@@ -35,7 +35,21 @@ minetest.register_node("circuit_blocks:x_gate", {
                 ", ctrl_a: " .. tostring(ctrl_a) ..
                 ", ctrl_b: " .. tostring(ctrl_b))
         return
-    end
+    end,
+	on_rightclick = function(pos, node, clicker, itemstack)
+		local meta = minetest.get_meta(pos)
+		local node_type = meta:get_int("node_type")
+		local radians = meta:get_float("radians")
+		local ctrl_a = meta:get_int("ctrl_a")
+		local ctrl_b = meta:get_int("ctrl_b")
+
+        if itemstack:get_name() == "circuit_blocks:control_tool" then
+            ctrl_a = ctrl_a * -1
+            meta:set_int("ctrl_a", ctrl_a)
+            local player_name = clicker:get_player_name()
+            minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
+        end
+	end
 })
 
 minetest.register_node("circuit_blocks:h_gate", {
@@ -48,4 +62,13 @@ minetest.register_node("circuit_blocks:no_gate", {
     description = "Empty wire block",
     tiles = {"no_gate.png"},
     groups = {oddly_breakable_by_hand=2}
+})
+
+minetest.register_tool("circuit_blocks:control_tool", {
+	description = "Control tool",
+	inventory_image = "control_tool.png",
+	wield_image = "control_tool.png",
+	wield_scale = { x = 1, y = 1, z = 1 },
+	range = 10,
+	tool_capabilities = {},
 })
