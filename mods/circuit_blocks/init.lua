@@ -1,3 +1,5 @@
+-- TODO: Ascertain how to tell whether a node is in a group
+
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
 minetest.register_node("circuit_blocks:qubit_0", {
@@ -15,7 +17,7 @@ minetest.register_node("circuit_blocks:qubit_1", {
 minetest.register_node("circuit_blocks:x_gate", {
     description = "Pauli X gate block",
     tiles = {"x_gate.png"},
-    groups = {oddly_breakable_by_hand=2},
+    groups = {oddly_breakable_by_hand=2, circuit_gate=7},
     on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
         meta:set_int("node_type", CircuitNodeTypes.X)
@@ -48,6 +50,8 @@ minetest.register_node("circuit_blocks:x_gate", {
             meta:set_int("ctrl_a", ctrl_a)
             local player_name = clicker:get_player_name()
             minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
+            -- TODO: Make something like this work
+            minetest.chat_send_player(player_name, "circuit_gate rating: " .. minetest.get_item_group(node, "oddly_breakable_by_hand"))
         end
 	end
 })
@@ -55,7 +59,7 @@ minetest.register_node("circuit_blocks:x_gate", {
 minetest.register_node("circuit_blocks:h_gate", {
     description = "Hadamard gate block",
     tiles = {"h_gate.png"},
-    groups = {oddly_breakable_by_hand=2}
+    groups = {oddly_breakable_by_hand=2, circuit_gate=1}
 })
 
 minetest.register_node("circuit_blocks:no_gate", {
