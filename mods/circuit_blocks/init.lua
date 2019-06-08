@@ -2,6 +2,9 @@
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
+-- our API object
+circuit_blocks = {}
+
 minetest.register_node("circuit_blocks:qubit_0", {
     description = "Qubit 0 block",
     tiles = {"qubit_0.png"},
@@ -17,7 +20,7 @@ minetest.register_node("circuit_blocks:qubit_1", {
 minetest.register_node("circuit_blocks:x_gate", {
     description = "Pauli X gate block",
     tiles = {"x_gate.png"},
-    groups = {oddly_breakable_by_hand=2, circuit_gate=7},
+    groups = {circuit_gate=7, oddly_breakable_by_hand=2},
     on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
         meta:set_int("node_type", CircuitNodeTypes.X)
@@ -50,8 +53,27 @@ minetest.register_node("circuit_blocks:x_gate", {
             meta:set_int("ctrl_a", ctrl_a)
             local player_name = clicker:get_player_name()
             minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
-            -- TODO: Make something like this work
-            minetest.chat_send_player(player_name, "circuit_gate rating: " .. minetest.get_item_group(node, "oddly_breakable_by_hand"))
+
+            node = node or minetest.get_node(pos)
+
+            -- TODO: Study door example to understand this better
+            --local def = minetest.registered_nodes[node.name]
+            --local name = def.door.name
+
+            local function get_nodedef_field(nodename, fieldname)
+                if not minetest.registered_nodes[nodename] then
+                    return nil
+                end
+                return minetest.registered_nodes[nodename][fieldname]
+            end
+            local drawtype = get_nodedef_field(node.name, "drawtype")
+            minetest.chat_send_player(player_name, "drawtype: " .. drawtype)
+
+            local tiles = get_nodedef_field(node.name, "tiles")
+            minetest.chat_send_player(player_name, "tiles: " .. tostring(tiles[1]))
+
+            local groups = get_nodedef_field(node.name, "groups")
+            minetest.chat_send_player(player_name, "groups: " .. tostring(groups.circuit_gate))
         end
 	end
 })
@@ -76,3 +98,4 @@ minetest.register_tool("circuit_blocks:control_tool", {
 	range = 10,
 	tool_capabilities = {},
 })
+
