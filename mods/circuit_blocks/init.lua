@@ -7,19 +7,19 @@ circuit_blocks = {}
 
 minetest.register_node("circuit_blocks:qubit_0", {
     description = "Qubit 0 block",
-    tiles = {"qubit_0.png"},
+    tiles = {"circuit_blocks_qubit_0.png"},
     groups = {oddly_breakable_by_hand=2}
 })
 
 minetest.register_node("circuit_blocks:qubit_1", {
     description = "Qubit 1 block",
-    tiles = {"qubit_1.png"},
+    tiles = {"circuit_blocks_qubit_1.png"},
     groups = {oddly_breakable_by_hand=2}
 })
 
 minetest.register_node("circuit_blocks:x_gate", {
     description = "Pauli X gate block",
-    tiles = {"x_gate.png"},
+    tiles = {"circuit_blocks_x_gate.png"},
     groups = {circuit_gate=7, oddly_breakable_by_hand=2},
     on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -54,6 +54,10 @@ minetest.register_node("circuit_blocks:x_gate", {
             local player_name = clicker:get_player_name()
             minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
 
+            --minetest.swap_node(pos, {
+            --    name = "circuit_blocks:no_gate"})
+            --minetest.chat_send_player(player_name, "after swap ctrl_a is now: " .. tostring(ctrl_a))
+
             node = node or minetest.get_node(pos)
 
             -- TODO: Study door example to understand this better
@@ -73,29 +77,33 @@ minetest.register_node("circuit_blocks:x_gate", {
             minetest.chat_send_player(player_name, "tiles: " .. tostring(tiles[1]))
 
             local groups = get_nodedef_field(node.name, "groups")
-            minetest.chat_send_player(player_name, "groups: " .. tostring(groups.circuit_gate))
+            minetest.chat_send_player(player_name, "circuit_gate: " .. tostring(groups.circuit_gate))
+
+            -- tiles[1] = {"circuit_blocks_x_gate.png"}
         end
 	end
 })
 
 minetest.register_node("circuit_blocks:h_gate", {
     description = "Hadamard gate block",
-    tiles = {"h_gate.png"},
+    tiles = {"circuit_blocks_h_gate.png"},
     groups = {oddly_breakable_by_hand=2, circuit_gate=1}
 })
 
 minetest.register_node("circuit_blocks:no_gate", {
     description = "Empty wire block",
-    tiles = {"no_gate.png"},
+    tiles = {"circuit_blocks_no_gate.png"},
     groups = {oddly_breakable_by_hand=2}
 })
 
 minetest.register_tool("circuit_blocks:control_tool", {
 	description = "Control tool",
-	inventory_image = "control_tool.png",
-	wield_image = "control_tool.png",
+	inventory_image = "circuit_blocks_control_tool.png",
+	wield_image = "circuit_blocks_control_tool.png",
 	wield_scale = { x = 1, y = 1, z = 1 },
 	range = 10,
 	tool_capabilities = {},
 })
+
+
 
