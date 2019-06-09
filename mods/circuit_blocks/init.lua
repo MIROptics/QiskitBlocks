@@ -10,6 +10,8 @@ dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 -- our API object
 circuit_blocks = {}
 
+minetest.debug("In circuit_blocks/init.lua")
+
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
