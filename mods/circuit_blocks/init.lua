@@ -1,14 +1,20 @@
 -- TODO:
--- Define Quantum control block that creates circuit, etc.
--- Right click places circuit_gate
--- Make left click drop gate entity
+--  Define Quantum control block that creates circuit, etc.
+--  Right click places circuit_gate
+--  Make left click drop gate entity
+--  Utilize is_gate boolean parameter of register_circuit_block function to
+--      identify circuit blocks that are circuit gates
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
 -- our API object
 circuit_blocks = {}
 
-function circuit_blocks:register_circuit_block(circuit_node_type, connector_up, connector_down, rotational)
+function circuit_blocks:register_circuit_block(circuit_node_type,
+                                               connector_up,
+                                               connector_down,
+                                               rotational,
+                                               is_gate)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
         texture_name = "circuit_blocks_no_gate"
@@ -32,6 +38,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type, connector_up, 
             meta:set_float("radians", 0.0)
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
+            meta:get_int("is_gate", is_gate)
             minetest.debug("circuit_node_type: " .. tostring(circuit_node_type))
         end,
         after_dig_node = function(pos, node, player)
@@ -40,10 +47,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type, connector_up, 
             local radians = meta:get_float("radians")
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
+            local is_gate = meta:get_int("is_gate")
             minetest.debug("node_type: " .. tostring(node_type) ..
                     ", radians: " .. tostring(radians) ..
                     ", ctrl_a: " .. tostring(ctrl_a) ..
-                    ", ctrl_b: " .. tostring(ctrl_b))
+                    ", ctrl_b: " .. tostring(ctrl_b) ..
+                    ", is_gate: " .. tostring(is_gate))
             minetest.set_node(pos, {name = "circuit_blocks:circuit_blocks_no_gate"})
             return
         end,
@@ -53,11 +62,19 @@ function circuit_blocks:register_circuit_block(circuit_node_type, connector_up, 
             local radians = meta:get_float("radians")
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
+            local is_gate = meta:get_int("is_gate")
+            local player_name = clicker:get_player_name()
 
-            if itemstack:get_name() == "circuit_blocks:control_tool" then
+            minetest.chat_send_player(player_name, "itemstack:get_name(): " .. itemstack:get_name())
+
+            if node_type == CircuitNodeTypes.EMPTY then
+                local itemstack_meta = itemstack:get_meta()
+                if itemstack_meta and itemstack_meta:get_int(is_gate) then
+                    minetest.set_node(pos, {name = itemstack:get_name()})
+                end
+            elseif itemstack:get_name() == "circuit_blocks:control_tool" then
                 ctrl_a = ctrl_a * -1
                 meta:set_int("ctrl_a", ctrl_a)
-                local player_name = clicker:get_player_name()
                 minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
 
                 --minetest.swap_node(pos, {
@@ -85,6 +102,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type, connector_up, 
                 local groups = get_nodedef_field(node.name, "groups")
                 minetest.chat_send_player(player_name, "circuit_gate: " .. tostring(groups.circuit_gate))
             end
+
         end
     })
 end
