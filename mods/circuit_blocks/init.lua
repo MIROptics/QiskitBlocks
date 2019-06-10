@@ -63,11 +63,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
-            minetest.debug("node_type: " .. tostring(node_type) ..
-                    ", radians: " .. tostring(radians) ..
-                    ", ctrl_a: " .. tostring(ctrl_a) ..
-                    ", ctrl_b: " .. tostring(ctrl_b) ..
-                    ", is_gate: " .. tostring(is_gate))
+            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
             minetest.set_node(pos, {name = "circuit_blocks:circuit_blocks_no_gate"})
             return
         end,
@@ -90,33 +86,29 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             elseif itemstack:get_name() == "circuit_blocks:control_tool" then
                 ctrl_a = ctrl_a * -1
                 meta:set_int("ctrl_a", ctrl_a)
-                -- minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
+                minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
 
-                --minetest.swap_node(pos, {
-                --    name = "circuit_blocks:no_gate"})
-                --minetest.chat_send_player(player_name, "after swap ctrl_a is now: " .. tostring(ctrl_a))
-
-                node = node or minetest.get_node(pos)
+                --node = node or minetest.get_node(pos)
 
                 -- TODO: Study door example to understand this better
-                local def = minetest.registered_nodes[node.name]
+                --local def = minetest.registered_nodes[node.name]
 
-                minetest.debug("node.name: " .. node.name ..
-                    " dump(def): " .. dump(def))
+                --minetest.debug("node.name: " .. node.name ..
+                --    " dump(def): " .. dump(def))
 
                 -- TODO: Remove this code after putting it in Paper for reference
-                local function get_nodedef_field(nodename, fieldname)
-                    if not minetest.registered_nodes[nodename] then
-                        return nil
-                    end
-                    return minetest.registered_nodes[nodename][fieldname]
-                end
-                local drawtype = get_nodedef_field(node.name, "drawtype")
-                minetest.chat_send_player(player_name, "drawtype: " .. drawtype)
-                local tiles = get_nodedef_field(node.name, "tiles")
-                minetest.chat_send_player(player_name, "tiles: " .. tostring(tiles[1]))
-                local groups = get_nodedef_field(node.name, "groups")
-                minetest.chat_send_player(player_name, "circuit_gate: " .. tostring(groups.circuit_gate))
+                --local function get_nodedef_field(nodename, fieldname)
+                --    if not minetest.registered_nodes[nodename] then
+                --        return nil
+                --    end
+                --    return minetest.registered_nodes[nodename][fieldname]
+                --end
+                --local drawtype = get_nodedef_field(node.name, "drawtype")
+                --minetest.chat_send_player(player_name, "drawtype: " .. drawtype)
+                --local tiles = get_nodedef_field(node.name, "tiles")
+                --minetest.chat_send_player(player_name, "tiles: " .. tostring(tiles[1]))
+                --local groups = get_nodedef_field(node.name, "groups")
+                --minetest.chat_send_player(player_name, "circuit_gate: " .. tostring(groups.circuit_gate))
             end
 
         end
@@ -146,7 +138,7 @@ minetest.register_tool("circuit_blocks:control_tool", {
 })
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, false)

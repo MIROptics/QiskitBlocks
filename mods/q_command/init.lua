@@ -43,7 +43,7 @@ function q_command:create_blank_circuit_grid()
             meta:set_int("circuit_specs_pos_x", node_pos.x)
             meta:set_int("circuit_specs_pos_y", node_pos.y)
             meta:set_int("circuit_specs_pos_z", node_pos.z)
-            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
+            -- minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
         end
     end
 end
