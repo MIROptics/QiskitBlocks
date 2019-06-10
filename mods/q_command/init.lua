@@ -5,8 +5,19 @@
 q_command = {}
 
 q_command.block_pos = {}
-q_command.circuit_specs = {}
-q_command.circuit_specs.pos = {}
+q_command.circuit_specs = {} -- pos, num_wires, num_columns
+q_command.circuit_specs.pos = {} -- x, y, z
+
+function q_command:create_blank_circuit_grid()
+    for wire = 1, q_command.circuit_specs.num_wires do
+        for column = 1, q_command.circuit_specs.num_columns do
+            minetest.set_node({x = q_command.circuit_specs.pos.x + column - 1,
+                               y = q_command.circuit_specs.pos.y + wire - 1,
+                               z = q_command.circuit_specs.pos.z},
+                    {name="circuit_blocks:circuit_blocks_no_gate"})
+        end
+    end
+end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
@@ -28,6 +39,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                 q_command.circuit_specs.num_wires = num_wires
                 q_command.circuit_specs.num_columns = num_columns
                 minetest.debug("q_command.circuit_specs: " .. dump(q_command.circuit_specs))
+
+                -- Create circuit grid with empty blocks
+                q_command:create_blank_circuit_grid()
             else
                 -- TODO: Show error message dialog?
                 minetest.chat_send_player(player:get_player_name(),
@@ -52,9 +66,9 @@ minetest.register_node("q_command:q_block", {
         local meta = minetest.get_meta(pos)
         local formspec = "size[5.0, 4.6]"..
                 "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
+                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;5]" ..
                 "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;3]" ..
-                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;4]" ..
+                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;2]" ..
 				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end
