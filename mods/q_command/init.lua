@@ -33,13 +33,22 @@ minetest.register_node("q_command:q_block", {
     groups = {oddly_breakable_by_hand=2},
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
-        meta:set_string("infotext", "Quantum circuit command block");
-        meta:set_string("formspec",
-                "size[3.0, 5.0]"..
+        meta:set_string("infotext", "Quantum circuit command block")
+        --meta:set_string("formspec",
+        --        "size[3.0, 5.0]"..
+        --        "field[1.0, 0.5; 1.5, 1.0; num_wires; Wires:; 3]" ..
+        --        "field[1.0, 2.0; 1.5, 1.0; num_columns; Columns:; 8]" ..
+		--		"button_exit[1.0, 3.5; 1.5, 1.0; create_circuit_grid; Create]"
+		--)
+    end,
+    on_rightclick = function(pos, node, clicker, itemstack)
+        local player_name = clicker:get_player_name()
+        local meta = minetest.get_meta(pos)
+        local formspec = "size[3.0, 5.0]"..
                 "field[1.0, 0.5; 1.5, 1.0; num_wires; Wires:; 3]" ..
                 "field[1.0, 2.0; 1.5, 1.0; num_columns; Columns:; 8]" ..
-				"button_exit[1.0, 3.5; 1.5, 1.0; create_circuit_grid; Create]"
-		)
+				"button_exit[1.0, 3.5; 1.5, 1.0; create; Create]"
+        minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end
 })
 
