@@ -11,6 +11,20 @@ dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 -- our API object
 circuit_blocks = {}
 
+-- returns circuit_blocks object or nil
+-- TODO: Use : instead of . for consistency?
+function circuit_blocks.get(pos)
+	local node_name = minetest.get_node(pos).name
+	if minetest.registered_nodes[node_name] then
+		return {
+			pos = pos,
+		}
+	else
+		return nil
+	end
+end
+
+
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
@@ -40,7 +54,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:get_int("is_gate", is_gate)
-            minetest.debug("circuit_node_type: " .. tostring(circuit_node_type))
+            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
         end,
         after_dig_node = function(pos, node, player)
             local meta = minetest.get_meta(pos)

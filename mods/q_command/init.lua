@@ -8,13 +8,42 @@ q_command.block_pos = {}
 q_command.circuit_specs = {} -- pos, num_wires, num_columns
 q_command.circuit_specs.pos = {} -- x, y, z
 
+-- returns circuit_blocks object or nil
+-- TODO: Use : instead of . for consistency?
+--[[
+function q_command:get_circuit_block(pos)
+	local node_name = minetest.get_node(pos).name
+	if minetest.registered_nodes[node_name] then
+		return {
+			pos = pos,
+		}
+	else
+		return nil
+	end
+end
+--]]
+
 function q_command:create_blank_circuit_grid()
-    for wire = 1, q_command.circuit_specs.num_wires do
-        for column = 1, q_command.circuit_specs.num_columns do
-            minetest.set_node({x = q_command.circuit_specs.pos.x + column - 1,
-                               y = q_command.circuit_specs.pos.y + wire - 1,
-                               z = q_command.circuit_specs.pos.z},
+    local circuit_num_wires = q_command.circuit_specs.num_wires
+    local circuit_num_columns = q_command.circuit_specs.num_columns
+    for wire = 1, circuit_num_wires do
+        for column = 1, circuit_num_columns do
+            local node_pos = {}
+            node_pos.x = q_command.circuit_specs.pos.x + column - 1
+            node_pos.y = q_command.circuit_specs.pos.y + wire - 1
+            node_pos.z = q_command.circuit_specs.pos.z
+            -- TODO: Change to add_node() for clarity?
+            minetest.set_node(node_pos,
                     {name="circuit_blocks:circuit_blocks_no_gate"})
+
+            -- Update the metadata in these newly created nodes
+            local meta = minetest.get_meta(node_pos)
+            meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+            meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+            meta:set_int("circuit_specs_pos_x", node_pos.x)
+            meta:set_int("circuit_specs_pos_y", node_pos.y)
+            meta:set_int("circuit_specs_pos_z", node_pos.z)
+            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
         end
     end
 end
