@@ -4,12 +4,16 @@
 -- our API object
 q_command = {}
 
-minetest.debug("In q_command/init.lua")
+q_command.block_pos = {}
+q_command.circuit_specs = {}
+q_command.circuit_specs.pos = {}
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
-        if fields.num_wires and fields.num_columns and
-                fields.start_z_offset and fields.start_x_offset then
+        if fields.num_wires and tonumber(fields.num_wires) > 0 and
+                fields.num_columns and tonumber(fields.num_columns) > 0 and
+                fields.start_z_offset and tonumber(fields.start_z_offset) > 0 and
+                fields.start_x_offset and tonumber(fields.start_x_offset) > 0 then
             minetest.chat_send_player(player:get_player_name(),
                     "Creating circuit grid with " ..
                             fields["num_wires"] .. " wires, " ..
@@ -17,6 +21,18 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                             fields["start_z_offset"] .. " start_z_offset, " ..
                             fields["start_x_offset"] .. " start_x_offset"
             )
+
+            -- Store position of left-most, bottom-most block, and dimensions of circuit
+            q_command.circuit_specs.pos.x = q_command.block_pos.x -
+                    tonumber(fields.start_x_offset)
+            q_command.circuit_specs.pos.y = q_command.block_pos.y
+            q_command.circuit_specs.pos.z = q_command.block_pos.z +
+                    tonumber(fields.start_z_offset)
+
+            q_command.circuit_specs.num_wires = tonumber(fields.num_wires)
+            q_command.circuit_specs.num_columns = tonumber(fields.num_columns)
+            minetest.debug("q_command.circuit_specs: " .. dump(q_command.circuit_specs))
+
             return
         end
     end
@@ -29,6 +45,7 @@ minetest.register_node("q_command:q_block", {
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("infotext", "Quantum circuit command block")
+        q_command.block_pos = pos
     end,
     on_rightclick = function(pos, node, clicker, itemstack)
         local player_name = clicker:get_player_name()
