@@ -13,16 +13,16 @@ circuit_blocks = {}
 
 -- returns circuit_blocks object or nil
 -- TODO: Use : instead of . for consistency?
-function circuit_blocks.get(pos)
-	local node_name = minetest.get_node(pos).name
-	if minetest.registered_nodes[node_name] then
-		return {
-			pos = pos,
-		}
-	else
-		return nil
-	end
-end
+--function circuit_blocks.get(pos)
+--	local node_name = minetest.get_node(pos).name
+--	if minetest.registered_nodes[node_name] then
+--		return {
+--			pos = pos,
+--		}
+--	else
+--		return nil
+--	end
+--end
 
 
 function circuit_blocks:register_circuit_block(circuit_node_type,
@@ -54,18 +54,57 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:get_int("is_gate", is_gate)
-            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
-        after_dig_node = function(pos, node, player)
+        on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
             local node_type = meta:get_int("node_type")
             local radians = meta:get_float("radians")
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
-            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
-            minetest.set_node(pos, {name = "circuit_blocks:circuit_blocks_no_gate"})
+            local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+            minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
+            if is_on_grid and is_on_grid == 1 then
+                -- TODO: Factor this into a function
+                -- Retrieve circuit_specs metadata
+                meta = minetest.get_meta(pos)
+                local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+                local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+                local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+                local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+                local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+                local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+
+                minetest.set_node(pos, {name = "circuit_blocks:circuit_blocks_no_gate"})
+
+                -- Put circuit_specs metadata on placed node
+                meta = minetest.get_meta(pos)
+                meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+                meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+                meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+                meta:set_int("circuit_specs_pos_x", circuit_pos_x)
+                meta:set_int("circuit_specs_pos_y", circuit_pos_y)
+                meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+            end
             return
+        end,
+        can_dig = function(pos)
+            local meta = minetest.get_meta(pos)
+            local node_type = meta:get_int("node_type")
+            local radians = meta:get_float("radians")
+            local ctrl_a = meta:get_int("ctrl_a")
+            local ctrl_b = meta:get_int("ctrl_b")
+            local is_gate = meta:get_int("is_gate")
+            local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+            minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("is_on_grid: " .. is_on_grid)
+            return is_on_grid == 0
+            --if is_on_grid == 0 then
+            --    return true
+            --else
+            --    return false
+            --end
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
             local meta = minetest.get_meta(pos)
@@ -74,43 +113,46 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
+            local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             local player_name = clicker:get_player_name()
 
-            minetest.chat_send_player(player_name, "itemstack:get_name(): " .. itemstack:get_name())
+            minetest.chat_send_player(player_name,
+                    "itemstack:get_name(): " .. itemstack:get_name() ..
+                            ", is_on_grid: " .. is_on_grid)
 
-            if node_type == CircuitNodeTypes.EMPTY then
-                local itemstack_meta = itemstack:get_meta()
-                if itemstack_meta and itemstack_meta:get_int(is_gate) then
-                    minetest.set_node(pos, {name = itemstack:get_name()})
+            minetest.debug("In on_rightclick: meta:to_table():\n" .. dump(meta:to_table()))
+
+            if is_on_grid then
+                if node_type == CircuitNodeTypes.EMPTY then
+                    local itemstack_meta = itemstack:get_meta()
+                    if itemstack_meta and itemstack_meta:get_int(is_gate) then
+                        -- TODO: Factor this into a function
+                        -- Retrieve circuit_specs metadata
+                        meta = minetest.get_meta(pos)
+                        local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+                        local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+                        local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+                        local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+                        local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+                        local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+
+                        minetest.set_node(pos, {name = itemstack:get_name()})
+
+                        -- Put circuit_specs metadata on placed node
+                        meta = minetest.get_meta(pos)
+                        meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+                        meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+                        meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+                        meta:set_int("circuit_specs_pos_x", circuit_pos_x)
+                        meta:set_int("circuit_specs_pos_y", circuit_pos_y)
+                        meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+                    end
+                elseif itemstack:get_name() == "circuit_blocks:control_tool" then
+                    ctrl_a = ctrl_a * -1
+                    meta:set_int("ctrl_a", ctrl_a)
+                    minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
                 end
-            elseif itemstack:get_name() == "circuit_blocks:control_tool" then
-                ctrl_a = ctrl_a * -1
-                meta:set_int("ctrl_a", ctrl_a)
-                minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
-
-                --node = node or minetest.get_node(pos)
-
-                -- TODO: Study door example to understand this better
-                --local def = minetest.registered_nodes[node.name]
-
-                --minetest.debug("node.name: " .. node.name ..
-                --    " dump(def): " .. dump(def))
-
-                -- TODO: Remove this code after putting it in Paper for reference
-                --local function get_nodedef_field(nodename, fieldname)
-                --    if not minetest.registered_nodes[nodename] then
-                --        return nil
-                --    end
-                --    return minetest.registered_nodes[nodename][fieldname]
-                --end
-                --local drawtype = get_nodedef_field(node.name, "drawtype")
-                --minetest.chat_send_player(player_name, "drawtype: " .. drawtype)
-                --local tiles = get_nodedef_field(node.name, "tiles")
-                --minetest.chat_send_player(player_name, "tiles: " .. tostring(tiles[1]))
-                --local groups = get_nodedef_field(node.name, "groups")
-                --minetest.chat_send_player(player_name, "circuit_gate: " .. tostring(groups.circuit_gate))
             end
-
         end
     })
 end

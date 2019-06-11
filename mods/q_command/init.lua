@@ -5,7 +5,7 @@
 q_command = {}
 
 q_command.block_pos = {}
-q_command.circuit_specs = {} -- pos, num_wires, num_columns
+q_command.circuit_specs = {} -- pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
 
 -- returns circuit_blocks object or nil
@@ -40,6 +40,7 @@ function q_command:create_blank_circuit_grid()
             local meta = minetest.get_meta(node_pos)
             meta:set_int("circuit_specs_num_wires", circuit_num_wires)
             meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+            meta:set_int("circuit_specs_is_on_grid", 1)
             meta:set_int("circuit_specs_pos_x", node_pos.x)
             meta:set_int("circuit_specs_pos_y", node_pos.y)
             meta:set_int("circuit_specs_pos_z", node_pos.z)
