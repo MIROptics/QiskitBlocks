@@ -60,7 +60,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             texture_name = "circuit_blocks_not_gate_up"
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_not_gate_down"
-        elseif connector_up and connector_down then
+        elseif connector_up and connector_up then
             texture_name = "circuit_blocks_not_gate"
         end
     elseif circuit_node_type == CircuitNodeTypes.H then
@@ -77,7 +77,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:get_int("is_gate", is_gate)
-            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
+            -- minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
@@ -87,7 +87,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
+            -- minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
             if is_on_grid and is_on_grid == 1 then
                 circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_no_gate")
@@ -102,8 +102,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
-            minetest.debug("is_on_grid: " .. is_on_grid)
+            -- minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
             return is_on_grid == 0
             --if is_on_grid == 0 then
             --    return true
@@ -121,17 +120,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             local player_name = clicker:get_player_name()
 
-            minetest.chat_send_player(player_name,
-                    "itemstack:get_name(): " .. itemstack:get_name() ..
-                            ", is_on_grid: " .. is_on_grid)
-
-            minetest.debug("In on_rightclick: meta:to_table():\n" .. dump(meta:to_table()))
+            -- minetest.debug("In on_rightclick: meta:to_table():\n" .. dump(meta:to_table()))
 
             if is_on_grid == 1 then
                 if node_type == CircuitNodeTypes.EMPTY then
                     local itemstack_name = itemstack:get_name()
                     local itemstack_meta = itemstack:get_meta()
-                    minetest.debug("itemstack_meta:to_table():\n" .. dump(itemstack_meta:to_table()))
+                    -- minetest.debug("itemstack_meta:to_table():\n" .. dump(itemstack_meta:to_table()))
 
                     -- TODO: How best to get metadata for this item?
                     -- if itemstack_meta and itemstack_meta:get_int(is_gate) then
@@ -174,6 +169,7 @@ minetest.register_tool("circuit_blocks:control_tool", {
 })
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, false)

@@ -30,7 +30,7 @@ function q_command:create_blank_circuit_grid()
         for column = 1, circuit_num_columns do
             local node_pos = {}
             node_pos.x = q_command.circuit_specs.pos.x + column - 1
-            node_pos.y = q_command.circuit_specs.pos.y + wire - 1
+            node_pos.y = circuit_num_wires - (q_command.circuit_specs.pos.y + wire - 2)
             node_pos.z = q_command.circuit_specs.pos.z
             -- TODO: Change to add_node() for clarity?
             minetest.set_node(node_pos,
@@ -97,7 +97,7 @@ minetest.register_node("q_command:q_block", {
         local formspec = "size[5.0, 4.6]"..
                 "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
                 "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;5]" ..
-                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;3]" ..
+                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;4]" ..
                 "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;2]" ..
 				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
