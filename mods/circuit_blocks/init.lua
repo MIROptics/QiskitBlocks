@@ -25,25 +25,25 @@ circuit_blocks = {}
 --end
 
 function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
-        -- Retrieve circuit_specs metadata
-        meta = minetest.get_meta(pos)
-        local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
-        local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
-        local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-        local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
-        local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
-        local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+    -- Retrieve circuit_specs metadata
+    meta = minetest.get_meta(pos)
+    local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+    local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+    local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+    local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+    local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+    local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
 
-        minetest.set_node(pos, {name = node_name})
+    minetest.set_node(pos, {name = node_name})
 
-        -- Put circuit_specs metadata on placed node
-        meta = minetest.get_meta(pos)
-        meta:set_int("circuit_specs_num_wires", circuit_num_wires)
-        meta:set_int("circuit_specs_num_columns", circuit_num_columns)
-        meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
-        meta:set_int("circuit_specs_pos_x", circuit_pos_x)
-        meta:set_int("circuit_specs_pos_y", circuit_pos_y)
-        meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+    -- Put circuit_specs metadata on placed node
+    meta = minetest.get_meta(pos)
+    meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+    meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+    meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+    meta:set_int("circuit_specs_pos_x", circuit_pos_x)
+    meta:set_int("circuit_specs_pos_y", circuit_pos_y)
+    meta:set_int("circuit_specs_pos_z", circuit_pos_z)
 end
 
 function circuit_blocks:register_circuit_block(circuit_node_type,
@@ -60,6 +60,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             texture_name = "circuit_blocks_not_gate_up"
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_not_gate_down"
+        elseif connector_up and connector_down then
+            texture_name = "circuit_blocks_not_gate"
         end
     elseif circuit_node_type == CircuitNodeTypes.H then
         texture_name = "circuit_blocks_h_gate"
