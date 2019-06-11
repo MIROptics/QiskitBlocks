@@ -122,10 +122,18 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
             minetest.debug("In on_rightclick: meta:to_table():\n" .. dump(meta:to_table()))
 
-            if is_on_grid then
+            if is_on_grid == 1 then
                 if node_type == CircuitNodeTypes.EMPTY then
+                    local itemstack_name = itemstack:get_name()
                     local itemstack_meta = itemstack:get_meta()
-                    if itemstack_meta and itemstack_meta:get_int(is_gate) then
+                    minetest.debug("itemstack_meta:to_table():\n" .. dump(itemstack_meta:to_table()))
+
+                    -- TODO: How best to get metadata for this item?
+                    -- if itemstack_meta and itemstack_meta:get_int(is_gate) then
+
+                    -- TODO: Perhaps use naming convention that indicates this is a gate
+                    if itemstack_name:sub(1, 14) == "circuit_blocks" then
+
                         -- TODO: Factor this into a function
                         -- Retrieve circuit_specs metadata
                         meta = minetest.get_meta(pos)
