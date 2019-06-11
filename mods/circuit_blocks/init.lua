@@ -88,13 +88,16 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             -- minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
-            if is_on_grid and is_on_grid == 1 then
+
+            local wielded_item = player:get_wielded_item()
+            if is_on_grid and is_on_grid == 1 and
+                    wielded_item:get_name() ~= "circuit_blocks:control_tool" then
                 circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_no_gate")
             end
             return
         end,
-        can_dig = function(pos)
+        can_dig = function(pos, player)
             local meta = minetest.get_meta(pos)
             local node_type = meta:get_int("node_type")
             local radians = meta:get_float("radians")
@@ -102,13 +105,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            -- minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
+            --minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
             return is_on_grid == 0
-            --if is_on_grid == 0 then
-            --    return true
-            --else
-            --    return false
-            --end
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
             local meta = minetest.get_meta(pos)
