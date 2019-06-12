@@ -59,6 +59,31 @@ function circuit_blocks:get_circuit_block(pos)
             -- Indicates whether node is a gate, boolean
             is_gate = function()
 				return is_gate == 1
+			end,
+
+            --
+            -- Number of circuit wires, integer
+            get_circuit_num_wires = function()
+				return circuit_num_wires
+			end,
+
+            -- Number of circuit columns, integer
+            get_circuit_num_columns = function()
+				return circuit_num_columns
+			end,
+
+            -- Indicates whether node is on the circuit grid, boolean
+            is_on_circuit_grid = function()
+				return circuit_is_on_grid == 1
+			end,
+
+            -- Position of lower-left node of the circuit grid
+            get_circuit_pos = function()
+                local ret_pos = {}
+                ret_pos.x = circuit_pos_x
+                ret_pos.y = circuit_pos_y
+                ret_pos.z = circuit_pos_z
+				return ret_pos
 			end
 		}
 	else
