@@ -34,7 +34,7 @@ function q_command:create_blank_circuit_grid()
             node_pos.z = q_command.circuit_specs.pos.z
             -- TODO: Change to add_node() for clarity?
             minetest.set_node(node_pos,
-                    {name="circuit_blocks:circuit_blocks_no_gate"})
+                    {name="circuit_blocks:circuit_blocks_empty_wire"})
 
             -- Update the metadata in these newly created nodes
             local meta = minetest.get_meta(node_pos)

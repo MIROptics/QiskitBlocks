@@ -12,21 +12,66 @@ dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 circuit_blocks = {}
 
 -- returns circuit_blocks object or nil
--- TODO: Use : instead of . for consistency?
---function circuit_blocks.get(pos)
---	local node_name = minetest.get_node(pos).name
---	if minetest.registered_nodes[node_name] then
---		return {
---			pos = pos,
---		}
---	else
---		return nil
---	end
---end
+function circuit_blocks:get_circuit_block(pos)
+	local node_name = minetest.get_node(pos).name
+	if minetest.registered_nodes[node_name] then
+        -- Retrieve metadata
+        local node_type = meta:get_int("node_type")
+        local radians = meta:get_float("radians")
+        local ctrl_a = meta:get_int("ctrl_a")
+        local ctrl_b = meta:get_int("ctrl_b")
+        local is_gate = meta:get_int("is_gate")
+        local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+
+        -- Retrieve circuit_specs metadata
+        local meta = minetest.get_meta(pos)
+        local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+        local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+        local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+        local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+        local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+        local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+
+		return {
+			pos = pos,
+            get_node_type = function()
+				return node_type
+			end
+		}
+	else
+		return nil
+	end
+end
+
 
 function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     -- Retrieve circuit_specs metadata
+    local meta = minetest.get_meta(pos)
+    local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+    local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+    local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+    local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+    local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+    local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+
+    minetest.set_node(pos, {name = node_name})
+
+    -- Put circuit_specs metadata on placed node
     meta = minetest.get_meta(pos)
+    meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+    meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+    meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+    meta:set_int("circuit_specs_pos_x", circuit_pos_x)
+    meta:set_int("circuit_specs_pos_y", circuit_pos_y)
+    meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+
+
+end
+
+
+function circuit_blocks:toggle_control_qubit(pos)
+    -- TODO: LEFT OFF HERE
+    local meta = minetest.get_meta(pos)
     local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
     local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
     local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
@@ -46,6 +91,7 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)
 end
 
+
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
@@ -53,7 +99,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                                is_gate)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
-        texture_name = "circuit_blocks_no_gate"
+        texture_name = "circuit_blocks_empty_wire"
     elseif circuit_node_type == CircuitNodeTypes.X then
         texture_name = "circuit_blocks_x_gate"
         if connector_up and not connector_down then
@@ -65,6 +111,15 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.H then
         texture_name = "circuit_blocks_h_gate"
+    elseif circuit_node_type == CircuitNodeTypes.CTRL then
+        texture_name = "circuit_blocks_control"
+        if connector_up and not connector_down then
+            texture_name = "circuit_blocks_control_up"
+        elseif connector_down and not connector_up then
+            texture_name = "circuit_blocks_control_down"
+        end
+    elseif circuit_node_type == CircuitNodeTypes.TRACE then
+        texture_name = "circuit_blocks_trace"
     end
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
@@ -76,7 +131,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_float("radians", 0.0)
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
-            meta:get_int("is_gate", is_gate)
+            meta:get_int("is_gate", (is_gate and 1 or 0))
             -- minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
@@ -90,10 +145,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             -- minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
 
             local wielded_item = player:get_wielded_item()
-            if is_on_grid and is_on_grid == 1 and
-                    wielded_item:get_name() ~= "circuit_blocks:control_tool" then
-                circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                        "circuit_blocks:circuit_blocks_no_gate")
+
+            if is_on_grid and is_on_grid == 1 then
+                if wielded_item:get_name() == "circuit_blocks:control_tool" then
+                    --
+                else
+                    circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                        "circuit_blocks:circuit_blocks_empty_wire")
+                end
             end
             return
         end,
@@ -166,9 +225,13 @@ minetest.register_tool("circuit_blocks:control_tool", {
 	tool_capabilities = {},
 })
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, false, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.TRACE, false, false, false, false)
