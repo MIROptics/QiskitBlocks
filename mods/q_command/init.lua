@@ -41,10 +41,11 @@ function q_command:create_blank_circuit_grid()
             meta:set_int("circuit_specs_num_wires", circuit_num_wires)
             meta:set_int("circuit_specs_num_columns", circuit_num_columns)
             meta:set_int("circuit_specs_is_on_grid", 1)
-            meta:set_int("circuit_specs_pos_x", node_pos.x)
-            meta:set_int("circuit_specs_pos_y", node_pos.y)
-            meta:set_int("circuit_specs_pos_z", node_pos.z)
-            -- minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
+            meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
+            meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
+            meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
+            minetest.debug("dump(node_pos):\n" .. dump(node_pos))
+            minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
         end
     end
 end

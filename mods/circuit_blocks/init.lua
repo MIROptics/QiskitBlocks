@@ -16,15 +16,16 @@ function circuit_blocks:get_circuit_block(pos)
 	local node_name = minetest.get_node(pos).name
 	if minetest.registered_nodes[node_name] then
         -- Retrieve metadata
+        local meta = minetest.get_meta(pos)
         local node_type = meta:get_int("node_type")
         local radians = meta:get_float("radians")
         local ctrl_a = meta:get_int("ctrl_a")
         local ctrl_b = meta:get_int("ctrl_b")
-        local is_gate = meta:get_int("is_gate")
-        local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+
+        -- 1 if node is a gate, 0 of node is not a gate
+        local node_is_gate = meta:get_int("is_gate")
 
         -- Retrieve circuit_specs metadata
-        local meta = minetest.get_meta(pos)
         local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
         local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
         local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
@@ -34,8 +35,30 @@ function circuit_blocks:get_circuit_block(pos)
 
 		return {
 			pos = pos,
+
+            -- Circuit node type, integer
             get_node_type = function()
 				return node_type
+			end,
+
+            -- Rotation in radians, float
+            get_radians = function()
+				return radians
+			end,
+
+            -- Control wire A, integer
+            get_ctrl_a = function()
+				return ctrl_a
+			end,
+
+            -- Control wire B, integer
+            get_ctrl_b = function()
+				return ctrl_b
+			end,
+
+            -- Indicates whether node is a gate, boolean
+            is_gate = function()
+				return is_gate == 1
 			end
 		}
 	else
@@ -131,8 +154,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_float("radians", 0.0)
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
-            meta:get_int("is_gate", (is_gate and 1 or 0))
-            -- minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
+            meta:set_int("is_gate", (is_gate and 1 or 0))
+            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
