@@ -36,6 +36,11 @@ function circuit_blocks:get_circuit_block(pos)
 		return {
 			pos = pos,
 
+            -- Node position, integer
+            get_node_pos = function()
+				return pos
+			end,
+
             -- Circuit node type, integer
             get_node_type = function()
 				return node_type
@@ -58,7 +63,7 @@ function circuit_blocks:get_circuit_block(pos)
 
             -- Indicates whether node is a gate, boolean
             is_gate = function()
-				return is_gate == 1
+				return node_is_gate == 1
 			end,
 
             --
@@ -84,7 +89,25 @@ function circuit_blocks:get_circuit_block(pos)
                 ret_pos.y = circuit_pos_y
                 ret_pos.z = circuit_pos_z
 				return ret_pos
-			end
+			end,
+
+            -- Create string representation
+            -- TODO: What is Lua way to implement a "to string" function?
+            to_string = function()
+                local ret_str = "pos: " .. dump(pos) .. "\n" ..
+                        "node_type: " .. tostring(node_type) .. "\n" ..
+                        "radians: " .. tostring(radians) .. "\n" ..
+                        "ctrl_a: " .. tostring(ctrl_a) .. "\n" ..
+                        "ctrl_b: " .. tostring(ctrl_b) .. "\n" ..
+                        "node_is_gate: " .. tostring(node_is_gate) .. "\n" ..
+                        "circuit_num_wires: " .. tostring(circuit_num_wires) .. "\n" ..
+                        "circuit_num_columns: " .. tostring(circuit_num_columns) .. "\n" ..
+                        "circuit_is_on_grid: " .. tostring(circuit_is_on_grid) .. "\n" ..
+                        "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
+                        "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
+                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n"
+                return ret_str
+            end
 		}
 	else
 		return nil
@@ -196,7 +219,74 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
             if is_on_grid and is_on_grid == 1 then
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    --
+                    local block = circuit_blocks:get_circuit_block(pos)
+                    minetest.debug(" in_on_punch, block.to_string():\n" .. block.to_string() .. "\n")
+
+                    minetest.debug(" in_on_punch, block:\n" ..
+                        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
+                        "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
+                        "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
+                        "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
+                        "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
+                        "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
+                        "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
+                        "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
+                        "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
+                        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+--[[
+            -- Circuit node type, integer
+            get_node_type = function()
+				return node_type
+			end,
+
+            -- Rotation in radians, float
+            get_radians = function()
+				return radians
+			end,
+
+            -- Control wire A, integer
+            get_ctrl_a = function()
+				return ctrl_a
+			end,
+
+            -- Control wire B, integer
+            get_ctrl_b = function()
+				return ctrl_b
+			end,
+
+            -- Indicates whether node is a gate, boolean
+            is_gate = function()
+				return is_gate == 1
+			end,
+
+            --
+            -- Number of circuit wires, integer
+            get_circuit_num_wires = function()
+				return circuit_num_wires
+			end,
+
+            -- Number of circuit columns, integer
+            get_circuit_num_columns = function()
+				return circuit_num_columns
+			end,
+
+            -- Indicates whether node is on the circuit grid, boolean
+            is_on_circuit_grid = function()
+				return circuit_is_on_grid == 1
+			end,
+
+            -- Position of lower-left node of the circuit grid
+            get_circuit_pos = function()
+                local ret_pos = {}
+                ret_pos.x = circuit_pos_x
+                ret_pos.y = circuit_pos_y
+                ret_pos.z = circuit_pos_z
+				return ret_pos
+			end
+		}
+--]]
+
+
                 else
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_empty_wire")
@@ -283,3 +373,5 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, false, 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.TRACE, false, false, false, false)
+
+
