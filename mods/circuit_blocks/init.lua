@@ -58,6 +58,14 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             -- Control wire A, integer
+            set_ctrl_a = function(ctrl_a_arg)
+				ctrl_a = ctrl_a_arg
+
+                -- TODO: LEFT OFF HERE
+
+                circuit_blocks:set_node_with_circuit_specs_meta(pos, new_node_name)
+			end,
+
             get_ctrl_a = function()
 				return ctrl_a
 			end,
@@ -86,6 +94,24 @@ function circuit_blocks:get_circuit_block(pos)
             -- Indicates whether node is on the circuit grid, boolean
             is_on_circuit_grid = function()
 				return circuit_is_on_grid == 1
+			end,
+
+            -- Circuit wire num that node is on, integer (1..num wires, -1 if not)
+            get_node_wire_num = function()
+                local ret_wire_num = -1
+                if circuit_is_on_grid == 1 then
+                    ret_wire_num = circuit_num_wires - (pos.y - circuit_pos_y)
+                end
+				return ret_wire_num
+			end,
+
+            -- Circuit column that node is on, integer (1..num columns, -1 if not)
+            get_node_column_num = function()
+                local ret_column_num = -1
+                if circuit_is_on_grid == 1 then
+                    ret_column_num = pos.x - circuit_pos_x + 1
+                end
+				return ret_column_num
 			end,
 
             -- Position of lower-left node of the circuit grid
@@ -141,32 +167,29 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     meta:set_int("circuit_specs_pos_x", circuit_pos_x)
     meta:set_int("circuit_specs_pos_y", circuit_pos_y)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)
-
-
 end
 
 
-function circuit_blocks:toggle_control_qubit(pos)
-    -- TODO: LEFT OFF HERE
-    local meta = minetest.get_meta(pos)
-    local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
-    local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
-    local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-    local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
-    local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
-    local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
-
-    minetest.set_node(pos, {name = node_name})
-
-    -- Put circuit_specs metadata on placed node
-    meta = minetest.get_meta(pos)
-    meta:set_int("circuit_specs_num_wires", circuit_num_wires)
-    meta:set_int("circuit_specs_num_columns", circuit_num_columns)
-    meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
-    meta:set_int("circuit_specs_pos_x", circuit_pos_x)
-    meta:set_int("circuit_specs_pos_y", circuit_pos_y)
-    meta:set_int("circuit_specs_pos_z", circuit_pos_z)
-end
+--function circuit_blocks:toggle_control_qubit(pos)
+--    local meta = minetest.get_meta(pos)
+--    local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+--    local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+--    local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+--    local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+--    local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+--    local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+--
+--    minetest.set_node(pos, {name = node_name})
+--
+--    -- Put circuit_specs metadata on placed node
+--    meta = minetest.get_meta(pos)
+--    meta:set_int("circuit_specs_num_wires", circuit_num_wires)
+--    meta:set_int("circuit_specs_num_columns", circuit_num_columns)
+--    meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+--    meta:set_int("circuit_specs_pos_x", circuit_pos_x)
+--    meta:set_int("circuit_specs_pos_y", circuit_pos_y)
+--    meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+--end
 
 
 function circuit_blocks:register_circuit_block(circuit_node_type,
@@ -209,7 +232,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:set_int("is_gate", (is_gate and 1 or 0))
-            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
+            --minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
@@ -227,8 +250,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
                     local block = circuit_blocks:get_circuit_block(pos)
                     block.set_node_type(CircuitNodeTypes.X)
-                    minetest.debug(" in_on_punch, block.to_string():\n" .. block.to_string() .. "\n")
-
                     minetest.debug(" in_on_punch, block:\n" ..
                         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
                         "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
@@ -239,61 +260,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
                         "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
                         "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
+                        "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
+                        "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
                         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
---[[
-            -- Circuit node type, integer
-            get_node_type = function()
-				return node_type
-			end,
-
-            -- Rotation in radians, float
-            get_radians = function()
-				return radians
-			end,
-
-            -- Control wire A, integer
-            get_ctrl_a = function()
-				return ctrl_a
-			end,
-
-            -- Control wire B, integer
-            get_ctrl_b = function()
-				return ctrl_b
-			end,
-
-            -- Indicates whether node is a gate, boolean
-            is_gate = function()
-				return is_gate == 1
-			end,
-
-            --
-            -- Number of circuit wires, integer
-            get_circuit_num_wires = function()
-				return circuit_num_wires
-			end,
-
-            -- Number of circuit columns, integer
-            get_circuit_num_columns = function()
-				return circuit_num_columns
-			end,
-
-            -- Indicates whether node is on the circuit grid, boolean
-            is_on_circuit_grid = function()
-				return circuit_is_on_grid == 1
-			end,
-
-            -- Position of lower-left node of the circuit grid
-            get_circuit_pos = function()
-                local ret_pos = {}
-                ret_pos.x = circuit_pos_x
-                ret_pos.y = circuit_pos_y
-                ret_pos.z = circuit_pos_z
-				return ret_pos
-			end
-		}
---]]
-
-
                 else
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_empty_wire")
