@@ -33,6 +33,16 @@ function circuit_blocks:get_circuit_block(pos)
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
 
+        local node_wire_num = -1
+        if circuit_is_on_grid == 1 then
+            node_wire_num = circuit_num_wires - (pos.y - circuit_pos_y)
+        end
+
+        local node_column_num = -1
+        if circuit_is_on_grid == 1 then
+            node_column_num = pos.x - circuit_pos_x + 1
+        end
+
 		return {
 			pos = pos,
 
@@ -57,15 +67,44 @@ function circuit_blocks:get_circuit_block(pos)
 				return radians
 			end,
 
-            -- Control wire A, integer
+            -- Set control wire A, integer
+            -- returns wire on which control was placed, -1 if not placed
             set_ctrl_a = function(ctrl_a_arg)
-				ctrl_a = ctrl_a_arg
+                local ret_wire_placed = -1
+                if circuit_is_on_grid == 1 and
+                        ctrl_a_arg >= 1 and ctrl_a_arg <= circuit_num_wires then
+                    local pos_y = circuit_num_wires - ctrl_a_arg + circuit_pos_y
+                    local candidate_ctrl_pos = {pos.x, pos_y , pos.z}
 
-                -- TODO: LEFT OFF HERE
+                    -- TODO: Validate whether argument is placeable
+                    --local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+                    --circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
+                    --        new_node_name)
 
-                circuit_blocks:set_node_with_circuit_specs_meta(pos, new_node_name)
+                    local block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
+                    block.set_node_type(CircuitNodeTypes.X)
+
+                    minetest.debug("candidate_ctrl_pos: " .. dump(candidate_ctrl_pos))
+                    minetest.debug(" in_on_punch, block:\n" ..
+                        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
+                        "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
+                        "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
+                        "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
+                        "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
+                        "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
+                        "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
+                        "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
+                        "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
+                        "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
+                        "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
+                        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+
+                    ret_wire_placed = ctrl_a_arg
+                end
+                return ret_wire_placed
 			end,
 
+            -- Get control wire A, integer
             get_ctrl_a = function()
 				return ctrl_a
 			end,
@@ -98,20 +137,12 @@ function circuit_blocks:get_circuit_block(pos)
 
             -- Circuit wire num that node is on, integer (1..num wires, -1 if not)
             get_node_wire_num = function()
-                local ret_wire_num = -1
-                if circuit_is_on_grid == 1 then
-                    ret_wire_num = circuit_num_wires - (pos.y - circuit_pos_y)
-                end
-				return ret_wire_num
+				return node_wire_num
 			end,
 
             -- Circuit column that node is on, integer (1..num columns, -1 if not)
             get_node_column_num = function()
-                local ret_column_num = -1
-                if circuit_is_on_grid == 1 then
-                    ret_column_num = pos.x - circuit_pos_x + 1
-                end
-				return ret_column_num
+				return node_column_num
 			end,
 
             -- Position of lower-left node of the circuit grid
@@ -263,6 +294,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
                         "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
                         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+
+                    -- TODO: Replace with real logic
+                    local wire_placed = block.set_ctrl_a(block.get_node_wire_num() - 1)
+                    minetest.debug("control wire_placed: " .. tostring(wire_placed))
                 else
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_empty_wire")
