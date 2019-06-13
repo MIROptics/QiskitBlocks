@@ -105,5 +105,29 @@ minetest.register_node("q_command:q_block", {
     end
 })
 
+minetest.register_node("q_command:q_sphere", {
+    description = "Q command sphere",
+    drawtype = "mesh",
+    mesh = "q_sphere.obj",
+    tiles = {"q_command_block.png"},
+    groups = {oddly_breakable_by_hand=2},
+    on_construct = function(pos)
+        local meta = minetest.get_meta(pos)
+        meta:set_string("infotext", "Quantum circuit command block")
+        q_command.block_pos = pos
+    end,
+    on_rightclick = function(pos, node, clicker, itemstack)
+        local player_name = clicker:get_player_name()
+        local meta = minetest.get_meta(pos)
+        local formspec = "size[5.0, 4.6]"..
+                "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
+                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;5]" ..
+                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;4]" ..
+                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;2]" ..
+				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
+        minetest.show_formspec(player_name, "create_circuit_grid", formspec)
+    end
+})
+
 
 
