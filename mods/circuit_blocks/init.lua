@@ -42,6 +42,12 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             -- Circuit node type, integer
+            set_node_type = function(node_type_arg)
+				node_type = node_type_arg
+                local new_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
+                circuit_blocks:set_node_with_circuit_specs_meta(pos, new_node_name)
+			end,
+
             get_node_type = function()
 				return node_type
 			end,
@@ -213,13 +219,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            -- minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
 
             local wielded_item = player:get_wielded_item()
 
             if is_on_grid and is_on_grid == 1 then
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
                     local block = circuit_blocks:get_circuit_block(pos)
+                    block.set_node_type(CircuitNodeTypes.X)
                     minetest.debug(" in_on_punch, block.to_string():\n" .. block.to_string() .. "\n")
 
                     minetest.debug(" in_on_punch, block:\n" ..
