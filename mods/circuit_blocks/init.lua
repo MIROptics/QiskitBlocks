@@ -11,10 +11,13 @@ dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 -- our API object
 circuit_blocks = {}
 
--- returns circuit_blocks object or nil
+-- returns circuit_block object or nil
 function circuit_blocks:get_circuit_block(pos)
 	local node_name = minetest.get_node(pos).name
+    --minetest.debug("In get_circuit_block, pos, node_name\n" ..
+    --        dump(pos) .. node_name)
 	if minetest.registered_nodes[node_name] then
+
         -- Retrieve metadata
         local meta = minetest.get_meta(pos)
         local node_type = meta:get_int("node_type")
@@ -52,11 +55,11 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             -- Circuit node type, integer
-            set_node_type = function(node_type_arg)
-				node_type = node_type_arg
-                local new_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
-                circuit_blocks:set_node_with_circuit_specs_meta(pos, new_node_name)
-			end,
+            --set_node_type = function(node_type_arg)
+			--	node_type = node_type_arg
+            --    local new_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
+            --    circuit_blocks:set_node_with_circuit_specs_meta(pos, new_node_name)
+			--end,
 
             get_node_type = function()
 				return node_type
@@ -74,30 +77,47 @@ function circuit_blocks:get_circuit_block(pos)
                 if circuit_is_on_grid == 1 and
                         ctrl_a_arg >= 1 and ctrl_a_arg <= circuit_num_wires then
                     local pos_y = circuit_num_wires - ctrl_a_arg + circuit_pos_y
-                    local candidate_ctrl_pos = {pos.x, pos_y , pos.z}
+                    local candidate_ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                    --local candidate_ctrl_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
+
+                    local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
 
                     -- TODO: Validate whether argument is placeable
-                    --local new_node_name = "circuit_blocks:circuit_blocks_control_down"
-                    --circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
-                    --        new_node_name)
+                    minetest.debug("BEFORE In set_ctrl_a: candidate_ctrl_pos, meta:to_table():\n" ..
+                    dump(candidate_ctrl_pos) .. "\n" .. dump(meta:to_table()))
+                    minetest.debug(" candidate_block BEFORE:\n" ..
+                        "get_node_pos() " .. dump(candidate_block.get_node_pos()) .. "\n" ..
+                        "get_node_type() " .. tostring(candidate_block.get_node_type()) .. "\n" ..
+                        "get_radians() " .. tostring(candidate_block.get_radians()) .. "\n" ..
+                        "get_ctrl_a() " .. tostring(candidate_block.get_ctrl_a()) .. "\n" ..
+                        "get_ctrl_b() " .. tostring(candidate_block.get_ctrl_b()) .. "\n" ..
+                        "is_gate() " .. tostring(candidate_block.is_gate()) .. "\n" ..
+                        "get_circuit_num_wires() " .. tostring(candidate_block.get_circuit_num_wires()) .. "\n" ..
+                        "get_circuit_num_columns() " .. tostring(candidate_block.get_circuit_num_columns()) .. "\n" ..
+                        "is_on_circuit_grid() " .. tostring(candidate_block.is_on_circuit_grid()) .. "\n" ..
+                        "get_node_wire_num() " .. tostring(candidate_block.get_node_wire_num()) .. "\n" ..
+                        "get_node_column_num() " .. tostring(candidate_block.get_node_column_num()) .. "\n" ..
+                        "get_circuit_pos() " .. dump(candidate_block.get_circuit_pos()) .. "\n")
 
-                    local block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
-                    block.set_node_type(CircuitNodeTypes.X)
+                    local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+                    circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
+                            new_node_name)
 
-                    minetest.debug("candidate_ctrl_pos: " .. dump(candidate_ctrl_pos))
-                    minetest.debug(" in_on_punch, block:\n" ..
-                        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
-                        "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
-                        "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
-                        "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
-                        "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
-                        "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
-                        "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
-                        "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
-                        "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
-                        "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
-                        "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
-                        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+                    minetest.debug("AFTER In set_ctrl_a: candidate_ctrl_pos, meta:to_table():\n" ..
+                    dump(candidate_ctrl_pos) .. "\n" .. dump(meta:to_table()))
+                    minetest.debug(" candidate_block AFTER:\n" ..
+                        "get_node_pos() " .. dump(candidate_block.get_node_pos()) .. "\n" ..
+                        "get_node_type() " .. tostring(candidate_block.get_node_type()) .. "\n" ..
+                        "get_radians() " .. tostring(candidate_block.get_radians()) .. "\n" ..
+                        "get_ctrl_a() " .. tostring(candidate_block.get_ctrl_a()) .. "\n" ..
+                        "get_ctrl_b() " .. tostring(candidate_block.get_ctrl_b()) .. "\n" ..
+                        "is_gate() " .. tostring(candidate_block.is_gate()) .. "\n" ..
+                        "get_circuit_num_wires() " .. tostring(candidate_block.get_circuit_num_wires()) .. "\n" ..
+                        "get_circuit_num_columns() " .. tostring(candidate_block.get_circuit_num_columns()) .. "\n" ..
+                        "is_on_circuit_grid() " .. tostring(candidate_block.is_on_circuit_grid()) .. "\n" ..
+                        "get_node_wire_num() " .. tostring(candidate_block.get_node_wire_num()) .. "\n" ..
+                        "get_node_column_num() " .. tostring(candidate_block.get_node_column_num()) .. "\n" ..
+                        "get_circuit_pos() " .. dump(candidate_block.get_circuit_pos()) .. "\n")
 
                     ret_wire_placed = ctrl_a_arg
                 end
@@ -181,6 +201,7 @@ end
 function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     -- Retrieve circuit_specs metadata
     local meta = minetest.get_meta(pos)
+
     local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
     local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
     local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
@@ -188,39 +209,24 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
     local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
 
+    minetest.debug("In set_node_with_circuit_specs_meta BEFORE set_node\n " ..
+        dump(pos) .. "\n" .. dump(meta:to_table()))
+
     minetest.set_node(pos, {name = node_name})
 
     -- Put circuit_specs metadata on placed node
     meta = minetest.get_meta(pos)
+
     meta:set_int("circuit_specs_num_wires", circuit_num_wires)
     meta:set_int("circuit_specs_num_columns", circuit_num_columns)
     meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
     meta:set_int("circuit_specs_pos_x", circuit_pos_x)
     meta:set_int("circuit_specs_pos_y", circuit_pos_y)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+
+    minetest.debug("In set_node_with_circuit_specs_meta AFTER set_node\n " ..
+        dump(pos) .. "\n" .. dump(meta:to_table()))
 end
-
-
---function circuit_blocks:toggle_control_qubit(pos)
---    local meta = minetest.get_meta(pos)
---    local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
---    local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
---    local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
---    local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
---    local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
---    local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
---
---    minetest.set_node(pos, {name = node_name})
---
---    -- Put circuit_specs metadata on placed node
---    meta = minetest.get_meta(pos)
---    meta:set_int("circuit_specs_num_wires", circuit_num_wires)
---    meta:set_int("circuit_specs_num_columns", circuit_num_columns)
---    meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
---    meta:set_int("circuit_specs_pos_x", circuit_pos_x)
---    meta:set_int("circuit_specs_pos_y", circuit_pos_y)
---    meta:set_int("circuit_specs_pos_z", circuit_pos_z)
---end
 
 
 function circuit_blocks:register_circuit_block(circuit_node_type,
@@ -263,7 +269,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:set_int("is_gate", (is_gate and 1 or 0))
-            --minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
@@ -279,8 +285,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
             if is_on_grid and is_on_grid == 1 then
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
+
+                    --pos.y = pos.y + 1
+                    --pos = {x = 44, y = 3, z = 32}
                     local block = circuit_blocks:get_circuit_block(pos)
-                    block.set_node_type(CircuitNodeTypes.X)
+                    --block.set_node_type(CircuitNodeTypes.X)
                     minetest.debug(" in_on_punch, block:\n" ..
                         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
                         "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
@@ -313,7 +322,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            --minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
             return is_on_grid == 0
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
@@ -326,7 +335,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             local player_name = clicker:get_player_name()
 
-            -- minetest.debug("In on_rightclick: meta:to_table():\n" .. dump(meta:to_table()))
+            minetest.debug("In on_rightclick: pos, meta:to_table():\n" ..
+                    dump(pos) .. "\n" .. dump(meta:to_table()))
 
             if is_on_grid == 1 then
                 if node_type == CircuitNodeTypes.EMPTY then
@@ -343,9 +353,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 itemstack:get_name())
                     end
                 elseif itemstack:get_name() == "circuit_blocks:control_tool" then
-                    ctrl_a = ctrl_a * -1
-                    meta:set_int("ctrl_a", ctrl_a)
-                    minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
+                    --ctrl_a = ctrl_a * -1
+                    --meta:set_int("ctrl_a", ctrl_a)
+                    --minetest.chat_send_player(player_name, "ctrl_a is now: " .. tostring(ctrl_a))
+
                 end
             end
         end
