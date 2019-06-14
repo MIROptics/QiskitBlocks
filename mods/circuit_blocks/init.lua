@@ -74,31 +74,32 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             -- Set control wire A, integer
-            -- returns wire on which control was placed, -1 if not placed
             set_ctrl_a = function(ctrl_a_arg)
-                local ret_wire_placed = -1
-                if circuit_is_on_grid == 1 and
-                        ctrl_a_arg >= 1 and ctrl_a_arg <= circuit_num_wires then
-                    local pos_y = circuit_num_wires - ctrl_a_arg + circuit_pos_y
-                    local candidate_ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                    --local candidate_ctrl_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
-
-                    local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
-
-                    -- TODO: Validate whether argument is placeable
-                    circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                            "BEFORE In set_ctrl_a")
-
-                    local new_node_name = "circuit_blocks:circuit_blocks_control_down"
-                    circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
-                            new_node_name)
-
-                    circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                            "AFTER In set_ctrl_a")
-
-                    ret_wire_placed = ctrl_a_arg
-                end
-                return ret_wire_placed
+                meta:set_int("ctrl_a", ctrl_a_arg)
+                return
+                --local ret_wire_placed = -1
+                --if circuit_is_on_grid == 1 and
+                --        ctrl_a_arg >= 1 and ctrl_a_arg <= circuit_num_wires then
+                --    local pos_y = circuit_num_wires - ctrl_a_arg + circuit_pos_y
+                --    local candidate_ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                --    --local candidate_ctrl_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
+                --
+                --    local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
+                --
+                --    -- TODO: Validate whether argument is placeable
+                --    circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                --            "BEFORE In set_ctrl_a")
+                --
+                --    local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+                --    circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
+                --            new_node_name)
+                --
+                --    circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                --            "AFTER In set_ctrl_a")
+                --
+                --    ret_wire_placed = ctrl_a_arg
+                --end
+                --return ret_wire_placed
 			end,
 
             -- Get control wire A, integer
@@ -228,6 +229,41 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
 end
 
 
+function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
+    --[[
+    Attempt to place a control qubit on a wire.
+    If successful, return the wire number. If not, return -1
+    --]]
+    local ret_placed_wire = -1
+    local gate_wire_num = gate_block:get_node_wire_num()
+    local circuit_num_wires = gate_block.get_circuit_num_wires()
+    local circuit_pos = gate_block.get_circuit_pos()
+    local circuit_pos_y = circuit_pos.y
+
+    if gate_wire_num > 1 and
+            gate_wire_num < gate_block:get_circuit_num_wires() then
+        local pos_y = circuit_num_wires - candidate_ctrl_wire_num + circuit_pos_y
+        local candidate_ctrl_pos = {x = circuit_pos.x, y = pos_y, z = circuit_pos.z}
+        local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
+
+        -- TODO: Validate whether argument is placeable
+        circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                "BEFORE In place_ctrl_qubit")
+
+        local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+        circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
+                new_node_name)
+
+        circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                "AFTER In place_ctrl_qubit")
+
+        ret_placed_wire = candidate_ctrl_wire_num
+        gate_block.set_ctrl_a(candidate_ctrl_wire_num)
+    end
+    return ret_placed_wire
+end
+
+
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
@@ -271,27 +307,27 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             -- minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
-            local meta = minetest.get_meta(pos)
-            local node_type = meta:get_int("node_type")
-            local radians = meta:get_float("radians")
-            local ctrl_a = meta:get_int("ctrl_a")
-            local ctrl_b = meta:get_int("ctrl_b")
-            local is_gate = meta:get_int("is_gate")
-            local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+            circuit_blocks:debug_node_info(pos,"In on_punch")
 
-            circuit_blocks:debug_node_info(pos,
-                    "In on_punch")
+            local block = circuit_blocks:get_circuit_block(pos)
+            local node_type = block:get_node_type()
+            if block.is_on_circuit_grid() and
+                    (node_type == CircuitNodeTypes.X or
+                    node_type == CircuitNodeTypes.Y or
+                    node_type == CircuitNodeTypes.Z or
+                    node_type == CircuitNodeTypes.H) and
+                    block.get_ctrl_a() == -1 then
 
-            local wielded_item = player:get_wielded_item()
-
-            if is_on_grid and is_on_grid == 1 then
+                local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local block = circuit_blocks:get_circuit_block(pos)
+                    local placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                            1)
 
-                    -- TODO: Replace with real logic
-                    local wire_placed = block.set_ctrl_a(block.get_node_wire_num() - 1)
-                    minetest.debug("control wire_placed: " .. tostring(wire_placed))
+                    minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                    minetest.chat_send_player(player:get_player_name(),
+                            "control placed_wire: " .. tostring(placed_wire))
                 else
+                    -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_empty_wire")
                 end
@@ -320,8 +356,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             local player_name = clicker:get_player_name()
 
-            minetest.debug("In on_rightclick:")
-            circuit_blocks:debug_node_info(pos)
+            circuit_blocks:debug_node_info(pos, "In on_rightclick")
 
             if is_on_grid == 1 then
                 if node_type == CircuitNodeTypes.EMPTY then
