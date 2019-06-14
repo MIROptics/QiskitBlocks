@@ -14,8 +14,6 @@ circuit_blocks = {}
 -- returns circuit_block object or nil
 function circuit_blocks:get_circuit_block(pos)
 	local node_name = minetest.get_node(pos).name
-    --minetest.debug("In get_circuit_block, pos, node_name\n" ..
-    --        dump(pos) .. node_name)
 	if minetest.registered_nodes[node_name] then
 
         -- Retrieve metadata
@@ -54,6 +52,11 @@ function circuit_blocks:get_circuit_block(pos)
 				return pos
 			end,
 
+            -- Node name, string
+            get_node_name = function()
+				return node_name
+			end,
+
             -- Circuit node type, integer
             --set_node_type = function(node_type_arg)
 			--	node_type = node_type_arg
@@ -83,41 +86,15 @@ function circuit_blocks:get_circuit_block(pos)
                     local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
 
                     -- TODO: Validate whether argument is placeable
-                    minetest.debug("BEFORE In set_ctrl_a: candidate_ctrl_pos, meta:to_table():\n" ..
-                    dump(candidate_ctrl_pos) .. "\n" .. dump(meta:to_table()))
-                    minetest.debug(" candidate_block BEFORE:\n" ..
-                        "get_node_pos() " .. dump(candidate_block.get_node_pos()) .. "\n" ..
-                        "get_node_type() " .. tostring(candidate_block.get_node_type()) .. "\n" ..
-                        "get_radians() " .. tostring(candidate_block.get_radians()) .. "\n" ..
-                        "get_ctrl_a() " .. tostring(candidate_block.get_ctrl_a()) .. "\n" ..
-                        "get_ctrl_b() " .. tostring(candidate_block.get_ctrl_b()) .. "\n" ..
-                        "is_gate() " .. tostring(candidate_block.is_gate()) .. "\n" ..
-                        "get_circuit_num_wires() " .. tostring(candidate_block.get_circuit_num_wires()) .. "\n" ..
-                        "get_circuit_num_columns() " .. tostring(candidate_block.get_circuit_num_columns()) .. "\n" ..
-                        "is_on_circuit_grid() " .. tostring(candidate_block.is_on_circuit_grid()) .. "\n" ..
-                        "get_node_wire_num() " .. tostring(candidate_block.get_node_wire_num()) .. "\n" ..
-                        "get_node_column_num() " .. tostring(candidate_block.get_node_column_num()) .. "\n" ..
-                        "get_circuit_pos() " .. dump(candidate_block.get_circuit_pos()) .. "\n")
+                    circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                            "BEFORE In set_ctrl_a")
 
                     local new_node_name = "circuit_blocks:circuit_blocks_control_down"
                     circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
                             new_node_name)
 
-                    minetest.debug("AFTER In set_ctrl_a: candidate_ctrl_pos, meta:to_table():\n" ..
-                    dump(candidate_ctrl_pos) .. "\n" .. dump(meta:to_table()))
-                    minetest.debug(" candidate_block AFTER:\n" ..
-                        "get_node_pos() " .. dump(candidate_block.get_node_pos()) .. "\n" ..
-                        "get_node_type() " .. tostring(candidate_block.get_node_type()) .. "\n" ..
-                        "get_radians() " .. tostring(candidate_block.get_radians()) .. "\n" ..
-                        "get_ctrl_a() " .. tostring(candidate_block.get_ctrl_a()) .. "\n" ..
-                        "get_ctrl_b() " .. tostring(candidate_block.get_ctrl_b()) .. "\n" ..
-                        "is_gate() " .. tostring(candidate_block.is_gate()) .. "\n" ..
-                        "get_circuit_num_wires() " .. tostring(candidate_block.get_circuit_num_wires()) .. "\n" ..
-                        "get_circuit_num_columns() " .. tostring(candidate_block.get_circuit_num_columns()) .. "\n" ..
-                        "is_on_circuit_grid() " .. tostring(candidate_block.is_on_circuit_grid()) .. "\n" ..
-                        "get_node_wire_num() " .. tostring(candidate_block.get_node_wire_num()) .. "\n" ..
-                        "get_node_column_num() " .. tostring(candidate_block.get_node_column_num()) .. "\n" ..
-                        "get_circuit_pos() " .. dump(candidate_block.get_circuit_pos()) .. "\n")
+                    circuit_blocks:debug_node_info(candidate_ctrl_pos,
+                            "AFTER In set_ctrl_a")
 
                     ret_wire_placed = ctrl_a_arg
                 end
@@ -178,6 +155,7 @@ function circuit_blocks:get_circuit_block(pos)
             -- TODO: What is Lua way to implement a "to string" function?
             to_string = function()
                 local ret_str = "pos: " .. dump(pos) .. "\n" ..
+                        "node_name: " .. node_name .. "\n" ..
                         "node_type: " .. tostring(node_type) .. "\n" ..
                         "radians: " .. tostring(radians) .. "\n" ..
                         "ctrl_a: " .. tostring(ctrl_a) .. "\n" ..
@@ -198,6 +176,27 @@ function circuit_blocks:get_circuit_block(pos)
 end
 
 
+function circuit_blocks:debug_node_info(pos, message)
+    local block = circuit_blocks:get_circuit_block(pos)
+    -- minetest.debug("to_string:\n" .. dump(block.to_string()))
+    minetest.debug((message or "") .. "\ncircuit_block:\n" ..
+        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
+        "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
+        "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
+        "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
+        "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
+        "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
+        "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
+        "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
+        "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
+        "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
+        "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
+        "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
+        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+
+end
+
+
 function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     -- Retrieve circuit_specs metadata
     local meta = minetest.get_meta(pos)
@@ -209,8 +208,8 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
     local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
 
-    minetest.debug("In set_node_with_circuit_specs_meta BEFORE set_node\n " ..
-        dump(pos) .. "\n" .. dump(meta:to_table()))
+    circuit_blocks:debug_node_info(pos,
+            "In set_node_with_circuit_specs_meta BEFORE set_node")
 
     minetest.set_node(pos, {name = node_name})
 
@@ -224,8 +223,8 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     meta:set_int("circuit_specs_pos_y", circuit_pos_y)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)
 
-    minetest.debug("In set_node_with_circuit_specs_meta AFTER set_node\n " ..
-        dump(pos) .. "\n" .. dump(meta:to_table()))
+    circuit_blocks:debug_node_info(pos,
+            "In set_node_with_circuit_specs_meta AFTER set_node")
 end
 
 
@@ -269,7 +268,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
             meta:set_int("is_gate", (is_gate and 1 or 0))
-            minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
+            -- minetest.debug("In on_construct: meta:to_table():\n" .. dump(meta:to_table()))
         end,
         on_punch = function(pos, node, player)
             local meta = minetest.get_meta(pos)
@@ -279,30 +278,15 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            minetest.debug("In on_punch: meta:to_table():\n" .. dump(meta:to_table()))
+
+            circuit_blocks:debug_node_info(pos,
+                    "In on_punch")
 
             local wielded_item = player:get_wielded_item()
 
             if is_on_grid and is_on_grid == 1 then
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-
-                    --pos.y = pos.y + 1
-                    --pos = {x = 44, y = 3, z = 32}
                     local block = circuit_blocks:get_circuit_block(pos)
-                    --block.set_node_type(CircuitNodeTypes.X)
-                    minetest.debug(" in_on_punch, block:\n" ..
-                        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
-                        "get_node_type() " .. tostring(block.get_node_type()) .. "\n" ..
-                        "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
-                        "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
-                        "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
-                        "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
-                        "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
-                        "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
-                        "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
-                        "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
-                        "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
-                        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
 
                     -- TODO: Replace with real logic
                     local wire_placed = block.set_ctrl_a(block.get_node_wire_num() - 1)
@@ -322,7 +306,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local ctrl_b = meta:get_int("ctrl_b")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
-            minetest.debug("In can_dig: meta:to_table():\n" .. dump(meta:to_table()))
+
+            circuit_blocks:debug_node_info(pos, "In can_dig")
             return is_on_grid == 0
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
@@ -335,8 +320,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
             local player_name = clicker:get_player_name()
 
-            minetest.debug("In on_rightclick: pos, meta:to_table():\n" ..
-                    dump(pos) .. "\n" .. dump(meta:to_table()))
+            minetest.debug("In on_rightclick:")
+            circuit_blocks:debug_node_info(pos)
 
             if is_on_grid == 1 then
                 if node_type == CircuitNodeTypes.EMPTY then
