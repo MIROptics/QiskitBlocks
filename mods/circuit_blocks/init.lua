@@ -263,21 +263,32 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
 
         -- Validate whether control qubit may be placed
         minetest.debug()
-        if candidate_block:is_within_circuit_grid() then
+        if candidate_block:is_within_circuit_grid() and
+                (candidate_block.get_node_type() == CircuitNodeTypes.EMPTY or
+                        candidate_block.get_node_type() == CircuitNodeTypes.TRACE) then
             circuit_blocks:debug_node_info(candidate_ctrl_pos,
                     "BEFORE In place_ctrl_qubit")
 
-            local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_down"
             if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
-                new_node_name = "circuit_blocks:circuit_blocks_control_up"
+                new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_up"
             end
             circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
-                    new_node_name)
+                    new_ctrl_node_name)
 
             circuit_blocks:debug_node_info(candidate_ctrl_pos,
                     "AFTER In place_ctrl_qubit")
             gate_block.set_ctrl_a(candidate_ctrl_wire_num)
             ret_placed_wire = candidate_ctrl_wire_num
+
+            if gate_block.get_node_type() == CircuitNodeTypes.X then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
+                if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
+                end
+                circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+                        new_gate_node_name)
+            end
         end
     end
     return ret_placed_wire
