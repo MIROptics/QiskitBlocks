@@ -256,7 +256,7 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
 
     if gate_wire_num >= 1 and
             gate_wire_num <= gate_block:get_circuit_num_wires() then
-        local pos_y = circuit_num_wires - candidate_ctrl_wire_num + gate_pos.y - 1
+        local pos_y = circuit_num_wires - candidate_ctrl_wire_num + gate_block:get_circuit_pos().y
         local candidate_ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
         local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
         circuit_blocks:debug_node_info(candidate_ctrl_pos, "candidate_ctrl_pos")
@@ -268,6 +268,9 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
                     "BEFORE In place_ctrl_qubit")
 
             local new_node_name = "circuit_blocks:circuit_blocks_control_down"
+            if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                new_node_name = "circuit_blocks:circuit_blocks_control_up"
+            end
             circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
                     new_node_name)
 
@@ -323,25 +326,29 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("is_gate", (is_gate and 1 or 0))
         end,
         on_punch = function(pos, node, player)
-            circuit_blocks:debug_node_info(pos,"In on_punch")
-
             local block = circuit_blocks:get_circuit_block(pos)
             local node_type = block:get_node_type()
-            if block.is_on_circuit_grid() and
+            if block.is_within_circuit_grid() and
                     (node_type == CircuitNodeTypes.X or
                     node_type == CircuitNodeTypes.Y or
                     node_type == CircuitNodeTypes.Z or
-                    node_type == CircuitNodeTypes.H) and
-                    block.get_ctrl_a() == -1 then
+                    node_type == CircuitNodeTypes.H) then
 
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                            1)
-
-                    minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                    minetest.chat_send_player(player:get_player_name(),
-                            "control placed_wire: " .. tostring(placed_wire))
+                    if block:get_ctrl_a() == -1 then
+                        local placed_wire = -1
+                        placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                block:get_node_wire_num() - 1)
+                        if placed_wire == -1 then
+                            placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                    block:get_node_wire_num() + 1)
+                        end
+                        minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                        minetest.chat_send_player(player:get_player_name(),
+                                "control placed_wire: " .. tostring(placed_wire))
+                        block.set_ctrl_a(placed_wire)
+                    end
                 else
                     -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
