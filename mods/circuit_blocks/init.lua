@@ -5,6 +5,7 @@
 --  Utilize is_gate boolean parameter of register_circuit_block function to
 --      identify circuit blocks that are circuit gates
 --  Remove circuit_gate group code
+--  Understand and standardize on when to use colon, or dot, as function separator
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
@@ -75,7 +76,9 @@ function circuit_blocks:get_circuit_block(pos)
 
             -- Set control wire A, integer
             set_ctrl_a = function(ctrl_a_arg)
+                ctrl_a = ctrl_a_arg
                 meta:set_int("ctrl_a", ctrl_a_arg)
+
                 return
                 --local ret_wire_placed = -1
                 --if circuit_is_on_grid == 1 and
@@ -273,19 +276,66 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
             if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
                 new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_up"
             end
+
+            gate_block.set_ctrl_a(candidate_ctrl_wire_num)
             circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
                     new_ctrl_node_name)
 
             circuit_blocks:debug_node_info(candidate_ctrl_pos,
                     "AFTER In place_ctrl_qubit")
-            gate_block.set_ctrl_a(candidate_ctrl_wire_num)
             ret_placed_wire = candidate_ctrl_wire_num
 
+            --TODO: Fix and uncomment
             if gate_block.get_node_type() == CircuitNodeTypes.X then
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
                 if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
                     new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
                 end
+
+                -- Change the node name but leave metadata the same
+                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+            end
+        end
+    end
+    return ret_placed_wire
+end
+
+
+function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num)
+    --[[
+    Remove a control qubit from a wire.
+    --]]
+    local gate_wire_num = gate_block:get_node_wire_num()
+    local circuit_num_wires = gate_block.get_circuit_num_wires()
+    local gate_pos = gate_block:get_node_pos()
+
+    if gate_wire_num >= 1 and
+            gate_wire_num <= gate_block:get_circuit_num_wires() then
+        local pos_y = circuit_num_wires - ctrl_wire_num + gate_block:get_circuit_pos().y
+        local ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
+        local ctrl_block = circuit_blocks:get_circuit_block(ctrl_pos)
+        circuit_blocks:debug_node_info(ctrl_pos, "ctrl_pos")
+
+        -- Validate whether control qubit may be removed
+        minetest.debug()
+        if ctrl_block:is_within_circuit_grid() then
+            circuit_blocks:debug_node_info(ctrl_pos,
+                    "BEFORE In remove_ctrl_qubit")
+
+            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
+            if ctrl_wire_num > gate_block:get_node_wire_num() then
+                -- TODO: Modify above condition, and remove nodes
+                --       in-between gate and ctrl nodes
+            end
+            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                    new_ctrl_node_name)
+
+            circuit_blocks:debug_node_info(ctrl_pos,
+                    "AFTER In remove_ctrl_qubit")
+            gate_block.set_ctrl_a(-1)
+
+            if gate_block.get_node_type() == CircuitNodeTypes.X then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_x_gate"
                 circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
                         new_gate_node_name)
             end
@@ -338,6 +388,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end,
         on_punch = function(pos, node, player)
             local block = circuit_blocks:get_circuit_block(pos)
+            circuit_blocks:debug_node_info(pos, "In on_punch()")
+
             local node_type = block:get_node_type()
             if block.is_within_circuit_grid() and
                     (node_type == CircuitNodeTypes.X or
@@ -347,7 +399,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    if block:get_ctrl_a() == -1 then
+                    if block.get_ctrl_a() == -1 then
                         local placed_wire = -1
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() - 1)
@@ -358,7 +410,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
-                        block.set_ctrl_a(placed_wire)
+                        --block.set_ctrl_a(placed_wire)
+                    else
+                        circuit_blocks:remove_ctrl_qubit(block,
+                                block.get_ctrl_a())
                     end
                 else
                     -- Necessary to replace punched node
