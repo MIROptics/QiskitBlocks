@@ -393,9 +393,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local node_type = block:get_node_type()
             if block.is_within_circuit_grid() and
                     (node_type == CircuitNodeTypes.X or
-                    node_type == CircuitNodeTypes.Y or
-                    node_type == CircuitNodeTypes.Z or
-                    node_type == CircuitNodeTypes.H) then
+                            node_type == CircuitNodeTypes.Y or
+                            node_type == CircuitNodeTypes.Z or
+                            node_type == CircuitNodeTypes.H) then
 
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
@@ -418,8 +418,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 else
                     -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                        "circuit_blocks:circuit_blocks_empty_wire")
+                            "circuit_blocks:circuit_blocks_empty_wire")
                 end
+            elseif node_type == CircuitNodeTypes.EMPTY then
+                -- Necessary to replace punched node
+                circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                        "circuit_blocks:circuit_blocks_empty_wire")
             end
             return
         end,
