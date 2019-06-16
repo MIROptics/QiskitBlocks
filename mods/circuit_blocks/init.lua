@@ -8,6 +8,7 @@
 --  Remove circuit_gate group code
 --  Understand and standardize on when to use colon, or dot, as function separator
 --  Find alternative to hardcoding node name strings everywhere
+--  Remove hearts from creative mode
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
@@ -456,11 +457,15 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     else
                         local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                         local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                "circuit_blocks:circuit_blocks_empty_wire")
-
-                        placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                block.get_ctrl_a() - 1)
+                        if block.get_ctrl_a() - 1 >= 1 then
+                            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                    "circuit_blocks:circuit_blocks_empty_wire")
+                            placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                    block.get_ctrl_a() - 1)
+                        else
+                            minetest.debug("Tried to place ctrl on nonexistent wire: " ..
+                                    block.get_ctrl_a() - 1)
+                        end
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
@@ -516,15 +521,18 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     else
                         local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                         local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                "circuit_blocks:circuit_blocks_empty_wire")
-
-                        placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                block.get_ctrl_a() + 1)
+                        if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() then
+                            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                    "circuit_blocks:circuit_blocks_empty_wire")
+                            placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                    block.get_ctrl_a() + 1)
+                        else
+                            minetest.debug("Tried to place ctrl on nonexistent wire: " ..
+                                    block.get_ctrl_a() + 1)
+                        end
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
-
                     end
                 end
             elseif node_type == CircuitNodeTypes.EMPTY then
