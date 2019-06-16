@@ -229,7 +229,9 @@ function circuit_blocks:place_nodes_between(block_a, block_b, new_node_type)
     local high_wire_num = math.max(block_a.get_node_wire_num(),
             block_b.get_node_wire_num())
     local new_node_name = "circuit_blocks:circuit_blocks_empty_wire"
-    if new_node_type == CircuitNodeTypes.TRACE then
+    if new_node_type == CircuitNodeTypes.EMPTY then
+        new_node_name = "circuit_blocks:circuit_blocks_empty_wire"
+    elseif new_node_type == CircuitNodeTypes.TRACE then
         new_node_name = "circuit_blocks:circuit_blocks_trace"
     end
 
@@ -367,9 +369,11 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num)
                     "BEFORE In remove_ctrl_qubit")
 
             local new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
-            if ctrl_wire_num > gate_block:get_node_wire_num() then
-                -- TODO: Modify above condition, and remove nodes
-                --       in-between gate and ctrl nodes
+            if math.abs(ctrl_wire_num - gate_block:get_node_wire_num()) > 0 then
+                -- Remove nodes in-between gate and ctrl nodes
+                circuit_blocks:place_nodes_between(gate_block, ctrl_block,
+                        CircuitNodeTypes.EMPTY)
+
             end
             circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                     new_ctrl_node_name)
@@ -471,6 +475,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 "control placed_wire: " .. tostring(placed_wire))
                     end
                 else
+                    if block.get_ctrl_a() ~= -1 then
+                        circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a())
+                    end
+
                     -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                             "circuit_blocks:circuit_blocks_empty_wire")
