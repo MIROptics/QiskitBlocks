@@ -1,4 +1,5 @@
 -- TODO:
+--  When punching NOT gate block when it has a control qubit, delete entire gate
 --  Define Quantum control block that creates circuit, etc.
 --  Right click places circuit_gate
 --  Make left click drop gate entity
@@ -453,12 +454,16 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         circuit_blocks:remove_ctrl_qubit(block,
                                 block.get_ctrl_a())
                     else
+                        local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                        local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                "circuit_blocks:circuit_blocks_empty_wire")
+
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block.get_ctrl_a() - 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
-
                     end
                 else
                     -- Necessary to replace punched node
@@ -509,6 +514,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         circuit_blocks:remove_ctrl_qubit(block,
                                 block.get_ctrl_a())
                     else
+                        local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                        local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                "circuit_blocks:circuit_blocks_empty_wire")
+
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block.get_ctrl_a() + 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
