@@ -247,6 +247,7 @@ function circuit_blocks:place_nodes_between(block_a, block_b, new_node_type)
                     "low_wire_num_pos: " .. dump(low_wire_num_pos) ..
                     ", i: " .. tostring(i))
             minetest.swap_node(cur_pos, {name = new_node_name})
+            minetest.get_meta(cur_pos):set_int("node_type", CircuitNodeTypes.TRACE)
         end
     end
     return
@@ -444,10 +445,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     if block.get_ctrl_a() == -1 then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() - 1)
-                        --if placed_wire == -1 then
-                        --    placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                        --            block:get_node_wire_num() + 1)
-                        --end
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
@@ -514,10 +511,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     else
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block.get_ctrl_a() + 1)
-                        --if placed_wire == -1 then
-                        --    placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                        --            block:get_node_wire_num() + 1)
-                        --end
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
