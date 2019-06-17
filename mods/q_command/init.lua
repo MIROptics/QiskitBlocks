@@ -8,7 +8,91 @@ q_command.block_pos = {}
 q_command.circuit_specs = {} -- pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
 
--- returns circuit_block object or nil
+-- returns q_command object or nil
+function q_command:get_q_command_block(pos)
+	local node_name = minetest.get_node(pos).name
+	if minetest.registered_nodes[node_name] then
+
+        -- Retrieve metadata
+        local meta = minetest.get_meta(pos)
+        -- local node_type = meta:get_int("node_type")
+        local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+        local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+        local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+
+		return {
+			pos = pos,
+
+            -- Node position, table
+            get_node_pos = function()
+				return pos
+			end,
+
+            -- Node name, string
+            get_node_name = function()
+				return node_name
+			end,
+
+            -- Set control wire A, integer
+            --set_ctrl_a = function(ctrl_a_arg)
+            --    ctrl_a = ctrl_a_arg
+            --    meta:set_int("ctrl_a", ctrl_a_arg)
+            --
+            --    return
+			--end,
+
+            -- Get control wire A, integer
+            --get_ctrl_a = function()
+			--	return ctrl_a
+			--end,
+
+
+            -- Position of lower-left node of the circuit grid
+            get_circuit_pos = function()
+                local ret_pos = {}
+                ret_pos.x = circuit_pos_x
+                ret_pos.y = circuit_pos_y
+                ret_pos.z = circuit_pos_z
+				return ret_pos
+			end,
+
+            -- Determine if circuit grid exists
+            circuit_grid_exists = function()
+                local ret_exists = false
+                if circuit_pos_x > 0 and circuit_pos_z > 0 then
+                    ret_exists = true
+                end
+				return ret_exists
+			end,
+
+            -- Create string representation
+            -- TODO: What is Lua way to implement a "to string" function?
+            to_string = function()
+                local ret_str = "pos: " .. dump(pos) .. "\n" ..
+                        "node_name: " .. node_name .. "\n" ..
+                        "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
+                        "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
+                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n"
+                return ret_str
+            end
+		}
+	else
+		return nil
+	end
+end
+
+
+function q_command:debug_node_info(pos, message)
+    local block = q_command:get_q_command_block(pos)
+    minetest.debug("to_string:\n" .. dump(block.to_string()))
+    minetest.debug((message or "") .. "\ncircuit_block:\n" ..
+        "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
+        "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
+        "circuit_grid_exists() " .. dump(block.circuit_grid_exists()) .. "\n" ..
+        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+
+end
+
 
 function q_command:create_blank_circuit_grid()
     local circuit_num_wires = q_command.circuit_specs.num_wires
@@ -195,6 +279,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
                 -- Create circuit grid with empty blocks
                 q_command:create_blank_circuit_grid()
+
+                -- Put location of circuit into the q_command block metadata
+                local meta = minetest.get_meta(q_command.block_pos)
+                meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
+                meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
+                meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
             else
                 -- TODO: Show error message dialog?
                 minetest.chat_send_player(player:get_player_name(),
@@ -226,14 +316,22 @@ minetest.register_node("q_command:q_block", {
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end,
     on_punch = function(pos, node, player)
-        local qasm_str = q_command:compute_circuit()
-        minetest.debug("qasm_str:\n" .. qasm_str)
+        local q_block = q_command:get_q_command_block(pos)
+        q_command:debug_node_info(pos, "In on_punch, q_command_block")
+        if q_block:circuit_grid_exists() then
+            local qasm_str = q_command:compute_circuit()
+            minetest.debug("qasm_str:\n" .. qasm_str)
+        else
+            minetest.chat_send_player(player:get_player_name(),
+                    "Must create a circuit first")
+        end
     end,
     can_dig = function(pos, player)
         return false
     end
 })
 
+--[[
 minetest.register_node("q_command:q_sphere", {
     description = "Q command sphere",
     drawtype = "mesh",
@@ -257,6 +355,7 @@ minetest.register_node("q_command:q_sphere", {
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end
 })
+--]]
 
 
 
