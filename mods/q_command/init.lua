@@ -122,8 +122,13 @@ function q_command:create_blank_circuit_grid()
 end
 
 
-function q_command:compute_circuit()
+function q_command:compute_circuit(circuit_block)
     local qasm_str = 'OPENQASM 2.0;\ninclude "qelib1.inc";\n'
+
+    --local circuit_block = circuit_blocks:get_circuit_block(pos)
+    qasm_str = qasm_str .. 'qreg q[' .. tostring(circuit_block.get_circuit_num_wires()) .. '];\n'
+    qasm_str = qasm_str .. 'creg q[' .. tostring(circuit_block.get_circuit_num_wires()) .. '];\n'
+
 
     --[[
     qasm_str = qasm_str .. 'qreg q[' .. tostring(self.max_wires) .. '];\n'
@@ -319,7 +324,9 @@ minetest.register_node("q_command:q_block", {
         local q_block = q_command:get_q_command_block(pos)
         q_command:debug_node_info(pos, "In on_punch, q_command_block")
         if q_block:circuit_grid_exists() then
-            local qasm_str = q_command:compute_circuit()
+            local circuit_grid_pos = q_block.get_circuit_pos()
+            local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
+            local qasm_str = q_command:compute_circuit(circuit_block)
             minetest.debug("qasm_str:\n" .. qasm_str)
         else
             minetest.chat_send_player(player:get_player_name(),
