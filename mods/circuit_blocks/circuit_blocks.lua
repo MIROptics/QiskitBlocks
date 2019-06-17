@@ -332,8 +332,12 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
                 if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
                     new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
                 end
-
-                -- Change the node name but leave metadata the same
+                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+            elseif gate_block.get_node_type() == CircuitNodeTypes.H then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate_up"
+                if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate_down"
+                end
                 minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
             end
 
@@ -386,6 +390,10 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num)
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_x_gate"
                 circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
                         new_gate_node_name)
+            elseif gate_block.get_node_type() == CircuitNodeTypes.H then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate"
+                circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+                        new_gate_node_name)
             end
         end
     end
@@ -412,6 +420,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.H then
         texture_name = "circuit_blocks_h_gate"
+        if connector_up and not connector_down then
+            texture_name = "circuit_blocks_h_gate_up"
+        elseif connector_down and not connector_up then
+            texture_name = "circuit_blocks_h_gate_down"
+        end
     elseif circuit_node_type == CircuitNodeTypes.CTRL then
         texture_name = "circuit_blocks_control"
         if connector_up and not connector_down then

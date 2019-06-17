@@ -151,6 +151,10 @@ function q_command:compute_circuit(circuit_block)
                 local node_type = circuit_node_block.get_node_type()
                 local ctrl_a = circuit_node_block.get_ctrl_a()
                 local ctrl_b = circuit_node_block.get_ctrl_b()
+
+                -- TODO: Implement swap gate
+                -- local swap = circuit_node_block.get_swap()
+
                 local radians = circuit_node_block.get_radians()
 
                 if node_type == CircuitNodeTypes.IDEN then
@@ -217,42 +221,45 @@ function q_command:compute_circuit(circuit_block)
                             qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
                         end
                     end
-                --[[
-                elseif node.node_type == CircuitNodeTypes.S then
+
+                elseif node_type == CircuitNodeTypes.S then
                     -- S gate
                     qasm_str = qasm_str .. 's q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.SDG then
+                elseif node_type == CircuitNodeTypes.SDG then
                     -- S dagger gate
                     qasm_str = qasm_str .. 'sdg q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.T then
+                elseif node_type == CircuitNodeTypes.T then
                     -- T gate
                     qasm_str = qasm_str .. 't q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.TDG then
+                elseif node_type == CircuitNodeTypes.TDG then
                     -- T dagger gate
                     qasm_str = qasm_str .. 'tdg q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.H then
-                    if node.ctrl_a ~= -1 then
+                elseif node_type == CircuitNodeTypes.H then
+                    if ctrl_a ~= -1 then
                         -- Controlled Hadamard
-                        qasm_str = qasm_str .. 'ch q[' .. tostring(node.ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'ch q[' .. tostring(ctrl_a) .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
                     else
                         -- Hadamard gate
                         qasm_str = qasm_str .. 'h q[' .. tostring(wire_num) .. '];\n'
                     end
-                elseif node.node_type == CircuitNodeTypes.SWAP then
-                    if node.ctrl_a ~= -1 then
+
+                --TODO: Implement SWAP gate in circuit blocks
+                --[[
+                elseif node_type == CircuitNodeTypes.SWAP then
+                    if ctrl_a ~= -1 then
                         -- Controlled Swap
-                        qasm_str = qasm_str .. 'cswap q[' .. tostring(node.ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'cswap q[' .. tostring(ctrl_a) .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];\n'
                     else
                         -- Swap gate
                         qasm_str = qasm_str .. 'swap q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];\n'
                     end
+                --]]
                 else
                     print("Unknown gate!")
-                --]]
                 end
             end
 

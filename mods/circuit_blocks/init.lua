@@ -41,6 +41,8 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, false, tru
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, false, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, false, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.H, true, false, false, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, true, false, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, false, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, false, false)
