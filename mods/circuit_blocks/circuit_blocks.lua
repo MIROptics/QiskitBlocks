@@ -339,6 +339,18 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num)
                     new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate_down"
                 end
                 minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+            elseif gate_block.get_node_type() == CircuitNodeTypes.Y then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_y_gate_up"
+                if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_y_gate_down"
+                end
+                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+            elseif gate_block.get_node_type() == CircuitNodeTypes.Z then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_up"
+                if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_down"
+                end
+                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
             end
 
             -- Place TRACE nodes between gate and ctrl nodes
@@ -390,6 +402,14 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num)
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_x_gate"
                 circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
                         new_gate_node_name)
+            elseif gate_block.get_node_type() == CircuitNodeTypes.Y then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_y_gate"
+                circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+                        new_gate_node_name)
+            elseif gate_block.get_node_type() == CircuitNodeTypes.Z then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate"
+                circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+                        new_gate_node_name)
             elseif gate_block.get_node_type() == CircuitNodeTypes.H then
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate"
                 circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
@@ -418,6 +438,20 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         elseif connector_up and connector_up then
             texture_name = "circuit_blocks_not_gate"
         end
+    elseif circuit_node_type == CircuitNodeTypes.Y then
+        texture_name = "circuit_blocks_y_gate"
+        if connector_up and not connector_down then
+            texture_name = "circuit_blocks_y_gate_up"
+        elseif connector_down and not connector_up then
+            texture_name = "circuit_blocks_y_gate_down"
+        end
+    elseif circuit_node_type == CircuitNodeTypes.Z then
+        texture_name = "circuit_blocks_z_gate"
+        if connector_up and not connector_down then
+            texture_name = "circuit_blocks_z_gate_up"
+        elseif connector_down and not connector_up then
+            texture_name = "circuit_blocks_z_gate_down"
+        end
     elseif circuit_node_type == CircuitNodeTypes.H then
         texture_name = "circuit_blocks_h_gate"
         if connector_up and not connector_down then
@@ -432,6 +466,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_control_down"
         end
+    elseif circuit_node_type == CircuitNodeTypes.S then
+        texture_name = "circuit_blocks_s_gate"
+    elseif circuit_node_type == CircuitNodeTypes.SDG then
+        texture_name = "circuit_blocks_sdg_gate"
+    elseif circuit_node_type == CircuitNodeTypes.T then
+        texture_name = "circuit_blocks_t_gate"
+    elseif circuit_node_type == CircuitNodeTypes.TDG then
+        texture_name = "circuit_blocks_tdg_gate"
     elseif circuit_node_type == CircuitNodeTypes.TRACE then
         texture_name = "circuit_blocks_trace"
     end
