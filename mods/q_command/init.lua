@@ -123,11 +123,135 @@ end
 
 
 function q_command:compute_circuit(circuit_block)
+    local num_wires = circuit_block.get_circuit_num_wires()
+    local num_columns = circuit_block.get_circuit_num_columns()
+    local circuit_pos_x = circuit_block.get_circuit_pos().x
+    local circuit_pos_y = circuit_block.get_circuit_pos().y
+    local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+
     local qasm_str = 'OPENQASM 2.0;\ninclude "qelib1.inc";\n'
 
-    --local circuit_block = circuit_blocks:get_circuit_block(pos)
-    qasm_str = qasm_str .. 'qreg q[' .. tostring(circuit_block.get_circuit_num_wires()) .. '];\n'
-    qasm_str = qasm_str .. 'creg q[' .. tostring(circuit_block.get_circuit_num_wires()) .. '];\n'
+    qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];\n'
+    qasm_str = qasm_str .. 'creg q[' .. tostring(num_wires) .. '];\n'
+
+    -- Add a column of identity gates to protect simulators from an empty circuit
+    qasm_str = qasm_str .. 'id q;\n'
+
+    for column_num = 1, num_columns do
+        for wire_num = 1, num_wires do
+            local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+            local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+            minetest.debug("c: " .. tostring(column_num) .. ", w: " ..
+                    tostring(wire_num) .. ", node_type: " .. circuit_node_block.get_node_type())
+
+            --[[
+            --local node = self.nodes[wire_num][column_num]
+            if node then
+                if node.node_type == CircuitNodeTypes.IDEN then
+                    -- Identity gate
+                    qasm_str = qasm_str .. 'id q[' .. tostring(wire_num) .. '];\n'
+                elseif node.node_type == CircuitNodeTypes.X then
+                    if node.radians == 0 then
+                        if node.ctrl_a ~= -1 then
+                            if node.ctrl_b ~= -1 then
+                                -- Toffoli gate
+                                qasm_str = qasm_str .. 'ccx q[' .. tostring(node.ctrl_a) .. '],'
+                                qasm_str = qasm_str .. 'q[' .. tostring(node.ctrl_b) .. '],'
+                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            else
+                                -- Controlled X gate
+                                qasm_str = qasm_str .. 'cx q[' .. tostring(node.ctrl_a) .. '],'
+                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            end
+                        else
+                            -- Pauli-X gate
+                            qasm_str = qasm_str .. 'x q[' .. tostring(wire_num) .. '];\n'
+                        end
+                    else
+                        -- Rotation around X axis
+                        qasm_str = qasm_str .. 'rx(' .. tostring(node.radians) .. ') '
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                    end
+                elseif node.node_type == CircuitNodeTypes.Y then
+                    if node.radians == 0 then
+                        if node.ctrl_a ~= -1 then
+                            -- Controlled Y gate
+                            qasm_str = qasm_str .. 'cy q[' .. tostring(node.ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        else
+                            -- Pauli-Y gate
+                            qasm_str = qasm_str .. 'y q[' .. tostring(wire_num) .. '];\n'
+                        end
+                    else
+                        -- Rotation around Y axis
+                        qasm_str = qasm_str .. 'ry(' .. tostring(node.radians) .. ') '
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                    end
+                elseif node.node_type == CircuitNodeTypes.Z then
+                    if node.radians == 0 then
+                        if node.ctrl_a ~= -1 then
+                            -- Controlled Z gate
+                            qasm_str = qasm_str .. 'cz q[' .. tostring(node.ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        else
+                            -- Pauli-Z gate
+                            qasm_str = qasm_str .. 'z q[' .. tostring(wire_num) .. '];\n'
+                        end
+                    else
+                        if node.ctrl_a ~= -1 then
+                            -- Controlled rotation around the Z axis
+                            qasm_str = qasm_str .. 'crz(' .. tostring(node.radians) .. ') '
+                            qasm_str = qasm_str .. 'q[' .. tostring(node.ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        else
+                            -- Rotation around Z axis
+                            qasm_str = qasm_str .. 'rz(' .. tostring(node.radians) .. ') '
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        end
+                    end
+                elseif node.node_type == CircuitNodeTypes.S then
+                    -- S gate
+                    qasm_str = qasm_str .. 's q[' .. tostring(wire_num) .. '];\n'
+                elseif node.node_type == CircuitNodeTypes.SDG then
+                    -- S dagger gate
+                    qasm_str = qasm_str .. 'sdg q[' .. tostring(wire_num) .. '];\n'
+                elseif node.node_type == CircuitNodeTypes.T then
+                    -- T gate
+                    qasm_str = qasm_str .. 't q[' .. tostring(wire_num) .. '];\n'
+                elseif node.node_type == CircuitNodeTypes.TDG then
+                    -- T dagger gate
+                    qasm_str = qasm_str .. 'tdg q[' .. tostring(wire_num) .. '];\n'
+                elseif node.node_type == CircuitNodeTypes.H then
+                    if node.ctrl_a ~= -1 then
+                        -- Controlled Hadamard
+                        qasm_str = qasm_str .. 'ch q[' .. tostring(node.ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                    else
+                        -- Hadamard gate
+                        qasm_str = qasm_str .. 'h q[' .. tostring(wire_num) .. '];\n'
+                    end
+                elseif node.node_type == CircuitNodeTypes.SWAP then
+                    if node.ctrl_a ~= -1 then
+                        -- Controlled Swap
+                        qasm_str = qasm_str .. 'cswap q[' .. tostring(node.ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
+                    else
+                        -- Swap gate
+                        qasm_str = qasm_str .. 'swap q[' .. tostring(wire_num) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
+                    end
+                else
+                    print("Unknown gate!")
+                end
+            end
+            --]]
+
+        end
+    end
 
 
     --[[
