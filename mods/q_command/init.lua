@@ -144,26 +144,26 @@ function q_command:compute_circuit(circuit_block)
                                       y = circuit_pos_y + num_wires - wire_num,
                                       z = circuit_pos_z}
             local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
-            minetest.debug("c: " .. tostring(column_num) .. ", w: " ..
-                    tostring(wire_num) .. ", node_type: " .. circuit_node_block.get_node_type())
+            --minetest.debug("c: " .. tostring(column_num) .. ", w: " ..
+            --        tostring(wire_num) .. ", node_type: " .. circuit_node_block.get_node_type())
 
-            --[[
-            --local node = self.nodes[wire_num][column_num]
-            if node then
-                if node.node_type == CircuitNodeTypes.IDEN then
+            if circuit_node_block then
+                local node_type = circuit_node_block.get_node_type()
+                if node_type == CircuitNodeTypes.IDEN then
                     -- Identity gate
                     qasm_str = qasm_str .. 'id q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.X then
-                    if node.radians == 0 then
-                        if node.ctrl_a ~= -1 then
-                            if node.ctrl_b ~= -1 then
+
+                elseif node_type == CircuitNodeTypes.X then
+                    if circuit_node_block.get_radians() == 0 then
+                        if circuit_node_block.get_ctrl_a() ~= -1 then
+                            if circuit_node_block.get_ctrl_b() ~= -1 then
                                 -- Toffoli gate
-                                qasm_str = qasm_str .. 'ccx q[' .. tostring(node.ctrl_a) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(node.ctrl_b) .. '],'
+                                qasm_str = qasm_str .. 'ccx q[' .. tostring(circuit_node_block.get_ctrl_a()) .. '],'
+                                qasm_str = qasm_str .. 'q[' .. tostring(circuit_node_block.get_ctrl_b()) .. '],'
                                 qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
                             else
                                 -- Controlled X gate
-                                qasm_str = qasm_str .. 'cx q[' .. tostring(node.ctrl_a) .. '],'
+                                qasm_str = qasm_str .. 'cx q[' .. tostring(circuit_node_block.get_ctrl_a()) .. '],'
                                 qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
                             end
                         else
@@ -172,9 +172,10 @@ function q_command:compute_circuit(circuit_block)
                         end
                     else
                         -- Rotation around X axis
-                        qasm_str = qasm_str .. 'rx(' .. tostring(node.radians) .. ') '
+                        qasm_str = qasm_str .. 'rx(' .. tostring(circuit_node_block.get_radians()) .. ') '
                         qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
                     end
+                --[[
                 elseif node.node_type == CircuitNodeTypes.Y then
                     if node.radians == 0 then
                         if node.ctrl_a ~= -1 then
@@ -246,9 +247,9 @@ function q_command:compute_circuit(circuit_block)
                     end
                 else
                     print("Unknown gate!")
+                --]]
                 end
             end
-            --]]
 
         end
     end
