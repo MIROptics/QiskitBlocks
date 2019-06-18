@@ -101,7 +101,8 @@ function q_command:create_blank_circuit_grid()
         for column = 1, circuit_num_columns do
             local node_pos = {}
             node_pos.x = q_command.circuit_specs.pos.x + column - 1
-            node_pos.y = circuit_num_wires - (q_command.circuit_specs.pos.y + wire - 2)
+            --node_pos.y = circuit_num_wires - (q_command.circuit_specs.pos.y + wire - 2)
+            node_pos.y = q_command.circuit_specs.pos.y + circuit_num_wires - wire
             node_pos.z = q_command.circuit_specs.pos.z
             -- TODO: Change to add_node() for clarity?
             minetest.set_node(node_pos,
@@ -266,120 +267,6 @@ function q_command:compute_circuit(circuit_block)
         end
     end
 
-
-    --[[
-    qasm_str = qasm_str .. 'qreg q[' .. tostring(self.max_wires) .. '];\n'
-    qasm_str = qasm_str .. 'creg q[' .. tostring(self.max_wires) .. '];\n'
-
-    -- Add a column of identity gates to protect simulators from an empty circuit
-    qasm_str = qasm_str .. 'id q;\n'
-
-    for column_num = 1, self.max_columns do
-        for wire_num = 1, self.max_wires do
-            local node = self.nodes[wire_num][column_num]
-            if node then
-                if node.node_type == CircuitNodeTypes.IDEN then
-                    -- Identity gate
-                    qasm_str = qasm_str .. 'id q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.X then
-                    if node.radians == 0 then
-                        if node.ctrl_a ~= -1 then
-                            if node.ctrl_b ~= -1 then
-                                -- Toffoli gate
-                                qasm_str = qasm_str .. 'ccx q[' .. tostring(node.ctrl_a) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(node.ctrl_b) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                            else
-                                -- Controlled X gate
-                                qasm_str = qasm_str .. 'cx q[' .. tostring(node.ctrl_a) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                            end
-                        else
-                            -- Pauli-X gate
-                            qasm_str = qasm_str .. 'x q[' .. tostring(wire_num) .. '];\n'
-                        end
-                    else
-                        -- Rotation around X axis
-                        qasm_str = qasm_str .. 'rx(' .. tostring(node.radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                    end
-                elseif node.node_type == CircuitNodeTypes.Y then
-                    if node.radians == 0 then
-                        if node.ctrl_a ~= -1 then
-                            -- Controlled Y gate
-                            qasm_str = qasm_str .. 'cy q[' .. tostring(node.ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                        else
-                            -- Pauli-Y gate
-                            qasm_str = qasm_str .. 'y q[' .. tostring(wire_num) .. '];\n'
-                        end
-                    else
-                        -- Rotation around Y axis
-                        qasm_str = qasm_str .. 'ry(' .. tostring(node.radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                    end
-                elseif node.node_type == CircuitNodeTypes.Z then
-                    if node.radians == 0 then
-                        if node.ctrl_a ~= -1 then
-                            -- Controlled Z gate
-                            qasm_str = qasm_str .. 'cz q[' .. tostring(node.ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                        else
-                            -- Pauli-Z gate
-                            qasm_str = qasm_str .. 'z q[' .. tostring(wire_num) .. '];\n'
-                        end
-                    else
-                        if node.ctrl_a ~= -1 then
-                            -- Controlled rotation around the Z axis
-                            qasm_str = qasm_str .. 'crz(' .. tostring(node.radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. tostring(node.ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                        else
-                            -- Rotation around Z axis
-                            qasm_str = qasm_str .. 'rz(' .. tostring(node.radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                        end
-                    end
-                elseif node.node_type == CircuitNodeTypes.S then
-                    -- S gate
-                    qasm_str = qasm_str .. 's q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.SDG then
-                    -- S dagger gate
-                    qasm_str = qasm_str .. 'sdg q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.T then
-                    -- T gate
-                    qasm_str = qasm_str .. 't q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.TDG then
-                    -- T dagger gate
-                    qasm_str = qasm_str .. 'tdg q[' .. tostring(wire_num) .. '];\n'
-                elseif node.node_type == CircuitNodeTypes.H then
-                    if node.ctrl_a ~= -1 then
-                        -- Controlled Hadamard
-                        qasm_str = qasm_str .. 'ch q[' .. tostring(node.ctrl_a) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
-                    else
-                        -- Hadamard gate
-                        qasm_str = qasm_str .. 'h q[' .. tostring(wire_num) .. '];\n'
-                    end
-                elseif node.node_type == CircuitNodeTypes.SWAP then
-                    if node.ctrl_a ~= -1 then
-                        -- Controlled Swap
-                        qasm_str = qasm_str .. 'cswap q[' .. tostring(node.ctrl_a) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
-                    else
-                        -- Swap gate
-                        qasm_str = qasm_str .. 'swap q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(node.swap) .. '];\n'
-                    end
-                else
-                    print("Unknown gate!")
-                end
-            end
-        end
-    end
-    --]]
-
     return qasm_str
 
     -- TODO: Implement following lines
@@ -451,9 +338,9 @@ minetest.register_node("q_command:q_block", {
         local meta = minetest.get_meta(pos)
         local formspec = "size[5.0, 4.6]"..
                 "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;5]" ..
-                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;4]" ..
-                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;2]" ..
+                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
+                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;7]" ..
+                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;3]" ..
 				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end,
@@ -465,6 +352,57 @@ minetest.register_node("q_command:q_block", {
             local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
             local qasm_str = q_command:compute_circuit(circuit_block)
             minetest.debug("qasm_str:\n" .. qasm_str)
+
+            -- TODO: Just testing
+            local hist_node_pos = {x = circuit_grid_pos.x,
+                                   y = circuit_grid_pos.y - 1,
+                                   z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 15})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 1,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 31})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 2,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 7})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 3,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 10})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 4,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 7})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 5,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 10})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 6,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 7})
+
+            hist_node_pos = {x = circuit_grid_pos.x + 7,
+                             y = circuit_grid_pos.y - 1,
+                             z = circuit_grid_pos.z}
+            minetest.set_node(hist_node_pos,
+                    {name="q_command:glass", param2 = 10})
+
+            -- TODO: End testing
         else
             minetest.chat_send_player(player:get_player_name(),
                     "Must create a circuit first")
@@ -500,6 +438,31 @@ minetest.register_node("q_command:q_sphere", {
     end
 })
 --]]
+
+minetest.register_node("q_command:glass", {
+	description = "Histogram Glass",
+	drawtype = "glasslike_framed",
+	tiles = {"q_command_glass.png", "q_command_glass_detail.png"},
+    special_tiles = {"q_command_water.png"},
+	paramtype = "light",
+	paramtype2 = "glasslikeliquidlevel",
+	--sunlight_propagates = true,
+	--is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	--sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("q_command:q_command_state_101", {
+    description = "State 101 block",
+    tiles = {"q_command_state_101.png"},
+    groups = {oddly_breakable_by_hand=2}
+})
+
+minetest.register_node("q_command:q_command_lbl_101", {
+    description = "Label 101 block",
+    tiles = {"q_command_lbl_101.png"},
+    groups = {oddly_breakable_by_hand=2}
+})
 
 
 
