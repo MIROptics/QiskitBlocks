@@ -1,5 +1,41 @@
--- TODO:
---  Define Quantum control block that creates circuit, etc.
+-- Quantum control block that creates circuit, etc.
+
+dofile(minetest.get_modpath("q_command").."/dkjson.lua");
+
+request_http_api = minetest.request_http_api()
+minetest.debug("request_http_api: " .. dump(request_http_api))
+
+-- TODO: Remove this test of the json library
+-- Encoding:
+local tbl = {
+  animals = { "dog", "cat", "aardvark" },
+  instruments = { "violin", "trombone", "theremin" },
+  bugs = json.null,
+  trees = nil
+}
+
+local str = json.encode (tbl, { indent = true })
+
+minetest.debug (str)
+
+-- Decoding:
+local str = [[
+{
+  "numbers": [ 2, 3, -20.23e+2, -4 ],
+  "currency": "\u20AC"
+}
+]]
+
+local obj, pos, err = json.decode (str, 1, nil)
+if err then
+  minetest.debug ("Error:", err)
+else
+  minetest.debug ("currency", obj.currency)
+  for i = 1,#obj.numbers do
+    minetest.debug (i, obj.numbers[i])
+  end
+end
+-- TODO: End of Remove
 
 -- our API object
 q_command = {}
@@ -285,6 +321,7 @@ function q_command:compute_circuit(circuit_block)
     --]]
 end
 
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
         if fields.num_wires_str and fields.num_columns_str and
@@ -352,6 +389,35 @@ minetest.register_node("q_command:q_block", {
             local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
             local qasm_str = q_command:compute_circuit(circuit_block)
             minetest.debug("qasm_str:\n" .. qasm_str)
+
+            local qasm_json = {
+                qasm = qasm_str,
+                backend = "statevector_simulator"
+            }
+
+            local http_request = {
+                -- TODO: Make URL host and port configurable
+                url = "http://localhost:5000/api/run/statevector",
+                --post_data = json.encode(qasm_json)
+                post_data = "{'qasm': 'OPENQASM 2.0;include \"qelib1.inc\";qreg q[3];creg c[3];z q[0];h q[0];x q[2];','backend': 'statevector_simulator'}"
+            }
+
+            --local http_request_json = json.encode(http_request)
+
+            local function process_backend_result(http_request_response)
+                minetest.debug("http_request_response:/n" .. dump(http_request_response))
+            end
+
+            minetest.debug("http_request:/n" .. dump(http_request))
+            request_http_api.fetch(http_request, process_backend_result)
+
+
+            --[[
+                test_json = {
+                  "qasm": "",
+                  "backend": "statevector_simulator"
+                }
+            --]]
 
             -- TODO: Just testing
             local hist_node_pos = {x = circuit_grid_pos.x,
@@ -463,6 +529,7 @@ minetest.register_node("q_command:q_command_lbl_101", {
     tiles = {"q_command_lbl_101.png"},
     groups = {oddly_breakable_by_hand=2}
 })
+
 
 
 
