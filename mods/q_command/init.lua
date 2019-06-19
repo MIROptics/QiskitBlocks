@@ -1,6 +1,7 @@
 -- Quantum control block that creates circuit, etc.
 
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
+dofile(minetest.get_modpath("q_command").."/url_code.lua");
 
 request_http_api = minetest.request_http_api()
 minetest.debug("request_http_api: " .. dump(request_http_api))
@@ -167,7 +168,7 @@ function q_command:compute_circuit(circuit_block)
     local circuit_pos_z = circuit_block.get_circuit_pos().z
 
 
-    local qasm_str = "OPENQASM 2.0;include 'qelib1.inc';"
+    local qasm_str = 'OPENQASM 2.0;include "qelib1.inc";'
 
     qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];'
     qasm_str = qasm_str .. 'creg c[' .. tostring(num_wires) .. '];'
@@ -181,8 +182,6 @@ function q_command:compute_circuit(circuit_block)
                                       y = circuit_pos_y + num_wires - wire_num,
                                       z = circuit_pos_z}
             local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
-            --minetest.debug("c: " .. tostring(column_num) .. ", w: " ..
-            --        tostring(wire_num) .. ", node_type: " .. circuit_node_block.get_node_type())
 
             if circuit_node_block then
                 local node_type = circuit_node_block.get_node_type()
@@ -203,12 +202,12 @@ function q_command:compute_circuit(circuit_block)
                         if ctrl_a ~= -1 then
                             if ctrl_b ~= -1 then
                                 -- Toffoli gate
-                                qasm_str = qasm_str .. 'ccx q[' .. tostring(ctrl_a) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(ctrl_b) .. '],'
+                                qasm_str = qasm_str .. 'ccx q[' .. tostring(ctrl_a - 1) .. '],'
+                                qasm_str = qasm_str .. 'q[' .. tostring(ctrl_b - 1) .. '],'
                                 qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                             else
                                 -- Controlled X gate
-                                qasm_str = qasm_str .. 'cx q[' .. tostring(ctrl_a) .. '],'
+                                qasm_str = qasm_str .. 'cx q[' .. tostring(ctrl_a - 1) .. '],'
                                 qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                             end
                         else
@@ -225,7 +224,7 @@ function q_command:compute_circuit(circuit_block)
                     if radians == 0 then
                         if ctrl_a ~= -1 then
                             -- Controlled Y gate
-                            qasm_str = qasm_str .. 'cy q[' .. tostring(ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'cy q[' .. tostring(ctrl_a - 1) .. '],'
                             qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Pauli-Y gate
@@ -240,7 +239,7 @@ function q_command:compute_circuit(circuit_block)
                     if radians == 0 then
                         if ctrl_a ~= -1 then
                             -- Controlled Z gate
-                            qasm_str = qasm_str .. 'cz q[' .. tostring(ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'cz q[' .. tostring(ctrl_a - 1) .. '],'
                             qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Pauli-Z gate
@@ -250,7 +249,7 @@ function q_command:compute_circuit(circuit_block)
                         if circuit_node_block.get_ctrl_a() ~= -1 then
                             -- Controlled rotation around the Z axis
                             qasm_str = qasm_str .. 'crz(' .. tostring(radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. tostring(ctrl_a) .. '],'
+                            qasm_str = qasm_str .. 'q[' .. tostring(ctrl_a - 1) .. '],'
                             qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Rotation around Z axis
@@ -274,7 +273,7 @@ function q_command:compute_circuit(circuit_block)
                 elseif node_type == CircuitNodeTypes.H then
                     if ctrl_a ~= -1 then
                         -- Controlled Hadamard
-                        qasm_str = qasm_str .. 'ch q[' .. tostring(ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'ch q[' .. tostring(ctrl_a - 1) .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                     else
                         -- Hadamard gate
@@ -286,7 +285,7 @@ function q_command:compute_circuit(circuit_block)
                 elseif node_type == CircuitNodeTypes.SWAP then
                     if ctrl_a ~= -1 then
                         -- Controlled Swap
-                        qasm_str = qasm_str .. 'cswap q[' .. tostring(ctrl_a) .. '],'
+                        qasm_str = qasm_str .. 'cswap q[' .. tostring(ctrl_a - 1) .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
                     else
@@ -304,21 +303,6 @@ function q_command:compute_circuit(circuit_block)
     end
 
     return qasm_str
-
-    -- TODO: Implement following lines
-    --[[
-
-                    elif node.node_type == node_types.SWAP:
-                        if node.ctrl_a != -1:
-                            # Controlled Swap
-                            qc.cswap(qr[node.ctrl_a], qr[wire_num - 1], qr[node.swap])
-                        else:
-                            # Swap gate
-                            qc.swap(qr[wire_num - 1], qr[node.swap])
-
-        self.latest_computed_circuit = qc
-        return qc
-    --]]
 end
 
 
@@ -388,18 +372,13 @@ minetest.register_node("q_command:q_block", {
             local circuit_grid_pos = q_block.get_circuit_pos()
             local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
             local qasm_str = q_command:compute_circuit(circuit_block)
+
             minetest.debug("qasm_str:\n" .. qasm_str)
-
-            local qasm_json = '{"qasm":"' .. qasm_str .. '","backend":"statevector_simulator"}'
-
-            minetest.debug("qasm_json:\n" .. qasm_json)
 
             local http_request = {
                 -- TODO: Make URL host and port configurable
-                url = "http://localhost:5000/api/run/statevector",
-                post_data = {}
-                -- TODO: Put correct data into post_data
-                --post_data = qasm_json
+                url = "http://localhost:5000/api/run/statevector?backend=statevector_simulator&qasm=" ..
+                        url_code.urlencode(qasm_str)
             }
 
             local function process_backend_result(http_request_response)
@@ -408,14 +387,6 @@ minetest.register_node("q_command:q_block", {
 
             minetest.debug("http_request:\n" .. dump(http_request))
             request_http_api.fetch(http_request, process_backend_result)
-
-
-            --[[
-                test_json = {
-                  "qasm": "",
-                  "backend": "statevector_simulator"
-                }
-            --]]
 
             -- TODO: Just testing
             local hist_node_pos = {x = circuit_grid_pos.x,

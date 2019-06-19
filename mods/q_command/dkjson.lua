@@ -52,11 +52,11 @@ local strrep, gsub, strsub, strbyte, strchar, strfind, strlen, strformat =
 local strmatch = string.match
 local concat = table.concat
 
-json = { version = "dkjson 2.5" }
+  json = { version = "dkjson 2.5" }
 
-if register_global_module_table then
-  _G[global_module_name] = json
-end
+  if register_global_module_table then
+    _G[global_module_name] = json
+  end
 
 local _ENV = nil -- blocking globals in Lua 5.2
 
