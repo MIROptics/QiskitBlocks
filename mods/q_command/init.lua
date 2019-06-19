@@ -167,13 +167,13 @@ function q_command:compute_circuit(circuit_block)
     local circuit_pos_z = circuit_block.get_circuit_pos().z
 
 
-    local qasm_str = 'OPENQASM 2.0;\ninclude "qelib1.inc";\n'
+    local qasm_str = "OPENQASM 2.0;include 'qelib1.inc';"
 
-    qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];\n'
-    qasm_str = qasm_str .. 'creg q[' .. tostring(num_wires) .. '];\n'
+    qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];'
+    qasm_str = qasm_str .. 'creg c[' .. tostring(num_wires) .. '];'
 
     -- Add a column of identity gates to protect simulators from an empty circuit
-    qasm_str = qasm_str .. 'id q;\n'
+    qasm_str = qasm_str .. 'id q;'
 
     for column_num = 1, num_columns do
         for wire_num = 1, num_wires do
@@ -196,7 +196,7 @@ function q_command:compute_circuit(circuit_block)
 
                 if node_type == CircuitNodeTypes.IDEN then
                     -- Identity gate
-                    qasm_str = qasm_str .. 'id q[' .. tostring(wire_num) .. '];\n'
+                    qasm_str = qasm_str .. 'id q[' .. tostring(wire_num - 1) .. '];'
 
                 elseif node_type == CircuitNodeTypes.X then
                     if radians == 0 then
@@ -205,20 +205,20 @@ function q_command:compute_circuit(circuit_block)
                                 -- Toffoli gate
                                 qasm_str = qasm_str .. 'ccx q[' .. tostring(ctrl_a) .. '],'
                                 qasm_str = qasm_str .. 'q[' .. tostring(ctrl_b) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                             else
                                 -- Controlled X gate
                                 qasm_str = qasm_str .. 'cx q[' .. tostring(ctrl_a) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                                qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                             end
                         else
                             -- Pauli-X gate
-                            qasm_str = qasm_str .. 'x q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'x q[' .. tostring(wire_num - 1) .. '];'
                         end
                     else
                         -- Rotation around X axis
                         qasm_str = qasm_str .. 'rx(' .. tostring(radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                     end
 
                 elseif node_type == CircuitNodeTypes.Y then
@@ -226,59 +226,59 @@ function q_command:compute_circuit(circuit_block)
                         if ctrl_a ~= -1 then
                             -- Controlled Y gate
                             qasm_str = qasm_str .. 'cy q[' .. tostring(ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Pauli-Y gate
-                            qasm_str = qasm_str .. 'y q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'y q[' .. tostring(wire_num - 1) .. '];'
                         end
                     else
                         -- Rotation around Y axis
                         qasm_str = qasm_str .. 'ry(' .. tostring(radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                     end
                 elseif node_type == CircuitNodeTypes.Z then
                     if radians == 0 then
                         if ctrl_a ~= -1 then
                             -- Controlled Z gate
                             qasm_str = qasm_str .. 'cz q[' .. tostring(ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Pauli-Z gate
-                            qasm_str = qasm_str .. 'z q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'z q[' .. tostring(wire_num - 1) .. '];'
                         end
                     else
                         if circuit_node_block.get_ctrl_a() ~= -1 then
                             -- Controlled rotation around the Z axis
                             qasm_str = qasm_str .. 'crz(' .. tostring(radians) .. ') '
                             qasm_str = qasm_str .. 'q[' .. tostring(ctrl_a) .. '],'
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         else
                             -- Rotation around Z axis
                             qasm_str = qasm_str .. 'rz(' .. tostring(radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                            qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                         end
                     end
 
                 elseif node_type == CircuitNodeTypes.S then
                     -- S gate
-                    qasm_str = qasm_str .. 's q[' .. tostring(wire_num) .. '];\n'
+                    qasm_str = qasm_str .. 's q[' .. tostring(wire_num - 1) .. '];'
                 elseif node_type == CircuitNodeTypes.SDG then
                     -- S dagger gate
-                    qasm_str = qasm_str .. 'sdg q[' .. tostring(wire_num) .. '];\n'
+                    qasm_str = qasm_str .. 'sdg q[' .. tostring(wire_num - 1) .. '];'
                 elseif node_type == CircuitNodeTypes.T then
                     -- T gate
-                    qasm_str = qasm_str .. 't q[' .. tostring(wire_num) .. '];\n'
+                    qasm_str = qasm_str .. 't q[' .. tostring(wire_num - 1) .. '];'
                 elseif node_type == CircuitNodeTypes.TDG then
                     -- T dagger gate
-                    qasm_str = qasm_str .. 'tdg q[' .. tostring(wire_num) .. '];\n'
+                    qasm_str = qasm_str .. 'tdg q[' .. tostring(wire_num - 1) .. '];'
                 elseif node_type == CircuitNodeTypes.H then
                     if ctrl_a ~= -1 then
                         -- Controlled Hadamard
                         qasm_str = qasm_str .. 'ch q[' .. tostring(ctrl_a) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '];'
                     else
                         -- Hadamard gate
-                        qasm_str = qasm_str .. 'h q[' .. tostring(wire_num) .. '];\n'
+                        qasm_str = qasm_str .. 'h q[' .. tostring(wire_num - 1) .. '];'
                     end
 
                 --TODO: Implement SWAP gate in circuit blocks
@@ -287,12 +287,12 @@ function q_command:compute_circuit(circuit_block)
                     if ctrl_a ~= -1 then
                         -- Controlled Swap
                         qasm_str = qasm_str .. 'cswap q[' .. tostring(ctrl_a) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];\n'
+                        qasm_str = qasm_str .. 'q[' .. tostring(wire_num - 1) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
                     else
                         -- Swap gate
-                        qasm_str = qasm_str .. 'swap q[' .. tostring(wire_num) .. '],'
-                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];\n'
+                        qasm_str = qasm_str .. 'swap q[' .. tostring(wire_num - 1) .. '],'
+                        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
                     end
                 --]]
                 else
@@ -311,10 +311,10 @@ function q_command:compute_circuit(circuit_block)
                     elif node.node_type == node_types.SWAP:
                         if node.ctrl_a != -1:
                             # Controlled Swap
-                            qc.cswap(qr[node.ctrl_a], qr[wire_num], qr[node.swap])
+                            qc.cswap(qr[node.ctrl_a], qr[wire_num - 1], qr[node.swap])
                         else:
                             # Swap gate
-                            qc.swap(qr[wire_num], qr[node.swap])
+                            qc.swap(qr[wire_num - 1], qr[node.swap])
 
         self.latest_computed_circuit = qc
         return qc
@@ -390,25 +390,23 @@ minetest.register_node("q_command:q_block", {
             local qasm_str = q_command:compute_circuit(circuit_block)
             minetest.debug("qasm_str:\n" .. qasm_str)
 
-            local qasm_json = {
-                qasm = qasm_str,
-                backend = "statevector_simulator"
-            }
+            local qasm_json = '{"qasm":"' .. qasm_str .. '","backend":"statevector_simulator"}'
+
+            minetest.debug("qasm_json:\n" .. qasm_json)
 
             local http_request = {
                 -- TODO: Make URL host and port configurable
                 url = "http://localhost:5000/api/run/statevector",
-                --post_data = json.encode(qasm_json)
-                post_data = "{'qasm': 'OPENQASM 2.0;include \"qelib1.inc\";qreg q[3];creg c[3];z q[0];h q[0];x q[2];','backend': 'statevector_simulator'}"
+                post_data = {}
+                -- TODO: Put correct data into post_data
+                --post_data = qasm_json
             }
 
-            --local http_request_json = json.encode(http_request)
-
             local function process_backend_result(http_request_response)
-                minetest.debug("http_request_response:/n" .. dump(http_request_response))
+                minetest.debug("http_request_response:\n" .. dump(http_request_response))
             end
 
-            minetest.debug("http_request:/n" .. dump(http_request))
+            minetest.debug("http_request:\n" .. dump(http_request))
             request_http_api.fetch(http_request, process_backend_result)
 
 
