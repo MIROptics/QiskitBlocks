@@ -392,6 +392,41 @@ minetest.register_node("q_command:q_block", {
                         not http_request_response.timeout then
                     minetest.debug(dump(http_request_response.data))
 
+                    local sv_data = http_request_response.data
+                    local statevector = nil
+                    local obj, pos, err = json.decode (sv_data, 1, nil)
+                    if err then
+                        minetest.debug ("Error:", err)
+                    else
+                        statevector = obj.__ndarray__
+                        minetest.debug ("statevector:\n" .. dump(statevector))
+                        for i = 1,#obj.__ndarray__ do
+                          minetest.debug (dump(obj.__ndarray__[i].__complex__))
+                        end
+                    end
+--[[
+2019-06-20 12:56:36: [Server]: {
+	dtype = "complex128",
+	__ndarray__ = {
+		{
+			__complex__ = {
+				0.707,
+				0
+			}
+		},
+
+
+local obj, pos, err = json.decode (str, 1, nil)
+if err then
+  minetest.debug ("Error:", err)
+else
+  minetest.debug ("currency", obj.currency)
+  for i = 1,#obj.numbers do
+    minetest.debug (i, obj.numbers[i])
+  end
+end
+--]]
+
                     local a = complex.new(.0701, 0)
 
                     minetest.debug("a: " ..
