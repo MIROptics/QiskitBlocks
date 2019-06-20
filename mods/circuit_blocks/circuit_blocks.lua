@@ -37,6 +37,9 @@ function circuit_blocks:get_circuit_block(pos)
         local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+        local q_command_pos_x = meta:get_int("q_command_block_pos_x")
+        local q_command_pos_y = meta:get_int("q_command_block_pos_y")
+        local q_command_pos_z = meta:get_int("q_command_block_pos_z")
 
         local node_wire_num = -1
         if circuit_is_on_grid == 1 then
@@ -172,6 +175,15 @@ function circuit_blocks:get_circuit_block(pos)
 				return ret_pos
 			end,
 
+            -- Position of q_command block
+            get_q_command_pos = function()
+                local ret_pos = {}
+                ret_pos.x = q_command_pos_x
+                ret_pos.y = q_command_pos_y
+                ret_pos.z = q_command_pos_z
+				return ret_pos
+			end,
+
             -- Create string representation
             -- TODO: What is Lua way to implement a "to string" function?
             to_string = function()
@@ -187,7 +199,10 @@ function circuit_blocks:get_circuit_block(pos)
                         "circuit_is_on_grid: " .. tostring(circuit_is_on_grid) .. "\n" ..
                         "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
-                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n"
+                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
+                        "q_command_pos_x: " .. tostring(q_command_pos_x) .. "\n" ..
+                        "q_command_pos_y: " .. tostring(q_command_pos_y) .. "\n" ..
+                        "q_command_pos_z: " .. tostring(q_command_pos_z) .. "\n"
                 return ret_str
             end
 		}
@@ -214,7 +229,8 @@ function circuit_blocks:debug_node_info(pos, message)
         "is_within_circuit_grid() " .. tostring(block.is_within_circuit_grid()) .. "\n" ..
         "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
         "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
-        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
+        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n" ..
+        "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n")
 
 end
 
@@ -268,6 +284,9 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
     local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
     local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+    local q_command_pos_x = meta:get_int("q_command_block_pos_x")
+    local q_command_pos_y = meta:get_int("q_command_block_pos_y")
+    local q_command_pos_z = meta:get_int("q_command_block_pos_z")
 
     circuit_blocks:debug_node_info(pos,
             "In set_node_with_circuit_specs_meta BEFORE set_node")
@@ -283,6 +302,9 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     meta:set_int("circuit_specs_pos_x", circuit_pos_x)
     meta:set_int("circuit_specs_pos_y", circuit_pos_y)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)
+    meta:set_int("q_command_block_pos_x", q_command_pos_x)
+    meta:set_int("q_command_block_pos_y", q_command_pos_y)
+    meta:set_int("q_command_block_pos_z", q_command_pos_z)
 
     circuit_blocks:debug_node_info(pos,
             "In set_node_with_circuit_specs_meta AFTER set_node")
@@ -538,11 +560,19 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                             "circuit_blocks:circuit_blocks_empty_wire")
                 end
+
             elseif node_type == CircuitNodeTypes.EMPTY then
                 -- Necessary to replace punched node
                 circuit_blocks:set_node_with_circuit_specs_meta(pos,
                         "circuit_blocks:circuit_blocks_empty_wire")
             end
+
+            if block.is_within_circuit_grid() then
+                -- Punch the q_command block to run simulator and update resultant displays
+                local q_command_pos = block.get_q_command_pos()
+                minetest.punch_node(q_command_pos)
+            end
+
             return
         end,
         can_dig = function(pos, player)
@@ -598,6 +628,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 "control placed_wire: " .. tostring(placed_wire))
                     end
                 end
+
             elseif node_type == CircuitNodeTypes.EMPTY then
                 -- TODO: Perhaps use naming convention that indicates this is a gate
                 -- TODO: Make referencing wielded item consistent in this function
@@ -606,6 +637,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             wielded_item:get_name())
                 end
             end
+
+            if block.is_within_circuit_grid() then
+                -- Punch the q_command block to run simulator and update resultant displays
+                local q_command_pos = block.get_q_command_pos()
+                minetest.punch_node(q_command_pos)
+            end
+
             return
         end
     })

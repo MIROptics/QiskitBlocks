@@ -156,8 +156,9 @@ function q_command:create_blank_circuit_grid()
             meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
             meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
             meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
-            --minetest.debug("dump(node_pos):\n" .. dump(node_pos))
-            --minetest.debug("meta:to_table():\n" .. dump(meta:to_table()))
+            meta:set_int("q_command_block_pos_x", q_command.block_pos.x)
+            meta:set_int("q_command_block_pos_y", q_command.block_pos.y)
+            meta:set_int("q_command_block_pos_z", q_command.block_pos.z)
         end
     end
 end
@@ -385,7 +386,7 @@ minetest.register_node("q_command:q_block", {
             }
 
             local function process_backend_result(http_request_response)
-                -- minetest.debug("http_request_response:\n" .. dump(http_request_response))
+                minetest.debug("http_request_response:\n" .. dump(http_request_response))
 
                 if http_request_response.succeeded and
                         http_request_response.completed and
@@ -404,11 +405,13 @@ minetest.register_node("q_command:q_block", {
                         end
                     end
 
+                    minetest.debug("statevector:\n" .. dump(statevector))
+
                     -- Update the histogram
                     local hist_node_pos = nil
 
                     -- TODO: Put this constant somewhere
-                    local BLOCK_WATER_LEVELS = 64
+                    local BLOCK_WATER_LEVELS = 63
 
                     for idx = 1, #statevector do
                         hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
@@ -418,8 +421,11 @@ minetest.register_node("q_command:q_block", {
                         local probability = (complex.abs(statevector[idx]))^2
                         local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
 
+                        minetest.debug("probability :" .. tostring(probability))
+
                         minetest.set_node(hist_node_pos,
                                 {name="q_command:glass", param2 = scaled_prob})
+
                     end
                 else
                     minetest.debug("Call to statevector_simulator Didn't succeed")
