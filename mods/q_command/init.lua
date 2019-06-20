@@ -385,150 +385,50 @@ minetest.register_node("q_command:q_block", {
             }
 
             local function process_backend_result(http_request_response)
-                minetest.debug("http_request_response:\n" .. dump(http_request_response))
+                -- minetest.debug("http_request_response:\n" .. dump(http_request_response))
 
                 if http_request_response.succeeded and
                         http_request_response.completed and
                         not http_request_response.timeout then
-                    minetest.debug(dump(http_request_response.data))
 
                     local sv_data = http_request_response.data
-                    local statevector = nil
+                    local statevector = {}
                     local obj, pos, err = json.decode (sv_data, 1, nil)
                     if err then
                         minetest.debug ("Error:", err)
                     else
-                        statevector = obj.__ndarray__
-                        minetest.debug ("statevector:\n" .. dump(statevector))
-                        for i = 1,#obj.__ndarray__ do
-                          minetest.debug (dump(obj.__ndarray__[i].__complex__))
+                        temp_statevector = obj.__ndarray__
+                        for i = 1,#temp_statevector do
+                            statevector[i] = complex.new(temp_statevector[i].__complex__[1],
+                                    temp_statevector[i].__complex__[2])
                         end
                     end
---[[
-2019-06-20 12:56:36: [Server]: {
-	dtype = "complex128",
-	__ndarray__ = {
-		{
-			__complex__ = {
-				0.707,
-				0
-			}
-		},
-
-
-local obj, pos, err = json.decode (str, 1, nil)
-if err then
-  minetest.debug ("Error:", err)
-else
-  minetest.debug ("currency", obj.currency)
-  for i = 1,#obj.numbers do
-    minetest.debug (i, obj.numbers[i])
-  end
-end
---]]
-
-                    local a = complex.new(.0701, 0)
-
-                    minetest.debug("a: " ..
-                            dump(a))
-
-                    minetest.debug("complex.mul(a, a) " ..
-                            dump(complex.mul(a, a)))
 
                     -- Update the histogram
-                    --local hist_node_pos = {x = circuit_grid_pos.x,
-                    --                       y = circuit_grid_pos.y - 1,
-                    --                       z = circuit_grid_pos.z}
-                    --
-                    --
-                    --minetest.set_node(hist_node_pos,
-                    --        {name="q_command:glass", param2 = 15})
+                    local hist_node_pos = nil
 
+                    -- TODO: Put this constant somewhere
+                    local BLOCK_WATER_LEVELS = 64
 
+                    for idx = 1, #statevector do
+                        hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
+                                         y = circuit_grid_pos.y - 1,
+                                         z = circuit_grid_pos.z}
+
+                        local probability = (complex.abs(statevector[idx]))^2
+                        local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
+
+                        minetest.set_node(hist_node_pos,
+                                {name="q_command:glass", param2 = scaled_prob})
+                    end
                 else
                     minetest.debug("Call to statevector_simulator Didn't succeed")
                 end
-
-                --[[
-	succeeded = true,
-	code = 200,
-	completed = true,
-	timeout = false,
-	data = "{\"__ndarray__\": [{\"__complex__\": [0.707, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.707, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}], \"dtype\": \"complex128\", \"shape\": [8]}"
-                --]]
-
-                --minetest.debug("obj:\n" .. dump(obj))
-
-                --local obj, pos, err = json.decode (http_request_response, 1, nil)
-                --if err then
-                --    minetest.debug ("Error:", err)
-                --else
-                --    minetest.debug ("succeeded", obj.succeeded)
-                --    minetest.debug ("completed", obj.completed)
-                --    minetest.debug ("timeout", obj.timeout)
-                --
-                --    if obj.succeeded and obj.completed and not obj.timeout then
-                --        for i = 1,#obj.data do
-                --            minetest.debug (i, dump(obj.data[i]))
-                --        end
-                --    end
-                --end
-
             end
 
             minetest.debug("http_request:\n" .. dump(http_request))
             request_http_api.fetch(http_request, process_backend_result)
 
-            -- TODO: Just testing
-            local hist_node_pos = {x = circuit_grid_pos.x,
-                                   y = circuit_grid_pos.y - 1,
-                                   z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 15})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 1,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 31})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 2,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 7})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 3,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 10})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 4,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 7})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 5,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 10})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 6,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 7})
-
-            hist_node_pos = {x = circuit_grid_pos.x + 7,
-                             y = circuit_grid_pos.y - 1,
-                             z = circuit_grid_pos.z}
-            minetest.set_node(hist_node_pos,
-                    {name="q_command:glass", param2 = 10})
-
-            -- TODO: End testing
         else
             minetest.chat_send_player(player:get_player_name(),
                     "Must create a circuit first")

@@ -30,7 +30,11 @@ function create_complex()
     end
 
     function complex.div (c1, c2)
-        return M.mul(c1, inv(c2))
+        return complex.mul(c1, inv(c2))
+    end
+
+    function complex.abs (c)
+        return math.sqrt(c.r^2 + c.i^2)
     end
 
     function complex.tostring (c)
