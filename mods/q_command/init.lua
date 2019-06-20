@@ -2,9 +2,12 @@
 
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
+dofile(minetest.get_modpath("q_command").."/complex_module.lua");
 
 request_http_api = minetest.request_http_api()
 minetest.debug("request_http_api: " .. dump(request_http_api))
+
+complex = create_complex()
 
 -- TODO: Remove this test of the json library
 -- Encoding:
@@ -383,6 +386,59 @@ minetest.register_node("q_command:q_block", {
 
             local function process_backend_result(http_request_response)
                 minetest.debug("http_request_response:\n" .. dump(http_request_response))
+
+                if http_request_response.succeeded and
+                        http_request_response.completed and
+                        not http_request_response.timeout then
+                    minetest.debug(dump(http_request_response.data))
+
+                    local a = complex.new(.0701, 0)
+
+                    minetest.debug("a: " ..
+                            dump(a))
+
+                    minetest.debug("complex.mul(a, a) " ..
+                            dump(complex.mul(a, a)))
+
+                    -- Update the histogram
+                    --local hist_node_pos = {x = circuit_grid_pos.x,
+                    --                       y = circuit_grid_pos.y - 1,
+                    --                       z = circuit_grid_pos.z}
+                    --
+                    --
+                    --minetest.set_node(hist_node_pos,
+                    --        {name="q_command:glass", param2 = 15})
+
+
+                else
+                    minetest.debug("Call to statevector_simulator Didn't succeed")
+                end
+
+                --[[
+	succeeded = true,
+	code = 200,
+	completed = true,
+	timeout = false,
+	data = "{\"__ndarray__\": [{\"__complex__\": [0.707, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.707, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}, {\"__complex__\": [0.0, 0.0]}], \"dtype\": \"complex128\", \"shape\": [8]}"
+                --]]
+
+                --minetest.debug("obj:\n" .. dump(obj))
+
+                --local obj, pos, err = json.decode (http_request_response, 1, nil)
+                --if err then
+                --    minetest.debug ("Error:", err)
+                --else
+                --    minetest.debug ("succeeded", obj.succeeded)
+                --    minetest.debug ("completed", obj.completed)
+                --    minetest.debug ("timeout", obj.timeout)
+                --
+                --    if obj.succeeded and obj.completed and not obj.timeout then
+                --        for i = 1,#obj.data do
+                --            minetest.debug (i, dump(obj.data[i]))
+                --        end
+                --    end
+                --end
+
             end
 
             minetest.debug("http_request:\n" .. dump(http_request))

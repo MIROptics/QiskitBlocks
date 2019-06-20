@@ -1,3 +1,8 @@
+-- TODO: Remove these lines if HTTP GET breaks
+local register_global_module_table = false
+local global_module_name = 'url_code'
+
+
 url_code = { version = "1.0" }
 
 if register_global_module_table then
