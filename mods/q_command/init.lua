@@ -339,6 +339,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                 meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
                 meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
                 meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
+
+                -- TODO: Find a better way (that works)
+                -- Punch the q_command block (ourself) to run simulator and update resultant displays
+                minetest.punch_node(q_command.block_pos)
+
             else
                 -- TODO: Show error message dialog?
                 minetest.chat_send_player(player:get_player_name(),
