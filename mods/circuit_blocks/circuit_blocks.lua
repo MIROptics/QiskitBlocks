@@ -446,14 +446,16 @@ end
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
-                                               rotational,
+                                               pi16rotation,
                                                is_gate)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
         texture_name = "circuit_blocks_empty_wire"
     elseif circuit_node_type == CircuitNodeTypes.X then
         texture_name = "circuit_blocks_x_gate"
-        if connector_up and not connector_down then
+        if pi16rotation ~= 0 then
+            texture_name = "circuit_blocks_rx_gate_" .. pi16rotation .. "p16"
+        elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_not_gate_up"
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_not_gate_down"
@@ -499,6 +501,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
     elseif circuit_node_type == CircuitNodeTypes.TRACE then
         texture_name = "circuit_blocks_trace"
     end
+
+    -- minetest.debug("circuit_blocks:"..texture_name)
+
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
         tiles = {texture_name..".png"},
