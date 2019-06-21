@@ -35,6 +35,15 @@ minetest.register_tool("circuit_blocks:control_tool", {
 	tool_capabilities = {},
 })
 
+minetest.register_tool("circuit_blocks:rotate_tool", {
+	description = "Rotate tool",
+	inventory_image = "circuit_blocks_rotate_tool.png",
+	wield_image = "circuit_blocks_rotate_tool.png",
+	wield_scale = { x = 1, y = 1, z = 1 },
+	range = 10,
+	tool_capabilities = {},
+})
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 0, true)

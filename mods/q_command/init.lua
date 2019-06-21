@@ -403,7 +403,7 @@ minetest.register_node("q_command:q_block", {
                     if err then
                         minetest.debug ("Error:", err)
                     else
-                        temp_statevector = obj.__ndarray__
+                        local temp_statevector = obj.__ndarray__
                         for i = 1,#temp_statevector do
                             statevector[i] = complex.new(temp_statevector[i].__complex__[1],
                                     temp_statevector[i].__complex__[2])

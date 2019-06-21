@@ -80,6 +80,11 @@ function circuit_blocks:get_circuit_block(pos)
 				return radians
 			end,
 
+            set_radians = function(radians_arg)
+                radians = radians_arg
+                meta:set_float("radians", radians_arg)
+            end,
+
             -- Set control wire A, integer
             set_ctrl_a = function(ctrl_a_arg)
                 ctrl_a = ctrl_a_arg
@@ -145,7 +150,7 @@ function circuit_blocks:get_circuit_block(pos)
             -- Determine if a node is in the bounds of the circuit grid
             -- TODO: Perhaps deprecate is_on_circuit_grid()
             is_within_circuit_grid = function()
-                ret_within = false
+                local ret_within = false
                 if pos.x >= circuit_pos_x and
                         pos.x < (circuit_pos_x + circuit_num_columns) and
                         pos.y >= circuit_pos_y and
@@ -443,6 +448,62 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num)
 end
 
 
+function circuit_blocks:rotate_gate(gate_block, by_radians)
+    --[[
+    Rotate a gate by a given number of radians
+    --]]
+
+    local node_name_beginning = nil
+    local non_rotate_gate_name = nil
+    if gate_block.get_ctrl_a == -1 then
+        -- TODO: Support crz gates
+        return
+    end
+    if gate_block.get_node_type() == CircuitNodeTypes.X then
+        node_name_beginning = "circuit_blocks:circuit_blocks_rx_gate_"
+        non_rotate_gate_name = "circuit_blocks:circuit_blocks_x_gate"
+    elseif gate_block.get_node_type() == CircuitNodeTypes.Y then
+        node_name_beginning = "circuit_blocks:circuit_blocks_ry_gate_"
+        non_rotate_gate_name = "circuit_blocks:circuit_blocks_y_gate"
+    elseif gate_block.get_node_type() == CircuitNodeTypes.Z then
+        node_name_beginning = "circuit_blocks:circuit_blocks_rz_gate_"
+        non_rotate_gate_name = "circuit_blocks:circuit_blocks_z_gate"
+    else
+        -- Rotation is only supported on X, Y and Z gates
+        return
+    end
+
+
+    local prev_radians = gate_block.get_radians()
+    minetest.debug("prev_radians: " .. tostring(prev_radians))
+
+    local new_radians = (gate_block.get_radians() + (math.pi * 2) + by_radians) % (math.pi * 2)
+    minetest.debug("new_radians: " .. tostring(new_radians))
+
+    gate_block.set_radians(new_radians)
+
+    local new_node_name = non_rotate_gate_name
+
+    if new_radians ~= 0 then
+        local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
+        minetest.debug("num_pi_16_radians: " .. tostring(num_pi_16_radians))
+
+        if num_pi_16_radians < 1 then
+            num_pi_16_radians = 1
+        elseif num_pi_16_radians > 32 then
+            num_pi_16_radians = 32
+        end
+
+        new_node_name = node_name_beginning .. tostring(num_pi_16_radians) .. "p16"
+        minetest.debug("new_node_name: " .. new_node_name)
+    end
+
+
+    circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+            new_node_name)
+end
+
+
 function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
@@ -502,7 +563,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_trace"
     end
 
-    -- minetest.debug("circuit_blocks:"..texture_name)
+    minetest.debug("circuit_blocks:"..texture_name)
 
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
@@ -556,6 +617,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
                     end
+                elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                    minetest.debug("rotate right requested")
+                    circuit_blocks:rotate_gate(block, math.pi / 16.0)
                 else
                     if block.get_ctrl_a() ~= -1 then
                         circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a())
@@ -632,6 +696,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         minetest.chat_send_player(player:get_player_name(),
                                 "control placed_wire: " .. tostring(placed_wire))
                     end
+                elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                    minetest.debug("rotate right requested")
+                    circuit_blocks:rotate_gate(block, -math.pi / 16.0)
                 end
 
             elseif node_type == CircuitNodeTypes.EMPTY then
