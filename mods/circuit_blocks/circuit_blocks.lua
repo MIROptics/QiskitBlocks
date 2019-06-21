@@ -219,7 +219,7 @@ end
 
 function circuit_blocks:debug_node_info(pos, message)
     local block = circuit_blocks:get_circuit_block(pos)
-    -- minetest.debug("to_string:\n" .. dump(block.to_string()))
+    minetest.debug("to_string:\n" .. dump(block.to_string()))
     minetest.debug((message or "") .. "\ncircuit_block:\n" ..
         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
         "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
@@ -455,7 +455,7 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     local node_name_beginning = nil
     local non_rotate_gate_name = nil
-    if gate_block.get_ctrl_a == -1 then
+    if gate_block.get_ctrl_a() ~= -1 then
         -- TODO: Support crz gates
         return
     end
@@ -484,7 +484,8 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     local new_node_name = non_rotate_gate_name
 
-    if new_radians ~= 0 then
+    local threshold = 0.0001
+    if math.abs(new_radians - 0) > threshold then
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
         minetest.debug("num_pi_16_radians: " .. tostring(num_pi_16_radians))
 
@@ -498,9 +499,12 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
         minetest.debug("new_node_name: " .. new_node_name)
     end
 
+    circuit_blocks:debug_node_info(gate_block.get_node_pos(), "In rotate_gate *before* swap")
+    minetest.swap_node(gate_block.get_node_pos(), {name = new_node_name})
+    circuit_blocks:debug_node_info(gate_block.get_node_pos(), "In rotate_gate *after* swap")
 
-    circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
-            new_node_name)
+    --circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
+    --        new_node_name)
 end
 
 
@@ -591,7 +595,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 local placed_wire = -1
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    if block.get_ctrl_a() == -1 then
+                    if block.get_ctrl_a() == -1 and block.get_radians() == 0 then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() - 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
@@ -670,7 +674,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             node_type == CircuitNodeTypes.H) then
 
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    if block.get_ctrl_a() == -1 then
+                    if block.get_ctrl_a() == -1 and block.get_radians() == 0 then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() + 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
