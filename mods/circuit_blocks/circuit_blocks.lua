@@ -538,7 +538,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.Z then
         texture_name = "circuit_blocks_z_gate"
-        if connector_up and not connector_down then
+        if pi16rotation ~= 0 then
+            texture_name = "circuit_blocks_rz_gate_" .. pi16rotation .. "p16"
+        elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_z_gate_up"
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_z_gate_down"
@@ -597,7 +599,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 local placed_wire = -1
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    if block.get_ctrl_a() == -1 and block.get_radians() == 0 then
+                    local threshold = 0.0001
+                    if block.get_ctrl_a() == -1 and
+                            math.abs(block.get_radians() - 0) < threshold then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() - 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
@@ -676,7 +680,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             node_type == CircuitNodeTypes.H) then
 
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    if block.get_ctrl_a() == -1 and block.get_radians() == 0 then
+                    local threshold = 0.0001
+                    if block.get_ctrl_a() == -1 and
+                            math.abs(block.get_radians() - 0) < threshold then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() + 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))

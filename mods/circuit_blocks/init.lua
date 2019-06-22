@@ -71,6 +71,7 @@ local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do
     circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, idx, true)
     circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, false, idx, true)
+    circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, idx, true)
 end
 
 
