@@ -91,29 +91,6 @@ function circuit_blocks:get_circuit_block(pos)
                 meta:set_int("ctrl_a", ctrl_a_arg)
 
                 return
-                --local ret_wire_placed = -1
-                --if circuit_is_on_grid == 1 and
-                --        ctrl_a_arg >= 1 and ctrl_a_arg <= circuit_num_wires then
-                --    local pos_y = circuit_num_wires - ctrl_a_arg + circuit_pos_y
-                --    local candidate_ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                --    --local candidate_ctrl_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
-                --
-                --    local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
-                --
-                --    -- TODO: Validate whether argument is placeable
-                --    circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                --            "BEFORE In set_ctrl_a")
-                --
-                --    local new_node_name = "circuit_blocks:circuit_blocks_control_down"
-                --    circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
-                --            new_node_name)
-                --
-                --    circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                --            "AFTER In set_ctrl_a")
-                --
-                --    ret_wire_placed = ctrl_a_arg
-                --end
-                --return ret_wire_placed
 			end,
 
             -- Get control wire A, integer
@@ -219,7 +196,7 @@ end
 
 function circuit_blocks:debug_node_info(pos, message)
     local block = circuit_blocks:get_circuit_block(pos)
-    minetest.debug("to_string:\n" .. dump(block.to_string()))
+    -- minetest.debug("to_string:\n" .. dump(block.to_string()))
     minetest.debug((message or "") .. "\ncircuit_block:\n" ..
         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
         "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
@@ -484,8 +461,9 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     local new_node_name = non_rotate_gate_name
 
-    local threshold = 0.0001
-    if math.abs(new_radians - 0) > threshold then
+    local threshold = 0.00001
+    if math.abs(new_radians - 0) > threshold and
+            math.abs(new_radians - math.pi * 2) > threshold then
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
         minetest.debug("num_pi_16_radians: " .. tostring(num_pi_16_radians))
 
@@ -571,7 +549,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_trace"
     end
 
-    minetest.debug("circuit_blocks:"..texture_name)
+    -- minetest.debug("circuit_blocks:"..texture_name)
 
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
@@ -599,9 +577,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 local placed_wire = -1
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.0001
+                    local threshold = 0.00001
                     if block.get_ctrl_a() == -1 and
-                            math.abs(block.get_radians() - 0) < threshold then
+                            math.abs(block.get_radians() - 0) < threshold and
+                            math.abs(block.get_radians() - math.pi * 2) > threshold then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() - 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
@@ -680,9 +659,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             node_type == CircuitNodeTypes.H) then
 
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.0001
+                    local threshold = 0.00001
                     if block.get_ctrl_a() == -1 and
-                            math.abs(block.get_radians() - 0) < threshold then
+                            math.abs(block.get_radians() - 0) < threshold and
+                            math.abs(block.get_radians() - math.pi * 2) > threshold then
                         placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                 block:get_node_wire_num() + 1)
                         minetest.debug("control placed_wire: " .. tostring(placed_wire))
