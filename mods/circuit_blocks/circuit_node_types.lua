@@ -13,5 +13,6 @@ CircuitNodeTypes = {
     SWAP = 9,
     -- B = 10,
     CTRL = 11, -- "control" part of multi-qubit gate
-    TRACE = 12 -- In the path between a gate part and a "control" or "swap" part
+    TRACE = 12, -- In the path between a gate part and a "control" or "swap" part
+    MEASURE_Z = 13
 }

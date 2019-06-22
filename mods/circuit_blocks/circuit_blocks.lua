@@ -547,10 +547,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_tdg_gate"
     elseif circuit_node_type == CircuitNodeTypes.TRACE then
         texture_name = "circuit_blocks_trace"
+    elseif circuit_node_type == CircuitNodeTypes.MEASURE_Z then
+        texture_name = "circuit_blocks_measure_z"
     end
 
     -- minetest.debug("circuit_blocks:"..texture_name)
-
+    -- TODO: Work out way to pass in a meaningful description
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
         tiles = {texture_name..".png"},
@@ -564,6 +566,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("is_gate", (is_gate and 1 or 0))
         end,
         on_punch = function(pos, node, player)
+            -- TODO: Enable digging other types of blocks (e.g. measure_z)
             local block = circuit_blocks:get_circuit_block(pos)
             circuit_blocks:debug_node_info(pos, "In on_punch()")
 
