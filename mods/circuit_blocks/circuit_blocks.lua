@@ -490,7 +490,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_up,
                                                connector_down,
                                                pi16rotation,
-                                               is_gate)
+                                               is_gate,
+                                               suffix)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
         texture_name = "circuit_blocks_empty_wire"
@@ -548,7 +549,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
     elseif circuit_node_type == CircuitNodeTypes.TRACE then
         texture_name = "circuit_blocks_trace"
     elseif circuit_node_type == CircuitNodeTypes.MEASURE_Z then
-        texture_name = "circuit_blocks_measure_z"
+        texture_name = "circuit_blocks_measure_" .. suffix
     end
 
     -- minetest.debug("circuit_blocks:"..texture_name)

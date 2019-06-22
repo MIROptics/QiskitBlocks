@@ -399,13 +399,13 @@ minetest.register_node("q_command:q_block", {
                         url_code.urlencode(qasm_str)
             }
 
-             local http_request_qasm = {
+            local http_request_qasm = {
                 -- TODO: Make URL host and port configurable
                 url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
                         url_code.urlencode(qasm_with_measurement_str)
             }
 
-           local function process_backend_statevector_result(http_request_response)
+            local function process_backend_statevector_result(http_request_response)
                 minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
 
                 if http_request_response.succeeded and
@@ -482,10 +482,39 @@ minetest.register_node("q_command:q_block", {
 
                     minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
 
-                    --[[
-                    -- Update the histogram
-                    local hist_node_pos = nil
+                    -- Update measure blocks in the circuit
+                    if basis_state_bit_str then
+                        local num_wires = circuit_block.get_circuit_num_wires()
+                        local num_columns = circuit_block.get_circuit_num_columns()
+                        local circuit_pos_x = circuit_block.get_circuit_pos().x
+                        local circuit_pos_y = circuit_block.get_circuit_pos().y
+                        local circuit_pos_z = circuit_block.get_circuit_pos().z
 
+                        for column_num = 1, num_columns do
+                            for wire_num = 1, num_wires do
+                                local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                                          y = circuit_pos_y + num_wires - wire_num,
+                                                          z = circuit_pos_z}
+                                local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+
+                                if circuit_node_block then
+                                    local node_type = circuit_node_block.get_node_type()
+                                    if node_type == CircuitNodeTypes.MEASURE_Z then
+                                        local bit_str_idx = num_wires + 1 - wire_num
+                                        local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
+                                        local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
+                                        minetest.swap_node(circuit_node_pos, {name = new_node_name})
+                                    end
+                                end
+
+                            end
+
+                        end
+
+                    end
+
+
+                    --[[
                     -- TODO: Put this constant somewhere
                     local BLOCK_WATER_LEVELS = 63
 
