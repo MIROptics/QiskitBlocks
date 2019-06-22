@@ -463,21 +463,26 @@ minetest.register_node("q_command:q_block", {
 
                     minetest.debug ("qasm_data:", qasm_data)
 
-                    --[[
-                    local statevector = {}
-                    local obj, pos, err = json.decode (sv_data, 1, nil)
+                    local basis_state_bit_str = nil
+
+                    local obj, pos, err = json.decode (qasm_data, 1, nil)
                     if err then
                         minetest.debug ("Error:", err)
                     else
-                        local temp_statevector = obj.__ndarray__
-                        for i = 1,#temp_statevector do
-                            statevector[i] = complex.new(temp_statevector[i].__complex__[1],
-                                    temp_statevector[i].__complex__[2])
+                        local basis_freq = obj.result
+                        minetest.debug("basis_freq:\n" .. dump(basis_freq))
+
+                        -- Only one shot is requested from simulator,
+                        -- so this table should have only one entry
+                        for key, val in pairs(basis_freq) do
+                            basis_state_bit_str = key
+                            --minetest.debug("k: " .. k .. ", v: " .. v)
                         end
                     end
 
-                    minetest.debug("statevector:\n" .. dump(statevector))
+                    minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
 
+                    --[[
                     -- Update the histogram
                     local hist_node_pos = nil
 
