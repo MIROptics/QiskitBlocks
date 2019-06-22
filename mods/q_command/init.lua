@@ -164,7 +164,7 @@ function q_command:create_blank_circuit_grid()
 end
 
 
-function q_command:compute_circuit(circuit_block)
+function q_command:compute_circuit(circuit_block, include_measurement_blocks)
     local num_wires = circuit_block.get_circuit_num_wires()
     local num_columns = circuit_block.get_circuit_num_columns()
     local circuit_pos_x = circuit_block.get_circuit_pos().x
@@ -287,8 +287,10 @@ function q_command:compute_circuit(circuit_block)
                         qasm_str = qasm_str .. 'h q[' .. wire_num_idx .. '];'
                     end
                 elseif node_type == CircuitNodeTypes.MEASURE_Z then
-                    -- Measurement block
-                    qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
+                    if include_measurement_blocks then
+                        -- Measurement block
+                        qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
+                    end
 
                 --TODO: Implement SWAP gate in circuit blocks
                 --[[
@@ -387,7 +389,9 @@ minetest.register_node("q_command:q_block", {
         if q_block:circuit_grid_exists() then
             local circuit_grid_pos = q_block.get_circuit_pos()
             local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
-            local qasm_str = q_command:compute_circuit(circuit_block)
+
+            local qasm_str = q_command:compute_circuit(circuit_block, false)
+            local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
 
             local http_request_statevector = {
                 -- TODO: Make URL host and port configurable
@@ -398,7 +402,7 @@ minetest.register_node("q_command:q_block", {
              local http_request_qasm = {
                 -- TODO: Make URL host and port configurable
                 url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                        url_code.urlencode(qasm_str)
+                        url_code.urlencode(qasm_with_measurement_str)
             }
 
            local function process_backend_statevector_result(http_request_response)

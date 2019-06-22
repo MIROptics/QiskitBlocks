@@ -461,7 +461,7 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     local new_node_name = non_rotate_gate_name
 
-    local threshold = 0.00001
+    local threshold = 0.0001
     if math.abs(new_radians - 0) > threshold and
             math.abs(new_radians - math.pi * 2) > threshold then
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
@@ -580,7 +580,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 local placed_wire = -1
                 local wielded_item = player:get_wielded_item()
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.00001
+                    local threshold = 0.0001
                     if block.get_ctrl_a() == -1 and
                             math.abs(block.get_radians() - 0) < threshold and
                             math.abs(block.get_radians() - math.pi * 2) > threshold then
@@ -662,7 +662,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             node_type == CircuitNodeTypes.H) then
 
                 if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.00001
+                    local threshold = 0.0001
                     if block.get_ctrl_a() == -1 and
                             math.abs(block.get_radians() - 0) < threshold and
                             math.abs(block.get_radians() - math.pi * 2) > threshold then
