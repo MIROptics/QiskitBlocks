@@ -529,7 +529,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.Y then
         texture_name = "circuit_blocks_y_gate"
-        if connector_up and not connector_down then
+        if pi16rotation ~= 0 then
+            texture_name = "circuit_blocks_ry_gate_" .. pi16rotation .. "p16"
+        elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_y_gate_up"
         elseif connector_down and not connector_up then
             texture_name = "circuit_blocks_y_gate_down"
