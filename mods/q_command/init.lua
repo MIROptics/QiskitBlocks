@@ -389,16 +389,20 @@ minetest.register_node("q_command:q_block", {
             local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
             local qasm_str = q_command:compute_circuit(circuit_block)
 
-            minetest.debug("qasm_str:\n" .. qasm_str)
-
-            local http_request = {
+            local http_request_statevector = {
                 -- TODO: Make URL host and port configurable
                 url = "http://localhost:5000/api/run/statevector?backend=statevector_simulator&qasm=" ..
                         url_code.urlencode(qasm_str)
             }
 
-            local function process_backend_result(http_request_response)
-                minetest.debug("http_request_response:\n" .. dump(http_request_response))
+             local http_request_qasm = {
+                -- TODO: Make URL host and port configurable
+                url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url_code.urlencode(qasm_str)
+            }
+
+           local function process_backend_statevector_result(http_request_response)
+                minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
 
                 if http_request_response.succeeded and
                         http_request_response.completed and
@@ -444,8 +448,63 @@ minetest.register_node("q_command:q_block", {
                 end
             end
 
+            local function process_backend_qasm_result(http_request_response)
+                minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
+
+                if http_request_response.succeeded and
+                        http_request_response.completed and
+                        not http_request_response.timeout then
+
+                    local qasm_data = http_request_response.data
+
+                    minetest.debug ("qasm_data:", qasm_data)
+
+                    --[[
+                    local statevector = {}
+                    local obj, pos, err = json.decode (sv_data, 1, nil)
+                    if err then
+                        minetest.debug ("Error:", err)
+                    else
+                        local temp_statevector = obj.__ndarray__
+                        for i = 1,#temp_statevector do
+                            statevector[i] = complex.new(temp_statevector[i].__complex__[1],
+                                    temp_statevector[i].__complex__[2])
+                        end
+                    end
+
+                    minetest.debug("statevector:\n" .. dump(statevector))
+
+                    -- Update the histogram
+                    local hist_node_pos = nil
+
+                    -- TODO: Put this constant somewhere
+                    local BLOCK_WATER_LEVELS = 63
+
+                    for idx = 1, #statevector do
+                        hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
+                                         y = circuit_grid_pos.y - 1,
+                                         z = circuit_grid_pos.z}
+
+                        local probability = (complex.abs(statevector[idx]))^2
+                        local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
+
+                        minetest.debug("probability :" .. tostring(probability))
+
+                        minetest.set_node(hist_node_pos,
+                                {name="q_command:glass", param2 = scaled_prob})
+
+                    end
+                    --]]
+                else
+                    minetest.debug("Call to statevector_simulator Didn't succeed")
+                end
+            end
+
             minetest.debug("http_request:\n" .. dump(http_request))
-            request_http_api.fetch(http_request, process_backend_result)
+
+            request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
+
+            request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
 
         else
             minetest.chat_send_player(player:get_player_name(),

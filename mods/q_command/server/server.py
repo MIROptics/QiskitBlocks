@@ -22,32 +22,31 @@ def test_json():
     return jsonify(ret)
 
 
-@app.route('/api/run/qasm', methods=['POST'])
-def qasm():
-    data = request.get_json()
-    qasm = data['qasm']
-    backend = data['backend']
-    print("--------------")
-    print(qasm)
-    print(backend)
-    output = run_qasm(qasm, backend)
-    ret = {"result": output}
-    return jsonify(ret)
-
-
-# @app.route('/api/run/statevector', methods=['POST'])
-# def statevector():
-#     raw_data = request.get_data()
-#     print('raw_data: ', raw_data)
+# @app.route('/api/run/qasm', methods=['POST'])
+# def qasm():
 #     data = request.get_json()
-#     print('data: ', data)
 #     qasm = data['qasm']
 #     backend = data['backend']
 #     print("--------------")
 #     print(qasm)
 #     print(backend)
-#     output = get_statevector(qasm, backend)
-#     return json_tricks.dumps(output)  # dump complex vector as json strings
+#     output = run_qasm(qasm, backend)
+#     ret = {"result": output}
+#     return jsonify(ret)
+
+
+
+@app.route('/api/run/qasm', methods=['GET'])
+def qasm():
+    qasm = request.args['qasm']
+    backend = request.args['backend']
+    print("--------------")
+    print('qasm: ', qasm)
+    print('backend: ', backend)
+    print("^^^^^^^^^^^^^^")
+    output = run_qasm(qasm, backend)
+    ret = {"result": output}
+    return jsonify(ret)
 
 
 @app.route('/api/run/statevector', methods=['GET'])
