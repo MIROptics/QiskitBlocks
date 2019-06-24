@@ -66,9 +66,11 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, 0, fals
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.TRACE, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "z")
-circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "0")
-circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "1")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"", "z")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"","0")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","1")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.CONNECTOR_M, false, false, 0, false, "q_command:wire_extension_block")
+-- circuit_blocks:register_circuit_block(CircuitNodeTypes.CONNECTOR_F, false, false, 0, false)
 
 local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do

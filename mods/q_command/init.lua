@@ -3,6 +3,8 @@
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
+dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
+
 
 request_http_api = minetest.request_http_api()
 minetest.debug("request_http_api: " .. dump(request_http_api))

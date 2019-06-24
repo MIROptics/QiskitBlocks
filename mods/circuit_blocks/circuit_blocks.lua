@@ -491,6 +491,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                                connector_down,
                                                pi16rotation,
                                                is_gate,
+                                               drop_name,
                                                suffix)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
@@ -550,6 +551,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_trace"
     elseif circuit_node_type == CircuitNodeTypes.MEASURE_Z then
         texture_name = "circuit_blocks_measure_" .. suffix
+    elseif circuit_node_type == CircuitNodeTypes.CONNECTOR_M then
+        texture_name = "circuit_blocks_wire_connector_m"
+    elseif circuit_node_type == CircuitNodeTypes.CONNECTOR_F then
+        texture_name = "circuit_blocks_wire_connector_f"
     end
 
     -- minetest.debug("circuit_blocks:"..texture_name)
@@ -558,6 +563,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         description = texture_name,
         tiles = {texture_name..".png"},
         groups = {circuit_gate=1, oddly_breakable_by_hand=2},
+
+        -- TODO: Find best way to implement dropping an item
+        -- drop = drop_name,
+
+        on_drop = function(itemstack, dropper, pos)
+            minetest.debug("in on_drop, itemstack: " .. dump(itemstack))
+        end,
+
         on_construct = function(pos)
             local meta = minetest.get_meta(pos)
             meta:set_int("node_type", circuit_node_type)
@@ -622,6 +635,20 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                             "circuit_blocks:circuit_blocks_empty_wire")
                 end
+
+            elseif block.is_within_circuit_grid() and
+                    node_type == CircuitNodeTypes.CONNECTOR_M then
+
+                -- TODO: fill in
+                local wire_extension_itemstack = ItemStack("q_command:wire_extension_block")
+                local meta = wire_extension_itemstack:get_meta()
+                meta:set_int("circuit_extension_pos_x", pos.x)
+                meta:set_int("circuit_extension_pos_y", pos.y)
+                meta:set_int("circuit_extension_pos_z", pos.z)
+
+                minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack))
+                local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
+                minetest.item_drop(wire_extension_itemstack, player, drop_pos)
 
             elseif node_type == CircuitNodeTypes.EMPTY then
                 -- Necessary to replace punched node

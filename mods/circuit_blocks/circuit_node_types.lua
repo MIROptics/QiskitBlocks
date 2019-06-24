@@ -14,5 +14,7 @@ CircuitNodeTypes = {
     -- B = 10,
     CTRL = 11, -- "control" part of multi-qubit gate
     TRACE = 12, -- In the path between a gate part and a "control" or "swap" part
-    MEASURE_Z = 13
+    MEASURE_Z = 13,
+    CONNECTOR_M = 14, -- Block that connects a wire to a distant wire
+    CONNECTOR_F = 15 -- Block that connects a wire from a distant wire
 }
