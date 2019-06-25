@@ -139,6 +139,12 @@ end
 function q_command:create_blank_circuit_grid()
     local circuit_num_wires = q_command.circuit_specs.num_wires
     local circuit_num_columns = q_command.circuit_specs.num_columns
+
+    -- Must be 0 for the circuit grid. This variable is
+    -- to be used by wire extension to indicate which wire
+    -- is being extended
+    local circuit_specs_wire_num_offset = 0
+
     for wire = 1, circuit_num_wires do
         for column = 1, circuit_num_columns do
             local node_pos = {}
@@ -152,6 +158,7 @@ function q_command:create_blank_circuit_grid()
 
             -- Update the metadata in these newly created nodes
             local meta = minetest.get_meta(node_pos)
+            meta:set_int("circuit_specs_wire_num_offset", circuit_specs_wire_num_offset)
             meta:set_int("circuit_specs_num_wires", circuit_num_wires)
             meta:set_int("circuit_specs_num_columns", circuit_num_columns)
             meta:set_int("circuit_specs_is_on_grid", 1)
@@ -200,7 +207,12 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                 local radians = circuit_node_block.get_radians()
 
                 -- For convenience and brevity, create a zero-based, string, wire number
-                local wire_num_idx = tostring(wire_num - 1)
+                local wire_num_idx = tostring(wire_num - 1 +
+                        circuit_node_block.get_circuit_specs_wire_num_offset())
+                local ctrl_a_idx = tostring(ctrl_a - 1 +
+                        circuit_node_block.get_circuit_specs_wire_num_offset())
+                local ctrl_b_idx = tostring(ctrl_b - 1 +
+                        circuit_node_block.get_circuit_specs_wire_num_offset())
 
                 if node_type == CircuitNodeTypes.IDEN then
                     -- Identity gate
@@ -211,12 +223,12 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                         if ctrl_a ~= -1 then
                             if ctrl_b ~= -1 then
                                 -- Toffoli gate
-                                qasm_str = qasm_str .. 'ccx q[' .. tostring(ctrl_a - 1) .. '],'
-                                qasm_str = qasm_str .. 'q[' .. tostring(ctrl_b - 1) .. '],'
+                                qasm_str = qasm_str .. 'ccx q[' .. ctrl_a_idx .. '],'
+                                qasm_str = qasm_str .. 'q[' .. ctrl_b_idx .. '],'
                                 qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                             else
                                 -- Controlled X gate
-                                qasm_str = qasm_str .. 'cx q[' .. tostring(ctrl_a - 1) .. '],'
+                                qasm_str = qasm_str .. 'cx q[' .. ctrl_a_idx .. '],'
                                 qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                             end
                         else
@@ -233,7 +245,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                     if radians == 0 then
                         if ctrl_a ~= -1 then
                             -- Controlled Y gate
-                            qasm_str = qasm_str .. 'cy q[' .. tostring(ctrl_a - 1) .. '],'
+                            qasm_str = qasm_str .. 'cy q[' .. ctrl_a_idx .. '],'
                             qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                         else
                             -- Pauli-Y gate
@@ -248,7 +260,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                     if radians == 0 then
                         if ctrl_a ~= -1 then
                             -- Controlled Z gate
-                            qasm_str = qasm_str .. 'cz q[' .. tostring(ctrl_a - 1) .. '],'
+                            qasm_str = qasm_str .. 'cz q[' .. ctrl_a_idx .. '],'
                             qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                         else
                             -- Pauli-Z gate
@@ -258,7 +270,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                         if circuit_node_block.get_ctrl_a() ~= -1 then
                             -- Controlled rotation around the Z axis
                             qasm_str = qasm_str .. 'crz(' .. tostring(radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. tostring(ctrl_a - 1) .. '],'
+                            qasm_str = qasm_str .. 'q[' .. ctrl_a_idx .. '],'
                             qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                         else
                             -- Rotation around Z axis
@@ -282,7 +294,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                 elseif node_type == CircuitNodeTypes.H then
                     if ctrl_a ~= -1 then
                         -- Controlled Hadamard
-                        qasm_str = qasm_str .. 'ch q[' .. tostring(ctrl_a - 1) .. '],'
+                        qasm_str = qasm_str .. 'ch q[' .. ctrl_a_idx .. '],'
                         qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
                     else
                         -- Hadamard gate
@@ -299,7 +311,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                 elseif node_type == CircuitNodeTypes.SWAP then
                     if ctrl_a ~= -1 then
                         -- Controlled Swap
-                        qasm_str = qasm_str .. 'cswap q[' .. tostring(ctrl_a - 1) .. '],'
+                        qasm_str = qasm_str .. 'cswap q[' .. ctrl_a_idx .. '],'
                         qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '],'
                         qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
                     else

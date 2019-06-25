@@ -31,6 +31,7 @@ function circuit_blocks:get_circuit_block(pos)
         local node_is_gate = meta:get_int("is_gate")
 
         -- Retrieve circuit_specs metadata
+        local circuit_specs_wire_num_offset = meta:get_int("circuit_specs_wire_num_offset")
         local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
         local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
         local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
@@ -48,7 +49,7 @@ function circuit_blocks:get_circuit_block(pos)
 
         local node_wire_num = -1
         if circuit_is_on_grid == 1 then
-            node_wire_num = circuit_num_wires - (pos.y - circuit_pos_y)
+            node_wire_num = circuit_num_wires - (pos.y - circuit_pos_y) + circuit_specs_wire_num_offset
         end
 
         local node_column_num = -1
@@ -114,6 +115,11 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             --
+            -- Number of circuit wires, integer
+            get_circuit_specs_wire_num_offset = function()
+				return circuit_specs_wire_num_offset
+			end,
+
             -- Number of circuit wires, integer
             get_circuit_num_wires = function()
 				return circuit_num_wires
@@ -190,6 +196,7 @@ function circuit_blocks:get_circuit_block(pos)
                         "ctrl_a: " .. tostring(ctrl_a) .. "\n" ..
                         "ctrl_b: " .. tostring(ctrl_b) .. "\n" ..
                         "node_is_gate: " .. tostring(node_is_gate) .. "\n" ..
+                        "circuit_specs_wire_num_offset: " .. tostring(circuit_specs_wire_num_offset) .. "\n" ..
                         "circuit_num_wires: " .. tostring(circuit_num_wires) .. "\n" ..
                         "circuit_num_columns: " .. tostring(circuit_num_columns) .. "\n" ..
                         "circuit_is_on_grid: " .. tostring(circuit_is_on_grid) .. "\n" ..
@@ -222,6 +229,7 @@ function circuit_blocks:debug_node_info(pos, message)
         "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
         "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
         "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
+        "circuit_specs_wire_num_offset() " .. tostring(block.get_circuit_specs_wire_num_offset()) .. "\n" ..
         "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
         "get_circuit_num_columns() " .. tostring(block.get_circuit_num_columns()) .. "\n" ..
         "is_on_circuit_grid() " .. tostring(block.is_on_circuit_grid()) .. "\n" ..
@@ -279,6 +287,7 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     -- Retrieve circuit_specs metadata
     local meta = minetest.get_meta(pos)
 
+    local circuit_specs_wire_num_offset = meta:get_int("circuit_specs_wire_num_offset")
     local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
     local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
     local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
@@ -297,6 +306,7 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     -- Put circuit_specs metadata on placed node
     meta = minetest.get_meta(pos)
 
+    meta:set_int("circuit_specs_wire_num_offset", circuit_specs_wire_num_offset)
     meta:set_int("circuit_specs_num_wires", circuit_num_wires)
     meta:set_int("circuit_specs_num_columns", circuit_num_columns)
     meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
