@@ -175,6 +175,31 @@ minetest.register_node("q_command:wire_extension_block", {
         meta:set_string("infotext", "Wire extension block")
         wire_extension.block_pos = pos
     end,
+    after_place_node = function(pos, placer, itemstack)
+        local itemstack_meta = itemstack:get_meta()
+        local circuit_extension_pos = {x = itemstack_meta:get_int("circuit_extension_pos_x"),
+                                       y = itemstack_meta:get_int("circuit_extension_pos_y"),
+                                       z = itemstack_meta:get_int("circuit_extension_pos_z")}
+
+        minetest.debug("In after_place_node(), wire_extension_itemstack circuit_extension_pos: " ..
+                dump(circuit_extension_pos))
+
+        -- Put the position of the circuit extension node into this wire extension block
+        local wire_extension_block_meta = minetest.get_meta(pos)
+        wire_extension_block_meta:set_int("circuit_extension_pos_x",
+                circuit_extension_pos.x)
+        wire_extension_block_meta:set_int("circuit_extension_pos_y",
+                circuit_extension_pos.y)
+        wire_extension_block_meta:set_int("circuit_extension_pos_z",
+                circuit_extension_pos.z)
+
+        -- Put the location of this wire extension block into the circuit extension node
+        local circuit_extension_block_meta = minetest.get_meta(circuit_extension_pos)
+        circuit_extension_block_meta:set_int("wire_extension_block_pos_x", pos.x)
+        circuit_extension_block_meta:set_int("wire_extension_block_pos_y", pos.y)
+        circuit_extension_block_meta:set_int("wire_extension_block_pos_z", pos.z)
+
+    end,
     on_rightclick = function(pos, node, clicker, itemstack)
         local player_name = clicker:get_player_name()
         local meta = minetest.get_meta(pos)

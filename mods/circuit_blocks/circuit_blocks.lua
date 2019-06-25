@@ -41,6 +41,11 @@ function circuit_blocks:get_circuit_block(pos)
         local q_command_pos_y = meta:get_int("q_command_block_pos_y")
         local q_command_pos_z = meta:get_int("q_command_block_pos_z")
 
+        -- Retrieve wire extension related metadata (specific to circuit extension blocks)
+        local wire_extension_block_pos_x = meta:get_int("wire_extension_block_pos_x")
+        local wire_extension_block_pos_y = meta:get_int("wire_extension_block_pos_y")
+        local wire_extension_block_pos_z = meta:get_int("wire_extension_block_pos_z")
+
         local node_wire_num = -1
         if circuit_is_on_grid == 1 then
             node_wire_num = circuit_num_wires - (pos.y - circuit_pos_y)
@@ -163,6 +168,15 @@ function circuit_blocks:get_circuit_block(pos)
                 ret_pos.x = q_command_pos_x
                 ret_pos.y = q_command_pos_y
                 ret_pos.z = q_command_pos_z
+				return ret_pos
+			end,
+
+            -- Position of wire extension block (specific to circuit extension blocks)
+            get_wire_extension_block_pos = function()
+                local ret_pos = {}
+                ret_pos.x = wire_extension_block_pos_x
+                ret_pos.y = wire_extension_block_pos_y
+                ret_pos.z = wire_extension_block_pos_z
 				return ret_pos
 			end,
 
@@ -639,14 +653,17 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             elseif block.is_within_circuit_grid() and
                     node_type == CircuitNodeTypes.CONNECTOR_M then
 
-                -- TODO: fill in
+                -- TODO: continue filling in
                 local wire_extension_itemstack = ItemStack("q_command:wire_extension_block")
                 local meta = wire_extension_itemstack:get_meta()
                 meta:set_int("circuit_extension_pos_x", pos.x)
                 meta:set_int("circuit_extension_pos_y", pos.y)
                 meta:set_int("circuit_extension_pos_z", pos.z)
 
-                minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack))
+                minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack) ..
+                ", circuit_extension_pos_x: " .. tostring(meta:get_int("circuit_extension_pos_x")) ..
+                ", circuit_extension_pos_y: " .. tostring(meta:get_int("circuit_extension_pos_y")) ..
+                ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")))
                 local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
                 minetest.item_drop(wire_extension_itemstack, player, drop_pos)
 
