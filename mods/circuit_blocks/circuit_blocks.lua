@@ -198,7 +198,10 @@ function circuit_blocks:get_circuit_block(pos)
                         "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
                         "q_command_pos_x: " .. tostring(q_command_pos_x) .. "\n" ..
                         "q_command_pos_y: " .. tostring(q_command_pos_y) .. "\n" ..
-                        "q_command_pos_z: " .. tostring(q_command_pos_z) .. "\n"
+                        "q_command_pos_z: " .. tostring(q_command_pos_z) .. "\n" ..
+                        "wire_extension_block_pos_x: " .. tostring(wire_extension_block_pos_x) .. "\n" ..
+                        "wire_extension_block_pos_x: " .. tostring(wire_extension_block_pos_x) .. "\n" ..
+                        "wire_extension_block_pos_x: " .. tostring(wire_extension_block_pos_x) .. "\n"
                 return ret_str
             end
 		}
@@ -226,7 +229,9 @@ function circuit_blocks:debug_node_info(pos, message)
         "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
         "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n" ..
-        "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n")
+        "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n" ..
+        "get_wire_extension_block_pos() " .. dump(block.get_wire_extension_block_pos()) .. "\n"
+    )
 
 end
 
