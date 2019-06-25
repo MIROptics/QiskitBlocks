@@ -111,12 +111,16 @@ function wire_extension:create_blank_wire_extension()
 
         -- Update the metadata in these newly created nodes
         local meta = minetest.get_meta(node_pos)
-        meta:set_int("wire_specs_num_wires", 1) -- TODO: Remove, as s/b 1 ?
-        meta:set_int("wire_specs_num_columns", wire_num_columns)
-        meta:set_int("wire_specs_is_on_grid", 1)
-        meta:set_int("wire_specs_pos_x", wire_extension.wire_specs.pos.x)
-        meta:set_int("wire_specs_pos_y", wire_extension.wire_specs.pos.y)
-        meta:set_int("wire_specs_pos_z", wire_extension.wire_specs.pos.z)
+
+        -- TODO: Calculate offset from the circuit_extension_pos
+        meta:set_int("circuit_specs_wire_num_offset", 0)
+
+        meta:set_int("circuit_specs_num_wires", 1)
+        meta:set_int("circuit_specs_num_columns", wire_num_columns)
+        meta:set_int("circuit_specs_is_on_grid", 1)
+        meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
+        meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
+        meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
         meta:set_int("wire_extension_block_pos_x", wire_extension.block_pos.x)
         meta:set_int("wire_extension_block_pos_y", wire_extension.block_pos.y)
         meta:set_int("wire_extension_block_pos_z", wire_extension.block_pos.z)
@@ -146,9 +150,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
                 -- Put location of circuit into the wire_extension block metadata
                 local meta = minetest.get_meta(wire_extension.block_pos)
-                meta:set_int("wire_specs_pos_x", wire_extension.wire_specs.pos.x)
-                meta:set_int("wire_specs_pos_y", wire_extension.wire_specs.pos.y)
-                meta:set_int("wire_specs_pos_z", wire_extension.wire_specs.pos.z)
+                meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
+                meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
+                meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
 
                 --wire_extension:debug_node_info(pos, "After setting metadata")
 
