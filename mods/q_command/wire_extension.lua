@@ -62,6 +62,16 @@ function wire_extension:get_wire_extension_block(pos)
 				return circuit_specs_wire_num_offset
 			end,
 
+            -- Number of circuit wires, integer
+            get_circuit_num_wires = function()
+				return circuit_num_wires
+			end,
+
+            -- Number of circuit columns, integer
+            get_circuit_num_columns = function()
+				return circuit_num_columns
+			end,
+
             -- Position of q_command block
             get_q_command_pos = function()
                 local ret_pos = {}
@@ -123,17 +133,25 @@ end
 
 
 function wire_extension:create_blank_wire_extension()
+    local extension_block = wire_extension:get_wire_extension_block(wire_extension.block_pos)
     -- local wire_num_wires = wire_extension.wire_specs.num_wires -- s/b 1
-    local wire_num_columns = wire_extension.wire_specs.num_columns
+    -- local wire_num_columns = wire_extension.wire_specs.num_columns
+    local wire_num_columns = extension_block.get_circuit_num_columns()
 
     -- TODO: [x] Eliminate outer loop, as there is just one wire
     -- for wire = 1, 1 do
     for column = 1, wire_num_columns do
         local node_pos = {}
-        node_pos.x = wire_extension.wire_specs.pos.x + column - 1
+        -- node_pos.x = wire_extension.wire_specs.pos.x + column - 1
+        node_pos.x = extension_block.get_circuit_pos().x + column - 1
+
         -- node_pos.y = wire_extension.wire_specs.pos.y + circuit_num_wires - wire
-        node_pos.y = wire_extension.wire_specs.pos.y
-        node_pos.z = wire_extension.wire_specs.pos.z
+        -- node_pos.y = wire_extension.wire_specs.pos.y
+        node_pos.y = extension_block.get_circuit_pos().y
+
+        -- node_pos.z = wire_extension.wire_specs.pos.z
+        node_pos.z = extension_block.get_circuit_pos().z
+
         -- TODO: Change to add_node() for clarity?
         minetest.set_node(node_pos,
                 {name="circuit_blocks:circuit_blocks_empty_wire"})
@@ -142,7 +160,7 @@ function wire_extension:create_blank_wire_extension()
         local meta = minetest.get_meta(node_pos)
 
         -- TODO: Calculate offset from the circuit_extension_pos
-        meta:set_int("circuit_specs_wire_num_offset", 0)
+        meta:set_int("circuit_specs_wire_num_offset", extension_block.get_circuit_specs_wire_num_offset())
 
         meta:set_int("circuit_specs_num_wires", 1)
         meta:set_int("circuit_specs_num_columns", wire_num_columns)
@@ -150,9 +168,14 @@ function wire_extension:create_blank_wire_extension()
         meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
         meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
         meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
-        meta:set_int("wire_extension_block_pos_x", wire_extension.block_pos.x)
-        meta:set_int("wire_extension_block_pos_y", wire_extension.block_pos.y)
-        meta:set_int("wire_extension_block_pos_z", wire_extension.block_pos.z)
+        meta:set_int("wire_extension_block_pos_x", extension_block.get_node_pos().x)
+        meta:set_int("wire_extension_block_pos_y", extension_block.get_node_pos().y)
+        meta:set_int("wire_extension_block_pos_z", extension_block.get_node_pos().z)
+
+        meta:set_int("q_command_block_pos_x", extension_block.get_q_command_pos().x)
+        meta:set_int("q_command_block_pos_y", extension_block.get_q_command_pos().y)
+        meta:set_int("q_command_block_pos_z", extension_block.get_q_command_pos().z)
+
     end
 end
 
@@ -174,14 +197,16 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                 wire_extension.wire_specs.num_columns = num_columns
                 minetest.debug("wire_extension.wire_specs: " .. dump(wire_extension.wire_specs))
 
-                -- Create circuit grid with empty blocks
-                wire_extension:create_blank_wire_extension()
-
                 -- Put location of circuit into the wire_extension block metadata
                 local meta = minetest.get_meta(wire_extension.block_pos)
                 meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
                 meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
                 meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
+                meta:set_int("circuit_specs_num_wires", wire_extension.wire_specs.num_wires)
+                meta:set_int("circuit_specs_num_columns", wire_extension.wire_specs.num_columns)
+
+                -- Create circuit grid with empty blocks
+                wire_extension:create_blank_wire_extension()
 
                 --wire_extension:debug_node_info(pos, "After setting metadata")
 
