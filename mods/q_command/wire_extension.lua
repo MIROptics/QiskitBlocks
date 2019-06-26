@@ -14,10 +14,22 @@ function wire_extension:get_wire_extension_block(pos)
 
         -- Retrieve metadata
         local meta = minetest.get_meta(pos)
-        -- local node_type = meta:get_int("node_type")
-        local wire_pos_x = meta:get_int("wire_specs_pos_x")
-        local wire_pos_y = meta:get_int("wire_specs_pos_y")
-        local wire_pos_z = meta:get_int("wire_specs_pos_z")
+        local node_type = meta:get_int("node_type")
+
+        local circuit_specs_wire_num_offset = meta:get_int("circuit_specs_wire_num_offset")
+        local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
+        local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
+        local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+        local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
+        local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
+        local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
+        local q_command_pos_x = meta:get_int("q_command_block_pos_x")
+        local q_command_pos_y = meta:get_int("q_command_block_pos_y")
+        local q_command_pos_z = meta:get_int("q_command_block_pos_z")
+
+        --local wire_pos_x = meta:get_int("wire_specs_pos_x")
+        --local wire_pos_y = meta:get_int("wire_specs_pos_y")
+        --local wire_pos_z = meta:get_int("wire_specs_pos_z")
 
         local circuit_extension_pos_x = meta:get_int("circuit_extension_pos_x")
         local circuit_extension_pos_y = meta:get_int("circuit_extension_pos_y")
@@ -36,19 +48,33 @@ function wire_extension:get_wire_extension_block(pos)
 				return node_name
 			end,
 
-            -- Position of left node of the wire extension
-            get_wire_pos = function()
+            -- Position of lower-left node of the circuit grid
+            get_circuit_pos = function()
                 local ret_pos = {}
-                ret_pos.x = wire_pos_x
-                ret_pos.y = wire_pos_y
-                ret_pos.z = wire_pos_z
+                ret_pos.x = circuit_pos_x
+                ret_pos.y = circuit_pos_y
+                ret_pos.z = circuit_pos_z
+				return ret_pos
+			end,
+
+            -- Wire number offset, integer
+            get_circuit_specs_wire_num_offset = function()
+				return circuit_specs_wire_num_offset
+			end,
+
+            -- Position of q_command block
+            get_q_command_pos = function()
+                local ret_pos = {}
+                ret_pos.x = q_command_pos_x
+                ret_pos.y = q_command_pos_y
+                ret_pos.z = q_command_pos_z
 				return ret_pos
 			end,
 
             -- Determine if wire extension exists
             wire_extension_exists = function()
                 local ret_exists = false
-                if wire_pos_x > 0 and wire_pos_z > 0 then
+                if circuit_pos_x > 0 and circuit_pos_z > 0 then
                     ret_exists = true
                 end
 				return ret_exists
@@ -87,8 +113,11 @@ function wire_extension:debug_node_info(pos, message)
         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
         "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
         "wire_extension_exists() " .. dump(block.wire_extension_exists()) .. "\n" ..
-        "get_wire_pos() " .. dump(block.get_wire_pos()) .. "\n" ..
-        "get_circuit_extension_pos() " .. dump(block.get_circuit_extension_pos()) .. "\n")
+        --"get_wire_pos() " .. dump(block.get_wire_pos()) .. "\n" ..
+        "circuit_specs_wire_num_offset() " .. tostring(block.get_circuit_specs_wire_num_offset()) .. "\n" ..
+        "get_circuit_extension_pos() " .. dump(block.get_circuit_extension_pos()) .. "\n" ..
+        "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n" ..
+        "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n")
 
 end
 
@@ -184,12 +213,9 @@ minetest.register_node("q_command:wire_extension_block", {
         local circuit_extension_pos = {x = itemstack_meta:get_int("circuit_extension_pos_x"),
                                        y = itemstack_meta:get_int("circuit_extension_pos_y"),
                                        z = itemstack_meta:get_int("circuit_extension_pos_z")}
-
-        minetest.debug("In after_place_node(), wire_extension_itemstack circuit_extension_pos: " ..
-                dump(circuit_extension_pos))
+        local wire_extension_block_meta = minetest.get_meta(pos)
 
         -- Put the position of the circuit extension node into this wire extension block
-        local wire_extension_block_meta = minetest.get_meta(pos)
         wire_extension_block_meta:set_int("circuit_extension_pos_x",
                 circuit_extension_pos.x)
         wire_extension_block_meta:set_int("circuit_extension_pos_y",
@@ -203,6 +229,25 @@ minetest.register_node("q_command:wire_extension_block", {
         circuit_extension_block_meta:set_int("wire_extension_block_pos_y", pos.y)
         circuit_extension_block_meta:set_int("wire_extension_block_pos_z", pos.z)
 
+        -- Put the wire num offset into this wire extension block
+        wire_extension_block_meta:set_int("circuit_specs_wire_num_offset",
+                itemstack_meta:get_int("circuit_specs_wire_num_offset"))
+
+        -- Put the position of the q_command block into this wire extension block
+        wire_extension_block_meta:set_int("q_command_block_pos_x",
+                itemstack_meta:get_int("q_command_block_pos_x"))
+        wire_extension_block_meta:set_int("q_command_block_pos_y",
+                itemstack_meta:get_int("q_command_block_pos_y"))
+        wire_extension_block_meta:set_int("q_command_block_pos_z",
+                itemstack_meta:get_int("q_command_block_pos_z"))
+
+        minetest.debug("In after_place_node(), wire_extension_itemstack circuit_extension_pos: " ..
+                dump(circuit_extension_pos))
+        minetest.debug("wire_extension_block_meta:get_int('circuit_specs_wire_num_offset') " ..
+                wire_extension_block_meta:get_int("circuit_specs_wire_num_offset"))
+
+        local extension_block = wire_extension:get_wire_extension_block(pos)
+        wire_extension:debug_node_info(pos, "In after_place_node(), wire_extension_block")
     end,
     on_rightclick = function(pos, node, clicker, itemstack)
         local player_name = clicker:get_player_name()

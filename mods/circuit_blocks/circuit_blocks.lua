@@ -115,7 +115,7 @@ function circuit_blocks:get_circuit_block(pos)
 			end,
 
             --
-            -- Number of circuit wires, integer
+            -- Wire number offset, integer
             get_circuit_specs_wire_num_offset = function()
 				return circuit_specs_wire_num_offset
 			end,
@@ -675,10 +675,24 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 meta:set_int("circuit_extension_pos_y", pos.y)
                 meta:set_int("circuit_extension_pos_z", pos.z)
 
+                meta:set_int("q_command_block_pos_x", block.get_q_command_pos().x)
+                meta:set_int("q_command_block_pos_y", block.get_q_command_pos().y)
+                meta:set_int("q_command_block_pos_z", block.get_q_command_pos().z)
+
+                meta:set_int("circuit_specs_wire_num_offset", block.get_node_wire_num() - 1)
+
+                --minetest.debug("wire_extension_itemstack meta: " .. dump(meta.to_table()))
+
                 minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack) ..
                 ", circuit_extension_pos_x: " .. tostring(meta:get_int("circuit_extension_pos_x")) ..
                 ", circuit_extension_pos_y: " .. tostring(meta:get_int("circuit_extension_pos_y")) ..
-                ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")))
+                ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")) ..
+                ", q_command_block_pos_x: " .. tostring(meta:get_int("q_command_block_pos_x")) ..
+                ", q_command_block_pos_y: " .. tostring(meta:get_int("q_command_block_pos_y")) ..
+                ", q_command_block_pos_z: " .. tostring(meta:get_int("q_command_block_pos_z")) ..
+                ", circuit_specs_wire_num_offset: " .. tostring(meta:get_int("circuit_specs_wire_num_offset"))
+               )
+
                 local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
                 minetest.item_drop(wire_extension_itemstack, player, drop_pos)
 
