@@ -1,14 +1,12 @@
 -- TODO:
---  When punching NOT gate block when it has a control qubit, delete entire gate
---  Define Quantum control block that creates circuit, etc.
---  Right click places circuit_gate
---  Make left click drop gate entity
---  Utilize is_gate boolean parameter of register_circuit_block function to
---      identify circuit blocks that are circuit gates
---  Remove circuit_gate group code
---  Understand and standardize on when to use colon, or dot, as function separator
---  Find alternative to hardcoding node name strings everywhere
---  Remove hearts from creative mode
+
+--[[
+[] Populate left side of circuit with |0>
+[] Remove circuit_gate group code
+[] Understand and standardize on when to use colon, or dot, as function separator
+[] Find alternative to hardcoding node name strings everywhere
+[] Remove hearts from creative mode
+--]]
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");

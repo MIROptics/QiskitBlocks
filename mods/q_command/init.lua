@@ -11,37 +11,6 @@ minetest.debug("request_http_api: " .. dump(request_http_api))
 
 complex = create_complex()
 
--- TODO: Remove this test of the json library
--- Encoding:
-local tbl = {
-  animals = { "dog", "cat", "aardvark" },
-  instruments = { "violin", "trombone", "theremin" },
-  bugs = json.null,
-  trees = nil
-}
-
-local str = json.encode (tbl, { indent = true })
-
-minetest.debug (str)
-
--- Decoding:
-local str = [[
-{
-  "numbers": [ 2, 3, -20.23e+2, -4 ],
-  "currency": "\u20AC"
-}
-]]
-
-local obj, pos, err = json.decode (str, 1, nil)
-if err then
-  minetest.debug ("Error:", err)
-else
-  minetest.debug ("currency", obj.currency)
-  for i = 1,#obj.numbers do
-    minetest.debug (i, obj.numbers[i])
-  end
-end
--- TODO: End of Remove
 
 -- our API object
 q_command = {}
@@ -75,21 +44,6 @@ function q_command:get_q_command_block(pos)
 				return node_name
 			end,
 
-            -- Set control wire A, integer
-            --set_ctrl_a = function(ctrl_a_arg)
-            --    ctrl_a = ctrl_a_arg
-            --    meta:set_int("ctrl_a", ctrl_a_arg)
-            --
-            --    return
-			--end,
-
-            -- Get control wire A, integer
-            --get_ctrl_a = function()
-			--	return ctrl_a
-			--end,
-
-
-            -- Position of lower-left node of the circuit grid
             get_circuit_pos = function()
                 local ret_pos = {}
                 ret_pos.x = circuit_pos_x
@@ -149,10 +103,16 @@ function q_command:create_blank_circuit_grid()
         for column = 1, circuit_num_columns do
             local node_pos = {}
             node_pos.x = q_command.circuit_specs.pos.x + column - 1
-            --node_pos.y = circuit_num_wires - (q_command.circuit_specs.pos.y + wire - 2)
             node_pos.y = q_command.circuit_specs.pos.y + circuit_num_wires - wire
             node_pos.z = q_command.circuit_specs.pos.z
-            -- TODO: Change to add_node() for clarity?
+
+            -- Put [0> blocks to the left of the circuit
+            if column == 1 then
+                local ket_pos = {x = node_pos.x - 1, y = node_pos.y, z = node_pos.z}
+                minetest.set_node(ket_pos,
+                        {name="circuit_blocks:qubit_0"})
+            end
+
             minetest.set_node(node_pos,
                     {name="circuit_blocks:circuit_blocks_empty_wire"})
 
@@ -319,13 +279,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
                     local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
                     for column_num = 1, extension_num_columns do
                          local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
-
-                                                  -- y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
-                                                  -- TODO: Fix line below?
                                                   y = wire_extension_circuit_pos.y,
-
                                                   z = wire_extension_circuit_pos.z}
-
 
                         q_command:debug_node_info(circ_node_pos,
                                 "Processing CONNECTOR_M, circ_node_pos")
@@ -383,142 +338,6 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
                                       z = circuit_pos_z}
 
             qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_measurement_blocks)
-
-            --[[
-            local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
-
-            if circuit_node_block then
-                local node_type = circuit_node_block.get_node_type()
-                local ctrl_a = circuit_node_block.get_ctrl_a()
-                local ctrl_b = circuit_node_block.get_ctrl_b()
-
-                -- TODO: Implement swap gate
-                -- local swap = circuit_node_block.get_swap()
-
-                local radians = circuit_node_block.get_radians()
-
-                -- For convenience and brevity, create a zero-based, string, wire number
-                local wire_num_idx = tostring(wire_num - 1 +
-                        circuit_node_block.get_circuit_specs_wire_num_offset())
-                local ctrl_a_idx = tostring(ctrl_a - 1 +
-                        circuit_node_block.get_circuit_specs_wire_num_offset())
-                local ctrl_b_idx = tostring(ctrl_b - 1 +
-                        circuit_node_block.get_circuit_specs_wire_num_offset())
-
-                if node_type == CircuitNodeTypes.IDEN then
-                    -- Identity gate
-                    qasm_str = qasm_str .. 'id q[' .. wire_num_idx .. '];'
-
-                elseif node_type == CircuitNodeTypes.X then
-                    if radians == 0 then
-                        if ctrl_a ~= -1 then
-                            if ctrl_b ~= -1 then
-                                -- Toffoli gate
-                                qasm_str = qasm_str .. 'ccx q[' .. ctrl_a_idx .. '],'
-                                qasm_str = qasm_str .. 'q[' .. ctrl_b_idx .. '],'
-                                qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                            else
-                                -- Controlled X gate
-                                qasm_str = qasm_str .. 'cx q[' .. ctrl_a_idx .. '],'
-                                qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                            end
-                        else
-                            -- Pauli-X gate
-                            qasm_str = qasm_str .. 'x q[' .. wire_num_idx .. '];'
-                        end
-                    else
-                        -- Rotation around X axis
-                        qasm_str = qasm_str .. 'rx(' .. tostring(radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                    end
-
-                elseif node_type == CircuitNodeTypes.Y then
-                    if radians == 0 then
-                        if ctrl_a ~= -1 then
-                            -- Controlled Y gate
-                            qasm_str = qasm_str .. 'cy q[' .. ctrl_a_idx .. '],'
-                            qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                        else
-                            -- Pauli-Y gate
-                            qasm_str = qasm_str .. 'y q[' .. wire_num_idx .. '];'
-                        end
-                    else
-                        -- Rotation around Y axis
-                        qasm_str = qasm_str .. 'ry(' .. tostring(radians) .. ') '
-                        qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                    end
-                elseif node_type == CircuitNodeTypes.Z then
-                    if radians == 0 then
-                        if ctrl_a ~= -1 then
-                            -- Controlled Z gate
-                            qasm_str = qasm_str .. 'cz q[' .. ctrl_a_idx .. '],'
-                            qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                        else
-                            -- Pauli-Z gate
-                            qasm_str = qasm_str .. 'z q[' .. wire_num_idx .. '];'
-                        end
-                    else
-                        if circuit_node_block.get_ctrl_a() ~= -1 then
-                            -- Controlled rotation around the Z axis
-                            qasm_str = qasm_str .. 'crz(' .. tostring(radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. ctrl_a_idx .. '],'
-                            qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                        else
-                            -- Rotation around Z axis
-                            qasm_str = qasm_str .. 'rz(' .. tostring(radians) .. ') '
-                            qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                        end
-                    end
-
-                elseif node_type == CircuitNodeTypes.S then
-                    -- S gate
-                    qasm_str = qasm_str .. 's q[' .. wire_num_idx .. '];'
-                elseif node_type == CircuitNodeTypes.SDG then
-                    -- S dagger gate
-                    qasm_str = qasm_str .. 'sdg q[' .. wire_num_idx .. '];'
-                elseif node_type == CircuitNodeTypes.T then
-                    -- T gate
-                    qasm_str = qasm_str .. 't q[' .. wire_num_idx .. '];'
-                elseif node_type == CircuitNodeTypes.TDG then
-                    -- T dagger gate
-                    qasm_str = qasm_str .. 'tdg q[' .. wire_num_idx .. '];'
-                elseif node_type == CircuitNodeTypes.H then
-                    if ctrl_a ~= -1 then
-                        -- Controlled Hadamard
-                        qasm_str = qasm_str .. 'ch q[' .. ctrl_a_idx .. '],'
-                        qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
-                    else
-                        -- Hadamard gate
-                        qasm_str = qasm_str .. 'h q[' .. wire_num_idx .. '];'
-                    end
-                elseif node_type == CircuitNodeTypes.MEASURE_Z then
-                    if include_measurement_blocks then
-                        -- Measurement block
-                        qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
-                    end
-                elseif node_type == CircuitNodeTypes.CONNECTOR_M then
-                    -- Connector to wire extension, so traverse
-                end
-
-
-                --TODO: Implement SWAP gate in circuit blocks
-                --elseif node_type == CircuitNodeTypes.SWAP then
-                --    if ctrl_a ~= -1 then
-                --        -- Controlled Swap
-                --        qasm_str = qasm_str .. 'cswap q[' .. ctrl_a_idx .. '],'
-                --        qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '],'
-                --        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
-                --    else
-                --        -- Swap gate
-                --        qasm_str = qasm_str .. 'swap q[' .. wire_num_idx .. '],'
-                --        qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
-                --    end
-
-            else
-                print("Unknown gate!")
-            end
-            --]]
-
         end
     end
 
@@ -535,14 +354,15 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             local num_columns = tonumber(fields.num_columns_str)
             local start_z_offset = tonumber(fields.start_z_offset_str)
             local start_x_offset = tonumber(fields.start_x_offset_str)
+            local start_y_offset = 1  -- TODO: Perhaps make this configurable
 
             if num_wires and num_wires > 0 and
                     num_columns and num_columns > 0 and
-                    start_z_offset and start_z_offset > 0 and
+                    start_z_offset and start_z_offset >= 0 and
                     start_x_offset then
                 -- Store position of left-most, bottom-most block, and dimensions of circuit
                 q_command.circuit_specs.pos.x = q_command.block_pos.x - start_x_offset
-                q_command.circuit_specs.pos.y = q_command.block_pos.y
+                q_command.circuit_specs.pos.y = q_command.block_pos.y + start_y_offset
                 q_command.circuit_specs.pos.z = q_command.block_pos.z + start_z_offset
                 q_command.circuit_specs.num_wires = num_wires
                 q_command.circuit_specs.num_columns = num_columns
@@ -586,8 +406,8 @@ minetest.register_node("q_command:q_block", {
         local formspec = "size[5.0, 4.6]"..
                 "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
                 "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
-                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;7]" ..
-                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;3]" ..
+                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
+                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
 				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
         minetest.show_formspec(player_name, "create_circuit_grid", formspec)
     end,
@@ -692,13 +512,8 @@ minetest.register_node("q_command:q_block", {
                                 local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
                                 for column_num = 1, extension_num_columns do
                                      local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
-
-                                                              -- y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
-                                                              -- TODO: Fix line below?
                                                               y = wire_extension_circuit_pos.y,
-
                                                               z = wire_extension_circuit_pos.z}
-
 
                                     q_command:debug_node_info(circ_node_pos,
                                             "Processing CONNECTOR_M, circ_node_pos")
@@ -757,47 +572,10 @@ minetest.register_node("q_command:q_block", {
                                                           z = circuit_pos_z}
 
                                 update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
-
-                                --[[
-                                local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
-
-                                if circuit_node_block then
-                                    local node_type = circuit_node_block.get_node_type()
-                                    if node_type == CircuitNodeTypes.MEASURE_Z then
-                                        local bit_str_idx = num_wires + 1 - wire_num
-                                        local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
-                                        local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
-                                        minetest.swap_node(circuit_node_pos, {name = new_node_name})
-                                    end
-                                end
-                                --]]
-
                             end
 
                         end
-
                     end
-
-
-                    --[[
-                    -- TODO: Put this constant somewhere
-                    local BLOCK_WATER_LEVELS = 63
-
-                    for idx = 1, #statevector do
-                        hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
-                                         y = circuit_grid_pos.y - 1,
-                                         z = circuit_grid_pos.z}
-
-                        local probability = (complex.abs(statevector[idx]))^2
-                        local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
-
-                        minetest.debug("probability :" .. tostring(probability))
-
-                        minetest.set_node(hist_node_pos,
-                                {name="q_command:glass", param2 = scaled_prob})
-
-                    end
-                    --]]
                 else
                     minetest.debug("Call to statevector_simulator Didn't succeed")
                 end

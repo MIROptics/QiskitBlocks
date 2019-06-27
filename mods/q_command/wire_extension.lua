@@ -208,8 +208,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                 -- Create circuit grid with empty blocks
                 wire_extension:create_blank_wire_extension()
 
-                --wire_extension:debug_node_info(pos, "After setting metadata")
-
                 -- TODO: Find a better way (that works)
                 -- Punch the wire_extension block (ourself) to run simulator and update resultant displays
                 --minetest.punch_node(wire_extension.block_pos)
