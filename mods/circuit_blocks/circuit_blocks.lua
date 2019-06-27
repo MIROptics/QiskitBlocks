@@ -668,7 +668,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             elseif block.is_within_circuit_grid() and
                     node_type == CircuitNodeTypes.CONNECTOR_M then
 
-                -- TODO: continue filling in
                 local wire_extension_itemstack = ItemStack("q_command:wire_extension_block")
                 local meta = wire_extension_itemstack:get_meta()
                 meta:set_int("circuit_extension_pos_x", pos.x)
