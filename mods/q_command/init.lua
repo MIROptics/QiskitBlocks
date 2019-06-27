@@ -31,6 +31,10 @@ function q_command:get_q_command_block(pos)
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
 
+        -- Flag that indicates whether to run qasm_simulator on next on_punch()
+        -- 0 means don't run
+        local qasm_simulator_flag = meta:get_int("qasm_simulator_flag")
+
 		return {
 			pos = pos,
 
@@ -52,6 +56,16 @@ function q_command:get_q_command_block(pos)
 				return ret_pos
 			end,
 
+            -- Get qasm simulator flag, integer
+            get_qasm_simulator_flag = function()
+				return qasm_simulator_flag
+			end,
+
+            -- Set qasm simulator flag, integer
+            set_qasm_simulator_flag = function(zero_one)
+                meta:set_int("qasm_simulator_flag", zero_one)
+			end,
+
             -- Determine if circuit grid exists
             circuit_grid_exists = function()
                 local ret_exists = false
@@ -68,7 +82,8 @@ function q_command:get_q_command_block(pos)
                         "node_name: " .. node_name .. "\n" ..
                         "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
-                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n"
+                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
+                        "qasm_simulator_flag: " .. tostring(qasm_simulator_flag) .. "\n"
                 return ret_str
             end
 		}
@@ -586,7 +601,10 @@ minetest.register_node("q_command:q_block", {
 
             request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
 
-            request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
+            if q_block.get_qasm_simulator_flag() ~= 0 then
+                request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
+                q_block.set_qasm_simulator_flag(0)
+            end
 
         else
             minetest.chat_send_player(player:get_player_name(),

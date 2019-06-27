@@ -764,6 +764,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             if block.is_within_circuit_grid() then
                 -- Punch the q_command block to run simulator and update resultant displays
                 local q_command_pos = block.get_q_command_pos()
+
+                if block.get_node_type() == CircuitNodeTypes.MEASURE_Z then
+                    -- Also indicate that the qasm_simulator should be run
+                    q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                end
                 minetest.punch_node(q_command_pos)
             end
 
