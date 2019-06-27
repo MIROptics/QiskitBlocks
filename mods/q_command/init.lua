@@ -671,6 +671,42 @@ minetest.register_node("q_command:q_block", {
                         local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
                         local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
                         minetest.swap_node(circuit_node_pos, {name = new_node_name})
+
+                    elseif node_type == CircuitNodeTypes.CONNECTOR_M then
+                        -- Connector to wire extension, so traverse
+                        local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
+
+                        q_command:debug_node_info(wire_extension_block_pos,
+                                "Processing CONNECTOR_M, wire_extension_block")
+
+                        if wire_extension_block_pos.x > 0 then
+                            local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+                            local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
+
+                            q_command:debug_node_info(wire_extension_circuit_pos,
+                                    "Processing CONNECTOR_M, wire_extension_circuit")
+
+                            if wire_extension_circuit_pos.x > 0 then
+                                local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
+                                local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
+                                local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
+                                for column_num = 1, extension_num_columns do
+                                     local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
+
+                                                              -- y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
+                                                              -- TODO: Fix line below?
+                                                              y = wire_extension_circuit_pos.y,
+
+                                                              z = wire_extension_circuit_pos.z}
+
+
+                                    q_command:debug_node_info(circ_node_pos,
+                                            "Processing CONNECTOR_M, circ_node_pos")
+
+                                    update_measure_block(circ_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                end
+                            end
+                        end
                     end
                 end
             end
@@ -721,7 +757,7 @@ minetest.register_node("q_command:q_block", {
                                                           z = circuit_pos_z}
 
                                 update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
-                                
+
                                 --[[
                                 local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
