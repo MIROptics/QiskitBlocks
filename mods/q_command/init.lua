@@ -194,12 +194,19 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
         local radians = circuit_node_block.get_radians()
 
         -- For convenience and brevity, create a zero-based, string, wire number
-        local wire_num_idx = tostring(wire_num - 1 +
-                circuit_node_block.get_circuit_specs_wire_num_offset())
-        local ctrl_a_idx = tostring(ctrl_a - 1 +
-                circuit_node_block.get_circuit_specs_wire_num_offset())
-        local ctrl_b_idx = tostring(ctrl_b - 1 +
-                circuit_node_block.get_circuit_specs_wire_num_offset())
+        --local wire_num_idx = tostring(wire_num - 1 +
+        --        circuit_node_block.get_circuit_specs_wire_num_offset())
+        --local ctrl_a_idx = tostring(ctrl_a - 1 +
+        --        circuit_node_block.get_circuit_specs_wire_num_offset())
+        --local ctrl_b_idx = tostring(ctrl_b - 1 +
+        --        circuit_node_block.get_circuit_specs_wire_num_offset())
+
+        -- TODO: Replace above with below?
+
+        local wire_num_idx = tostring(wire_num - 1)
+        local ctrl_a_idx = tostring(ctrl_a - 1)
+        local ctrl_b_idx = tostring(ctrl_b - 1)
+
 
         if node_type == CircuitNodeTypes.IDEN then
             -- Identity gate
@@ -308,11 +315,15 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
 
                 if wire_extension_circuit_pos.x > 0 then
                     local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
-                    local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset()
+                    local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
                     local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
                     for column_num = 1, extension_num_columns do
                          local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
-                                                  y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
+
+                                                  -- y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
+                                                  -- TODO: Fix line below?
+                                                  y = wire_extension_circuit_pos.y,
+
                                                   z = wire_extension_circuit_pos.z}
 
 
