@@ -660,6 +660,22 @@ minetest.register_node("q_command:q_block", {
                 end
             end
 
+
+            local function update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+
+                if circuit_node_block then
+                    local node_type = circuit_node_block.get_node_type()
+                    if node_type == CircuitNodeTypes.MEASURE_Z then
+                        local bit_str_idx = num_wires + 1 - wire_num
+                        local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
+                        local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
+                        minetest.swap_node(circuit_node_pos, {name = new_node_name})
+                    end
+                end
+            end
+
+
             local function process_backend_qasm_result(http_request_response)
                 minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
 
@@ -703,6 +719,10 @@ minetest.register_node("q_command:q_block", {
                                 local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
                                                           y = circuit_pos_y + num_wires - wire_num,
                                                           z = circuit_pos_z}
+
+                                update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                
+                                --[[
                                 local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
                                 if circuit_node_block then
@@ -714,6 +734,7 @@ minetest.register_node("q_command:q_block", {
                                         minetest.swap_node(circuit_node_pos, {name = new_node_name})
                                     end
                                 end
+                                --]]
 
                             end
 
@@ -745,6 +766,7 @@ minetest.register_node("q_command:q_block", {
                     minetest.debug("Call to statevector_simulator Didn't succeed")
                 end
             end
+
 
             minetest.debug("http_request:\n" .. dump(http_request))
 
