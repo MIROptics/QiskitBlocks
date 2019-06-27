@@ -179,6 +179,12 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
 
     if circuit_node_block then
         local node_type = circuit_node_block.get_node_type()
+
+        if node_type == CircuitNodeTypes.EMPTY then
+            -- Return immediately with zero length qasm_str
+            return qasm_str
+        end
+
         local ctrl_a = circuit_node_block.get_ctrl_a()
         local ctrl_b = circuit_node_block.get_ctrl_b()
 
@@ -288,6 +294,37 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
             end
         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
             -- Connector to wire extension, so traverse
+            local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
+
+            q_command:debug_node_info(wire_extension_block_pos,
+                    "Processing CONNECTOR_M, wire_extension_block")
+
+            if wire_extension_block_pos.x > 0 then
+                local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+                local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
+
+                q_command:debug_node_info(wire_extension_circuit_pos,
+                        "Processing CONNECTOR_M, wire_extension_circuit")
+
+                if wire_extension_circuit_pos.x > 0 then
+                    local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
+                    local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset()
+                    local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
+                    for column_num = 1, extension_num_columns do
+                         local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
+                                                  y = wire_extension_circuit_pos.y + 1 - extension_wire_num,
+                                                  z = wire_extension_circuit_pos.z}
+
+
+                        q_command:debug_node_info(circ_node_pos,
+                                "Processing CONNECTOR_M, circ_node_pos")
+
+                         qasm_str = qasm_str ..
+                                 q_command:create_qasm_for_node(circ_node_pos,
+                                         extension_wire_num, include_measurement_blocks)
+                    end
+                end
+            end
         end
 
 
@@ -308,6 +345,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
     else
         print("Unknown gate!")
     end
+    minetest.debug("End of create_qasm_for_node(), qasm_str:\n" .. qasm_str)
     return qasm_str
 end
 
