@@ -231,6 +231,17 @@ minetest.register_node("q_command:wire_extension_block", {
         meta:set_string("infotext", "Wire extension block")
         wire_extension.block_pos = pos
     end,
+	on_place = function(itemstack, placer, pointed_thing)
+		-- Place the wire extension block
+        -- TODO: Verify that this is working correctly
+		local ret_itemstack, ret_success = minetest.item_place(itemstack, placer, pointed_thing)
+        minetest.debug("In wire_extension_block on_place, ret_itemstack.get_count():\n" ..
+        tostring(ret_itemstack:get_count()) .. "\nret_success: " .. tostring(ret_success))
+        if ret_success then
+            ret_itemstack:set_count(0)
+        end
+        return ret_itemstack
+	end,
     after_place_node = function(pos, placer, itemstack)
         local itemstack_meta = itemstack:get_meta()
         local circuit_extension_pos = {x = itemstack_meta:get_int("circuit_extension_pos_x"),
@@ -271,6 +282,9 @@ minetest.register_node("q_command:wire_extension_block", {
 
         local extension_block = wire_extension:get_wire_extension_block(pos)
         wire_extension:debug_node_info(pos, "In after_place_node(), wire_extension_block")
+
+        -- TODO: Decide whether to return true or false
+        return false
     end,
     on_rightclick = function(pos, node, clicker, itemstack)
         local player_name = clicker:get_player_name()

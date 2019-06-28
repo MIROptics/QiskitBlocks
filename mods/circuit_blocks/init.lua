@@ -1,7 +1,11 @@
 -- TODO:
 
 --[[
-[] Populate left side of circuit with |0>
+[] Remove q_command:wire_extension_block from inventory after placing
+[] Shift-left-click deletes a circuit connector and its wire extension
+[] Shift-left-click deletes a wire extension and its circuit connector
+[] Make measurement block deletable
+[] Label M & F connectors
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator
 [] Find alternative to hardcoding node name strings everywhere
