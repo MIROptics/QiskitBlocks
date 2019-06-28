@@ -1,9 +1,13 @@
 -- TODO:
 
 --[[
-[] Shift-left-click deletes a circuit connector and its wire extension
-[] Shift-left-click deletes a wire extension and its circuit connector
-[] Make measurement block deletable
+[] Delete entire circuit including wire extensions. Don't allow deletion of individual blocks.
+[] Don't allow creating circuit if already exists
+[] Ability to place circuits and wire extensions in four orientations, perpendicular to
+   direction that player is facing
+[] Protect against orphaning wire extensions
+[] Ability for measurement block to actuate (e.g. turn on a light or open a door)
+[] Set wire_extension itemstack count to 0 when deleting wire extension related elements
 [] Label M & F connectors
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator

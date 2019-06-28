@@ -502,11 +502,13 @@ function circuit_blocks:delete_wire_extension(connector_block)
     circuit_blocks:set_node_with_circuit_specs_meta(connector_block:get_node_pos(),
             "circuit_blocks:circuit_blocks_empty_wire")
 
-            -- Traverse from connector to wire extension
-            local wire_extension_block_pos = connector_block.get_wire_extension_block_pos()
+    -- Traverse from connector to wire extension
+    local wire_extension_block_pos = connector_block.get_wire_extension_block_pos()
 
     if wire_extension_block_pos.x > 0 then
         local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+        minetest.remove_node(wire_extension_block_pos)
+
         local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
 
         if wire_extension_circuit_pos.x > 0 then
@@ -519,7 +521,6 @@ function circuit_blocks:delete_wire_extension(connector_block)
                                        z = wire_extension_circuit_pos.z}
                 minetest.remove_node(circ_node_pos)
             end
-            minetest.remove_node(wire_extension_block_pos)
         end
     end
 end
@@ -624,102 +625,103 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             circuit_blocks:debug_node_info(pos, "In on_punch()")
 
             local node_type = block:get_node_type()
-            if block.is_within_circuit_grid() and
-                    (node_type == CircuitNodeTypes.X or
-                            node_type == CircuitNodeTypes.Y or
-                            node_type == CircuitNodeTypes.Z or
-                            node_type == CircuitNodeTypes.H) then
 
-                local placed_wire = -1
-                local wielded_item = player:get_wielded_item()
-                if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.0001
-                    if block.get_ctrl_a() == -1 and
-                            math.abs(block.get_radians() - 0) < threshold and
-                            math.abs(block.get_radians() - math.pi * 2) > threshold then
-                        placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                block:get_node_wire_num() - 1)
-                        minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                        minetest.chat_send_player(player:get_player_name(),
-                                "control placed_wire: " .. tostring(placed_wire))
-                        --block.set_ctrl_a(placed_wire)
-                    elseif block.get_ctrl_a() == block:get_node_wire_num() + 1 then
-                        circuit_blocks:remove_ctrl_qubit(block,
-                                block.get_ctrl_a())
-                    else
-                        local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
-                        local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                        if block.get_ctrl_a() - 1 >= 1 then
-                            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                    "circuit_blocks:circuit_blocks_empty_wire")
+            if block.is_within_circuit_grid() then
+
+                if node_type == CircuitNodeTypes.X or
+                        node_type == CircuitNodeTypes.Y or
+                        node_type == CircuitNodeTypes.Z or
+                        node_type == CircuitNodeTypes.H then
+
+                    local placed_wire = -1
+                    local wielded_item = player:get_wielded_item()
+                    if wielded_item:get_name() == "circuit_blocks:control_tool" then
+                        local threshold = 0.0001
+                        if block.get_ctrl_a() == -1 and
+                                math.abs(block.get_radians() - 0) < threshold and
+                                math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                    block.get_ctrl_a() - 1)
+                                    block:get_node_wire_num() - 1)
+                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "control placed_wire: " .. tostring(placed_wire))
+                            --block.set_ctrl_a(placed_wire)
+                        elseif block.get_ctrl_a() == block:get_node_wire_num() + 1 then
+                            circuit_blocks:remove_ctrl_qubit(block,
+                                    block.get_ctrl_a())
                         else
-                            minetest.debug("Tried to place ctrl on nonexistent wire: " ..
-                                    block.get_ctrl_a() - 1)
+                            local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                            local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_ctrl_a() - 1 >= 1 then
+                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire")
+                                placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                        block.get_ctrl_a() - 1)
+                            else
+                                minetest.debug("Tried to place ctrl on nonexistent wire: " ..
+                                        block.get_ctrl_a() - 1)
+                            end
+                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "control placed_wire: " .. tostring(placed_wire))
                         end
-                        minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                        minetest.chat_send_player(player:get_player_name(),
-                                "control placed_wire: " .. tostring(placed_wire))
-                    end
-                elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
-                    minetest.debug("rotate right requested")
-                    circuit_blocks:rotate_gate(block, math.pi / 16.0)
-                else
-                    if block.get_ctrl_a() ~= -1 then
-                        circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a())
+                    elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                        minetest.debug("rotate right requested")
+                        circuit_blocks:rotate_gate(block, math.pi / 16.0)
+                    else
+                        if block.get_ctrl_a() ~= -1 then
+                            circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a())
+                        end
+
+                        -- Necessary to replace punched node
+                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                "circuit_blocks:circuit_blocks_empty_wire")
                     end
 
+                elseif node_type == CircuitNodeTypes.CONNECTOR_M then
+
+                    -- If shift key is down, delete this block and the wire extension
+                    if player:get_player_control().sneak then
+                        circuit_blocks:delete_wire_extension(block)
+                    else
+                        local wire_extension_itemstack = ItemStack("q_command:wire_extension_block")
+                        local meta = wire_extension_itemstack:get_meta()
+                        meta:set_int("circuit_extension_pos_x", pos.x)
+                        meta:set_int("circuit_extension_pos_y", pos.y)
+                        meta:set_int("circuit_extension_pos_z", pos.z)
+
+                        meta:set_int("q_command_block_pos_x", block.get_q_command_pos().x)
+                        meta:set_int("q_command_block_pos_y", block.get_q_command_pos().y)
+                        meta:set_int("q_command_block_pos_z", block.get_q_command_pos().z)
+
+                        meta:set_int("circuit_specs_wire_num_offset", block.get_node_wire_num() - 1)
+
+                        --minetest.debug("wire_extension_itemstack meta: " .. dump(meta.to_table()))
+
+                        minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack) ..
+                        ", circuit_extension_pos_x: " .. tostring(meta:get_int("circuit_extension_pos_x")) ..
+                        ", circuit_extension_pos_y: " .. tostring(meta:get_int("circuit_extension_pos_y")) ..
+                        ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")) ..
+                        ", q_command_block_pos_x: " .. tostring(meta:get_int("q_command_block_pos_x")) ..
+                        ", q_command_block_pos_y: " .. tostring(meta:get_int("q_command_block_pos_y")) ..
+                        ", q_command_block_pos_z: " .. tostring(meta:get_int("q_command_block_pos_z")) ..
+                        ", circuit_specs_wire_num_offset: " .. tostring(meta:get_int("circuit_specs_wire_num_offset"))
+                       )
+
+                        local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
+                        minetest.item_drop(wire_extension_itemstack, player, drop_pos)
+
+                    end
+                else
                     -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
                             "circuit_blocks:circuit_blocks_empty_wire")
                 end
 
-            elseif block.is_within_circuit_grid() and
-                    node_type == CircuitNodeTypes.CONNECTOR_M then
-
-                -- If shift key is down, delete this block and the wire extension
-                if player:get_player_control().sneak then
-                    circuit_blocks:delete_wire_extension(block)
-                else
-                    local wire_extension_itemstack = ItemStack("q_command:wire_extension_block")
-                    local meta = wire_extension_itemstack:get_meta()
-                    meta:set_int("circuit_extension_pos_x", pos.x)
-                    meta:set_int("circuit_extension_pos_y", pos.y)
-                    meta:set_int("circuit_extension_pos_z", pos.z)
-
-                    meta:set_int("q_command_block_pos_x", block.get_q_command_pos().x)
-                    meta:set_int("q_command_block_pos_y", block.get_q_command_pos().y)
-                    meta:set_int("q_command_block_pos_z", block.get_q_command_pos().z)
-
-                    meta:set_int("circuit_specs_wire_num_offset", block.get_node_wire_num() - 1)
-
-                    --minetest.debug("wire_extension_itemstack meta: " .. dump(meta.to_table()))
-
-                    minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack) ..
-                    ", circuit_extension_pos_x: " .. tostring(meta:get_int("circuit_extension_pos_x")) ..
-                    ", circuit_extension_pos_y: " .. tostring(meta:get_int("circuit_extension_pos_y")) ..
-                    ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")) ..
-                    ", q_command_block_pos_x: " .. tostring(meta:get_int("q_command_block_pos_x")) ..
-                    ", q_command_block_pos_y: " .. tostring(meta:get_int("q_command_block_pos_y")) ..
-                    ", q_command_block_pos_z: " .. tostring(meta:get_int("q_command_block_pos_z")) ..
-                    ", circuit_specs_wire_num_offset: " .. tostring(meta:get_int("circuit_specs_wire_num_offset"))
-                   )
-
-                    local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
-                    minetest.item_drop(wire_extension_itemstack, player, drop_pos)
-
-                end
-            elseif node_type == CircuitNodeTypes.EMPTY then
-                -- Necessary to replace punched node
-                circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                        "circuit_blocks:circuit_blocks_empty_wire")
-            end
-
-            if block.is_within_circuit_grid() then
                 -- Punch the q_command block to run simulator and update resultant displays
                 local q_command_pos = block.get_q_command_pos()
                 minetest.punch_node(q_command_pos)
+
             end
 
             return
