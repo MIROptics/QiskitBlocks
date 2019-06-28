@@ -296,16 +296,12 @@ minetest.register_node("q_command:wire_extension_block", {
         minetest.show_formspec(player_name, "create_wire_extension", formspec)
     end,
     on_punch = function(pos, node, player)
-        local extension_block = wire_extension:get_wire_extension_block(pos)
-        wire_extension:debug_node_info(pos, "In on_punch, wire_extension_block")
-        if extension_block:wire_extension_exists() then
-            -- TODO: find out why this is being punched when not expected
-            --local wire_extension_pos = wire_extension.get_wire_pos()
-            --local wire_extension_block = wire_extension:get_wire_extension_block(wire_extension_pos)
-
-        else
-            minetest.chat_send_player(player:get_player_name(),
-                    "Must create a wire extension first")
+        -- If shift key is down, delete this block and the wire extension
+        if player:get_player_control().sneak then
+            local extension_block = wire_extension:get_wire_extension_block(pos)
+            local circuit_extension_pos = extension_block:get_circuit_extension_pos()
+            local circuit_extension_block = circuit_blocks:get_circuit_block(circuit_extension_pos)
+            circuit_blocks:delete_wire_extension(circuit_extension_block)
         end
     end,
     can_dig = function(pos, player)
