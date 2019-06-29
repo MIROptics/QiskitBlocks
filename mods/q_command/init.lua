@@ -416,194 +416,244 @@ minetest.register_node("q_command:q_block", {
         q_command.block_pos = pos
     end,
     on_rightclick = function(pos, node, clicker, itemstack)
-        local player_name = clicker:get_player_name()
-        local meta = minetest.get_meta(pos)
-        local formspec = "size[5.0, 4.6]"..
-                "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
-                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
-                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
-				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
-        minetest.show_formspec(player_name, "create_circuit_grid", formspec)
+        local q_block = q_command:get_q_command_block(pos)
+        if not q_block:circuit_grid_exists() then
+            local player_name = clicker:get_player_name()
+            local meta = minetest.get_meta(pos)
+            local formspec = "size[5.0, 4.6]"..
+                    "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
+                    "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
+                    "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
+                    "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
+                    "button_exit[1.8,3.5;1.5,1.0;create;Create]"
+            minetest.show_formspec(player_name, "create_circuit_grid", formspec)
+        else
+            minetest.chat_send_player(clicker:get_player_name(),
+                    "Circuit already exists.")
+        end
     end,
     on_punch = function(pos, node, player)
         local q_block = q_command:get_q_command_block(pos)
         q_command:debug_node_info(pos, "In on_punch, q_command_block")
         if q_block:circuit_grid_exists() then
-            local circuit_grid_pos = q_block.get_circuit_pos()
-            local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
 
-            local qasm_str = q_command:compute_circuit(circuit_block, false)
-            local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
+            if player:get_player_control().sneak then
+                -- Delete entire circuit and wire extensions
 
-            local http_request_statevector = {
-                -- TODO: Make URL host and port configurable
-                url = "http://localhost:5000/api/run/statevector?backend=statevector_simulator&qasm=" ..
-                        url_code.urlencode(qasm_str)
-            }
+                local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
+                local num_wires = circuit_block.get_circuit_num_wires()
+                local num_columns = circuit_block.get_circuit_num_columns()
+                local circuit_pos_x = circuit_block.get_circuit_pos().x
+                local circuit_pos_y = circuit_block.get_circuit_pos().y
+                local circuit_pos_z = circuit_block.get_circuit_pos().z
 
-            local http_request_qasm = {
-                -- TODO: Make URL host and port configurable
-                url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                        url_code.urlencode(qasm_with_measurement_str)
-            }
+                for column_num = 1, num_columns do
+                    for wire_num = 1, num_wires do
+                        local node_pos = {x = circuit_pos_x + column_num - 1,
+                                                  y = circuit_pos_y + num_wires - wire_num,
+                                                  z = circuit_pos_z}
 
-            local function process_backend_statevector_result(http_request_response)
-                minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
-
-                if http_request_response.succeeded and
-                        http_request_response.completed and
-                        not http_request_response.timeout then
-
-                    local sv_data = http_request_response.data
-                    local statevector = {}
-                    local obj, pos, err = json.decode (sv_data, 1, nil)
-                    if err then
-                        minetest.debug ("Error:", err)
-                    else
-                        local temp_statevector = obj.__ndarray__
-                        for i = 1,#temp_statevector do
-                            statevector[i] = complex.new(temp_statevector[i].__complex__[1],
-                                    temp_statevector[i].__complex__[2])
+                        -- Delete ket blocks to the left of the circuit
+                        if column_num == 1 then
+                            local ket_pos = {x = node_pos.x - 1, y = node_pos.y, z = node_pos.z}
+                            minetest.remove_node(ket_pos)
                         end
+
+                        -- Delete histogram blocks at the bottom of the circuit
+                        if wire_num == num_wires then
+                            local hist_pos = {x = node_pos.x, y = node_pos.y - 1, z = node_pos.z}
+                            minetest.remove_node(hist_pos)
+                        end
+
+                        local cur_block = circuit_blocks:get_circuit_block(node_pos)
+                        if cur_block.get_node_type() == CircuitNodeTypes.CONNECTOR_M then
+                            circuit_blocks:delete_wire_extension(cur_block)
+                        end
+                        minetest.remove_node(node_pos)
                     end
-
-                    minetest.debug("statevector:\n" .. dump(statevector))
-
-                    -- Update the histogram
-                    local hist_node_pos = nil
-
-                    -- TODO: Put this constant somewhere
-                    local BLOCK_WATER_LEVELS = 63
-
-                    for idx = 1, #statevector do
-                        hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
-                                         y = circuit_grid_pos.y - 1,
-                                         z = circuit_grid_pos.z}
-
-                        local probability = (complex.abs(statevector[idx]))^2
-                        local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
-
-                        minetest.debug("probability :" .. tostring(probability))
-
-                        minetest.set_node(hist_node_pos,
-                                {name="q_command:glass", param2 = scaled_prob})
-
-                    end
-                else
-                    minetest.debug("Call to statevector_simulator Didn't succeed")
                 end
-            end
+
+                -- Remove the q_block
+                minetest.remove_node(pos)
+
+            else
+
+                local circuit_grid_pos = q_block.get_circuit_pos()
+                local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
+
+                local qasm_str = q_command:compute_circuit(circuit_block, false)
+                local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
+
+                local http_request_statevector = {
+                    -- TODO: Make URL host and port configurable
+                    url = "http://localhost:5000/api/run/statevector?backend=statevector_simulator&qasm=" ..
+                            url_code.urlencode(qasm_str)
+                }
+
+                local http_request_qasm = {
+                    -- TODO: Make URL host and port configurable
+                    url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                            url_code.urlencode(qasm_with_measurement_str)
+                }
+
+                local function process_backend_statevector_result(http_request_response)
+                    minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
+
+                    if http_request_response.succeeded and
+                            http_request_response.completed and
+                            not http_request_response.timeout then
+
+                        local sv_data = http_request_response.data
+                        local statevector = {}
+                        local obj, pos, err = json.decode (sv_data, 1, nil)
+                        if err then
+                            minetest.debug ("Error:", err)
+                        else
+                            local temp_statevector = obj.__ndarray__
+                            for i = 1,#temp_statevector do
+                                statevector[i] = complex.new(temp_statevector[i].__complex__[1],
+                                        temp_statevector[i].__complex__[2])
+                            end
+                        end
+
+                        minetest.debug("statevector:\n" .. dump(statevector))
+
+                        -- Update the histogram
+                        local hist_node_pos = nil
+
+                        -- TODO: Put this constant somewhere
+                        local BLOCK_WATER_LEVELS = 63
+
+                        for idx = 1, #statevector do
+                            hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
+                                             y = circuit_grid_pos.y - 1,
+                                             z = circuit_grid_pos.z}
+
+                            local probability = (complex.abs(statevector[idx]))^2
+                            local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
+
+                            minetest.debug("probability :" .. tostring(probability))
+
+                            minetest.set_node(hist_node_pos,
+                                    {name="q_command:glass", param2 = scaled_prob})
+
+                        end
+                    else
+                        minetest.debug("Call to statevector_simulator Didn't succeed")
+                    end
+                end
 
 
-            local function update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
-                local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+                local function update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                    local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
-                if circuit_node_block then
-                    local node_type = circuit_node_block.get_node_type()
-                    if node_type == CircuitNodeTypes.MEASURE_Z then
-                        local bit_str_idx = num_wires + 1 - wire_num
-                        local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
-                        local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
-                        minetest.swap_node(circuit_node_pos, {name = new_node_name})
+                    if circuit_node_block then
+                        local node_type = circuit_node_block.get_node_type()
+                        if node_type == CircuitNodeTypes.MEASURE_Z then
+                            local bit_str_idx = num_wires + 1 - wire_num
+                            local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
+                            local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
+                            minetest.swap_node(circuit_node_pos, {name = new_node_name})
 
-                    elseif node_type == CircuitNodeTypes.CONNECTOR_M then
-                        -- Connector to wire extension, so traverse
-                        local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
+                        elseif node_type == CircuitNodeTypes.CONNECTOR_M then
+                            -- Connector to wire extension, so traverse
+                            local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
 
-                        q_command:debug_node_info(wire_extension_block_pos,
-                                "Processing CONNECTOR_M, wire_extension_block")
+                            q_command:debug_node_info(wire_extension_block_pos,
+                                    "Processing CONNECTOR_M, wire_extension_block")
 
-                        if wire_extension_block_pos.x > 0 then
-                            local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
-                            local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
+                            if wire_extension_block_pos.x > 0 then
+                                local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+                                local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
 
-                            q_command:debug_node_info(wire_extension_circuit_pos,
-                                    "Processing CONNECTOR_M, wire_extension_circuit")
+                                q_command:debug_node_info(wire_extension_circuit_pos,
+                                        "Processing CONNECTOR_M, wire_extension_circuit")
 
-                            if wire_extension_circuit_pos.x > 0 then
-                                local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
-                                local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
-                                local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
-                                for column_num = 1, extension_num_columns do
-                                     local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
-                                                              y = wire_extension_circuit_pos.y,
-                                                              z = wire_extension_circuit_pos.z}
+                                if wire_extension_circuit_pos.x > 0 then
+                                    local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
+                                    local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
+                                    local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
+                                    for column_num = 1, extension_num_columns do
+                                         local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
+                                                                  y = wire_extension_circuit_pos.y,
+                                                                  z = wire_extension_circuit_pos.z}
 
-                                    q_command:debug_node_info(circ_node_pos,
-                                            "Processing CONNECTOR_M, circ_node_pos")
+                                        q_command:debug_node_info(circ_node_pos,
+                                                "Processing CONNECTOR_M, circ_node_pos")
 
-                                    update_measure_block(circ_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                        update_measure_block(circ_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                    end
                                 end
                             end
                         end
                     end
                 end
-            end
 
 
-            local function process_backend_qasm_result(http_request_response)
-                minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
+                local function process_backend_qasm_result(http_request_response)
+                    minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
 
-                if http_request_response.succeeded and
-                        http_request_response.completed and
-                        not http_request_response.timeout then
+                    if http_request_response.succeeded and
+                            http_request_response.completed and
+                            not http_request_response.timeout then
 
-                    local qasm_data = http_request_response.data
+                        local qasm_data = http_request_response.data
 
-                    minetest.debug ("qasm_data:", qasm_data)
+                        minetest.debug ("qasm_data:", qasm_data)
 
-                    local basis_state_bit_str = nil
+                        local basis_state_bit_str = nil
 
-                    local obj, pos, err = json.decode (qasm_data, 1, nil)
-                    if err then
-                        minetest.debug ("Error:", err)
-                    else
-                        local basis_freq = obj.result
-                        minetest.debug("basis_freq:\n" .. dump(basis_freq))
+                        local obj, pos, err = json.decode (qasm_data, 1, nil)
+                        if err then
+                            minetest.debug ("Error:", err)
+                        else
+                            local basis_freq = obj.result
+                            minetest.debug("basis_freq:\n" .. dump(basis_freq))
 
-                        -- Only one shot is requested from simulator,
-                        -- so this table should have only one entry
-                        for key, val in pairs(basis_freq) do
-                            basis_state_bit_str = key
-                            --minetest.debug("k: " .. k .. ", v: " .. v)
-                        end
-                    end
-
-                    minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
-
-                    -- Update measure blocks in the circuit
-                    if basis_state_bit_str then
-                        local num_wires = circuit_block.get_circuit_num_wires()
-                        local num_columns = circuit_block.get_circuit_num_columns()
-                        local circuit_pos_x = circuit_block.get_circuit_pos().x
-                        local circuit_pos_y = circuit_block.get_circuit_pos().y
-                        local circuit_pos_z = circuit_block.get_circuit_pos().z
-
-                        for column_num = 1, num_columns do
-                            for wire_num = 1, num_wires do
-                                local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
-                                                          y = circuit_pos_y + num_wires - wire_num,
-                                                          z = circuit_pos_z}
-
-                                update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                            -- Only one shot is requested from simulator,
+                            -- so this table should have only one entry
+                            for key, val in pairs(basis_freq) do
+                                basis_state_bit_str = key
+                                --minetest.debug("k: " .. k .. ", v: " .. v)
                             end
-
                         end
+
+                        minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
+
+                        -- Update measure blocks in the circuit
+                        if basis_state_bit_str then
+                            local num_wires = circuit_block.get_circuit_num_wires()
+                            local num_columns = circuit_block.get_circuit_num_columns()
+                            local circuit_pos_x = circuit_block.get_circuit_pos().x
+                            local circuit_pos_y = circuit_block.get_circuit_pos().y
+                            local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+                            for column_num = 1, num_columns do
+                                for wire_num = 1, num_wires do
+                                    local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                                              y = circuit_pos_y + num_wires - wire_num,
+                                                              z = circuit_pos_z}
+
+                                    update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                end
+
+                            end
+                        end
+                    else
+                        minetest.debug("Call to statevector_simulator Didn't succeed")
                     end
-                else
-                    minetest.debug("Call to statevector_simulator Didn't succeed")
                 end
-            end
 
 
-            minetest.debug("http_request:\n" .. dump(http_request))
+                minetest.debug("http_request:\n" .. dump(http_request))
 
-            request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
+                request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
 
-            if q_block.get_qasm_simulator_flag() ~= 0 then
-                request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
-                q_block.set_qasm_simulator_flag(0)
+                if q_block.get_qasm_simulator_flag() ~= 0 then
+                    request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
+                    q_block.set_qasm_simulator_flag(0)
+                end
+
             end
 
         else
@@ -651,7 +701,7 @@ minetest.register_node("q_command:glass", {
 	paramtype2 = "glasslikeliquidlevel",
 	--sunlight_propagates = true,
 	--is_ground_content = false,
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	groups = {cracky = 3},
 	--sounds = default.node_sound_glass_defaults(),
 })
 

@@ -3,12 +3,16 @@
 --[[
 [] Delete entire circuit including wire extensions. Don't allow deletion of individual blocks.
 [] Don't allow creating circuit if already exists
+[] Make and place basis state blocks, and marble floor
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
 [] Protect against orphaning wire extensions
+[] Filter inventory panel (e.g. hide rotation blocks)
+[] Walk up to a dropped item to pick it up
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
 [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
 [] Label M & F connectors
+[] Make |0> |1> labels on measure block on left & right
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator
 [] Find alternative to hardcoding node name strings everywhere
