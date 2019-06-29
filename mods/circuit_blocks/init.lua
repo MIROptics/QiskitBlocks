@@ -1,13 +1,13 @@
 -- TODO:
 
 --[[
+[] Make and place basis state blocks, and marble floor
 [] Don't allow extenders to be placed on extensions.
 [] Check into warning message:
 2019-06-29 07:53:26: WARNING[Server]: Map::getNodeMetadata(): Block not found
 2019-06-29 07:53:26: WARNING[Server]: Map::removeNodeMetadata(): Block not found
 [] Don't allow creating circuit if already exists
 [] Delete histogram when deleting circuit
-[] Make and place basis state blocks, and marble floor
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
 [] Color the phases in the histograms
