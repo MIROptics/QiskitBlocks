@@ -657,8 +657,13 @@ minetest.register_node("q_command:q_block", {
             end
 
         else
-            minetest.chat_send_player(player:get_player_name(),
-                    "Must create a circuit first")
+            if player:get_player_control().sneak then
+                -- Circuit doesn't exist, so just remove the q_block
+                minetest.remove_node(pos)
+            else
+                minetest.chat_send_player(player:get_player_name(),
+                        "Must create a circuit first")
+            end
         end
     end,
     can_dig = function(pos, player)

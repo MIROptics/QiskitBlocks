@@ -1,12 +1,14 @@
 -- TODO:
 
 --[[
-[] Delete entire circuit including wire extensions. Don't allow deletion of individual blocks.
 [] Don't allow creating circuit if already exists
 [] Make and place basis state blocks, and marble floor
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
+[] Fast way to create walls and floors
 [] Protect against orphaning wire extensions
+[] don't allow placing continuation on a wire extension
+[] Don't allow deletion of individual blocks.
 [] Filter inventory panel (e.g. hide rotation blocks)
 [] Walk up to a dropped item to pick it up
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
