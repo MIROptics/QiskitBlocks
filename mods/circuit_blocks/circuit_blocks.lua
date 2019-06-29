@@ -745,54 +745,68 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local placed_wire = -1
             local wielded_item = player:get_wielded_item()
             local node_type = block:get_node_type()
-            if block.is_within_circuit_grid() and
-                    (node_type == CircuitNodeTypes.X or
-                            node_type == CircuitNodeTypes.Y or
-                            node_type == CircuitNodeTypes.Z or
-                            node_type == CircuitNodeTypes.H) then
 
-                if wielded_item:get_name() == "circuit_blocks:control_tool" then
-                    local threshold = 0.0001
-                    if block.get_ctrl_a() == -1 and
-                            math.abs(block.get_radians() - 0) < threshold and
-                            math.abs(block.get_radians() - math.pi * 2) > threshold then
-                        placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                block:get_node_wire_num() + 1)
-                        minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                        minetest.chat_send_player(player:get_player_name(),
-                                "control placed_wire: " .. tostring(placed_wire))
-                        --block.set_ctrl_a(placed_wire)
-                    elseif block.get_ctrl_a() == block:get_node_wire_num() - 1 then
-                        circuit_blocks:remove_ctrl_qubit(block,
-                                block.get_ctrl_a())
-                    else
-                        local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
-                        local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                        if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() then
-                            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                    "circuit_blocks:circuit_blocks_empty_wire")
+            if block.is_within_circuit_grid() then
+
+                if node_type == CircuitNodeTypes.X or
+                        node_type == CircuitNodeTypes.Y or
+                        node_type == CircuitNodeTypes.Z or
+                        node_type == CircuitNodeTypes.H then
+
+                    if wielded_item:get_name() == "circuit_blocks:control_tool" then
+                        local threshold = 0.0001
+                        if block.get_ctrl_a() == -1 and
+                                math.abs(block.get_radians() - 0) < threshold and
+                                math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                    block.get_ctrl_a() + 1)
+                                    block:get_node_wire_num() + 1)
+                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "control placed_wire: " .. tostring(placed_wire))
+                            --block.set_ctrl_a(placed_wire)
+                        elseif block.get_ctrl_a() == block:get_node_wire_num() - 1 then
+                            circuit_blocks:remove_ctrl_qubit(block,
+                                    block.get_ctrl_a())
                         else
-                            minetest.debug("Tried to place ctrl on nonexistent wire: " ..
-                                    block.get_ctrl_a() + 1)
+                            local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                            local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() then
+                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire")
+                                placed_wire = circuit_blocks:place_ctrl_qubit(block,
+                                        block.get_ctrl_a() + 1)
+                            else
+                                minetest.debug("Tried to place ctrl on nonexistent wire: " ..
+                                        block.get_ctrl_a() + 1)
+                            end
+                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "control placed_wire: " .. tostring(placed_wire))
                         end
-                        minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                        minetest.chat_send_player(player:get_player_name(),
-                                "control placed_wire: " .. tostring(placed_wire))
+                    elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                        minetest.debug("rotate right requested")
+                        circuit_blocks:rotate_gate(block, -math.pi / 16.0)
                     end
-                elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
-                    minetest.debug("rotate right requested")
-                    circuit_blocks:rotate_gate(block, -math.pi / 16.0)
+
+                elseif node_type == CircuitNodeTypes.EMPTY then
+                    -- TODO: Perhaps use naming convention that indicates this is a gate
+                    -- TODO: Make referencing wielded item consistent in this function
+                    if wielded_item:get_name() == "circuit_blocks:circuit_blocks_wire_connector_m" then
+                        -- Only allow placement on rightmost column
+                        if block.get_circuit_pos().x + block.get_circuit_num_columns() - 1 ==
+                                block.get_node_pos().x then
+                            circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                    wielded_item:get_name())
+                        else
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "Wire connector may only be placed on rightmost column")
+                        end
+                    elseif wielded_item:get_name():sub(1, 14) == "circuit_blocks" then
+                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                wielded_item:get_name())
+                    end
                 end
 
-            elseif node_type == CircuitNodeTypes.EMPTY then
-                -- TODO: Perhaps use naming convention that indicates this is a gate
-                -- TODO: Make referencing wielded item consistent in this function
-                if wielded_item:get_name():sub(1, 14) == "circuit_blocks" then
-                    circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                            wielded_item:get_name())
-                end
             end
 
             if block.is_within_circuit_grid() then
