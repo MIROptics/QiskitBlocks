@@ -1,10 +1,16 @@
 -- TODO:
 
 --[[
+[] Why doesn't histogram appear sometimes?
+[] Check into warning message:
+2019-06-29 07:53:26: WARNING[Server]: Map::getNodeMetadata(): Block not found
+2019-06-29 07:53:26: WARNING[Server]: Map::removeNodeMetadata(): Block not found
 [] Don't allow creating circuit if already exists
 [] Make and place basis state blocks, and marble floor
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
+[] Color the phases in the histograms
+[] Can liquid blocks have tooltip that shows probability and other info (e.g. amp & phase)?
 [] Fast way to create walls and floors
 [] Protect against orphaning wire extensions
 [] don't allow placing continuation on a wire extension
@@ -14,11 +20,15 @@
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
 [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
 [] Label M & F connectors
+[] Make shift-right-click place a gate on all wires?
 [] Make |0> |1> labels on measure block on left & right
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator
 [] Find alternative to hardcoding node name strings everywhere
 [] Remove hearts from creative mode
+[] Update music and sounds
+[] Should this warning be addressed?
+	2019-06-29 08:11:11: WARNING[Main]: Irrlicht: PNG warning: iCCP: CRC error
 --]]
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");

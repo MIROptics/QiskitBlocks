@@ -67,9 +67,12 @@ function q_command:get_q_command_block(pos)
 			end,
 
             -- Determine if circuit grid exists
+            --
             circuit_grid_exists = function()
                 local ret_exists = false
-                if circuit_pos_x > 0 and circuit_pos_z > 0 then
+                if circuit_pos_x ~= 0 or circuit_pos_y ~= 0 or circuit_pos_z ~= 0 then
+                    -- TODO: Close the loophole where the origin of a circuit is on 0,0,0
+                    --       (or make it an Easter egg)
                     ret_exists = true
                 end
 				return ret_exists
@@ -149,7 +152,7 @@ end
 
 
 function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_measurement_blocks)
-    qasm_str = ""
+    local qasm_str = ""
     local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
     if circuit_node_block then
@@ -643,9 +646,6 @@ minetest.register_node("q_command:q_block", {
                         minetest.debug("Call to statevector_simulator Didn't succeed")
                     end
                 end
-
-
-                minetest.debug("http_request:\n" .. dump(http_request))
 
                 request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
 
