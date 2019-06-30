@@ -11,6 +11,8 @@ minetest.debug("request_http_api: " .. dump(request_http_api))
 
 complex = create_complex()
 
+BASIS_STATE_BLOCK_MAX_QUBITS = 4
+
 
 -- our API object
 q_command = {}
@@ -440,15 +442,15 @@ minetest.register_node("q_command:q_block", {
         q_command:debug_node_info(pos, "In on_punch, q_command_block")
         if q_block:circuit_grid_exists() then
 
+            local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
+            local num_wires = circuit_block.get_circuit_num_wires()
+            local num_columns = circuit_block.get_circuit_num_columns()
+            local circuit_pos_x = circuit_block.get_circuit_pos().x
+            local circuit_pos_y = circuit_block.get_circuit_pos().y
+            local circuit_pos_z = circuit_block.get_circuit_pos().z
+
             if player:get_player_control().sneak then
                 -- Delete entire circuit and wire extensions
-
-                local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
-                local num_wires = circuit_block.get_circuit_num_wires()
-                local num_columns = circuit_block.get_circuit_num_columns()
-                local circuit_pos_x = circuit_block.get_circuit_pos().x
-                local circuit_pos_y = circuit_block.get_circuit_pos().y
-                local circuit_pos_z = circuit_block.get_circuit_pos().z
 
                 for column_num = 1, num_columns do
                     for wire_num = 1, num_wires do
@@ -462,10 +464,20 @@ minetest.register_node("q_command:q_block", {
                             minetest.remove_node(ket_pos)
                         end
 
-                        -- Delete histogram blocks at the bottom of the circuit
+                        -- Delete histogram and basis state blocks at the bottom of the circuit
                         if wire_num == num_wires then
                             local hist_pos = {x = node_pos.x, y = node_pos.y - 1, z = node_pos.z}
                             minetest.remove_node(hist_pos)
+
+                            -- Place basis state block
+                            basis_state_node_pos = {x = hist_pos.x,
+                                                    y = hist_pos.y - 1,
+                                                    z = hist_pos.z - 1}
+
+                            if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
+                                minetest.remove_node(basis_state_node_pos)
+                            end
+
                         end
 
                         local cur_block = circuit_blocks:get_circuit_block(node_pos)
@@ -523,6 +535,7 @@ minetest.register_node("q_command:q_block", {
 
                         -- Update the histogram
                         local hist_node_pos = nil
+                        local basis_state_node_pos = nil
 
                         -- TODO: Put this constant somewhere
                         local BLOCK_WATER_LEVELS = 63
@@ -539,6 +552,17 @@ minetest.register_node("q_command:q_block", {
 
                             minetest.set_node(hist_node_pos,
                                     {name="q_command:glass", param2 = scaled_prob})
+
+                            -- Place basis state block
+                            basis_state_node_pos = {x = hist_node_pos.x,
+                                                    y = hist_node_pos.y - 1,
+                                                    z = hist_node_pos.z - 1}
+
+                            if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
+                                local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(idx - 1)
+                                minetest.set_node(basis_state_node_pos,
+                                        {name=node_name})
+                            end
 
                         end
                     else
@@ -710,18 +734,21 @@ minetest.register_node("q_command:glass", {
 	--sounds = default.node_sound_glass_defaults(),
 })
 
-minetest.register_node("q_command:q_command_state_101", {
-    description = "State 101 block",
-    tiles = {"q_command_state_101.png"},
-    groups = {oddly_breakable_by_hand=2}
-})
 
-minetest.register_node("q_command:q_command_lbl_101", {
-    description = "Label 101 block",
-    tiles = {"q_command_lbl_101.png"},
-    groups = {oddly_breakable_by_hand=2}
-})
-
+function q_command:register_basis_state_block(num_qubits, basis_state_num)
+    local texture_name = "q_command_state_" .. num_qubits .. "qb_" ..
+            tostring(basis_state_num)
+    minetest.register_node("q_command:" .. texture_name, {
+        description = "Basis state " .. tostring(basis_state_num) .. " block",
+        tiles = {texture_name .. ".png"},
+        groups = {oddly_breakable_by_hand=2}
+    })
+end
 
 
+for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
+    for basis_state_num = 0, 2^num_qubits - 1 do
+        q_command:register_basis_state_block(num_qubits, basis_state_num)
+    end
+end
 
