@@ -1,19 +1,19 @@
 -- TODO:
 
 --[[
-[] Make and place basis state blocks, and marble floor
-[] Only show basis states for width of circuit
-	[] Put ellipse on rightmost basis state block if there are more
-	[] Clicking ellipse block shows a state vector display
+[] Test wire extenders after having deleted the connector PNGs
+[] Delete rotation PNGs & XCFs if not required
+[] Indicate the phases in the histograms
+[] Ability to place circuits and wire extensions in four orientations, perpendicular to
+   direction that player is facing
+[] Don't allow creating circuit if already exists
+[] Create marble floor
+[] Clicking basis state ellipse block shows a state vector display?
 [] Make arrow blocks (connector, extenders, etc.) point correct direction on all sides
 [] Don't allow extenders to be placed on extensions.
 [] Check into warning message:
 2019-06-29 07:53:26: WARNING[Server]: Map::getNodeMetadata(): Block not found
 2019-06-29 07:53:26: WARNING[Server]: Map::removeNodeMetadata(): Block not found
-[] Don't allow creating circuit if already exists
-[] Ability to place circuits and wire extensions in four orientations, perpendicular to
-   direction that player is facing
-[] Color the phases in the histograms
 [] Can liquid blocks have tooltip that shows probability and other info (e.g. amp & phase)?
 [] Fast way to create walls and floors
 [] Protect against orphaning wire extensions
