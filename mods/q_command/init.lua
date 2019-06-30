@@ -540,12 +540,12 @@ minetest.register_node("q_command:q_block", {
                         -- TODO: Put this constant somewhere
                         local BLOCK_WATER_LEVELS = 63
 
-                        for idx = 1, #statevector do
-                            hist_node_pos = {x = circuit_grid_pos.x + idx - 1,
+                        for col_num = 1, math.min(#statevector, num_columns) do
+                            hist_node_pos = {x = circuit_grid_pos.x + col_num - 1,
                                              y = circuit_grid_pos.y - 1,
                                              z = circuit_grid_pos.z}
 
-                            local probability = (complex.abs(statevector[idx]))^2
+                            local probability = (complex.abs(statevector[col_num]))^2
                             local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
 
                             minetest.debug("probability :" .. tostring(probability))
@@ -559,9 +559,16 @@ minetest.register_node("q_command:q_block", {
                                                     z = hist_node_pos.z - 1}
 
                             if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
-                                local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(idx - 1)
+                                local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(col_num - 1)
                                 minetest.set_node(basis_state_node_pos,
                                         {name=node_name})
+
+                                -- Place ellipsis block if there are more
+                                -- basis states than displayed
+                                if num_columns < #statevector and col_num == num_columns then
+                                    minetest.set_node(basis_state_node_pos,
+                                        {name="q_command:q_command_state_ellipsis"})
+                                end
                             end
 
                         end
@@ -734,6 +741,12 @@ minetest.register_node("q_command:glass", {
 	--sounds = default.node_sound_glass_defaults(),
 })
 
+
+minetest.register_node("q_command:q_command_state_ellipsis", {
+    description = "Some basis states not displayed",
+    tiles = {"q_command_state_ellipsis.png"},
+    groups = {oddly_breakable_by_hand=2}
+})
 
 function q_command:register_basis_state_block(num_qubits, basis_state_num)
     local texture_name = "q_command_state_" .. num_qubits .. "qb_" ..
