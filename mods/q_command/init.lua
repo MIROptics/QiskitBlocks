@@ -545,6 +545,23 @@ minetest.register_node("q_command:q_block", {
                                              y = circuit_grid_pos.y - 1,
                                              z = circuit_grid_pos.z}
 
+                            local amp = statevector[col_num]
+                            local phase_rad = (complex.polar_radians(amp) + math.pi * 2) % (math.pi * 2)
+
+                            local p16_radians = 0
+                            local threshold = 0.0001
+                            if math.abs(phase_rad - 0) > threshold and
+                                    math.abs(phase_rad - math.pi * 2) > threshold then
+                                p16_radians = math.floor(phase_rad * 16 / math.pi + 0.5)
+                                minetest.debug("phase_rad: " .. tostring(phase_rad) .. ", p16_radians: " .. tostring(p16_radians))
+
+                                if p16_radians < 1 then
+                                    p16_radians = 1
+                                elseif p16_radians > 32 then
+                                    p16_radians = 32
+                                end
+                            end
+
                             local probability = (complex.abs(statevector[col_num]))^2
                             local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
 
@@ -552,7 +569,7 @@ minetest.register_node("q_command:q_block", {
 
                             local hist_node_name = "q_command:statevector_glass_no_arrow"
                             if scaled_prob > 0 then
-                                hist_node_name = "q_command:statevector_glass_0p16"
+                                hist_node_name = "q_command:statevector_glass_" .. tostring(p16_radians) .. "p16"
                             end
                             minetest.set_node(hist_node_pos,
                                     {name=hist_node_name, param2 = scaled_prob})

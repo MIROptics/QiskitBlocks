@@ -41,6 +41,10 @@ function create_complex()
         return string.format("(%g,%g)", c.r, c.i)
     end
 
+    function complex.polar_radians(c)
+        return math.atan2( c.i, c.r )
+    end
+
     return complex
 
 end
