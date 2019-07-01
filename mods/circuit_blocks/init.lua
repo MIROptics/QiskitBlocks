@@ -4,8 +4,10 @@
 [] Test wire extenders after having deleted the connector PNGs
 [] Delete rotation PNGs & XCFs if not required
 [] Indicate the phases in the histograms
+[] Try non-creative mode, using a chest for objects
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
+[] Create teleportation demo using JWootton terrain generation image to state vector ideas
 [] Don't allow creating circuit if already exists
 [] Create marble floor
 [] Clicking basis state ellipse block shows a state vector display?
@@ -25,6 +27,7 @@
 [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
 [] Label M & F connectors
 [] Make shift-right-click place a gate on all wires?
+[] Use JWootton terrain generation mod
 [] Make |0> |1> labels on measure block on left & right
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator

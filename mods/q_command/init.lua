@@ -731,7 +731,7 @@ minetest.register_node("q_command:q_sphere", {
 minetest.register_node("q_command:glass", {
 	description = "Histogram Glass",
 	drawtype = "glasslike_framed",
-	tiles = {"q_command_glass.png", "q_command_rotation_0p16.png^q_command_glass_detail.png"},
+	tiles = {"q_command_glass.png", "q_command_rotation_4p16.png^q_command_glass_detail.png"},
     special_tiles = {"q_command_water.png"},
 	paramtype = "light",
 	paramtype2 = "glasslikeliquidlevel",
