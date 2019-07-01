@@ -550,8 +550,12 @@ minetest.register_node("q_command:q_block", {
 
                             minetest.debug("probability :" .. tostring(probability))
 
+                            local hist_node_name = "q_command:statevector_glass_no_arrow"
+                            if scaled_prob > 0 then
+                                hist_node_name = "q_command:statevector_glass_0p16"
+                            end
                             minetest.set_node(hist_node_pos,
-                                    {name="q_command:glass", param2 = scaled_prob})
+                                    {name=hist_node_name, param2 = scaled_prob})
 
                             -- Place basis state block
                             basis_state_node_pos = {x = hist_node_pos.x,
@@ -728,19 +732,6 @@ minetest.register_node("q_command:q_sphere", {
 })
 --]]
 
-minetest.register_node("q_command:glass", {
-	description = "Histogram Glass",
-	drawtype = "glasslike_framed",
-	tiles = {"q_command_glass.png", "q_command_rotation_4p16.png^q_command_glass_detail.png"},
-    special_tiles = {"q_command_water.png"},
-	paramtype = "light",
-	paramtype2 = "glasslikeliquidlevel",
-	--sunlight_propagates = true,
-	--is_ground_content = false,
-	groups = {cracky = 3},
-	--sounds = default.node_sound_glass_defaults(),
-})
-
 
 minetest.register_node("q_command:q_command_state_ellipsis", {
     description = "Some basis states not displayed",
@@ -759,9 +750,46 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
 end
 
 
+minetest.register_node("q_command:statevector_glass_no_arrow", {
+    description = "Statevector Glass with no arrow",
+    drawtype = "glasslike_framed",
+    tiles = {"q_command_glass.png", "q_command_glass_detail.png"},
+    special_tiles = {"q_command_water.png"},
+    paramtype = "light",
+    paramtype2 = "glasslikeliquidlevel",
+    --sunlight_propagates = true,
+    --is_ground_content = false,
+    groups = {cracky = 3},
+    --sounds = default.node_sound_glass_defaults(),
+})
+
+
+function q_command:register_statevector_liquid_block(pi16rotation)
+    texture_name = "q_command_rotation_" .. pi16rotation .. "p16"
+    minetest.register_node("q_command:statevector_glass_" .. pi16rotation .. "p16", {
+        description = "Statevector Glass " .. pi16rotation .. "p16",
+        drawtype = "glasslike_framed",
+        tiles = {"q_command_glass.png", texture_name .. ".png^q_command_glass_detail.png"},
+        special_tiles = {"q_command_water.png"},
+        paramtype = "light",
+        paramtype2 = "glasslikeliquidlevel",
+        --sunlight_propagates = true,
+        --is_ground_content = false,
+        groups = {cracky = 3},
+        --sounds = default.node_sound_glass_defaults(),
+    })
+end
+
+
 for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
     for basis_state_num = 0, 2^num_qubits - 1 do
         q_command:register_basis_state_block(num_qubits, basis_state_num)
     end
 end
+
+local ROTATION_RESOLUTION = 32
+for idx = 0, ROTATION_RESOLUTION do
+    q_command:register_statevector_liquid_block(idx)
+end
+
 
