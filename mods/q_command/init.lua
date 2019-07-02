@@ -173,9 +173,9 @@ function q_command:create_blank_circuit_grid()
                 local ket_pos = {x = node_pos.x - 1, y = node_pos.y, z = node_pos.z}
 
                 if q_command.circuit_specs.dir_str == "+X" then
-                    ket_pos = {x = node_pos.z, y = node_pos.y, z = node_pos.x - 1}
+                    ket_pos = {x = node_pos.x, y = node_pos.y, z = node_pos.z + 1}
                 elseif q_command.circuit_specs.dir_str == "-X" then
-                    ket_pos = {x = node_pos.z, y = node_pos.y, z = node_pos.x + 1}
+                    ket_pos = {x = node_pos.x, y = node_pos.y, z = node_pos.z - 1}
                 elseif q_command.circuit_specs.dir_str == "-Z" then
                     ket_pos = {x = node_pos.x + 1, y = node_pos.y, z = node_pos.z}
                 end
@@ -613,9 +613,25 @@ minetest.register_node("q_command:q_block", {
                         local BLOCK_WATER_LEVELS = 63
 
                         for col_num = 1, math.min(#statevector, num_columns) do
+
+                            -- Assume dir_str is "+Z"
                             hist_node_pos = {x = circuit_grid_pos.x + col_num - 1,
                                              y = circuit_grid_pos.y - 1,
                                              z = circuit_grid_pos.z}
+
+                            if q_command.circuit_specs.dir_str == "+X" then
+                                hist_node_pos = {x = circuit_grid_pos.x,
+                                                 y = circuit_grid_pos.y - 1,
+                                                 z = circuit_grid_pos.z - col_num + 1}
+                            elseif q_command.circuit_specs.dir_str == "-X" then
+                                hist_node_pos = {x = circuit_grid_pos.x,
+                                                 y = circuit_grid_pos.y - 1,
+                                                 z = circuit_grid_pos.z + col_num - 1}
+                            elseif q_command.circuit_specs.dir_str == "-Z" then
+                                hist_node_pos = {x = circuit_grid_pos.x - col_num + 1,
+                                                 y = circuit_grid_pos.y - 1,
+                                                 z = circuit_grid_pos.z}
+                            end
 
                             local amp = statevector[col_num]
                             local phase_rad = (complex.polar_radians(amp) + math.pi * 2) % (math.pi * 2)
@@ -647,9 +663,24 @@ minetest.register_node("q_command:q_block", {
                                     {name=hist_node_name, param2 = scaled_prob})
 
                             -- Place basis state block
+                            -- Assume dir_str is "+Z"
                             basis_state_node_pos = {x = hist_node_pos.x,
                                                     y = hist_node_pos.y - 1,
                                                     z = hist_node_pos.z - 1}
+
+                            if q_command.circuit_specs.dir_str == "+X" then
+                                basis_state_node_pos = {x = hist_node_pos.x - 1,
+                                                        y = hist_node_pos.y - 1,
+                                                        z = hist_node_pos.z}
+                            elseif q_command.circuit_specs.dir_str == "-X" then
+                                basis_state_node_pos = {x = hist_node_pos.x + 1,
+                                                        y = hist_node_pos.y - 1,
+                                                        z = hist_node_pos.z}
+                            elseif q_command.circuit_specs.dir_str == "-Z" then
+                                basis_state_node_pos = {x = hist_node_pos.x,
+                                                        y = hist_node_pos.y - 1,
+                                                        z = hist_node_pos.z + 1}
+                            end
 
                             if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
                                 local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(col_num - 1)
