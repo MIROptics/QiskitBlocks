@@ -1,16 +1,15 @@
 -- TODO:
 
 --[[
-[] Test wire extenders after having deleted the connector PNGs
-[] Delete rotation PNGs & XCFs if not required
-[] Indicate the phases in the histograms
 [] Try non-creative mode, using a chest for objects
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
+[] Fix issue when right-clicking empty block with a control tool or rotate tool
 [] Create teleportation demo using JWootton terrain generation image to state vector ideas
 [] Don't allow creating circuit if already exists
 [] Create marble floor
 [] Clicking basis state ellipse block shows a state vector display?
+[] Create game environment with rooms that are significant in quantum computing history
 [] Make arrow blocks (connector, extenders, etc.) point correct direction on all sides
 [] Don't allow extenders to be placed on extensions.
 [] Check into warning message:

@@ -25,6 +25,7 @@ function circuit_blocks:get_circuit_block(pos)
         local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
         local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
         local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+        local circuit_dir_str = meta:get_string("circuit_specs_dir_str")
         local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
@@ -142,6 +143,11 @@ function circuit_blocks:get_circuit_block(pos)
 				return node_column_num
 			end,
 
+            -- Direction that the back of the circuit is facing (X+, X-, Z+, Z-)
+            get_circuit_dir_str = function()
+				return circuit_dir_str
+			end,
+
             -- Position of lower-left node of the circuit grid
             get_circuit_pos = function()
                 local ret_pos = {}
@@ -183,6 +189,7 @@ function circuit_blocks:get_circuit_block(pos)
                         "circuit_num_wires: " .. tostring(circuit_num_wires) .. "\n" ..
                         "circuit_num_columns: " .. tostring(circuit_num_columns) .. "\n" ..
                         "circuit_is_on_grid: " .. tostring(circuit_is_on_grid) .. "\n" ..
+                        "circuit_dir_str: " .. circuit_dir_str .. "\n" ..
                         "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
                         "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
@@ -219,6 +226,7 @@ function circuit_blocks:debug_node_info(pos, message)
         "is_within_circuit_grid() " .. tostring(block.is_within_circuit_grid()) .. "\n" ..
         "get_node_wire_num() " .. tostring(block.get_node_wire_num()) .. "\n" ..
         "get_node_column_num() " .. tostring(block.get_node_column_num()) .. "\n" ..
+        "get_circuit_dir_str() " .. block.get_circuit_dir_str() .. "\n" ..
         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n" ..
         "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n" ..
         "get_wire_extension_block_pos() " .. dump(block.get_wire_extension_block_pos()) .. "\n"
@@ -274,6 +282,7 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
     local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
     local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+    local circuit_dir_str = meta:get_string("circuit_specs_dir_str")
     local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
     local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
     local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
@@ -293,6 +302,7 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name)
     meta:set_int("circuit_specs_num_wires", circuit_num_wires)
     meta:set_int("circuit_specs_num_columns", circuit_num_columns)
     meta:set_int("circuit_specs_is_on_grid", circuit_is_on_grid)
+    meta:set_string("circuit_specs_dir_str", circuit_dir_str)
     meta:set_int("circuit_specs_pos_x", circuit_pos_x)
     meta:set_int("circuit_specs_pos_y", circuit_pos_y)
     meta:set_int("circuit_specs_pos_z", circuit_pos_z)

@@ -18,7 +18,7 @@ BASIS_STATE_BLOCK_MAX_QUBITS = 4
 q_command = {}
 
 q_command.block_pos = {}
-q_command.circuit_specs = {} -- pos, num_wires, num_columns, is_on_grid
+q_command.circuit_specs = {} -- dir_str, pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
 
 -- returns q_command object or nil
@@ -29,6 +29,7 @@ function q_command:get_q_command_block(pos)
         -- Retrieve metadata
         local meta = minetest.get_meta(pos)
         -- local node_type = meta:get_int("node_type")
+        local circuit_dir_str = meta:get_string("circuit_specs_dir_str")
         local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
@@ -48,6 +49,11 @@ function q_command:get_q_command_block(pos)
             -- Node name, string
             get_node_name = function()
 				return node_name
+			end,
+
+            -- Direction that the back of the circuit is facing (X+, X-, Z+, Z-)
+            get_circuit_dir_str = function()
+				return circuit_dir_str
 			end,
 
             get_circuit_pos = function()
@@ -85,6 +91,7 @@ function q_command:get_q_command_block(pos)
             to_string = function()
                 local ret_str = "pos: " .. dump(pos) .. "\n" ..
                         "node_name: " .. node_name .. "\n" ..
+                        "circuit_dir_str: " .. circuit_dir_str .. "\n" ..
                         "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
                         "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
@@ -105,8 +112,29 @@ function q_command:debug_node_info(pos, message)
         "get_node_pos() " .. dump(block.get_node_pos()) .. "\n" ..
         "get_node_name() " .. dump(block.get_node_name()) .. "\n" ..
         "circuit_grid_exists() " .. dump(block.circuit_grid_exists()) .. "\n" ..
+        "get_circuit_dir_str() " .. block.get_circuit_dir_str() .. "\n" ..
         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n")
 
+end
+
+--[[
+    Computes player direction string +X, -X, +Z, or -Z
+    TODO: Consider creating utils and moving this function there
+--]]
+function q_command:player_horiz_direction_string(player)
+    local ret_dir = "Z+"
+    local horiz_dir = player:get_look_horizontal()
+    if horiz_dir > math.pi / 4 and horiz_dir <= 3*math.pi / 4 then
+        ret_dir = "X-"
+    elseif horiz_dir > 3*math.pi / 4 and horiz_dir <= 5*math.pi / 4 then
+        ret_dir = "Z-"
+    elseif horiz_dir > 5*math.pi / 4 and horiz_dir <= 7*math.pi / 4 then
+        ret_dir = "X+"
+    end
+
+    minetest.chat_send_player(player:get_player_name(),
+        "Direction facing: " .. ret_dir .. ", " .. horiz_dir)
+    return ret_dir
 end
 
 
@@ -142,6 +170,7 @@ function q_command:create_blank_circuit_grid()
             meta:set_int("circuit_specs_num_wires", circuit_num_wires)
             meta:set_int("circuit_specs_num_columns", circuit_num_columns)
             meta:set_int("circuit_specs_is_on_grid", 1)
+            meta:set_string("circuit_specs_dir_str", q_command.circuit_specs.dir_str)
             meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
             meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
             meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
@@ -376,11 +405,14 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             local start_x_offset = tonumber(fields.start_x_offset_str)
             local start_y_offset = 1  -- TODO: Perhaps make this configurable
 
+            local horiz_dir_str = q_command:player_horiz_direction_string(player)
+
             if num_wires and num_wires > 0 and
                     num_columns and num_columns > 0 and
                     start_z_offset and start_z_offset >= 0 and
                     start_x_offset then
-                -- Store position of left-most, bottom-most block, and dimensions of circuit
+                -- Store direction string, position of left-most, bottom-most block, and dimensions of circuit
+                q_command.circuit_specs.dir_str = horiz_dir_str
                 q_command.circuit_specs.pos.x = q_command.block_pos.x - start_x_offset
                 q_command.circuit_specs.pos.y = q_command.block_pos.y + start_y_offset
                 q_command.circuit_specs.pos.z = q_command.block_pos.z + start_z_offset
@@ -391,8 +423,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                 -- Create circuit grid with empty blocks
                 q_command:create_blank_circuit_grid()
 
-                -- Put location of circuit into the q_command block metadata
+                -- Put direction and location of circuit into the q_command block metadata
                 local meta = minetest.get_meta(q_command.block_pos)
+                meta:set_string("circuit_specs_dir_str", q_command.circuit_specs.dir_str)
                 meta:set_int("circuit_specs_pos_x", q_command.circuit_specs.pos.x)
                 meta:set_int("circuit_specs_pos_y", q_command.circuit_specs.pos.y)
                 meta:set_int("circuit_specs_pos_z", q_command.circuit_specs.pos.z)
@@ -445,6 +478,7 @@ minetest.register_node("q_command:q_block", {
             local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
             local num_wires = circuit_block.get_circuit_num_wires()
             local num_columns = circuit_block.get_circuit_num_columns()
+            local circuit_dir_str = circuit_block.get_circuit_dir_str()
             local circuit_pos_x = circuit_block.get_circuit_pos().x
             local circuit_pos_y = circuit_block.get_circuit_pos().y
             local circuit_pos_z = circuit_block.get_circuit_pos().z
@@ -770,7 +804,7 @@ end
 minetest.register_node("q_command:statevector_glass_no_arrow", {
     description = "Statevector Glass with no arrow",
     drawtype = "glasslike_framed",
-    tiles = {"q_command_glass.png", "q_command_glass_detail.png"},
+    tiles = {"q_command_glass.png", "q_command_transparent_blank.png^q_command_glass_detail.png"},
     special_tiles = {"q_command_water.png"},
     paramtype = "light",
     paramtype2 = "glasslikeliquidlevel",
@@ -782,7 +816,7 @@ minetest.register_node("q_command:statevector_glass_no_arrow", {
 
 
 function q_command:register_statevector_liquid_block(pi16rotation)
-    texture_name = "q_command_rotation_" .. pi16rotation .. "p16"
+    local texture_name = "q_command_rotation_" .. pi16rotation .. "p16"
     minetest.register_node("q_command:statevector_glass_" .. pi16rotation .. "p16", {
         description = "Statevector Glass " .. pi16rotation .. "p16",
         drawtype = "glasslike_framed",
