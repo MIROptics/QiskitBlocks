@@ -51,7 +51,7 @@ function q_command:get_q_command_block(pos)
 				return node_name
 			end,
 
-            -- Direction that the back of the circuit is facing (X+, X-, Z+, Z-)
+            -- Direction that the back of the circuit is facing (+X, -X, +Z, -Z)
             get_circuit_dir_str = function()
 				return circuit_dir_str
 			end,
@@ -122,14 +122,14 @@ end
     TODO: Consider creating utils and moving this function there
 --]]
 function q_command:player_horiz_direction_string(player)
-    local ret_dir = "Z+"
+    local ret_dir = "+Z"
     local horiz_dir = player:get_look_horizontal()
     if horiz_dir > math.pi / 4 and horiz_dir <= 3*math.pi / 4 then
-        ret_dir = "X-"
+        ret_dir = "-X"
     elseif horiz_dir > 3*math.pi / 4 and horiz_dir <= 5*math.pi / 4 then
-        ret_dir = "Z-"
+        ret_dir = "-Z"
     elseif horiz_dir > 5*math.pi / 4 and horiz_dir <= 7*math.pi / 4 then
-        ret_dir = "X+"
+        ret_dir = "+X"
     end
 
     minetest.chat_send_player(player:get_player_name(),
@@ -150,13 +150,36 @@ function q_command:create_blank_circuit_grid()
     for wire = 1, circuit_num_wires do
         for column = 1, circuit_num_columns do
             local node_pos = {}
-            node_pos.x = q_command.circuit_specs.pos.x + column - 1
             node_pos.y = q_command.circuit_specs.pos.y + circuit_num_wires - wire
+
+            -- Assume dir_str is "+Z"
+            node_pos.x = q_command.circuit_specs.pos.x + column - 1
             node_pos.z = q_command.circuit_specs.pos.z
+
+            if q_command.circuit_specs.dir_str == "+X" then
+                node_pos.x = q_command.circuit_specs.pos.x
+                node_pos.z = q_command.circuit_specs.pos.z - column + 1
+            elseif q_command.circuit_specs.dir_str == "-X" then
+                node_pos.x = q_command.circuit_specs.pos.x
+                node_pos.z = q_command.circuit_specs.pos.z + column - 1
+            elseif q_command.circuit_specs.dir_str == "-Z" then
+                node_pos.x = q_command.circuit_specs.pos.x - column + 1
+                node_pos.z = q_command.circuit_specs.pos.z
+            end
+
 
             -- Put [0> blocks to the left of the circuit
             if column == 1 then
                 local ket_pos = {x = node_pos.x - 1, y = node_pos.y, z = node_pos.z}
+
+                if q_command.circuit_specs.dir_str == "+X" then
+                    ket_pos = {x = node_pos.z, y = node_pos.y, z = node_pos.x - 1}
+                elseif q_command.circuit_specs.dir_str == "-X" then
+                    ket_pos = {x = node_pos.z, y = node_pos.y, z = node_pos.x + 1}
+                elseif q_command.circuit_specs.dir_str == "-Z" then
+                    ket_pos = {x = node_pos.x + 1, y = node_pos.y, z = node_pos.z}
+                end
+
                 minetest.set_node(ket_pos,
                         {name="circuit_blocks:qubit_0"})
             end
@@ -413,9 +436,24 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
                     start_x_offset then
                 -- Store direction string, position of left-most, bottom-most block, and dimensions of circuit
                 q_command.circuit_specs.dir_str = horiz_dir_str
-                q_command.circuit_specs.pos.x = q_command.block_pos.x - start_x_offset
+
                 q_command.circuit_specs.pos.y = q_command.block_pos.y + start_y_offset
+
+                -- Assume dir_str is "+Z"
+                q_command.circuit_specs.pos.x = q_command.block_pos.x - start_x_offset
                 q_command.circuit_specs.pos.z = q_command.block_pos.z + start_z_offset
+
+                if q_command.circuit_specs.dir_str == "+X" then
+                    q_command.circuit_specs.pos.x = q_command.block_pos.x + start_z_offset
+                    q_command.circuit_specs.pos.z = q_command.block_pos.z + start_x_offset
+                elseif q_command.circuit_specs.dir_str == "-X" then
+                    q_command.circuit_specs.pos.x = q_command.block_pos.x - start_z_offset
+                    q_command.circuit_specs.pos.z = q_command.block_pos.z - start_x_offset
+                elseif q_command.circuit_specs.dir_str == "-Z" then
+                    q_command.circuit_specs.pos.x = q_command.block_pos.x + start_x_offset
+                    q_command.circuit_specs.pos.z = q_command.block_pos.z - start_z_offset
+                end
+
                 q_command.circuit_specs.num_wires = num_wires
                 q_command.circuit_specs.num_columns = num_columns
                 minetest.debug("q_command.circuit_specs: " .. dump(q_command.circuit_specs))
