@@ -664,19 +664,23 @@ minetest.register_node("q_command:q_block", {
 
                             -- Place basis state block
                             -- Assume dir_str is "+Z"
+                            local param2_dir = 4
                             basis_state_node_pos = {x = hist_node_pos.x,
                                                     y = hist_node_pos.y - 1,
                                                     z = hist_node_pos.z - 1}
 
                             if q_command.circuit_specs.dir_str == "+X" then
+                                param2_dir = 12
                                 basis_state_node_pos = {x = hist_node_pos.x - 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
                             elseif q_command.circuit_specs.dir_str == "-X" then
+                                param2_dir = 16
                                 basis_state_node_pos = {x = hist_node_pos.x + 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
                             elseif q_command.circuit_specs.dir_str == "-Z" then
+                                param2_dir = 8
                                 basis_state_node_pos = {x = hist_node_pos.x,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z + 1}
@@ -685,13 +689,13 @@ minetest.register_node("q_command:q_block", {
                             if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
                                 local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(col_num - 1)
                                 minetest.set_node(basis_state_node_pos,
-                                        {name=node_name})
+                                        {name=node_name, param2=param2_dir})
 
                                 -- Place ellipsis block if there are more
                                 -- basis states than displayed
                                 if num_columns < #statevector and col_num == num_columns then
                                     minetest.set_node(basis_state_node_pos,
-                                        {name="q_command:q_command_state_ellipsis"})
+                                        {name="q_command:q_command_state_ellipsis", param2=param2_dir})
                                 end
                             end
 
@@ -865,6 +869,7 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
     minetest.register_node("q_command:" .. texture_name, {
         description = "Basis state " .. tostring(basis_state_num) .. " block",
         tiles = {texture_name .. ".png"},
+        paramtype2 = "facedir",
         groups = {oddly_breakable_by_hand=2}
     })
 end
