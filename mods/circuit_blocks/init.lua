@@ -1,10 +1,13 @@
 -- TODO:
 
 --[[
+[] Make compute circuit check all the blocks in the wire extensions
+[] Rotate nodes in wire extensions that are in non +Z directions
 [] Try non-creative mode, using a chest for objects
 [] Ability to place circuits and wire extensions in four orientations, perpendicular to
    direction that player is facing
 [] Fix issue when right-clicking empty block with a control tool or rotate tool
+[] Prevent right-clicking on wire_extension_block after wire_extension exists
 [] Create teleportation demo using JWootton terrain generation image to state vector ideas
 [] Don't allow creating circuit if already exists
 [] Create marble floor

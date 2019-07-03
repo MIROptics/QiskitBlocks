@@ -20,6 +20,7 @@ function wire_extension:get_wire_extension_block(pos)
         local circuit_num_wires = meta:get_int("circuit_specs_num_wires")
         local circuit_num_columns = meta:get_int("circuit_specs_num_columns")
         local circuit_is_on_grid = meta:get_int("circuit_specs_is_on_grid")
+        local circuit_dir_str = meta:get_string("circuit_specs_dir_str")
         local circuit_pos_x = meta:get_int("circuit_specs_pos_x")
         local circuit_pos_y = meta:get_int("circuit_specs_pos_y")
         local circuit_pos_z = meta:get_int("circuit_specs_pos_z")
@@ -46,6 +47,11 @@ function wire_extension:get_wire_extension_block(pos)
             -- Node name, string
             get_node_name = function()
 				return node_name
+			end,
+
+            -- Direction that the back of the circuit is facing (+X, -X, +Z, -Z)
+            get_circuit_dir_str = function()
+				return circuit_dir_str
 			end,
 
             -- Position of lower-left node of the circuit grid
@@ -104,9 +110,10 @@ function wire_extension:get_wire_extension_block(pos)
             to_string = function()
                 local ret_str = "pos: " .. dump(pos) .. "\n" ..
                         "node_name: " .. node_name .. "\n" ..
-                        "wire_pos_x: " .. tostring(wire_pos_x) .. "\n" ..
-                        "wire_pos_y: " .. tostring(wire_pos_y) .. "\n" ..
-                        "wire_pos_z: " .. tostring(wire_pos_z) .. "\n"
+                        "circuit_dir_str: " .. circuit_dir_str .. "\n" ..
+                        "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
+                        "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
+                        "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n"
                 return ret_str
             end
 		}
@@ -126,6 +133,7 @@ function wire_extension:debug_node_info(pos, message)
         --"get_wire_pos() " .. dump(block.get_wire_pos()) .. "\n" ..
         "circuit_specs_wire_num_offset() " .. tostring(block.get_circuit_specs_wire_num_offset()) .. "\n" ..
         "get_circuit_extension_pos() " .. dump(block.get_circuit_extension_pos()) .. "\n" ..
+        "get_circuit_dir_str() " .. block.get_circuit_dir_str() .. "\n" ..
         "get_circuit_pos() " .. dump(block.get_circuit_pos()) .. "\n" ..
         "get_q_command_pos() " .. dump(block.get_q_command_pos()) .. "\n")
 
@@ -142,17 +150,23 @@ function wire_extension:create_blank_wire_extension()
     -- for wire = 1, 1 do
     for column = 1, wire_num_columns do
         local node_pos = {}
-        -- node_pos.x = wire_extension.wire_specs.pos.x + column - 1
-        node_pos.x = extension_block.get_circuit_pos().x + column - 1
-
-        -- node_pos.y = wire_extension.wire_specs.pos.y + circuit_num_wires - wire
-        -- node_pos.y = wire_extension.wire_specs.pos.y
         node_pos.y = extension_block.get_circuit_pos().y
 
-        -- node_pos.z = wire_extension.wire_specs.pos.z
+        -- Assume dir_str is "+Z"
+        node_pos.x = extension_block.get_circuit_pos().x + column - 1
         node_pos.z = extension_block.get_circuit_pos().z
 
-        -- TODO: Change to add_node() for clarity?
+        if extension_block.get_circuit_dir_str() == "+X" then
+            node_pos.x = extension_block.get_circuit_pos().x
+            node_pos.z = extension_block.get_circuit_pos().z - column + 1
+        elseif extension_block.get_circuit_dir_str() == "-X" then
+            node_pos.x = extension_block.get_circuit_pos().x
+            node_pos.z = extension_block.get_circuit_pos().z + column - 1
+        elseif extension_block.get_circuit_dir_str() == "-Z" then
+            node_pos.x = extension_block.get_circuit_pos().x - column + 1
+            node_pos.z = extension_block.get_circuit_pos().z
+        end
+
         minetest.set_node(node_pos,
                 {name="circuit_blocks:circuit_blocks_empty_wire"})
 
@@ -165,6 +179,7 @@ function wire_extension:create_blank_wire_extension()
         meta:set_int("circuit_specs_num_wires", 1)
         meta:set_int("circuit_specs_num_columns", wire_num_columns)
         meta:set_int("circuit_specs_is_on_grid", 1)
+        meta:set_string("circuit_specs_dir_str", wire_extension.wire_specs.dir_str)
         meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
         meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
         meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
@@ -188,17 +203,37 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             local start_z_offset = 0
             local start_x_offset = 1
 
+            local horiz_dir_str = q_command:player_horiz_direction_string(player)
+
             if num_columns and num_columns > 0 then
-                -- Store position of left-most, bottom-most block, and dimensions of circuit
-                wire_extension.wire_specs.pos.x = wire_extension.block_pos.x + start_x_offset
+                -- Store direction string, position of left-most, bottom-most block, and dimensions of circuit
+                wire_extension.wire_specs.dir_str = horiz_dir_str
+
                 wire_extension.wire_specs.pos.y = wire_extension.block_pos.y
+
+                -- Assume dir_str is "+Z"
+                wire_extension.wire_specs.pos.x = wire_extension.block_pos.x + start_x_offset
                 wire_extension.wire_specs.pos.z = wire_extension.block_pos.z + start_z_offset
+
+                if wire_extension.wire_specs.dir_str == "+X" then
+                    wire_extension.wire_specs.pos.x = wire_extension.block_pos.x + start_z_offset
+                    wire_extension.wire_specs.pos.z = wire_extension.block_pos.z - start_x_offset
+                elseif wire_extension.wire_specs.dir_str == "-X" then
+                    wire_extension.wire_specs.pos.x = wire_extension.block_pos.x - start_z_offset
+                    wire_extension.wire_specs.pos.z = wire_extension.block_pos.z + start_x_offset
+                elseif wire_extension.wire_specs.dir_str == "-Z" then
+                    wire_extension.wire_specs.pos.x = wire_extension.block_pos.x - start_x_offset
+                    wire_extension.wire_specs.pos.z = wire_extension.block_pos.z - start_z_offset
+                end
+
+
                 wire_extension.wire_specs.num_wires = num_wires
                 wire_extension.wire_specs.num_columns = num_columns
                 minetest.debug("wire_extension.wire_specs: " .. dump(wire_extension.wire_specs))
 
-                -- Put location of circuit into the wire_extension block metadata
+                -- Put direction and location of circuit into the wire_extension block metadata
                 local meta = minetest.get_meta(wire_extension.block_pos)
+                meta:set_string("circuit_specs_dir_str", wire_extension.wire_specs.dir_str)
                 meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
                 meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
                 meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)

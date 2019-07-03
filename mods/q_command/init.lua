@@ -56,6 +56,7 @@ function q_command:get_q_command_block(pos)
 				return circuit_dir_str
 			end,
 
+            -- Position of lower-left node of the circuit grid
             get_circuit_pos = function()
                 local ret_pos = {}
                 ret_pos.x = circuit_pos_x
