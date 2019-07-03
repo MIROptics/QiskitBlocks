@@ -2,4 +2,4 @@
 Teaches quantum computing and Qiskit in a Minetest block world
 
 ## TODO:
-* [] Prefix mod names with texture names
+* [] Create game that requires modifiying and creating circuits correctly to progress.
