@@ -390,6 +390,7 @@ end
 function q_command:compute_circuit(circuit_block, include_measurement_blocks)
     local num_wires = circuit_block.get_circuit_num_wires()
     local num_columns = circuit_block.get_circuit_num_columns()
+    local circuit_dir_str = circuit_block.get_circuit_dir_str()
     local circuit_pos_x = circuit_block.get_circuit_pos().x
     local circuit_pos_y = circuit_block.get_circuit_pos().y
     local circuit_pos_z = circuit_block.get_circuit_pos().z
@@ -403,11 +404,30 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
     -- Add a column of identity gates to protect simulators from an empty circuit
     qasm_str = qasm_str .. 'id q;'
 
+
     for column_num = 1, num_columns do
         for wire_num = 1, num_wires do
+
+            -- Assume dir_str is "+Z"
             local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
                                       y = circuit_pos_y + num_wires - wire_num,
                                       z = circuit_pos_z}
+
+            if circuit_dir_str == "+X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z - column_num + 1}
+            elseif circuit_dir_str == "-X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z + column_num - 1}
+            elseif circuit_dir_str == "-Z" then
+                circuit_node_pos = {x = circuit_pos_x - column_num + 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+            end
+
+
 
             qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_measurement_blocks)
         end

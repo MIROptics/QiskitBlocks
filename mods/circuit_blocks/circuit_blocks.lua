@@ -123,13 +123,40 @@ function circuit_blocks:get_circuit_block(pos)
             -- TODO: Perhaps deprecate is_on_circuit_grid()
             is_within_circuit_grid = function()
                 local ret_within = false
-                if pos.x >= circuit_pos_x and
-                        pos.x < (circuit_pos_x + circuit_num_columns) and
-                        pos.y >= circuit_pos_y and
-                        pos.y < (circuit_pos_y + circuit_num_wires) and
-                        pos.z == circuit_pos_z then
-                    ret_within = true
+                if circuit_dir_str == "+Z" then
+                    if pos.x >= circuit_pos_x and
+                            pos.x < (circuit_pos_x + circuit_num_columns) and
+                            pos.y >= circuit_pos_y and
+                            pos.y < (circuit_pos_y + circuit_num_wires) and
+                            pos.z == circuit_pos_z then
+                        ret_within = true
+                    end
+                elseif circuit_dir_str == "+X" then
+                    if pos.z <= circuit_pos_z and
+                            pos.z > (circuit_pos_z - circuit_num_columns) and
+                            pos.y >= circuit_pos_y and
+                            pos.y < (circuit_pos_y + circuit_num_wires) and
+                            pos.x == circuit_pos_x then
+                        ret_within = true
+                    end
+                elseif circuit_dir_str == "-X" then
+                    if pos.z >= circuit_pos_z and
+                            pos.z < (circuit_pos_z + circuit_num_columns) and
+                            pos.y >= circuit_pos_y and
+                            pos.y < (circuit_pos_y + circuit_num_wires) and
+                            pos.x == circuit_pos_x then
+                        ret_within = true
+                    end
+                elseif circuit_dir_str == "-Z" then
+                    if pos.x <= circuit_pos_x and
+                            pos.x > (circuit_pos_x - circuit_num_columns) and
+                            pos.y >= circuit_pos_y and
+                            pos.y < (circuit_pos_y + circuit_num_wires) and
+                            pos.z == circuit_pos_z then
+                        ret_within = true
+                    end
                 end
+
 				return ret_within
 			end,
 
