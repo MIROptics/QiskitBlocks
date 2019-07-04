@@ -640,6 +640,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         description = texture_name,
         tiles = {texture_name..".png"},
         groups = {circuit_gate=1, oddly_breakable_by_hand=2},
+        paramtype2 = "facedir",
 
         -- TODO: Find best way to implement dropping an item
         -- drop = drop_name,

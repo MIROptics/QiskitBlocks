@@ -153,22 +153,26 @@ function wire_extension:create_blank_wire_extension()
         node_pos.y = extension_block.get_circuit_pos().y
 
         -- Assume dir_str is "+Z"
+        local param2_dir = 0
         node_pos.x = extension_block.get_circuit_pos().x + column - 1
         node_pos.z = extension_block.get_circuit_pos().z
 
         if extension_block.get_circuit_dir_str() == "+X" then
+            param2_dir = 1
             node_pos.x = extension_block.get_circuit_pos().x
             node_pos.z = extension_block.get_circuit_pos().z - column + 1
         elseif extension_block.get_circuit_dir_str() == "-X" then
+            param2_dir = 3
             node_pos.x = extension_block.get_circuit_pos().x
             node_pos.z = extension_block.get_circuit_pos().z + column - 1
         elseif extension_block.get_circuit_dir_str() == "-Z" then
+            param2_dir = 2
             node_pos.x = extension_block.get_circuit_pos().x - column + 1
             node_pos.z = extension_block.get_circuit_pos().z
         end
 
         minetest.set_node(node_pos,
-                {name="circuit_blocks:circuit_blocks_empty_wire"})
+                {name="circuit_blocks:circuit_blocks_empty_wire", param2=param2_dir})
 
         -- Update the metadata in these newly created nodes
         local meta = minetest.get_meta(node_pos)
@@ -269,7 +273,8 @@ minetest.register_node("q_command:wire_extension_block", {
 	on_place = function(itemstack, placer, pointed_thing)
 		-- Place the wire extension block
         -- TODO: Verify that this is working correctly
-		local ret_itemstack, ret_success = minetest.item_place(itemstack, placer, pointed_thing)
+		local ret_itemstack, ret_success = minetest.item_place(itemstack,
+                placer, pointed_thing)
         minetest.debug("In wire_extension_block on_place, ret_itemstack.get_count():\n" ..
         tostring(ret_itemstack:get_count()) .. "\nret_success: " .. tostring(ret_success))
         if ret_success then

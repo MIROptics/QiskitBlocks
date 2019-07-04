@@ -1,6 +1,9 @@
 -- TODO:
 
 --[[
+[] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
+	in what seems like the same wrong orientation
+[] Place q_command block and wire_extension_block in correct direction
 [] Make compute circuit check all the blocks in the wire extensions
 [] Rotate nodes in wire extensions that are in non +Z directions
 [] Try non-creative mode, using a chest for objects
@@ -46,13 +49,15 @@ dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 minetest.register_node("circuit_blocks:qubit_0", {
     description = "Qubit 0 block",
     tiles = {"circuit_blocks_qubit_0.png"},
-    groups = {oddly_breakable_by_hand=2}
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:qubit_1", {
     description = "Qubit 1 block",
     tiles = {"circuit_blocks_qubit_1.png"},
-    groups = {oddly_breakable_by_hand=2}
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
 })
 
 

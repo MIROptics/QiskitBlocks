@@ -154,16 +154,20 @@ function q_command:create_blank_circuit_grid()
             node_pos.y = q_command.circuit_specs.pos.y + circuit_num_wires - wire
 
             -- Assume dir_str is "+Z"
+            local param2_dir = 0
             node_pos.x = q_command.circuit_specs.pos.x + column - 1
             node_pos.z = q_command.circuit_specs.pos.z
 
             if q_command.circuit_specs.dir_str == "+X" then
+                param2_dir = 1
                 node_pos.x = q_command.circuit_specs.pos.x
                 node_pos.z = q_command.circuit_specs.pos.z - column + 1
             elseif q_command.circuit_specs.dir_str == "-X" then
+                param2_dir = 3
                 node_pos.x = q_command.circuit_specs.pos.x
                 node_pos.z = q_command.circuit_specs.pos.z + column - 1
             elseif q_command.circuit_specs.dir_str == "-Z" then
+                param2_dir = 2
                 node_pos.x = q_command.circuit_specs.pos.x - column + 1
                 node_pos.z = q_command.circuit_specs.pos.z
             end
@@ -182,11 +186,11 @@ function q_command:create_blank_circuit_grid()
                 end
 
                 minetest.set_node(ket_pos,
-                        {name="circuit_blocks:qubit_0"})
+                        {name="circuit_blocks:qubit_0", param2=param2_dir})
             end
 
             minetest.set_node(node_pos,
-                    {name="circuit_blocks:circuit_blocks_empty_wire"})
+                    {name="circuit_blocks:circuit_blocks_empty_wire", param2=param2_dir})
 
             -- Update the metadata in these newly created nodes
             local meta = minetest.get_meta(node_pos)
@@ -507,6 +511,7 @@ minetest.register_node("q_command:q_block", {
     description = "Q command block",
     tiles = {"q_command_block.png"},
     groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir",
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("infotext", "Quantum circuit command block")
@@ -563,7 +568,7 @@ minetest.register_node("q_command:q_block", {
                             minetest.remove_node(hist_pos)
 
                             -- Place basis state block
-                            basis_state_node_pos = {x = hist_pos.x,
+                            local basis_state_node_pos = {x = hist_pos.x,
                                                     y = hist_pos.y - 1,
                                                     z = hist_pos.z - 1}
 
@@ -685,23 +690,23 @@ minetest.register_node("q_command:q_block", {
 
                             -- Place basis state block
                             -- Assume dir_str is "+Z"
-                            local param2_dir = 4
+                            local param2_dir = 0
                             basis_state_node_pos = {x = hist_node_pos.x,
                                                     y = hist_node_pos.y - 1,
                                                     z = hist_node_pos.z - 1}
 
                             if q_command.circuit_specs.dir_str == "+X" then
-                                param2_dir = 12
+                                param2_dir = 1
                                 basis_state_node_pos = {x = hist_node_pos.x - 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
                             elseif q_command.circuit_specs.dir_str == "-X" then
-                                param2_dir = 16
+                                param2_dir = 3
                                 basis_state_node_pos = {x = hist_node_pos.x + 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
                             elseif q_command.circuit_specs.dir_str == "-Z" then
-                                param2_dir = 8
+                                param2_dir = 2
                                 basis_state_node_pos = {x = hist_node_pos.x,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z + 1}
@@ -881,7 +886,8 @@ minetest.register_node("q_command:q_sphere", {
 minetest.register_node("q_command:q_command_state_ellipsis", {
     description = "Some basis states not displayed",
     tiles = {"q_command_state_ellipsis.png"},
-    groups = {oddly_breakable_by_hand=2}
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
 function q_command:register_basis_state_block(num_qubits, basis_state_num)
