@@ -752,6 +752,7 @@ minetest.register_node("q_command:q_block", {
 
                             if wire_extension_block_pos.x > 0 then
                                 local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+                                local wire_extension_dir_str = wire_extension_block.get_circuit_dir_str()
                                 local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
 
                                 q_command:debug_node_info(wire_extension_circuit_pos,
@@ -762,9 +763,25 @@ minetest.register_node("q_command:q_block", {
                                     local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
                                     local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
                                     for column_num = 1, extension_num_columns do
-                                         local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
-                                                                  y = wire_extension_circuit_pos.y,
-                                                                  z = wire_extension_circuit_pos.z}
+
+                                        -- Assume dir_str is "+Z"
+                                        local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
+                                                               y = wire_extension_circuit_pos.y,
+                                                               z = wire_extension_circuit_pos.z}
+
+                                        if wire_extension_dir_str == "+X" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                z = wire_extension_circuit_pos.z - column_num + 1}
+                                        elseif wire_extension_dir_str == "-X" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                z = wire_extension_circuit_pos.z + column_num - 1}
+                                        elseif wire_extension_dir_str == "-Z" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
+                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                z = wire_extension_circuit_pos.z}
+                                        end
 
                                         q_command:debug_node_info(circ_node_pos,
                                                 "Processing CONNECTOR_M, circ_node_pos")
@@ -812,15 +829,32 @@ minetest.register_node("q_command:q_block", {
                         if basis_state_bit_str then
                             local num_wires = circuit_block.get_circuit_num_wires()
                             local num_columns = circuit_block.get_circuit_num_columns()
+                            local circuit_dir_str = circuit_block.get_circuit_dir_str()
                             local circuit_pos_x = circuit_block.get_circuit_pos().x
                             local circuit_pos_y = circuit_block.get_circuit_pos().y
                             local circuit_pos_z = circuit_block.get_circuit_pos().z
 
                             for column_num = 1, num_columns do
                                 for wire_num = 1, num_wires do
+
+                                    -- Assume dir_str is "+Z"
                                     local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
                                                               y = circuit_pos_y + num_wires - wire_num,
                                                               z = circuit_pos_z}
+
+                                    if circuit_dir_str == "+X" then
+                                        circuit_node_pos = {x = circuit_pos_x,
+                                                            y = circuit_pos_y + num_wires - wire_num,
+                                                            z = circuit_pos_z - column_num + 1}
+                                    elseif circuit_dir_str == "-X" then
+                                        circuit_node_pos = {x = circuit_pos_x,
+                                                            y = circuit_pos_y + num_wires - wire_num,
+                                                            z = circuit_pos_z + column_num - 1}
+                                    elseif circuit_dir_str == "-Z" then
+                                        circuit_node_pos = {x = circuit_pos_x - column_num + 1,
+                                                            y = circuit_pos_y + num_wires - wire_num,
+                                                            z = circuit_pos_z}
+                                    end
 
                                     update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
                                 end

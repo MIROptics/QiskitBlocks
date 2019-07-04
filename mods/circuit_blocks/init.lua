@@ -1,6 +1,8 @@
 -- TODO:
 
 --[[
+[] Make measurement work on circuits in other orientations
+[] Add all other direction code
 [] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
 	in what seems like the same wrong orientation
 [] Place q_command block and wire_extension_block in correct direction
