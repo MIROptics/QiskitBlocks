@@ -788,15 +788,15 @@ minetest.register_node("q_command:q_block", {
 
                                         if wire_extension_dir_str == "+X" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                y = wire_extension_circuit_pos.y,
                                                                 z = wire_extension_circuit_pos.z - column_num + 1}
                                         elseif wire_extension_dir_str == "-X" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                y = wire_extension_circuit_pos.y,
                                                                 z = wire_extension_circuit_pos.z + column_num - 1}
                                         elseif wire_extension_dir_str == "-Z" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
-                                                                y = wire_extension_circuit_pos.y + num_wires - wire_num,
+                                                                y = wire_extension_circuit_pos.y,
                                                                 z = wire_extension_circuit_pos.z}
                                         end
 

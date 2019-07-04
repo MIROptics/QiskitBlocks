@@ -3,7 +3,6 @@
 --[[
 [] Make compute circuit check all the blocks in the wire extensions
 [] Make empty wire blocks appear in correct orientation after removing a gate, as well as the gates themselves
-[X] Make measurement work on circuits in other orientations
 [] Add all other direction code, including:
 	[] Deleting wire_extension blocks correctly
 [] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit

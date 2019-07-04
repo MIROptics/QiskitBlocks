@@ -183,10 +183,19 @@ function wire_extension:create_blank_wire_extension()
         meta:set_int("circuit_specs_num_wires", 1)
         meta:set_int("circuit_specs_num_columns", wire_num_columns)
         meta:set_int("circuit_specs_is_on_grid", 1)
+
+        --[[
         meta:set_string("circuit_specs_dir_str", wire_extension.wire_specs.dir_str)
         meta:set_int("circuit_specs_pos_x", wire_extension.wire_specs.pos.x)
         meta:set_int("circuit_specs_pos_y", wire_extension.wire_specs.pos.y)
         meta:set_int("circuit_specs_pos_z", wire_extension.wire_specs.pos.z)
+        --]]
+
+        meta:set_string("circuit_specs_dir_str", extension_block.get_circuit_dir_str())
+        meta:set_int("circuit_specs_pos_x", extension_block.get_circuit_pos().x)
+        meta:set_int("circuit_specs_pos_y", extension_block.get_circuit_pos().y)
+        meta:set_int("circuit_specs_pos_z", extension_block.get_circuit_pos().z)
+
         meta:set_int("wire_extension_block_pos_x", extension_block.get_node_pos().x)
         meta:set_int("wire_extension_block_pos_y", extension_block.get_node_pos().y)
         meta:set_int("wire_extension_block_pos_z", extension_block.get_node_pos().z)
@@ -265,6 +274,8 @@ minetest.register_node("q_command:wire_extension_block", {
     description = "Wire extension block",
     tiles = {"circuit_blocks_wire_connector_f.png"},
     groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir",
+
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string("infotext", "Wire extension block")
