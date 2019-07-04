@@ -90,7 +90,7 @@ function wire_extension:get_wire_extension_block(pos)
             -- Determine if wire extension exists
             wire_extension_exists = function()
                 local ret_exists = false
-                if circuit_pos_x > 0 and circuit_pos_z > 0 then
+                if circuit_pos_x ~= 0 and circuit_pos_z ~= 0 then
                     ret_exists = true
                 end
 				return ret_exists

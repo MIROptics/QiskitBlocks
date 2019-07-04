@@ -542,13 +542,13 @@ function circuit_blocks:delete_wire_extension(connector_block)
     -- Traverse from connector to wire extension
     local wire_extension_block_pos = connector_block.get_wire_extension_block_pos()
 
-    if wire_extension_block_pos.x > 0 then
+    if wire_extension_block_pos.x ~= 0 then
         local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
         minetest.remove_node(wire_extension_block_pos)
 
         local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
 
-        if wire_extension_circuit_pos.x > 0 then
+        if wire_extension_circuit_pos.x ~= 0 then
             local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
             -- local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
             local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
