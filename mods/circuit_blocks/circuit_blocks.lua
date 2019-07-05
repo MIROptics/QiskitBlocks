@@ -681,7 +681,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 math.abs(block.get_radians() - 0) < threshold and
                                 math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                    block:get_node_wire_num() - 1)
+                                    block:get_node_wire_num() - 1, player)
                             minetest.debug("control placed_wire: " .. tostring(placed_wire))
                             minetest.chat_send_player(player:get_player_name(),
                                     "control placed_wire: " .. tostring(placed_wire))
@@ -814,14 +814,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                                         "circuit_blocks:circuit_blocks_empty_wire", player)
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
-                                        block.get_ctrl_a() + 1)
+                                        block.get_ctrl_a() + 1, player)
                             else
                                 minetest.debug("Tried to place ctrl on nonexistent wire: " ..
                                         block.get_ctrl_a() + 1)
                             end
-                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control placed_wire: " .. tostring(placed_wire))
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
                         minetest.debug("rotate right requested")

@@ -1,6 +1,7 @@
 -- TODO:
 
 --[[
+[] Fix problem of not being able to place circuit extension on a circuit grid in non +Z orientation
 [] Add all other direction code, including:
 	[] Deleting wire_extension blocks correctly
 [] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
