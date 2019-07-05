@@ -702,15 +702,15 @@ minetest.register_node("q_command:q_block", {
                                              y = circuit_grid_pos.y - 1,
                                              z = circuit_grid_pos.z}
 
-                            if q_command.circuit_specs.dir_str == "+X" then
+                            if circuit_block.get_circuit_dir_str() == "+X" then
                                 hist_node_pos = {x = circuit_grid_pos.x,
                                                  y = circuit_grid_pos.y - 1,
                                                  z = circuit_grid_pos.z - col_num + 1}
-                            elseif q_command.circuit_specs.dir_str == "-X" then
+                            elseif circuit_block.get_circuit_dir_str() == "-X" then
                                 hist_node_pos = {x = circuit_grid_pos.x,
                                                  y = circuit_grid_pos.y - 1,
                                                  z = circuit_grid_pos.z + col_num - 1}
-                            elseif q_command.circuit_specs.dir_str == "-Z" then
+                            elseif circuit_block.get_circuit_dir_str() == "-Z" then
                                 hist_node_pos = {x = circuit_grid_pos.x - col_num + 1,
                                                  y = circuit_grid_pos.y - 1,
                                                  z = circuit_grid_pos.z}
@@ -752,17 +752,17 @@ minetest.register_node("q_command:q_block", {
                                                     y = hist_node_pos.y - 1,
                                                     z = hist_node_pos.z - 1}
 
-                            if q_command.circuit_specs.dir_str == "+X" then
+                            if circuit_block.get_circuit_dir_str() == "+X" then
                                 param2_dir = 1
                                 basis_state_node_pos = {x = hist_node_pos.x - 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
-                            elseif q_command.circuit_specs.dir_str == "-X" then
+                            elseif circuit_block.get_circuit_dir_str() == "-X" then
                                 param2_dir = 3
                                 basis_state_node_pos = {x = hist_node_pos.x + 1,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z}
-                            elseif q_command.circuit_specs.dir_str == "-Z" then
+                            elseif circuit_block.get_circuit_dir_str() == "-Z" then
                                 param2_dir = 2
                                 basis_state_node_pos = {x = hist_node_pos.x,
                                                         y = hist_node_pos.y - 1,
