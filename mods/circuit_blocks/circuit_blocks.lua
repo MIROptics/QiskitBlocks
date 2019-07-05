@@ -554,10 +554,25 @@ function circuit_blocks:delete_wire_extension(connector_block, player)
             local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
             -- local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
             local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
+            local circuit_dir_str = wire_extension_circuit.get_circuit_dir_str()
             for column_num = 1, extension_num_columns do
                 local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
                                        y = wire_extension_circuit_pos.y,
                                        z = wire_extension_circuit_pos.z}
+                if circuit_dir_str == "+X" then
+                    circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                     y = wire_extension_circuit_pos.y,
+                                     z = wire_extension_circuit_pos.z - column_num + 1}
+                elseif circuit_dir_str == "-X" then
+                    circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                     y = wire_extension_circuit_pos.y,
+                                     z = wire_extension_circuit_pos.z + column_num - 1}
+                elseif circuit_dir_str == "-Z" then
+                    circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
+                                     y = wire_extension_circuit_pos.y,
+                                     z = wire_extension_circuit_pos.z}
+                end
+
                 minetest.remove_node(circ_node_pos)
             end
         end

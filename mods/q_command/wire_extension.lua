@@ -352,7 +352,7 @@ minetest.register_node("q_command:wire_extension_block", {
             local extension_block = wire_extension:get_wire_extension_block(pos)
             local circuit_extension_pos = extension_block:get_circuit_extension_pos()
             local circuit_extension_block = circuit_blocks:get_circuit_block(circuit_extension_pos)
-            circuit_blocks:delete_wire_extension(circuit_extension_block)
+            circuit_blocks:delete_wire_extension(circuit_extension_block, player)
         end
     end,
     can_dig = function(pos, player)

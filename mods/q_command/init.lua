@@ -637,7 +637,7 @@ minetest.register_node("q_command:q_block", {
 
                         local cur_block = circuit_blocks:get_circuit_block(node_pos)
                         if cur_block.get_node_type() == CircuitNodeTypes.CONNECTOR_M then
-                            circuit_blocks:delete_wire_extension(cur_block)
+                            circuit_blocks:delete_wire_extension(cur_block, player)
                         end
                         minetest.remove_node(node_pos)
                     end
