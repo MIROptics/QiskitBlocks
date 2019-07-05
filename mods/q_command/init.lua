@@ -695,6 +695,32 @@ minetest.register_node("q_command:q_block", {
                         -- TODO: Put this constant somewhere
                         local BLOCK_WATER_LEVELS = 63
 
+                        -- Place a platform under the circuit
+                        for col_num = 1, math.min(#statevector, num_columns) + 3 do
+                            for row_num = 1, 4 do
+                                -- Assume dir_str is "+Z"
+                                local platform_node_pos = {x = circuit_grid_pos.x + col_num - 3,
+                                                 y = circuit_grid_pos.y - 2,
+                                                 z = circuit_grid_pos.z + 2 - row_num}
+                                if circuit_block.get_circuit_dir_str() == "+X" then
+                                    platform_node_pos = {x = circuit_grid_pos.x + 2 - row_num,
+                                                         y = circuit_grid_pos.y - 2,
+                                                         z = circuit_grid_pos.z - col_num + 3}
+                                elseif circuit_block.get_circuit_dir_str() == "-X" then
+                                    platform_node_pos = {x = circuit_grid_pos.x - 2 + row_num,
+                                                         y = circuit_grid_pos.y - 2,
+                                                         z = circuit_grid_pos.z + col_num - 3}
+                                elseif circuit_block.get_circuit_dir_str() == "-Z" then
+                                    platform_node_pos = {x = circuit_grid_pos.x - col_num + 3,
+                                                         y = circuit_grid_pos.y - 2,
+                                                         z = circuit_grid_pos.z - 2 + row_num}
+                                end
+
+                                minetest.set_node(platform_node_pos,
+                                            {name="darkage:marble_tile"})
+                            end
+                        end
+
                         for col_num = 1, math.min(#statevector, num_columns) do
 
                             -- Assume dir_str is "+Z"
@@ -783,6 +809,7 @@ minetest.register_node("q_command:q_block", {
                             end
 
                         end
+
                     else
                         minetest.debug("Call to statevector_simulator Didn't succeed")
                     end

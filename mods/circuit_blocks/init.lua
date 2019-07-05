@@ -7,7 +7,7 @@
 [X] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
 	in what seems like the same wrong orientation
 [] Place q_command block and wire_extension_block in correct direction
-[] Fix issue when right-clicking empty block with a control tool or rotate tool
+[X] Fix issue when right-clicking empty block with a control tool or rotate tool
 [] Try non-creative mode, using a chest for objects
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
 [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
