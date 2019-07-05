@@ -124,7 +124,7 @@ end
 --]]
 function q_command:player_horiz_direction_string(player)
     local ret_dir = "+Z"
-    local horiz_dir = player:get_look_horizontal()
+        local horiz_dir = player:get_look_horizontal()
     if horiz_dir > math.pi / 4 and horiz_dir <= 3*math.pi / 4 then
         ret_dir = "-X"
     elseif horiz_dir > 3*math.pi / 4 and horiz_dir <= 5*math.pi / 4 then

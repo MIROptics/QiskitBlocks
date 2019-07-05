@@ -1,7 +1,6 @@
 -- TODO:
 
 --[[
-[] Make compute circuit check all the blocks in the wire extensions
 [] Make empty wire blocks appear in correct orientation after removing a gate, as well as the gates themselves
 [] Add all other direction code, including:
 	[] Deleting wire_extension blocks correctly
