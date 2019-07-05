@@ -680,6 +680,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             circuit_blocks:debug_node_info(pos, "In on_punch()")
 
             local node_type = block:get_node_type()
+            local wielded_item = player:get_wielded_item()
 
             if block.is_within_circuit_grid() then
 
@@ -689,7 +690,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         node_type == CircuitNodeTypes.H then
 
                     local placed_wire = -1
-                    local wielded_item = player:get_wielded_item()
                     if wielded_item:get_name() == "circuit_blocks:control_tool" then
                         local threshold = 0.0001
                         if block.get_ctrl_a() == -1 and
@@ -767,6 +767,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         minetest.item_drop(wire_extension_itemstack, player, drop_pos)
 
                     end
+                elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
+                    minetest.chat_send_player(player:get_player_name(),
+                            "Control tool may only be used on X, Y, Z and H gates")
+                elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                    minetest.chat_send_player(player:get_player_name(),
+                            "Rotate tool may only be used on X, Y and Z gates")
                 else
                     -- Necessary to replace punched node
                     circuit_blocks:set_node_with_circuit_specs_meta(pos,
@@ -867,6 +873,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             minetest.chat_send_player(player:get_player_name(),
                                     "Wire connector may only be placed on rightmost column")
                         end
+                    elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
+                        minetest.chat_send_player(player:get_player_name(),
+                                "Control tool may only be used on X, Y, Z and H gates")
+                    elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
+                        minetest.chat_send_player(player:get_player_name(),
+                                "Rotate tool may only be used on X, Y and Z gates")
                     elseif wielded_item:get_name():sub(1, 14) == "circuit_blocks" then
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 wielded_item:get_name(), player)
