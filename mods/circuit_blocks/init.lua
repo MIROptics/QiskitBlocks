@@ -1,17 +1,17 @@
 -- TODO:
 
 --[[
-[] Make empty wire blocks appear in correct orientation after removing a gate, as well as the gates themselves
 [] Add all other direction code, including:
 	[] Deleting wire_extension blocks correctly
 [] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
 	in what seems like the same wrong orientation
 [] Place q_command block and wire_extension_block in correct direction
-[] Rotate nodes in wire extensions that are in non +Z directions
+[] Fix issue when right-clicking empty block with a control tool or rotate tool
 [] Try non-creative mode, using a chest for objects
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
+[] Modify texture configuration on circuit connector blocks (M & F) so that they appear
+	correct on the back side as well
 [] Make circuit extension M block item fall where it can easily be picked up
-[] Fix issue when right-clicking empty block with a control tool or rotate tool
 [] Prevent right-clicking on wire_extension_block after wire_extension exists
 [] Create teleportation demo using JWootton terrain generation image to state vector ideas
 [] Don't allow creating circuit if already exists

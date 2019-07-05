@@ -569,25 +569,65 @@ minetest.register_node("q_command:q_block", {
 
                 for column_num = 1, num_columns do
                     for wire_num = 1, num_wires do
+
+                        -- Assume dir_str is "+Z"
                         local node_pos = {x = circuit_pos_x + column_num - 1,
-                                                  y = circuit_pos_y + num_wires - wire_num,
-                                                  z = circuit_pos_z}
+                                          y = circuit_pos_y + num_wires - wire_num,
+                                          z = circuit_pos_z}
+
+                        if circuit_dir_str == "+X" then
+                            node_pos = {x = circuit_pos_x,
+                                        y = circuit_pos_y + num_wires - wire_num,
+                                        z = circuit_pos_z - column_num + 1}
+                        elseif circuit_dir_str == "-X" then
+                            node_pos = {x = circuit_pos_x,
+                                        y = circuit_pos_y + num_wires - wire_num,
+                                        z = circuit_pos_z + column_num - 1}
+                        elseif circuit_dir_str == "-Z" then
+                            node_pos = {x = circuit_pos_x - column_num + 1,
+                                        y = circuit_pos_y + num_wires - wire_num,
+                                        z = circuit_pos_z}
+                        end
 
                         -- Delete ket blocks to the left of the circuit
                         if column_num == 1 then
                             local ket_pos = {x = node_pos.x - 1, y = node_pos.y, z = node_pos.z}
+
+                            if circuit_dir_str == "+X" then
+                                ket_pos = {x = node_pos.x, y = node_pos.y, z = node_pos.z + 1}
+                            elseif circuit_dir_str == "-X" then
+                                ket_pos = {x = node_pos.x, y = node_pos.y, z = node_pos.z - 1}
+                            elseif circuit_dir_str == "-Z" then
+                                ket_pos = {x = node_pos.x + 1, y = node_pos.y, z = node_pos.z}
+                            end
+
                             minetest.remove_node(ket_pos)
                         end
 
                         -- Delete histogram and basis state blocks at the bottom of the circuit
                         if wire_num == num_wires then
                             local hist_pos = {x = node_pos.x, y = node_pos.y - 1, z = node_pos.z}
+
                             minetest.remove_node(hist_pos)
 
-                            -- Place basis state block
+                            -- Remove basis state block
                             local basis_state_node_pos = {x = hist_pos.x,
-                                                    y = hist_pos.y - 1,
-                                                    z = hist_pos.z - 1}
+                                                          y = hist_pos.y - 1,
+                                                          z = hist_pos.z - 1}
+
+                            if circuit_dir_str == "+X" then
+                                basis_state_node_pos = {x = hist_pos.x - 1,
+                                                        y = hist_pos.y - 1,
+                                                        z = hist_pos.z}
+                            elseif circuit_dir_str == "-X" then
+                                basis_state_node_pos = {x = hist_pos.x + 1,
+                                                        y = hist_pos.y - 1,
+                                                        z = hist_pos.z}
+                            elseif circuit_dir_str == "-Z" then
+                                basis_state_node_pos = {x = hist_pos.x,
+                                                        y = hist_pos.y - 1,
+                                                        z = hist_pos.z + 1}
+                            end
 
                             if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
                                 minetest.remove_node(basis_state_node_pos)
