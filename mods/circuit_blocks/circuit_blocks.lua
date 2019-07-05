@@ -795,6 +795,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end,
         on_rightclick = function(pos, node, player, itemstack)
             local block = circuit_blocks:get_circuit_block(pos)
+            local circuit_dir_str = block.get_circuit_dir_str()
             circuit_blocks:debug_node_info(pos, "In on_rightclick()")
 
             local placed_wire = -1
@@ -845,8 +846,21 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     -- TODO: Make referencing wielded item consistent in this function
                     if wielded_item:get_name() == "circuit_blocks:circuit_blocks_wire_connector_m" then
                         -- Only allow placement on rightmost column
-                        if block.get_circuit_pos().x + block.get_circuit_num_columns() - 1 ==
-                                block.get_node_pos().x then
+                        -- Assume dir_str is "+Z"
+                        local is_rightmost_column = block.get_circuit_pos().x +
+                                block.get_circuit_num_columns() - 1 == block.get_node_pos().x
+                        if circuit_dir_str == "+X" then
+                            is_rightmost_column = block.get_circuit_pos().z -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().z
+                        elseif circuit_dir_str == "-X" then
+                            is_rightmost_column = block.get_circuit_pos().z +
+                                    block.get_circuit_num_columns() - 1 == block.get_node_pos().z
+                        elseif circuit_dir_str == "-Z" then
+                            is_rightmost_column = block.get_circuit_pos().x -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().x
+                        end
+
+                        if is_rightmost_column then
                             circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                     wielded_item:get_name(), player)
                         else
