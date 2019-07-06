@@ -835,7 +835,17 @@ minetest.register_node("q_command:q_block", {
                                 new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat_" .. meas_bit
                             end
 
-                            minetest.swap_node(circuit_node_pos, {name = new_node_name})
+                            local circuit_dir_str = circuit_node_block.get_circuit_dir_str()
+                            local param2_dir = 0
+                            if circuit_dir_str == "+X" then
+                                param2_dir = 1
+                            elseif circuit_dir_str == "-X" then
+                                param2_dir = 3
+                            elseif circuit_dir_str == "-Z" then
+                                param2_dir = 2
+                            end
+
+                            minetest.swap_node(circuit_node_pos, {name = new_node_name, param2 = param2_dir})
 
                         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
                             -- Connector to wire extension, so traverse
