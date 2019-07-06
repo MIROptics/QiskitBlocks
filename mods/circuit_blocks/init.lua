@@ -27,8 +27,9 @@
 [] Can liquid blocks have tooltip that shows probability and other info (e.g. amp & phase)?
 [] Fast way to create walls and floors
 [] Protect against orphaning wire extensions
-[] don't allow placing continuation on a wire extension
 [] Don't allow deletion of individual blocks.
+[] Find better way of programmatically distinguishing (than leading underscore) between
+    blocks that may reside on the circuit grid and those that may not
 [] Filter inventory panel (e.g. hide rotation blocks)
 [] Walk up to a dropped item to pick it up
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
@@ -49,20 +50,47 @@
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
-minetest.register_node("circuit_blocks:qubit_0", {
+minetest.register_node("circuit_blocks:_qubit_0", {
     description = "Qubit 0 block",
     tiles = {"circuit_blocks_qubit_0.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
-minetest.register_node("circuit_blocks:qubit_1", {
+minetest.register_node("circuit_blocks:_qubit_1", {
     description = "Qubit 1 block",
     tiles = {"circuit_blocks_qubit_1.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
+minetest.register_node("circuit_blocks:_alice_cat_0", {
+    description = "Alice cat grumpy block",
+    tiles = {"circuit_blocks_alice_cat_0.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_alice_cat_1", {
+    description = "Alice cat happy block",
+    tiles = {"circuit_blocks_alice_cat_1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_bob_cat_0", {
+    description = "Bob cat grumpy block",
+    tiles = {"circuit_blocks_bob_cat_0.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_bob_cat_1", {
+    description = "Bob cat happy block",
+    tiles = {"circuit_blocks_bob_cat_1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
 
 minetest.register_tool("circuit_blocks:control_tool", {
 	description = "Control tool",

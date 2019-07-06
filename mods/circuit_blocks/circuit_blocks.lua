@@ -879,7 +879,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
                         minetest.chat_send_player(player:get_player_name(),
                                 "Rotate tool may only be used on X, Y and Z gates")
-                    elseif wielded_item:get_name():sub(1, 14) == "circuit_blocks" then
+                    elseif wielded_item:get_name():sub(1, 14) == "circuit_blocks" and
+                        wielded_item:get_name():sub(1, 16) ~= "circuit_blocks:_" then
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 wielded_item:get_name(), player)
                     end

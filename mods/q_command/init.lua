@@ -186,7 +186,7 @@ function q_command:create_blank_circuit_grid()
                 end
 
                 minetest.set_node(ket_pos,
-                        {name="circuit_blocks:qubit_0", param2=param2_dir})
+                        {name="circuit_blocks:_qubit_0", param2=param2_dir})
             end
 
             minetest.set_node(node_pos,
