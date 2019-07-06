@@ -825,6 +825,16 @@ minetest.register_node("q_command:q_block", {
                             local bit_str_idx = num_wires + 1 - wire_num
                             local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
                             local new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
+
+                            -- Use cat measure textures if measure block is cat-related
+                            if circuit_node_block.get_node_name():sub(1, 47) ==
+                                    "circuit_blocks:circuit_blocks_measure_alice_cat" then
+                                new_node_name = "circuit_blocks:circuit_blocks_measure_alice_cat_" .. meas_bit
+                            elseif circuit_node_block.get_node_name():sub(1, 45) ==
+                                    "circuit_blocks:circuit_blocks_measure_bob_cat" then
+                                new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat_" .. meas_bit
+                            end
+
                             minetest.swap_node(circuit_node_pos, {name = new_node_name})
 
                         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
