@@ -1,12 +1,14 @@
 -- TODO:
 
 --[[
+[] Create a barrier block and implementation
 [X] Add all other direction code, including:
 	[X] Deleting wire_extension blocks correctly
 [X] Fix problem of not being able to place circuit extension on a circuit grid in non +Z orientation
 [X] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
 	in what seems like the same wrong orientation
 [] Place q_command block and wire_extension_block in correct direction
+[] Verify that measure blocks are oriented correctly
 [X] Fix issue when right-clicking empty block with a control tool or rotate tool
 [] Try non-creative mode, using a chest for objects
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
@@ -132,6 +134,7 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, 0, fals
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.TRACE, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.BARRIER, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"", "z")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"","0")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","1")

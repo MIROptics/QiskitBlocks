@@ -331,6 +331,9 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
                 -- Hadamard gate
                 qasm_str = qasm_str .. 'h q[' .. wire_num_idx .. '];'
             end
+        elseif node_type == CircuitNodeTypes.BARRIER then
+            -- barrier
+            qasm_str = qasm_str .. 'barrier q[' .. wire_num_idx .. '];'
         elseif node_type == CircuitNodeTypes.MEASURE_Z then
             if include_measurement_blocks then
                 -- Measurement block

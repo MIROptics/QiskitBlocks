@@ -643,6 +643,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_tdg_gate"
     elseif circuit_node_type == CircuitNodeTypes.TRACE then
         texture_name = "circuit_blocks_trace"
+    elseif circuit_node_type == CircuitNodeTypes.BARRIER then
+        texture_name = "circuit_blocks_barrier"
     elseif circuit_node_type == CircuitNodeTypes.MEASURE_Z then
         texture_name = "circuit_blocks_measure_" .. suffix
     elseif circuit_node_type == CircuitNodeTypes.CONNECTOR_M then
