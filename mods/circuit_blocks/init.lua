@@ -1,7 +1,7 @@
 -- TODO:
 
 --[[
-[] Create a barrier block and implementation
+[X] Create a barrier block and implementation
 [X] Add all other direction code, including:
 	[X] Deleting wire_extension blocks correctly
 [X] Fix problem of not being able to place circuit extension on a circuit grid in non +Z orientation
@@ -19,7 +19,9 @@
 [] Prevent right-clicking on wire_extension_block after wire_extension exists
 [] Create teleportation demo using JWootton terrain generation image to state vector ideas
 [] Don't allow creating circuit if already exists
-[] Create marble floor and replace after deleting circuit grid
+[] Create marble floor and replace after deleting circuit grid, and extend base to max(circuit_width, statevector_dimensions)
+[] Make tools and blocks reach farther in non-creative mode
+[] Display wire local state
 [] Clicking basis state ellipse block shows a state vector display?
 [] Create game environment with rooms that are significant in quantum computing history
 [] Make arrow blocks (connector, extenders, etc.) point correct direction on all sides
