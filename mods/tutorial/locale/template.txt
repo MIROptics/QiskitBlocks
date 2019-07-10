@@ -1,0 +1,286 @@
+# Section headers
+Introduction
+Minetest
+Player Camera
+Small Abysses
+Jumping (1)
+Jumping (2)
+Sneaking
+Sneak-jumping
+Information about the following tutorial sections
+Hotbar
+Comestibles and Eating
+Chests
+Climbing Ladders
+Swimming
+Diving
+Swimming up a Waterfall
+Viscosity
+Liquid sources and flowing liquids
+Pointing (1)
+Pointing (2)
+Health and Damage
+Blocks Which Hurt You
+Death and Respawning
+Items
+Tools
+Using the Inventory
+Using blocks
+Comment About Chests
+Building Some Blocks
+Building at Usable Blocks
+Mining blocks
+Mining example: Cobblestone
+Mining example: Stone
+Mining example: Conglomerate
+Mining example: Wooden Planks
+Mining example: Weak glass
+Unminable blocks
+Special blocks
+Falling blocks
+Attached blocks
+Crafting Basics
+Crafting Faster
+Crafting using Shapeless Recipes
+Crafting Groups
+Furnace Operation Instructions
+Repairing Tools
+End of the Basic Tutorial
+Controls Overview
+Online Resources
+Games
+No-jumping blocks
+Minimap
+Inventory shortcut
+Bouncy blocks
+
+# Misc. formspec captions
+Warning: You're not playing in singleplayer mode
+Warning: Creative mode is active
+You fell from the castle!
+Gold ingots in the tutorial
+You've finished the tutorial!
+You found a hidden diamond!
+You have collected all hidden diamonds!
+
+# Sign infotext (%s is replaced with sign caption
+%s (Right-click to read)
+
+# Craft guide infotext
+This is a crafting example.
+
+# Awards
+golden cup
+diamond cup
+This golden cup has been awarded for finishing the tutorial.
+This diamond cup has been awarded for collecting all hidden diamonds.
+
+# Kick message
+You have voluntarily exited the tutorial.
+
+# Formspec buttons
+Continue
+Continue anyways
+Close
+Leave tutorial
+Go to Good-Bye room
+
+# Teleport dialog
+Select teleport destination:
+Good-Bye room
+
+# Items
+reinforced wall
+reinforced glass
+weak glass
+apple snatcher
+day/night switch (day)
+day/night switch (night)
+waterfall switch (on)
+waterfall switch (off)
+tutorial sign '%s'
+# “ruler” as in “distance measuring device”
+ruler
+# Crafting examples
+crafting example: white paper
+crafting example: colored paper
+crafting example: wheat
+crafting example: tool repair
+
+# Tutorial text: inventory
+The inventory menu usually contains the player inventory. This allows you\nto carry along items throughout the world.\n\nEvery inventory is made out of slots where you can store items in. You can store one\nentire stack of items per slot, the only condition is that the items are of the same\ntype. In this tutorial all items except for tools stack up to 99 items, but this number\ncan vary in actual games.\n\nHere are the controls which explain how to move around the items within the inventory:\n\nIn the game:\n   Open inventory menu: [I]\n\nWhen the inventory is opened and you don't hold any items:\n   Take item stack: [Left mouse button]\n   Take 10 items from item stack: [Middle mouse button]\n   Take half item stack: [Right mouse button]\n\nWhen you took an item stack in the inventory:\n   Put item stack: [Left mouse button]\n   Put 10 items from item stack: [Middle mouse button]\n   Put single item from item stack: [Right mouse button]\n\nYou can also drop an item stack by holding it in the inventory, then clicking anywhere\noutside of the window.
+
+# Tutorial text: mine_conglomerate
+This is a cube of conglomerate. You need a pickaxe to mine it.\nConglomerate drops something based on probability. Conglomerate randomly drops between 1\nand 5 rocks, when mined.
+
+# Tutorial text: mine
+Mining is a method to remove a single block with a mining tool. It is a very important\ntask in Minetest which you will use often.\n\n(It is recommended that you go to the crafting and items house first. It is right in front of\nthis sign.)\n\nTo be able to mine a block, you need\n\n1. to have minable block, after all,\n2. to point on the block and\n3. to carry an appropriate tool.\n\n   Mine: [Left mouse button]\n\nWhen you are ready, hold the left mouse button while pointing the block. Depending on\nthe block type and the tool properties, this can take some time. Some tools are fast with\nsome particular block types, some other tools may be slower to mine other block types.\nIf you do not carry an appropriate tool, you are not able to mine the block at all.\nYou can tell that you are actually mining when you see cracks or some other animation\non the block in question.\n\nWhen done mining, blocks will often add one or more items to your inventory. This is called\nthe "drop" of a block and depends on the block type. Now try to mine those large cubes in\nthis area, using different tools. Note that all blocks here are just examples to show you\ndifferent kinds of drops.
+
+# Tutorial text: fallout
+You somehow managed to fall from the castle or got otherwise below it!\nHow did you do that?\n\nAnyways, you've got teleported back to the starting location. Whatever you did, be more\ncareful next time.
+
+# Tutorial text: disable_jump
+These nasty blocks on the floor prevent you from jumping when you stand on them.
+
+# Tutorial text: blocks
+The world of Minetest is made entirely out of blocks, or voxels, to be precise.\nBlocks can be added or removed with the correct tools.\n\nIn this section, we'll show you a few special but common blocks which behave in unexpected,\nways.,\n\nOf course, games can come up with more special weird blocks.
+
+# Tutorial text: eat
+In this chest you find some comestibles. Comestibles are items which instantly\nheal you when eaten. This removes the item from your inventory.\nTo eat one, select the comestible in your hotbar, then click the left mouse button.\nUnlike other items, you cannot punch or attack while holding a comestible. To be able\nto attack, you have to select something else.\nOf course, this does not have to be the only way to heal you.\n\n   Eat comestible: [Left mouse button]\n\nDon't forget to take the gold ingot.
+
+# Tutorial text: sneak
+Sneaking is a special move. As long as you sneak, you walk slower, but you are\nguaranteed to not accidentally fall off the edge of a block. This also allows you to\n"lean over" in a sense.\nTo sneak, keep the sneak key pressed. As soon as you release the sneak key,\nyou walk at normal speed again. Be careful not releasing the sneak key when you\nare at a ledge, you might fall!\n\n   Sneak: [Shift]\n\nKeep in mind that the [Shift] key is used for a large number of other things in Minetest.\nSneaking only works when you are not in a liquid stand on solid ground and are not at a\nladder.\n\nYou may try out sneaking at this little blocky pyramid.
+
+# Tutorial text: jumpover
+Here is a slightly larger abyss. Luckily, you can also jump just far enough to\ncross a gap of this width. Don't worry, the abyss is not deep enough to hurt you\nwhen you fall down. There are stairs which lead back up here.\n\n   Jump: [Space]
+
+# Tutorial text: notsingleplayer
+You are now playing the tutorial in multiplayer mode.\nBut this tutorial is optimized for the singleplayer mode.\nThis tutorial does not work properly with more than 1 player.\n\nUnless you are sure no other players will join, you should\nleave now and start the tutorial in singleplayer mode.
+
+# Tutorial text: subgame
+Now since you probably now the basics, you may want to actually play or build something.\nMinetest comes bundled with a default game, which you may try out now.\nSadly, there is currently no tutorial for the default game.\nYou may want to read the "Getting Started" section of the Community Wiki,\nwhich is more specific about the default game.\nSaid document can be found at:\n\n<https://wiki.minetest.net/Getting_Started>\n\nAlternatively, you may check out one of the games which are shared on the Minetest forums.
+
+# Tutorial text: cam
+Minetest has 3 different views which determine the way you see the world.\nThe three modes are:\n\n- First-person view (default)\n- Third-person view from behind\n- Third-person view from the front\n\nYou can change the camera mode by pressing [F7] (but you have to close this\nwindow first).\n\n   Switch camera mode: [F7]
+
+# Tutorial text: pointing1
+An important general concept in Minetest is pointing. As mentioned earlier,\nthere is a crosshair in the center of the screen.\n\nYou can point several things in Minetest:\n\n- Blocks\n- Dropped items\n- Other players\n- Many other things\n\nYou can only point one thing at once, or nothing at all. You can tell when\nyou point something if it is surrounded by a thin cuboid wireframe or\nhighlighted (you can change the style in your settings).\n\nTo point something, three conditions have to be met:\n1. The thing in question must be pointable at all\n2. Your crosshair must be exactly over the thing in question\n3. You must be close enough to the thing\n\nWhen a thing is pointed, you can do different stuff with it; e.g. collecting it,\npunching it, building to it, etc. We come to all that later.\n\nNow collect that apple from the small tree in front of this sign, and the gold bar.\nTo do that, you must point it and click with the left mouse button.
+
+# Tutorial text: waterfall
+You can easily swim up this waterfall. Go into the water and hold the space bar until you're\nat the top\n\n   Swim forwards: [W]\n   Swim backwards: [S]\n   Swim leftwards: [A]\n   Swim rightwards: [D]\n   Swim upwards: [Space]\n   Swim downwards: [Shift]
+
+# Tutorial text: liquidtypes
+Liquids behave somewhat weirdly in Minetest. Actually, there are 2 kinds of liquids.\nIf you watched the waterfall closely, you may have noticed that there is a slight difference\nbetween the water blocks that make the waterfall, and those up here in the basin.\n\nMinetest distinguishes between liquid source and flowing liquid.\n\nA liquid source block is always a full cube.\nA flowing liquid block looks slightly different. Often, it is not a full cube, but has a more or less\ntriangular shape. Also, flowing liquids usually have an unique "flowing" animation, but this may\nnot be the case for all liquids.\n\nUp in the basin, you see four rows of liquid sources, followed by one row of flowing\nliquids, followed by the waterfall itself. The waterfall itself is solely made of flowing liquids.\n\nLiquid sources generate flowing liquids around them. Liquid sources can also exist on their own.\nFlowing liquids are not able to exist on their own. They have to originate from a liquid source.\nIf the liquid source is gone, or the way to one is blocked, the flowing liquid will slowly dry\nout.\n\nTo the left of this sign is a special block. When used, it will block the liquid flow.\nUse that block, being close enough and looking at it, and watch the waterfall dry out.\n\n   Use something: [Right mouse button]
+
+# Tutorial text: falling_node
+Some blocks need to rest on top of another block, otherwise, they fall down.\nTry it and mine the block below the uppermost block.
+
+# Tutorial text: online
+You may want to check out these online resources related to Minetest:\n\nOfficial homepage of Minetest: <https://minetest.net/>\nThe main place to find the most recent version of Minetest.\n\nCommunity wiki: <https://wiki.minetest.net/>\nA community-based documentation website for Minetest. Anyone with an account can edit\nit! It also features a documentation of the default game, which was NOT covered by\nthis tutorial.\n\nWebforums: <https://forum.minetest.net/>\nA web-based discussion platform where you can discuss everything related to Minetest.\nThis is also a place where player-made mods and games are published and\ndiscussed. The discussions are mainly in English, but there is also space for\ndiscussion in other languages.\n\nChat: <irc://irc.freenode.net#minetest>\nA generic Internet Relay Chat channel for everything related to Minetest where people can\nmeet to discuss in real-time.\nIf you do not understand IRC, see the Community Wiki for help.
+
+# Tutorial text: craft1
+Crafting is the task of taking several items and combining them to form a new item.\nCrafting is another important task in Minetest.\n\nTo craft something, you need a few items and a so-called crafting grid.\n\nIn this tutorial, you have a grid of size 3 times 3 in your inventory.\nLet's get right into crafting:\n\n1. Take 3 sheets of paper from the chest next to this sign.\n2. Open the inventory menu with [I].\n3. Place the paper in the crafting grid so that they form a 1×3 vertical line.\n4. A book should appear in the output slot. Click on it to take it,\n   then put it in your player inventory.\n\nThis process consumes the paper.\nWhen you have the book in your inventory, go on with the next sign.
+
+# Tutorial text: death
+Oops! So it seems you just have died. Don't worry, you don't have lost any of your\npossessions and you have been revived. You are still in Tutorial World at a different\nlocation.\n\nYou have arrived at the so-called respawn location of Tutorial World. You will\nalways appear here after you died. This is called "respawning". In most worlds,\nhowever, you will respawn in a slightly randomized location.\n\nThe tutorial uses a so-called fixed spawn point, so you respawn always at the same\nspot. This is unusual for singleplayer worlds, but in online play some servers,\nuse fixed spawn points, too.\n\nUnder normal conditions you would have lost all or a part of your possessions or some\nother bad thing would have happened to you. But not here, this is a tutorial.\n\nTo continue, just drop out at the end of that gangway. The drop is safe.
+
+# Tutorial text: creative
+The creative mode is turned on. If you are here to learn how to play Minetest,\nyou should probably leave now, turn creative mode off and restart the\ntutorial.\n\nRoughly spoken, creative mode is for messing around with the game without\nthe normal gameplay restraints.\n\nYou can leave now by pressing "Leave tutorial", or later, by pressing [Esc].
+
+# Tutorial text: hotbar
+At the bottom of the screen you see 8 squares. This is called the 'hotbar'.\nThe hotbar allows you to quickly access some items from your inventory.\nIn our case, the upper 8 slots in your inventory.\nYou can change the selected item with the mouse wheel, if you have one, or with the\nnumber keys.\n\n   Select previous item in hotbar: [Mouse wheel up]\n   Select next item in hotbar: [Mouse wheel down]\n   Select item #N in hotbar: the key with the number #N\n\nThe item you've selected is also the item you wield. This will be important later for\ntools, mining, building, etc.
+
+# Tutorial text: damageblock
+Careful! These spikes hurt you when you stand inside, so don't walk into them.\nTry to walk around and get the gold ingot.\n\nThey damage you every second you stand in them.\n\nThis is one of the many ways you can get hurt in Minetest.
+
+# Tutorial text: last_diamond
+Congratulations!\nYou have collected all the diamonds of Tutorial World!\n\nTo recognize this achievement, you have been awarded with a diamond cup. It has been placed in\nthe Good-Bye Room for you.
+
+# Tutorial text: first_diamond
+Great, you have found and collected a hidden diamond! In Tutorial World, there are 12 hidden\ndiamonds. Can you find them all? The first diamond may have been easy to collect, but the\nremaining 11 diamonds probably won't be that easy.\n\nIf you manage to find them all, you will be awarded a symbolic prize.
+
+# Tutorial text: dive
+To get to the other side, you have to dive here. Don't worry, the tunnel is not\nlong. But don't stay too long in the water, or else you take damage.\nAt the bottom of the pool lies a gold ingot. Try to get it!\n\n   Swim forwards: [W]\n   Swim backwards: [S]\n   Swim leftwards: [A]\n   Swim rightwards: [D]\n   Swim upwards: [Space]\n   Swim downwards: [Shift]
+
+# Tutorial text: craft4
+Another important thing to know about crafting are so-called groups. Crafting recipes do\nnot always require you to use the exactly same items every time.\nThis tutorial has a special recipe for books. In the chest, you will find paper in 4\ndifferent colors. You can also make a book by placing 3 paper sheets of any color\nin a vertical line.\nThe paper color does not matter here, you can use only white paper, only orange paper\nor even mix it. What is important here are the occupied slots.\nThis is possible because all 4 types of (example) paper belong to the same group and\nour book recipe accepts not only white paper, but any paper of that group.\n\nFeel free to experiment a bit around with this.
+
+# Tutorial text: repair
+Some games may come with a special recipe which allows you to repair your tools.\nIn those, repairing works always the same way:\nPlace two more or less worn out tools of the same kind into the crafting crid and\ntake the result. The result is a new tool which is slightly repaired by a fixed percentage.\n\nOf course, this tutorial comes with such a recipe. The chest next to this sign stores\nsome damaged tools which you may try to repair now.
+
+# Tutorial text: attached_node
+Some blocks have to be attached to another block, otherwise, they drop as an item\nas if you would have mined it.\n\nAttached here is a picture frame. You can't collect or mine it directly, but if you mine\nthe block it is attached to, it will drop as an item which you can collect.
+
+# Tutorial text: last_gold
+You have collected all the gold ingots in this tutorial.\n\nThis means you have now travelled to each station. If you read and understood everything,\nyou have learned everything which can be learned from this tutorial.\n\nIf this is the case, you are finished with this tutorial and can leave now. But feel\nfree to stay in this world to explore the area a bit further.\n\nYou may also want to visit the Good-Bye room, which has a few more informational\nsigns with supplemental information, but nothing of is is essential or gameplay-relevant.\n\nIf you want to stay, you leave later by pressing [Esc] to open the pause menu and then\nreturn to the main menu or quit Minetest.
+
+# Tutorial text: basic_end
+If you think you have enough of this tutorial, you can leave at any time. There are\n13 gold ingots at the stations to be found, to help you keep track.\n\nYou can find the gold ingots at the following stations:\n- Ladders\n- Sneaking\n- Swimming\n- Diving\n- Waterfall\n- Viscosity\n- Comestibles and Eating\n- Pointing\n- Crafting\n- Smelting\n- Mining\n- Building\n- Damage and Health\n\nIf you've got 13 gold ingots (in total), you probably know now everything which can be\nlearned from this tutorial. Collecting the gold ingots is optional and won't give you\nanything special.\n\nAfter you closed this dialog, you can press [Esc] to open the pause menu and return\nto the main menu or quit Minetest.\n\nIn the next room there are some further signs with information, but it is entirely optional\nand not related to gameplay.
+
+# Tutorial text: mine_wood
+These are wooden planks. In the tutorial, you can only mine those blocks with an axe.\nWooden planks drop themselves.\n\nIn Minetest, we use the term "mining" in a general sense, regardless of the material.
+
+# Tutorial text: first_gold
+You have collected your first gold ingot. Those will help you to keep track in this tutorial.\nThere are 13 gold ingots in this tutorial.\n\nThere is a gold ingot at every important station. If you collected all ingots, you are\ndone with the tutorial, but collecting the gold ingots is not mandatory.
+
+# Tutorial text: craft3
+Do you got your dough? Good.\n\nYou may have noticed that crafting always consumes one item from each occupied slot\nof the crafting grid. This is true for all crafting recipes.\nYou can speed crafting up a bit when you click with the middle mouse button on the\nitem in the output slot. Doing so will attempt to do the same craft up to 10 times,\ninstead of just once.\n\nFeel free to try it with the remaining wheat or just go on with the next sign.
+
+# Tutorial text: intro
+Welcome! This tutorial will teach you the most crucial basics of Minetest.\nThis tutorial assumes that you have not changed the default keybindings yet.\n\nLet's start for the most important keybindings right now:\n\n   Look around: Move the mouse\n   Walk forwards: [W]\n   Strafe left: [A]\n   Walk backwards: [S]\n   Strafe right: [D]\n   Action: [Right mouse button]\n  Pause menu (you can exit the game here): [Esc]\n\nYou will find signs with more introductionary texts throughout this tutorial.\nThe "action" key has many uses. For now, let's just say you need it to read\nthe signs. Look at one and right-click it to read it.\n\nTo look at a sign, make sure you are close enough to it and the crosshair in the\ncenter of the screen points directly on the sign.\n\nYou can exit the tutorial at any time, the world will be automatically saved.\n\nNow feel free to walk around a bit and read the other signs to learn more.
+
+# Tutorial text: mine_stone
+This is stone. You need a pickaxe to mine it. When mined, stone will drop cobblestone.
+
+# Tutorial text: tools
+A tool is a special kind of item.\nTools can be used for many things, such as:\n- Breaking blocks\n- Collecting liquids\n- Rotating blocks\n- Many others!\nThe number of tools which are possible in Minetest are innumberable and are\ntoo many to cover in this tutorial.\nBut at least we will look at a very common and important tool type: mining tools,\nWe will come to that in the mining section.\n\nMany tools wear off and get destroyed after you used them for a while. In an\ninventory the tool's "health" is indicated by a colored bar\n\nTools may be able to be repaired, see the sign about repairing.
+
+# Tutorial text: runover
+This abyss behind this sign is so small that you can even walk over it,\nas long as you don't stop midway. But you can jump over it anyways, just to be,\nsafe.
+
+# Tutorial text: jumpup
+You can't reach this upper block by walking. But luckily, you are able to jump.\nFor our purposes, you can jump just high enough to reach one block above you.\nBut you can't two blocks high.\nPress the space bar once to jump at a constant height.\n\n   Jump: [Space]\n\nNow try it to continue.
+
+# Tutorial text: build
+Another important task in Minetest is building blocks.\nBuilding" here refers to the task of placing one block in your possession onto\nanother block in the world.\nUnlike mining, building a block happens instantanous. To build, select a block in your\nhotbar, point to any block in the world and press the right mouse button.\nYour block will be immediately placed on the pointed side.\nIt is important that the block you want to build to is pointable. This means you cannot build\nnext to or on liquids by normal means.\n\n   Build on ordinary block: [Right mouse button]\n\nTry to get up to that little hole by using the wood blocks in the chest. There is another\ngold ingot waiting for you.
+
+# Tutorial text: build_special
+You may have wondered how you can build on a block which you use, like a chest.\nFor this, you have to hold the sneak key and then use the build key.\n\n   Build on usable block: [Shift] + [Right mouse button]
+
+# Tutorial text: controls
+To recap, here is an overview over the most important default controls:\n\n   Move forwards: [W]\n   Move left: [A]\n   Move backwards: [S]\n   Move right: [D]\n   Jump: [Space]\n   Sneak: [Shift]\n   Move upwards (ladder/liquid): [Space]\n   Move downwards (ladder/liquid): [Shift]\n\n   Toggle camera mode: [F7]\n   Toggle minimap mode: [F9]\n\n   Select item in hotbar: [Mouse wheel]\n   Select item in hotbar: [0] - [9]\n   Inventory menu: [I]\n\n   Collect pointed item: [Left mouse button]\n   Drop item stack: [Q]\n   Drop single item: [Shift] + [Q]\n\n   Punch: [Left mouse button]\n   Mine: [Left mouse button]\n   Build/use: [Right mouse button]\n   Build: [Shift] + [Right mouse button]\n\n   Abort/open pause menu: [Esc]\n\nYou can review a shorter version of the controls in the pause menu.
+
+# Tutorial text: mine_immortal
+There can always be some blocks which are not minable by any tool. In our tutorial, all\nthose castle walls can't me mined, for example.
+
+# Tutorial text: viscosity
+Minetest mods can introduce various liquids which differ in their properties.\nProbably the most important property is their viscosity. Here you have some\npools which differ in their viscosity. Feel free to try them out.
+
+# Tutorial text: ladder
+This is a ladder. Ladders help you to climb up great heights or to climb down safely.\nTo climb a ladder, go into the block occupied by the ladder and hold one of the\nfollowing keys:\n\n   Climb up ladder: [Space]\n   Climb down ladder: [Shift]\n\nNote that sneaking and jumping do not work when you are at a ladder.
+
+# Tutorial text: craft2
+To craft the book you have used a so-called crafting recipe. You must know the crafting\nrecipes as well so you can craft.\n\nThe crafting recipe you used in particular is a so-called shaped recipe. This means the\npattern you place in the crafting grid matters, but you can move the entire pattern\nfreely.\n\nThere is another kind of crafting recipe: Shapeless.\nShapeless recipes only care about which items you place in the crafting grid, but not in\nwhich pattern. In the next chest you find some wheat. Let's make dough from it! For this,\nyou have to place at least 1 wheat in 4 different slots, but the other slots must be empty.\nWhat is special about this recipe is that you can place them anywhere in the grid.\n\nWhen you got your dough, go on with the next sign.
+
+# Tutorial text: mine_glass
+This is some weak glass. You can break it with your bare hands. Or you can use your pickaxe,\nwhich is faster. Note that it looks slightly different than the other glass in this world.\nThese glass blocks don't drop anything.
+
+# Tutorial text: minetest
+Minetest itself is not a game, it is a game engine.\nTo be able to actually play it, you need something called a "game".\n\nDon't worry, Minetest comes pre-installed with a rather simple default game,\ncalled "Minetest Game".\n\nThis tutorial teaches you the basics of Minetest (the engine), things which are true for\nall games. This tutorial does not teach you how to play a particular game, not\neven the default one.
+
+# Tutorial text: swim
+What you see here is a small swimming pool. You are able to swim and dive.\nDiving usually costs you breath. While diving, 10 bubbles appear in the heads-up display.\nThese bubbles disappear over time while diving and when you are out of bubbles,\nyou slowly lose some health points. You have to back up to the surface from time to\ntime to restore the bubbles.\n\nMovement in a liquid is slightly different than on solid ground:\n\n   Swim forwards: [W]\n   Swim backwards: [S]\n   Swim leftwards: [A]\n   Swim rightwards: [D]\n   Swim upwards: [Space]\n   Swim downwards: [Shift]\n\nAt the bottom of the pool lies a gold ingot. Try to get it!
+
+# Tutorial text: chest
+This is a chest. You can view its contents by right-clicking it. In the menu you will see\ntwo inventories, on the upper part the chest inventory and on the lower part the player\ninventory. Exchanging items works exactly the same as in the inventory menu.
+
+# Tutorial text: smelt
+This is a furnace. Furnaces can be used to turn a smeltable item with help of a fuel\nto a new item. Many items can be furnace fuels, but not all. A few items are smeltable.\n\nIn order to operate a furnace, you have to put the smeltable item into the 'Source' slot\nand the fuel into the 'Fuel' slot.\nAs soon as the items have been placed, the furnace automatically starts to smelt the\nitems. The furnace becomes active and consumes an item in the fuel slot. The flame\ngoes on and will continue burning for a given time. The time depends on the fuel type.\nSome fuels burn very short, and others burn longer. In the furnace menu, the burn time\nis indicated by the flame symbol. As soon as the flame goes out, the furnace may\ncontinue burning if there is still fuel and smeltable material in the furnace,\notherwise, the furnace becomes inactive again.\nThe smeltable material has to be exposed to the flame for a given time as well. This\ntime depends on the type of the material, too. Some material smelt faster than others.\nYou can see the smelting progress of a single item on the progress arrow. If one item\nhas been smelt, the result goes to one of the output slots, where you can take it.\n\nIn the left chest you find some fuels and in the right chest you find some materials to\nsmelt. Feel free to experiment with the furnace a bit. Smelt the gold lump to receive\nthis station's gold bar.\n\nAgain, this furnace is just an example; the exact operation may differ slightly from\ngame to game.
+
+# Tutorial text: health
+Unless you have damage disabled, all players start with 20 hit points (HP), represented\nby ten hearts in the heads-up display. One HP is represented by half a heart in this\ntutorial, but the actual representation can vary from game to game.\n\nYou can take damage for the following reasons (including, but not limited to):\n- Falling too deep\n- Standing in a block which hurts you\n- Attacks from other players\n- Staying too long in a liquid\n\nIn this tutorial, you can regain health by eating a comestible. This is only an example,\nmods and games may come with other mechanisms to heal you.\n\nWhen you lose all your hit points, you die. Death is normally not really that bad in Minetest.\nWhen you die, you will usually lose all your possessions. You are able to put yourself\ninto the world immediately again. This is called "respawning". Normally you appear at a\nmore or less random location.\nIn the tutorial you can die, too, but don't worry about that. You will\nrespawn at a special location you can't normally reach and keep all your posessions.\nGames may introduce special events on a player's death.
+
+# Tutorial text: items
+Throughout your journey, you will probably collect many items. Once you collected\nthem, blocks are considered to be items, too.\n\nItems can be stored in your inventory and selected with the hotbar (see the other signs).\nYou can wield any items; you can even punch with almost any item to hurt enemies.\nUsually, you will deal a minimal default damage with most items. Even if you do not hold,\nan item at all.\nIf you don't want to have an item anymore, you can always throw it away. Likewise,\nyou can collect items which lie around by pointing and leftclicking them.\n\n   Collect item: [Left mouse button]\n   Drop carried item stack: [Q]\n   Drop single item from carried item stack: [Shift] + [Q]\n\nOn the ledge at the right to this sign lies an item stack of 50 rocks so you have some items,\nto test out the inventory.
+
+# Tutorial text: orientation
+From this point on, there will be branching paths. For orientation, we placed\nsome arrow signs. They just show a short text when you hover them, that's all.\n\nYou don't have to follow the sections in any particular order, with one exception,\nfor which you will be informed.
+
+# Tutorial text: mine_cobble
+This is cobblestone. You can mine it with a pickaxe.\nThis cobblestone will always drop itself, that means, cobblestone. Dropping itself is the\nusual dropping behaviour of a block, throughout many games.
+
+# Tutorial text: pointing2
+The distance you need to point to things solely depends on the tool you carry.\nMost tools share a default value but some tools may have a longer or shorter distance.\n\nAt the moment, your only "tool" is the hand. It was good enough to collect the apple\nfrom the small tree.\n\nAbove this sign hang some apples, but you cannot reach them by normal means. At the\nwall in front of this sign lies a special example tool which you can use to retrieve the apple\nfrom afar.\n\nTo take the tool, point to it and click the left mouse button. Then select it with the\nmouse wheel or the number keys. You will learn more about tools in a different section.
+
+# Tutorial text: use
+You will often meet some blocks you can use. Something special happens when you\nright-click while pointing on them.\nIn fact, you already used such blocks: All the signs you read are "usable" blocks.\n\nThere is a strange device next to this sign. Use it and see what happens.\n\n   Use usable block: [Right mouse button]
+
+# Tutorial text: minimap
+Press the [F9] key to make a minimap appear on the top right.\nThe minimap helps you to find your way around the world.\nPress it again to toggle through different minimap modes and zoom levels.\n\nThere are 2 minimap modes and 3 zoom levels.\n\nSurface mode is a top-down view of the world, roughly resembling the\ncolors of the blocks this world is made on. It only shows the topmost\nblocks, everything below is hidden, like a satellite photo. Surface\nmode is useful if you got lost.\n\nRadar mode is more complicated. It displays the "denseness" of the area\naround you and changes with your height. Roughly, the more green an\narea is, the less "dense" it is. Black areas have many blocks. Use\nthe radar to find caverns, hidden areas, walls and more. Currently,\nradar mode does not work in the tutorial. Sorry, you have to try it\nout in games.\n\nThere are also two different direction modes. Normally, "up" on the minimap\nis always pointing to the North. But if you press [Shift]+[F9], the minimap\nwill instead rotate with your looking direction, so "up" is always your\nlooking direction.\n\nIn some games, the minimap may be disabled.\n\n   Toggle minimap mode: [F9]\n   Toggle minimap rotating: [Shift]+[F9]
+
+# Tutorial text: listrings
+By the way, if you are tired of clicking, there is a little convenience\nfeature:\nHold [Shift] while you left-click on an item stack in a menu to\nmove it instantly to another relevant section. For example, in this tutorial\nyou can use it to move an item stack from the chest into your inventory (and\nvice-versa) with a single click.\n\n   [Shift]+[Left click]: Move full item stack to other section in menu
+
+# Tutorial text: bouncy
+Whee! The blocks will make you bounce if you jump on them. They also can bounce\nyou from the side, if you are fast enough.
+
