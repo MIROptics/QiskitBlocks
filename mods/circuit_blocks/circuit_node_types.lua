@@ -16,5 +16,6 @@ CircuitNodeTypes = {
     TRACE = 12, -- In the path between a gate part and a "control" or "swap" part
     MEASURE_Z = 13,
     CONNECTOR_M = 14, -- Block that connects a wire to a distant wire
-    CONNECTOR_F = 15 -- Block that connects a wire from a distant wire
+    CONNECTOR_F = 15, -- Block that connects a wire from a distant wire
+    BLOCH_SPHERE = 16 -- Block that depicts the state of a qubit on a Bloch sphere
 }

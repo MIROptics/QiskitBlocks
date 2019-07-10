@@ -156,4 +156,11 @@ for idx = 0, ROTATION_RESOLUTION do
     circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, idx, true)
 end
 
+for y_rot = 0, 8 do
+    for z_rot = 0, 15 do
+        circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "", y_rot, z_rot)
+    end
+end
 
+-- Create a blank Block sphere
+circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "", nil, nil)

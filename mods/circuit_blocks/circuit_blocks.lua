@@ -586,7 +586,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                                pi16rotation,
                                                is_gate,
                                                drop_name,
-                                               suffix)
+                                               suffix,
+                                               y_pi8rot,
+                                               z_pi8rot)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
         texture_name = "circuit_blocks_empty_wire"
@@ -651,6 +653,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_wire_connector_m"
     elseif circuit_node_type == CircuitNodeTypes.CONNECTOR_F then
         texture_name = "circuit_blocks_wire_connector_f"
+    elseif circuit_node_type == CircuitNodeTypes.BLOCH_SPHERE then
+        if y_pi8rot and z_pi8rot then
+            texture_name = "circuit_blocks_qubit_bloch_y" .. y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+        else
+            texture_name = "circuit_blocks_qubit_bloch_blank"
+        end
     end
 
     -- minetest.debug("circuit_blocks:"..texture_name)
