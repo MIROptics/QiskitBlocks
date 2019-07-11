@@ -883,6 +883,30 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             minetest.chat_send_player(player:get_player_name(),
                                     "Wire connector may only be placed on rightmost column")
                         end
+                    elseif wielded_item:get_name() == "circuit_blocks:circuit_blocks_qubit_bloch_blank" then
+                        -- TODO: Try using node_type == ... instead
+                        -- Only allow placement on rightmost column
+                        -- Assume dir_str is "+Z"
+                        local is_rightmost_column = block.get_circuit_pos().x +
+                                block.get_circuit_num_columns() - 1 == block.get_node_pos().x
+                        if circuit_dir_str == "+X" then
+                            is_rightmost_column = block.get_circuit_pos().z -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().z
+                        elseif circuit_dir_str == "-X" then
+                            is_rightmost_column = block.get_circuit_pos().z +
+                                    block.get_circuit_num_columns() - 1 == block.get_node_pos().z
+                        elseif circuit_dir_str == "-Z" then
+                            is_rightmost_column = block.get_circuit_pos().x -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().x
+                        end
+
+                        if is_rightmost_column then
+                            circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                    wielded_item:get_name(), player)
+                        else
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "Bloch sphere display may only be placed on rightmost column")
+                        end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                         minetest.chat_send_player(player:get_player_name(),
                                 "Control tool may only be used on X, Y, Z and H gates")

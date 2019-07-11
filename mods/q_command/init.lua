@@ -669,6 +669,84 @@ minetest.register_node("q_command:q_block", {
                             url_code.urlencode(qasm_with_measurement_str)
                 }
 
+
+                local function update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num, statevector)
+                    local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+
+                    if circuit_node_block then
+                        local node_type = circuit_node_block.get_node_type()
+                        if node_type == CircuitNodeTypes.BLOCH_SPHERE then
+                            -- TODO: Ascertain the state of this qubit, and whether it is entangled
+                            local y_pi8rot = 0
+                            local z_pi8rot = 0
+
+                            local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
+                                    y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+
+                            local circuit_dir_str = circuit_node_block.get_circuit_dir_str()
+                            local param2_dir = 0
+                            if circuit_dir_str == "+X" then
+                                param2_dir = 1
+                            elseif circuit_dir_str == "-X" then
+                                param2_dir = 3
+                            elseif circuit_dir_str == "-Z" then
+                                param2_dir = 2
+                            end
+
+                            minetest.swap_node(circuit_node_pos, {name = new_node_name, param2 = param2_dir})
+
+                        elseif node_type == CircuitNodeTypes.CONNECTOR_M then
+                            -- Connector to wire extension, so traverse
+                            local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
+
+                            q_command:debug_node_info(wire_extension_block_pos,
+                                    "Processing CONNECTOR_M, wire_extension_block")
+
+                            if wire_extension_block_pos.x ~= 0 then
+                                local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
+                                local wire_extension_dir_str = wire_extension_block.get_circuit_dir_str()
+                                local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
+
+                                q_command:debug_node_info(wire_extension_circuit_pos,
+                                        "In update_bloch_sphere_block(), processing CONNECTOR_M, wire_extension_circuit")
+
+                                if wire_extension_circuit_pos.x ~= 0 then
+                                    local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
+                                    local extension_wire_num = wire_extension_circuit.get_circuit_specs_wire_num_offset() + 1
+                                    local extension_num_columns = wire_extension_circuit.get_circuit_num_columns()
+                                    for column_num = 1, extension_num_columns do
+
+                                        -- Assume dir_str is "+Z"
+                                        local circ_node_pos = {x = wire_extension_circuit_pos.x + column_num - 1,
+                                                               y = wire_extension_circuit_pos.y,
+                                                               z = wire_extension_circuit_pos.z}
+
+                                        if wire_extension_dir_str == "+X" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                                                y = wire_extension_circuit_pos.y,
+                                                                z = wire_extension_circuit_pos.z - column_num + 1}
+                                        elseif wire_extension_dir_str == "-X" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x,
+                                                                y = wire_extension_circuit_pos.y,
+                                                                z = wire_extension_circuit_pos.z + column_num - 1}
+                                        elseif wire_extension_dir_str == "-Z" then
+                                            circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
+                                                                y = wire_extension_circuit_pos.y,
+                                                                z = wire_extension_circuit_pos.z}
+                                        end
+
+                                        q_command:debug_node_info(circ_node_pos,
+                                                "In update_bloch_sphere_block(), Processing CONNECTOR_M, circ_node_pos")
+
+                                        update_bloch_sphere_block(circ_node_pos, num_wires, wire_num, statevector)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+
+
                 local function process_backend_statevector_result(http_request_response)
                     minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
 
@@ -812,6 +890,42 @@ minetest.register_node("q_command:q_block", {
                             end
 
                         end
+
+                        -- Update bloch sphere blocks in the circuit
+                        if statevector then
+                            local num_wires = circuit_block.get_circuit_num_wires()
+                            local num_columns = circuit_block.get_circuit_num_columns()
+                            local circuit_dir_str = circuit_block.get_circuit_dir_str()
+                            local circuit_pos_x = circuit_block.get_circuit_pos().x
+                            local circuit_pos_y = circuit_block.get_circuit_pos().y
+                            local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+                            local column_num = num_columns
+                            for wire_num = 1, num_wires do
+
+                                -- Assume dir_str is "+Z"
+                                local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                                          y = circuit_pos_y + num_wires - wire_num,
+                                                          z = circuit_pos_z}
+
+                                if circuit_dir_str == "+X" then
+                                    circuit_node_pos = {x = circuit_pos_x,
+                                                        y = circuit_pos_y + num_wires - wire_num,
+                                                        z = circuit_pos_z - column_num + 1}
+                                elseif circuit_dir_str == "-X" then
+                                    circuit_node_pos = {x = circuit_pos_x,
+                                                        y = circuit_pos_y + num_wires - wire_num,
+                                                        z = circuit_pos_z + column_num - 1}
+                                elseif circuit_dir_str == "-Z" then
+                                    circuit_node_pos = {x = circuit_pos_x - column_num + 1,
+                                                        y = circuit_pos_y + num_wires - wire_num,
+                                                        z = circuit_pos_z}
+                                end
+
+                                update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num, statevector)
+                            end
+                        end
+
 
                     else
                         minetest.debug("Call to statevector_simulator Didn't succeed")
