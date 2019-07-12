@@ -8,6 +8,7 @@
 [X] Fix problem of histogram blocks appearing in wrong orientation after creating a circuit
 	in what seems like the same wrong orientation
 [] Allow bloch sphere block to be placed on second to rightmost column
+[] Create Alice and Bob mobs that coach the player
 [] Place q_command block and wire_extension_block in correct direction
 [] Verify that measure blocks are oriented correctly
 [X] Fix issue when right-clicking empty block with a control tool or rotate tool
