@@ -290,9 +290,6 @@ function circuit_blocks:place_nodes_between(block_a, block_b, new_node_type)
 
         for i = 1, high_wire_num - low_wire_num - 1 do
             cur_pos.y = low_wire_num_pos.y - i
-            minetest.debug("cur_pos: " .. dump(cur_pos) ..
-                    "low_wire_num_pos: " .. dump(low_wire_num_pos) ..
-                    ", i: " .. tostring(i))
             minetest.swap_node(cur_pos, {name = new_node_name})
             minetest.get_meta(cur_pos):set_int("node_type", CircuitNodeTypes.TRACE)
         end
@@ -317,12 +314,23 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name, player)
     local q_command_pos_y = meta:get_int("q_command_block_pos_y")
     local q_command_pos_z = meta:get_int("q_command_block_pos_z")
 
-    circuit_blocks:debug_node_info(pos,
-            "In set_node_with_circuit_specs_meta BEFORE set_node")
 
+    local circuit_node_block = circuit_blocks:get_circuit_block(pos)
+    local circuit_dir_str = circuit_node_block.get_circuit_dir_str()
+    local param2_dir = 0
+    if circuit_dir_str == "+X" then
+        param2_dir = 1
+    elseif circuit_dir_str == "-X" then
+        param2_dir = 3
+    elseif circuit_dir_str == "-Z" then
+        param2_dir = 2
+    end
 
     minetest.set_node(pos, {name = node_name,
-                            param2 = minetest.dir_to_facedir(player:get_look_dir())})
+                            param2 = param2_dir})
+
+    --minetest.set_node(pos, {name = node_name,
+    --                        param2 = minetest.dir_to_facedir(player:get_look_dir())})
 
     -- Put circuit_specs metadata on placed node
     meta = minetest.get_meta(pos)
@@ -338,9 +346,6 @@ function circuit_blocks:set_node_with_circuit_specs_meta(pos, node_name, player)
     meta:set_int("q_command_block_pos_x", q_command_pos_x)
     meta:set_int("q_command_block_pos_y", q_command_pos_y)
     meta:set_int("q_command_block_pos_z", q_command_pos_z)
-
-    circuit_blocks:debug_node_info(pos,
-            "In set_node_with_circuit_specs_meta AFTER set_node")
 end
 
 
@@ -359,15 +364,11 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num, pl
         local pos_y = circuit_num_wires - candidate_ctrl_wire_num + gate_block:get_circuit_pos().y
         local candidate_ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
         local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
-        circuit_blocks:debug_node_info(candidate_ctrl_pos, "candidate_ctrl_pos")
 
         -- Validate whether control qubit may be placed
-        minetest.debug()
         if candidate_block:is_within_circuit_grid() and
                 (candidate_block.get_node_type() == CircuitNodeTypes.EMPTY or
                         candidate_block.get_node_type() == CircuitNodeTypes.TRACE) then
-            circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                    "BEFORE In place_ctrl_qubit")
 
             local new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_down"
             if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
@@ -378,8 +379,6 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num, pl
             circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
                     new_ctrl_node_name, player)
 
-            circuit_blocks:debug_node_info(candidate_ctrl_pos,
-                    "AFTER In place_ctrl_qubit")
             ret_placed_wire = candidate_ctrl_wire_num
 
             if gate_block.get_node_type() == CircuitNodeTypes.X then
@@ -431,14 +430,9 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num, player)
         local pos_y = circuit_num_wires - ctrl_wire_num + gate_block:get_circuit_pos().y
         local ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
         local ctrl_block = circuit_blocks:get_circuit_block(ctrl_pos)
-        circuit_blocks:debug_node_info(ctrl_pos, "ctrl_pos")
 
         -- Validate whether control qubit may be removed
-        minetest.debug()
         if ctrl_block:is_within_circuit_grid() then
-            circuit_blocks:debug_node_info(ctrl_pos,
-                    "BEFORE In remove_ctrl_qubit")
-
             local new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
             if math.abs(ctrl_wire_num - gate_block:get_node_wire_num()) > 0 then
                 -- Remove nodes in-between gate and ctrl nodes
@@ -449,8 +443,6 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num, player)
             circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                     new_ctrl_node_name, player)
 
-            circuit_blocks:debug_node_info(ctrl_pos,
-                    "AFTER In remove_ctrl_qubit")
             gate_block.set_ctrl_a(-1)
 
             if gate_block.get_node_type() == CircuitNodeTypes.X then
@@ -503,10 +495,7 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
 
     local prev_radians = gate_block.get_radians()
-    minetest.debug("prev_radians: " .. tostring(prev_radians))
-
     local new_radians = (gate_block.get_radians() + (math.pi * 2) + by_radians) % (math.pi * 2)
-    minetest.debug("new_radians: " .. tostring(new_radians))
 
     gate_block.set_radians(new_radians)
 
@@ -516,7 +505,6 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
     if math.abs(new_radians - 0) > threshold and
             math.abs(new_radians - math.pi * 2) > threshold then
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
-        minetest.debug("num_pi_16_radians: " .. tostring(num_pi_16_radians))
 
         if num_pi_16_radians < 1 then
             num_pi_16_radians = 1
@@ -525,15 +513,9 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
         end
 
         new_node_name = node_name_beginning .. tostring(num_pi_16_radians) .. "p16"
-        minetest.debug("new_node_name: " .. new_node_name)
     end
 
-    circuit_blocks:debug_node_info(gate_block.get_node_pos(), "In rotate_gate *before* swap")
     minetest.swap_node(gate_block.get_node_pos(), {name = new_node_name})
-    circuit_blocks:debug_node_info(gate_block.get_node_pos(), "In rotate_gate *after* swap")
-
-    --circuit_blocks:set_node_with_circuit_specs_meta(gate_block.get_node_pos(),
-    --        new_node_name)
 end
 
 
@@ -661,7 +643,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     end
 
-    -- minetest.debug("circuit_blocks:"..texture_name)
     -- TODO: Work out way to pass in a meaningful description
     minetest.register_node("circuit_blocks:"..texture_name, {
         description = texture_name,
@@ -687,7 +668,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         on_punch = function(pos, node, player)
             -- TODO: Enable digging other types of blocks (e.g. measure_z)
             local block = circuit_blocks:get_circuit_block(pos)
-            circuit_blocks:debug_node_info(pos, "In on_punch()")
 
             local node_type = block:get_node_type()
             local wielded_item = player:get_wielded_item()
@@ -707,7 +687,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() - 1, player)
-                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
                             minetest.chat_send_player(player:get_player_name(),
                                     "control placed_wire: " .. tostring(placed_wire))
                             --block.set_ctrl_a(placed_wire)
@@ -726,12 +705,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 minetest.debug("Tried to place ctrl on nonexistent wire: " ..
                                         block.get_ctrl_a() - 1)
                             end
-                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control placed_wire: " .. tostring(placed_wire))
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
-                        minetest.debug("rotate right requested")
                         circuit_blocks:rotate_gate(block, math.pi / 16.0)
                     else
                         if block.get_ctrl_a() ~= -1 then
@@ -760,18 +735,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         meta:set_int("q_command_block_pos_z", block.get_q_command_pos().z)
 
                         meta:set_int("circuit_specs_wire_num_offset", block.get_node_wire_num() - 1)
-
-                        --minetest.debug("wire_extension_itemstack meta: " .. dump(meta.to_table()))
-
-                        minetest.debug("wire_extension_itemstack: " .. dump(wire_extension_itemstack) ..
-                        ", circuit_extension_pos_x: " .. tostring(meta:get_int("circuit_extension_pos_x")) ..
-                        ", circuit_extension_pos_y: " .. tostring(meta:get_int("circuit_extension_pos_y")) ..
-                        ", circuit_extension_pos_z: " .. tostring(meta:get_int("circuit_extension_pos_z")) ..
-                        ", q_command_block_pos_x: " .. tostring(meta:get_int("q_command_block_pos_x")) ..
-                        ", q_command_block_pos_y: " .. tostring(meta:get_int("q_command_block_pos_y")) ..
-                        ", q_command_block_pos_z: " .. tostring(meta:get_int("q_command_block_pos_z")) ..
-                        ", circuit_specs_wire_num_offset: " .. tostring(meta:get_int("circuit_specs_wire_num_offset"))
-                       )
 
                         local drop_pos = {x = pos.x, y = pos.y, z = pos.z - 1}
                         minetest.item_drop(wire_extension_itemstack, player, drop_pos)
@@ -806,13 +769,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
 
-            circuit_blocks:debug_node_info(pos, "In can_dig")
             return is_on_grid == 0
         end,
         on_rightclick = function(pos, node, player, itemstack)
             local block = circuit_blocks:get_circuit_block(pos)
             local circuit_dir_str = block.get_circuit_dir_str()
-            circuit_blocks:debug_node_info(pos, "In on_rightclick()")
 
             local placed_wire = -1
             local wielded_item = player:get_wielded_item()
@@ -832,10 +793,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() + 1, player)
-                            minetest.debug("control placed_wire: " .. tostring(placed_wire))
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control placed_wire: " .. tostring(placed_wire))
-                            --block.set_ctrl_a(placed_wire)
                         elseif block.get_ctrl_a() == block:get_node_wire_num() - 1 then
                             circuit_blocks:remove_ctrl_qubit(block,
                                     block.get_ctrl_a(), player)
@@ -853,7 +810,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             end
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
-                        minetest.debug("rotate right requested")
                         circuit_blocks:rotate_gate(block, -math.pi / 16.0)
                     end
 
@@ -885,27 +841,27 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:circuit_blocks_qubit_bloch_blank" then
                         -- TODO: Try using node_type == ... instead
-                        -- Only allow placement on rightmost column
+                        -- Only allow placement on penultimate and rightmost and column
                         -- Assume dir_str is "+Z"
-                        local is_rightmost_column = block.get_circuit_pos().x +
-                                block.get_circuit_num_columns() - 1 == block.get_node_pos().x
+                        local is_rightmost_columns = block.get_circuit_pos().x +
+                                block.get_circuit_num_columns() - 2 <= block.get_node_pos().x
                         if circuit_dir_str == "+X" then
-                            is_rightmost_column = block.get_circuit_pos().z -
-                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().z
+                            is_rightmost_columns = block.get_circuit_pos().z -
+                                    block.get_circuit_num_columns() + 2 == block.get_node_pos().z
                         elseif circuit_dir_str == "-X" then
-                            is_rightmost_column = block.get_circuit_pos().z +
-                                    block.get_circuit_num_columns() - 1 == block.get_node_pos().z
+                            is_rightmost_columns = block.get_circuit_pos().z +
+                                    block.get_circuit_num_columns() - 2 == block.get_node_pos().z
                         elseif circuit_dir_str == "-Z" then
-                            is_rightmost_column = block.get_circuit_pos().x -
-                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().x
+                            is_rightmost_columns = block.get_circuit_pos().x -
+                                    block.get_circuit_num_columns() + 2 == block.get_node_pos().x
                         end
 
-                        if is_rightmost_column then
+                        if is_rightmost_columns then
                             circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                     wielded_item:get_name(), player)
                         else
                             minetest.chat_send_player(player:get_player_name(),
-                                    "Bloch sphere display may only be placed on rightmost column")
+                                    "Bloch sphere display may only be placed on the two rightmost columns")
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                         minetest.chat_send_player(player:get_player_name(),

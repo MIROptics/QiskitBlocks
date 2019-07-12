@@ -501,7 +501,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
                 q_command.circuit_specs.num_wires = num_wires
                 q_command.circuit_specs.num_columns = num_columns
-                minetest.debug("q_command.circuit_specs: " .. dump(q_command.circuit_specs))
 
                 -- Create circuit grid with empty blocks
                 q_command:create_blank_circuit_grid()
@@ -724,11 +723,21 @@ minetest.register_node("q_command:q_block", {
                             if not entangled then
                                 local norm_0 = complex.abs(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
                                 local y_rot = math.acos(norm_0) * 2
-                                y_pi8rot = y_rot * 8 / math.pi
+                                y_pi8rot = math.floor(y_rot * 8 / math.pi)
                                 minetest.debug("norm_0: " .. norm_0 .. ", y_rot: " .. y_rot ..
                                         "y_pi8rot: " ..  y_pi8rot)
 
-                                y_pi8rot = math.floor(y_pi8rot)
+                                local phase_0 = complex.polar_radians(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
+                                local phase_1 = complex.polar_radians(temp_complex_1) * math.sqrt(1/2) / math.sqrt(1/8)
+                                local global_phase = ((phase_1 - phase_0) + 2 * math.pi) % (2 * math.pi)
+
+                                minetest.debug("phase_0: " .. phase_0 .. ", phase_1: " .. phase_1 ..
+                                        "global_phase: " ..  global_phase)
+
+                                local z_rot = global_phase
+                                z_pi8rot = math.floor(z_rot * 8 / math.pi)
+                                minetest.debug("global_phase: " .. global_phase .. ", z_rot: " .. z_rot ..
+                                        "z_pi8rot: " ..  z_pi8rot)
 
                                 new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
                                         y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
