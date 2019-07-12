@@ -669,6 +669,18 @@ minetest.register_node("q_command:q_block", {
                             url_code.urlencode(qasm_with_measurement_str)
                 }
 
+                --[[
+                bit_idx is one-based
+                --]]
+                local function bit_is_set(num, num_bits, bit_idx)
+                    num_bits = num_bits or math.max(1, select(2, math.frexp(num)))
+                    local bits_table = {} -- will contain the bits
+                    for b = 1, num_bits do
+                        bits_table[b] = math.fmod(num, 2)
+                        num = math.floor((num - bits_table[b]) / 2)
+                    end
+                    return bits_table[bit_idx] == 1
+                end
 
                 local function update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num, statevector)
                     local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
@@ -676,12 +688,52 @@ minetest.register_node("q_command:q_block", {
                     if circuit_node_block then
                         local node_type = circuit_node_block.get_node_type()
                         if node_type == CircuitNodeTypes.BLOCH_SPHERE then
+                            local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                             -- TODO: Ascertain the state of this qubit, and whether it is entangled
                             local y_pi8rot = 0
                             local z_pi8rot = 0
 
-                            local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
-                                    y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+                            local complex_0 = complex.new(0, 0)
+                            local complex_1 = complex.new(0, 0)
+                            local entangled = false
+                            local temp_complex_0 = nil
+                            local temp_complex_1 = nil
+                            for basis_state_num = 0, #statevector - 1 do
+                                minetest.debug("basis_state_num: " .. basis_state_num)
+                                if bit_is_set(basis_state_num, #statevector, wire_num) then
+                                    minetest.debug("#" .. wire_num .. " bit is set, in basis_state_num: " .. basis_state_num)
+                                    if temp_complex_1 and
+                                            not complex.nearly_equals(temp_complex_1, statevector[basis_state_num + 1]) then
+                                        entangled = true
+                                        break
+                                    end
+                                    temp_complex_1 = complex.new(statevector[basis_state_num + 1].r,
+                                            statevector[basis_state_num + 1].i)
+                                else
+                                    minetest.debug("#" .. wire_num .. " bit is NOT set, in basis_state_num: " .. basis_state_num)
+                                    if temp_complex_0 and
+                                            not complex.nearly_equals(temp_complex_0, statevector[basis_state_num + 1]) then
+                                        entangled = true
+                                        break
+                                    end
+                                    temp_complex_0 = complex.new(statevector[basis_state_num + 1].r,
+                                            statevector[basis_state_num + 1].i)
+                                end
+                            end
+
+                            if not entangled then
+                                local norm_0 = complex.abs(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
+                                local y_rot = math.acos(norm_0) * 2
+                                y_pi8rot = y_rot * 8 / math.pi
+                                minetest.debug("norm_0: " .. norm_0 .. ", y_rot: " .. y_rot ..
+                                        "y_pi8rot: " ..  y_pi8rot)
+
+                                y_pi8rot = math.floor(y_pi8rot)
+
+                                new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
+                                        y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+                            end
+
 
                             local circuit_dir_str = circuit_node_block.get_circuit_dir_str()
                             local param2_dir = 0
@@ -723,16 +775,16 @@ minetest.register_node("q_command:q_block", {
 
                                         if wire_extension_dir_str == "+X" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                                y = wire_extension_circuit_pos.y,
-                                                                z = wire_extension_circuit_pos.z - column_num + 1}
+                                                             y = wire_extension_circuit_pos.y,
+                                                             z = wire_extension_circuit_pos.z - column_num + 1}
                                         elseif wire_extension_dir_str == "-X" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                                y = wire_extension_circuit_pos.y,
-                                                                z = wire_extension_circuit_pos.z + column_num - 1}
+                                                             y = wire_extension_circuit_pos.y,
+                                                             z = wire_extension_circuit_pos.z + column_num - 1}
                                         elseif wire_extension_dir_str == "-Z" then
                                             circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
-                                                                y = wire_extension_circuit_pos.y,
-                                                                z = wire_extension_circuit_pos.z}
+                                                             y = wire_extension_circuit_pos.y,
+                                                             z = wire_extension_circuit_pos.z}
                                         end
 
                                         q_command:debug_node_info(circ_node_pos,

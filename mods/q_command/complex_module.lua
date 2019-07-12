@@ -33,6 +33,11 @@ function create_complex()
         return complex.mul(c1, inv(c2))
     end
 
+    function complex.nearly_equals (c1, c2)
+        return math.abs(c1.r - c2.r) < 0.001 and
+                math.abs(c1.i - c2.i) < 0.001
+    end
+
     function complex.abs (c)
         return math.sqrt(c.r^2 + c.i^2)
     end
