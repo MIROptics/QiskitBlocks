@@ -854,6 +854,24 @@ function q_command:register_q_command_block(suffix, solution_statevector)
 
                             minetest.debug("statevector:\n" .. dump(statevector))
 
+                            minetest.debug("solution_statevector:\n" .. dump(solution_statevector))
+
+                            local is_correct_solution = true
+                            for sv_idx = 1, #statevector do
+                                if statevector and solution_statevector and
+                                        not complex.nearly_equals(statevector[sv_idx],
+                                                solution_statevector[sv_idx]) then
+                                    is_correct_solution = false
+                                    break
+                                end
+                            end
+
+                            minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
+
+                            if is_correct_solution then
+                                -- TODO: swap blocks
+                            end
+
                             -- Update the histogram
                             local hist_node_pos = nil
                             local basis_state_node_pos = nil
@@ -1274,7 +1292,27 @@ end
 
 
 q_command:register_q_command_block("default")
-q_command:register_q_command_block("bell_phi_plus", '{"__ndarray__": [{"__complex__": [0.707, 0.0]}, {"__complex__": [0.0, 0.0]}, {"__complex__": [0.0, 0.0]}, {"__complex__": [0.707, 0.0]}], "dtype": "complex128", "shape": [4]}')
+
+local solution_statevector =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block("bell_phi_plus", solution_statevector)
 q_command:register_q_command_block("bell_phi_minus")
 q_command:register_q_command_block("bell_psi_plus")
 q_command:register_q_command_block("bell_psi_minus")
