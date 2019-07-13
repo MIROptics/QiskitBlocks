@@ -859,7 +859,7 @@ minetest.register_node("q_command:q_block", {
                                 end
 
                                 minetest.set_node(platform_node_pos,
-                                            {name="darkage:marble_tile"})
+                                            {name="default:diamondblock"})
                             end
                         end
 

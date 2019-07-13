@@ -8,6 +8,7 @@
 [] Limit size of circuit grids and wire extensions
 [] Prevent ket blocks from being deleted easily
 [] Create Alice and Bob mobs that coach the player
+[] Investigate punch_operable for rotate and control tools
 [] Place q_command block and wire_extension_block in correct direction
 [] Make circuit blocks on wire extensions oriented correctly
 [] Verify that measure blocks are oriented correctly
