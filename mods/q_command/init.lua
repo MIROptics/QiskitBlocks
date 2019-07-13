@@ -526,7 +526,22 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     end
 end)
 
-function q_command:register_q_command_block(suffix)
+function q_command:parse_json_statevector(sv_data)
+    local statevector = {}
+    local obj, pos, err = json.decode (sv_data, 1, nil)
+    if err then
+        minetest.debug ("Error in parse_json_statevector:", err)
+    else
+        local temp_statevector = obj.__ndarray__
+        for i = 1,#temp_statevector do
+            statevector[i] = complex.new(temp_statevector[i].__complex__[1],
+                    temp_statevector[i].__complex__[2])
+        end
+    end
+    return statevector
+end
+
+function q_command:register_q_command_block(suffix, solution_statevector)
     if not suffix then
         suffix = "default"
     end
@@ -821,7 +836,10 @@ function q_command:register_q_command_block(suffix)
                                 not http_request_response.timeout then
 
                             local sv_data = http_request_response.data
-                            local statevector = {}
+
+                            local statevector = q_command:parse_json_statevector(sv_data)
+
+                            --[[
                             local obj, pos, err = json.decode (sv_data, 1, nil)
                             if err then
                                 minetest.debug ("Error:", err)
@@ -832,6 +850,7 @@ function q_command:register_q_command_block(suffix)
                                             temp_statevector[i].__complex__[2])
                                 end
                             end
+                            --]]
 
                             minetest.debug("statevector:\n" .. dump(statevector))
 
@@ -1255,7 +1274,7 @@ end
 
 
 q_command:register_q_command_block("default")
-q_command:register_q_command_block("bell_phi_plus")
+q_command:register_q_command_block("bell_phi_plus", '{"__ndarray__": [{"__complex__": [0.707, 0.0]}, {"__complex__": [0.0, 0.0]}, {"__complex__": [0.0, 0.0]}, {"__complex__": [0.707, 0.0]}], "dtype": "complex128", "shape": [4]}')
 q_command:register_q_command_block("bell_phi_minus")
 q_command:register_q_command_block("bell_psi_plus")
 q_command:register_q_command_block("bell_psi_minus")
