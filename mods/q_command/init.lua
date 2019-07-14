@@ -926,7 +926,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     end
 
                                     minetest.set_node(platform_node_pos,
-                                                {name="default:diamondblock"})
+                                                {name="default:desert_stone_block"})
                                 end
                             end
 
@@ -986,10 +986,16 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 basis_state_node_pos = {x = hist_node_pos.x,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z - 1}
+                                under_hist_node_pos = {x = hist_node_pos.x,
+                                                        y = hist_node_pos.y - 1,
+                                                        z = hist_node_pos.z}
 
                                 if circuit_block.get_circuit_dir_str() == "+X" then
                                     param2_dir = 1
                                     basis_state_node_pos = {x = hist_node_pos.x - 1,
+                                                            y = hist_node_pos.y - 1,
+                                                            z = hist_node_pos.z}
+                                    under_hist_node_pos = {x = hist_node_pos.x,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z}
                                 elseif circuit_block.get_circuit_dir_str() == "-X" then
@@ -997,17 +1003,25 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     basis_state_node_pos = {x = hist_node_pos.x + 1,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z}
+                                    under_hist_node_pos = {x = hist_node_pos.x,
+                                                            y = hist_node_pos.y - 1,
+                                                            z = hist_node_pos.z}
                                 elseif circuit_block.get_circuit_dir_str() == "-Z" then
                                     param2_dir = 2
                                     basis_state_node_pos = {x = hist_node_pos.x,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z + 1}
+                                    under_hist_node_pos = {x = hist_node_pos.x,
+                                                            y = hist_node_pos.y - 1,
+                                                            z = hist_node_pos.z}
                                 end
 
                                 if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
                                     local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(col_num - 1)
                                     minetest.set_node(basis_state_node_pos,
                                             {name=node_name, param2=param2_dir})
+                                    minetest.set_node(under_hist_node_pos,
+                                        {name="wool:dark_grey", param2=param2_dir})
 
                                     -- Place ellipsis block if there are more
                                     -- basis states than displayed
