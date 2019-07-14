@@ -5,6 +5,8 @@
 [X] Add all other direction code, including:
 	[X] Deleting wire_extension blocks correctly
 [X] Allow bloch sphere block to be placed on second to rightmost column
+[] Make defaults in formspec (particularly num wires) correspond to log length of statevector solution
+[] Change default platform blocks on circuit, but change to diamond when user fills in circuit correctly
 [] Limit size of circuit grids and wire extensions
 [] Prevent ket blocks from being deleted easily
 [] Create Alice and Bob mobs that coach the player

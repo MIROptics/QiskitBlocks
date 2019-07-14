@@ -465,13 +465,12 @@ end
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
-        if fields.num_wires_str and fields.num_columns_str and
-                fields.start_z_offset_str and fields.start_x_offset_str then
+        if fields.num_wires_str and fields.num_columns_str then
             local num_wires = tonumber(fields.num_wires_str)
             local num_columns = tonumber(fields.num_columns_str)
-            local start_z_offset = tonumber(fields.start_z_offset_str)
-            local start_x_offset = tonumber(fields.start_x_offset_str)
-            local start_y_offset = 1  -- TODO: Perhaps make this configurable
+            local start_z_offset = 0
+            local start_x_offset = -1
+            local start_y_offset = 1
 
             local horiz_dir_str = q_command:player_horiz_direction_string(player)
 
@@ -541,14 +540,36 @@ function q_command:parse_json_statevector(sv_data)
     return statevector
 end
 
-function q_command:register_q_command_block(suffix, solution_statevector)
-    if not suffix then
-        suffix = "default"
+function q_command:register_q_command_block(suffix_correct_solution,
+                                            suffix_incorrect_solution,
+                                            correct_solution_statevector,
+                                            block_represents_correct_solution)
+    if not suffix_correct_solution or not suffix_incorrect_solution then
+        suffix_incorrect_solution = "default"
+        suffix_correct_solution = "default_success"
     end
-    local success_texture = "q_command_block_" .. suffix .. ".png"
-    minetest.register_node("q_command:q_block_" .. suffix, {
-        description = "Q command block " .. suffix,
-        tiles = {"q_command_block_" .. suffix .. ".png"},
+
+    if not block_represents_correct_solution then
+        block_represents_correct_solution = false
+    end
+
+    local texture_correct_solution = "q_command_block_" .. suffix_correct_solution .. ".png"
+    local texture_incorrect_solution = "q_command_block_" .. suffix_incorrect_solution .. ".png"
+
+    local q_block_node_name = "q_command:q_block_" .. suffix_incorrect_solution
+    local other_q_block_node_name = "q_command:q_block_" .. suffix_correct_solution
+    local block_desc = "Q command block " .. suffix_incorrect_solution
+    local block_texture = "q_command_block_" .. suffix_incorrect_solution .. ".png"
+    if block_represents_correct_solution then
+        q_block_node_name = "q_command:q_block_" .. suffix_correct_solution
+        other_q_block_node_name = "q_command:q_block_" .. suffix_incorrect_solution
+        block_desc = "Q command block " .. suffix_correct_solution
+        block_texture = "q_command_block_" .. suffix_correct_solution .. ".png"
+    end
+
+    minetest.register_node(q_block_node_name, {
+        description = block_desc,
+        tiles = {block_texture},
         groups = {oddly_breakable_by_hand=2},
         paramtype2 = "facedir",
         on_construct = function(pos)
@@ -562,10 +583,10 @@ function q_command:register_q_command_block(suffix, solution_statevector)
                 local player_name = clicker:get_player_name()
                 local meta = minetest.get_meta(pos)
                 local formspec = "size[5.0, 4.6]"..
-                        "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                        "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;8]" ..
-                        "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
-                        "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
+                        "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;2]" ..
+                        "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;4]" ..
+                        --"field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
+                        --"field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
                         "button_exit[1.8,3.5;1.5,1.0;create;Create]"
                 minetest.show_formspec(player_name, "create_circuit_grid", formspec)
             else
@@ -854,22 +875,26 @@ function q_command:register_q_command_block(suffix, solution_statevector)
 
                             minetest.debug("statevector:\n" .. dump(statevector))
 
-                            minetest.debug("solution_statevector:\n" .. dump(solution_statevector))
+                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
-                            for sv_idx = 1, #statevector do
-                                if statevector and solution_statevector and
-                                        not complex.nearly_equals(statevector[sv_idx],
-                                                solution_statevector[sv_idx]) then
-                                    is_correct_solution = false
-                                    break
+                            if statevector and correct_solution_statevector and
+                                    #statevector == #correct_solution_statevector then
+                                for sv_idx = 1, #statevector do
+                                    if not complex.nearly_equals(statevector[sv_idx],
+                                                    correct_solution_statevector[sv_idx]) then
+                                        is_correct_solution = false
+                                        break
+                                    end
                                 end
+                            else
+                                is_correct_solution = false
                             end
-
                             minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
 
-                            if is_correct_solution then
-                                -- TODO: swap blocks
+                            if (is_correct_solution and not block_represents_correct_solution) or
+                                    (not is_correct_solution and block_represents_correct_solution) then
+                                minetest.swap_node(q_block.get_node_pos(), {name = other_q_block_node_name})
                             end
 
                             -- Update the histogram
@@ -1293,7 +1318,7 @@ end
 
 q_command:register_q_command_block("default")
 
-local solution_statevector =
+local solution_statevector_bell_phi_plus =
 {
 	{
 		r = 0.707,
@@ -1312,10 +1337,82 @@ local solution_statevector =
 		i = 0
 	}
 }
-q_command:register_q_command_block("bell_phi_plus", solution_statevector)
-q_command:register_q_command_block("bell_phi_minus")
-q_command:register_q_command_block("bell_psi_plus")
-q_command:register_q_command_block("bell_psi_minus")
+q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
+        solution_statevector_bell_phi_plus, true)
+q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
+        solution_statevector_bell_phi_plus, false)
+
+local solution_statevector_bell_phi_minus =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = -0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
+        solution_statevector_bell_phi_minus, true)
+q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
+        solution_statevector_bell_phi_minus, false)
+
+local solution_statevector_bell_psi_plus =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
+        solution_statevector_bell_psi_plus, true)
+q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
+        solution_statevector_bell_psi_plus, false)
+
+local solution_statevector_bell_psi_minus =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = -0.707,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
+        solution_statevector_bell_psi_minus, true)
+q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
+        solution_statevector_bell_psi_minus, false)
 
 for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
     for basis_state_num = 0, 2^num_qubits - 1 do
