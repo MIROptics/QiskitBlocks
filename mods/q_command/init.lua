@@ -1332,6 +1332,38 @@ end
 
 q_command:register_q_command_block("default")
 
+local solution_statevector_x_gate =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 1,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "x_gate_success", "x_gate",
+        solution_statevector_x_gate, true)
+q_command:register_q_command_block( "x_gate_success", "x_gate",
+        solution_statevector_x_gate, false)
+
+local solution_statevector_h_gate =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "h_gate_success", "h_gate",
+        solution_statevector_h_gate, true)
+q_command:register_q_command_block( "h_gate_success", "h_gate",
+        solution_statevector_h_gate, false)
+
 local solution_statevector_bell_phi_plus =
 {
 	{

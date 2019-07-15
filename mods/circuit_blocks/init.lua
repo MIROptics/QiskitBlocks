@@ -10,6 +10,8 @@
 [] Limit size of circuit grids and wire extensions
 [] Prevent ket blocks from being deleted easily
 [] Create Alice and Bob mobs that coach the player
+    [] Make mob jump and chat when user answers correctly
+    [] Make mob invite user to next circuit (closest in proximity) after completing one
 [] Investigate punch_operable for rotate and control tools
 [] Place q_command block and wire_extension_block in correct direction
 [] Make circuit blocks on wire extensions oriented correctly
