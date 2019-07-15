@@ -1330,7 +1330,103 @@ function q_command:register_statevector_liquid_block(pi16rotation)
 end
 
 
+--- Help buttons ---
+local function register_help_button(suffix, def)
+	minetest.register_node("q_command:q_command_button_wall_help_" .. suffix, {
+		description = suffix .. " help button",
+		drawtype = "nodebox",
+		tiles = {"q_command_button_wall_help_" .. suffix .. ".png"},
+		inventory_image = "q_command_button_wall_help_" .. suffix .. ".png",
+		wield_image = "q_command_button_wall_help_" .. suffix .. ".png",
+		paramtype = "light",
+		paramtype2 = "wallmounted",
+		sunlight_propagates = true,
+		is_ground_content = false,
+		walkable = false,
+		node_box = {
+			type = "wallmounted",
+			wall_top    = {-0.4375, 0.4375, -0.3125, 0.4375, 0.5, 0.3125},
+			wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
+			wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
+		},
+		groups = def.groups,
+		legacy_wallmounted = true,
+		sounds = def.sounds,
+
+		on_construct = function(pos)
+			--local n = minetest.get_node(pos)
+			local meta = minetest.get_meta(pos)
+			meta:set_string("formspec", "field[text;;${text}]")
+		end,
+		on_receive_fields = function(pos, formname, fields, sender)
+			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
+			local player_name = sender:get_player_name()
+			if minetest.is_protected(pos, player_name) then
+				minetest.record_protection_violation(pos, player_name)
+				return
+			end
+			local text = fields.text
+			if not text then
+				return
+			end
+			if string.len(text) > 512 then
+				minetest.chat_send_player(player_name, "Text too long")
+				return
+			end
+			minetest.log("action", (player_name or "") .. " wrote \"" ..
+				text .. "\" to sign at " .. minetest.pos_to_string(pos))
+			local meta = minetest.get_meta(pos)
+			meta:set_string("text", text)
+			meta:set_string("infotext", '"' .. text .. '"')
+		end,
+	})
+end
+
+register_help_button("x_gate", {
+	--sounds = default.node_sound_metal_defaults(),
+	groups = {cracky = 2, attached_node = 1}
+})
+
+
 q_command:register_q_command_block("default")
+
+
+--[[
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+--]]
 
 local solution_statevector_x_gate =
 {
@@ -1348,6 +1444,7 @@ q_command:register_q_command_block( "x_gate_success", "x_gate",
 q_command:register_q_command_block( "x_gate_success", "x_gate",
         solution_statevector_x_gate, false)
 
+
 local solution_statevector_h_gate =
 {
 	{
@@ -1363,6 +1460,32 @@ q_command:register_q_command_block( "h_gate_success", "h_gate",
         solution_statevector_h_gate, true)
 q_command:register_q_command_block( "h_gate_success", "h_gate",
         solution_statevector_h_gate, false)
+
+
+local solution_statevector_equal_super_2wire =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
+        solution_statevector_equal_super_2wire, true)
+q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
+        solution_statevector_equal_super_2wire, false)
+
 
 local solution_statevector_bell_phi_plus =
 {
@@ -1388,6 +1511,7 @@ q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
 q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
         solution_statevector_bell_phi_plus, false)
 
+
 local solution_statevector_bell_phi_minus =
 {
 	{
@@ -1411,6 +1535,7 @@ q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
         solution_statevector_bell_phi_minus, true)
 q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
         solution_statevector_bell_phi_minus, false)
+
 
 local solution_statevector_bell_psi_plus =
 {
@@ -1436,6 +1561,7 @@ q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
 q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
         solution_statevector_bell_psi_plus, false)
 
+
 local solution_statevector_bell_psi_minus =
 {
 	{
@@ -1459,6 +1585,48 @@ q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
         solution_statevector_bell_psi_minus, true)
 q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
         solution_statevector_bell_psi_minus, false)
+
+
+local solution_statevector_ghz_state =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "ghz_state_success", "ghz_state",
+        solution_statevector_ghz_state, true)
+q_command:register_q_command_block( "ghz_state_success", "ghz_state",
+        solution_statevector_ghz_state, false)
+
 
 for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
     for basis_state_num = 0, 2^num_qubits - 1 do
