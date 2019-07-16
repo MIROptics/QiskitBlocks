@@ -1,5 +1,13 @@
 -- Quantum control block that creates circuit, etc.
 
+-- intllib support
+local S
+if (minetest.get_modpath("intllib")) then
+	S = intllib.Getter()
+else
+  S = function ( s ) return s end
+end
+
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
@@ -20,6 +28,7 @@ q_command = {}
 q_command.block_pos = {}
 q_command.circuit_specs = {} -- dir_str, pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
+
 
 -- returns q_command object or nil
 function q_command:get_q_command_block(pos)
@@ -1329,15 +1338,30 @@ function q_command:register_statevector_liquid_block(pi16rotation)
     })
 end
 
+function q_command:convert_newlines(str)
+	if(type(str)~="string") then
+		return "ERROR: No string found!"
+	end
+
+	local function convert(s)
+		return s:gsub("\n", function(slash, what)
+			return ","
+		end)
+	end
+
+	return convert(str)
+end
+
 
 --- Help buttons ---
-local function register_help_button(suffix, def)
+function q_command:register_help_button(suffix, caption, fulltext)
+	--q_command.captions[itemstringpart] = caption
 	minetest.register_node("q_command:q_command_button_wall_help_" .. suffix, {
 		description = suffix .. " help button",
 		drawtype = "nodebox",
-		tiles = {"q_command_button_wall_help_" .. suffix .. ".png"},
-		inventory_image = "q_command_button_wall_help_" .. suffix .. ".png",
-		wield_image = "q_command_button_wall_help_" .. suffix .. ".png",
+		tiles = {"q_command_button_wall_help.png"},
+		inventory_image = "q_command_button_wield_help.png",
+		wield_image = "q_command_button_wield_help.png",
 		paramtype = "light",
 		paramtype2 = "wallmounted",
 		sunlight_propagates = true,
@@ -1349,14 +1373,23 @@ local function register_help_button(suffix, def)
 			wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
 			wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
 		},
-		groups = def.groups,
+		groups = {cracky = 2, attached_node = 1},
 		legacy_wallmounted = true,
-		sounds = def.sounds,
-
 		on_construct = function(pos)
-			--local n = minetest.get_node(pos)
 			local meta = minetest.get_meta(pos)
-			meta:set_string("formspec", "field[text;;${text}]")
+			local formspec = ""..
+			"size[12,6]"..
+			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
+			"tablecolumns[text]"..
+			"tableoptions[background=#000000;highlight=#000000;border=false]"..
+			"table[0,0.25;12,5.2;infosign_text;"..
+			q_command:convert_newlines(minetest.formspec_escape(S(fulltext)))..
+			"]"..
+			"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
+			meta:set_string("formspec", formspec)
+			meta:set_string("infotext", string.format(S("%s (Right-click for hints)"), S(caption)))
+			meta:set_string("id", itemstringpart)
+			meta:set_string("caption", caption)
 		end,
 		on_receive_fields = function(pos, formname, fields, sender)
 			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
@@ -1382,10 +1415,32 @@ local function register_help_button(suffix, def)
 	})
 end
 
-register_help_button("x_gate", {
-	--sounds = default.node_sound_metal_defaults(),
-	groups = {cracky = 2, attached_node = 1}
-})
+q_command.texts = {}
+
+q_command.texts.quantum_circuit_garden =
+[[This will introduce the garden area and how to use the quantum circuits.
+]]
+q_command:register_help_button("quantum_circuit_garden", "Quantum circuit garden", q_command.texts.quantum_circuit_garden)
+
+q_command.texts.x_gate =
+[[This will explain the quantum version of a NOT gate. This will then
+ask the user to get an X block out of the chest and place it on the circuit,
+right-clicking the measure block to see effect of the X gate.
+]]
+q_command:register_help_button("x_gate", "Quantum NOT gate", q_command.texts.x_gate)
+
+q_command.texts.h_gate =
+[[This will explain the Hadamard gate. This will then
+ask the user to get an H block out of the chest and place it on the circuit,
+right-clicking the measure block to see effect of the H gate.
+]]
+q_command:register_help_button("h_gate", "Hadamard gate", q_command.texts.h_gate)
+
+q_command.texts.equal_super_2wire =
+[[This will discuss setting up equal superpositions with multiple qubits using Hadamard gates.
+]]
+q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
+
 
 
 q_command:register_q_command_block("default")
