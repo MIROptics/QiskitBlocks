@@ -1417,6 +1417,43 @@ end
 
 q_command.texts = {}
 
+q_command.texts.quantum_circuit_world =
+[[Welcome to the world of quantum computing circuits! The block-world environment you are currently
+in is created with the Minetest.net open-source library. The quantum circuits with which you will
+interact are powered by Qiskit.org quantum simulators.
+
+There are an increasing number of areas that you may explore in this environment. The first place
+you may want to visit is the quantum cats sandbox. It this area, some basic quantum computing circuits
+and gates are demonstrated with grumpy and happy cats instead of the usual qubits. To get there,
+just follow the light blocks just outside the front doors into the woods.
+
+If you are too grown-up to play with cats, then a good place to begin your journey would be in the
+quantum circuit garden on the other side of the large wall outside the front doors. Wherever you
+choose to begin, please be sure to right-click the Help buttons (labeled with a question mark) as
+you encounter them.
+]]
+q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
+
+q_command.texts.quantum_cats_sandbox =
+[[This will introduce the quantum cats sandbox.
+]]
+q_command:register_help_button("quantum_cats_sandbox", "Quantum cats sandbox", q_command.texts.quantum_cats_sandbox)
+
+q_command.texts.making_cats_happy =
+[[Using the X gate to turn a grumpy cat into a happy cat
+]]
+q_command:register_help_button("making_cats_happy", "Making a cat happy", q_command.texts.making_cats_happy)
+
+q_command.texts.superpositional_cat =
+[[Using the H gate to put a cat into a superposition of grumpy and happy
+]]
+q_command:register_help_button("superpositional_cat", "Superposition of grumpy and happy cat", q_command.texts.superpositional_cat)
+
+q_command.texts.entangling_cats =
+[[Entangling two cats so that the state of one cat is determined when the other cat is observed
+]]
+q_command:register_help_button("entangling_cats", "Entangling cats", q_command.texts.entangling_cats)
+
 q_command.texts.quantum_circuit_garden =
 [[This will introduce the garden area and how to use the quantum circuits.
 ]]
