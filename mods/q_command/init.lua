@@ -1444,12 +1444,17 @@ are expressed by the liquid levels in the glass blocks below each circuit. The b
 in front of the liquid blocks represent grumpy and happy states, respectively, with the rightmost digit
 representing the topmost cat.
 
-Take a look at the circuits, and right-click their Help buttons to learn more about them. Feel free
-to remove (by left-clicking) and add (by right-clicking) gates on a circuit to see the effects on the
-probabilities as well as measurements. To measure a circuit, right-click on a block that has the
-appearance of a measuring device. You will find a couple of gates and some other items in the chest,
-which you may open and close by right-clicking. To move an item from the chest into your inventory,
-drag it from the upper to the lower section of the chest dialog box.
+Take a look at the circuits, beginning with the one-wire circuits on the opposite wall, and
+right-click their Help buttons to learn more about them. Feel free to remove (by left-clicking)
+and add (by right-clicking) gates on a circuit to see the effects on the probabilities as well as
+measurements. To measure a circuit, right-click on a block that has the appearance of a measuring
+device. You will find a couple of gates and some other items in the chest, which you may open and
+close by right-clicking. To move an item from the chest into your inventory, drag it from the upper
+to the lower section of the chest dialog box.
+
+There are a couple of tools in the chest with which you may add control qubits to a gate, as well
+as to rotate a gate. To use these tools, position the cursor on an appropriate gate and left-click
+or right-click.
 ]]
 q_command:register_help_button("quantum_cats_sandbox", "Quantum cats sandbox", q_command.texts.quantum_cats_sandbox)
 
@@ -1484,70 +1489,55 @@ the state of the other wire, performing the NOT operation only when the other wi
 q_command:register_help_button("entangling_cats", "Entangling cats", q_command.texts.entangling_cats)
 
 q_command.texts.quantum_circuit_garden =
-[[This will introduce the garden area and how to use the quantum circuits.
+[[Welcome to the quantum circuit garden, which contains various circuit-based puzzles to solve.
+For more information on the challenge for a given circuit, right-click its Help button. To solve
+a puzzle, add the appropriate gates to its circuit. You can find the necessary gates in the chest
+below this sign, which you may open and close by right-clicking. To move an item from the chest
+into your inventory, drag it from the upper to the lower section of the chest dialog box. To add a
+gate to a circuit, choose the gate block from the hotbar, position the cursor on the circuit, and
+right-click. Left-click a gate to remove it from the circuit. When you solve a given circuit
+puzzle, the black block will turn gold.
+
+There are a couple of tools in the chest with which you may add control qubits to a gate, as well
+as to rotate a gate. To use these tools, position the cursor on an appropriate gate and left-click
+or right-click.
+
+Notice that each circuit has a set of glass blocks with liquid levels that express the measurement
+probability of each basis state. The rightmost digit of each basis state represents the topmost
+wire. To measure a circuit, right-click on a block that has the appearance of a measuring
+device.
 ]]
 q_command:register_help_button("quantum_circuit_garden", "Quantum circuit garden", q_command.texts.quantum_circuit_garden)
 
 q_command.texts.x_gate =
-[[This will explain the quantum version of a NOT gate. This will then
-ask the user to get an X block out of the chest and place it on the circuit,
-right-clicking the measure block to see effect of the X gate.
+[[This circuit, consisting of only one wire, leverages the Pauli-X gate, also known as the NOT,
+or bit-flip, gate. Its effect on the |0> state is to make it |1>, and vice-versa. To solve this
+circuit puzzle, get an X block out of the chest and place it on the circuit. Notice how the
+outcome probabilities and measurement results change as this gate is removed and added.
 ]]
 q_command:register_help_button("x_gate", "Quantum NOT gate", q_command.texts.x_gate)
 
 q_command.texts.h_gate =
-[[This will explain the Hadamard gate. This will then
-ask the user to get an H block out of the chest and place it on the circuit,
-right-clicking the measure block to see effect of the H gate.
+[[
+This circuit leverages the Hadamard gate to put a qubit into an equal superposition of |0> and |1>.
+To solve this circuit puzzle, get an H block out of the chest and place it on the circuit. Notice
+how the outcome probabilities and measurement results change as this gate is removed and added.
+Notice how the outcome probabilities and measurement results change as this gate is removed
+and added.
 ]]
 q_command:register_help_button("h_gate", "Hadamard gate", q_command.texts.h_gate)
 
 q_command.texts.equal_super_2wire =
-[[This will discuss setting up equal superpositions with multiple qubits using Hadamard gates.
+[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
+and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed and added. This pattern of
+placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
+of 2^numQubits states.
 ]]
 q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
 
-
-
 q_command:register_q_command_block("default")
 
-
---[[
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	}
-}
---]]
 
 local solution_statevector_x_gate =
 {
