@@ -1435,22 +1435,51 @@ you encounter them.
 q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
 
 q_command.texts.quantum_cats_sandbox =
-[[This will introduce the quantum cats sandbox.
+[[There are so many ones and zeros in quantum computing that some folks find it easier to initially
+relate to states with real world concepts (e.g. cats) rather than jumping straight to qubits. In the
+Quantum Cats Sandbox, each of the circuits start out with cats (Alice Cat and Bob Cat) in their
+grumpy state. The gates in the circuits evolve their quantum states, resulting in various
+probabilities of the cats being being grumpy or happy when observed (measured). These probabilities
+are expressed by the liquid levels in the glass blocks below each circuit. The binary digits 0 and 1
+in front of the liquid blocks represent grumpy and happy states, respectively, with the rightmost digit
+representing the topmost cat.
+
+Take a look at the circuits, and right-click their Help buttons to learn more about them. Feel free
+to remove (by left-clicking) and add (by right-clicking) gates on a circuit to see the effects on the
+probabilities as well as measurements. To measure a circuit, right-click on a block that has the
+appearance of a measuring device. You will find a couple of gates and some other items in the chest,
+which you may open and close by right-clicking. To move an item from the chest into your inventory,
+drag it from the upper to the lower section of the chest dialog box.
 ]]
 q_command:register_help_button("quantum_cats_sandbox", "Quantum cats sandbox", q_command.texts.quantum_cats_sandbox)
 
 q_command.texts.making_cats_happy =
-[[Using the X gate to turn a grumpy cat into a happy cat
+[[This circuit, consisting of only one wire (cat), leverages the Pauli-X gate, also known as the NOT,
+or bit-flip, gate. Its effect on a grumpy cat is to make it happy, and vice-versa. Notice how the
+outcome probabilities and measurement results change as this gate is removed and added.
 ]]
 q_command:register_help_button("making_cats_happy", "Making a cat happy", q_command.texts.making_cats_happy)
 
 q_command.texts.superpositional_cat =
-[[Using the H gate to put a cat into a superposition of grumpy and happy
+[[This circuit leverages the Hadamard gate to put a cat into an equal superposition of grumpy and
+happy. Notice how the outcome probabilities and measurement results change as this gate is removed
+and added.
 ]]
 q_command:register_help_button("superpositional_cat", "Superposition of grumpy and happy cat", q_command.texts.superpositional_cat)
 
 q_command.texts.entangling_cats =
-[[Entangling two cats so that the state of one cat is determined when the other cat is observed
+[[This two-wire circuit demonstrates the property known as quantum entanglement. Notice that each
+of the wires in the circuit are continued by blocks separated from the main circuit. This illustrates
+the idea that two entangled quantum particles may be separated by a great distance and continue
+to be entangled. Measuring one of the particles (cats) results in the measured state of the other
+particle to be determined. Try it out by right-clicking one of the measurement blocks. Also notice
+that the probabilities indicate that states 00 (grumpy-grumpy) and 11 (happy-happy) are equally likely.
+
+The CNOT gate (the two-wire gate that has the appearance of cross-hairs and a vertical line with a dot),
+is partially responsible for the entanglement. The cross-hairs symbol has the functionality of a
+NOT gate used in another circuit in this cat sandbox. The difference is that it is conditional on
+the state of the other wire, performing the NOT operation only when the other wire is on at that point
+(contains a happy cat).
 ]]
 q_command:register_help_button("entangling_cats", "Entangling cats", q_command.texts.entangling_cats)
 
