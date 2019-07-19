@@ -1509,6 +1509,8 @@ device.
 ]]
 q_command:register_help_button("quantum_circuit_garden", "Quantum circuit garden", q_command.texts.quantum_circuit_garden)
 
+q_command:register_q_command_block("default")
+
 q_command.texts.x_gate =
 [[This circuit, consisting of only one wire, leverages the Pauli-X gate, also known as the NOT,
 or bit-flip, gate. Its effect on the |0> state is to make it |1>, and vice-versa. To solve this
@@ -1516,29 +1518,6 @@ circuit puzzle, get an X block out of the chest and place it on the circuit. Not
 outcome probabilities and measurement results change as this gate is removed and added.
 ]]
 q_command:register_help_button("x_gate", "Quantum NOT gate", q_command.texts.x_gate)
-
-q_command.texts.h_gate =
-[[
-This circuit leverages the Hadamard gate to put a qubit into an equal superposition of |0> and |1>.
-To solve this circuit puzzle, get an H block out of the chest and place it on the circuit. Notice
-how the outcome probabilities and measurement results change as this gate is removed and added.
-Notice how the outcome probabilities and measurement results change as this gate is removed
-and added.
-]]
-q_command:register_help_button("h_gate", "Hadamard gate", q_command.texts.h_gate)
-
-q_command.texts.equal_super_2wire =
-[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
-and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
-probabilities and measurement results change as these gates are removed and added. This pattern of
-placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
-of 2^numQubits states.
-]]
-q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
-
-q_command:register_q_command_block("default")
-
-
 local solution_statevector_x_gate =
 {
 	{
@@ -1556,6 +1535,15 @@ q_command:register_q_command_block( "x_gate_success", "x_gate",
         solution_statevector_x_gate, false)
 
 
+q_command.texts.h_gate =
+[[
+This circuit leverages the Hadamard gate to put a qubit into an equal superposition of |0> and |1>.
+To solve this circuit puzzle, get an H block out of the chest and place it on the circuit. Notice
+how the outcome probabilities and measurement results change as this gate is removed and added.
+Notice how the outcome probabilities and measurement results change as this gate is removed
+and added.
+]]
+q_command:register_help_button("h_gate", "Hadamard gate", q_command.texts.h_gate)
 local solution_statevector_h_gate =
 {
 	{
@@ -1573,6 +1561,15 @@ q_command:register_q_command_block( "h_gate_success", "h_gate",
         solution_statevector_h_gate, false)
 
 
+
+q_command.texts.equal_super_2wire =
+[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
+and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed and added. This pattern of
+placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
+of 2^numQubits states.
+]]
+q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
 local solution_statevector_equal_super_2wire =
 {
 	{
@@ -1596,6 +1593,52 @@ q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2w
         solution_statevector_equal_super_2wire, true)
 q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
         solution_statevector_equal_super_2wire, false)
+
+
+q_command.texts.hxx_gates =
+[[This circuit leverages Hadamard and X gates to create a state |001> + |101>. To solve this
+circuit puzzle, place the appropriate gates on the wires.
+]]
+q_command:register_help_button("hxx_gates", "Hadamard and X gates", q_command.texts.hxx_gates)
+local solution_statevector_hxx_gates =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
+        solution_statevector_hxx_gates, true)
+q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
+        solution_statevector_hxx_gates, false)
 
 
 local solution_statevector_bell_phi_plus =
