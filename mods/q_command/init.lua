@@ -1,3 +1,19 @@
+--[[
+Copyright 2019 the original author or authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+--]]
+
 -- Quantum control block that creates circuit, etc.
 
 -- intllib support
@@ -1805,6 +1821,23 @@ q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
         solution_statevector_bell_psi_minus, false)
 
 
+q_command.texts.ghz_state =
+[[GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving three or more qubits,
+where the basis states involved contain all zeros or all ones. For example, the entangled state
+in this three-wire circuit puzzle has equal probabilities of being measured as |000> and |111>.
+Please refer to the Bell state circuit puzzles for more information on entanglement.
+
+One way to realize this state is to place a Hadamard gate on the top wire, and an X gate on the
+second wire in a column to the right of the Hadamard gate. Then select the control tool from
+the hotbar (after having retrieved it from the chest). While positioning the cursor on the X gate
+in the circuit, convert it to a CNOT gate by left-clicking, until the control qubit is on the same
+wire as the Hadamard gate. Repeat this process to place another CNOT gate whose X gate is on the
+third wire and control qubit is on the top wire.
+
+Note that measuring the circuit (by right-clicking the measurement blocks) results in either |000>
+or |111> each time.
+]]
+q_command:register_help_button("ghz_state", "GHZ states", q_command.texts.ghz_state)
 local solution_statevector_ghz_state =
 {
 	{
