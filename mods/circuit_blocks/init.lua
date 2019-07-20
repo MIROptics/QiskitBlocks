@@ -125,7 +125,7 @@ minetest.register_tool("circuit_blocks:control_tool", {
 	inventory_image = "circuit_blocks_control_tool.png",
 	wield_image = "circuit_blocks_control_tool.png",
 	wield_scale = { x = 1, y = 1, z = 1 },
-	range = 10,
+	range = 8,
 	tool_capabilities = {},
 })
 
@@ -134,7 +134,7 @@ minetest.register_tool("circuit_blocks:rotate_tool", {
 	inventory_image = "circuit_blocks_rotate_tool.png",
 	wield_image = "circuit_blocks_rotate_tool.png",
 	wield_scale = { x = 1, y = 1, z = 1 },
-	range = 10,
+	range = 8,
 	tool_capabilities = {},
 })
 
