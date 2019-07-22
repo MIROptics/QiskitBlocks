@@ -13,7 +13,7 @@ level as the `games` folder.
 1. Copy the `puzzle_map_demo` folder from from the `worlds` folder of this distribution into 
 the `worlds` folder of your Minetest installation.
 
-Please reach out to James.weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
+Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
 ![Quantum Circuits Garden in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png)
 
