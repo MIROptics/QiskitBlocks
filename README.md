@@ -12,3 +12,5 @@ your Minetest installation: `secure.http_mods = q_command`
 level as the `games` folder. 
 1. Copy the `puzzle_map_demo` folder from from the `worlds` folder of this distribution into 
 the `worlds` folder of your Minetest installation.
+
+Please reach out to James.weaver on Qiskit Slack (located at qiskit.org) with questions or feedback.
