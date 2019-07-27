@@ -690,11 +690,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             texture_name = "circuit_blocks_h_gate_down"
         end
     elseif circuit_node_type == CircuitNodeTypes.SWAP then
-        texture_name = "circuit_blocks_swap"
+        texture_name = "circuit_blocks_swap" .. suffix
         if connector_up and not connector_down then
-            texture_name = "circuit_blocks_swap_up"
+            texture_name = "circuit_blocks_swap_up" .. suffix
         elseif connector_down and not connector_up then
-            texture_name = "circuit_blocks_swap_down"
+            texture_name = "circuit_blocks_swap_down" .. suffix
         end
     elseif circuit_node_type == CircuitNodeTypes.CTRL then
         texture_name = "circuit_blocks_control" .. suffix

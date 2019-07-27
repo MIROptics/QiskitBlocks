@@ -40,6 +40,7 @@ TODO:
 [] Prevent right-clicking on wire_extension_block after wire_extension exists
 [] Prevent digging a wire connection block if wire extension exists
 [] Don't allow creating circuit if already exists
+[] Right-clicking input ket flips to opposite state
 [] Create an area where a mob does a quantum random walk
 [] Create marble floor and replace after deleting circuit grid, and extend base to max(circuit_width, statevector_dimensions)
 [] Make tools and blocks reach farther in non-creative mode
@@ -134,6 +135,15 @@ minetest.register_tool("circuit_blocks:rotate_tool", {
 	tool_capabilities = {},
 })
 
+minetest.register_tool("circuit_blocks:swap_tool", {
+	description = "Swap tool",
+	inventory_image = "circuit_blocks_swap_tool.png",
+	wield_image = "circuit_blocks_swap_tool.png",
+	wield_scale = { x = 1, y = 1, z = 1 },
+	range = 16,
+	tool_capabilities = {},
+})
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 0, true)
@@ -148,9 +158,12 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, true, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, true, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true, "", "")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "_mate")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "_mate")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true, "", "_mate")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.S, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SDG, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.T, false, false, 0, false)
