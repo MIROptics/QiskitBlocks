@@ -14,7 +14,8 @@ level as the `games` folder.
 the `worlds` folder of your Minetest installation.
 1. Checkout and run the [QiskitBlocksSevice](https://github.com/JavaFXpert/QiskitBlocksService) 
 project, as that service accesses the Qiskit quantum simulators that power the QiskitBlocks quantum 
-circuits. 
+circuits.
+1. Open the Minetest application, select the world `puzzle_map_demo` from the menu, and click `start game`.
 
 Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
