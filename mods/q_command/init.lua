@@ -885,22 +885,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            --[[
-                            local obj, pos, err = json.decode (sv_data, 1, nil)
-                            if err then
-                                minetest.debug ("Error:", err)
-                            else
-                                local temp_statevector = obj.__ndarray__
-                                for i = 1,#temp_statevector do
-                                    statevector[i] = complex.new(temp_statevector[i].__complex__[1],
-                                            temp_statevector[i].__complex__[2])
-                                end
-                            end
-                            --]]
+                            -- minetest.debug("statevector:\n" .. dump(statevector))
 
-                            minetest.debug("statevector:\n" .. dump(statevector))
-
-                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                            -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
                             if statevector and correct_solution_statevector and
@@ -925,6 +912,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             -- Update the histogram
                             local hist_node_pos = nil
                             local basis_state_node_pos = nil
+                            local under_hist_node_pos = nil
 
                             -- TODO: Put this constant somewhere
                             local BLOCK_WATER_LEVELS = 63
