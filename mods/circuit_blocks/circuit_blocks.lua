@@ -31,6 +31,7 @@ function circuit_blocks:get_circuit_block(pos)
         local radians = meta:get_float("radians")
         local ctrl_a = meta:get_int("ctrl_a")
         local ctrl_b = meta:get_int("ctrl_b")
+        local swap = meta:get_int("swap")
 
         -- 1 if node is a gate, 0 of node is not a gate
         local node_is_gate = meta:get_int("is_gate")
@@ -115,6 +116,21 @@ function circuit_blocks:get_circuit_block(pos)
             get_ctrl_b = function()
 				return ctrl_b
 			end,
+
+
+            -- Set swap wire, integer
+            set_swap = function(swap_arg)
+                swap = swap_arg
+                meta:set_int("swap", swap_arg)
+
+                return
+			end,
+
+            -- Get swap wire, integer
+            get_swap = function()
+				return swap
+			end,
+
 
             -- Indicates whether node is a gate, boolean
             is_gate = function()
@@ -234,6 +250,7 @@ function circuit_blocks:get_circuit_block(pos)
                         "radians: " .. tostring(radians) .. "\n" ..
                         "ctrl_a: " .. tostring(ctrl_a) .. "\n" ..
                         "ctrl_b: " .. tostring(ctrl_b) .. "\n" ..
+                        "swap: " .. tostring(swap) .. "\n" ..
                         "node_is_gate: " .. tostring(node_is_gate) .. "\n" ..
                         "circuit_specs_wire_num_offset: " .. tostring(circuit_specs_wire_num_offset) .. "\n" ..
                         "circuit_num_wires: " .. tostring(circuit_num_wires) .. "\n" ..
@@ -268,6 +285,7 @@ function circuit_blocks:debug_node_info(pos, message)
         "get_radians() " .. tostring(block.get_radians()) .. "\n" ..
         "get_ctrl_a() " .. tostring(block.get_ctrl_a()) .. "\n" ..
         "get_ctrl_b() " .. tostring(block.get_ctrl_b()) .. "\n" ..
+        "get_swap() " .. tostring(block.get_swap()) .. "\n" ..
         "is_gate() " .. tostring(block.is_gate()) .. "\n" ..
         "circuit_specs_wire_num_offset() " .. tostring(block.get_circuit_specs_wire_num_offset()) .. "\n" ..
         "get_circuit_num_wires() " .. tostring(block.get_circuit_num_wires()) .. "\n" ..
@@ -750,6 +768,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_float("radians", 0.0)
             meta:set_int("ctrl_a", -1)
             meta:set_int("ctrl_b", -1)
+            meta:set_int("swap", -1)
             meta:set_int("is_gate", (is_gate and 1 or 0))
         end,
         on_punch = function(pos, node, player)
@@ -841,7 +860,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
                         circuit_blocks:rotate_gate(block, math.pi / 16.0)
                     else
-                        -- TODO: Handle control qubit b as well
                         if block.get_ctrl_a() ~= -1 then
                             circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a(), player)
                             if block.get_ctrl_b() ~= -1 then
@@ -902,6 +920,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local radians = meta:get_float("radians")
             local ctrl_a = meta:get_int("ctrl_a")
             local ctrl_b = meta:get_int("ctrl_b")
+            local swap = meta:get_int("swap")
             local is_gate = meta:get_int("is_gate")
             local is_on_grid = meta:get_int("circuit_specs_is_on_grid")
 
@@ -1052,6 +1071,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
                         minetest.chat_send_player(player:get_player_name(),
                                 "Rotate tool may only be used on X, Y and Z gates")
+                    elseif wielded_item:get_name() == "circuit_blocks:swap_tool" then
+                        minetest.chat_send_player(player:get_player_name(),
+                                "Swap tool may only be used on SWAP gates")
                     elseif wielded_item:get_name():sub(1, 14) == "circuit_blocks" and
                         wielded_item:get_name():sub(1, 16) ~= "circuit_blocks:_" then
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,

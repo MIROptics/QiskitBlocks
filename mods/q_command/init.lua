@@ -249,9 +249,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
 
         local ctrl_a = circuit_node_block.get_ctrl_a()
         local ctrl_b = circuit_node_block.get_ctrl_b()
-
-        -- TODO: Implement swap gate
-        -- local swap = circuit_node_block.get_swap()
+        local swap = circuit_node_block.get_swap()
 
         local radians = circuit_node_block.get_radians()
 
@@ -268,6 +266,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
         local wire_num_idx = tostring(wire_num - 1)
         local ctrl_a_idx = tostring(ctrl_a - 1)
         local ctrl_b_idx = tostring(ctrl_b - 1)
+        local swap_idx = tostring(swap - 1)
 
 
         if node_type == CircuitNodeTypes.IDEN then
@@ -413,23 +412,20 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
                     end
                 end
             end
-        end
 
-
-        --TODO: Implement SWAP gate in circuit blocks
-        --[[
-        elseif node_type == CircuitNodeTypes.SWAP then
+        elseif node_type == CircuitNodeTypes.SWAP and swap ~= -1 then
             if ctrl_a ~= -1 then
                 -- Controlled Swap
                 qasm_str = qasm_str .. 'cswap q[' .. ctrl_a_idx .. '],'
                 qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '],'
-                qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
+                qasm_str = qasm_str .. 'q[' .. swap_idx .. '];'
             else
                 -- Swap gate
                 qasm_str = qasm_str .. 'swap q[' .. wire_num_idx .. '],'
-                qasm_str = qasm_str .. 'q[' .. tostring(swap) .. '];'
+                qasm_str = qasm_str .. 'q[' .. swap_idx .. '];'
             end
-        --]]
+        end
+
     else
         print("Unknown gate!")
     end
