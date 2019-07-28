@@ -987,6 +987,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             end
                         end
                     else
+                        if block.get_swap() ~= -1 then
+                            circuit_blocks:remove_swap_qubit(block, block.get_swap(), player)
+                        end
+
                         -- Necessary to replace punched node
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 "circuit_blocks:circuit_blocks_empty_wire", player)
