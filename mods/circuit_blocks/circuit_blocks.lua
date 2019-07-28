@@ -972,6 +972,19 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User removing swap qubit
                             circuit_blocks:remove_swap_qubit(block,
                                     block.get_swap(), player)
+                        else
+                            -- User moving swap qubit
+                            local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
+                            local swap_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_swap() - 1 >= 1 then
+                                circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                placed_wire = circuit_blocks:place_swap_qubit(block,
+                                        block.get_swap() - 1, player)
+                            else
+                                minetest.debug("Tried to place swap on unavailable wire: " ..
+                                        block.get_swap() - 1)
+                            end
                         end
                     else
                         -- Necessary to replace punched node
@@ -1133,6 +1146,19 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User removing swap qubit
                             circuit_blocks:remove_swap_qubit(block,
                                     block.get_swap(), player)
+                        else
+                            -- User moving swap qubit
+                            local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
+                            local swap_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_swap() + 1 <= block.get_circuit_num_wires() then
+                                circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                placed_wire = circuit_blocks:place_swap_qubit(block,
+                                        block.get_swap() + 1, player)
+                            else
+                                minetest.debug("Tried to place swap on unavailable wire: " ..
+                                        block.get_swap() + 1)
+                            end
                         end
                     else
                         -- Necessary to replace punched node

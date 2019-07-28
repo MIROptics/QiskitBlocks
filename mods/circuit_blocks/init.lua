@@ -32,6 +32,7 @@ TODO:
 [] Create Alice and Bob mobs that coach the player in some small way
 [] Create basement under the quantum circuits in the garden that show matrices/vectors/geometric interpretation of 2D vector spaces
 [] Investigate punch_operable for rotate and control tools
+[] SPECIAL-left-click and SPECIAL-right-click make X/Y/Z gates automatically rotate
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
 [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
 	correct on the back side as well
