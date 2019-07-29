@@ -18,8 +18,9 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
-[] SWAP gate: Fix problem of being able to left/right click on swap_mate blocks
-    [] Why are some empty blocks in a state in which a SWAP block may not be placed?
+[X] SWAP gate: Fix problem of being able to left/right click on swap_mate blocks
+[] Why are some empty blocks in a state in which a SWAP block may not be placed?
+    - Seems to occur after having a Trace gate
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
 [] Use state tomography or purity to update bloch-sphere blocks
 - https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb

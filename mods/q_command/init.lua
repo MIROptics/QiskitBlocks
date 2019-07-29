@@ -36,6 +36,8 @@ minetest.debug("request_http_api: " .. dump(request_http_api))
 complex = create_complex()
 
 BASIS_STATE_BLOCK_MAX_QUBITS = 4
+CIRCUIT_MAX_WIRES = 6
+CIRCUIT_MAX_COLUMNS = 64
 
 
 -- our API object
@@ -495,8 +497,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
             local horiz_dir_str = q_command:player_horiz_direction_string(player)
 
-            if num_wires and num_wires > 0 and
-                    num_columns and num_columns > 0 and
+            if num_wires and num_wires >= 1 and num_wires <= CIRCUIT_MAX_WIRES and
+                    num_columns and num_columns >= 1 and num_columns <= CIRCUIT_MAX_COLUMNS and
                     start_z_offset and start_z_offset >= 0 and
                     start_x_offset then
                 -- Store direction string, position of left-most, bottom-most block, and dimensions of circuit
@@ -539,7 +541,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             else
                 -- TODO: Show error message dialog?
                 minetest.chat_send_player(player:get_player_name(),
-                    "Circuit not created! ")
+                    "Circuit not created! Max wires is " .. CIRCUIT_MAX_WIRES ..
+                            ", max columns is " .. CIRCUIT_MAX_COLUMNS)
             end
             return
         end
@@ -604,8 +607,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                 local player_name = clicker:get_player_name()
                 local meta = minetest.get_meta(pos)
                 local formspec = "size[5.0, 4.6]"..
-                        "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;2]" ..
-                        "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;4]" ..
+                        "field[1.0,0.5;1.8,1.5;num_wires_str;Wires (max " .. CIRCUIT_MAX_WIRES .. ");2]" ..
+                        "field[3.0,0.5;1.8,1.5;num_columns_str;Cols (max " .. CIRCUIT_MAX_COLUMNS .. ");4]" ..
                         --"field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
                         --"field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;-1]" ..
                         "button_exit[1.8,3.5;1.5,1.0;create;Create]"

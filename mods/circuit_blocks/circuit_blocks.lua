@@ -483,6 +483,122 @@ function circuit_blocks:remove_swap_qubit(gate_block, swap_wire_num, player)
 end
 
 
+function circuit_blocks:place_ctrl_swap_qubit(gate_block, candidate_ctrl_wire_num, player)
+    --[[
+    Attempt to place a ctrl qubit on a wire for a swap gate.
+    If successful, return the wire number. If not, return -1
+    --]]
+    local ret_placed_wire = -1
+    local gate_wire_num = gate_block:get_node_wire_num()
+    local circuit_num_wires = gate_block.get_circuit_num_wires()
+    local gate_pos = gate_block:get_node_pos()
+
+    if gate_block.get_node_type() == CircuitNodeTypes.SWAP and
+            gate_block:get_swap() ~= -1 and
+            gate_wire_num >= 1 and
+            gate_wire_num <= gate_block:get_circuit_num_wires() then
+        local pos_y = circuit_num_wires - candidate_ctrl_wire_num + gate_block:get_circuit_pos().y
+        local candidate_ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
+        local candidate_block = circuit_blocks:get_circuit_block(candidate_ctrl_pos)
+
+        -- Validate whether ctrl qubit may be placed
+        if candidate_block:is_within_circuit_grid() and
+                (candidate_block.get_node_type() == CircuitNodeTypes.EMPTY or
+                        candidate_block.get_node_type() == CircuitNodeTypes.TRACE) then
+
+            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_control"
+            if candidate_ctrl_wire_num < gate_block:get_node_wire_num() and
+                    candidate_ctrl_wire_num < gate_block:get_swap() then
+                new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_down"
+            elseif candidate_ctrl_wire_num > gate_block:get_node_wire_num() and
+                    candidate_ctrl_wire_num > gate_block:get_swap() then
+                new_ctrl_node_name = "circuit_blocks:circuit_blocks_control_up"
+            end
+
+            gate_block.set_ctrl_a(candidate_ctrl_wire_num)
+
+            circuit_blocks:set_node_with_circuit_specs_meta(candidate_ctrl_pos,
+                    new_ctrl_node_name, player)
+
+            ret_placed_wire = candidate_ctrl_wire_num
+
+            -- TODO: Work out which blocks to use for both swap nodes
+            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
+            if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+            end
+            minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+
+            -- Place TRACE nodes between gate and ctrl_a node
+            if gate_block.get_ctrl_a() ~= -1 then
+                circuit_blocks:place_nodes_between(gate_block, candidate_block,
+                    CircuitNodeTypes.TRACE)
+            end
+        end
+    end
+
+    return ret_placed_wire
+end
+
+
+function circuit_blocks:remove_ctrl_swap_qubit(gate_block, ctrl_wire_num, player)
+    --[[
+    Remove a control qubit from a wire for a swap gate.
+    --]]
+    local gate_wire_num = gate_block:get_node_wire_num()
+    local circuit_num_wires = gate_block.get_circuit_num_wires()
+    local gate_pos = gate_block:get_node_pos()
+
+    if gate_block:get_swap() ~= -1 and
+            gate_wire_num >= 1 and
+            gate_wire_num <= gate_block:get_circuit_num_wires() then
+        local pos_y = circuit_num_wires - ctrl_wire_num + gate_block:get_circuit_pos().y
+        local ctrl_pos = {x = gate_pos.x, y = pos_y, z = gate_pos.z}
+        local ctrl_block = circuit_blocks:get_circuit_block(ctrl_pos)
+
+        -- Validate whether control qubit may be removed
+        if ctrl_block:is_within_circuit_grid() then
+            if math.abs(ctrl_wire_num - gate_block:get_node_wire_num()) > 0 then
+                -- Remove nodes in-between gate and ctrl nodes
+                circuit_blocks:place_nodes_between(gate_block, ctrl_block,
+                        CircuitNodeTypes.EMPTY)
+            end
+
+            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
+
+            gate_block.set_ctrl_a(-1)
+
+            circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                    new_ctrl_node_name, player)
+
+            --[[
+            TODO: Work out which blocks to use for both swap nodes
+            if gate_block.get_node_type() == CircuitNodeTypes.X then
+                local new_gate_node_name = "circuit_blocks:circuit_blocks_x_gate"
+                if gate_block.get_ctrl_a() ~= -1 then
+                    if gate_block.get_ctrl_b() ~= -1 then
+                        if gate_block.get_ctrl_a() < gate_block:get_node_wire_num() and
+                                gate_block.get_ctrl_b() < gate_block:get_node_wire_num() then
+                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
+                        elseif gate_block.get_ctrl_a() > gate_block:get_node_wire_num() and
+                                gate_block.get_ctrl_b() > gate_block:get_node_wire_num() then
+                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
+                        end
+                    else
+                        if gate_block.get_ctrl_a() < gate_block:get_node_wire_num() then
+                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
+                        else
+                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
+                        end
+                    end
+                end
+                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+            --]]
+        end
+    end
+end
+
+
 function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num, player, b)
     --[[
     Attempt to place a control qubit on a wire.
@@ -988,6 +1104,31 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                         block.get_swap() - 1)
                             end
                         end
+                    elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
+                        if block.get_ctrl_a() == -1 then
+                            -- Attempt to place a ctrl qubit
+                            placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
+                                    block:get_node_wire_num() - 1, player)
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "ctrl_a placed_wire: " .. tostring(placed_wire))
+                        elseif block.get_ctrl_a() == block:get_node_wire_num() + 1 then
+                            -- User removing control qubit
+                            circuit_blocks:remove_ctrl_swap_qubit(block,
+                                    block.get_ctrl_a(), player)
+                        elseif block.get_ctrl_a() ~= -1 then
+                            -- User moving control qubit a
+                            local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                            local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_ctrl_a() - 1 >= 1 then
+                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
+                                        block.get_ctrl_a() - 1, player)
+                            else
+                                minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
+                                        block.get_ctrl_a() - 1)
+                            end
+                        end
                     else
                         if block.get_swap() ~= -1 then
                             circuit_blocks:remove_swap_qubit(block, block.get_swap(), player)
@@ -1166,6 +1307,31 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             else
                                 minetest.debug("Tried to place swap on unavailable wire: " ..
                                         block.get_swap() + 1)
+                            end
+                        end
+                    elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
+                        if block.get_ctrl_a() == -1 then
+                            -- Attempt to place a ctrl qubit
+                            placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
+                                    block:get_node_wire_num() + 1, player)
+                            minetest.chat_send_player(player:get_player_name(),
+                                    "ctrl_a placed_wire: " .. tostring(placed_wire))
+                        elseif block.get_ctrl_a() == block:get_node_wire_num() - 1 then
+                            -- User removing control qubit
+                            circuit_blocks:remove_ctrl_swap_qubit(block,
+                                    block.get_ctrl_a(), player)
+                        elseif block.get_ctrl_a() ~= -1 then
+                            -- User moving control qubit a
+                            local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
+                            local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
+                            if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() then
+                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
+                                        block.get_ctrl_a() + 1, player)
+                            else
+                                minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
+                                        block.get_ctrl_a() + 1)
                             end
                         end
                     else
