@@ -980,7 +980,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 local probability = (complex.abs(statevector[col_num]))^2
                                 local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
 
-                                minetest.debug("probability :" .. tostring(probability))
+                                -- minetest.debug("probability :" .. tostring(probability))
 
                                 local hist_node_name = "q_command:statevector_glass_no_arrow"
                                 if scaled_prob > 0 then

@@ -963,11 +963,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 elseif node_type == CircuitNodeTypes.SWAP then
                     if wielded_item:get_name() == "circuit_blocks:swap_tool" then
                         if block.get_swap() == -1 then
-                            -- Attempt to place a swap qubit
-                            placed_wire = circuit_blocks:place_swap_qubit(block,
-                                    block:get_node_wire_num() - 1, player)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "swap placed_wire: " .. tostring(placed_wire))
+                            if block:get_node_name():sub(-5) ~= "_mate" then
+                                -- Attempt to place a swap qubit
+                                placed_wire = circuit_blocks:place_swap_qubit(block,
+                                        block:get_node_wire_num() - 1, player)
+                                minetest.chat_send_player(player:get_player_name(),
+                                        "swap placed_wire: " .. tostring(placed_wire))
+                            end
                         elseif block.get_swap() == block:get_node_wire_num() + 1 then
                             -- User removing swap qubit
                             circuit_blocks:remove_swap_qubit(block,
@@ -1141,11 +1143,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 elseif node_type == CircuitNodeTypes.SWAP then
                     if wielded_item:get_name() == "circuit_blocks:swap_tool" then
                         if block.get_swap() == -1 then
-                            -- Attempt to place a swap qubit
-                            placed_wire = circuit_blocks:place_swap_qubit(block,
-                                    block:get_node_wire_num() + 1, player)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "swap placed_wire: " .. tostring(placed_wire))
+                            if block:get_node_name():sub(-5) ~= "_mate" then
+                                -- Attempt to place a swap qubit
+                                placed_wire = circuit_blocks:place_swap_qubit(block,
+                                        block:get_node_wire_num() + 1, player)
+                                minetest.chat_send_player(player:get_player_name(),
+                                        "swap placed_wire: " .. tostring(placed_wire))
+                            end
                         elseif block.get_swap() == block:get_node_wire_num() - 1 then
                             -- User removing swap qubit
                             circuit_blocks:remove_swap_qubit(block,
