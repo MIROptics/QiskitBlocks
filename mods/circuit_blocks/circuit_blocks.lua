@@ -428,10 +428,23 @@ function circuit_blocks:place_swap_qubit(gate_block, candidate_swap_wire_num, pl
 
             ret_placed_wire = candidate_swap_wire_num
 
-            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
-            if candidate_swap_wire_num > gate_block:get_node_wire_num() then
-                new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap"
+            if gate_block.get_ctrl_a() ~= -1 then
+                if gate_block.get_ctrl_a() > gate_block:get_node_wire_num() and
+                        candidate_swap_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+                elseif gate_block.get_ctrl_a() < gate_block:get_node_wire_num() and
+                        candidate_swap_wire_num < gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
+                end
+            else
+                if candidate_swap_wire_num > gate_block:get_node_wire_num() then
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+                else
+                    new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
+                end
             end
+
             minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
 
             -- Place TRACE nodes between gate and swap node
@@ -523,9 +536,13 @@ function circuit_blocks:place_ctrl_swap_qubit(gate_block, candidate_ctrl_wire_nu
             ret_placed_wire = candidate_ctrl_wire_num
 
             -- TODO: Work out which blocks to use for both swap nodes
-            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
-            if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap"
+            if candidate_ctrl_wire_num > gate_block:get_node_wire_num() and
+                    gate_block:get_swap() > gate_block:get_node_wire_num() then
                 new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+            elseif candidate_ctrl_wire_num < gate_block:get_node_wire_num() and
+                    gate_block:get_swap() < gate_block:get_node_wire_num() then
+                new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
             end
             minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
 
@@ -564,36 +581,22 @@ function circuit_blocks:remove_ctrl_swap_qubit(gate_block, ctrl_wire_num, player
                         CircuitNodeTypes.EMPTY)
             end
 
-            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
-
+            local new_ctrl_node_name = "circuit_blocks:circuit_blocks_trace"
+            if (ctrl_wire_num > gate_block:get_node_wire_num() and
+                    ctrl_wire_num > gate_block:get_swap()) or
+                    (ctrl_wire_num < gate_block:get_node_wire_num() and
+                    ctrl_wire_num < gate_block:get_swap()) then
+                new_ctrl_node_name = "circuit_blocks:circuit_blocks_empty_wire"
+            end
             gate_block.set_ctrl_a(-1)
-
             circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                     new_ctrl_node_name, player)
 
-            --[[
-            TODO: Work out which blocks to use for both swap nodes
-            if gate_block.get_node_type() == CircuitNodeTypes.X then
-                local new_gate_node_name = "circuit_blocks:circuit_blocks_x_gate"
-                if gate_block.get_ctrl_a() ~= -1 then
-                    if gate_block.get_ctrl_b() ~= -1 then
-                        if gate_block.get_ctrl_a() < gate_block:get_node_wire_num() and
-                                gate_block.get_ctrl_b() < gate_block:get_node_wire_num() then
-                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
-                        elseif gate_block.get_ctrl_a() > gate_block:get_node_wire_num() and
-                                gate_block.get_ctrl_b() > gate_block:get_node_wire_num() then
-                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
-                        end
-                    else
-                        if gate_block.get_ctrl_a() < gate_block:get_node_wire_num() then
-                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_up"
-                        else
-                            new_gate_node_name = "circuit_blocks:circuit_blocks_not_gate_down"
-                        end
-                    end
-                end
-                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
-            --]]
+            local new_gate_node_name = "circuit_blocks:circuit_blocks_swap_up"
+            if gate_block.get_swap() > gate_block:get_node_wire_num() then
+                new_gate_node_name = "circuit_blocks:circuit_blocks_swap_down"
+            end
+            minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
         end
     end
 end
@@ -1087,9 +1090,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                         "swap placed_wire: " .. tostring(placed_wire))
                             end
                         elseif block.get_swap() == block:get_node_wire_num() + 1 then
-                            -- User removing swap qubit
-                            circuit_blocks:remove_swap_qubit(block,
-                                    block.get_swap(), player)
+                            if block:get_ctrl_a() == -1 then
+                                -- User removing swap qubit
+                                circuit_blocks:remove_swap_qubit(block,
+                                        block.get_swap(), player)
+                            end
                         else
                             -- User moving swap qubit
                             local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
@@ -1119,7 +1124,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User moving control qubit a
                             local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                            if block.get_ctrl_a() - 1 >= 1 then
+                            if block.get_ctrl_a() - 1 >= 1 and
+                                    block.get_ctrl_a() - 1 ~= block.get_swap() then
                                 circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                                         "circuit_blocks:circuit_blocks_empty_wire", player)
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
@@ -1132,6 +1138,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     else
                         if block.get_swap() ~= -1 then
                             circuit_blocks:remove_swap_qubit(block, block.get_swap(), player)
+                        end
+                        if block.get_ctrl_a() ~= -1 then
+                            circuit_blocks:remove_swap_qubit(block, block.get_ctrl_a(), player)
                         end
 
                         -- Necessary to replace punched node
@@ -1292,9 +1301,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                         "swap placed_wire: " .. tostring(placed_wire))
                             end
                         elseif block.get_swap() == block:get_node_wire_num() - 1 then
-                            -- User removing swap qubit
-                            circuit_blocks:remove_swap_qubit(block,
-                                    block.get_swap(), player)
+                            if block:get_ctrl_a() == -1 then
+                                -- User removing swap qubit
+                                circuit_blocks:remove_swap_qubit(block,
+                                        block.get_swap(), player)
+                            end
                         else
                             -- User moving swap qubit
                             local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
@@ -1324,7 +1335,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User moving control qubit a
                             local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
-                            if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() then
+                            if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() and
+                                    block.get_ctrl_a() + 1 ~= block.get_swap() then
                                 circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                                         "circuit_blocks:circuit_blocks_empty_wire", player)
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
