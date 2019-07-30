@@ -21,6 +21,7 @@ TODO:
 [X] SWAP gate: Fix problem of being able to left/right click on swap_mate blocks
 [X] Why are some empty blocks in a state in which a SWAP block may not be placed?
     - Seems to occur after having a Trace gate
+[] Don't print debug by default
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Implement CRZ gate

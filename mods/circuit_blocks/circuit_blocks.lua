@@ -980,6 +980,18 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             meta:set_int("swap", -1)
             meta:set_int("is_gate", (is_gate and 1 or 0))
         end,
+
+        on_timer = function(pos, elapsed)
+            local block = circuit_blocks:get_circuit_block(pos)
+            circuit_blocks:rotate_gate(block, math.pi / 16.0)
+
+            -- Punch the q_command block to run simulator and update resultant displays
+            local q_command_pos = block.get_q_command_pos()
+            minetest.punch_node(q_command_pos)
+
+            return true
+        end,
+
         on_punch = function(pos, node, player)
             -- TODO: Enable digging other types of blocks (e.g. measure_z)
             local block = circuit_blocks:get_circuit_block(pos)
@@ -989,6 +1001,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local node_type = block:get_node_type()
 
             if block.is_within_circuit_grid() then
+
+                -- Stop node timer if running
+                local node_timer = minetest.get_node_timer(pos)
+                node_timer:stop()
 
                 if node_type == CircuitNodeTypes.X or
                         node_type == CircuitNodeTypes.Y or
@@ -1065,8 +1081,20 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             end
                         end
 
-                    elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
-                        circuit_blocks:rotate_gate(block, math.pi / 16.0)
+                    elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" and
+                            (node_type == CircuitNodeTypes.X or
+                                    node_type == CircuitNodeTypes.Y or
+                                    node_type == CircuitNodeTypes.Z) then
+                        if player:get_player_control().aux1 then
+                            local node_timer = minetest.get_node_timer(pos)
+                            if node_timer:is_started() then
+                                node_timer:stop()
+                            else
+                                node_timer:start(0.5)
+                            end
+                        else
+                            circuit_blocks:rotate_gate(block, math.pi / 16.0)
+                        end
                     else
                         if block.get_ctrl_a() ~= -1 then
                             circuit_blocks:remove_ctrl_qubit(block, block.get_ctrl_a(), player)
@@ -1217,6 +1245,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             local node_type = block:get_node_type()
 
             if block.is_within_circuit_grid() then
+
+                -- Stop node timer if running
+                local node_timer = minetest.get_node_timer(pos)
+                node_timer:stop()
 
                 if node_type == CircuitNodeTypes.X or
                         node_type == CircuitNodeTypes.Y or
