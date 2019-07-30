@@ -335,6 +335,8 @@ function circuit_blocks:place_nodes_between(gate_block, ctrl_block, new_node_typ
             if cur_wire_num ~= gate_block.get_ctrl_a() and cur_wire_num ~= gate_block.get_ctrl_b() then
                 cur_pos.y = low_wire_num_pos.y - i
                 minetest.swap_node(cur_pos, {name = new_node_name})
+
+                -- TODO: Ascertain whether next line is completely correct, and document
                 minetest.get_meta(cur_pos):set_int("node_type", CircuitNodeTypes.TRACE)
             end
         end
@@ -535,7 +537,7 @@ function circuit_blocks:place_ctrl_swap_qubit(gate_block, candidate_ctrl_wire_nu
 
             ret_placed_wire = candidate_ctrl_wire_num
 
-            -- TODO: Work out which blocks to use for both swap nodes
+            -- Work out which blocks to use for swap node
             local new_gate_node_name = "circuit_blocks:circuit_blocks_swap"
             if candidate_ctrl_wire_num > gate_block:get_node_wire_num() and
                     gate_block:get_swap() > gate_block:get_node_wire_num() then
@@ -1126,8 +1128,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_ctrl_a() - 1 >= 1 and
                                     block.get_ctrl_a() - 1 ~= block.get_swap() then
-                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                if block:get_ctrl_a() - 1 < block:get_swap() and
+                                        block:get_ctrl_a() - 1 > block:get_node_wire_num() then
+                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                            "circuit_blocks:circuit_blocks_trace", player)
+                                else
+                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                end
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() - 1, player)
                             else
@@ -1337,8 +1345,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() and
                                     block.get_ctrl_a() + 1 ~= block.get_swap() then
-                                circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                if block:get_ctrl_a() + 1 > block:get_swap() and
+                                        block:get_ctrl_a() + 1 < block:get_node_wire_num() then
+                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                            "circuit_blocks:circuit_blocks_trace", player)
+                                else
+                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                end
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() + 1, player)
                             else
