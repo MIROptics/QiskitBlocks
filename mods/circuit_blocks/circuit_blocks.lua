@@ -336,8 +336,7 @@ function circuit_blocks:place_nodes_between(gate_block, ctrl_block, new_node_typ
                 cur_pos.y = low_wire_num_pos.y - i
                 minetest.swap_node(cur_pos, {name = new_node_name})
 
-                -- TODO: Ascertain whether next line is completely correct, and document
-                minetest.get_meta(cur_pos):set_int("node_type", CircuitNodeTypes.TRACE)
+                minetest.get_meta(cur_pos):set_int("node_type", new_node_type)
             end
         end
     end
@@ -1360,10 +1359,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                         block.get_ctrl_a() + 1)
                             end
                         end
-                    else
-                        -- Necessary to replace punched node
-                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                                "circuit_blocks:circuit_blocks_empty_wire", player)
                     end
 
                 elseif node_type == CircuitNodeTypes.EMPTY then
@@ -1418,7 +1413,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                         minetest.chat_send_player(player:get_player_name(),
-                                "Control tool may only be used on X, Y, Z and H gates")
+                                "Control tool may only be used on X, Y, Z, H and SWAP gates")
                     elseif wielded_item:get_name() == "circuit_blocks:rotate_tool" then
                         minetest.chat_send_player(player:get_player_name(),
                                 "Rotate tool may only be used on X, Y and Z gates")
