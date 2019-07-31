@@ -24,6 +24,8 @@ else
   S = function ( s ) return s end
 end
 
+LOG_DEBUG = false
+
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
@@ -31,7 +33,9 @@ dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
 
 
 request_http_api = minetest.request_http_api()
-minetest.debug("request_http_api: " .. dump(request_http_api))
+if LOG_DEBUG then
+    minetest.debug("request_http_api: " .. dump(request_http_api))
+end
 
 complex = create_complex()
 
@@ -134,6 +138,8 @@ end
 
 
 function q_command:debug_node_info(pos, message)
+    if not LOG_DEBUG then return end
+
     local block = q_command:get_q_command_block(pos)
     minetest.debug("to_string:\n" .. dump(block.to_string()))
     minetest.debug((message or "") .. "\ncircuit_block:\n" ..
@@ -160,8 +166,6 @@ function q_command:player_horiz_direction_string(player)
         ret_dir = "+X"
     end
 
-    minetest.chat_send_player(player:get_player_name(),
-        "Direction facing: " .. ret_dir .. ", " .. horiz_dir)
     return ret_dir
 end
 
@@ -369,16 +373,10 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
             -- Connector to wire extension, so traverse
             local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
 
-            q_command:debug_node_info(wire_extension_block_pos,
-                    "Processing CONNECTOR_M, wire_extension_block")
-
             if wire_extension_block_pos.x ~= 0 then
                 local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
                 local wire_extension_dir_str = wire_extension_block.get_circuit_dir_str()
                 local wire_extension_circuit_pos = wire_extension_block.get_circuit_pos()
-
-                q_command:debug_node_info(wire_extension_circuit_pos,
-                        "Processing CONNECTOR_M, wire_extension_circuit")
 
                 if wire_extension_circuit_pos.x ~= 0 then
                     local wire_extension_circuit = circuit_blocks:get_circuit_block(wire_extension_circuit_pos)
@@ -405,10 +403,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
                                                 z = wire_extension_circuit_pos.z}
                         end
 
-                        q_command:debug_node_info(circ_node_pos,
-                                "Processing CONNECTOR_M, circ_node_pos")
-
-                         qasm_str = qasm_str ..
+                        qasm_str = qasm_str ..
                                  q_command:create_qasm_for_node(circ_node_pos,
                                          extension_wire_num, include_measurement_blocks)
                     end
@@ -431,7 +426,10 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
     else
         print("Unknown gate!")
     end
-    minetest.debug("End of create_qasm_for_node(), qasm_str:\n" .. qasm_str)
+
+    if LOG_DEBUG then
+        minetest.debug("End of create_qasm_for_node(), qasm_str:\n" .. qasm_str)
+    end
     return qasm_str
 end
 
@@ -481,7 +479,9 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
         end
     end
 
-    minetest.debug("qasm_str:\n" .. qasm_str)
+    if LOG_DEBUG then
+        minetest.debug("qasm_str:\n" .. qasm_str)
+    end
     return qasm_str
 end
 
@@ -620,7 +620,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
         end,
         on_punch = function(pos, node, player)
             local q_block = q_command:get_q_command_block(pos)
-            q_command:debug_node_info(pos, "In on_punch, q_command_block")
             if q_block:circuit_grid_exists() then
 
                 local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
@@ -763,9 +762,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 local temp_complex_0 = nil
                                 local temp_complex_1 = nil
                                 for basis_state_num = 0, #statevector - 1 do
-                                    minetest.debug("basis_state_num: " .. basis_state_num)
                                     if bit_is_set(basis_state_num, #statevector, wire_num) then
-                                        minetest.debug("#" .. wire_num .. " bit is set, in basis_state_num: " .. basis_state_num)
                                         if temp_complex_1 and
                                                 not complex.nearly_equals(temp_complex_1, statevector[basis_state_num + 1]) then
                                             entangled = true
@@ -774,7 +771,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                         temp_complex_1 = complex.new(statevector[basis_state_num + 1].r,
                                                 statevector[basis_state_num + 1].i)
                                     else
-                                        minetest.debug("#" .. wire_num .. " bit is NOT set, in basis_state_num: " .. basis_state_num)
                                         if temp_complex_0 and
                                                 not complex.nearly_equals(temp_complex_0, statevector[basis_state_num + 1]) then
                                             entangled = true
@@ -789,20 +785,26 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     local norm_0 = complex.abs(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
                                     local y_rot = math.acos(norm_0) * 2
                                     y_pi8rot = math.floor(y_rot * 8 / math.pi)
-                                    minetest.debug("norm_0: " .. norm_0 .. ", y_rot: " .. y_rot ..
-                                            "y_pi8rot: " ..  y_pi8rot)
+                                    if LOG_DEBUG then
+                                        minetest.debug("norm_0: " .. norm_0 .. ", y_rot: " .. y_rot ..
+                                                "y_pi8rot: " ..  y_pi8rot)
+                                    end
 
                                     local phase_0 = complex.polar_radians(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
                                     local phase_1 = complex.polar_radians(temp_complex_1) * math.sqrt(1/2) / math.sqrt(1/8)
                                     local global_phase = ((phase_1 - phase_0) + 2 * math.pi) % (2 * math.pi)
 
-                                    minetest.debug("phase_0: " .. phase_0 .. ", phase_1: " .. phase_1 ..
-                                            "global_phase: " ..  global_phase)
+                                    if LOG_DEBUG then
+                                        minetest.debug("phase_0: " .. phase_0 .. ", phase_1: " .. phase_1 ..
+                                                "global_phase: " ..  global_phase)
+                                    end
 
                                     local z_rot = global_phase
                                     z_pi8rot = math.floor(z_rot * 8 / math.pi)
-                                    minetest.debug("global_phase: " .. global_phase .. ", z_rot: " .. z_rot ..
-                                            "z_pi8rot: " ..  z_pi8rot)
+                                    if LOG_DEBUG then
+                                        minetest.debug("global_phase: " .. global_phase .. ", z_rot: " .. z_rot ..
+                                                "z_pi8rot: " ..  z_pi8rot)
+                                    end
 
                                     new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
                                             y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
@@ -824,9 +826,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             elseif node_type == CircuitNodeTypes.CONNECTOR_M then
                                 -- Connector to wire extension, so traverse
                                 local wire_extension_block_pos = circuit_node_block.get_wire_extension_block_pos()
-
-                                q_command:debug_node_info(wire_extension_block_pos,
-                                        "Processing CONNECTOR_M, wire_extension_block")
 
                                 if wire_extension_block_pos.x ~= 0 then
                                     local wire_extension_block = circuit_blocks:get_circuit_block(wire_extension_block_pos)
@@ -874,8 +873,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
 
                     local function process_backend_statevector_result(http_request_response)
-                        minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
-
+                        if LOG_DEBUG then
+                            minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
+                        end
                         if http_request_response.succeeded and
                                 http_request_response.completed and
                                 not http_request_response.timeout then
@@ -893,7 +893,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     #statevector == #correct_solution_statevector then
                                 for sv_idx = 1, #statevector do
                                     if not complex.nearly_equals(statevector[sv_idx],
-                                                    correct_solution_statevector[sv_idx]) then
+                                            correct_solution_statevector[sv_idx]) then
                                         is_correct_solution = false
                                         break
                                     end
@@ -901,8 +901,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             else
                                 is_correct_solution = false
                             end
-                            minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
-
+                            if LOG_DEBUG then
+                                minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
+                            end
                             if (is_correct_solution and not block_represents_correct_solution) or
                                     (not is_correct_solution and block_represents_correct_solution) then
                                 minetest.swap_node(q_block.get_node_pos(), {name = other_q_block_node_name})
@@ -921,8 +922,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 for row_num = 1, 4 do
                                     -- Assume dir_str is "+Z"
                                     local platform_node_pos = {x = circuit_grid_pos.x + col_num - 3,
-                                                     y = circuit_grid_pos.y - 2,
-                                                     z = circuit_grid_pos.z + 2 - row_num}
+                                                               y = circuit_grid_pos.y - 2,
+                                                               z = circuit_grid_pos.z + 2 - row_num}
                                     if circuit_block.get_circuit_dir_str() == "+X" then
                                         platform_node_pos = {x = circuit_grid_pos.x + 2 - row_num,
                                                              y = circuit_grid_pos.y - 2,
@@ -938,7 +939,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     end
 
                                     minetest.set_node(platform_node_pos,
-                                                {name="default:desert_stone_block"})
+                                            {name="default:desert_stone_block"})
                                 end
                             end
 
@@ -971,8 +972,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 if math.abs(phase_rad - 0) > threshold and
                                         math.abs(phase_rad - math.pi * 2) > threshold then
                                     p16_radians = math.floor(phase_rad * 16 / math.pi + 0.5)
-                                    minetest.debug("phase_rad: " .. tostring(phase_rad) .. ", p16_radians: " .. tostring(p16_radians))
-
+                                    if LOG_DEBUG then
+                                        minetest.debug("phase_rad: " .. tostring(phase_rad) .. ", p16_radians: " .. tostring(p16_radians))
+                                    end
                                     if p16_radians < 1 then
                                         p16_radians = 1
                                     elseif p16_radians > 32 then
@@ -999,8 +1001,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                                         y = hist_node_pos.y - 1,
                                                         z = hist_node_pos.z - 1}
                                 under_hist_node_pos = {x = hist_node_pos.x,
-                                                        y = hist_node_pos.y - 1,
-                                                        z = hist_node_pos.z}
+                                                       y = hist_node_pos.y - 1,
+                                                       z = hist_node_pos.z}
 
                                 if circuit_block.get_circuit_dir_str() == "+X" then
                                     param2_dir = 1
@@ -1008,24 +1010,24 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z}
                                     under_hist_node_pos = {x = hist_node_pos.x,
-                                                            y = hist_node_pos.y - 1,
-                                                            z = hist_node_pos.z}
+                                                           y = hist_node_pos.y - 1,
+                                                           z = hist_node_pos.z}
                                 elseif circuit_block.get_circuit_dir_str() == "-X" then
                                     param2_dir = 3
                                     basis_state_node_pos = {x = hist_node_pos.x + 1,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z}
                                     under_hist_node_pos = {x = hist_node_pos.x,
-                                                            y = hist_node_pos.y - 1,
-                                                            z = hist_node_pos.z}
+                                                           y = hist_node_pos.y - 1,
+                                                           z = hist_node_pos.z}
                                 elseif circuit_block.get_circuit_dir_str() == "-Z" then
                                     param2_dir = 2
                                     basis_state_node_pos = {x = hist_node_pos.x,
                                                             y = hist_node_pos.y - 1,
                                                             z = hist_node_pos.z + 1}
                                     under_hist_node_pos = {x = hist_node_pos.x,
-                                                            y = hist_node_pos.y - 1,
-                                                            z = hist_node_pos.z}
+                                                           y = hist_node_pos.y - 1,
+                                                           z = hist_node_pos.z}
                                 end
 
                                 if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
@@ -1033,13 +1035,13 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     minetest.set_node(basis_state_node_pos,
                                             {name=node_name, param2=param2_dir})
                                     minetest.set_node(under_hist_node_pos,
-                                        {name="wool:dark_grey", param2=param2_dir})
+                                            {name="wool:dark_grey", param2=param2_dir})
 
                                     -- Place ellipsis block if there are more
                                     -- basis states than displayed
                                     if num_columns < #statevector and col_num == num_columns then
                                         minetest.set_node(basis_state_node_pos,
-                                            {name="q_command:q_command_state_ellipsis", param2=param2_dir})
+                                                {name="q_command:q_command_state_ellipsis", param2=param2_dir})
                                     end
                                 end
 
@@ -1171,15 +1173,18 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
 
                     local function process_backend_qasm_result(http_request_response)
-                        minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
-
+                        if LOG_DEBUG then
+                            minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
+                        end
                         if http_request_response.succeeded and
                                 http_request_response.completed and
                                 not http_request_response.timeout then
 
                             local qasm_data = http_request_response.data
 
-                            minetest.debug ("qasm_data:", qasm_data)
+                            if LOG_DEBUG then
+                                minetest.debug ("qasm_data:", qasm_data)
+                            end
 
                             local basis_state_bit_str = nil
 
@@ -1188,7 +1193,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 minetest.debug ("Error:", err)
                             else
                                 local basis_freq = obj.result
-                                minetest.debug("basis_freq:\n" .. dump(basis_freq))
+                                if LOG_DEBUG then
+                                    minetest.debug("basis_freq:\n" .. dump(basis_freq))
+                                end
 
                                 -- Only one shot is requested from simulator,
                                 -- so this table should have only one entry
@@ -1198,7 +1205,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                             end
 
-                            minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
+                            if LOG_DEBUG then
+                                minetest.debug("basis_state_bit_str: " .. basis_state_bit_str)
+                            end
 
                             -- Update measure blocks in the circuit
                             if basis_state_bit_str then

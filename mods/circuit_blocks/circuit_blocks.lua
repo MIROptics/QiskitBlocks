@@ -276,6 +276,8 @@ end
 
 
 function circuit_blocks:debug_node_info(pos, message)
+    if not LOG_DEBUG then return end
+
     local block = circuit_blocks:get_circuit_block(pos)
     -- minetest.debug("to_string:\n" .. dump(block.to_string()))
     minetest.debug((message or "") .. "\ncircuit_block:\n" ..
@@ -968,7 +970,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         -- drop = drop_name,
 
         on_drop = function(itemstack, dropper, pos)
-            minetest.debug("in on_drop, itemstack: " .. dump(itemstack))
+            -- minetest.debug("in on_drop, itemstack: " .. dump(itemstack))
         end,
 
         on_construct = function(pos)
@@ -1018,8 +1020,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() - 1, player, false)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control a placed_wire: " .. tostring(placed_wire))
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_a() ~= -1 and
                                 block.get_ctrl_b() == -1 and
@@ -1027,8 +1027,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User adding control qubit b
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() - 1, player, true)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control b placed_wire: " .. tostring(placed_wire))
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_a() ~= -1 and
                                 block.get_ctrl_b() == block:get_node_wire_num() + 1 then
@@ -1055,8 +1053,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                         block.get_ctrl_a() - 1, player, false)
                             else
-                                minetest.debug("Tried to place ctrl a on unavailable wire: " ..
-                                        block.get_ctrl_a() - 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl a on unavailable wire: " ..
+                                            block.get_ctrl_a() - 1)
+                                end
                             end
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_b() ~= -1 then
@@ -1076,8 +1076,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                         block.get_ctrl_b() - 1, player, true)
                             else
-                                minetest.debug("Tried to place ctrl b on unavailable wire: " ..
-                                        block.get_ctrl_b() - 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl b on unavailable wire: " ..
+                                            block.get_ctrl_b() - 1)
+                                end
                             end
                         end
 
@@ -1115,8 +1117,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 -- Attempt to place a swap qubit
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block:get_node_wire_num() - 1, player)
-                                minetest.chat_send_player(player:get_player_name(),
-                                        "swap placed_wire: " .. tostring(placed_wire))
                             end
                         elseif block.get_swap() == block:get_node_wire_num() + 1 then
                             if block:get_ctrl_a() == -1 then
@@ -1134,8 +1134,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block.get_swap() - 1, player)
                             else
-                                minetest.debug("Tried to place swap on unavailable wire: " ..
-                                        block.get_swap() - 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place swap on unavailable wire: " ..
+                                            block.get_swap() - 1)
+                                end
                             end
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
@@ -1143,8 +1145,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- Attempt to place a ctrl qubit
                             placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                     block:get_node_wire_num() - 1, player)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "ctrl_a placed_wire: " .. tostring(placed_wire))
                         elseif block.get_ctrl_a() == block:get_node_wire_num() + 1 then
                             -- User removing control qubit
                             circuit_blocks:remove_ctrl_swap_qubit(block,
@@ -1166,8 +1166,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() - 1, player)
                             else
-                                minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
-                                        block.get_ctrl_a() - 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
+                                            block.get_ctrl_a() - 1)
+                                end
                             end
                         end
                     else
@@ -1262,8 +1264,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 math.abs(block.get_radians() - math.pi * 2) > threshold then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() + 1, player, false)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control a placed_wire: " .. tostring(placed_wire))
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_a() ~= -1 and
                                 block.get_ctrl_b() == -1 and
@@ -1271,8 +1271,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- User adding control qubit b
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() + 1, player, true)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "control b placed_wire: " .. tostring(placed_wire))
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_a() ~= -1 and
                                 block.get_ctrl_b() == block:get_node_wire_num() - 1 then
@@ -1299,8 +1297,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                         block.get_ctrl_a() + 1, player, false)
                             else
-                                minetest.debug("Tried to place ctrl a on unavailable wire: " ..
-                                        block.get_ctrl_a() + 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl a on unavailable wire: " ..
+                                            block.get_ctrl_a() + 1)
+                                end
                             end
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_b() ~= -1 then
@@ -1320,8 +1320,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                         block.get_ctrl_b() + 1, player, true)
                             else
-                                minetest.debug("Tried to place ctrl b on unavailable wire: " ..
-                                        block.get_ctrl_b() + 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl b on unavailable wire: " ..
+                                            block.get_ctrl_b() + 1)
+                                end
                             end
                         end
 
@@ -1336,8 +1338,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 -- Attempt to place a swap qubit
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block:get_node_wire_num() + 1, player)
-                                minetest.chat_send_player(player:get_player_name(),
-                                        "swap placed_wire: " .. tostring(placed_wire))
                             end
                         elseif block.get_swap() == block:get_node_wire_num() - 1 then
                             if block:get_ctrl_a() == -1 then
@@ -1355,8 +1355,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block.get_swap() + 1, player)
                             else
-                                minetest.debug("Tried to place swap on unavailable wire: " ..
-                                        block.get_swap() + 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place swap on unavailable wire: " ..
+                                            block.get_swap() + 1)
+                                end
                             end
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
@@ -1364,8 +1366,6 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             -- Attempt to place a ctrl qubit
                             placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                     block:get_node_wire_num() + 1, player)
-                            minetest.chat_send_player(player:get_player_name(),
-                                    "ctrl_a placed_wire: " .. tostring(placed_wire))
                         elseif block.get_ctrl_a() == block:get_node_wire_num() - 1 then
                             -- User removing control qubit
                             circuit_blocks:remove_ctrl_swap_qubit(block,
@@ -1387,8 +1387,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() + 1, player)
                             else
-                                minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
-                                        block.get_ctrl_a() + 1)
+                                if LOG_DEBUG then
+                                    minetest.debug("Tried to place ctrl_a on unavailable wire: " ..
+                                            block.get_ctrl_a() + 1)
+                                end
                             end
                         end
                     end

@@ -29,17 +29,14 @@ TODO:
 [] Use state tomography or purity to update bloch-sphere blocks
 - https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb
 [] Fix problem of deleting a control qubit by left-clicking with a circuit block.
-[] Implement Toffoli gates
-[] Implement Swap gates
 [] Make defaults in formspec (particularly num wires) correspond to log length of statevector solution
 [] Implement games like Tiq Taq Toe (the following, or MTod's versions)
 - https://quantumfrontiers.com/2019/07/15/tiqtaqtoe/
-[] Limit size of circuit grids and wire extensions
 [] Prevent ket blocks from being deleted easily
 [] Create Alice and Bob mobs that coach the player in some small way
 [] Create basement under the quantum circuits in the garden that show matrices/vectors/geometric interpretation of 2D vector spaces
 [] Investigate punch_operable for rotate and control tools
-[] SPECIAL-left-click and SPECIAL-right-click make X/Y/Z gates automatically rotate
+[] SPECIAL-right-click make X/Y/Z gates automatically rotate clockwise
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
 [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
 	correct on the back side as well
@@ -50,25 +47,19 @@ TODO:
 [] Don't allow creating circuit if already exists
 [] Right-clicking input ket flips to opposite state
 [] Create an area where a mob does a quantum random walk
-[] Create marble floor and replace after deleting circuit grid, and extend base to max(circuit_width, statevector_dimensions)
-[] Make tools and blocks reach farther in non-creative mode
+[] Make rest of tools and blocks reach farther in non-creative mode
 [] Display wire local state
 [] Clicking basis state ellipse block shows a state vector display?
 [] Create game environment with rooms that are significant in quantum computing history
 [] Make arrow blocks (connector, extenders, etc.) point correct direction on all sides
 [] Don't allow extenders to be placed on extensions.
-[] Check into warning message:
-2019-06-29 07:53:26: WARNING[Server]: Map::getNodeMetadata(): Block not found
-2019-06-29 07:53:26: WARNING[Server]: Map::removeNodeMetadata(): Block not found
 [] Can liquid blocks have tooltip that shows probability and other info (e.g. amp & phase)?
 [] Protect against orphaning wire extensions
 [] Don't allow deletion of individual blocks.
 [] Find better way of programmatically distinguishing (than leading underscore) between
     blocks that may reside on the circuit grid and those that may not
 [] Filter inventory panel (e.g. hide rotation blocks)
-[] Walk up to a dropped item to pick it up
 [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
-[] Make shift-right-click place a gate on all wires?
 [] Use JWootton terrain generation mod
 [] Make |0> |1> labels on measure block on left & right
 [] Remove circuit_gate group code
@@ -79,6 +70,8 @@ TODO:
 [] Should this warning be addressed?
 	2019-06-29 08:11:11: WARNING[Main]: Irrlicht: PNG warning: iCCP: CRC error
 --]]
+
+LOG_DEBUG = false
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
