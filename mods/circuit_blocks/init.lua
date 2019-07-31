@@ -18,10 +18,6 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
-[X] SWAP gate: Fix problem of being able to left/right click on swap_mate blocks
-[X] Why are some empty blocks in a state in which a SWAP block may not be placed?
-    - Seems to occur after having a Trace gate
-[] Don't print debug by default
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Implement CRZ gate
@@ -29,7 +25,7 @@ TODO:
 [] Use state tomography or purity to update bloch-sphere blocks
 - https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb
 [] Fix problem of deleting a control qubit by left-clicking with a circuit block.
-[] Make defaults in formspec (particularly num wires) correspond to log length of statevector solution
+[] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
 [] Implement games like Tiq Taq Toe (the following, or MTod's versions)
 - https://quantumfrontiers.com/2019/07/15/tiqtaqtoe/
 [] Prevent ket blocks from being deleted easily

@@ -683,11 +683,15 @@ function circuit_blocks:place_ctrl_qubit(gate_block, candidate_ctrl_wire_num, pl
                 end
                 minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
             elseif gate_block.get_node_type() == CircuitNodeTypes.Z then
-                local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_up"
-                if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
-                    new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_down"
+                -- TODO: Replace node with appropriate Rz block
+                if gate_block.get_node_name():sub(1, 36) ==
+                        "circuit_blocks:circuit_blocks_z_gate" then
+                    local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_up"
+                    if candidate_ctrl_wire_num > gate_block:get_node_wire_num() then
+                        new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate_down"
+                    end
+                    minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
                 end
-                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
             end
 
             -- Place TRACE nodes between gate and ctrl node
@@ -765,8 +769,12 @@ function circuit_blocks:remove_ctrl_qubit(gate_block, ctrl_wire_num, player, b)
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_y_gate"
                 minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
             elseif gate_block.get_node_type() == CircuitNodeTypes.Z then
-                local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate"
-                minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+                -- TODO: Replace node with appropriate Rz block
+                if gate_block.get_node_name():sub(1, 36) ==
+                        "circuit_blocks:circuit_blocks_z_gate" then
+                    local new_gate_node_name = "circuit_blocks:circuit_blocks_z_gate"
+                    minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
+                end
             elseif gate_block.get_node_type() == CircuitNodeTypes.H then
                 local new_gate_node_name = "circuit_blocks:circuit_blocks_h_gate"
                 minetest.swap_node(gate_block.get_node_pos(), {name = new_gate_node_name})
@@ -783,8 +791,8 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     local node_name_beginning = nil
     local non_rotate_gate_name = nil
-    if gate_block.get_ctrl_a() ~= -1 then
-        -- TODO: Support crz gates
+    if gate_block.get_ctrl_a() ~= -1 and
+            gate_block.get_node_type() ~= CircuitNodeTypes.Z then
         return
     end
     if gate_block.get_node_type() == CircuitNodeTypes.X then
@@ -807,11 +815,14 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     gate_block.set_radians(new_radians)
 
-    local new_node_name = non_rotate_gate_name
+    local new_node_name = nil
 
     local threshold = 0.0001
-    if math.abs(new_radians - 0) > threshold and
-            math.abs(new_radians - math.pi * 2) > threshold then
+    if math.abs(new_radians - 0) < threshold or
+            math.abs(new_radians - math.pi * 2) < threshold then
+        new_node_name = non_rotate_gate_name
+        gate_block.set_radians(0)
+    else
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
 
         if num_pi_16_radians < 1 then
@@ -1015,9 +1026,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
                     if wielded_item:get_name() == "circuit_blocks:control_tool" then
                         local threshold = 0.0001
+                        -- TODO: Revisit this radians logic, and factor into a function
                         if not player:get_player_control().aux1 and block.get_ctrl_a() == -1 and
-                                math.abs(block.get_radians() - 0) < threshold and
-                                math.abs(block.get_radians() - math.pi * 2) > threshold then
+                                (node_type == CircuitNodeTypes.Z or
+                                (math.abs(block.get_radians() - 0) < threshold and
+                                math.abs(block.get_radians() - math.pi * 2) > threshold)) then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() - 1, player, false)
 
@@ -1260,8 +1273,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     if wielded_item:get_name() == "circuit_blocks:control_tool" then
                         local threshold = 0.0001
                         if not player:get_player_control().aux1 and block.get_ctrl_a() == -1 and
-                                math.abs(block.get_radians() - 0) < threshold and
-                                math.abs(block.get_radians() - math.pi * 2) > threshold then
+                                (node_type == CircuitNodeTypes.Z or
+                                (math.abs(block.get_radians() - 0) < threshold and
+                                math.abs(block.get_radians() - math.pi * 2) > threshold)) then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() + 1, player, false)
 
