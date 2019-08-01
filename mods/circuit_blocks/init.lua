@@ -24,7 +24,7 @@ TODO:
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Investigate punch_operable for rotate and control tools
 [] Implement appropriate gate images for CRZ gate
-[] Ability for measurement block to actuate (e.g. turn on a light or open a door)
+[] Ability for measurement block to actuate (e.g. turn on a light or open door)
     [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
     [] Ability for measured output wire to feed into input of same circuit
 [] Fix problem of deleting a control qubit by left-clicking with a circuit block.
