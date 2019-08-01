@@ -40,7 +40,7 @@ end
 complex = create_complex()
 
 BASIS_STATE_BLOCK_MAX_QUBITS = 4
-CIRCUIT_MAX_WIRES = 6
+CIRCUIT_MAX_WIRES = 8
 CIRCUIT_MAX_COLUMNS = 64
 
 
@@ -367,7 +367,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
         elseif node_type == CircuitNodeTypes.MEASURE_Z then
             if include_measurement_blocks then
                 -- Measurement block
-                qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
+                --qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
+                qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c' .. wire_num_idx .. '[0];'
             end
         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
             -- Connector to wire extension, so traverse
@@ -445,7 +446,13 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
     local qasm_str = 'OPENQASM 2.0;include "qelib1.inc";'
 
     qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];'
-    qasm_str = qasm_str .. 'creg c[' .. tostring(num_wires) .. '];'
+
+    --qasm_str = qasm_str .. 'creg c[' .. tostring(num_wires) .. '];'
+
+    -- Create a classical register for each qubit
+    for wire_num = 1, num_wires do
+        qasm_str = qasm_str .. 'creg c' .. tostring(wire_num - 1) .. '[1];'
+    end
 
     -- Add a column of identity gates to protect simulators from an empty circuit
     qasm_str = qasm_str .. 'id q;'
@@ -1200,7 +1207,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 -- Only one shot is requested from simulator,
                                 -- so this table should have only one entry
                                 for key, val in pairs(basis_freq) do
-                                    basis_state_bit_str = key
+                                    basis_state_bit_str = key:gsub("%s+", "")
+                                    -- basis_state_bit_str = key
                                     --minetest.debug("k: " .. k .. ", v: " .. v)
                                 end
                             end
