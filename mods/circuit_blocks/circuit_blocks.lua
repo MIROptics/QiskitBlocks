@@ -815,6 +815,8 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     gate_block.set_radians(new_radians)
 
+    gate_block.set_radians(new_radians)
+
     local new_node_name = nil
 
     local threshold = 0.0001
