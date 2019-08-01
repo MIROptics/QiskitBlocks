@@ -18,12 +18,14 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
+[] Implement reset
 [] Use state tomography or purity to update bloch-sphere blocks
 - https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Investigate punch_operable for rotate and control tools
 [] Implement appropriate gate images for CRZ gate
+[] Improve appearance of measurement results blocks
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
     [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
     [] Ability for measured output wire to feed into input of same circuit
@@ -37,7 +39,6 @@ TODO:
     [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
     [] Don't allow extenders to be placed on extensions.
     [] Prevent digging a wire connection block if wire extension exists
-[] Implement reset
 [] Implement classical registers and conditionals supported by OpenQASM
 [] Implement games like Tiq Taq Toe (the following, or MTod's versions)
 - https://quantumfrontiers.com/2019/07/15/tiqtaqtoe/
@@ -72,6 +73,7 @@ TODO:
 --]]
 
 LOG_DEBUG = false
+MAX_C_IF_WIRES = 7
 
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
@@ -165,10 +167,10 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, tru
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "_mate")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "_mate")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true, "", "_mate")
-circuit_blocks:register_circuit_block(CircuitNodeTypes.S, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.SDG, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.T, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.TDG, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.S, false, false, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.SDG, false, false, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.T, false, false, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.TDG, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, 0, false, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, 0, false, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, 0, false, "", "")
@@ -187,7 +189,6 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","bob_cat_0")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","bob_cat_1")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CONNECTOR_M, false, false, 0, false, "q_command:wire_extension_block")
--- circuit_blocks:register_circuit_block(CircuitNodeTypes.CONNECTOR_F, false, false, 0, false)
 
 local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do
@@ -204,3 +205,11 @@ end
 
 -- Create a blank Block sphere
 circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "", nil, nil)
+
+-- Create classical if blocks
+for wire_idx = 0, MAX_C_IF_WIRES - 1 do
+    for eq_val = 0, 1 do
+        circuit_blocks:register_circuit_block(CircuitNodeTypes.C_IF, false, false,
+                0, false, "", "_c" .. tostring(wire_idx) .. "_eq" .. tostring(eq_val))
+    end
+end

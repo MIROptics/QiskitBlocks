@@ -33,5 +33,6 @@ CircuitNodeTypes = {
     MEASURE_Z = 13,
     CONNECTOR_M = 14, -- Block that connects a wire to a distant wire
     CONNECTOR_F = 15, -- Block that connects a wire from a distant wire
-    BLOCH_SPHERE = 16 -- Block that depicts the state of a qubit on a Bloch sphere
+    BLOCH_SPHERE = 16, -- Block that depicts the state of a qubit on a Bloch sphere
+    C_IF = 17 -- Block that indicates classical "if" functionality
 }
