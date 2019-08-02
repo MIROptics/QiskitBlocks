@@ -148,38 +148,48 @@ minetest.register_tool("circuit_blocks:swap_tool", {
 	tool_capabilities = {},
 })
 
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, 0, true)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, true, 0, true)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, true, 0, true)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, true, 0, true)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "_mate")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "_mate")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, true, 0, true, "", "_mate")
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.S, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SDG, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.T, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.TDG, false, false, 0, true)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, 0, false, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, 0, false, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, 0, false, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, true, 0, false, "", "_b")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, true, false, 0, false, "", "_b")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CTRL, false, true, 0, false, "", "_b")
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.TRACE, false, false, 0, false)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.BARRIER, false, false, 0, false)
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"", "z")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false,"","0")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","1")
@@ -189,7 +199,11 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","alice_cat_1")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","bob_cat_0")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.MEASURE_Z, false, false, 0, false, "","bob_cat_1")
+
 circuit_blocks:register_circuit_block(CircuitNodeTypes.CONNECTOR_M, false, false, 0, false, "q_command:wire_extension_block")
+
+circuit_blocks:register_circuit_block(CircuitNodeTypes.QUBIT_BASIS, false, false, 0, true,"","qubit_0")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.QUBIT_BASIS, false, false, 0, true,"","qubit_1")
 
 local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do
@@ -211,6 +225,6 @@ circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, fals
 for wire_idx = 0, MAX_C_IF_WIRES - 1 do
     for eq_val = 0, 1 do
         circuit_blocks:register_circuit_block(CircuitNodeTypes.C_IF, false, false,
-                0, false, "", "_c" .. tostring(wire_idx) .. "_eq" .. tostring(eq_val))
+                0, false, "", "c" .. tostring(wire_idx) .. "_eq" .. tostring(eq_val))
     end
 end

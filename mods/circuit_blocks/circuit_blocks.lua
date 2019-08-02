@@ -970,7 +970,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
             texture_name = "circuit_blocks_qubit_bloch_blank"
         end
     elseif circuit_node_type == CircuitNodeTypes.C_IF then
-        texture_name = "circuit_blocks_if" .. suffix
+        texture_name = "circuit_blocks_if_" .. suffix
+    elseif circuit_node_type == CircuitNodeTypes.QUBIT_BASIS then
+        texture_name = "circuit_blocks_gate_" .. suffix
     end
 
     -- TODO: Work out way to pass in a meaningful description

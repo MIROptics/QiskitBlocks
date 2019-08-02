@@ -249,7 +249,9 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
     if circuit_node_block then
         local node_type = circuit_node_block.get_node_type()
 
-        if node_type == CircuitNodeTypes.EMPTY then
+        if node_type == CircuitNodeTypes.EMPTY or
+                node_type == CircuitNodeTypes.TRACE or
+                node_type == CircuitNodeTypes.CTRL then
             -- Throw away a c_if if present
             c_if_table[wire_num] = ""
             -- Return immediately with zero length qasm_str
@@ -377,6 +379,11 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
                 -- Measurement block
                 --qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c[' .. wire_num_idx .. '];'
                 qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c' .. wire_num_idx .. '[0];'
+            end
+        elseif node_type == CircuitNodeTypes.QUBIT_BASIS then
+            qasm_str = qasm_str .. 'reset q[' .. wire_num_idx .. '];'
+            if circuit_node_block.get_node_name():sub(-2) == "_1" then
+                qasm_str = qasm_str .. 'x q[' .. wire_num_idx .. '];'
             end
         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
             -- Connector to wire extension, so traverse
