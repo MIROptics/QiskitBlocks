@@ -18,6 +18,7 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
+[] Why does compute_circuit seem to be called twice?
 [] Implement reset
 [] Use state tomography or purity to update bloch-sphere blocks
 - https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb

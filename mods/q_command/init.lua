@@ -241,7 +241,8 @@ function q_command:create_blank_circuit_grid()
 end
 
 
-function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_measurement_blocks)
+function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
+                                        include_measurement_blocks, c_if_table)
     local qasm_str = ""
     local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
@@ -249,8 +250,15 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
         local node_type = circuit_node_block.get_node_type()
 
         if node_type == CircuitNodeTypes.EMPTY then
+            -- Throw away a c_if if present
+            c_if_table[wire_num] = ""
             -- Return immediately with zero length qasm_str
             return qasm_str
+        else
+            if c_if_table[wire_num] and c_if_table[wire_num] ~= "" then
+                qasm_str = qasm_str .. c_if_table[wire_num] .. " "
+                c_if_table[wire_num] = ""
+            end
         end
 
         local ctrl_a = circuit_node_block.get_ctrl_a()
@@ -406,7 +414,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
 
                         qasm_str = qasm_str ..
                                  q_command:create_qasm_for_node(circ_node_pos,
-                                         extension_wire_num, include_measurement_blocks)
+                                         extension_wire_num, include_measurement_blocks,
+                                         c_if_table)
                     end
                 end
             end
@@ -422,6 +431,13 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_meas
                 qasm_str = qasm_str .. 'swap q[' .. wire_num_idx .. '],'
                 qasm_str = qasm_str .. 'q[' .. swap_idx .. '];'
             end
+
+        elseif node_type == CircuitNodeTypes.C_IF then
+            local node_name = circuit_node_block.get_node_name()
+            local register_idx_str = node_name:sub(35, 35)
+            local eq_val_str = node_name:sub(39, 39)
+            c_if_table[wire_num] = "if(c" .. register_idx_str .. "==" ..
+                    eq_val_str .. ")"
         end
 
     else
@@ -442,12 +458,12 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
     local circuit_pos_y = circuit_block.get_circuit_pos().y
     local circuit_pos_z = circuit_block.get_circuit_pos().z
 
+    -- Holds conditional if statements for each wire
+    local c_if_table = {}
 
     local qasm_str = 'OPENQASM 2.0;include "qelib1.inc";'
 
     qasm_str = qasm_str .. 'qreg q[' .. tostring(num_wires) .. '];'
-
-    --qasm_str = qasm_str .. 'creg c[' .. tostring(num_wires) .. '];'
 
     -- Create a classical register for each qubit
     for wire_num = 1, num_wires do
@@ -482,13 +498,15 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
 
 
 
-            qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num, include_measurement_blocks)
+            qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num,
+                    include_measurement_blocks, c_if_table)
         end
     end
 
     if LOG_DEBUG then
         minetest.debug("qasm_str:\n" .. qasm_str)
     end
+
     return qasm_str
 end
 
