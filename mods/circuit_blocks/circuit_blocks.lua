@@ -1413,6 +1413,22 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         end
                     end
 
+                elseif node_type == CircuitNodeTypes.C_IF then
+                    local node_name = block.get_node_name()
+                    local register_idx = tonumber(node_name:sub(35, 35))
+                    local eq_val = tonumber(node_name:sub(39, 39))
+
+                    -- Toggle the equals value between 0 and 1, incrementing the register index as appropriate
+                    eq_val = (eq_val + 1) % 2
+                    if eq_val == 0 then
+                        register_idx = (register_idx + 1) %
+                                (math.min(MAX_C_IF_WIRES, block.get_circuit_num_wires()))
+                    end
+
+                    local new_node_name = "circuit_blocks:circuit_blocks_if_c" ..
+                            tostring(register_idx) .. "_eq" .. tostring(eq_val)
+                    minetest.swap_node(block.get_node_pos(), {name = new_node_name})
+
                 elseif node_type == CircuitNodeTypes.EMPTY then
                     -- TODO: Perhaps use naming convention that indicates this is a gate
                     -- TODO: Make referencing wielded item consistent in this function
