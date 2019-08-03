@@ -1517,6 +1517,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
+                        -- Also indicate that the qasm_simulator should be run, with state tomography,
+                        -- beginning with the X measurement basis (1 is X)
+                        -- TODO: Make constants for these?
+                        q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                        q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(1)
                     end
                 end
                 minetest.punch_node(q_command_pos)

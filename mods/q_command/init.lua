@@ -69,6 +69,11 @@ function q_command:get_q_command_block(pos)
         -- 0 means don't run
         local qasm_simulator_flag = meta:get_int("qasm_simulator_flag")
 
+        -- Variable that indicates whether to run state tomography, and if so,
+        -- on which measurement basis currently
+        -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
+        local state_tomography_basis = meta:get_int("state_tomography_basis")
+
 		return {
 			pos = pos,
 
@@ -104,6 +109,18 @@ function q_command:get_q_command_block(pos)
             -- Set qasm simulator flag, integer
             set_qasm_simulator_flag = function(zero_one)
                 meta:set_int("qasm_simulator_flag", zero_one)
+			end,
+
+            -- Get current state tomography basis, integer
+            -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
+            get_state_tomography_basis = function()
+				return state_tomography_basis
+			end,
+
+            -- Set current state tomography basis, integer
+            -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
+            set_state_tomography_basis = function(state_tomography_basis)
+                meta:set_int("state_tomography_basis", state_tomography_basis)
 			end,
 
             -- Determine if circuit grid exists
