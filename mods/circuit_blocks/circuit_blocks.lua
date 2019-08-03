@@ -1505,9 +1505,19 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 -- Punch the q_command block to run simulator and update resultant displays
                 local q_command_pos = block.get_q_command_pos()
 
-                if block.get_node_type() == CircuitNodeTypes.MEASURE_Z then
-                    -- Also indicate that the qasm_simulator should be run
-                    q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                if block.get_node_type() == CircuitNodeTypes.MEASURE_Z or
+                        block.get_node_type() == CircuitNodeTypes.BLOCH_SPHERE then
+                    if not player:get_player_control().aux1 then
+                        local new_node_name = "circuit_blocks:circuit_blocks_measure_z"
+                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                new_node_name, player)
+                        -- Also indicate that the qasm_simulator should be run
+                        q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                    else
+                        local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
+                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                new_node_name, player)
+                    end
                 end
                 minetest.punch_node(q_command_pos)
             end

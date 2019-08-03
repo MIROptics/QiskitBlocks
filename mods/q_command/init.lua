@@ -761,7 +761,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     local http_request_qasm = {
                         -- TODO: Make URL host and port configurable
                         url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_measurement_str)
+                                url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1"
                     }
 
                     --[[
@@ -1279,7 +1279,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                             end
                         else
-                            minetest.debug("Call to statevector_simulator Didn't succeed")
+                            minetest.debug("Call to qasm_simulator Didn't succeed")
                         end
                     end
 
