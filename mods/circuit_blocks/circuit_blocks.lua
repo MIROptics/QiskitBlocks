@@ -1507,14 +1507,23 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
 
                 if block.get_node_type() == CircuitNodeTypes.MEASURE_Z or
                         block.get_node_type() == CircuitNodeTypes.BLOCH_SPHERE then
+                    local new_node_name = nil
                     if not player:get_player_control().aux1 then
-                        local new_node_name = "circuit_blocks:circuit_blocks_measure_z"
+                        -- Use cat measure textures if measure block is cat-related
+                        new_node_name = "circuit_blocks:circuit_blocks_measure_z"
+                        if block.get_node_name():sub(1, 47) ==
+                                "circuit_blocks:circuit_blocks_measure_alice_cat" then
+                            new_node_name = "circuit_blocks:circuit_blocks_measure_alice_cat"
+                        elseif block.get_node_name():sub(1, 45) ==
+                                "circuit_blocks:circuit_blocks_measure_bob_cat" then
+                            new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat"
+                        end
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
                         -- Also indicate that the qasm_simulator should be run
                         q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
                     else
-                        local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
+                        new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
                         -- Also indicate that the qasm_simulator should be run, with state tomography,
