@@ -202,6 +202,9 @@ function q_command:get_q_command_block(pos)
                     local bit_str_idx = num_wires + 1 - wire_num
 
                     local basis_state_bit_str = nil
+                    local num_zeros = 0
+                    local num_ones_and_zeros = 0
+
 
                     local obj, pos, err = json.decode (qasm_data, 1, nil)
                     if err then
@@ -214,9 +217,6 @@ function q_command:get_q_command_block(pos)
 
                         minetest.debug("q_block results, meas_basis == " .. tostring(meas_basis))
 
-                        local num_zeros = 0
-                        local num_ones_and_zeros = 0
-
                         for key, val in pairs(basis_freq) do
                             basis_state_bit_str = key:gsub("%s+", "")
                             local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
@@ -228,6 +228,8 @@ function q_command:get_q_command_block(pos)
                         end
                         minetest.debug("num_zeros: " .. num_zeros .. ", num_ones_and_zeros: " .. num_ones_and_zeros)
                     end
+
+                    return num_zeros / num_ones_and_zeros
 
                 else
                     return nil
@@ -946,8 +948,10 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local node_type = circuit_node_block.get_node_type()
 
                             -- TODO: Remove
-                            minetest.debug("calling q_block:compute_meas_ket_0_ratio(1, 1)")
-                            q_block.compute_meas_ket_0_ratio(1, 1)
+                            minetest.debug("X basis ratio: " .. q_block.compute_meas_ket_0_ratio(1, 1))
+                            minetest.debug("Y basis ratio: " .. q_block.compute_meas_ket_0_ratio(2, 1))
+                            minetest.debug("Z basis ratio: " .. q_block.compute_meas_ket_0_ratio(3, 1))
+                            
 
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
 
