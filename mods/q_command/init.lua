@@ -805,19 +805,19 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     local http_request_qasm_tomo_x = {
                         -- TODO: Make URL host and port configurable
                         url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1"
+                                url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1000"
                     }
 
                     local http_request_qasm_tomo_y = {
                         -- TODO: Make URL host and port configurable
                         url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1"
+                                url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1000"
                     }
 
                     local http_request_qasm_tomo_z = {
                         -- TODO: Make URL host and port configurable
                         url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1"
+                                url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1000"
                     }
 
                     --[[
@@ -1260,7 +1260,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     end
 
 
-                    local function process_backend_qasm_result(http_request_response)
+                    local function common_process_backend_qasm_result(http_request_response, state_tomo_basis)
                         if LOG_DEBUG then
                             minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
                         end
@@ -1285,13 +1285,14 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     minetest.debug("basis_freq:\n" .. dump(basis_freq))
                                 end
 
-                                -- Only one shot is requested from simulator,
-                                -- so this table should have only one entry
+                                -- If only one shot is requested from simulator,
+                                -- them this table should have only one entry
+                                minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
                                 for key, val in pairs(basis_freq) do
                                     basis_state_bit_str = key:gsub("%s+", "")
-                                    -- basis_state_bit_str = key
-                                    --minetest.debug("k: " .. k .. ", v: " .. v)
+                                    minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
                                 end
+                                minetest.debug("")
                             end
 
                             if LOG_DEBUG then
@@ -1339,22 +1340,38 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         end
                     end
 
+                    local function process_backend_qasm_result_no_tomo(http_request_response)
+                        common_process_backend_qasm_result(http_request_response, 0)
+                    end
+
+                    local function process_backend_qasm_result_tomo_x_meas_basis(http_request_response)
+                        common_process_backend_qasm_result(http_request_response, 1)
+                    end
+
+                    local function process_backend_qasm_result_tomo_y_meas_basis(http_request_response)
+                        common_process_backend_qasm_result(http_request_response, 2)
+                    end
+
+                    local function process_backend_qasm_result_tomo_z_meas_basis(http_request_response)
+                        common_process_backend_qasm_result(http_request_response, 3)
+                    end
+
                     if q_block.get_qasm_simulator_flag() ~= 0 then
 
                         if q_block.get_state_tomography_basis() == 0 then
                             -- First, run statevector_simulator
                             -- request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
                             -- Run qasm_simulator without state tomography
-                            request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
+                            request_http_api.fetch(http_request_qasm, process_backend_qasm_result_no_tomo)
                         elseif q_block.get_state_tomography_basis() == 1 then
                             -- Measure in X basis for state tomography
-                            request_http_api.fetch(http_request_qasm_tomo_x, process_backend_qasm_result)
+                            request_http_api.fetch(http_request_qasm_tomo_x, process_backend_qasm_result_tomo_x_meas_basis)
                         elseif q_block.get_state_tomography_basis() == 2 then
                             -- Measure in Y basis for state tomography
-                            request_http_api.fetch(http_request_qasm_tomo_y, process_backend_qasm_result)
+                            request_http_api.fetch(http_request_qasm_tomo_y, process_backend_qasm_result_tomo_y_meas_basis)
                         elseif q_block.get_state_tomography_basis() == 3 then
                             -- Measure in Z basis for state tomography
-                            request_http_api.fetch(http_request_qasm_tomo_z, process_backend_qasm_result)
+                            request_http_api.fetch(http_request_qasm_tomo_z, process_backend_qasm_result_tomo_z_meas_basis)
                         end
 
                         q_block.set_qasm_simulator_flag(0)
