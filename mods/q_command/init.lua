@@ -119,8 +119,8 @@ function q_command:get_q_command_block(pos)
 
             -- Set current state tomography basis, integer
             -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
-            set_state_tomography_basis = function(state_tomography_basis)
-                meta:set_int("state_tomography_basis", state_tomography_basis)
+            set_state_tomography_basis = function(state_tomography_basis_num)
+                meta:set_int("state_tomography_basis", state_tomography_basis_num)
 			end,
 
             -- Determine if circuit grid exists
@@ -144,7 +144,8 @@ function q_command:get_q_command_block(pos)
                         "circuit_pos_x: " .. tostring(circuit_pos_x) .. "\n" ..
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
                         "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
-                        "qasm_simulator_flag: " .. tostring(qasm_simulator_flag) .. "\n"
+                        "qasm_simulator_flag: " .. tostring(qasm_simulator_flag) .. "\n" ..
+                        "state_tomography_basis: " .. tostring(state_tomography_basis) .. "\n"
                 return ret_str
             end
 		}
@@ -259,9 +260,10 @@ end
 
 
 function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
-                                        include_measurement_blocks, c_if_table)
+                                        include_measurement_blocks, c_if_table, tomo_meas_basis)
     local qasm_str = ""
     local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+    local q_block = q_command:get_q_command_block(circuit_node_pos)
 
     if circuit_node_block then
         local node_type = circuit_node_block.get_node_type()
@@ -439,7 +441,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
                         qasm_str = qasm_str ..
                                  q_command:create_qasm_for_node(circ_node_pos,
                                          extension_wire_num, include_measurement_blocks,
-                                         c_if_table)
+                                         c_if_table, tomo_meas_basis)
                     end
                 end
             end
@@ -462,6 +464,22 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
             local eq_val_str = node_name:sub(39, 39)
             c_if_table[wire_num] = "if(c" .. register_idx_str .. "==" ..
                     eq_val_str .. ")"
+
+        elseif node_type == CircuitNodeTypes.BLOCH_SPHERE then
+            if include_measurement_blocks then
+                if tomo_meas_basis == 1 then
+                    -- Measure in the X basis (by first rotating -pi/2 radians on Y axis)
+                    qasm_str = qasm_str .. 'ry(' .. tostring(-math.pi / 2) .. ') '
+                    qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
+                elseif tomo_meas_basis == 2 then
+                    -- Measure in the Y basis (by first rotating pi/2 radians on X axis)
+                    qasm_str = qasm_str .. 'rx(' .. tostring(math.pi / 2) .. ') '
+                    qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
+                elseif tomo_meas_basis == 3 then
+                    -- Measure in the Z basis (no rotation necessary)
+                end
+                qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c' .. wire_num_idx .. '[0];'
+            end
         end
 
     else
@@ -474,7 +492,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
     return qasm_str
 end
 
-function q_command:compute_circuit(circuit_block, include_measurement_blocks)
+function q_command:compute_circuit(circuit_block, include_measurement_blocks, tomo_meas_basis)
     local num_wires = circuit_block.get_circuit_num_wires()
     local num_columns = circuit_block.get_circuit_num_columns()
     local circuit_dir_str = circuit_block.get_circuit_dir_str()
@@ -523,7 +541,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks)
 
 
             qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num,
-                    include_measurement_blocks, c_if_table)
+                    include_measurement_blocks, c_if_table, tomo_meas_basis)
         end
     end
 
@@ -768,6 +786,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                     local qasm_str = q_command:compute_circuit(circuit_block, false)
                     local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
+                    local qasm_with_tomo_x_str = q_command:compute_circuit(circuit_block, true, 1)
+                    local qasm_with_tomo_y_str = q_command:compute_circuit(circuit_block, true, 2)
+                    local qasm_with_tomo_z_str = q_command:compute_circuit(circuit_block, true, 3)
 
                     local http_request_statevector = {
                         -- TODO: Make URL host and port configurable
@@ -779,6 +800,24 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         -- TODO: Make URL host and port configurable
                         url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1"
+                    }
+
+                    local http_request_qasm_tomo_x = {
+                        -- TODO: Make URL host and port configurable
+                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1"
+                    }
+
+                    local http_request_qasm_tomo_y = {
+                        -- TODO: Make URL host and port configurable
+                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1"
+                    }
+
+                    local http_request_qasm_tomo_z = {
+                        -- TODO: Make URL host and port configurable
+                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1"
                     }
 
                     --[[
@@ -1300,13 +1339,30 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         end
                     end
 
-                    request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
-
                     if q_block.get_qasm_simulator_flag() ~= 0 then
-                        request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
-                        q_block.set_qasm_simulator_flag(0)
-                    end
 
+                        if q_block.get_state_tomography_basis() == 0 then
+                            -- First, run statevector_simulator
+                            -- request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
+                            -- Run qasm_simulator without state tomography
+                            request_http_api.fetch(http_request_qasm, process_backend_qasm_result)
+                        elseif q_block.get_state_tomography_basis() == 1 then
+                            -- Measure in X basis for state tomography
+                            request_http_api.fetch(http_request_qasm_tomo_x, process_backend_qasm_result)
+                        elseif q_block.get_state_tomography_basis() == 2 then
+                            -- Measure in Y basis for state tomography
+                            request_http_api.fetch(http_request_qasm_tomo_y, process_backend_qasm_result)
+                        elseif q_block.get_state_tomography_basis() == 3 then
+                            -- Measure in Z basis for state tomography
+                            request_http_api.fetch(http_request_qasm_tomo_z, process_backend_qasm_result)
+                        end
+
+                        q_block.set_qasm_simulator_flag(0)
+                        q_block.set_state_tomography_basis(0)
+                    else
+                        -- Only run statevector_simulator
+                        request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
+                    end
                 end
 
             else
