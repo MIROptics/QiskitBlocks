@@ -237,6 +237,25 @@ function q_command:get_q_command_block(pos)
             end,
 
 
+            compute_yz_pi_8_rots_by_meas_ratios = function(x_basis_ratio, y_basis_ratio, z_basis_ratio)
+                local y_pi8rot = 0
+                local z_pi8rot = 0
+
+                -- Origin of sphere is 0, 0, 0
+                local x_coord = x_basis_ratio - 0.5
+                local y_coord = y_basis_ratio - 0.5
+                local z_coord = z_basis_ratio - 0.5
+
+                local polar_rads = math.atan((math.sqrt(x_coord^2 + y_coord^2)) / z_coord)
+                local azimuth_rads = math.atan(y_coord / x_coord)
+
+                y_pi8rot = math.floor(polar_rads * 8 / math.pi)
+                z_pi8rot = math.floor(azimuth_rads * 8 / math.pi)
+
+                return y_pi8rot, z_pi8rot
+            end,
+
+
             -- Create string representation
             -- TODO: What is Lua way to implement a "to string" function?
             to_string = function()
@@ -951,7 +970,15 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             minetest.debug("X basis ratio: " .. q_block.compute_meas_ket_0_ratio(1, 1))
                             minetest.debug("Y basis ratio: " .. q_block.compute_meas_ket_0_ratio(2, 1))
                             minetest.debug("Z basis ratio: " .. q_block.compute_meas_ket_0_ratio(3, 1))
-                            
+
+                            local y_pi8rot = 0
+                            local z_pi8rot = 0
+                            y_pi8rot, z_pi8rot = q_block.compute_yz_pi_8_rots_by_meas_ratios(
+                                    q_block.compute_meas_ket_0_ratio(1, 1),
+                                    q_block.compute_meas_ket_0_ratio(2, 1),
+                                    q_block.compute_meas_ket_0_ratio(3, 1))
+
+                            minetest.debug("y_pi8rot: " .. y_pi8rot .. ", z_pi8rot: " .. z_pi8rot)
 
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
 
