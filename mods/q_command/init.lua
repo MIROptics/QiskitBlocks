@@ -170,8 +170,22 @@ function q_command:get_q_command_block(pos)
             end,
 
 
+            -- Determine if circuit grid exists
+            --
+            circuit_grid_exists = function()
+                local ret_exists = false
+                if circuit_pos_x ~= 0 or circuit_pos_y ~= 0 or circuit_pos_z ~= 0 then
+                    -- TODO: Close the loophole where the origin of a circuit is on 0,0,0
+                    --       (or make it an Easter egg)
+                    ret_exists = true
+                end
+				return ret_exists
+			end,
+
+
             -- Compute ratio (numerator / 1) of |0> measurements in a given basis (X:1, Y:2, Z:3)
             compute_meas_ket_0_ratio = function(meas_basis, wire_num)
+                local q_block = q_command:get_q_command_block(pos)
                 local qasm_data = nil
                 if meas_basis == 1 then
                     qasm_data = meta:get_string("qasm_data_json_for_1k_x_basis_meas")
@@ -181,8 +195,12 @@ function q_command:get_q_command_block(pos)
                     qasm_data = meta:get_string("qasm_data_json_for_1k_z_basis_meas")
                 end
 
-                if qasm_data then
+                if qasm_data and q_block:circuit_grid_exists() then
                     -- TODO: Finish this logic
+                    local circuit_block = circuit_blocks:get_circuit_block(q_block:get_circuit_pos())
+                    local num_wires = circuit_block.get_circuit_num_wires()
+                    local bit_str_idx = num_wires + 1 - wire_num
+
                     local basis_state_bit_str = nil
 
                     local obj, pos, err = json.decode (qasm_data, 1, nil)
@@ -195,11 +213,20 @@ function q_command:get_q_command_block(pos)
                         end
 
                         minetest.debug("q_block results, meas_basis == " .. tostring(meas_basis))
+
+                        local num_zeros = 0
+                        local num_ones_and_zeros = 0
+
                         for key, val in pairs(basis_freq) do
                             basis_state_bit_str = key:gsub("%s+", "")
+                            local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
+                            if meas_bit == "0" then
+                                num_zeros = num_zeros + val
+                            end
+                            num_ones_and_zeros = num_ones_and_zeros + val
                             minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
                         end
-                        minetest.debug("")
+                        minetest.debug("num_zeros: " .. num_zeros .. ", num_ones_and_zeros: " .. num_ones_and_zeros)
                     end
 
                 else
@@ -207,17 +234,6 @@ function q_command:get_q_command_block(pos)
                 end
             end,
 
-            -- Determine if circuit grid exists
-            --
-            circuit_grid_exists = function()
-                local ret_exists = false
-                if circuit_pos_x ~= 0 or circuit_pos_y ~= 0 or circuit_pos_z ~= 0 then
-                    -- TODO: Close the loophole where the origin of a circuit is on 0,0,0
-                    --       (or make it an Easter egg)
-                    ret_exists = true
-                end
-				return ret_exists
-			end,
 
             -- Create string representation
             -- TODO: What is Lua way to implement a "to string" function?
@@ -930,8 +946,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local node_type = circuit_node_block.get_node_type()
 
                             -- TODO: Remove
-                            --minetest.debug("calling q_block:compute_meas_ket_0_ratio(1, 1)")
-                            --q_block.compute_meas_ket_0_ratio(1, 1)
+                            minetest.debug("calling q_block:compute_meas_ket_0_ratio(1, 1)")
+                            q_block.compute_meas_ket_0_ratio(1, 1)
 
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
 
