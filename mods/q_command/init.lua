@@ -113,6 +113,7 @@ function q_command:get_q_command_block(pos)
 
             -- Set qasm simulator flag, integer
             set_qasm_simulator_flag = function(zero_one)
+                qasm_simulator_flag = zero_one
                 meta:set_int("qasm_simulator_flag", zero_one)
 			end,
 
@@ -125,6 +126,7 @@ function q_command:get_q_command_block(pos)
             -- Set current state tomography basis, integer
             -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
             set_state_tomography_basis = function(state_tomography_basis_num)
+                state_tomography_basis = state_tomography_basis_num
                 meta:set_int("state_tomography_basis", state_tomography_basis_num)
 			end,
 
@@ -137,6 +139,8 @@ function q_command:get_q_command_block(pos)
             -- Set JSON results of tomography x-basis measurements
             set_qasm_data_json_for_1k_x_basis_meas = function(qasm_data_json)
                 qasm_data_json_for_1k_x_basis_meas = qasm_data_json
+                meta:set_string("qasm_data_json_for_1k_x_basis_meas",
+                        qasm_data_json)
             end,
 
 
@@ -148,6 +152,8 @@ function q_command:get_q_command_block(pos)
             -- Set JSON results of tomography y-basis measurements
             set_qasm_data_json_for_1k_y_basis_meas = function(qasm_data_json)
                 qasm_data_json_for_1k_y_basis_meas = qasm_data_json
+                meta:set_string("qasm_data_json_for_1k_y_basis_meas",
+                        qasm_data_json)
             end,
 
 
@@ -159,6 +165,46 @@ function q_command:get_q_command_block(pos)
             -- Set JSON results of tomography z-basis measurements
             set_qasm_data_json_for_1k_z_basis_meas = function(qasm_data_json)
                 qasm_data_json_for_1k_z_basis_meas = qasm_data_json
+                meta:set_string("qasm_data_json_for_1k_z_basis_meas",
+                        qasm_data_json)
+            end,
+
+
+            -- Compute ratio (numerator / 1) of |0> measurements in a given basis (X:1, Y:2, Z:3)
+            compute_meas_ket_0_ratio = function(meas_basis, wire_num)
+                local qasm_data = nil
+                if meas_basis == 1 then
+                    qasm_data = meta:get_string("qasm_data_json_for_1k_x_basis_meas")
+                elseif meas_basis == 2 then
+                    qasm_data = meta:get_string("qasm_data_json_for_1k_y_basis_meas")
+                elseif meas_basis == 3 then
+                    qasm_data = meta:get_string("qasm_data_json_for_1k_z_basis_meas")
+                end
+
+                if qasm_data then
+                    -- TODO: Finish this logic
+                    local basis_state_bit_str = nil
+
+                    local obj, pos, err = json.decode (qasm_data, 1, nil)
+                    if err then
+                        minetest.debug ("Error:", err)
+                    else
+                        local basis_freq = obj.result
+                        if LOG_DEBUG then
+                            minetest.debug("basis_freq:\n" .. dump(basis_freq))
+                        end
+
+                        minetest.debug("q_block results, meas_basis == " .. tostring(meas_basis))
+                        for key, val in pairs(basis_freq) do
+                            basis_state_bit_str = key:gsub("%s+", "")
+                            minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
+                        end
+                        minetest.debug("")
+                    end
+
+                else
+                    return nil
+                end
             end,
 
             -- Determine if circuit grid exists
@@ -882,7 +928,13 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                         if circuit_node_block then
                             local node_type = circuit_node_block.get_node_type()
+
+                            -- TODO: Remove
+                            --minetest.debug("calling q_block:compute_meas_ket_0_ratio(1, 1)")
+                            --q_block.compute_meas_ket_0_ratio(1, 1)
+
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
+
                                 local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                                 -- TODO: Ascertain the state of this qubit, and whether it is entangled
                                 local y_pi8rot = 0
@@ -1329,21 +1381,21 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     minetest.debug("basis_freq:\n" .. dump(basis_freq))
                                 end
 
+                                if state_tomo_basis == 1 then
+                                    q_block.set_qasm_data_json_for_1k_x_basis_meas(qasm_data)
+                                    local data = q_block.get_qasm_data_json_for_1k_x_basis_meas(1)
+                                    minetest.debug ("data 1:", data)
+                                elseif state_tomo_basis == 2 then
+                                    q_block.set_qasm_data_json_for_1k_y_basis_meas(qasm_data)
+                                elseif state_tomo_basis == 3 then
+                                    q_block.set_qasm_data_json_for_1k_z_basis_meas(qasm_data)
+                                end
+
                                 minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
                                 for key, val in pairs(basis_freq) do
                                     basis_state_bit_str = key:gsub("%s+", "")
                                     minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
 
-                                    if state_tomo_basis == 1 then
-                                        q_block:set_qasm_data_json_for_1k_x_basis_meas(qasm_data)
-                                        minetest:debug("q_block: \n" .. q_block:to_string())
-                                    elseif state_tomo_basis == 2 then
-                                        q_block:set_qasm_data_json_for_1k_y_basis_meas(qasm_data)
-                                        minetest:debug("q_block: \n" .. q_block:to_string())
-                                    elseif state_tomo_basis == 3 then
-                                        q_block:set_qasm_data_json_for_1k_z_basis_meas(qasm_data)
-                                        minetest:debug("q_block: \n" .. q_block:to_string())
-                                    end
                                 end
                                 minetest.debug("")
                             end
