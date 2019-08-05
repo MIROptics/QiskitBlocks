@@ -74,6 +74,11 @@ function q_command:get_q_command_block(pos)
         -- 1: X, 2: Y, 3: Z, 0: Don't run state tomography
         local state_tomography_basis = meta:get_int("state_tomography_basis")
 
+        -- JSON data returned from tomography measurements in x, y and z bases
+        local qasm_data_json_for_1k_x_basis_meas = meta:get_string("qasm_data_json_for_1k_x_basis_meas")
+        local qasm_data_json_for_1k_y_basis_meas = meta:get_string("qasm_data_json_for_1k_y_basis_meas")
+        local qasm_data_json_for_1k_z_basis_meas = meta:get_string("qasm_data_json_for_1k_z_basis_meas")
+
 		return {
 			pos = pos,
 
@@ -123,6 +128,39 @@ function q_command:get_q_command_block(pos)
                 meta:set_int("state_tomography_basis", state_tomography_basis_num)
 			end,
 
+
+            -- Get JSON results of tomography x-basis measurements
+            get_qasm_data_json_for_1k_x_basis_meas = function()
+                return qasm_data_json_for_1k_x_basis_meas
+            end,
+
+            -- Set JSON results of tomography x-basis measurements
+            set_qasm_data_json_for_1k_x_basis_meas = function(qasm_data_json)
+                qasm_data_json_for_1k_x_basis_meas = qasm_data_json
+            end,
+
+
+            -- Get JSON results of tomography y-basis measurements
+            get_qasm_data_json_for_1k_y_basis_meas = function()
+                return qasm_data_json_for_1k_y_basis_meas
+            end,
+
+            -- Set JSON results of tomography y-basis measurements
+            set_qasm_data_json_for_1k_y_basis_meas = function(qasm_data_json)
+                qasm_data_json_for_1k_y_basis_meas = qasm_data_json
+            end,
+
+
+            -- Get JSON results of tomography z-basis measurements
+            get_qasm_data_json_for_1k_z_basis_meas = function()
+                return qasm_data_json_for_1k_z_basis_meas
+            end,
+
+            -- Set JSON results of tomography z-basis measurements
+            set_qasm_data_json_for_1k_z_basis_meas = function(qasm_data_json)
+                qasm_data_json_for_1k_z_basis_meas = qasm_data_json
+            end,
+
             -- Determine if circuit grid exists
             --
             circuit_grid_exists = function()
@@ -145,7 +183,13 @@ function q_command:get_q_command_block(pos)
                         "circuit_pos_y: " .. tostring(circuit_pos_y) .. "\n" ..
                         "circuit_pos_z: " .. tostring(circuit_pos_z) .. "\n" ..
                         "qasm_simulator_flag: " .. tostring(qasm_simulator_flag) .. "\n" ..
-                        "state_tomography_basis: " .. tostring(state_tomography_basis) .. "\n"
+                        "state_tomography_basis: " .. tostring(state_tomography_basis) .. "\n" ..
+                        "qasm_data_json_for_1k_x_basis_meas: " ..
+                        tostring(qasm_data_json_for_1k_x_basis_meas) .. "\n" ..
+                        "qasm_data_json_for_1k_y_basis_meas: " ..
+                        tostring(qasm_data_json_for_1k_y_basis_meas) .. "\n" ..
+                        "qasm_data_json_for_1k_z_basis_meas: " ..
+                        tostring(qasm_data_json_for_1k_z_basis_meas) .. "\n"
                 return ret_str
             end
 		}
@@ -1285,12 +1329,21 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     minetest.debug("basis_freq:\n" .. dump(basis_freq))
                                 end
 
-                                -- If only one shot is requested from simulator,
-                                -- them this table should have only one entry
                                 minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
                                 for key, val in pairs(basis_freq) do
                                     basis_state_bit_str = key:gsub("%s+", "")
                                     minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
+
+                                    if state_tomo_basis == 1 then
+                                        q_block:set_qasm_data_json_for_1k_x_basis_meas(qasm_data)
+                                        minetest:debug("q_block: \n" .. q_block:to_string())
+                                    elseif state_tomo_basis == 2 then
+                                        q_block:set_qasm_data_json_for_1k_y_basis_meas(qasm_data)
+                                        minetest:debug("q_block: \n" .. q_block:to_string())
+                                    elseif state_tomo_basis == 3 then
+                                        q_block:set_qasm_data_json_for_1k_z_basis_meas(qasm_data)
+                                        minetest:debug("q_block: \n" .. q_block:to_string())
+                                    end
                                 end
                                 minetest.debug("")
                             end
