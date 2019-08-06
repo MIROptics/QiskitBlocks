@@ -273,6 +273,9 @@ function q_command:get_q_command_block(pos)
 
 
                 polar_rads = (polar_rads + (2 * math.pi)) % (2 * math.pi)
+                if x_coord < 0.0 then
+                    azimuth_rads = azimuth_rads + math.pi
+                end
                 azimuth_rads = (azimuth_rads + (2 * math.pi)) % (2 * math.pi)
 
 
