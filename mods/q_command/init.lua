@@ -215,7 +215,7 @@ function q_command:get_q_command_block(pos)
                             minetest.debug("basis_freq:\n" .. dump(basis_freq))
                         end
 
-                        minetest.debug("q_block results, meas_basis == " .. tostring(meas_basis))
+                        --minetest.debug("q_block results, meas_basis == " .. tostring(meas_basis))
 
                         for key, val in pairs(basis_freq) do
                             basis_state_bit_str = key:gsub("%s+", "")
@@ -224,9 +224,9 @@ function q_command:get_q_command_block(pos)
                                 num_zeros = num_zeros + val
                             end
                             num_ones_and_zeros = num_ones_and_zeros + val
-                            minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
+                            --minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
                         end
-                        minetest.debug("num_zeros: " .. num_zeros .. ", num_ones_and_zeros: " .. num_ones_and_zeros)
+                        --minetest.debug("num_zeros: " .. num_zeros .. ", num_ones_and_zeros: " .. num_ones_and_zeros)
                     end
 
                     return num_zeros / num_ones_and_zeros
@@ -1266,8 +1266,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         if circuit_node_block then
                             local node_type = circuit_node_block.get_node_type()
 
-                            minetest.debug("In update_bloch_sphere_block, node_type: " .. node_type)
-
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
 
                                 local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
@@ -1275,16 +1273,16 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 local entangled = false
 
                                 if not entangled then
-                                    minetest.debug("X basis ratio: " .. q_block.compute_meas_ket_0_ratio(1, 1))
-                                    minetest.debug("Y basis ratio: " .. q_block.compute_meas_ket_0_ratio(2, 1))
-                                    minetest.debug("Z basis ratio: " .. q_block.compute_meas_ket_0_ratio(3, 1))
+                                    --minetest.debug("X basis ratio: " .. q_block.compute_meas_ket_0_ratio(1, 1))
+                                    --minetest.debug("Y basis ratio: " .. q_block.compute_meas_ket_0_ratio(2, 1))
+                                    --minetest.debug("Z basis ratio: " .. q_block.compute_meas_ket_0_ratio(3, 1))
 
                                     local y_pi8rot = 0
                                     local z_pi8rot = 0
                                     y_pi8rot, z_pi8rot = q_block.compute_yz_pi_8_rots_by_meas_ratios(
-                                            q_block.compute_meas_ket_0_ratio(1, 1),
-                                            q_block.compute_meas_ket_0_ratio(2, 1),
-                                            q_block.compute_meas_ket_0_ratio(3, 1))
+                                            q_block.compute_meas_ket_0_ratio(1, wire_num),
+                                            q_block.compute_meas_ket_0_ratio(2, wire_num),
+                                            q_block.compute_meas_ket_0_ratio(3, wire_num))
 
                                     minetest.debug("y_pi8rot: " .. y_pi8rot .. ", z_pi8rot: " .. z_pi8rot)
 
@@ -1450,13 +1448,13 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     q_block.set_qasm_data_json_for_1k_z_basis_meas(qasm_data)
                                 end
 
-                                minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
+                                --minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
                                 for key, val in pairs(basis_freq) do
                                     basis_state_bit_str = key:gsub("%s+", "")
-                                    minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
+                                    --minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
 
                                 end
-                                minetest.debug("")
+                                --minetest.debug("")
                             end
 
                             if LOG_DEBUG then

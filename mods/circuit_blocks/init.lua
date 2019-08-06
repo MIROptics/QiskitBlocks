@@ -18,9 +18,11 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
-[] Use state tomography or purity to update bloch-sphere blocks
-- https://github.com/Qiskit/qiskit-tutorials/blob/master/qiskit/ignis/state_tomography.ipynb
 [] Create constants for tomography measurement bases
+[] Work out how to tell which wires are entangled by analyzing the statevector
+[] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
+[] Create a freeform circuit building area that contains a chest with blocks,
+    and instructions on how to use each block
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Create Mars and Venus blocks for cat entanglement demo
