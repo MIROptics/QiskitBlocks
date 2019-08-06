@@ -1109,8 +1109,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 local probability = (complex.abs(statevector[col_num]))^2
                                 local scaled_prob = math.floor(probability * BLOCK_WATER_LEVELS)
 
-                                -- minetest.debug("probability :" .. tostring(probability))
-
                                 local hist_node_name = "q_command:statevector_glass_no_arrow"
                                 if scaled_prob > 0 then
                                     hist_node_name = "q_command:statevector_glass_" .. tostring(p16_radians) .. "p16"
@@ -1170,7 +1168,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
 
                             end
-
                         else
                             minetest.debug("Call to statevector_simulator Didn't succeed")
                         end
@@ -1273,10 +1270,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 local entangled = false
 
                                 if not entangled then
-                                    --minetest.debug("X basis ratio: " .. q_block.compute_meas_ket_0_ratio(1, 1))
-                                    --minetest.debug("Y basis ratio: " .. q_block.compute_meas_ket_0_ratio(2, 1))
-                                    --minetest.debug("Z basis ratio: " .. q_block.compute_meas_ket_0_ratio(3, 1))
-
                                     local y_pi8rot = 0
                                     local z_pi8rot = 0
                                     y_pi8rot, z_pi8rot = q_block.compute_yz_pi_8_rots_by_meas_ratios(
@@ -1293,9 +1286,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                                 --[[
                                 -- TODO: Ascertain the state of this qubit, and whether it is entangled
-                                local y_pi8rot = 0
-                                local z_pi8rot = 0
-
                                 local complex_0 = complex.new(0, 0)
                                 local complex_1 = complex.new(0, 0)
                                 local entangled = false
@@ -1319,35 +1309,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                         temp_complex_0 = complex.new(statevector[basis_state_num + 1].r,
                                                 statevector[basis_state_num + 1].i)
                                     end
-                                end
-
-                                if not entangled then
-                                    local norm_0 = complex.abs(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
-                                    local y_rot = math.acos(norm_0) * 2
-                                    y_pi8rot = math.floor(y_rot * 8 / math.pi)
-                                    if LOG_DEBUG then
-                                        minetest.debug("norm_0: " .. norm_0 .. ", y_rot: " .. y_rot ..
-                                                "y_pi8rot: " ..  y_pi8rot)
-                                    end
-
-                                    local phase_0 = complex.polar_radians(temp_complex_0) * math.sqrt(1/2) / math.sqrt(1/8)
-                                    local phase_1 = complex.polar_radians(temp_complex_1) * math.sqrt(1/2) / math.sqrt(1/8)
-                                    local global_phase = ((phase_1 - phase_0) + 2 * math.pi) % (2 * math.pi)
-
-                                    if LOG_DEBUG then
-                                        minetest.debug("phase_0: " .. phase_0 .. ", phase_1: " .. phase_1 ..
-                                                "global_phase: " ..  global_phase)
-                                    end
-
-                                    local z_rot = global_phase
-                                    z_pi8rot = math.floor(z_rot * 8 / math.pi)
-                                    if LOG_DEBUG then
-                                        minetest.debug("global_phase: " .. global_phase .. ", z_rot: " .. z_rot ..
-                                                "z_pi8rot: " ..  z_pi8rot)
-                                    end
-
-                                    new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
-                                            y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
                                 end
                                 --]]
 
@@ -1441,20 +1402,15 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 if state_tomo_basis == 1 then
                                     q_block.set_qasm_data_json_for_1k_x_basis_meas(qasm_data)
                                     local data = q_block.get_qasm_data_json_for_1k_x_basis_meas(1)
-                                    minetest.debug ("data 1:", data)
                                 elseif state_tomo_basis == 2 then
                                     q_block.set_qasm_data_json_for_1k_y_basis_meas(qasm_data)
                                 elseif state_tomo_basis == 3 then
                                     q_block.set_qasm_data_json_for_1k_z_basis_meas(qasm_data)
                                 end
 
-                                --minetest.debug("Measurement results, state_tomo_basis == " .. tostring(state_tomo_basis))
                                 for key, val in pairs(basis_freq) do
                                     basis_state_bit_str = key:gsub("%s+", "")
-                                    --minetest.debug("key: " .. basis_state_bit_str .. ", val: " .. val)
-
                                 end
-                                --minetest.debug("")
                             end
 
                             if LOG_DEBUG then
