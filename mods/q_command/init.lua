@@ -246,11 +246,25 @@ function q_command:get_q_command_block(pos)
                 local y_coord = y_basis_ratio - 0.5
                 local z_coord = z_basis_ratio - 0.5
 
-                local polar_rads = math.atan((math.sqrt(x_coord^2 + y_coord^2)) / z_coord)
-                local azimuth_rads = math.atan(y_coord / x_coord)
+                --local x_coord = 0.5 - x_basis_ratio
+                --local y_coord = 0.5 - y_basis_ratio
+                --local z_coord = 0.5 - z_basis_ratio
 
-                y_pi8rot = math.floor(polar_rads * 8 / math.pi)
-                z_pi8rot = math.floor(azimuth_rads * 8 / math.pi)
+               minetest.debug("x_coord: " .. tostring(x_coord) ..
+                       ", y_coord: " .. tostring(y_coord) ..
+                       ", z_coord: " .. tostring(z_coord))
+
+
+                local polar_rads = math.atan((math.sqrt(x_coord^2 + y_coord^2)) / z_coord)
+                polar_rads = (polar_rads + math.pi) % math.pi
+
+                local azimuth_rads = math.atan(y_coord / x_coord)
+                azimuth_rads = (azimuth_rads + math.pi) % math.pi
+
+                minetest.debug("polar_rads: " .. tostring(polar_rads) .. ", azimuth_rads: " .. tostring(azimuth_rads))
+
+                y_pi8rot = math.floor(polar_rads * 8 / math.pi + .5)
+                z_pi8rot = math.floor(azimuth_rads * 8 / math.pi + .5)
 
                 return y_pi8rot, z_pi8rot
             end,
