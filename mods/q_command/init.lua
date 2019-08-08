@@ -43,6 +43,11 @@ BASIS_STATE_BLOCK_MAX_QUBITS = 4
 CIRCUIT_MAX_WIRES = 8
 CIRCUIT_MAX_COLUMNS = 64
 
+-- Background music IDs
+MUSIC_CHILL = 1
+MUSIC_ACTIVE = 2
+MUSIC_EXCITED = 3
+MUSIC_CONGRATS = 4
 
 -- our API object
 q_command = {}
@@ -830,6 +835,12 @@ function q_command:register_q_command_block(suffix_correct_solution,
             local meta = minetest.get_meta(pos)
             meta:set_string("infotext", "Quantum circuit command block")
             q_command.block_pos = pos
+
+            minetest.debug("mpd.playing:" .. tostring(mpd.playing))
+            if mpd.playing and mpd.playing ~= MUSIC_ACTIVE then
+                mpd.play_song(MUSIC_ACTIVE)
+            end
+
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
             local q_block = q_command:get_q_command_block(pos)
@@ -1217,15 +1228,38 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                         break
                                     end
                                 end
+
                             else
                                 is_correct_solution = false
+                                minetest.debug("mpd.playing:" .. tostring(mpd.playing))
                             end
+
+                            if is_correct_solution then
+                                if mpd.playing and mpd.playing ~= MUSIC_CONGRATS then
+                                    mpd.play_song(MUSIC_CONGRATS)
+                                end
+                                mpd.queue_next_song(MUSIC_ACTIVE)
+                            else
+                                if mpd.playing then
+                                    if mpd.playing == MUSIC_CHILL then
+                                        mpd.play_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_ACTIVE then
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_EXCITED then
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_CONGRATS then
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    end
+                                end
+                            end
+
                             if LOG_DEBUG then
                                 minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
                             end
                             if (is_correct_solution and not block_represents_correct_solution) or
                                     (not is_correct_solution and block_represents_correct_solution) then
                                 minetest.swap_node(q_block.get_node_pos(), {name = other_q_block_node_name})
+                            else
                             end
 
                             -- Update the histogram
@@ -1455,6 +1489,21 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             --end
 
                             if basis_state_bit_str then
+
+                                if mpd.playing then
+                                    if mpd.playing == MUSIC_CHILL then
+                                        mpd.play_song(MUSIC_EXCITED)
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_ACTIVE then
+                                        mpd.play_song(MUSIC_EXCITED)
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_EXCITED then
+                                        mpd.queue_next_song(MUSIC_ACTIVE)
+                                    elseif mpd.playing == MUSIC_CONGRATS then
+                                        mpd.queue_next_song(MUSIC_EXCITED)
+                                    end
+                                end
+
                                 -- Update measure blocks in the circuit
                                 local num_wires = circuit_block.get_circuit_num_wires()
                                 local num_columns = circuit_block.get_circuit_num_columns()
@@ -1486,12 +1535,16 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                         end
 
 
-                                        -- TODO: Determine if this isn't required
+                                        --if state_tomo_basis == 0 then
+                                        --    update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                        --else
+                                        --    update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num)
+                                        --end
+
                                         if state_tomo_basis == 0 then
                                             update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str)
-                                        else
-                                            update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num)
                                         end
+                                        update_bloch_sphere_block(circuit_node_pos, num_wires, wire_num)
                                     end
 
                                 end
