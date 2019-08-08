@@ -18,11 +18,20 @@ limitations under the License.
 --[[
 TODO:
 [X] Allow bloch sphere block to be placed on second to rightmost column
+[] Upgrade to latest version of Minetest & test QiskitBlocks
+[] Create a pedagogical progression of quantum algorithm circuits on Algorithm Shore
 [] Create constants for tomography measurement bases
-[] Work out how to tell which wires are entangled by analyzing the statevector
+[] Work out how to tell which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
+    [] Make this mode configurable on the Q command block
+[] Allow Bloch sphere blocks with a quantum state to be inserted in circuits
+    - This would set the state of that place in the wire to the state of the block)
+[] Allow Block sphere blocks with a quantum state to be removed and carried?
 [] Create a freeform circuit building area that contains a chest with blocks,
     and instructions on how to use each block
+[] Create mob, or player, that has a Bloch sphere head
+    - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)
+    - Health could be signified by quantum state
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 [] Create Mars and Venus blocks for cat entanglement demo
