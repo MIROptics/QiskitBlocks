@@ -3,7 +3,7 @@ Teaches quantum computing and Qiskit in a Minetest block world
 
 ## Installation
 1. Download and install [Minetest](https://www.minetest.net/)
-1. Checkout this QiskitBlocks project, and copy the `q_command` and `circuit_blocks` mods from 
+1. Checkout this QiskitBlocks project, and copy the `q_command`, `circuit_blocks` and `mpd` mods from 
 the `mods` folder of this QiskitBlocks project into the `games/minetest_game/mods` folder of your 
 Minetest installation.
 1. Add the following line to the `minetest.conf` file located the `games/minetest_game` folder of 
