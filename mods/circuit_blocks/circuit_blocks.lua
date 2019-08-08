@@ -967,7 +967,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         if y_pi8rot and z_pi8rot then
             texture_name = "circuit_blocks_qubit_bloch_y" .. y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
         else
-            texture_name = "circuit_blocks_qubit_bloch_blank"
+            texture_name = "circuit_blocks_qubit_bloch_" .. suffix
         end
     elseif circuit_node_type == CircuitNodeTypes.C_IF then
         texture_name = "circuit_blocks_if_" .. suffix

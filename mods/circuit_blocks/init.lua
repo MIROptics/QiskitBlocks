@@ -230,7 +230,10 @@ for y_rot = 0, 8 do
 end
 
 -- Create a blank Block sphere
-circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "", nil, nil)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "blank", nil, nil)
+
+-- Create an entangled Block sphere
+circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "entangled", nil, nil)
 
 -- Create classical if blocks
 for wire_idx = 0, MAX_C_IF_WIRES - 1 do

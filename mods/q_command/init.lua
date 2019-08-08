@@ -254,39 +254,41 @@ function q_command:get_q_command_block(pos)
                        ", y_coord: " .. tostring(y_coord) ..
                        ", z_coord: " .. tostring(z_coord))
 
-
-                --[[
-                local polar_rads = math.atan((math.sqrt(x_coord^2 + y_coord^2)) / z_coord)
-                polar_rads = (polar_rads + math.pi) % math.pi
-
-                local azimuth_rads = math.atan(y_coord / x_coord)
-                azimuth_rads = (azimuth_rads + math.pi) % math.pi
-                --]]
+                local entangled = false
 
                 local radius = math.sqrt(x_coord^2 + y_coord^2 + z_coord^2)
-                local polar_rads = math.acos(z_coord / radius)
-                local azimuth_rads = math.atan(y_coord / x_coord)
 
-                minetest.debug("Before mod: polar_rads: " .. tostring(polar_rads) ..
-                        ", azimuth_rads: " .. tostring(azimuth_rads) ..
-                        ", radius: " .. tostring(radius))
+                -- Protect against divide by zero error and do polar calculations
+                if radius ~= 0 and x_coord ~= 0 then
+                    local polar_rads = math.acos(z_coord / radius)
+                    local azimuth_rads = math.atan(y_coord / x_coord)
+
+                    minetest.debug("Before mod: polar_rads: " .. tostring(polar_rads) ..
+                            ", azimuth_rads: " .. tostring(azimuth_rads) ..
+                            ", radius: " .. tostring(radius))
 
 
-                polar_rads = (polar_rads + (2 * math.pi)) % (2 * math.pi)
-                if x_coord < 0.0 then
-                    azimuth_rads = azimuth_rads + math.pi
+                    polar_rads = (polar_rads + (2 * math.pi)) % (2 * math.pi)
+                    if x_coord < 0.0 then
+                        azimuth_rads = azimuth_rads + math.pi
+                    end
+                    azimuth_rads = (azimuth_rads + (2 * math.pi)) % (2 * math.pi)
+
+
+                    minetest.debug("polar_rads: " .. tostring(polar_rads) ..
+                            ", azimuth_rads: " .. tostring(azimuth_rads) ..
+                            ", radius: " .. tostring(radius))
+
+                    y_pi8rot = math.floor(polar_rads * 8 / math.pi + .5)
+                    z_pi8rot = math.floor(azimuth_rads * 8 / math.pi + .5) % 16
                 end
-                azimuth_rads = (azimuth_rads + (2 * math.pi)) % (2 * math.pi)
 
+                -- TODO: Find more reliable determination of entanglement
+                if radius < 0.47 then
+                    entangled = true
+                end
 
-                minetest.debug("polar_rads: " .. tostring(polar_rads) ..
-                        ", azimuth_rads: " .. tostring(azimuth_rads) ..
-                        ", radius: " .. tostring(radius))
-
-                y_pi8rot = math.floor(polar_rads * 8 / math.pi + .5)
-                z_pi8rot = math.floor(azimuth_rads * 8 / math.pi + .5) % 16
-
-                return y_pi8rot, z_pi8rot
+                return y_pi8rot, z_pi8rot, entangled
             end,
 
 
@@ -1107,50 +1109,23 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 if reset then
                                     new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                                 else
-                                    local entangled = false
+                                    local y_pi8rot = 0
+                                    local z_pi8rot = 0
+                                    y_pi8rot, z_pi8rot, entangled = q_block.compute_yz_pi_8_rots_by_meas_ratios(
+                                            q_block.compute_meas_ket_0_ratio(1, wire_num),
+                                            q_block.compute_meas_ket_0_ratio(2, wire_num),
+                                            q_block.compute_meas_ket_0_ratio(3, wire_num))
 
-                                    if not entangled then
-                                        local y_pi8rot = 0
-                                        local z_pi8rot = 0
-                                        y_pi8rot, z_pi8rot = q_block.compute_yz_pi_8_rots_by_meas_ratios(
-                                                q_block.compute_meas_ket_0_ratio(1, wire_num),
-                                                q_block.compute_meas_ket_0_ratio(2, wire_num),
-                                                q_block.compute_meas_ket_0_ratio(3, wire_num))
+                                    minetest.debug("y_pi8rot: " .. y_pi8rot ..
+                                            ", z_pi8rot: " .. z_pi8rot ..
+                                            ", entangled: " .. tostring(entangled))
 
-                                        minetest.debug("y_pi8rot: " .. y_pi8rot .. ", z_pi8rot: " .. z_pi8rot)
-
+                                    if entangled then
+                                        new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_entangled"
+                                    else
                                         new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
                                                 y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
-
                                     end
-
-                                    --[[
-                                    -- TODO: Ascertain the state of this qubit, and whether it is entangled
-                                    local complex_0 = complex.new(0, 0)
-                                    local complex_1 = complex.new(0, 0)
-                                    local entangled = false
-                                    local temp_complex_0 = nil
-                                    local temp_complex_1 = nil
-                                    for basis_state_num = 0, #statevector - 1 do
-                                        if bit_is_set(basis_state_num, #statevector, wire_num) then
-                                            if temp_complex_1 and
-                                                    not complex.nearly_equals(temp_complex_1, statevector[basis_state_num + 1]) then
-                                                entangled = true
-                                                break
-                                            end
-                                            temp_complex_1 = complex.new(statevector[basis_state_num + 1].r,
-                                                    statevector[basis_state_num + 1].i)
-                                        else
-                                            if temp_complex_0 and
-                                                    not complex.nearly_equals(temp_complex_0, statevector[basis_state_num + 1]) then
-                                                entangled = true
-                                                break
-                                            end
-                                            temp_complex_0 = complex.new(statevector[basis_state_num + 1].r,
-                                                    statevector[basis_state_num + 1].i)
-                                        end
-                                    end
-                                    --]]
                                 end
 
 
