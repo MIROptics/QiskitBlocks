@@ -213,7 +213,8 @@ function q_command:get_q_command_block(pos)
 
                     local obj, pos, err = json.decode (qasm_data, 1, nil)
                     if err then
-                        minetest.debug ("Error:", err)
+                        minetest.debug ("Error in compute_meas_ket_0_ratio:", err)
+                        return nil
                     else
                         local basis_freq = obj.result
                         if LOG_DEBUG then
@@ -245,54 +246,55 @@ function q_command:get_q_command_block(pos)
             compute_yz_pi_8_rots_by_meas_ratios = function(x_basis_ratio, y_basis_ratio, z_basis_ratio)
                 local y_pi8rot = 0
                 local z_pi8rot = 0
-
-                -- Origin of sphere is 0, 0, 0
-                local x_coord = x_basis_ratio - 0.5
-                local y_coord = y_basis_ratio - 0.5
-                local z_coord = z_basis_ratio - 0.5
-
-                --local x_coord = 0.5 - x_basis_ratio
-                --local y_coord = 0.5 - y_basis_ratio
-                --local z_coord = 0.5 - z_basis_ratio
-
-               minetest.debug("x_coord: " .. tostring(x_coord) ..
-                       ", y_coord: " .. tostring(y_coord) ..
-                       ", z_coord: " .. tostring(z_coord))
-
                 local entangled = false
 
-                local radius = math.sqrt(x_coord^2 + y_coord^2 + z_coord^2)
+                if x_basis_ratio and y_basis_ratio and z_basis_ratio then
+                    -- Origin of sphere is 0, 0, 0
+                    local x_coord = x_basis_ratio - 0.5
+                    local y_coord = y_basis_ratio - 0.5
+                    local z_coord = z_basis_ratio - 0.5
 
-                -- Protect against divide by zero error and do polar calculations
-                if radius ~= 0 and x_coord ~= 0 then
-                    local polar_rads = math.acos(z_coord / radius)
-                    local azimuth_rads = math.atan(y_coord / x_coord)
+                    --local x_coord = 0.5 - x_basis_ratio
+                    --local y_coord = 0.5 - y_basis_ratio
+                    --local z_coord = 0.5 - z_basis_ratio
 
-                    minetest.debug("Before mod: polar_rads: " .. tostring(polar_rads) ..
-                            ", azimuth_rads: " .. tostring(azimuth_rads) ..
-                            ", radius: " .. tostring(radius))
+                    minetest.debug("x_coord: " .. tostring(x_coord) ..
+                           ", y_coord: " .. tostring(y_coord) ..
+                           ", z_coord: " .. tostring(z_coord))
 
 
-                    polar_rads = (polar_rads + (2 * math.pi)) % (2 * math.pi)
-                    if x_coord < 0.0 then
-                        azimuth_rads = azimuth_rads + math.pi
+                    local radius = math.sqrt(x_coord^2 + y_coord^2 + z_coord^2)
+
+                    -- Protect against divide by zero error and do polar calculations
+                    if radius ~= 0 and x_coord ~= 0 then
+                        local polar_rads = math.acos(z_coord / radius)
+                        local azimuth_rads = math.atan(y_coord / x_coord)
+
+                        minetest.debug("Before mod: polar_rads: " .. tostring(polar_rads) ..
+                                ", azimuth_rads: " .. tostring(azimuth_rads) ..
+                                ", radius: " .. tostring(radius))
+
+
+                        polar_rads = (polar_rads + (2 * math.pi)) % (2 * math.pi)
+                        if x_coord < 0.0 then
+                            azimuth_rads = azimuth_rads + math.pi
+                        end
+                        azimuth_rads = (azimuth_rads + (2 * math.pi)) % (2 * math.pi)
+
+
+                        minetest.debug("polar_rads: " .. tostring(polar_rads) ..
+                                ", azimuth_rads: " .. tostring(azimuth_rads) ..
+                                ", radius: " .. tostring(radius))
+
+                        y_pi8rot = math.floor(polar_rads * 8 / math.pi + .5)
+                        z_pi8rot = math.floor(azimuth_rads * 8 / math.pi + .5) % 16
                     end
-                    azimuth_rads = (azimuth_rads + (2 * math.pi)) % (2 * math.pi)
 
-
-                    minetest.debug("polar_rads: " .. tostring(polar_rads) ..
-                            ", azimuth_rads: " .. tostring(azimuth_rads) ..
-                            ", radius: " .. tostring(radius))
-
-                    y_pi8rot = math.floor(polar_rads * 8 / math.pi + .5)
-                    z_pi8rot = math.floor(azimuth_rads * 8 / math.pi + .5) % 16
+                    -- TODO: Find more reliable determination of entanglement
+                    if radius < 0.47 then
+                        entangled = true
+                    end
                 end
-
-                -- TODO: Find more reliable determination of entanglement
-                if radius < 0.47 then
-                    entangled = true
-                end
-
                 return y_pi8rot, z_pi8rot, entangled
             end,
 
@@ -1097,7 +1099,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                             q_command:debug_node_info(circ_node_pos,
                                                     "Processing CONNECTOR_M, circ_node_pos")
 
-                                            update_measure_block(circ_node_pos, num_wires, wire_num, basis_state_bit_str)
+                                            update_measure_block(circ_node_pos, num_wires, wire_num, basis_state_bit_str, reset)
                                         end
                                     end
                                 end
@@ -1127,15 +1129,16 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                             q_block.compute_meas_ket_0_ratio(2, wire_num),
                                             q_block.compute_meas_ket_0_ratio(3, wire_num))
 
-                                    minetest.debug("y_pi8rot: " .. y_pi8rot ..
-                                            ", z_pi8rot: " .. z_pi8rot ..
-                                            ", entangled: " .. tostring(entangled))
-
                                     if entangled then
                                         new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_entangled"
-                                    else
+                                    elseif y_pi8rot and z_pi8rot then
                                         new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_y" ..
                                                 y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+                                    else
+                                        -- Perhaps the measurements haven't taken place fast enough
+                                        minetest.debug("y_pi8rot: " .. y_pi8rot ..
+                                                ", z_pi8rot: " .. z_pi8rot ..
+                                                ", entangled: " .. tostring(entangled))
                                     end
                                 end
 
