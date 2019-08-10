@@ -17,11 +17,14 @@ limitations under the License.
 
 --[[
 TODO:
-[X] Allow bloch sphere block to be placed on second to rightmost column
-[] Upgrade to latest version of Minetest & test QiskitBlocks
-[] Create a pedagogical progression of quantum algorithm circuits on Algorithm Shore
+[] Don't allow bloch sphere blocks to be placed directly
+
+[] Update Bloch sphere only after all three measurements have been processed
+[] Measuring a circuit also updates Bloch spheres if present
+[] If Bloch spheres are present, measure whenever statevector is calculated
 [] Create constants for tomography measurement bases
-[] Work out how to tell which wires are entangled
+
+[] Work out how more accurate way of ascertaining which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
     [] Make this mode configurable on the Q command block
 [] Allow Bloch sphere blocks with a quantum state to be inserted in circuits
@@ -29,14 +32,27 @@ TODO:
 [] Allow Block sphere blocks with a quantum state to be removed and carried?
 [] Create a freeform circuit building area that contains a chest with blocks,
     and instructions on how to use each block
+[] Create the following areas
+    [] Algorithm Shore
+        [] Create a pedagogical progression of quantum algorithm circuits on Algorithm Shore
+    [] Bureau of Random Walks
+    [] Quantum Error Correction Facility
+[] Create area that contains examples in https://community.qiskit.org/textbook/
 [] Create mob, or player, that has a Bloch sphere head
     - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)
     - Health could be signified by quantum state
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
+[] Perhaps only play music in morning and evening
+[] Stop auto-rotations when leaving game
+[] Remove some variables such as state_tomography_basis from q_command:init,
+    making state only stored in metadata and accessible via get/set methods?
 [] Create Mars and Venus blocks for cat entanglement demo
+[] Set spawn point at 225, 8.5, 75
 [] Investigate punch_operable for rotate and control tools
 [] Implement appropriate gate images for CRZ gate
+[] Should rotational gates start with pi radians when rotated from their Pauli gates?
+    - e.g. When rotating an X gate, should the first Rx angle be pi+angle instead of just angle?
 [] Improve appearance of measurement results blocks
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
     [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
@@ -82,6 +98,7 @@ TODO:
 [] Create blocks (e.g. classical optimizer) to demonstrate variational algorithms
 [] Should this warning be addressed?
 	2019-06-29 08:11:11: WARNING[Main]: Irrlicht: PNG warning: iCCP: CRC error
+[] Upgrade to latest version of Minetest & test QiskitBlocks
 --]]
 
 LOG_DEBUG = false

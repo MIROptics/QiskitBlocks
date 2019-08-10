@@ -1528,6 +1528,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
+
+                        -- Nil the tomo measurement data
+                        q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_x_basis_meas(nil)
+                        q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_y_basis_meas(nil)
+                        q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_z_basis_meas(nil)
+
+
                         -- Indicate that the qasm_simulator should be run, with state tomography,
                         -- beginning with the X measurement basis (1 is X)
                         -- TODO: Make constants for these?
