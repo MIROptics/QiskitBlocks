@@ -1111,7 +1111,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             if node_timer:is_started() then
                                 node_timer:stop()
                             else
-                                node_timer:start(0.5)
+                                node_timer:start(2.0)
                             end
                         else
                             circuit_blocks:rotate_gate(block, math.pi / 16.0)

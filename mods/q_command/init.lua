@@ -1486,6 +1486,38 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             end
 
+                            -- If Bloch sphere blocks are present, measure the circuit and do state tomography
+                            if q_block.get_bloch_present_flag() == 1 then
+                                -- Nil the tomo measurement data
+                                q_block.set_qasm_data_json_for_1k_x_basis_meas(nil)
+                                q_block.set_qasm_data_json_for_1k_y_basis_meas(nil)
+                                q_block.set_qasm_data_json_for_1k_z_basis_meas(nil)
+
+                                -- Indicate that the qasm_simulator should be run, with state tomography,
+                                -- beginning with the X measurement basis (1 is X)
+                                -- TODO: Make constants for these?
+
+                                q_block.set_qasm_simulator_flag(1)
+                                q_block.set_state_tomography_basis(1)
+                                minetest.punch_node(q_block.get_node_pos())
+
+                                q_block.set_qasm_simulator_flag(1)
+                                q_block.set_state_tomography_basis(2)
+                                minetest.punch_node(q_block.get_node_pos())
+
+                                q_block.set_qasm_simulator_flag(1)
+                                q_block.set_state_tomography_basis(3)
+                                minetest.punch_node(q_block.get_node_pos())
+
+                                -- Also indicate that the qasm_simulator should be run, without state tomography?
+                                --circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                                --        orig_node_name, player)
+                                q_block.set_qasm_simulator_flag(1)
+                                q_block.set_state_tomography_basis(0)
+                                minetest.punch_node(q_block.get_node_pos())
+                            end
+
+
                         else
                             minetest.debug("Call to statevector_simulator Didn't succeed")
                         end
