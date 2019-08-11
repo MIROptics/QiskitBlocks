@@ -84,6 +84,12 @@ function q_command:get_q_command_block(pos)
         local qasm_data_json_for_1k_y_basis_meas = meta:get_string("qasm_data_json_for_1k_y_basis_meas")
         local qasm_data_json_for_1k_z_basis_meas = meta:get_string("qasm_data_json_for_1k_z_basis_meas")
 
+        -- Indicator that Bloch sphere block is present in circuit
+        local bloch_present_flag = meta:get_int("bloch_present_flag")
+
+        -- Indicator that measurement sphere block is present in circuit
+        local measure_present_flag = meta:get_int("measure_present_flag")
+
 		return {
 			pos = pos,
 
@@ -178,6 +184,32 @@ function q_command:get_q_command_block(pos)
                 meta:set_string("qasm_data_json_for_1k_z_basis_meas",
                         qasm_data_json)
             end,
+
+
+            -- Get measure block present flag, integer
+            get_measure_present_flag = function()
+				measure_present_flag = meta:get_int("measure_present_flag")
+                return measure_present_flag
+			end,
+
+            -- Set measure block present flag, integer
+            set_measure_present_flag = function(zero_one)
+                measure_present_flag = zero_one
+                meta:set_int("measure_present_flag", zero_one)
+			end,
+
+
+            -- Get Bloch sphere block present flag, integer
+            get_bloch_present_flag = function()
+				bloch_present_flag = meta:get_int("bloch_present_flag")
+                return bloch_present_flag
+			end,
+
+            -- Set Bloch sphere present flag, integer
+            set_bloch_present_flag = function(zero_one)
+                bloch_present_flag = zero_one
+                meta:set_int("bloch_present_flag", zero_one)
+			end,
 
 
             -- Determine if circuit grid exists
@@ -1000,12 +1032,12 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
 
                     local function update_measure_block(circuit_node_pos, num_wires, wire_num, basis_state_bit_str, reset)
-                        local measure_block_present = false
                         local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
 
                         if circuit_node_block then
                             local node_type = circuit_node_block.get_node_type()
                             if node_type == CircuitNodeTypes.MEASURE_Z then
+                                q_block.set_measure_present_flag(1)
                                 local new_node_name = nil
                                 if reset then
                                     new_node_name = "circuit_blocks:circuit_blocks_measure_z"
@@ -1019,7 +1051,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                         new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat"
                                     end
                                 else
-                                    measure_block_present = true
                                     local bit_str_idx = num_wires + 1 - wire_num
                                     local meas_bit = string.sub(basis_state_bit_str, bit_str_idx, bit_str_idx)
                                     new_node_name = "circuit_blocks:circuit_blocks_measure_" .. meas_bit
@@ -1101,7 +1132,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                             end
                         end
-                        return measure_block_present
                     end
 
 
@@ -1113,6 +1143,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
 
                             if node_type == CircuitNodeTypes.BLOCH_SPHERE then
+                                q_block.set_bloch_present_flag(1)
                                 local circuit_dir_str = circuit_node_block.get_circuit_dir_str()
                                 local param2_dir = 0
                                 if circuit_dir_str == "+X" then
@@ -1214,7 +1245,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             end
                         end
                     end
-
 
 
                     local function process_backend_statevector_result(http_request_response)
@@ -1424,6 +1454,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local circuit_pos_x = circuit_block.get_circuit_pos().x
                             local circuit_pos_y = circuit_block.get_circuit_pos().y
                             local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+                            q_block.set_measure_present_flag(0)
+                            q_block.set_bloch_present_flag(0)
 
                             for column_num = 1, num_columns do
                                 for wire_num = 1, num_wires do

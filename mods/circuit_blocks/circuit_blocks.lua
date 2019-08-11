@@ -1509,6 +1509,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     local new_node_name = nil
                     --local orig_node_name = block.get_node_name()
                     if not player:get_player_control().aux1 then
+                        minetest.debug("User requested measurement, measurement block present: " ..
+                        q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
+                        ", Bloch sphere block present: " ..
+                        q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
+
                         -- Use cat measure textures if measure block is cat-related
                         new_node_name = "circuit_blocks:circuit_blocks_measure_z"
                         if block.get_node_name():sub(1, 47) ==
