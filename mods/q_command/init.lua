@@ -1238,7 +1238,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                             q_command:debug_node_info(circ_node_pos,
                                                     "In update_bloch_sphere_block(), Processing CONNECTOR_M, circ_node_pos")
 
-                                            update_bloch_sphere_block(circ_node_pos, num_wires, wire_num)
+                                            update_bloch_sphere_block(circ_node_pos, num_wires, wire_num, reset)
                                         end
                                     end
                                 end
