@@ -1507,13 +1507,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 if block.get_node_type() == CircuitNodeTypes.MEASURE_Z or
                         block.get_node_type() == CircuitNodeTypes.BLOCH_SPHERE then
                     local new_node_name = nil
-                    --local orig_node_name = block.get_node_name()
-                    if not player:get_player_control().aux1 then
-                        minetest.debug("User requested measurement, measurement block present: " ..
-                        q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
-                        ", Bloch sphere block present: " ..
-                        q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
 
+                    -- TODO: Remove
+                    minetest.punch_node(q_command_pos)
+
+                    if not player:get_player_control().aux1 then
+                        -- TODO: Put back
+                        --[
                         -- Use cat measure textures if measure block is cat-related
                         new_node_name = "circuit_blocks:circuit_blocks_measure_z"
                         if block.get_node_name():sub(1, 47) ==
@@ -1525,20 +1525,29 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         end
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
+                        --]]
+
                         -- Also indicate that the qasm_simulator should be run, without state tomography
-                        q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
-                        q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(0)
-                        minetest.punch_node(q_command_pos)
+                        --q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                        --q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(0)
+                        --minetest.punch_node(q_command_pos)
                     else
+                        q_command:get_q_command_block(q_command_pos).set_bloch_present_flag(1)
                         new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 new_node_name, player)
+                    end
 
+                    minetest.debug("User requested measurement, measurement block present: " ..
+                    q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
+                    ", Bloch sphere block present: " ..
+                    q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
+
+                    if q_command:get_q_command_block(q_command_pos).get_bloch_present_flag() == 1 then
                         -- Nil the tomo measurement data
                         q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_x_basis_meas(nil)
                         q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_y_basis_meas(nil)
                         q_command:get_q_command_block(q_command_pos).set_qasm_data_json_for_1k_z_basis_meas(nil)
-
 
                         -- Indicate that the qasm_simulator should be run, with state tomography,
                         -- beginning with the X measurement basis (1 is X)
@@ -1555,14 +1564,14 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
                         q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(3)
                         minetest.punch_node(q_command_pos)
-
-                        -- Indicate that the qasm_simulator should be run, without state tomography?
-                        --circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                        --        orig_node_name, player)
-                        q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
-                        q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(0)
-                        minetest.punch_node(q_command_pos)
                     end
+
+                    -- Also indicate that the qasm_simulator should be run, without state tomography?
+                    --circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                    --        orig_node_name, player)
+                    q_command:get_q_command_block(q_command_pos).set_qasm_simulator_flag(1)
+                    q_command:get_q_command_block(q_command_pos).set_state_tomography_basis(0)
+                    minetest.punch_node(q_command_pos)
                 else
                     -- Punch the q_command block to run simulator and update resultant displays
                     minetest.punch_node(q_command_pos)

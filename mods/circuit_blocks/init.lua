@@ -23,6 +23,7 @@ TODO:
 [] Measuring a circuit also updates Bloch spheres if present
 [] If Bloch spheres are present, measure whenever statevector is calculated
 [] Create constants for tomography measurement bases
+[] Change flags to have binary set/get methods
 
 [] Work out how more accurate way of ascertaining which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
