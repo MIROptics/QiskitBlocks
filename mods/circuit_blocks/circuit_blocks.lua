@@ -815,22 +815,21 @@ function circuit_blocks:rotate_gate(gate_block, by_radians)
 
     gate_block.set_radians(new_radians)
 
-    gate_block.set_radians(new_radians)
-
     local new_node_name = nil
 
     local threshold = 0.0001
-    if math.abs(new_radians - 0) < threshold or
-            math.abs(new_radians - math.pi * 2) < threshold then
+    --if math.abs(new_radians - 0) < threshold or
+    --        math.abs(new_radians - math.pi * 2) < threshold then
+    if math.abs(new_radians - math.pi) < threshold then
         new_node_name = non_rotate_gate_name
-        gate_block.set_radians(0)
+        gate_block.set_radians(math.pi)
     else
         local num_pi_16_radians = math.floor(new_radians * 16 / math.pi + 0.5)
 
-        if num_pi_16_radians < 1 then
-            num_pi_16_radians = 1
-        elseif num_pi_16_radians > 32 then
-            num_pi_16_radians = 32
+        if num_pi_16_radians < 0 then
+            num_pi_16_radians = 0
+        elseif num_pi_16_radians >= 32 then
+            num_pi_16_radians = 0
         end
 
         new_node_name = node_name_beginning .. tostring(num_pi_16_radians) .. "p16"
@@ -897,7 +896,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_empty_wire"
     elseif circuit_node_type == CircuitNodeTypes.X then
         texture_name = "circuit_blocks_x_gate"
-        if pi16rotation ~= 0 then
+        --if pi16rotation ~= 0 then
+        if pi16rotation ~= 16 then
             texture_name = "circuit_blocks_rx_gate_" .. pi16rotation .. "p16"
         elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_not_gate_up"
@@ -908,7 +908,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.Y then
         texture_name = "circuit_blocks_y_gate"
-        if pi16rotation ~= 0 then
+        --if pi16rotation ~= 0 then
+        if pi16rotation ~= 16 then
             texture_name = "circuit_blocks_ry_gate_" .. pi16rotation .. "p16"
         elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_y_gate_up"
@@ -917,7 +918,8 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         end
     elseif circuit_node_type == CircuitNodeTypes.Z then
         texture_name = "circuit_blocks_z_gate"
-        if pi16rotation ~= 0 then
+        --if pi16rotation ~= 0 then
+        if pi16rotation ~= 16 then
             texture_name = "circuit_blocks_rz_gate_" .. pi16rotation .. "p16"
         elseif connector_up and not connector_down then
             texture_name = "circuit_blocks_z_gate_up"
@@ -1538,10 +1540,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 new_node_name, player)
                     end
 
-                    minetest.debug("User requested measurement, measurement block present: " ..
-                    q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
-                    ", Bloch sphere block present: " ..
-                    q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
+                    --minetest.debug("User requested measurement, measurement block present: " ..
+                    --q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
+                    --", Bloch sphere block present: " ..
+                    --q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
 
                     if q_command:get_q_command_block(q_command_pos).get_bloch_present_flag() == 1 then
                         -- Nil the tomo measurement data

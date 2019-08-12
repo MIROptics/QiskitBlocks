@@ -19,13 +19,15 @@ limitations under the License.
 TODO:
 [] Don't allow bloch sphere blocks to be placed directly?
 
+[] Remove debug
+
 [] Update Bloch sphere only after all three measurements have been processed
 [] Measuring a circuit also updates Bloch spheres if present
 [] If Bloch spheres are present, measure whenever statevector is calculated
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 
-[] Decrease update frequency on spinners
+[] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 
 [] Work out how more accurate way of ascertaining which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
