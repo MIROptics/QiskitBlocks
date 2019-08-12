@@ -184,22 +184,22 @@ minetest.register_tool("circuit_blocks:swap_tool", {
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false)
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, true, 16, true)
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, true, false, 0, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.H, false, true, 0, true)
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, true, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, true, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, true, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Y, false, true, 16, true)
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, true, false, 0, true)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, true, 0, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, true, false, 16, true)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.Z, false, true, 16, true)
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, false, false, 0, true, "", "")
 circuit_blocks:register_circuit_block(CircuitNodeTypes.SWAP, true, false, 0, true, "", "")
