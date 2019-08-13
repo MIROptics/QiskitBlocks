@@ -17,16 +17,14 @@ limitations under the License.
 
 --[[
 TODO:
-[] Don't allow bloch sphere blocks to be placed directly?
-
-[] Remove debug
-
-[] Update Bloch sphere only after all three measurements have been processed
-[] Measuring a circuit also updates Bloch spheres if present
-[] If Bloch spheres are present, measure whenever statevector is calculated
+[] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
+[] Figure out how to install on MacOSX without Homebrew (or easily find where to put worlds)
+[] Put instruction to disable creative mode and damage
+[] Don't allow bloch sphere blocks to be placed directly
+[] Check to make sure (or force) players are in creative mode
+[] Find out how to give players initial inventory
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
-
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 
 [] Work out how more accurate way of ascertaining which wires are entangled

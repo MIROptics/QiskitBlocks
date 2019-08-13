@@ -1863,6 +1863,15 @@ you encounter them.
 ]]
 q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
 
+q_command.texts.x_rx_gates =
+[[The X, and Rx, gates rotate a qubit state around the X axis of a Bloch sphere (refer to the
+Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
+circuit. Once placed, left-click or right-click the Rotate Tool to rotate its state. When first
+placed TODO: LEFT OFF HERE
+]]
+q_command:register_help_button("x_rx_gates", "X and Rx gates", q_command.texts.x_rx_gates)
+
+
 q_command.texts.quantum_cats_sandbox =
 [[There are so many ones and zeros in quantum computing that some folks find it easier to initially
 relate to states with real world concepts (e.g. cats) rather than jumping straight to qubits. In the
@@ -2343,6 +2352,7 @@ local function register_sign(desc, def)
 	})
 end
 
+-- TODO: Remove this code after removing blocks in-world
 register_sign("Level sign", "Wooden", {
 	--sounds = default.node_sound_wood_defaults(),
 	groups = {choppy = 2, attached_node = 1, flammable = 2, oddly_breakable_by_hand = 3}
