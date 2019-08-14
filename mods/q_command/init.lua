@@ -1864,12 +1864,73 @@ you encounter them.
 q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
 
 q_command.texts.x_rx_gates =
-[[The X, and Rx, gates rotate a qubit state around the X axis of a Bloch sphere (refer to the
+[[The X and Rx gates rotate a qubit state around the X axis of a Bloch sphere (refer to the
 Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
-circuit. Once placed, left-click or right-click the Rotate Tool to rotate its state. When first
-placed TODO: LEFT OFF HERE
+circuit.
+
+Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
+of π/16 radians. When first placed, an Rx gate has a rotation of 0 radians around the X axis,
+and an X gate has a rotation of π radians around the X axis.
+
+To convert an X gate into a controlled-X gate (and vice-versa), left-click or right-click the block
+while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The controlled-X gate is also known as the controlled-NOT gate.
+It acts on a pair of qubits, with one acting as control and the other as target. It performs an X
+operation on the target whenever the control is in state |1>. If the control qubit is in a
+superposition, this gate creates entanglement.
+
+To convert a controlled-X gate into a Toffoli gate (and vice-versa), hold the Special key down while
+wielding the Control Tool and left-clicking or right-clicking. Left-clicking moves the second control
+qubit up one wire, and right-clicking moves the second control qubit down one wire. There is a blue
+dot on the second control qubit to help you distinguish it from the first control qubit. The
+aforementioned Special key may be known, and set, by pausing the game and choosing the Change Keys
+button.
+
+To remove an X gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("x_rx_gates", "X and Rx gates", q_command.texts.x_rx_gates)
+
+
+q_command.texts.y_ry_gates =
+[[The Y, and Ry, gates rotate a qubit state around the Y axis of a Bloch sphere (refer to the
+Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
+circuit.
+
+Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
+of π/16 radians. When first placed, an Ry gate has a rotation of 0 radians around the Y axis,
+and a Y gate has a rotation of π radians around the Y axis.
+
+To convert a Y gate into a controlled-Y gate (and vice-versa), left-click or right-click the block
+while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The controlled-Y gate acts on a pair of qubits, with one acting
+as control and the other as target. It performs a Y operation on the target whenever the control
+is in state |1>.
+
+To remove a Y gate, or any other gate, from a circuit, left-click it while wielding a block.
+]]
+
+q_command:register_help_button("y_ry_gates", "Y and Ry gates", q_command.texts.y_ry_gates)
+
+
+q_command.texts.z_rz_gates =
+[[The `Z`, and `Rz`, gates rotate a qubit state around the Z axis of a Bloch sphere (refer to the
+Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
+circuit.
+
+Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
+of π/16 radians. When first placed, an `Rz` gate has a rotation of 0 radians around the Z axis,
+and a `Z` gate has a rotation of π radians around the Z axis.
+
+To convert a Z gate into a controlled-Z gate (and vice-versa), left-click or right-click the block
+while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The controlled-Z gate acts on a pair of qubits, with one acting
+as control and the other as target. It performs a Z operation on the target whenever the control
+is in state |1>. A Z gate may be rotated even if it has a control qubit, in which case it is known
+as a controlled-Rz gate.
+
+To remove a Z gate, or any other gate, from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("z_rz_gates", "Z and Rz gates", q_command.texts.z_rz_gates)
 
 
 q_command.texts.quantum_cats_sandbox =
