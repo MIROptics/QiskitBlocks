@@ -1854,8 +1854,8 @@ you will interact are powered by Qiskit.org quantum simulators.
 There are an increasing number of areas that you may explore in this environment. First, it would be
 helpful to read the signs in this room, as they describe the behavior of various quantum computing
 related blocks that you will encounter. By the way, there is no need to take the blocks and tools
-from this room, as they will be available in chests along the way. Please leave them in this room
-for your reference later.
+from this room, as they will be available in chests along the way. Please leave them in this room,
+and come back anytime you have questions about what they do or how to use them.
 
 The first place outside this room that you may want to visit is the quantum cats sandbox. It this
 area, some basic quantum computing circuits and gates are demonstrated with grumpy and happy cats
@@ -1866,6 +1866,10 @@ If you would rather skip the cats, then a good place to begin your journey would
 quantum circuit garden on the other side of the large wall outside the front doors. Wherever you
 choose to begin, please be sure to right-click the Help buttons (labeled with a question mark) as
 you encounter them.
+
+Wherever you go, remember that the sun will eventually set for a while. To skip a night-cycle,
+just right-click a nearby bed and you will immediately wake up the next morning.
+
 ]]
 q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
 
@@ -1893,7 +1897,7 @@ dot on the second control qubit to help you distinguish it from the first contro
 aforementioned Special key may be known, and set, by pausing the game and choosing the Change Keys
 button.
 
-To remove an X gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove an X gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("x_rx_gates", "X and Rx gates", q_command.texts.x_rx_gates)
 
@@ -1913,14 +1917,14 @@ the control qubit up one wire, and right-clicking moves the control qubit down o
 controlled-Y gate acts on a pair of qubits, with one acting as control and the other as target. It
 performs a Y operation on the target whenever the control is in state |1>.
 
-To remove a Y gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove a Y gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 
 q_command:register_help_button("y_ry_gates", "Y and Ry gates", q_command.texts.y_ry_gates)
 
 
 q_command.texts.z_rz_gates =
-[[The `Z`, and `Rz`, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
+[[The Z, and Rz, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
 phase (refer to the Bloch sphere on the wall). While wielding one of these gates, right-click to
 place it on a quantum circuit.
 
@@ -1936,7 +1940,7 @@ controlled-Z gate acts on a pair of qubits, with one acting as control and the o
 It performs a Z operation on the target whenever the control is in state |1>. A Z gate may be
 rotated even if it has a control qubit, in which case it is known as a controlled-Rz gate.
 
-To remove a Z gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove a Z gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("z_rz_gates", "Z and Rz gates", q_command.texts.z_rz_gates)
 
@@ -1957,7 +1961,7 @@ the control qubit up one wire, and right-clicking moves the control qubit down o
 controlled-H gate acts on a pair of qubits, with one acting as control and the other as target.
 It performs an H operation on the target whenever the control is in state |1>.
 
-To remove an H gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove an H gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h_gate_desc)
 
@@ -1976,9 +1980,37 @@ Left-clicking moves the control qubit up one wire, and right-clicking moves the 
 one wire. The controlled-Swap gate acts on the qubits in a Swap gate by performing a Swap operation
 on the qubits whenever the control qubit is in state |1>.
 
-To remove an Swap gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove an Swap gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("swap_gate_desc", "Swap gate", q_command.texts.swap_gate_desc)
+
+
+q_command.texts.s_sdg_gates_desc =
+[[The S, and Sdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
+phase (refer to the Bloch sphere on the wall). The S gate performs a rotation of π/2 radians, which
+is a quarter of the way counterclockwise around the Bloch sphere . The Sdg (pronounced S dagger) gate
+performs a rotation of -π/2 radians, which is a quarter of the way clockwise around the Bloch sphere.
+
+As Clifford gates, both are useful for moving information between the x and y bases. While wielding
+one of these gates, right-click to place it on a quantum circuit.
+
+To remove an S gate, or any other gate from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("s_sdg_gates_desc", "S and Sdg gates", q_command.texts.s_sdg_gates_desc)
+
+
+q_command.texts.t_tdg_gates_desc =
+[[The T, and Tdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
+phase (refer to the Bloch sphere on the wall). The T gate performs a rotation of π/4 radians, which
+is an eighth of the way counterclockwise around the Bloch sphere . The Tdg (pronounced T dagger) gate
+performs a rotation of -π/4 radians, which is an eighth of the way clockwise around the Bloch sphere.
+
+Fault-tolerant quantum computers will compile all quantum programs down to just these gates, as well
+as the Clifford gates. While wielding one of these gates, right-click to place it on a quantum circuit.
+
+To remove a T gate, or any other gate from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("t_tdg_gates_desc", "T and Tdg gates", q_command.texts.t_tdg_gates_desc)
 
 
 q_command.texts.quantum_cats_sandbox =
