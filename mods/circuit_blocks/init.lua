@@ -26,6 +26,7 @@ TODO:
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
+[] Standardize on naming conventions for help buttons. For example, h_gate_puzzle and h_gate_desc
 
 [] Work out how more accurate way of ascertaining which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
@@ -39,7 +40,7 @@ TODO:
     [] Algorithm Shore
         [] Create a pedagogical progression of quantum algorithm circuits on Algorithm Shore
     [] Bureau of Random Walks
-    [] Quantum Error Correction Facility
+    [] Quantum Error Correction Facility (get input from James Wootton)
 [] Create area that contains examples in https://community.qiskit.org/textbook/
 [] Create mob, or player, that has a Bloch sphere head
     - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)

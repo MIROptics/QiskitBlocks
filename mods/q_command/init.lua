@@ -1865,8 +1865,9 @@ q_command:register_help_button("quantum_circuit_world", "Quantum circuit world",
 
 q_command.texts.x_rx_gates =
 [[The X and Rx gates rotate a qubit state around the X axis of a Bloch sphere (refer to the
-Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
-circuit.
+Bloch spheres on the wall). While wielding one of these gates, right-click to place it on a quantum
+circuit. The X gate is often referred to the NOT gate because it flips the |0> state to |1> and
+vice-versa.
 
 Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
 of π/16 radians. When first placed, an Rx gate has a rotation of 0 radians around the X axis,
@@ -1931,6 +1932,25 @@ as a controlled-Rz gate.
 To remove a Z gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("z_rz_gates", "Z and Rz gates", q_command.texts.z_rz_gates)
+
+
+q_command.texts.h_gate_desc =
+[[The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z axis of a Bloch sphere
+(refer to the Bloch spheres on the wall). For example, it rotates the state from |0> (top of the
+Bloch sphere) to |+> (front of the Bloch sphere) and vice-versa. Another common example is that
+it rotates the state from |1> (bottom of the Bloch sphere) to |-> (back of the Bloch sphere) and
+vice-versa. The H gate is used in many quantum algorithms to create superpostions. While wielding
+an H gate, right-click to place it on a quantum circuit.
+
+To convert a H gate into a controlled-H gate (and vice-versa), left-click or right-click the block
+while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The controlled-H gate acts on a pair of qubits, with one acting
+as control and the other as target. It performs an H operation on the target whenever the control
+is in state |1>.
+
+To remove an H gate, or any other gate, from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h_gate_desc)
 
 
 q_command.texts.quantum_cats_sandbox =
