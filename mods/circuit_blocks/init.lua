@@ -23,11 +23,16 @@ TODO:
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
 [] Find out how to give players initial inventory
-[] Find out how to make tools appear and persist 
+[] Find out how to make tools appear and persist
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 [] Standardize on naming conventions for help buttons. For example, h_gate_puzzle and h_gate_desc
+
+[] Work out way to host QiskitBlocks and QiskitBlocksService, perhaps via something
+    like Stadia.
+[] Make QiskitBlocks and puzzle map world available from `Content`>`Browse online content`
+    dialog in Minetest?
 
 [] Work out how more accurate way of ascertaining which wires are entangled
 [] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes

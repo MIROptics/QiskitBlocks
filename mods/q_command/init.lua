@@ -1954,20 +1954,20 @@ q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h
 
 
 q_command.texts.swap_gate_desc =
-[[The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z axis of a Bloch sphere
-(refer to the Bloch spheres on the wall). For example, it rotates the state from |0> (top of the
-Bloch sphere) to |+> (front of the Bloch sphere) and vice-versa. Another common example is that
-it rotates the state from |1> (bottom of the Bloch sphere) to |-> (back of the Bloch sphere) and
-vice-versa. The H gate is used in many quantum algorithms to create superpostions. While wielding
-an H gate, right-click to place it on a quantum circuit.
+[[The Swap gate swaps the states of the qubits on two wires with each other. While wielding
+a Swap gate block, right-click to place it on one of the desired wires. Then while wielding the
+Swap Tool (which is different from the Swap gate block), left-click or right-click the block to
+navigate to the other desired wire. Left-clicking moves the other swap qubit up one wire, and
+right-clicking moves it down one wire. Note that this other swap qubit has a slightly different
+appearance (less pixels) so that it may be distinguished from the originally placed Swap gate block.
 
-To convert a H gate into a controlled-H gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
-moves the control qubit down one wire. The controlled-H gate acts on a pair of qubits, with one acting
-as control and the other as target. It performs an H operation on the target whenever the control
-is in state |1>.
+To convert a Swap gate into a controlled-Swap gate (and vice-versa), left-click or right-click the
+original block placed while wielding the Control Tool. Left-clicking moves the control qubit up one
+wire, and right-clicking moves the control qubit down one wire. The controlled-Swap gate acts on the
+qubits in a Swap gate by performing a Swap operation on the qubits whenever the control qubit is in
+state |1>.
 
-To remove an H gate, or any other gate, from a circuit, left-click it while wielding a block.
+To remove an Swap gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("swap_gate_desc", "Swap gate", q_command.texts.swap_gate_desc)
 
