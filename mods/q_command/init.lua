@@ -1848,15 +1848,21 @@ q_command.texts = {}
 
 q_command.texts.quantum_circuit_world =
 [[Welcome to the world of quantum computing circuits! The block-world environment you are currently
-in is created with the Minetest.net open-source library. The quantum circuits with which you will
-interact are powered by Qiskit.org quantum simulators.
+in is created with the Minetest.net open-source library. The quantum gates and circuits with which
+you will interact are powered by Qiskit.org quantum simulators.
 
-There are an increasing number of areas that you may explore in this environment. The first place
-you may want to visit is the quantum cats sandbox. It this area, some basic quantum computing circuits
-and gates are demonstrated with grumpy and happy cats instead of the usual qubits. To get there,
-just follow the light blocks just outside the front doors into the woods.
+There are an increasing number of areas that you may explore in this environment. First, it would be
+helpful to read the signs in this room, as they describe the behavior of various quantum computing
+related blocks that you will encounter. By the way, there is no need to take the blocks and tools
+from this room, as they will be available in chests along the way. Please leave them in this room
+for your reference later.
 
-If you are too grown-up to play with cats, then a good place to begin your journey would be in the
+The first place outside this room that you may want to visit is the quantum cats sandbox. It this
+area, some basic quantum computing circuits and gates are demonstrated with grumpy and happy cats
+instead of the usual qubits. To get there, just follow the light blocks just outside the front doors
+into the woods.
+
+If you would rather skip the cats, then a good place to begin your journey would be in the
 quantum circuit garden on the other side of the large wall outside the front doors. Wherever you
 choose to begin, please be sure to right-click the Help buttons (labeled with a question mark) as
 you encounter them.
@@ -1869,16 +1875,16 @@ Bloch spheres on the wall). While wielding one of these gates, right-click to pl
 circuit. The X gate is often referred to the NOT gate because it flips the |0> state to |1> and
 vice-versa.
 
-Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
-of π/16 radians. When first placed, an Rx gate has a rotation of 0 radians around the X axis,
-and an X gate has a rotation of π radians around the X axis.
+Once placed, left-click or right-click the Rotate Tool (the round tool spinning on the floor)
+to rotate its state in increments of π/16 radians. When first placed, an Rx gate has a rotation
+of 0 radians around the X axis. An X gate when first placed has a rotation of π radians around the X axis.
 
 To convert an X gate into a controlled-X gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
-moves the control qubit down one wire. The controlled-X gate is also known as the controlled-NOT gate.
-It acts on a pair of qubits, with one acting as control and the other as target. It performs an X
-operation on the target whenever the control is in state |1>. If the control qubit is in a
-superposition, this gate creates entanglement.
+while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
+the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
+controlled-X gate is also known as the controlled-NOT gate. It acts on a pair of qubits, with one
+acting as control and the other as target. It performs an X operation on the target whenever the
+control is in state |1>. If the control qubit is in a superposition, this gate creates entanglement.
 
 To convert a controlled-X gate into a Toffoli gate (and vice-versa), hold the Special key down while
 wielding the Control Tool and left-clicking or right-clicking. Left-clicking moves the second control
@@ -1897,15 +1903,15 @@ q_command.texts.y_ry_gates =
 Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
 circuit.
 
-Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
-of π/16 radians. When first placed, an Ry gate has a rotation of 0 radians around the Y axis,
-and a Y gate has a rotation of π radians around the Y axis.
+Once placed, left-click or right-click the Rotate Tool (the round tool spinning on the floor)
+to rotate its state in increments of π/16 radians. When first placed, an Ry gate has a rotation
+of 0 radians around the Y axis. A Y gate when first placed has a rotation of π radians around the Y axis.
 
 To convert a Y gate into a controlled-Y gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
-moves the control qubit down one wire. The controlled-Y gate acts on a pair of qubits, with one acting
-as control and the other as target. It performs a Y operation on the target whenever the control
-is in state |1>.
+while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
+the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
+controlled-Y gate acts on a pair of qubits, with one acting as control and the other as target. It
+performs a Y operation on the target whenever the control is in state |1>.
 
 To remove a Y gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
@@ -1914,20 +1920,21 @@ q_command:register_help_button("y_ry_gates", "Y and Ry gates", q_command.texts.y
 
 
 q_command.texts.z_rz_gates =
-[[The `Z`, and `Rz`, gates rotate a qubit state around the Z axis of a Bloch sphere (refer to the
-Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
-circuit.
+[[The `Z`, and `Rz`, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
+phase (refer to the Bloch sphere on the wall). While wielding one of these gates, right-click to
+place it on a quantum circuit.
 
-Once placed, left-click or right-click the Rotate Tool to rotate its state in increments
-of π/16 radians. When first placed, an `Rz` gate has a rotation of 0 radians around the Z axis,
-and a `Z` gate has a rotation of π radians around the Z axis.
+Once placed, left-click or right-click the Rotate Tool (the round tool spinning on the floor)
+to rotate its state in increments of π/16 radians. When first placed, an Rz gate has a rotation
+of 0 radians around the Z axis. A Z gate when first placed has a rotation of π radians around the
+Z axis.
 
 To convert a Z gate into a controlled-Z gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
-moves the control qubit down one wire. The controlled-Z gate acts on a pair of qubits, with one acting
-as control and the other as target. It performs a Z operation on the target whenever the control
-is in state |1>. A Z gate may be rotated even if it has a control qubit, in which case it is known
-as a controlled-Rz gate.
+while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
+the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
+controlled-Z gate acts on a pair of qubits, with one acting as control and the other as target.
+It performs a Z operation on the target whenever the control is in state |1>. A Z gate may be
+rotated even if it has a control qubit, in which case it is known as a controlled-Rz gate.
 
 To remove a Z gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
@@ -1939,14 +1946,16 @@ q_command.texts.h_gate_desc =
 (refer to the Bloch spheres on the wall). For example, it rotates the state from |0> (top of the
 Bloch sphere) to |+> (front of the Bloch sphere) and vice-versa. Another common example is that
 it rotates the state from |1> (bottom of the Bloch sphere) to |-> (back of the Bloch sphere) and
-vice-versa. The H gate is used in many quantum algorithms to create superpostions. While wielding
-an H gate, right-click to place it on a quantum circuit.
+vice-versa. The H gate is used in many quantum algorithms to create superpostions. As a Clifford
+gate, it is useful for moving information between the x and z bases.
+
+While wielding an H gate, right-click to place it on a quantum circuit.
 
 To convert a H gate into a controlled-H gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
-moves the control qubit down one wire. The controlled-H gate acts on a pair of qubits, with one acting
-as control and the other as target. It performs an H operation on the target whenever the control
-is in state |1>.
+while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
+the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
+controlled-H gate acts on a pair of qubits, with one acting as control and the other as target.
+It performs an H operation on the target whenever the control is in state |1>.
 
 To remove an H gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
@@ -1956,16 +1965,16 @@ q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h
 q_command.texts.swap_gate_desc =
 [[The Swap gate swaps the states of the qubits on two wires with each other. While wielding
 a Swap gate block, right-click to place it on one of the desired wires. Then while wielding the
-Swap Tool (which is different from the Swap gate block), left-click or right-click the block to
+Swap Tool (the saw-like tool spinning on the floor), left-click or right-click the block to
 navigate to the other desired wire. Left-clicking moves the other swap qubit up one wire, and
 right-clicking moves it down one wire. Note that this other swap qubit has a slightly different
 appearance (less pixels) so that it may be distinguished from the originally placed Swap gate block.
 
 To convert a Swap gate into a controlled-Swap gate (and vice-versa), left-click or right-click the
-original block placed while wielding the Control Tool. Left-clicking moves the control qubit up one
-wire, and right-clicking moves the control qubit down one wire. The controlled-Swap gate acts on the
-qubits in a Swap gate by performing a Swap operation on the qubits whenever the control qubit is in
-state |1>.
+original block placed while wielding the Control Tool (the wand-shaped tool spinning on the floor).
+Left-clicking moves the control qubit up one wire, and right-clicking moves the control qubit down
+one wire. The controlled-Swap gate acts on the qubits in a Swap gate by performing a Swap operation
+on the qubits whenever the control qubit is in state |1>.
 
 To remove an Swap gate, or any other gate, from a circuit, left-click it while wielding a block.
 ]]
