@@ -1953,6 +1953,25 @@ To remove an H gate, or any other gate, from a circuit, left-click it while wiel
 q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h_gate_desc)
 
 
+q_command.texts.swap_gate_desc =
+[[The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z axis of a Bloch sphere
+(refer to the Bloch spheres on the wall). For example, it rotates the state from |0> (top of the
+Bloch sphere) to |+> (front of the Bloch sphere) and vice-versa. Another common example is that
+it rotates the state from |1> (bottom of the Bloch sphere) to |-> (back of the Bloch sphere) and
+vice-versa. The H gate is used in many quantum algorithms to create superpostions. While wielding
+an H gate, right-click to place it on a quantum circuit.
+
+To convert a H gate into a controlled-H gate (and vice-versa), left-click or right-click the block
+while wielding the Control Tool. Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The controlled-H gate acts on a pair of qubits, with one acting
+as control and the other as target. It performs an H operation on the target whenever the control
+is in state |1>.
+
+To remove an H gate, or any other gate, from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("swap_gate_desc", "Swap gate", q_command.texts.swap_gate_desc)
+
+
 q_command.texts.quantum_cats_sandbox =
 [[There are so many ones and zeros in quantum computing that some folks find it easier to initially
 relate to states with real world concepts (e.g. cats) rather than jumping straight to qubits. In the

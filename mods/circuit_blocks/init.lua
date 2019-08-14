@@ -23,6 +23,7 @@ TODO:
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
 [] Find out how to give players initial inventory
+[] Find out how to make tools appear and persist 
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
