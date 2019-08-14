@@ -2,7 +2,7 @@
 Teaches quantum computing and Qiskit in a Minetest block world
 
 ## Installation
-1. Download and install [Minetest](https://www.minetest.net/). Note: This site has an alternative for MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
+1. Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has an alternative for MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 1. Clone this QiskitBlocks project, and copy the `q_command`, `circuit_blocks` and `mpd` mods from 
 the `mods` folder of this QiskitBlocks project into the `games/minetest_game/mods` folder of your 
 Minetest installation.
