@@ -2061,7 +2061,7 @@ q_command:register_help_button("bloch_sphere_block_desc", "The Block sphere", q_
 
 
 q_command.texts.reset_op_desc =
-[[The reset operation returns a qubit to state |0>, irrespective of its state before the operation
+[[The Reset operation returns a qubit to state |0>, irrespective of its state before the operation
 was applied. It is not a reversible operation, and the state of a qubit will be |0> (represented
 by the top left Bloch sphere on the wall).
 
@@ -2070,6 +2070,59 @@ While wielding a Reset block, right-click to place it on a quantum circuit.
 To remove a Reset block, or any other block from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("reset_op_desc", "Reset or |0> operation", q_command.texts.reset_op_desc)
+
+
+q_command.texts.barrier_op_desc =
+[[To make your quantum program more efficient, the compiler will try to combine gates. The Barrier
+is an instruction to the compiler to prevent these combinations being made.
+
+While wielding a Barrier block, right-click to place it on a quantum circuit.
+
+To remove a Barrier block, or any other block from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("barrier_op_desc", "Barrier operation", q_command.texts.barrier_op_desc)
+
+
+q_command.texts.if_op_block_desc =
+[[The If operation allows quantum gates to be conditionally applied, depending on the state of a
+classical register. While wielding an If operation block, right-click to place it immediately to
+the left of the desired gate to be conditionally applied. Then right-click the If block until the
+wire containing the desired measurement block, and classical conditional value (0 or 1), are
+displayed on the block.
+
+Note that OpenQASM and Qiskit support multiple-bit classical registers, but this application
+currently supports only single-bit classical registers. These classical register are created
+implicitly, one per quantum register (which are implicitly created as single-qubit) in the circuit.
+
+To remove an If operation block, or any other block from a circuit, left-click it while wielding a
+block.
+]]
+q_command:register_help_button("if_op_block_desc", "If operation", q_command.texts.if_op_block_desc)
+
+
+q_command.texts.wire_extender_block_desc =
+[[Although not representative of a Qiskit operation, the Wire Extender block enables a circuit
+wire to be extended to another location. Here is the procedure for doing that:
+
+1) While wielding a Wire Extension block and pointing at the rightmost block on the desired wire,
+right-click to place it.
+
+2) Left-click the Wire Extension block, which will cause a Wire Continuation block to drop (the
+cube-shaped item spinning on the floor). Note: The direction in which it drops is influenced by
+the where you are when you left-click.
+
+3) Left-click the Wire Continuation block to put it in your inventory. Move this block to your
+hotbar if it is not already there.
+
+4) While wielding this Wire Continuation block, right-click to place it in the position and
+orientation that you would like the wire continuation to be.
+
+5) Right-click the Wire Continuation block, specifying how many blocks wide it should be.
+
+To remove a Wire Extension block, or any other block from a circuit, left-click it while wielding a
+block.
+]]
+q_command:register_help_button("wire_extender_block_desc", "Wire Extender block", q_command.texts.wire_extender_block_desc)
 
 
 q_command.texts.quantum_cats_sandbox =

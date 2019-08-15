@@ -47,6 +47,7 @@ TODO:
         [] Create a pedagogical progression of quantum algorithm circuits on Algorithm Shore
     [] Bureau of Random Walks
     [] Quantum Error Correction Facility (get input from James Wootton)
+    [] OpenQASM examples https://github.com/Qiskit/openqasm/tree/master/examples
 [] Create area that contains examples in https://community.qiskit.org/textbook/
 [] Create mob, or player, that has a Bloch sphere head
     - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)
