@@ -1903,7 +1903,7 @@ q_command:register_help_button("x_rx_gates", "X and Rx gates", q_command.texts.x
 
 
 q_command.texts.y_ry_gates =
-[[The Y, and Ry, gates rotate a qubit state around the Y axis of a Bloch sphere (refer to the
+[[The Y, and Ry, gates rotate a qubit state around the Y axis of a Bloch sphere (refer to a
 Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
 circuit.
 
@@ -1925,7 +1925,7 @@ q_command:register_help_button("y_ry_gates", "Y and Ry gates", q_command.texts.y
 
 q_command.texts.z_rz_gates =
 [[The Z, and Rz, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to the Bloch sphere on the wall). While wielding one of these gates, right-click to
+phase (refer to a Bloch sphere on the wall). While wielding one of these gates, right-click to
 place it on a quantum circuit.
 
 Once placed, left-click or right-click the Rotate Tool (the round tool spinning on the floor)
@@ -1947,11 +1947,12 @@ q_command:register_help_button("z_rz_gates", "Z and Rz gates", q_command.texts.z
 
 q_command.texts.h_gate_desc =
 [[The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z axis of a Bloch sphere
-(refer to the Bloch spheres on the wall). For example, it rotates the state from |0> (top of the
-Bloch sphere) to |+> (front of the Bloch sphere) and vice-versa. Another common example is that
-it rotates the state from |1> (bottom of the Bloch sphere) to |-> (back of the Bloch sphere) and
-vice-versa. The H gate is used in many quantum algorithms to create superpostions. As a Clifford
-gate, it is useful for moving information between the x and z bases.
+(refer to a Bloch spheres on the wall). For example, it rotates the state from |0> (see top-left
+Bloch sphere on the wall) to |+> (see top-right Bloch sphere on the wall) and vice-versa. Another
+common example is that it rotates the state from |1> (see bottom-left Bloch sphere on the wall) to
+|-> (see bottom-right Bloch sphere on the wall) and vice-versa. The H gate is used in many quantum
+algorithms to create superpositions. As a Clifford gate, the Hadamard gate is useful for moving
+information between the X and Z bases.
 
 While wielding an H gate, right-click to place it on a quantum circuit.
 
@@ -1987,7 +1988,7 @@ q_command:register_help_button("swap_gate_desc", "Swap gate", q_command.texts.sw
 
 q_command.texts.s_sdg_gates_desc =
 [[The S, and Sdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to the Bloch sphere on the wall). The S gate performs a rotation of π/2 radians, which
+phase (refer to a Bloch sphere on the wall). The S gate performs a rotation of π/2 radians, which
 is a quarter of the way counterclockwise around the Bloch sphere . The Sdg (pronounced S dagger) gate
 performs a rotation of -π/2 radians, which is a quarter of the way clockwise around the Bloch sphere.
 
@@ -2001,7 +2002,7 @@ q_command:register_help_button("s_sdg_gates_desc", "S and Sdg gates", q_command.
 
 q_command.texts.t_tdg_gates_desc =
 [[The T, and Tdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to the Bloch sphere on the wall). The T gate performs a rotation of π/4 radians, which
+phase (refer to a Bloch sphere on the wall). The T gate performs a rotation of π/4 radians, which
 is an eighth of the way counterclockwise around the Bloch sphere . The Tdg (pronounced T dagger) gate
 performs a rotation of -π/4 radians, which is an eighth of the way clockwise around the Bloch sphere.
 
@@ -2011,6 +2012,51 @@ as the Clifford gates. While wielding one of these gates, right-click to place i
 To remove a T gate, or any other gate from a circuit, left-click it while wielding a block.
 ]]
 q_command:register_help_button("t_tdg_gates_desc", "T and Tdg gates", q_command.texts.t_tdg_gates_desc)
+
+
+q_command.texts.measurement_z_desc =
+[[The Measurement block performs a measurement on a qubit in the Z basis, which is also called
+the computational, or standard, basis. Referring to a Bloch sphere on the wall, note that this
+basis may be represented by a plane cutting through its equator. After measurement, the state of a
+qubit will either be |0> (represented by the top left Bloch sphere) or |1> (represented by the
+bottom left Bloch sphere).
+
+While wielding a measurement block, right-click to place it on a quantum circuit.
+
+To make a measurement in the Z basis, right click the Measurement block. Measurement in other bases
+may be accomplished by rotating the qubit state and performing a measurement with this block.
+
+The Measurement block may be turned into a Bloch sphere that displays an estimation of the qubit
+state before measurement. To accomplish this, right-click the Measurement block while holding down
+the Special key. This will insert state tomography measurements into the circuit, calculating and
+displaying the estimated state. The Special key may be known, and set, by pausing the game and
+choosing the Change Keys button.
+
+To remove a Measurement block, or any other block from a circuit, left-click it while wielding a
+block.
+]]
+q_command:register_help_button("measurement_z_desc", "Measurement in Z basis", q_command.texts.measurement_z_desc)
+
+
+q_command.texts.bloch_sphere_block_desc =
+[[A Block sphere, like these on the wall, represent the quantum state of a qubit. Anywhere on the
+surface of the sphere is a valid quantum state. For example, the top-left Bloch sphere represents
+state |0> and the bottom-left Bloch sphere represents state |1>. Note that these Bloch spheres
+are rotated slightly clockwise and tilted toward the user. The green markers represent states on
+the visible side of a Bloch sphere, and the blue markers represent states on its hidden side.
+
+To make measurements for state tomography, right-click the Bloch sphere block while holding down
+the Special key. The Special key may be known, and set, by pausing the game and choosing the
+Change Keys button. To make a measurement in the Z basis and display the measured basis state,
+right-click the Bloch sphere block without holding down other keys.
+
+Note that the Bloch sphere block is only available by right-clicking a Measurement block while
+holding down the Special key.
+
+To remove a Bloch sphere block, or any other block from a circuit, left-click it while wielding a
+block.
+]]
+q_command:register_help_button("bloch_sphere_block_desc", "The Block sphere", q_command.texts.bloch_sphere_block_desc)
 
 
 q_command.texts.quantum_cats_sandbox =
