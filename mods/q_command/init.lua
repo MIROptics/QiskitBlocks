@@ -2025,6 +2025,7 @@ While wielding a measurement block, right-click to place it on a quantum circuit
 
 To make a measurement in the Z basis, right click the Measurement block. Measurement in other bases
 may be accomplished by rotating the qubit state and performing a measurement with this block.
+Measurement is not a reversible operation.
 
 The Measurement block may be turned into a Bloch sphere that displays an estimation of the qubit
 state before measurement. To accomplish this, right-click the Measurement block while holding down
@@ -2057,6 +2058,18 @@ To remove a Bloch sphere block, or any other block from a circuit, left-click it
 block.
 ]]
 q_command:register_help_button("bloch_sphere_block_desc", "The Block sphere", q_command.texts.bloch_sphere_block_desc)
+
+
+q_command.texts.reset_op_desc =
+[[The reset operation returns a qubit to state |0>, irrespective of its state before the operation
+was applied. It is not a reversible operation, and the state of a qubit will be |0> (represented
+by the top left Bloch sphere on the wall).
+
+While wielding a Reset block, right-click to place it on a quantum circuit.
+
+To remove a Reset block, or any other block from a circuit, left-click it while wielding a block.
+]]
+q_command:register_help_button("reset_op_desc", "Reset or |0> operation", q_command.texts.reset_op_desc)
 
 
 q_command.texts.quantum_cats_sandbox =
