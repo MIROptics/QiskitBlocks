@@ -880,6 +880,11 @@ function q_command:register_q_command_block(suffix_correct_solution,
             else
                 minetest.chat_send_player(clicker:get_player_name(),
                         "Circuit already exists.")
+                if mpd.playing then
+                    mpd.stop_song()
+                else
+                    mpd.play_song(MUSIC_CHILL)
+                end
             end
         end,
         on_punch = function(pos, node, player)
@@ -2156,6 +2161,8 @@ Left-clicking a Q block causes the Qiskit statevector simulator to be run, which
 necessary as it is run whenever the circuit is modified. The most common reason for left-clicking
 a Q block is to restore the Measurement blocks to their original appearance, rather than showing
 the state of their last measurement.
+
+Right-clicking on a Q block when a circuit has already been created stops and starts the music
 
 To remove a Q block and its circuit, while pressing the shift key left-click the Q block.
 ]]

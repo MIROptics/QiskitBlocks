@@ -19,11 +19,9 @@ limitations under the License.
 TODO:
 [] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
 [] Figure out how to install on MacOSX without Homebrew (or easily find where to put worlds)
-[] Put instruction to disable creative mode and damage
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
-[] Find out how to give players initial inventory
-[] Find out how to make tools appear and persist
+[] Find out how to give players initial inventory, and/or to stock the chests
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
