@@ -93,7 +93,7 @@ mpd.play_song=function(id)
 	end
 	mpd.playing=id
 	--adding 2 seconds as security
-	mpd.song_time_left = song.length + 2
+	mpd.song_time_left = song.length + 1
 end
 mpd.stop_song=function()
 	for pname, handle in pairs(mpd.handles) do
