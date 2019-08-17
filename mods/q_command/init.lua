@@ -27,8 +27,8 @@ end
 LOG_DEBUG = false
 
 -- TODO: Make these constants configurable
---QISKIT_SERVICE_HOST = "https://qiskit-blocks-service.herokuapp.com"
-QISKIT_SERVICE_HOST = "http://localhost:5000"
+QISKIT_SERVICE_HOST = "https://qiskit-blocks-service.herokuapp.com"
+--QISKIT_SERVICE_HOST = "http://localhost:5000"
 QISKIT_SERVICE_TIMEOUT = 10
 
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");

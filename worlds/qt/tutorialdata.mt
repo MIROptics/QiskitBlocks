@@ -1,1 +1,0 @@
-return {["loaded"] = {true, true, true, true, true, true, true, true, true, true, true, true, true, true, [16] = true, [17] = true}, ["last_diamond"] = false, ["first_gold"] = false, ["first_join"] = false, ["intro_text"] = true, ["first_diamond"] = false, ["last_gold"] = false}
