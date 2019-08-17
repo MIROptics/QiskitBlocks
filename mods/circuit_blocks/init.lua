@@ -18,9 +18,11 @@ limitations under the License.
 --[[
 TODO:
 [] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
-[] Figure out how to install on MacOSX without Homebrew (or easily find where to put worlds)
+[] Fix problem of Rx acting like X when placed
+[] Make URL to Qiskit simulators configurable
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
+[] Make use of health indicator
 [] Find out how to give players initial inventory, and/or to stock the chests
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
@@ -108,6 +110,18 @@ TODO:
 [] Should this warning be addressed?
 	2019-06-29 08:11:11: WARNING[Main]: Irrlicht: PNG warning: iCCP: CRC error
 [] Upgrade to latest version of Minetest & test QiskitBlocks
+
+[] Address James Wootton comments
+    It looks great! Here are a few comments on things that could be changed.
+    • In the 'Bloch sphere' hints text at the beginning, there are a few instances of 'Block' instead of 'Bloch'
+    • It would be good if the cat pictures changed from happy to sad. This would be difficult for the superpositions though, I suppose. Could you get the memory and use that to make the cat image flicker randomly? That could be used for the entangled case too.
+    • Why does \Phi^- in the quantum garden have no measurement blocks? (and why does it still work?)
+    • The fact that you only see Z basis probs means that some context is missed: such as the difference between \Phi^+ and \Phi^-. It would be good to have a box for X basis measurement. But I guess that would complicate checking to see whether a solution is correct. (edited)
+    -----------
+    Regarding the measurement thing, I have an idea (maybe for long-term implementation if the SF event is soon) (edited)
+    • The current measurement blocks could be changed to be Z on one side and X on the other
+    • The results blocks could be changed to have a different 'water level' on one side than the other
+    This means you'd easily be able to see these two perspectives, just by walking around the circuit. And it would mean that the info for both is available at the same time, so the system and player can easily see when a puzzle is solved
 --]]
 
 LOG_DEBUG = false

@@ -26,6 +26,11 @@ end
 
 LOG_DEBUG = false
 
+-- TODO: Make these constants configurable
+--QISKIT_SERVICE_HOST = "https://qiskit-blocks-service.herokuapp.com"
+QISKIT_SERVICE_HOST = "http://localhost:5000"
+QISKIT_SERVICE_TIMEOUT = 10
+
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
@@ -993,33 +998,33 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     local qasm_with_tomo_z_str = q_command:compute_circuit(circuit_block, true, 3)
 
                     local http_request_statevector = {
-                        -- TODO: Make URL host and port configurable
-                        url = "http://localhost:5000/api/run/statevector?backend=statevector_simulator&qasm=" ..
-                                url_code.urlencode(qasm_str)
+                        url = QISKIT_SERVICE_HOST .. "/api/run/statevector?backend=statevector_simulator&qasm=" ..
+                                url_code.urlencode(qasm_str),
+                        timeout = QISKIT_SERVICE_TIMEOUT
                     }
 
                     local http_request_qasm = {
-                        -- TODO: Make URL host and port configurable
-                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1"
+                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1",
+                        timeout = QISKIT_SERVICE_TIMEOUT
                     }
 
                     local http_request_qasm_tomo_x = {
-                        -- TODO: Make URL host and port configurable
-                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1000"
+                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1000",
+                        timeout = QISKIT_SERVICE_TIMEOUT
                     }
 
                     local http_request_qasm_tomo_y = {
-                        -- TODO: Make URL host and port configurable
-                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1000"
+                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1000",
+                        timeout = QISKIT_SERVICE_TIMEOUT
                     }
 
                     local http_request_qasm_tomo_z = {
-                        -- TODO: Make URL host and port configurable
-                        url = "http://localhost:5000/api/run/qasm?backend=qasm_simulator&qasm=" ..
-                                url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1000"
+                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                                url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1000",
+                        timeout = QISKIT_SERVICE_TIMEOUT
                     }
 
                     --[[
@@ -2053,7 +2058,7 @@ q_command:register_help_button("measurement_z_desc", "Measurement in Z basis", q
 
 
 q_command.texts.bloch_sphere_block_desc =
-[[A Block sphere, like these on the wall, represent the quantum state of a qubit. Anywhere on the
+[[A Bloch sphere, like these on the wall, represent the quantum state of a qubit. Anywhere on the
 surface of the sphere is a valid quantum state. For example, the top-left Bloch sphere represents
 state |0> and the bottom-left Bloch sphere represents state |1>. Note that these Bloch spheres
 are rotated slightly clockwise and tilted toward the user. The green markers represent states on
@@ -2071,7 +2076,7 @@ automatically be run whenever the any changes to the circuit occur.
 To remove a Bloch sphere block, or any other block from a circuit, left-click it while wielding a
 block.
 ]]
-q_command:register_help_button("bloch_sphere_block_desc", "The Block sphere", q_command.texts.bloch_sphere_block_desc)
+q_command:register_help_button("bloch_sphere_block_desc", "The Bloch sphere", q_command.texts.bloch_sphere_block_desc)
 
 
 q_command.texts.reset_op_desc =
