@@ -26,10 +26,10 @@ end
 
 LOG_DEBUG = false
 
--- TODO: Make these constants configurable
-QISKIT_SERVICE_HOST = "https://qiskit-blocks-service.herokuapp.com"
---QISKIT_SERVICE_HOST = "http://localhost:5000"
-QISKIT_SERVICE_TIMEOUT = 10
+local qiskit_service_host = minetest.settings:get("qiskit_service_host") or
+        "https://qiskit-blocks-service.herokuapp.com"
+
+local qiskit_service_timeout = tonumber(minetest.settings:get("qiskit_service_timeout")) or 10
 
 dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
@@ -998,33 +998,33 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     local qasm_with_tomo_z_str = q_command:compute_circuit(circuit_block, true, 3)
 
                     local http_request_statevector = {
-                        url = QISKIT_SERVICE_HOST .. "/api/run/statevector?backend=statevector_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/api/run/statevector?backend=statevector_simulator&qasm=" ..
                                 url_code.urlencode(qasm_str),
-                        timeout = QISKIT_SERVICE_TIMEOUT
+                        timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm = {
-                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1",
-                        timeout = QISKIT_SERVICE_TIMEOUT
+                        timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_x = {
-                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1000",
-                        timeout = QISKIT_SERVICE_TIMEOUT
+                        timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_y = {
-                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1000",
-                        timeout = QISKIT_SERVICE_TIMEOUT
+                        timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_z = {
-                        url = QISKIT_SERVICE_HOST .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1000",
-                        timeout = QISKIT_SERVICE_TIMEOUT
+                        timeout = qiskit_service_timeout
                     }
 
                     --[[
