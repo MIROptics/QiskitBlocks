@@ -32,3 +32,5 @@ Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http:/
 ![Quantum Cats Sandbox in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_cats_sandbox.png)
 
 ![Quantum Blocks Academy in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_blocks_academy.png)
+
+![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
