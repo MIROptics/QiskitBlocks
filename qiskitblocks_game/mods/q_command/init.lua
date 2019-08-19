@@ -864,7 +864,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
             meta:set_string("infotext", "Quantum circuit command block")
             q_command.block_pos = pos
 
-            minetest.debug("mpd.playing:" .. tostring(mpd.playing))
+            --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
             if mpd.playing and mpd.playing ~= MUSIC_ACTIVE then
                 mpd.play_song(MUSIC_ACTIVE)
             end
@@ -1269,9 +1269,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            -- minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
-                            -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
                             if statevector and correct_solution_statevector and
@@ -1286,7 +1286,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             else
                                 is_correct_solution = false
-                                minetest.debug("mpd.playing:" .. tostring(mpd.playing))
+                                --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
                             end
 
                             if is_correct_solution then
@@ -1574,10 +1574,10 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                             end
 
-                            --if LOG_DEBUG then
+                            if LOG_DEBUG then
                             minetest.debug("state_tomo_basis: " .. state_tomo_basis ..
                                     ", basis_state_bit_str: " .. basis_state_bit_str)
-                            --end
+                            end
 
                             if basis_state_bit_str then
 
@@ -1701,31 +1701,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
         end
     })
 end
---[[
-minetest.register_node("q_command:q_sphere", {
-    description = "Q command sphere",
-    drawtype = "mesh",
-    mesh = "q_sphere.obj",
-    tiles = {"q_command_block.png"},
-    groups = {oddly_breakable_by_hand=2},
-    on_construct = function(pos)
-        local meta = minetest.get_meta(pos)
-        meta:set_string("infotext", "Quantum circuit command block")
-        q_command.block_pos = pos
-    end,
-    on_rightclick = function(pos, node, clicker, itemstack)
-        local player_name = clicker:get_player_name()
-        local meta = minetest.get_meta(pos)
-        local formspec = "size[5.0, 4.6]"..
-                "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;5]" ..
-                "field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;4]" ..
-                "field[3.0,2.0;1.5,1.5;start_x_offset_str;Left offset:;2]" ..
-				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
-        minetest.show_formspec(player_name, "create_circuit_grid", formspec)
-    end
-})
---]]
 
 
 minetest.register_node("q_command:q_command_state_ellipsis", {
@@ -2303,6 +2278,59 @@ q_command:register_q_command_block( "h_gate_success", "h_gate",
         solution_statevector_h_gate, false)
 
 
+q_command.texts.cnot_gate_puzzle =
+[[The CNOT gate, also referred to as the controlled-NOT or controlled-X gate, is one of the two-qubit
+gates in quantum computing. To create a CNOT gate, first place an X gate on the circuit. Then, to
+convert an X gate into a CNOT gate (and vice-versa), left-click or right-click the block while
+wielding the Control Tool (the wand-shaped tool). Left-clicking moves the control qubit up one wire,
+and right-clicking moves the control qubit down one wire. The CNOT gate acts on a pair of qubits,
+with one acting as control and the other as target. It performs an X operation on the target whenever
+the control is in state |1>.
+
+To work through this puzzle, take the following steps:
+
+1) Place a CNOT gate in the second column, with the target qubit on the bottom and the control
+qubit on the top.
+
+2) Notice that the blue liquid indicates there is a 100% probability that the result will be |00>
+when the circuit is measured. The leftmost 0 corresponds to the bottom wire, and the rightmost 0
+corresponds to the top wire. Go ahead and right-click one of the measurement blocks to verify that
+|00> is always the result.
+
+3) Place an X gate on the top wire of the first column, noticing that there is now a 100% probability
+that the result will be |11> when measured. The bottom qubit flips to |1> because of the CNOT gate.
+Go ahead and right-click one of the measurement blocks to verify that |11> is always the result.
+
+3) Add an X gate to the circuit on the bottom wire of the first column, noticing that there is now a
+100% probability that the result will be |01> when measured. Go ahead and right-click one of the
+measurement blocks to verify that |01> is always the result.
+]]
+q_command:register_help_button("cnot_gate_puzzle", "CNOT gate puzzle", q_command.texts.cnot_gate_puzzle)
+local solution_statevector_cnot_gate_puzzle =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 1,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
+        solution_statevector_cnot_gate_puzzle, true)
+q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
+        solution_statevector_cnot_gate_puzzle, false)
+
+
 
 q_command.texts.equal_super_2wire =
 [[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
@@ -2605,6 +2633,7 @@ q_command:register_q_command_block( "ghz_state_success", "ghz_state",
         solution_statevector_ghz_state, false)
 
 
+-- TODO: Remove this code after removing blocks in-world
 local function register_sign(desc, def)
 	minetest.register_node("q_command:level_progression", {
 		description = desc,
