@@ -18,11 +18,15 @@ limitations under the License.
 --[[
 TODO:
 [] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
-[] Fix problem of Rx acting like X when placed
-[] Make URL to Qiskit simulators configurable
+[] Fix problem of Rx acting like X when placed (finish checking for math.pi radians and
+    correct behavior on X, Y, Z gates)
+[] Don't allow control qubit to be deleted
+[.] Make URL to Qiskit simulators configurable
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
-[] Make use of health indicator
+[] Shorten lines in dialog boxes to 73
+[] For the named gates like Hadamard it could be nice to have their name in the tooltips for searching
+[] Make use of health indicator and design gameplay with mobs, etc.
 [] Find out how to give players initial inventory, and/or to stock the chests
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods

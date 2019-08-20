@@ -1037,8 +1037,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         -- TODO: Revisit this radians logic, and factor into a function
                         if not player:get_player_control().aux1 and block.get_ctrl_a() == -1 and
                                 (node_type == CircuitNodeTypes.Z or
-                                (math.abs(block.get_radians() - 0) < threshold and
-                                math.abs(block.get_radians() - math.pi * 2) > threshold)) then
+                                math.abs(block.get_radians() - math.pi) < threshold) then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() - 1, player, false)
 
@@ -1282,8 +1281,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         local threshold = 0.0001
                         if not player:get_player_control().aux1 and block.get_ctrl_a() == -1 and
                                 (node_type == CircuitNodeTypes.Z or
-                                (math.abs(block.get_radians() - 0) < threshold and
-                                math.abs(block.get_radians() - math.pi * 2) > threshold)) then
+                                math.abs(block.get_radians() - math.pi) < threshold) then
                             placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                     block:get_node_wire_num() + 1, player, false)
 
@@ -1496,6 +1494,13 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         wielded_item:get_name():sub(1, 16) ~= "circuit_blocks:_" then
                         circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                 wielded_item:get_name(), player)
+
+                        -- Set radians to pi if X, Y or Z gate placed
+                        if wielded_item:get_name():sub(1, 36) == "circuit_blocks:circuit_blocks_x_gate" or
+                                wielded_item:get_name():sub(1, 36) == "circuit_blocks:circuit_blocks_y_gate" or
+                                wielded_item:get_name():sub(1, 36) == "circuit_blocks:circuit_blocks_z_gate" then
+                            block.set_radians(math.pi)
+                        end
                     end
                 end
 

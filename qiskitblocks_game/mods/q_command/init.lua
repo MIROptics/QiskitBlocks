@@ -505,7 +505,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
             qasm_str = qasm_str .. 'id q[' .. wire_num_idx .. '];'
 
         elseif node_type == CircuitNodeTypes.X then
-            if radians == 0 then
+            local threshold = 0.0001
+            if math.abs(radians - math.pi) <= threshold then
                 if ctrl_a ~= -1 then
                     if ctrl_b ~= -1 then
                         -- Toffoli gate
@@ -528,7 +529,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
             end
 
         elseif node_type == CircuitNodeTypes.Y then
-            if radians == 0 then
+            local threshold = 0.0001
+            if math.abs(radians - math.pi) <= threshold then
                 if ctrl_a ~= -1 then
                     -- Controlled Y gate
                     qasm_str = qasm_str .. 'cy q[' .. ctrl_a_idx .. '],'
@@ -543,7 +545,8 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
                 qasm_str = qasm_str .. 'q[' .. wire_num_idx .. '];'
             end
         elseif node_type == CircuitNodeTypes.Z then
-            if radians == 0 then
+            local threshold = 0.0001
+            if math.abs(radians - math.pi) <= threshold then
                 if ctrl_a ~= -1 then
                     -- Controlled Z gate
                     qasm_str = qasm_str .. 'cz q[' .. ctrl_a_idx .. '],'
@@ -1269,9 +1272,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            minetest.debug("statevector:\n" .. dump(statevector))
+                            -- minetest.debug("statevector:\n" .. dump(statevector))
 
-                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                            -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
                             if statevector and correct_solution_statevector and
