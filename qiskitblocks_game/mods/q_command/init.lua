@@ -2334,6 +2334,75 @@ q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzl
         solution_statevector_cnot_gate_puzzle, false)
 
 
+q_command.texts.rotate_yz_gates_puzzle =
+[[
+The Rx and X gates rotate a qubit state around the X axis of a Bloch
+sphere. The Ry and Y gates rotate a qubit state around the Y axis. The
+Rz and Z gates rotate a qubit state around the Z axis. To work through
+this puzzle, take the following steps:
+
+1) Place an Ry gate on first column of the top wire.
+
+2) Turn the Measurement block on the top wire into a Bloch sphere that
+displays an estimation of the qubit state before measurement. To
+accomplish this, right-click the Measurement block while holding down
+the Special key. This will insert state tomography measurements into the
+circuit, calculating and displaying the estimated state. The Special key
+may be known, and set, by pausing the game and choosing the Change Keys
+button.
+
+3) The Bloch sphere should have a green square at its top, reflecting
+that the state of the qubit is |0>. While wielding the Rotate Tool (the
+rounded tool), left-click the Ry gate 8 times, pausing a couple of
+seconds each time. Each click performs a rotation of π/16 radians (11.25
+degrees). Notice that the state represented on the Bloch sphere changes,
+moving along a curved vertical line and ending up on its equator. The
+state that should be reflected on the Bloch sphere is commonly referred
+to as the plus, or |+> state.
+
+4) Place a Z gate on the second column of the top wire. Notice that the
+state represented on the Bloch sphere changes again, rotating π radians
+(180 degrees) around the Z axis. Its color changes to blue, indicating
+that it is located on the back side of the sphere. This state is
+commonly referred to as the minus, or |-> state.
+
+5) Turn the Measurement block on the bottom wire into a Bloch sphere.
+Then place an X gate on the first column of the bottom wire. Note that
+the state of that qubit rotates π radians (180 degrees) around the X
+axis from the top to the bottom of the Bloch sphere.
+
+6) Place a Hadamard gate on the second column of the bottom wire. Note
+that the state reflected on the Bloch sphere is the same as the qubit on
+the top wire. This demonstrates that there are many combinations
+(actually an infinite number) of gate operations that can arrive at the
+same state.
+]]
+q_command:register_help_button("rotate_yz_gates_puzzle", "Rotate X/Y/Z gates puzzle", q_command.texts.rotate_yz_gates_puzzle)
+local solution_statevector_rotate_yz_gates_puzzle =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = -0.5,
+		i = 0
+	},
+	{
+		r = -0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
+        solution_statevector_rotate_yz_gates_puzzle, true)
+q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
+        solution_statevector_rotate_yz_gates_puzzle, false)
+
+
 q_command.texts.swap_gate_puzzle =
 [[
 The Swap gate swaps the states of the qubits on two wires with each
