@@ -20,6 +20,7 @@ TODO:
 [] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
 [] Fix problem of Rx acting like X when placed (finish checking for math.pi radians and
     correct behavior on X, Y, Z gates)
+[] Make crosshairs more visible (see https://forum.minetest.net/viewtopic.php?f=5&t=16687)
 [] Don't allow control qubit to be deleted
 [.] Make URL to Qiskit simulators configurable
 [] Don't allow bloch sphere blocks to be placed directly

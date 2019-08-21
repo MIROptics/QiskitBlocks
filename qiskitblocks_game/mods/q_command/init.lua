@@ -1272,9 +1272,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            -- minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
-                            -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
                             if statevector and correct_solution_statevector and
@@ -2332,6 +2332,59 @@ q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzl
         solution_statevector_cnot_gate_puzzle, true)
 q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
         solution_statevector_cnot_gate_puzzle, false)
+
+
+q_command.texts.swap_gate_puzzle =
+[[
+The Swap gate swaps the states of the qubits on two wires with each
+other. To work through this puzzle, take the following steps:
+
+1) Place an X gate on the top wire of the first column.
+
+2) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |01> when the circuit is measured. The leftmost
+digit corresponds to the bottom wire, and the rightmost digit
+corresponds to the top wire. Go ahead and right-click one of the
+measurement blocks to verify that |01> is always the result.
+
+3) While wielding a Swap gate block, right-click to place it in the
+second column of either wire. Then while wielding the Swap Tool (the
+saw-like tool), left-click or right-click the block to navigate to the
+other wire. Left-clicking moves the other swap qubit up one wire, and
+right-clicking moves it down one wire. Note that this other swap qubit
+has a slightly different appearance (less pixels) so that it may be
+distinguished from the originally placed Swap gate block.
+
+4) Notice that the blue liquid indicates there is now a 100% probability
+that the result will be |10> when the circuit is measured. This
+demonstrates that the qubits have switched wires with each other because
+of the Swap gate. Go ahead and right-click one of the measurement blocks
+to verify that |10> is always the result.
+]]
+q_command:register_help_button("swap_gate_puzzle", "Swap gate puzzle", q_command.texts.swap_gate_puzzle)
+local solution_statevector_swap_gate_puzzle =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 1,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
+        solution_statevector_swap_gate_puzzle, true)
+q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
+        solution_statevector_swap_gate_puzzle, false)
 
 
 
