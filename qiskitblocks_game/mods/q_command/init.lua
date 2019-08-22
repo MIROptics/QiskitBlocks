@@ -2423,31 +2423,40 @@ q_command:register_q_command_block( "h_gate_success", "h_gate",
 
 
 q_command.texts.cnot_gate_puzzle =
-[[The CNOT gate, also referred to as the controlled-NOT or controlled-X gate, is one of the two-qubit
-gates in quantum computing. To create a CNOT gate, first place an X gate on the circuit. Then, to
-convert an X gate into a CNOT gate (and vice-versa), left-click or right-click the block while
-wielding the Control Tool (the wand-shaped tool). Left-clicking moves the control qubit up one wire,
-and right-clicking moves the control qubit down one wire. The CNOT gate acts on a pair of qubits,
-with one acting as control and the other as target. It performs an X operation on the target whenever
-the control is in state |1>.
+[[
+The CNOT gate, also referred to as the controlled-NOT or controlled-X
+gate, is one of the two-qubit gates in quantum computing. To create a
+CNOT gate, first place an X gate on the circuit. Then, to convert an X
+gate into a CNOT gate (and vice-versa), left-click or right-click the
+block while wielding the Control Tool (the wand-shaped tool).
+Left-clicking moves the control qubit up one wire, and right-clicking
+moves the control qubit down one wire. The CNOT gate acts on a pair of
+qubits, with one acting as control and the other as target. It performs
+an X operation on the target whenever the control is in state |1>.
 
 To work through this puzzle, take the following steps:
 
-1) Place a CNOT gate in the second column, with the target qubit on the bottom and the control
-qubit on the top.
+1) Place a CNOT gate in the second column, with the target qubit on the
+bottom and the control qubit on the top.
 
-2) Notice that the blue liquid indicates there is a 100% probability that the result will be |00>
-when the circuit is measured. The leftmost 0 corresponds to the bottom wire, and the rightmost 0
-corresponds to the top wire. Go ahead and right-click one of the measurement blocks to verify that
-|00> is always the result.
+2) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |00> when the circuit is measured. The leftmost
+0 corresponds to the bottom wire, and the rightmost 0 corresponds to the
+top wire. Go ahead and right-click one of the measurement blocks a few
+times to verify that |00> is always the result.
 
-3) Place an X gate on the top wire of the first column, noticing that there is now a 100% probability
-that the result will be |11> when measured. The bottom qubit flips to |1> because of the CNOT gate.
-Go ahead and right-click one of the measurement blocks to verify that |11> is always the result.
+3) Place an X gate on the top wire of the first column, noticing that
+there is now a 100% probability that the result will be |11> when
+measured. Note that the bottom qubit flips to |1> because of the CNOT
+gate. Go ahead and right-click one of the measurement blocks a few times
+to verify that |11> is always the result.
 
-3) Add an X gate to the circuit on the bottom wire of the first column, noticing that there is now a
-100% probability that the result will be |01> when measured. Go ahead and right-click one of the
-measurement blocks to verify that |01> is always the result.
+4) Add an X gate to the circuit on the bottom wire of the first column,
+noticing that there is now a 100% probability that the result will be
+|01> when measured. Go ahead and right-click one of the measurement
+blocks to verify that |01> is always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("cnot_gate_puzzle", "CNOT gate puzzle", q_command.texts.cnot_gate_puzzle)
 local solution_statevector_cnot_gate_puzzle =
@@ -2476,8 +2485,15 @@ q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzl
 
 
 q_command.texts.hxx_gates =
-[[This circuit leverages Hadamard and X gates to create a state |001> + |101>. To solve this
-circuit puzzle, place the appropriate gates on the wires.
+[[
+This circuit leverages Hadamard and X gates to create a quantum state in
+which the measurement results |001> and |101> are equally likely, and no
+other measurement results are possible. This quantum state could be
+expressed as |001> + |101>
+
+To solve this circuit puzzle, place the appropriate gates on the wires.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("hxx_gates", "Hadamard and X gates", q_command.texts.hxx_gates)
 local solution_statevector_hxx_gates =
