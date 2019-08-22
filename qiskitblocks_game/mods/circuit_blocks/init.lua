@@ -33,6 +33,7 @@ TODO:
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 [] Standardize on naming conventions for help buttons. For example, h_gate_puzzle and h_gate_desc
+[] Right-clicking Q block when circuit exists should produce message like "starting music" and "pausing music"
 
 [] Work out way to host QiskitBlocks and QiskitBlocksService, perhaps via something
     like Stadia.

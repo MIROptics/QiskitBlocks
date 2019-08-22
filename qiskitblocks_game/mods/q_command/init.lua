@@ -2208,34 +2208,58 @@ happy cat state.
 q_command:register_help_button("entangling_cats", "Entangling cats", q_command.texts.entangling_cats)
 
 q_command.texts.quantum_circuit_garden =
-[[Welcome to the quantum circuit garden, which contains various circuit-based puzzles to solve.
-For more information on the challenge for a given circuit, right-click its Help button. To solve
-a puzzle, add the appropriate gates to its circuit. You can find the necessary gates in the chest
-below this sign, which you may open and close by right-clicking. To move an item from the chest
-into your inventory, drag it from the upper to the lower section of the chest dialog box. The items
-that appear in the top row of the inventory will appear in the hotbar ready to be wielded. To add a
-gate to a circuit, choose the gate block from the hotbar, position the cursor on the circuit, and
-right-click. Left-clicking a gate while wielding a block (or empty handed) removes it from the
-circuit. When you solve a given circuit puzzle, the black Q block will turn gold.
+[[
+Welcome to the quantum circuit garden, which contains various
+circuit-based puzzles to solve. For more information on the challenge
+for a given circuit, right-click its Help button. To solve a puzzle, add
+the appropriate gates to its circuit. You can find the necessary gates
+in the chest below this sign, which you may open and close by
+right-clicking. To move an item from the chest into your inventory, drag
+it from the upper to the lower section of the chest dialog box. The
+items that appear in the top row of the inventory will appear in the
+hotbar ready to be wielded. To add a gate to a circuit, choose the gate
+block from the hotbar, position the cursor on the circuit, and
+right-click. Left-clicking a gate while wielding a block (or empty
+handed if you are close enough) removes it from the circuit. When you
+solve a given circuit puzzle, the black Q block will turn gold.
 
-There are a couple of tools in the chest with which you may add control qubits to a gate, as well
-as to rotate a gate. To use these tools, position the cursor on an appropriate gate and left-click
-or right-click.
+There are a couple of tools in the chest with which you may add control
+qubits to a gate, as well as to rotate a gate. To use these tools,
+position the cursor on an appropriate gate and left-click or right-click.
 
-Notice that each circuit has a set of glass blocks with liquid levels that express the measurement
-probability of each basis state. The rightmost digit of each basis state represents the topmost
-wire. To measure a circuit, right-click on a block that has the appearance of a measuring
-device.
+Notice that each circuit has a set of glass blocks with liquid levels
+that express the measurement probability of each basis state. The
+rightmost digit of each basis state represents the topmost wire. To
+measure a circuit, right-click on a block that has the appearance of a
+measuring device.
 ]]
 q_command:register_help_button("quantum_circuit_garden", "Quantum circuit garden", q_command.texts.quantum_circuit_garden)
 
 q_command:register_q_command_block("default")
 
 q_command.texts.x_gate =
-[[This circuit, consisting of only one wire, leverages the Pauli-X gate, also known as the NOT,
-or bit-flip, gate. Its effect on the |0> state is to make it |1>, and vice-versa. To solve this
-circuit puzzle, get an X block out of the chest and place it on the circuit. Notice how the
-outcome probabilities and measurement results change as this gate is removed and added.
+[[
+This circuit, consisting of only one wire, leverages the X gate, also
+known as the Pauli-X, NOT, or bit-flip, gate. Its effect on the |0>
+state is to make it |1>, and vice-versa. To work through this puzzle,
+take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an X block out of the chest.
+
+3) While wielding the X block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 100% probability
+that the result will be |1> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |1> is
+always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("x_gate", "Quantum NOT gate", q_command.texts.x_gate)
 local solution_statevector_x_gate =
@@ -2257,11 +2281,30 @@ q_command:register_q_command_block( "x_gate_success", "x_gate",
 
 q_command.texts.h_gate =
 [[
-This circuit leverages the Hadamard gate to put a qubit into an equal superposition of |0> and |1>.
-To solve this circuit puzzle, get an H block out of the chest and place it on the circuit. Notice
-how the outcome probabilities and measurement results change as this gate is removed and added.
-Notice how the outcome probabilities and measurement results change as this gate is removed
-and added.
+This circuit, consisting of only one wire, leverages the H gate, also
+known as the the Hadamard gate. Its effect on the |0> state is to put it
+into an equal superposition of |0> and |1>. Therefore, when the qubit is
+measured, there is a 50% probability that the result will be |0>, and a
+50% probability that the result will be |1>. To work through this
+puzzle, take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an H block out of the chest.
+
+3) While wielding the H block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 50% probability
+that the result will be |0> when the circuit is measured, and a 50%
+probability that the result will be |1> when the circuit is measured. Go
+ahead and right-click the measurement block several times to verify that
+the results are fairly evenly distributed between |0> and |1>.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("h_gate", "Hadamard gate", q_command.texts.h_gate)
 local solution_statevector_h_gate =
@@ -2332,162 +2375,6 @@ q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzl
         solution_statevector_cnot_gate_puzzle, true)
 q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
         solution_statevector_cnot_gate_puzzle, false)
-
-
-q_command.texts.rotate_yz_gates_puzzle =
-[[
-The Rx and X gates rotate a qubit state around the X axis of a Bloch
-sphere. The Ry and Y gates rotate a qubit state around the Y axis. The
-Rz and Z gates rotate a qubit state around the Z axis. To work through
-this puzzle, take the following steps:
-
-1) Place an Ry gate on first column of the top wire.
-
-2) Turn the Measurement block on the top wire into a Bloch sphere that
-displays an estimation of the qubit state before measurement. To
-accomplish this, right-click the Measurement block while holding down
-the Special key. This will insert state tomography measurements into the
-circuit, calculating and displaying the estimated state. The Special key
-may be known, and set, by pausing the game and choosing the Change Keys
-button.
-
-3) The Bloch sphere should have a green square at its top, reflecting
-that the state of the qubit is |0>. While wielding the Rotate Tool (the
-rounded tool), left-click the Ry gate 8 times, pausing a couple of
-seconds each time. Each click performs a rotation of π/16 radians (11.25
-degrees). Notice that the state represented on the Bloch sphere changes,
-moving along a curved vertical line and ending up on its equator. The
-state that should be reflected on the Bloch sphere is commonly referred
-to as the plus, or |+> state.
-
-4) Place a Z gate on the second column of the top wire. Notice that the
-state represented on the Bloch sphere changes again, rotating π radians
-(180 degrees) around the Z axis. Its color changes to blue, indicating
-that it is located on the back side of the sphere. This state is
-commonly referred to as the minus, or |-> state.
-
-5) Turn the Measurement block on the bottom wire into a Bloch sphere.
-Then place an X gate on the first column of the bottom wire. Note that
-the state of that qubit rotates π radians (180 degrees) around the X
-axis from the top to the bottom of the Bloch sphere.
-
-6) Place a Hadamard gate on the second column of the bottom wire. Note
-that the state reflected on the Bloch sphere is the same as the qubit on
-the top wire. This demonstrates that there are many combinations
-(actually an infinite number) of gate operations that can arrive at the
-same state.
-]]
-q_command:register_help_button("rotate_yz_gates_puzzle", "Rotate X/Y/Z gates puzzle", q_command.texts.rotate_yz_gates_puzzle)
-local solution_statevector_rotate_yz_gates_puzzle =
-{
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = -0.5,
-		i = 0
-	},
-	{
-		r = -0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	}
-}
-q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
-        solution_statevector_rotate_yz_gates_puzzle, true)
-q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
-        solution_statevector_rotate_yz_gates_puzzle, false)
-
-
-q_command.texts.swap_gate_puzzle =
-[[
-The Swap gate swaps the states of the qubits on two wires with each
-other. To work through this puzzle, take the following steps:
-
-1) Place an X gate on the top wire of the first column.
-
-2) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |01> when the circuit is measured. The leftmost
-digit corresponds to the bottom wire, and the rightmost digit
-corresponds to the top wire. Go ahead and right-click one of the
-measurement blocks to verify that |01> is always the result.
-
-3) While wielding a Swap gate block, right-click to place it in the
-second column of either wire. Then while wielding the Swap Tool (the
-saw-like tool), left-click or right-click the block to navigate to the
-other wire. Left-clicking moves the other swap qubit up one wire, and
-right-clicking moves it down one wire. Note that this other swap qubit
-has a slightly different appearance (less pixels) so that it may be
-distinguished from the originally placed Swap gate block.
-
-4) Notice that the blue liquid indicates there is now a 100% probability
-that the result will be |10> when the circuit is measured. This
-demonstrates that the qubits have switched wires with each other because
-of the Swap gate. Go ahead and right-click one of the measurement blocks
-to verify that |10> is always the result.
-]]
-q_command:register_help_button("swap_gate_puzzle", "Swap gate puzzle", q_command.texts.swap_gate_puzzle)
-local solution_statevector_swap_gate_puzzle =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 1,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
-        solution_statevector_swap_gate_puzzle, true)
-q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
-        solution_statevector_swap_gate_puzzle, false)
-
-
-
-q_command.texts.equal_super_2wire =
-[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
-and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
-probabilities and measurement results change as these gates are removed and added. This pattern of
-placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
-of 2^numQubits states.
-]]
-q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
-local solution_statevector_equal_super_2wire =
-{
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	}
-}
-q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, true)
-q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, false)
 
 
 q_command.texts.hxx_gates =
@@ -2756,6 +2643,161 @@ q_command:register_q_command_block( "ghz_state_success", "ghz_state",
         solution_statevector_ghz_state, true)
 q_command:register_q_command_block( "ghz_state_success", "ghz_state",
         solution_statevector_ghz_state, false)
+
+
+q_command.texts.equal_super_2wire =
+[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
+and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed and added. This pattern of
+placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
+of 2^numQubits states.
+]]
+q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
+local solution_statevector_equal_super_2wire =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
+        solution_statevector_equal_super_2wire, true)
+q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
+        solution_statevector_equal_super_2wire, false)
+
+
+q_command.texts.rotate_yz_gates_puzzle =
+[[
+The Rx and X gates rotate a qubit state around the X axis of a Bloch
+sphere. The Ry and Y gates rotate a qubit state around the Y axis. The
+Rz and Z gates rotate a qubit state around the Z axis. To work through
+this puzzle, take the following steps:
+
+1) Place an Ry gate on first column of the top wire.
+
+2) Turn the Measurement block on the top wire into a Bloch sphere that
+displays an estimation of the qubit state before measurement. To
+accomplish this, right-click the Measurement block while holding down
+the Special key. This will insert state tomography measurements into the
+circuit, calculating and displaying the estimated state. The Special key
+may be known, and set, by pausing the game and choosing the Change Keys
+button.
+
+3) The Bloch sphere should have a green square at its top, reflecting
+that the state of the qubit is |0>. While wielding the Rotate Tool (the
+rounded tool), left-click the Ry gate 8 times, pausing a couple of
+seconds each time. Each click performs a rotation of π/16 radians (11.25
+degrees). Notice that the state represented on the Bloch sphere changes,
+moving along a curved vertical line and ending up on its equator. The
+state that should be reflected on the Bloch sphere is commonly referred
+to as the plus, or |+> state.
+
+4) Place a Z gate on the second column of the top wire. Notice that the
+state represented on the Bloch sphere changes again, rotating π radians
+(180 degrees) around the Z axis. Its color changes to blue, indicating
+that it is located on the back side of the sphere. This state is
+commonly referred to as the minus, or |-> state.
+
+5) Turn the Measurement block on the bottom wire into a Bloch sphere.
+Then place an X gate on the first column of the bottom wire. Note that
+the state of that qubit rotates π radians (180 degrees) around the X
+axis from the top to the bottom of the Bloch sphere.
+
+6) Place a Hadamard gate on the second column of the bottom wire. Note
+that the state reflected on the Bloch sphere is the same as the qubit on
+the top wire. This demonstrates that there are many combinations
+(actually an infinite number) of gate operations that can arrive at the
+same state.
+]]
+q_command:register_help_button("rotate_yz_gates_puzzle", "Rotate X/Y/Z gates puzzle", q_command.texts.rotate_yz_gates_puzzle)
+local solution_statevector_rotate_yz_gates_puzzle =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = -0.5,
+		i = 0
+	},
+	{
+		r = -0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
+        solution_statevector_rotate_yz_gates_puzzle, true)
+q_command:register_q_command_block( "rotate_yz_gates_puzzle_success", "rotate_yz_gates_puzzle",
+        solution_statevector_rotate_yz_gates_puzzle, false)
+
+
+q_command.texts.swap_gate_puzzle =
+[[
+The Swap gate swaps the states of the qubits on two wires with each
+other. To work through this puzzle, take the following steps:
+
+1) Place an X gate on the top wire of the first column.
+
+2) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |01> when the circuit is measured. The leftmost
+digit corresponds to the bottom wire, and the rightmost digit
+corresponds to the top wire. Go ahead and right-click one of the
+measurement blocks to verify that |01> is always the result.
+
+3) While wielding a Swap gate block, right-click to place it in the
+second column of either wire. Then while wielding the Swap Tool (the
+saw-like tool), left-click or right-click the block to navigate to the
+other wire. Left-clicking moves the other swap qubit up one wire, and
+right-clicking moves it down one wire. Note that this other swap qubit
+has a slightly different appearance (less pixels) so that it may be
+distinguished from the originally placed Swap gate block.
+
+4) Notice that the blue liquid indicates there is now a 100% probability
+that the result will be |10> when the circuit is measured. This
+demonstrates that the qubits have switched wires with each other because
+of the Swap gate. Go ahead and right-click one of the measurement blocks
+to verify that |10> is always the result.
+]]
+q_command:register_help_button("swap_gate_puzzle", "Swap gate puzzle", q_command.texts.swap_gate_puzzle)
+local solution_statevector_swap_gate_puzzle =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 1,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
+        solution_statevector_swap_gate_puzzle, true)
+q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzle",
+        solution_statevector_swap_gate_puzzle, false)
 
 
 -- TODO: Remove this code after removing blocks in-world
