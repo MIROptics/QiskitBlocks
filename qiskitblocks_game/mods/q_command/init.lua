@@ -2491,7 +2491,11 @@ which the measurement results |001> and |101> are equally likely, and no
 other measurement results are possible. This quantum state could be
 expressed as |001> + |101>
 
-To solve this circuit puzzle, place the appropriate gates on the wires.
+To solve this circuit puzzle, place an H gate and an X gate on the
+appropriate wires.
+
+Hint: Use what you already have learned about the behaviors of H and X
+gates on single-wire circuits.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
@@ -2538,23 +2542,31 @@ q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
 
 
 q_command.texts.bell_phi_plus =
-[[The four simplest examples of quantum entanglement are the Bell states. The most well-known Bell
-state, symbolized by Φ+ (phi plus), may be realized with a Hadamard gate and a CNOT gate. The CNOT
-gate is a two-wire gate that has the appearance of cross-hairs and a vertical line with a dot. The
-cross-hairs symbol has the functionality of the X gate, with the difference being that it is
-conditional on the state of the other wire, performing the NOT operation whenever the other wire
-is |1>.
+[[
+The four simplest examples of quantum entanglement are the Bell states.
+The most well-known Bell state, symbolized by Φ+ (phi plus), may be
+realized with a Hadamard gate and a CNOT gate. The CNOT gate is a
+two-wire gate that has the appearance of cross-hairs and a vertical line
+with a dot. The cross-hairs symbol has the functionality of the X gate,
+with the difference being that it is conditional on the state of the
+other wire, performing the NOT operation whenever the other wire is |1>.
 
-Measuring one of the qubits results in the measured state of the other qubit to be determined. A
-correct Φ+ Bell state solution will have probabilities indicating that measurement results |00>
-and |11> are equally likely, as well has having identical phases. The notation for a phase on these
-block-world circuits is an arrow that points in a direction signifying its counterclockwise
-rotation, from 0 radians pointing rightward.
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct Φ+ Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward.
 
-One way to realize this state is to place a Hadamard gate on the top wire, and an X gate on the
-second wire in a column to the right of the Hadamard gate. Then select the control tool from
-the hotbar (after having retrieved it from the chest). While positioning the cursor on the X gate
-in the circuit, left-click until the control qubit is on the same wire as the Hadamard gate.
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, left-click until the control qubit is on the same
+wire as the Hadamard gate.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("bell_phi_plus", "Bell State: Φ+", q_command.texts.bell_phi_plus)
 local solution_statevector_bell_phi_plus =
@@ -2583,19 +2595,22 @@ q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
 
 
 q_command.texts.bell_phi_minus =
-[[The four simplest examples of quantum entanglement are the Bell states. One of these Bell states,
-symbolized by Φ- (phi minus), may be realized by placing an X gate on the top wire, and adding the
-Φ+ Bell state circuit (as instructed in another puzzle) to the right of the X gate,
+[[
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by Φ- (phi minus), may be realized
+by placing an X gate on the top wire, and adding the Φ+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate.
 
-Measuring one of the qubits results in the measured state of the other qubit to be determined. A
-correct Φ- Bell state solution will have probabilities indicating that measurement results |00>
-and |11> are equally likely, as well has having opposite phases. The notation for a phase on these
-block-world circuits is an arrow that points in a direction signifying its counterclockwise
-rotation, from 0 radians pointing rightward. As an example, a leftward pointing arrow signifies a
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct Φ- Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
 phase of π radians.
 
-The interference of phases in the elements of a quantum state vector are used in quantum algorithms
-to increase the likelihood of measurements resulting in the correct answers.
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("bell_phi_minus", "Bell State: Φ-", q_command.texts.bell_phi_minus)
 local solution_statevector_bell_phi_minus =
@@ -2624,17 +2639,23 @@ q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
 
 
 q_command.texts.bell_psi_plus =
-[[The four simplest examples of quantum entanglement are the Bell states. One of these Bell states,
-symbolized by Ψ+ (psi plus), may be realized by placing an X gate on the second wire, and adding
-the Φ+ Bell state circuit (as instructed in another puzzle) to the right of the X gate,
+[[
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by Ψ+ (psi plus), may be realized
+by placing an X gate on the second wire, and adding the Φ+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate,
 
-Measuring one of the qubits results in the measured state of the other qubit to be determined. A
-correct Ψ+ Bell state solution will have probabilities indicating that measurement results |01>
-and |10> are equally likely, as well has having identical phases. The notation for a phase on these
-block-world circuits is an arrow that points in a direction signifying its counterclockwise
-rotation, from 0 radians pointing rightward. The Ψ+ Bell state is known as one of the singlet
-states, where measuring one of the qubits determines that the other qubit will be measured as the
-opposite state.
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct Ψ+ Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. The Ψ+ Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("bell_psi_plus", "Bell State: Ψ+", q_command.texts.bell_psi_plus)
 local solution_statevector_bell_psi_plus =
@@ -2663,17 +2684,25 @@ q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
 
 
 q_command.texts.bell_psi_minus =
-[[The four simplest examples of quantum entanglement are the Bell states. One of these Bell states,
-symbolized by Ψ- (psi minus), may be realized by placing X gates on the top and second wires, and
-adding the Φ+ Bell state circuit (as instructed in another puzzle) to the right of the X gates,
+[[
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by Ψ- (psi minus), may be realized
+by placing X gates on the top and second wires, and adding the Φ+ Bell
+state circuit (as instructed in another puzzle) to the right of the X
+gates.
 
-Measuring one of the qubits results in the measured state of the other qubit to be determined. A
-correct Ψ- Bell state solution will have probabilities indicating that measurement results |01>
-and |10> are equally likely, as well has having opposite phases. The notation for a phase on these
-block-world circuits is an arrow that points in a direction signifying its counterclockwise
-rotation, from 0 radians pointing rightward. As an example, a leftward pointing arrow signifies a
-phase of π radians. The Ψ- Bell state is known as one of the singlet states, where measuring one
-of the qubits determines that the other qubit will be measured as the opposite state.
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct Ψ- Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
+phase of π radians. The Ψ- Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("bell_psi_minus", "Bell State: Ψ-", q_command.texts.bell_psi_minus)
 local solution_statevector_bell_psi_minus =
@@ -2702,20 +2731,27 @@ q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
 
 
 q_command.texts.ghz_state =
-[[GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving three or more qubits,
-where the basis states involved contain all zeros or all ones. For example, the entangled state
-in this three-wire circuit puzzle has equal probabilities of being measured as |000> and |111>.
-Please refer to the Bell state circuit puzzles for more information on entanglement.
+[[
+GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving
+three or more qubits, where the basis states involved contain all zeros
+or all ones. For example, the entangled state in this three-wire circuit
+puzzle has equal probabilities of being measured as |000> and |111>.
+Please refer to the Bell state circuit puzzles for more information on
+entanglement.
 
-One way to realize this state is to place a Hadamard gate on the top wire, and an X gate on the
-second wire in a column to the right of the Hadamard gate. Then select the control tool from
-the hotbar (after having retrieved it from the chest). While positioning the cursor on the X gate
-in the circuit, convert it to a CNOT gate by left-clicking, until the control qubit is on the same
-wire as the Hadamard gate. Repeat this process to place another CNOT gate whose X gate is on the
-third wire and control qubit is on the top wire.
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, convert it to a CNOT gate by left-clicking, until
+the control qubit is on the same wire as the Hadamard gate. Repeat this
+process to place another CNOT gate whose X gate is on the third wire and
+control qubit is on the top wire.
 
-Note that measuring the circuit (by right-clicking the measurement blocks) results in either |000>
-or |111> each time.
+Note that measuring the circuit (by right-clicking the measurement
+blocks) results in either |000> or |111> each time.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("ghz_state", "GHZ states", q_command.texts.ghz_state)
 local solution_statevector_ghz_state =
@@ -2760,11 +2796,16 @@ q_command:register_q_command_block( "ghz_state_success", "ghz_state",
 
 
 q_command.texts.equal_super_2wire =
-[[This circuit leverages two Hadamard gates to create an equal superposition of |00>, |01>, |10>,
-and |11>. To solve this circuit puzzle, place an H block on each wire. Notice how the outcome
-probabilities and measurement results change as these gates are removed and added. This pattern of
-placing an H gate on each wire of a circuit is commonly used to create a superposition consisting
-of 2^numQubits states.
+[[
+This circuit leverages two Hadamard gates to create an equal
+superposition of |00>, |01>, |10>, and |11>. To solve this circuit
+puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed
+and added. This pattern of placing an H gate on each wire of a circuit
+is commonly used to create a superposition consisting of 2^numQubits
+states.
+
+If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command:register_help_button("equal_super_2wire", "Equal superposition with two qubits", q_command.texts.equal_super_2wire)
 local solution_statevector_equal_super_2wire =
