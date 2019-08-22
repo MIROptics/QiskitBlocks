@@ -1799,7 +1799,7 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
 			"tablecolumns[text]"..
 			"tableoptions[background=#000000;highlight=#000000;border=false]"..
-			"textarea[0,0.25;12,5.2;infosign_text;"..
+			"table[0,0.25;12,5.2;infosign_text;"..
 			q_command:convert_newlines(minetest.formspec_escape(S(fulltext)))..
 			"]"..
 			"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
