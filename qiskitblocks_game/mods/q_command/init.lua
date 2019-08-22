@@ -1799,7 +1799,7 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
 			"tablecolumns[text]"..
 			"tableoptions[background=#000000;highlight=#000000;border=false]"..
-			"table[0,0.25;12,5.2;infosign_text;"..
+			"textarea[0,0.25;12,5.2;infosign_text;"..
 			q_command:convert_newlines(minetest.formspec_escape(S(fulltext)))..
 			"]"..
 			"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
@@ -1835,375 +1835,473 @@ end
 q_command.texts = {}
 
 q_command.texts.quantum_circuit_world =
-[[Welcome to the world of quantum computing circuits! The block-world environment you are currently
-in is created with the Minetest.net open-source library. A list of controls for getting around and
-doing things in Minetest are available by pausing the game (e.g. with the Esc key on some platforms).
-The quantum gates and circuits with which you will interact are powered by Qiskit.org quantum
-simulators.
+[[
+Welcome to the world of quantum computing circuits! The block-world
+environment you are currently in is created with the Minetest.net
+open-source library. A list of controls for getting around and doing
+things in Minetest are available by pausing the game (e.g. with the Esc
+key on some platforms). The quantum gates and circuits with which you
+will interact are powered by Qiskit.org quantum simulators.
 
-There are an increasing number of areas that you may explore in this environment. First, it would be
-helpful to read the signs in this room (by right-clicking them), as they describe the behavior of
-various quantum computing related blocks that you will encounter. By the way, there is no need to
-take the blocks and tools from this room, as they will be available in chests along the way. Please
-leave them in this room, and come back anytime you have questions about what they do or how to use them.
+There are an increasing number of areas that you may explore in this
+environment. First, it would be helpful to read the signs in this room
+(by right-clicking them), as they describe the behavior of various
+quantum computing related blocks that you will encounter. By the way,
+there is no need to take the blocks and tools from this room, as they
+will be available in chests along the way. Please leave them in this
+room, and come back anytime you have questions about what they do or how
+to use them.
 
-The first place outside this room that you may want to visit is the quantum cats sandbox. In that
-area, some basic quantum computing circuits and gates are demonstrated with grumpy and happy cats
-instead of the usual qubits. To get there, follow the light blocks just outside the front doors
-into the woods.
+The first place outside this room that you may want to visit is the
+quantum cats sandbox. In that area, some basic quantum computing
+circuits and gates are demonstrated with grumpy and happy cats instead
+of the usual qubits. To get there, follow the light blocks just outside
+the front doors into the woods.
 
-If you would rather skip the cats, then a good place to begin your journey would be in the
-quantum circuit garden on the other side of the large wall outside the front doors. Wherever you
-choose to begin, please be sure to right-click the Help buttons (labeled with a question mark) as
-you encounter them.
+If you would rather skip the cats, then a good place to begin your
+journey would be in the quantum circuit garden on the other side of the
+large wall outside the front doors. Wherever you choose to begin, please
+be sure to right-click the Help buttons (labeled with a question mark)
+as you encounter them.
 
-Wherever you go, remember that the sun will eventually set for a while. To skip a night-cycle,
-just right-click a nearby bed and you will immediately wake up the next morning. You may also grab
-a yellow lamp from a chest to shed some light at night.
+Wherever you go, remember that the sun may eventually set for a while.
+To skip a night-cycle, just right-click a nearby bed and you will
+immediately wake up the next morning. You may also grab a yellow lamp
+from a chest to shed some light at night.
 ]]
 q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
 
+
 q_command.texts.x_rx_gates =
-[[The X and Rx gates rotate a qubit state around the X axis of a Bloch sphere (refer to the
-Bloch spheres on the wall). While wielding one of these gates, right-click to place it on a quantum
-circuit. The X gate is often referred to the NOT gate because it flips the |0> state to |1> and
+[[
+The X and Rx gates rotate a qubit state around the X axis of a Bloch
+sphere (refer to the Bloch spheres on the wall). While wielding one of
+these gates, right-click to place it on a quantum circuit. The X gate is
+often referred to the NOT gate because it flips the |0> state to |1> and
 vice-versa.
 
-Once placed, left-click or right-click the Rotate Tool (the rounded tool spinning on the floor)
-to rotate its state in increments of π/16 radians, or -π/16 radians, respectively. When first placed,
-an Rx gate has a rotation of 0 radians around the X axis. An X gate when first placed has a rotation
-of π radians around the X axis.
+Once placed, left-click or right-click the Rotate Tool (the rounded tool
+spinning on the floor) to rotate its state in increments of π/16 radians
+(11.25 degrees), or -π/16 radians, respectively. When first placed, an
+Rx gate has a rotation of 0 radians around the X axis. An X gate when
+first placed has a rotation of π radians (180 degrees) around the X axis.
 
-To convert an X gate into a controlled-X gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
-the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
-controlled-X gate is also known as the controlled-NOT, or CNOT gate. It acts on a pair of qubits,
-with one acting as control and the other as target. It performs an X operation on the target
-whenever the control is in state |1>. If the control qubit is in a superposition, this gate creates
-entanglement.
+To convert an X gate into a controlled-X gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool spinning on the floor). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-X gate is also known as the controlled-NOT, or CNOT
+gate. It acts on a pair of qubits, with one acting as control and the
+other as target. It performs an X operation on the target whenever the
+control is in state |1>. If the control qubit is in a superposition,
+this gate creates entanglement.
 
-To convert a controlled-X gate into a Toffoli gate (and vice-versa), hold the Special key down while
-wielding the Control Tool and left-clicking or right-clicking. Left-clicking moves the second control
-qubit up one wire, and right-clicking moves the second control qubit down one wire. There is a blue
-dot on the second control qubit to help you distinguish it from the first control qubit. The
-aforementioned Special key may be known, and set, by pausing the game and choosing the Change Keys
-button.
+To convert a controlled-X gate into a Toffoli gate (and vice-versa),
+hold the Special key down while wielding the Control Tool and
+left-clicking or right-clicking. Left-clicking moves the second control
+qubit up one wire, and right-clicking moves the second control qubit
+down one wire. There is a blue dot on the second control qubit to help
+you distinguish it from the first control qubit. The Special key
+mentioned earlier may be known, and set, by pausing the game and choosing
+the Change Keys button.
 
-To remove an X gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove an X gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("x_rx_gates", "X and Rx gates", q_command.texts.x_rx_gates)
 
 
 q_command.texts.y_ry_gates =
-[[The Y and Ry gates rotate a qubit state around the Y axis of a Bloch sphere (refer to a
-Bloch sphere on the wall). While wielding one of these gates, right-click to place it on a quantum
-circuit.
+[[
+The Y and Ry gates rotate a qubit state around the Y axis of a Bloch
+sphere (refer to a Bloch sphere on the wall). While wielding one of
+these gates, right-click to place it on a quantum circuit.
 
-Once placed, left-click or right-click the Rotate Tool (the rounded tool spinning on the floor)
-to rotate its state in increments of π/16 radians, or -π/16 radians, respectively. When first placed,
-an Ry gate has a rotation of 0 radians around the Y axis. A Y gate when first placed has a rotation
-of π radians around the Y axis.
+Once placed, left-click or right-click the Rotate Tool (the rounded tool
+spinning on the floor) to rotate its state in increments of π/16 radians
+(11.25 degrees), or -π/16 radians, respectively. When first placed, an
+Rx gate has a rotation of 0 radians around the Y axis. A Y gate when
+first placed has a rotation of π radians (180 degrees) around the Y axis.
 
-To convert a Y gate into a controlled-Y gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
-the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
-controlled-Y gate acts on a pair of qubits, with one acting as control and the other as target. It
-performs a Y operation on the target whenever the control is in state |1>.
+To convert a Y gate into a controlled-Y gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool spinning on the floor). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-Y gate acts on a pair of qubits, with one acting as
+control and the other as target. It performs a Y operation on the target
+whenever the control is in state |1>.
 
-To remove a Y gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove a Y gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
-
 q_command:register_help_button("y_ry_gates", "Y and Ry gates", q_command.texts.y_ry_gates)
 
 
 q_command.texts.z_rz_gates =
-[[The Z and Rz gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to a Bloch sphere on the wall). While wielding one of these gates, right-click to
-place it on a quantum circuit.
+[[The Z and Rz gates rotate a qubit state around the Z axis of a Bloch
+sphere, shifting its phase (refer to a Bloch sphere on the wall). While
+wielding one of these gates, right-click to place it on a quantum circuit.
 
-Once placed, left-click or right-click the Rotate Tool (the rounded tool spinning on the floor)
-to rotate its state in increments of π/16 radians, or -π/16 radians, respectively. When first placed,
-an Rz gate has a rotation of 0 radians around the Z axis. A Z gate when first placed has a rotation
-of π radians around the Z axis.
+Once placed, left-click or right-click the Rotate Tool (the rounded tool
+spinning on the floor) to rotate its state in increments of π/16 radians
+(11.25 degrees), or -π/16 radians, respectively. When first placed, an
+Rz gate has a rotation of 0 radians around the Z axis. A Z gate when
+first placed has a rotation of π radians (180 degrees) around the Z axis.
 
-To convert a Z gate into a controlled-Z gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
-the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
-controlled-Z gate acts on a pair of qubits, with one acting as control and the other as target.
-It performs a Z operation on the target whenever the control is in state |1>. A Z gate may be
-rotated even if it has a control qubit, in which case it is known as a controlled-Rz gate.
+To convert a Z gate into a controlled-Z gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool spinning on the floor). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-Z gate acts on a pair of qubits, with one acting as
+control and the other as target. It performs a Z operation on the target
+whenever the control is in state |1>. A Z gate may be rotated even if it
+has a control qubit, in which case it is known as a controlled-Rz gate.
 
-To remove a Z gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove a Z gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("z_rz_gates", "Z and Rz gates", q_command.texts.z_rz_gates)
 
 
 q_command.texts.h_gate_desc =
-[[The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z axis of a Bloch sphere
-(refer to a Bloch spheres on the wall). For example, it rotates the state from |0> (see top-left
-Bloch sphere on the wall) to |+> (see top-right Bloch sphere on the wall) and vice-versa. Another
-common example is that it rotates the state from |1> (see bottom-left Bloch sphere on the wall) to
-|-> (see bottom-right Bloch sphere on the wall) and vice-versa. The H gate is used in many quantum
-algorithms to create superpositions. As a Clifford gate, the Hadamard gate is useful for moving
-information between the X and Z bases.
+[[
+The H (for Hadamard) gate rotates a qubit state around the diagonal X+Z
+axis of a Bloch sphere (refer to a Bloch spheres on the wall). For
+example, it rotates the state from |0> (see top-left Bloch sphere on the
+wall) to |+> (see top-right Bloch sphere on the wall) and vice-versa.
+Another common example is that it rotates the state from |1> (see
+bottom-left Bloch sphere on the wall) to |-> (see bottom-right Bloch
+sphere on the wall) and vice-versa. The H gate is used in many quantum
+algorithms to create superpositions. As a Clifford gate, the Hadamard
+gate is useful for moving information between the X and Z bases.
 
 While wielding an H gate, right-click to place it on a quantum circuit.
 
-To convert an H gate into a controlled-H gate (and vice-versa), left-click or right-click the block
-while wielding the Control Tool (the wand-shaped tool spinning on the floor). Left-clicking moves
-the control qubit up one wire, and right-clicking moves the control qubit down one wire. The
-controlled-H gate acts on a pair of qubits, with one acting as control and the other as target.
-It performs an H operation on the target whenever the control is in state |1>.
+To convert an H gate into a controlled-H gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool spinning on the floor). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-H gate acts on a pair of qubits, with one acting as
+control and the other as target. It performs an H operation on the
+target whenever the control is in state |1>.
 
-To remove an H gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove an H gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("h_gate_desc", "Hadamard gate", q_command.texts.h_gate_desc)
 
 
 q_command.texts.swap_gate_desc =
-[[The Swap gate swaps the states of the qubits on two wires with each other. While wielding
-a Swap gate block, right-click to place it on one of the desired wires. Then while wielding the
-Swap Tool (the saw-like tool spinning on the floor), left-click or right-click the block to
-navigate to the other desired wire. Left-clicking moves the other swap qubit up one wire, and
-right-clicking moves it down one wire. Note that this other swap qubit has a slightly different
-appearance (less pixels) so that it may be distinguished from the originally placed Swap gate block.
+[[
+The Swap gate swaps the states of the qubits on two wires with each
+other. While wielding a Swap gate block, right-click to place it on one
+of the desired wires. Then while wielding the Swap Tool (the saw-like
+tool spinning on the floor), left-click or right-click the block to
+navigate to the other desired wire. Left-clicking moves the other swap
+qubit up one wire, and right-clicking moves it down one wire. Note that
+this other swap qubit has a slightly different appearance (less pixels)
+so that it may be distinguished from the originally placed Swap gate
+block.
 
-To convert a Swap gate into a controlled-Swap gate (and vice-versa), left-click or right-click the
-original block placed while wielding the Control Tool (the wand-shaped tool spinning on the floor).
-Left-clicking moves the control qubit up one wire, and right-clicking moves the control qubit down
-one wire. The controlled-Swap gate acts on the qubits in a Swap gate by performing a Swap operation
-on the qubits whenever the control qubit is in state |1>.
+To convert a Swap gate into a controlled-Swap gate (and vice-versa),
+left-click or right-click the original block placed while wielding the
+Control Tool (the wand-shaped tool spinning on the floor). Left-clicking
+moves the control qubit up one wire, and right-clicking moves the
+control qubit down one wire. The controlled-Swap gate acts on the qubits
+in a Swap gate by performing a Swap operation on the qubits whenever the
+control qubit is in state |1>.
 
-To remove a Swap gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove a Swap gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("swap_gate_desc", "Swap gate", q_command.texts.swap_gate_desc)
 
 
 q_command.texts.s_sdg_gates_desc =
-[[The S, and Sdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to a Bloch sphere on the wall). The S gate performs a rotation of π/2 radians, which
-is a quarter of the way counterclockwise around the Bloch sphere . The Sdg (pronounced S dagger) gate
-performs a rotation of -π/2 radians, which is a quarter of the way clockwise around the Bloch sphere.
+[[
+The S, and Sdg, gates rotate a qubit state around the Z axis of a Bloch
+sphere, shifting its phase (refer to a Bloch sphere on the wall). The S
+gate performs a rotation of π/2 radians, which is a quarter of the way
+counterclockwise around the Bloch sphere. The Sdg (pronounced S dagger)
+gate performs a rotation of -π/2 radians, which is a quarter of the way
+clockwise around the Bloch sphere.
 
-As Clifford gates, both are useful for moving information between the x and y bases. While wielding
-one of these gates, right-click to place it on a quantum circuit.
+As Clifford gates, both are useful for moving information between the x
+and y bases. While wielding one of these gates, right-click to place it
+on a quantum circuit.
 
-To remove an S gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove an S gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("s_sdg_gates_desc", "S and Sdg gates", q_command.texts.s_sdg_gates_desc)
 
 
 q_command.texts.t_tdg_gates_desc =
-[[The T, and Tdg, gates rotate a qubit state around the Z axis of a Bloch sphere, shifting its
-phase (refer to a Bloch sphere on the wall). The T gate performs a rotation of π/4 radians, which
-is an eighth of the way counterclockwise around the Bloch sphere . The Tdg (pronounced T dagger) gate
-performs a rotation of -π/4 radians, which is an eighth of the way clockwise around the Bloch sphere.
+[[
+The T, and Tdg, gates rotate a qubit state around the Z axis of a Bloch
+sphere, shifting its phase (refer to a Bloch sphere on the wall). The T
+gate performs a rotation of π/4 radians, which is an eighth of the way
+counterclockwise around the Bloch sphere . The Tdg (pronounced T dagger)
+gate performs a rotation of -π/4 radians, which is an eighth of the way
+clockwise around the Bloch sphere.
 
-Fault-tolerant quantum computers will compile all quantum programs down to just these gates, as well
-as the Clifford gates. While wielding one of these gates, right-click to place it on a quantum circuit.
+Fault-tolerant quantum computers will compile all quantum programs down
+to just these gates, as well as the Clifford gates. While wielding one
+of these gates, right-click to place it on a quantum circuit.
 
-To remove a T gate, or any other gate from a circuit, left-click it while wielding a block.
+To remove a T gate, or any other gate from a circuit, left-click it
+while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("t_tdg_gates_desc", "T and Tdg gates", q_command.texts.t_tdg_gates_desc)
 
 
 q_command.texts.measurement_z_desc =
-[[The Measurement block performs a measurement on a qubit in the Z basis, which is also called
-the computational, or standard, basis. Referring to a Bloch sphere on the wall, note that this
-basis may be represented by a plane cutting through its equator. After measurement, the state of a
-qubit will either be |0> (represented by the top left Bloch sphere) or |1> (represented by the
-bottom left Bloch sphere).
+[[
+The Measurement block performs a measurement on a qubit in the Z basis,
+which is also called the computational, or standard, basis. Referring to
+a Bloch sphere on the wall, note that this basis may be represented by a
+plane cutting through its equator. After measurement, the state of a
+qubit will either be |0> (represented by the top left Bloch sphere) or
+|1> (represented by the bottom left Bloch sphere).
 
-While wielding a measurement block, right-click to place it on a quantum circuit.
+While wielding a measurement block, right-click to place it on a quantum
+circuit.
 
-To make a measurement in the Z basis, right click the Measurement block. Measurement in other bases
-may be accomplished by rotating the qubit state with appropriate gates prior performing a measurement
-with this block. Measurement is not a reversible operation.
+To make a measurement in the Z basis, right click the Measurement block.
+Measurement in other bases may be accomplished by rotating the qubit
+state with appropriate gates prior to performing a measurement with this
+block. Measurement is not a reversible operation.
 
-The Measurement block may be turned into a Bloch sphere that displays an estimation of the qubit
-state before measurement. To accomplish this, right-click the Measurement block while holding down
-the Special key. This will insert state tomography measurements into the circuit, calculating and
-displaying the estimated state. The Special key may be known, and set, by pausing the game and
-choosing the Change Keys button.
+The Measurement block may be turned into a Bloch sphere that displays an
+estimation of the qubit state before measurement. To accomplish this,
+right-click the Measurement block while holding down the Special key.
+This will insert state tomography measurements into the circuit,
+calculating and displaying the estimated state. The Special key may be
+known, and set, by pausing the game and choosing the Change Keys button.
 
-Note: Whenever a Bloch sphere is on a circuit, the QASM simulator will automatically be run whenever
-the any changes to the circuit occur.
+Note: Whenever a Bloch sphere is on a circuit, the QASM simulator will
+automatically be run whenever the any changes to the circuit occur.
 
-To remove a Measurement block, or any other block from a circuit, left-click it while wielding a
-block.
+To remove a Measurement block, or any other block from a circuit,
+left-click it while wielding a block (or empty-handed if you are close
+enough).
 ]]
 q_command:register_help_button("measurement_z_desc", "Measurement in Z basis", q_command.texts.measurement_z_desc)
 
 
 q_command.texts.bloch_sphere_block_desc =
-[[A Bloch sphere, like these on the wall, represent the quantum state of a qubit. Anywhere on the
-surface of the sphere is a valid quantum state. For example, the top-left Bloch sphere represents
-state |0> and the bottom-left Bloch sphere represents state |1>. Note that these Bloch spheres
-are rotated slightly clockwise and tilted toward the user. The green markers represent states on
-the visible side of a Bloch sphere, and the blue markers represent states on its hidden side.
+[[
+A Bloch sphere, like these on the wall, represent the quantum state of a
+qubit. Anywhere on the surface of the sphere is a valid quantum state.
+For example, the top-left Bloch sphere represents state |0> and the
+bottom-left Bloch sphere represents state |1>. Note that these Bloch
+spheres are rotated slightly clockwise and tilted toward you. The green
+markers represent states on the visible side of a Bloch sphere, and the
+blue markers represent states on its hidden side.
 
-To make measurements for state tomography, right-click the Bloch sphere block while holding down
-the Special key. The Special key may be known, and set, by pausing the game and choosing the
-Change Keys button. To make a measurement in the Z basis and display the measured basis state,
+To make measurements for state tomography, right-click the Bloch sphere
+block while holding down the Special key. The Special key may be known,
+and set, by pausing the game and choosing the Change Keys button. To
+make a measurement in the Z basis and display the measured basis state,
 right-click the Bloch sphere block without holding down other keys.
 
-Note that the Bloch sphere block is only available by right-clicking a Measurement block while
-holding down the Special key. Whenever a Bloch sphere is on a circuit, the QASM simulator will
-automatically be run whenever the any changes to the circuit occur.
+Note that the Bloch sphere block is only available by right-clicking a
+Measurement block while holding down the Special key. Whenever a Bloch
+sphere is on a circuit, the QASM simulator will automatically be run
+whenever the any changes to the circuit occur.
 
-To remove a Bloch sphere block, or any other block from a circuit, left-click it while wielding a
-block.
+To remove a Bloch sphere block, or any other block from a circuit,
+left-click it while wielding a block (or empty-handed if you are close
+enough).
 ]]
 q_command:register_help_button("bloch_sphere_block_desc", "The Bloch sphere", q_command.texts.bloch_sphere_block_desc)
 
 
 q_command.texts.reset_op_desc =
-[[The Reset operation returns a qubit to state |0> (represented by the top left Bloch sphere on
-the wall), irrespective of its state before the operation was applied. It is not a reversible
-operation.
+[[
+The Reset operation returns a qubit to state |0> (represented by the top
+left Bloch sphere on the wall), irrespective of its state before the
+operation was applied. It is not a reversible operation.
 
-While wielding a Reset block, right-click to place it on a quantum circuit.
+While wielding a Reset block, right-click to place it on a quantum
+circuit.
 
-To remove a Reset block, or any other block from a circuit, left-click it while wielding a block.
+To remove a Reset block, or any other block from a circuit, left-click
+it while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("reset_op_desc", "Reset or |0> operation", q_command.texts.reset_op_desc)
 
 
 q_command.texts.barrier_op_desc =
-[[To make your quantum program more efficient, the compiler will try to combine gates. The Barrier
-is an instruction to the compiler to prevent these combinations being made.
+[[To make your quantum program more efficient, the compiler will try to
+combine gates. The Barrier is an instruction to the compiler to prevent
+these combinations being made.
 
-While wielding a Barrier block, right-click to place it on a quantum circuit.
+While wielding a Barrier block, right-click to place it on a quantum
+circuit.
 
-To remove a Barrier block, or any other block from a circuit, left-click it while wielding a block.
+To remove a Barrier block, or any other block from a circuit, left-click
+it while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command:register_help_button("barrier_op_desc", "Barrier operation", q_command.texts.barrier_op_desc)
 
 
 q_command.texts.if_op_block_desc =
-[[The If operation allows quantum gates to be conditionally applied, depending on the state of a
-classical register. While wielding an If operation block, right-click while pointing immediately
-to the left of the desired gate to be conditionally applied. Then right-click the If block until the
-wire containing the desired measurement block, and classical conditional value (0 or 1), are
-displayed on the block.
+[[
+The If operation allows quantum gates to be conditionally applied,
+depending on the state of a classical register. While wielding an If
+operation block, right-click while pointing immediately to the left of
+the desired gate to be conditionally applied. Then right-click the If
+block until the wire containing the desired measurement block, and
+classical conditional value (0 or 1), are displayed on the block.
 
-Note that OpenQASM and Qiskit support multiple-bit classical registers, but this application
-currently supports only single-bit classical registers. These classical register are created
-implicitly, one per quantum register (which are implicitly created as single-qubit) in the circuit.
+Note that OpenQASM and Qiskit support multiple-bit classical registers,
+but this application currently supports only single-bit classical
+registers. These classical register are created implicitly, one per
+quantum register (which are implicitly created as single-qubit) in the
+circuit.
 
-To remove an If operation block, or any other block from a circuit, left-click it while wielding a
-block.
+To remove an If operation block, or any other block from a circuit,
+left-click it while wielding a block (or empty-handed if you are close
+enough).
 ]]
 q_command:register_help_button("if_op_block_desc", "If operation", q_command.texts.if_op_block_desc)
 
 
 q_command.texts.wire_extender_block_desc =
-[[Although not representative of a Qiskit operation, the Wire Extender block enables a circuit
-wire to be extended to another location. Here is the procedure for doing that:
+[[
+Although not representative of a Qiskit operation, the Wire Extender
+block enables a circuit wire to be extended to another location. Here is
+the procedure for doing that:
 
-1) While wielding a Wire Extension block and pointing at the rightmost block on the desired wire,
-right-click to place it.
+1) While wielding a Wire Extension block and pointing at the rightmost
+block on the desired wire, right-click to place it.
 
-2) Left-click the Wire Extension block, which will cause a Wire Continuation block to drop (the
-cube-shaped item spinning on the floor). Note: The direction in which it drops is influenced by
-the where you are when you left-click.
+2) Left-click the Wire Extension block, which will cause a Wire
+Continuation block to drop (the cube-shaped item spinning on the floor).
+Note: The direction in which it drops is influenced by the where you are
+when you left-click.
 
-3) Left-click the Wire Continuation block to put it in your inventory. Move this block to your
-hotbar if it is not already there.
+3) Left-click the Wire Continuation block to put it in your inventory.
+Move this block to your hotbar if it is not already there.
 
-4) While wielding this Wire Continuation block, right-click to place it in the position and
-orientation that you would like the wire continuation to be.
+4) While wielding this Wire Continuation block, right-click to place it
+in the position and orientation that you would like the wire
+continuation to be.
 
-5) Right-click the Wire Continuation block, specifying how many blocks wide the wire continuation
-should be.
+5) Right-click the Wire Continuation block, specifying how many blocks
+wide the wire continuation should be.
 
-To remove a wire continuation and its associated Wire Extension block from a circuit, while pressing
-the shift key, left-click the Wire Continuation block.
+To remove a wire continuation and its associated Wire Extension block
+from a circuit, while pressing the shift key, left-click the Wire
+Continuation block.
 ]]
 q_command:register_help_button("wire_extender_block_desc", "Wire Extender block", q_command.texts.wire_extender_block_desc)
 
 
 q_command.texts.q_block_desc =
-[[The Q block enables you to create a quantum circuit that may be executed by Qiskit simulators.
-Here is the procedure for creating a quantum circuit:
+[[
+The Q block enables you to create a quantum circuit that may be executed
+by Qiskit simulators. Here is the procedure for creating a quantum circuit:
 
-1) While wielding a Q block, point at the position in the world that you would like the circuit
-to be placed and right-click.
+1) While wielding a Q block, point at the position in the world that you
+would like the circuit to be placed and right-click.
 
-2) Right-click the Q block, specifying in the dialog the number of wires and columns that you
-would like the circuit to have, and click the Create button.
+2) Right-click the Q block, specifying in the dialog the number of wires
+and columns that you would like the circuit to have, and click the Create
+button.
 
-3) Place blocks on the circuit and interact with it, referring to the instructions near each of the
-blocks in this room.
+3) Place blocks on the circuit and interact with it, referring to the
+instructions near each of the blocks in this room.
 
-When a quantum circuit is created, a foundation made of blocks is also created. This foundation
-includes some liquid blocks that help you visualize the probabilities and phases for each basis
-state in the state vector.
+When a quantum circuit is created, a foundation made of blocks is also
+created. This foundation includes some liquid blocks that help you
+visualize the probabilities and phases for each basis state in the state
+vector.
 
-Left-clicking a Q block causes the Qiskit statevector simulator to be run, which is not normally
-necessary as it is run whenever the circuit is modified. The most common reason for left-clicking
-a Q block is to restore the Measurement blocks to their original appearance, rather than showing
-the state of their last measurement.
+Left-clicking a Q block causes the Qiskit statevector simulator to be
+run, which is not normally necessary as it is run whenever the circuit
+is modified. The most common reason for left-clicking a Q block is to
+restore the Measurement blocks to their original appearance, rather than
+showing the state of their last measurement.
 
-Right-clicking on a Q block when a circuit has already been created stops and starts the music
+Right-clicking on a Q block when a circuit has already been created
+stops and starts the music
 
-To remove a Q block and its circuit, while pressing the shift key left-click the Q block.
+To remove a Q block and its circuit, while pressing the shift key
+left-click the Q block.
 ]]
 q_command:register_help_button("q_block_desc", "Q block", q_command.texts.q_block_desc)
 
 
 q_command.texts.quantum_cats_sandbox =
-[[There are so many ones and zeros in quantum computing that some folks find it easier to initially
-relate to states with real world concepts (e.g. cats) rather than jumping straight to qubits. In the
-Quantum Cats Sandbox, each of the circuits start out with cats (Alice Cat and Bob Cat) in their
-grumpy state. The gates in the circuits evolve their quantum states, resulting in various
-probabilities of the cats being being grumpy or happy when observed (measured). These probabilities
-are expressed by the liquid levels in the glass blocks below each circuit. The binary digits 0 and 1
-in front of the liquid blocks represent grumpy and happy states, respectively, with the rightmost digit
-representing the topmost cat.
+[[
+There are so many ones and zeros in quantum computing that some folks
+find it easier to initially relate to states with real world concepts
+(e.g. cats) rather than jumping straight to qubits. In the Quantum Cats
+Sandbox, each of the circuits start out with cats (Alice Cat and Bob
+Cat) in their grumpy state. The gates in the circuits evolve their
+quantum states, resulting in various probabilities of the cats being
+being grumpy or happy when observed (measured). These probabilities are
+expressed by the liquid levels in the glass blocks below each circuit.
+The binary digits 0 and 1 in front of the liquid blocks represent grumpy
+and happy states, respectively, with the rightmost digit representing
+the topmost cat.
 
-Take a look at the circuits, beginning with the one-wire circuits on the opposite wall, and
-right-click their Help buttons to learn more about them. Feel free to remove (by left-clicking)
-and add (by right-clicking) gates on a circuit to see the effects on the probabilities as well as
-measurements. To measure a circuit, right-click on a block that has the appearance of a measuring
-device. You will find a couple of gates and some other items in the chest, which you may open and
-close by right-clicking. To move an item from the chest into your inventory, drag it from the upper
-to the lower section of the chest dialog box. The items that appear in the top row of the inventory
-will appear in the hotbar ready to be wielded.
+Take a look at the circuits, beginning with the one-wire circuits on the
+opposite wall, and right-click their Help buttons to learn more about
+them. Feel free to remove (by left-clicking) and add (by right-clicking)
+gates on a circuit to see the effects on the probabilities as well as
+measurements. To measure a circuit, right-click on a block that has the
+appearance of a measuring device. You will find a couple of gates and
+some other items in the chest, which you may open and close by
+right-clicking. To move an item from the chest into your inventory, drag
+it from the upper to the lower section of the chest dialog box. The
+items that appear in the top row of the inventory will appear in the
+hotbar ready to be wielded.
 
-There are a couple of tools in the chest with which you may add control qubits to a gate, as well
-as to rotate a gate. To use these tools, position the cursor on an appropriate gate and left-click
-or right-click.
+There are a some tools in the chest with which you may add control
+qubits to a gate, as well as to rotate a gate. To use these tools,
+position the cursor on an appropriate gate and left-click or right-click.
 ]]
 q_command:register_help_button("quantum_cats_sandbox", "Quantum cats sandbox", q_command.texts.quantum_cats_sandbox)
 
 q_command.texts.making_cats_happy =
-[[This circuit, consisting of only one wire (cat), leverages the Pauli-X gate, also known as the NOT,
-or bit-flip, gate. Its effect on a grumpy cat is to make it happy, and vice-versa. Notice how the
-outcome probabilities and measurement results change as this gate is removed and added.
+[[
+This circuit, consisting of only one wire (cat), leverages the Pauli-X
+gate, also known as the NOT, or bit-flip, gate. Its effect on a grumpy
+cat is to make it happy, and vice-versa. Notice how the outcome
+probabilities and measurement results change as this gate is removed and
+added.
 ]]
 q_command:register_help_button("making_cats_happy", "Making a cat happy", q_command.texts.making_cats_happy)
 
 q_command.texts.superpositional_cat =
-[[This circuit leverages the Hadamard gate to put a cat into an equal superposition of grumpy and
-happy. Notice how the outcome probabilities and measurement results change as this gate is removed
-and added.
+[[
+This circuit leverages the Hadamard gate to put a cat into an equal
+superposition of grumpy and happy. Notice how the outcome probabilities
+and measurement results change as this gate is removed and added.
 ]]
 q_command:register_help_button("superpositional_cat", "Superposition of grumpy and happy cat", q_command.texts.superpositional_cat)
 
 q_command.texts.entangling_cats =
-[[This two-wire circuit demonstrates the property known as quantum entanglement. Notice that each
-of the wires in the circuit are continued by blocks separated from the main circuit. This illustrates
-the idea that two entangled quantum particles may be separated by a great distance and continue
-to be entangled. Measuring one of the particles (cats) results in the measured state of the other
-particle to be determined. Try it out by right-clicking one of the measurement blocks. Also notice
-that the probabilities indicate that states 00 (grumpy-grumpy) and 11 (happy-happy) are equally likely.
+[[
+This two-wire circuit demonstrates the property known as quantum
+entanglement. Notice that each of the wires in the circuit are continued
+by blocks separated from the main circuit. This illustrates the idea
+that two entangled quantum particles may be separated by a great
+distance and continue to be entangled. Measuring one of the particles
+(cats) results in the measured state of the other particle to be
+determined. Try it out by right-clicking one of the measurement blocks.
+Also notice that the probabilities indicate that states 00 (grumpy-grumpy)
+and 11 (happy-happy) are equally likely.
 
-The CNOT gate (the two-wire gate that has the appearance of cross-hairs and a vertical line with a
-dot), is partially responsible for the entanglement. The cross-hairs symbol has the functionality
-of a NOT gate used in another circuit in this cat sandbox. The difference is that it is conditional
-on the state of the other wire, performing the NOT operation whenever the other wire is in the
-happy cat state.
+The CNOT gate (the two-wire gate that has the appearance of cross-hairs
+and a vertical line with a dot), is partially responsible for the
+entanglement. The cross-hairs symbol has the functionality of a NOT gate
+used in another circuit in this cat sandbox. The difference is that it
+is conditional on the state of the other wire, performing the NOT
+operation whenever the other wire is in the happy cat state.
 ]]
 q_command:register_help_button("entangling_cats", "Entangling cats", q_command.texts.entangling_cats)
 

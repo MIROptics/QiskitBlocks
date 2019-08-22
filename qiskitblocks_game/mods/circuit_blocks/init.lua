@@ -25,7 +25,11 @@ TODO:
 [.] Make URL to Qiskit simulators configurable
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
+
 [] Shorten lines in dialog boxes to 73
+[] Check into readonly textarea instead of a table, see
+    https://github.com/minetest/minetest/blob/ded5da780002c17f2079a1d8ea09eb923a3b5e8f/doc/lua_api.txt#L2122-L2127.
+
 [] For the named gates like Hadamard it could be nice to have their name in the tooltips for searching
 [] Make use of health indicator and design gameplay with mobs, etc.
 [] Find out how to give players initial inventory, and/or to stock the chests
