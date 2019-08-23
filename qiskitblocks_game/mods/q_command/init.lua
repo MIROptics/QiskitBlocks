@@ -1274,9 +1274,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            minetest.debug("statevector:\n" .. dump(statevector))
+                            -- minetest.debug("statevector:\n" .. dump(statevector))
 
-                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                            -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
                             local is_correct_solution = true
                             if statevector and correct_solution_statevector and

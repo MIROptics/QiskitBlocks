@@ -32,6 +32,8 @@ TODO:
 [] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
+[] Remove debug
+[] Fix PNG issue (and remove XCF files)?
 
 [] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
 [] Don't allow bloch sphere blocks to be placed directly?
