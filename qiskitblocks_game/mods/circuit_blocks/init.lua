@@ -26,7 +26,10 @@ TODO:
 [] Right-clicking Q block when circuit exists should produce message like "starting music" and "pausing music"
 [.] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
 
-[] Don't allow control qubit to be deleted, and other swap qubit to be deleted
+[] Don't allow control qubit to be deleted directly
+[] Don't allow other swap qubit to be deleted directly
+[] Don't allow other TRACE node to be deleted directly
+[] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Fix problem of control qubit erased when it can't be placed becuase of running into
     another gate. Probably need to add code to on_punch and on_right_click.
 

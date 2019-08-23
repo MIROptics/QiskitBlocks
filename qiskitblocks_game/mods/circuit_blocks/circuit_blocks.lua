@@ -1131,7 +1131,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     end
 
                 elseif node_type == CircuitNodeTypes.SWAP then
-                    if wielded_item:get_name() == "circuit_blocks:swap_tool" then
+                    if block:get_node_name():sub(-5) == "_mate" then
+                        minetest.chat_send_player(player:get_player_name(),
+                                "Please operate on the originally placed Swap gate")
+                    elseif wielded_item:get_name() == "circuit_blocks:swap_tool" then
                         if block.get_swap() == -1 then
                             if block:get_node_name():sub(-5) ~= "_mate" then
                                 -- Attempt to place a swap qubit
@@ -1229,6 +1232,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 elseif node_type == CircuitNodeTypes.CTRL then
                     minetest.chat_send_player(player:get_player_name(),
                             "Use the Control Tool on the originally placed gate to move or remove a control qubit")
+                elseif node_type == CircuitNodeTypes.TRACE then
+                    minetest.chat_send_player(player:get_player_name(),
+                            "Please operate on the originally placed gate")
                 elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                     minetest.chat_send_player(player:get_player_name(),
                             "Control tool may only be used on X, Y, Z and H gates")
@@ -1355,7 +1361,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                     end
 
                 elseif node_type == CircuitNodeTypes.SWAP then
-                    if wielded_item:get_name() == "circuit_blocks:swap_tool" then
+                    if block:get_node_name():sub(-5) == "_mate" then
+                        minetest.chat_send_player(player:get_player_name(),
+                                "Please operate on the originally placed Swap gate")
+                    elseif wielded_item:get_name() == "circuit_blocks:swap_tool" then
                         if block.get_swap() == -1 then
                             if block:get_node_name():sub(-5) ~= "_mate" then
                                 -- Attempt to place a swap qubit
