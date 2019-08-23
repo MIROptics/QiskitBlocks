@@ -1182,7 +1182,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             circuit_blocks:remove_ctrl_swap_qubit(block,
                                     block.get_ctrl_a(), player)
                         elseif block.get_ctrl_a() ~= -1 then
-                            -- User moving control qubit a
+                            -- User moving control qubit "a" UP
                             local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_ctrl_a() - 1 >= 1 and
@@ -1192,8 +1192,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                     circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                                             "circuit_blocks:circuit_blocks_trace", player)
                                 else
-                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                    if block.get_ctrl_a() > block.get_node_wire_num() then
+                                        -- Replace with empty block if control is moving toward the gate
+                                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                                "circuit_blocks:circuit_blocks_empty_wire", player)
+                                    end
                                 end
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() - 1, player)
@@ -1418,7 +1421,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             circuit_blocks:remove_ctrl_swap_qubit(block,
                                     block.get_ctrl_a(), player)
                         elseif block.get_ctrl_a() ~= -1 then
-                            -- User moving control qubit a
+                            -- User moving control qubit "a" DOWN
                             local pos_y = block.get_circuit_num_wires() - block.get_ctrl_a() + block:get_circuit_pos().y
                             local ctrl_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_ctrl_a() + 1 <= block.get_circuit_num_wires() and
@@ -1428,8 +1431,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                     circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
                                             "circuit_blocks:circuit_blocks_trace", player)
                                 else
-                                    circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
-                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                    if block.get_ctrl_a() < block.get_node_wire_num() then
+                                        -- Replace with empty block if control is moving toward the gate
+                                        circuit_blocks:set_node_with_circuit_specs_meta(ctrl_pos,
+                                                "circuit_blocks:circuit_blocks_empty_wire", player)
+                                    end
                                 end
                                 placed_wire = circuit_blocks:place_ctrl_swap_qubit(block,
                                         block.get_ctrl_a() + 1, player)
