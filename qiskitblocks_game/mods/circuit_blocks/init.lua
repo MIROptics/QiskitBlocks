@@ -17,19 +17,23 @@ limitations under the License.
 
 --[[
 TODO:
+[.] Make URL to Qiskit simulators configurable
+[.] Check to make sure (or force) players are in creative mode
 [.] Shorten lines in dialog boxes to 73
 [.] Fix problem of Rx acting like X when placed (finish checking for math.pi radians and
     correct behavior on X, Y, Z gates)
 [.] Make crosshairs more visible (see https://forum.minetest.net/viewtopic.php?f=5&t=16687)
-[] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
-[] Don't allow control qubit to be deleted, and other swap qubit to be deleted
-[.] Make URL to Qiskit simulators configurable
-[] Don't allow bloch sphere blocks to be placed directly
-[] Check to make sure (or force) players are in creative mode
+[] Right-clicking Q block when circuit exists should produce message like "starting music" and "pausing music"
+[.] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
 
+[] Don't allow control qubit to be deleted, and other swap qubit to be deleted
+[] Fix problem of control qubit erased when it can't be placed becuase of running into
+    another gate. Probably need to add code to on_punch and on_right_click.
+
+[] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
+[] Don't allow bloch sphere blocks to be placed directly?
 [] Check into readonly textarea instead of a table, see
     https://github.com/minetest/minetest/blob/ded5da780002c17f2079a1d8ea09eb923a3b5e8f/doc/lua_api.txt#L2122-L2127.
-
 [] For the named gates like Hadamard it could be nice to have their name in the tooltips for searching
 [] Make use of health indicator and design gameplay with mobs, etc.
 [] Find out how to give players initial inventory, and/or to stock the chests
@@ -37,16 +41,12 @@ TODO:
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 [] Standardize on naming conventions for help buttons. For example, h_gate_puzzle and h_gate_desc
-[] Right-clicking Q block when circuit exists should produce message like "starting music" and "pausing music"
-
-[] Work out way to host QiskitBlocks and QiskitBlocksService, perhaps via something
-    like Stadia.
+[] Implement suggestions in this Minetest forum thread containing QiskitBlocks feedback:
+    https://forum.minetest.net/viewtopic.php?f=49&t=23121
 [] Make QiskitBlocks and puzzle map world available from `Content`>`Browse online content`
-    dialog in Minetest?
+    dialog in Minetest
 
 [] Work out how more accurate way of ascertaining which wires are entangled
-[] Create a mode where measurements (measure block, or Bloch sphere) happen whenever statevector changes
-    [] Make this mode configurable on the Q command block
 [] Allow Bloch sphere blocks with a quantum state to be inserted in circuits
     - This would set the state of that place in the wire to the state of the block)
 [] Allow Block sphere blocks with a quantum state to be removed and carried?
@@ -62,24 +62,19 @@ TODO:
 [] Create mob, or player, that has a Bloch sphere head
     - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)
     - Health could be signified by quantum state
-[] Fix problem of control qubit erased when it can't be placed becuase of running into
-    another gate. Probably need to add code to on_punch and on_right_click.
 [] Perhaps only play music in morning and evening
-[] Stop auto-rotations when leaving game
+[] Stop auto-rotations after one minute, or when leaving game
 [] Remove some variables such as state_tomography_basis from q_command:init,
     making state only stored in metadata and accessible via get/set methods?
 [] Create Mars and Venus blocks for cat entanglement demo
 [] Set spawn point at 225, 8.5, 75
 [] Investigate punch_operable for rotate and control tools
 [] Implement appropriate gate images for CRZ gate
-[] Should rotational gates start with pi radians when rotated from their Pauli gates?
-    - e.g. When rotating an X gate, should the first Rx angle be pi+angle instead of just angle?
 [] Improve appearance of measurement results blocks
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
     [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
     [] Ability for measured output wire to feed into input of same circuit
-[] Fix problem of deleting a control qubit by left-clicking with a circuit block.
-[] Tighten up circuit connector blocks and wire extension appearance and behavior
+\[] Tighten up circuit connector blocks and wire extension appearance and behavior
     [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
 	correct on the back side as well
     [] Make circuit extension M block item fall where it can easily be picked up
@@ -114,7 +109,7 @@ TODO:
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator
 [] Find alternative to hardcoding node name strings everywhere
-[] Remove hearts from creative mode
+[] Remove hearts from creative mode?
 [] Update music and sounds
 [] Create blocks (e.g. classical optimizer) to demonstrate variational algorithms
 [] Should this warning be addressed?

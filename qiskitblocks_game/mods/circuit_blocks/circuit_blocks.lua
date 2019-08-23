@@ -1226,6 +1226,9 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                         minetest.item_drop(wire_extension_itemstack, player, drop_pos)
 
                     end
+                elseif node_type == CircuitNodeTypes.CTRL then
+                    minetest.chat_send_player(player:get_player_name(),
+                            "Use the Control Tool on the originally placed gate to move or remove a control qubit")
                 elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                     minetest.chat_send_player(player:get_player_name(),
                             "Control tool may only be used on X, Y, Z and H gates")
