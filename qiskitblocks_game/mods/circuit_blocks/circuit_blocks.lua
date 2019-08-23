@@ -1079,10 +1079,10 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                 placed_wire = circuit_blocks:place_ctrl_qubit(block,
                                         block.get_ctrl_a() - 1, player, false)
                             else
-                                --if LOG_DEBUG then
+                                if LOG_DEBUG then
                                     minetest.debug("Tried to place ctrl a on unavailable wire: " ..
                                             block.get_ctrl_a() - 1)
-                                --end
+                                end
                             end
 
                         elseif player:get_player_control().aux1 and block.get_ctrl_b() ~= -1 then
@@ -1158,8 +1158,11 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
                             local swap_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_swap() - 1 >= 1 then
-                                circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
-                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                if block.get_swap() > block.get_node_wire_num() then
+                                    -- Replace with empty block if swap mate is moving toward the gate
+                                    circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
+                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                end
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block.get_swap() - 1, player)
                             else
@@ -1387,12 +1390,15 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                         block.get_swap(), player)
                             end
                         else
-                            -- User moving swap qubit
+                            -- User moving swap qubit DOWN
                             local pos_y = block.get_circuit_num_wires() - block.get_swap() + block:get_circuit_pos().y
                             local swap_pos = {x = pos.x, y = pos_y, z = pos.z}
                             if block.get_swap() + 1 <= block.get_circuit_num_wires() then
-                                circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
-                                        "circuit_blocks:circuit_blocks_empty_wire", player)
+                                if block.get_swap() < block.get_node_wire_num() then
+                                    -- Replace with empty block if swap mate is moving toward the gate
+                                    circuit_blocks:set_node_with_circuit_specs_meta(swap_pos,
+                                            "circuit_blocks:circuit_blocks_empty_wire", player)
+                                end
                                 placed_wire = circuit_blocks:place_swap_qubit(block,
                                         block.get_swap() + 1, player)
                             else
