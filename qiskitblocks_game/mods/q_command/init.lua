@@ -886,11 +886,13 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         "button_exit[1.8,3.5;1.5,1.0;create;Create]"
                 minetest.show_formspec(player_name, "create_circuit_grid", formspec)
             else
-                minetest.chat_send_player(clicker:get_player_name(),
-                        "Circuit already exists.")
                 if mpd.playing then
+                    minetest.chat_send_player(clicker:get_player_name(),
+                            "Pausing music")
                     mpd.stop_song()
                 else
+                    minetest.chat_send_player(clicker:get_player_name(),
+                            "Starting music")
                     mpd.play_song(MUSIC_CHILL)
                 end
             end
@@ -1841,7 +1843,7 @@ environment you are currently in is created with the Minetest.net
 open-source library. A list of controls for getting around and doing
 things in Minetest are available by pausing the game (e.g. with the Esc
 key on some platforms). The quantum gates and circuits with which you
-will interact are powered by Qiskit.org quantum simulators.
+will interact are powered by <https://qiskit.org/> quantum simulators.
 
 There are an increasing number of areas that you may explore in this
 environment. First, it would be helpful to read the signs in this room
@@ -2226,7 +2228,8 @@ restore the Measurement blocks to their original appearance, rather than
 showing the state of their last measurement.
 
 Right-clicking on a Q block when a circuit has already been created
-stops and starts the music
+stops and starts the music. You may also right-click this non-functional
+Q block to stop or start the music.
 
 To remove a Q block and its circuit, while pressing the shift key
 left-click the Q block.
@@ -2955,6 +2958,60 @@ q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzl
         solution_statevector_swap_gate_puzzle, false)
 
 
+q_command.texts.notsingleplayer =
+[[
+You are now playing QiskitBlocks in multiplayer mode, but QiskitBlocks
+is optimized for the singleplayer mode.
+
+Unless you are sure no other players will join, please exit now and
+start QiskitBlocks in singleplayer mode.
+]]
+
+q_command.texts.creative =
+[[
+The Creative Mode is turned on, but QiskitBlocks is designed to be
+played with the Creative Mode checkbox deselected.
+
+You can leave now by clicking the Leave QiskitBlocks button, or later by
+pressing [Esc].
+]]
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+    if(fields.leave) then
+        minetest.kick_player(player:get_player_name(), S("You have voluntarily exited QiskitBlocks"))
+        return
+    end
+end)
+
+minetest.register_on_joinplayer(function(player)
+	local formspec = nil
+	if(minetest.is_singleplayer() == false) then
+		formspec = "size[12,6]"..
+		"label[-0.15,-0.4;"..minetest.formspec_escape(S("Warning: You're not playing in singleplayer mode")).."]"..
+		"tablecolumns[text]"..
+		"tableoptions[background=#000000;highlight=#000000;border=false]"..
+		"table[0,0.25;12,5.2;creative_text;"..
+        q_command:convert_newlines(minetest.formspec_escape(S(q_command.texts.notsingleplayer)))..
+		"]"..
+		"button_exit[2.5,5.5;3,1;close;"..minetest.formspec_escape(S("Continue anyway")).."]"..
+		"button_exit[6.5,5.5;3,1;leave;"..minetest.formspec_escape(S("Leave QiskitBlocks")).."]"
+	elseif(minetest.settings:get_bool("creative_mode")) then
+		formspec = "size[12,6]"..
+		"label[-0.15,-0.4;"..(minetest.formspec_escape(S("Warning: Creative mode is active"))).."]"..
+		"tablecolumns[text]"..
+		"tableoptions[background=#000000;highlight=#000000;border=false]"..
+		"table[0,0.25;12,5.2;creative_text;"..
+        q_command:convert_newlines(minetest.formspec_escape(S(q_command.texts.creative)))..
+		"]"..
+		"button_exit[2.5,5.5;3,1;close;"..minetest.formspec_escape(S("Continue anyway")).."]"..
+		"button_exit[6.5,5.5;3,1;leave;"..minetest.formspec_escape(S("Leave QiskitBlocks")).."]"
+	end
+	if(formspec~=nil) then
+		minetest.show_formspec(player:get_player_name(), "intro", formspec)
+	end
+end)
+
+
 -- TODO: Remove this code after removing blocks in-world
 local function register_sign(desc, def)
 	minetest.register_node("q_command:level_progression", {
@@ -3017,7 +3074,18 @@ minetest.register_node("q_command:block_no_function", {
     description = "Non-functional Q command block",
     tiles = {"q_command_block_no_function.png"},
     groups = {oddly_breakable_by_hand=2},
-	paramtype2 = "facedir"
+	paramtype2 = "facedir",
+    on_rightclick = function(pos, node, clicker, itemstack)
+        if mpd.playing then
+            minetest.chat_send_player(clicker:get_player_name(),
+                    "Pausing music")
+            mpd.stop_song()
+        else
+            minetest.chat_send_player(clicker:get_player_name(),
+                    "Starting music")
+            mpd.play_song(MUSIC_CHILL)
+        end
+    end
 })
 
 
@@ -3031,6 +3099,9 @@ local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do
     q_command:register_statevector_liquid_block(idx)
 end
+
+
+
 
 
 

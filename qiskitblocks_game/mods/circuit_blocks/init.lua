@@ -17,16 +17,16 @@ limitations under the License.
 
 --[[
 TODO:
-[] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
+[.] Shorten lines in dialog boxes to 73
 [.] Fix problem of Rx acting like X when placed (finish checking for math.pi radians and
     correct behavior on X, Y, Z gates)
-[] Make crosshairs more visible (see https://forum.minetest.net/viewtopic.php?f=5&t=16687)
+[.] Make crosshairs more visible (see https://forum.minetest.net/viewtopic.php?f=5&t=16687)
+[] Put pointers to IBMQ, IQX (signing up for Q Experience), training, etc. as next steps
 [] Don't allow control qubit to be deleted, and other swap qubit to be deleted
 [.] Make URL to Qiskit simulators configurable
 [] Don't allow bloch sphere blocks to be placed directly
 [] Check to make sure (or force) players are in creative mode
 
-[] Shorten lines in dialog boxes to 73
 [] Check into readonly textarea instead of a table, see
     https://github.com/minetest/minetest/blob/ded5da780002c17f2079a1d8ea09eb923a3b5e8f/doc/lua_api.txt#L2122-L2127.
 
