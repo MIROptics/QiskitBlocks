@@ -2,9 +2,27 @@ xschem =  {}
 
 dofile(minetest.get_modpath("xschem") .. "/api.lua")
 
+local function begins(str, start)
+	return str:sub(1, #start) == start
+end
+
+-----------------------------------------------
+-- Add all nodes which begin with one of the --
+-- following names to the meta whitelist     --
+-----------------------------------------------
+local prefixes = {
+	"q_command:",
+	"default:chest",
+	"default:sign",
+	"circuit_blocks:",
+	"mobs:"
+}
+
 for name, _ in pairs(minetest.registered_nodes) do
-	if name:sub(1, 10) == "q_command:" or name:sub(1, 13) == "default:chest" then
-		xschem.whitelist(name)
+	for i=1, #prefixes do
+		if begins(name, prefixes[i]) then
+			xschem.whitelist(name)
+		end
 	end
 end
 
@@ -14,7 +32,6 @@ end
 ----------------------
 local FROM = vector.new(-50,-5,-192)
 local TO = vector.new(600,30,370)
-local CENTER = vector.divide(vector.add(FROM, TO), 2)
 
 minetest.register_chatcommand("xschemsave", {
 	privs = { server = true },
