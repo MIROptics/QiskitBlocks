@@ -4,19 +4,19 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
 ## Installation (the quick and easy way)
 - Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has an alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
-- Click the *Content* tab shown here, then click the *Browse online content* button. 
+- Click the `Content` tab shown here, then click the `Browse online content` button. 
 ![Minetest Content Tab](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_content_tab.png)
 
-- When on the page shown shown here, type *QiskitBlocks*, click the *Search* button, and click the *Install* button beside the *QiskitBlocks* row. Click the *Back to Main Menu* button when installation has completed.
+- When on the page shown shown here, type `QiskitBlocks`, click the `Search` button, and click the `Install` button beside the `QiskitBlocks` row. Click the `Back to Main Menu` button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
 
 - Click the *Start Game* tab shown here, click the round *Qiskit* button, deselect the three checkboxes, and click the *New* button.
 ![Minetest Start Game QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_startgame_qiskitblocks.png)
 
-- From the *new world* dialog shown here, make up a world name with characters and underscores, enter `0` in the *Seed* field, select *flat* in the *Mapgen* field, and click the *Create* button.
+- From the *new world* dialog shown here, make up a world name with characters and underscores, enter `0` in the `Seed` field, select `flat` in the `Mapgen` field, and click the `Create` button.
 ![Minetest New World Dialog](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_newworld_qiskitblocks.png)
 
-- Click the *Play Game* button, waiting a few seconds while the new world is generated and lighted.
+- Click the `Play Game` button, waiting a few seconds while the new world is generated and lighted.
 
 ## Installation (by cloning this repo)
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
