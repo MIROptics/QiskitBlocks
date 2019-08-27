@@ -1,5 +1,5 @@
 # QiskitBlocks
-Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384)
+Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384). Please choose one of the *Installing and running* options below and follow the instructions.
 
 ## Installing and running (the quick and easy way using the Minetest Content Database)
 - Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has an alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
