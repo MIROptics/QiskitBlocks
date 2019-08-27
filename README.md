@@ -10,7 +10,7 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
 - When on the page shown shown here, type `QiskitBlocks`, click the `Search` button, and click the `Install` button beside the `QiskitBlocks` row. Click the `Back to Main Menu` button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
 
-- Click the *Start Game* tab shown here, click the round *Qiskit* button, deselect the three checkboxes, and click the *New* button.
+- Click the `Start Game` tab shown here, click the round `Qiskit` button, deselect the three checkboxes, and click the `New` button.
 ![Minetest Start Game QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_startgame_qiskitblocks.png)
 
 - From the *new world* dialog shown here, make up a world name with characters and underscores, enter `0` in the `Seed` field, select `flat` in the `Mapgen` field, and click the `Create` button.
