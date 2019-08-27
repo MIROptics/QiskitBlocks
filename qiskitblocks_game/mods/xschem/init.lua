@@ -15,8 +15,7 @@ local prefixes = {
 	"default:chest",
 	"default:sign",
 	"circuit_blocks:",
-	"mobs:",
-	"frame:"
+	"mobs:"
 }
 
 for name, _ in pairs(minetest.registered_nodes) do
