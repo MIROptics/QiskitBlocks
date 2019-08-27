@@ -1,5 +1,5 @@
 # QiskitBlocks
-Teaches quantum computing and Qiskit in a Minetest block world.
+Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384)
 
 ## Installation
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
@@ -28,8 +28,6 @@ Teaches quantum computing and Qiskit in a Minetest block world.
 Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
 ![Quantum Circuits Garden in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png)
-
-![Brief video of QiskitBlocks](https://vimeo.com/356185384)
 
 ![Quantum Cats Sandbox in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_cats_sandbox.png)
 
