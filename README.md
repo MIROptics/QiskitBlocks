@@ -1,7 +1,7 @@
 # QiskitBlocks
 Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384)
 
-## Installation (the quick and easy way)
+## Installing and running (the quick and easy way using the Minetest Content Database)
 - Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has an alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
 - Click the `Content` tab shown here, then click the `Browse online content` button. 
@@ -18,7 +18,7 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
 
 - Click the `Play Game` button, waiting a few seconds while the new world is generated and lighted.
 
-## Installation (by cloning this repo)
+## Installing and running (by cloning this repo instead instead of using the Minetest Content Database)
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
 - Clone this QiskitBlocks project, and copy the `qiskitblocks_games` folder of this QiskitBlocks project into the `games` folder of your 
