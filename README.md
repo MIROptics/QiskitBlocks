@@ -18,8 +18,6 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
 
 - Click the *Play Game* button, waiting a few seconds while the new world is generated and lighted.
 
-- When you're in the starting room with all of the quantum operation blocks on the wall, use the W, A, S, D keys to walk up to the sign on the right side of the door. Right-click the sign and follow the instructions. Have fun exploring and solving quantum circuit puzzles! 
-
 ## Installation (by cloning this repo)
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
@@ -43,6 +41,9 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
   ```
 
 - Open the Minetest application, uncheck the `Creative Mode`, `Enable Damage`, and `Host Server` checkboxes, and select the round `QiskitBlocks` game from the lower left. Then select the world `quantum_circuits_world [qiskitblocks]` from the menu, and click `Play Game`.
+
+## Explore and learn!
+- When you're in the starting room with all of the quantum operation blocks on the wall, use the W, A, S, D keys to walk up to the sign on the right side of the door. Right-click the sign and follow the instructions. Have fun exploring and solving quantum circuit puzzles! 
 
 Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
