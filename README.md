@@ -40,17 +40,16 @@ Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief 
   #qiskit_service_timeout = 5 
   ```
 
-- Open the Minetest application, uncheck the `Creative Mode`, `Enable Damage`, and `Host Server` checkboxes, and select the round `QiskitBlocks` game from the lower left. Then select the world `quantum_circuits_world [qiskitblocks]` from the menu, and click `Play Game`.
+- Open the Minetest application, select the round `QiskitBlocks` game from the lower left, and uncheck the `Creative Mode`, `Enable Damage`, and `Host Server` checkboxes. Then select the world `quantum_circuits_world [qiskitblocks]` from the menu, and click `Play Game`.
+![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
 
 ## Explore and learn!
 - When you're in the starting room with all of the quantum operation blocks on the wall, use the W, A, S, D keys to walk up to the sign on the right side of the door. Right-click the sign and follow the instructions. Have fun exploring and solving quantum circuit puzzles! 
 
 Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
+![Quantum Blocks Academy in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_blocks_academy.png)
+
 ![Quantum Circuits Garden in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png)
 
 ![Quantum Cats Sandbox in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_cats_sandbox.png)
-
-![Quantum Blocks Academy in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_blocks_academy.png)
-
-![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
