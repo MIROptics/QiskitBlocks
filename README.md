@@ -2,12 +2,12 @@
 Teaches quantum computing and Qiskit in a Minetest block world. Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384)
 
 ## Installation (the quick and easy way)
-- Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
+- Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has an alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
-- From the *Content* tab shown here, click the *Browse online content* button. 
+- Click the *Content* tab shown here, then click the *Browse online content* button. 
 ![Minetest Content Tab](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_content_tab.png)
 
-- When on the page shown shown here, search for *QiskitBlocks* and click the *Install* button. Click the *Back to Main Menu* button when installation has completed.
+- When on the page shown shown here, type *QiskitBlocks*, click the *Search* button, and click the *Install* button beside the *QiskitBlocks* row. Click the *Back to Main Menu* button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
 
 - From the *Start Game* tab shown here, click the round *Qiskit* image, deselect the three checkboxes, and click the *New* button.
