@@ -57,6 +57,9 @@ MUSIC_CONGRATS = 4
 -- our API object
 q_command = {}
 
+q_command.tools_placed = false
+q_command.game_running_time = 0
+
 q_command.block_pos = {}
 q_command.circuit_specs = {} -- dir_str, pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
@@ -3100,7 +3103,75 @@ for idx = 0, ROTATION_RESOLUTION do
     q_command:register_statevector_liquid_block(idx)
 end
 
+minetest.register_globalstep(function(dtime)
+    q_command.game_running_time = q_command.game_running_time + dtime
 
+    if not q_command.tools_placed and q_command.game_running_time > 20 then
+        local pos_beneath_rotate_tool = {x = 232, y = 8, z = 76}
+        local rotate_tool_pos = {x = 232, y = 9, z = 76}
+
+        local pos_beneath_control_tool = {x = 232, y = 8, z = 74}
+        local control_tool_pos = {x = 232, y = 9, z = 74}
+
+        local pos_beneath_swap_tool = {x = 230, y = 8, z = 72}
+        local swap_tool_pos = {x = 230, y = 9, z = 72}
+
+        local pos_beneath_wire_extension_block = {x = 235, y = 8, z = 78}
+        local wire_extension_block_pos = {x = 235, y = 9, z = 78}
+
+        if minetest.get_node(pos_beneath_rotate_tool).name ==
+                "default:copperblock" then
+            -- Tools were already placed, so this world must have been
+            -- loaded from a database this time rather than being generated.
+            q_command.tools_placed = true
+        else
+            -- Place the tools, spinning on the floor. Use a different
+            -- block so that we can tell if they were already placed
+            -- when the world was loaded.
+            --minetest.debug("placing tools, q_command.game_running_time: " ..
+            --        tostring(q_command.game_running_time))
+            minetest.set_node(pos_beneath_rotate_tool,
+                    {name = "default:copperblock"})
+            minetest.item_drop(ItemStack("circuit_blocks:rotate_tool"),
+                    nil, rotate_tool_pos)
+
+            minetest.set_node(pos_beneath_control_tool,
+                    {name = "default:copperblock"})
+            minetest.item_drop(ItemStack("circuit_blocks:control_tool"),
+                    nil, control_tool_pos)
+
+            minetest.set_node(pos_beneath_swap_tool,
+                    {name = "default:copperblock"})
+            minetest.item_drop(ItemStack("circuit_blocks:swap_tool"),
+                    nil, swap_tool_pos)
+
+            minetest.set_node(pos_beneath_wire_extension_block,
+                    {name = "default:copperblock"})
+            minetest.item_drop(ItemStack("q_command:wire_extension_block"),
+                    nil, wire_extension_block_pos)
+            q_command.tools_placed = true
+        end
+    end
+
+
+	--if not q_command.tools_placed and q_command.game_running_time > 15 then
+    --    minetest.debug("placing tools, q_command.game_running_time: " ..
+    --            tostring(q_command.game_running_time))
+    --
+    --    minetest.dig_node({x = 232, y = 8, z = 76})
+    --    --minetest.set_node({x = 232, y = 8, z = 76}, {name = "default:bronzeblock"})
+    --    minetest.item_drop(ItemStack("circuit_blocks:rotate_tool"),
+    --            nil, {x = 232, y = 9, z = 76})
+    --
+    --    minetest.item_drop(ItemStack("circuit_blocks:control_tool"),
+    --            nil, {x = 232, y = 9, z = 74})
+    --    minetest.item_drop(ItemStack("circuit_blocks:swap_tool"),
+    --            nil, {x = 230, y = 9, z = 72})
+    --    minetest.item_drop(ItemStack("q_command:wire_extension_block"),
+    --            nil, {x = 235, y = 9, z = 78})
+    --   q_command.tools_placed = true
+    --end
+end)
 
 
 
