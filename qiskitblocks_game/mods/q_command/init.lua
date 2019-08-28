@@ -1299,11 +1299,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             if is_correct_solution then
                                 if mpd.playing then
-                                    if mpd.playing == MUSIC_CONGRATS then
-                                        mpd.queue_next_song(MUSIC_CONGRATS)
-                                    else
-                                        mpd.play_song(MUSIC_CONGRATS)
-                                    end
+                                    mpd.play_song(MUSIC_CONGRATS)
                                 end
                                 mpd.queue_next_song(MUSIC_ACTIVE)
                             else

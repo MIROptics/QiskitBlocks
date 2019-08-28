@@ -354,13 +354,22 @@ minetest.register_node("q_command:wire_extension_block", {
         return false
     end,
     on_rightclick = function(pos, node, clicker, itemstack)
-        local player_name = clicker:get_player_name()
-        local meta = minetest.get_meta(pos)
-        local formspec = "size[5.0, 4.6]"..
-                -- "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
-                "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;4]" ..
-				"button_exit[1.8,3.5;1.5,1.0;create;Create]"
-        minetest.show_formspec(player_name, "create_wire_extension", formspec)
+
+        local wire_extension_block = wire_extension:get_wire_extension_block(pos)
+        if not wire_extension_block:wire_extension_exists() then
+            local player_name = clicker:get_player_name()
+            local meta = minetest.get_meta(pos)
+            local formspec = "size[5.0, 4.6]"..
+                    -- "field[1.0,0.5;1.5,1.5;num_wires_str;Wires:;3]" ..
+                    "field[3.0,0.5;1.5,1.5;num_columns_str;Columns:;4]" ..
+                    "button_exit[1.8,3.5;1.5,1.0;create;Create]"
+            minetest.show_formspec(player_name, "create_wire_extension", formspec)
+        else
+                minetest.chat_send_player(clicker:get_player_name(),
+                        "Wire extension already exists!")
+        end
+
+
     end,
     on_punch = function(pos, node, player)
         -- If shift key is down, delete this block and the wire extension
