@@ -815,6 +815,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
             end
             return
         end
+    elseif(formname == "q_block_dialog") then
+        -- TODO: Process fields to be added on that formspec
     end
 end)
 
@@ -878,10 +880,11 @@ function q_command:register_q_command_block(suffix_correct_solution,
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
             local q_block = q_command:get_q_command_block(pos)
+            local player_name = clicker:get_player_name()
+            local formspec = nil
             if not q_block:circuit_grid_exists() then
-                local player_name = clicker:get_player_name()
                 local meta = minetest.get_meta(pos)
-                local formspec = "size[5.0, 4.6]"..
+                formspec = "size[5.0, 4.6]"..
                         "field[1.0,0.5;1.8,1.5;num_wires_str;Wires (max " .. CIRCUIT_MAX_WIRES .. ");2]" ..
                         "field[3.0,0.5;1.8,1.5;num_columns_str;Cols (max " .. CIRCUIT_MAX_COLUMNS .. ");4]" ..
                         --"field[1.0,2.0;1.5,1.5;start_z_offset_str;Forward offset:;0]" ..
@@ -898,6 +901,16 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             "Starting music")
                     mpd.play_song(MUSIC_CHILL)
                 end
+
+                local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
+                local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
+
+		        formspec = "size[12,7]"..
+                    "textarea[0.3,0.3;12,7;qasm_str;To run on a real quantum computer copy/paste into Circuit Composer at quantum-computing.ibm.com;"..
+                        minetest.formspec_escape(q_command:convert_semicolons(S(qasm_with_measurement_str)))..
+                        "]" ..
+                    "button_exit[4.9,6.5;2,1;close;Close]"
+                minetest.show_formspec(player_name, "q_block_dialog", formspec)
             end
         end,
         on_punch = function(pos, node, player)
@@ -1774,6 +1787,19 @@ function q_command:convert_newlines(str)
 	return convert(str)
 end
 
+function q_command:convert_semicolons(str)
+	if(type(str)~="string") then
+		return "ERROR: No string found!"
+	end
+
+	local function convert(s)
+		return s:gsub(";", function(slash, what)
+			return ";\n"
+		end)
+	end
+
+	return convert(str)
+end
 
 --- Help buttons ---
 function q_command:register_help_button(suffix, caption, fulltext)
@@ -2198,8 +2224,9 @@ continuation to be.
 wide the wire continuation should be.
 
 To remove a wire continuation and its associated Wire Extension block
-from a circuit, while pressing the shift key, left-click the Wire
-Continuation block.
+from a circuit, while pressing the Special key, left-click the Wire
+Continuation block. The Special key may be known, and set, by pausing
+the game and choosing the Change Keys button.
 ]]
 q_command:register_help_button("wire_extender_block_desc", "Wire Extender block", q_command.texts.wire_extender_block_desc)
 
@@ -2231,11 +2258,17 @@ restore the Measurement blocks to their original appearance, rather than
 showing the state of their last measurement.
 
 Right-clicking on a Q block when a circuit has already been created
-stops and starts the music. You may also right-click this non-functional
-Q block to stop or start the music.
+stops and starts the music. It also displays the OpenQASM code for the
+circuit, which you may run on one of the real quantum computers at IBM.
+To do that, copy and paste the OpenQASM code into the Circuit Editor
+pane of the Circuit Composer at https://quantum-computing.ibm.com
 
-To remove a Q block and its circuit, while pressing the shift key
-left-click the Q block.
+Note that you may also right-click this non-functional Q block to stop
+or start the music.
+
+To remove a Q block and its circuit, while pressing the Special key
+left-click the Q block. The Special key may be known, and set, by
+pausing the game and choosing the Change Keys button.
 ]]
 q_command:register_help_button("q_block_desc", "Q block", q_command.texts.q_block_desc)
 

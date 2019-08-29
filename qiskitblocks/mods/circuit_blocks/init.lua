@@ -22,6 +22,7 @@ TODO:
 [.] Increase time for tools to appear to 30 seconds.
 [.] Make minecarts stay in-world (whitelist in xschem)
 [.] Make sneak code into aux code
+    [] Modify help text to reflect aux key
     [] Ask "are you sure" before deleting entire circuit?
 [.] Give more Q blocks,
     [] perhaps earning them by solving puzzles
