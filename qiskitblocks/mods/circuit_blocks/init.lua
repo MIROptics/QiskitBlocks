@@ -22,11 +22,14 @@ TODO:
 [.] Increase time for tools to appear to 30 seconds.
 [.] Make minecarts stay in-world (whitelist in xschem)
 [.] Make sneak code into aux code
-    [] Modify help text to reflect aux key
-    [] Ask "are you sure" before deleting entire circuit?
+    [.] Modify help text to reflect aux key
+    [] Ask "are you sure" before deleting entire circuit, or put in right-click dialog?
 [.] Give more Q blocks,
     [] perhaps earning them by solving puzzles
-[] Automate replacing copper with bronze blocks?
+[] Update world with updated help signs (for wire_extender_block and q_block)
+[] Stop auto-rotations after one minute, or when leaving game
+
+[] Automate replacing copper with bronze blocks? (Only have to replace the block under rotate tool)
 [] Add link to Minetest Tutorial, and more in-world instructions on getting around Minetest
 [] Copy to OpenQASM and put pointers to running it in IQX
     - (signing up for Q Experience), training, etc. as next steps
@@ -62,7 +65,6 @@ TODO:
     - Perhaps collapses on certain events, to two different states (e.g. happy / grumpy)
     - Health could be signified by quantum state
 [] Perhaps only play music in morning and evening
-[] Stop auto-rotations after one minute, or when leaving game
 [] Remove some variables such as state_tomography_basis from q_command:init,
     making state only stored in metadata and accessible via get/set methods?
 [] Create Mars and Venus blocks for cat entanglement demo

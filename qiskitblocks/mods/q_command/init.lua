@@ -2994,6 +2994,43 @@ q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzl
         solution_statevector_swap_gate_puzzle, false)
 
 
+q_command.texts.deutsch_algo_puzzle =
+[[
+The Deutsch algorithm, first published in 1985, is the Hello World of
+quantum algorithms.
+
+TODO: Discuss the Deutsch algorithm and relevant concepts.
+
+To work through this puzzle, place appropriate gates between the
+barriers to implement a balanced oracle whose output on the bottom wire
+is the flipped state of its input on the top wire.
+]]
+q_command:register_help_button("deutsch_algo_puzzle", "Deutsch's algorithm puzzle", q_command.texts.deutsch_algo_puzzle)
+local solution_statevector_deutsch_algo_puzzle =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = -0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo_puzzle",
+        solution_statevector_deutsch_algo_puzzle, true)
+q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo_puzzle",
+        solution_statevector_deutsch_algo_puzzle, false)
+
+
 q_command.texts.notsingleplayer =
 [[
 You are now playing QiskitBlocks in multiplayer mode, but QiskitBlocks
@@ -3152,7 +3189,8 @@ minetest.register_globalstep(function(dtime)
         local pos_beneath_wire_extension_block = {x = 235, y = 8, z = 78}
         local wire_extension_block_pos = {x = 235, y = 9, z = 78}
 
-        local cart_entity_pos = {x = 230, y = 9, z = 83}
+        local cart_entity_1_pos = {x = 230, y = 9, z = 83}
+        local cart_entity_2_pos = {x = 189, y = 9, z = 72}
 
         if minetest.get_node(pos_beneath_rotate_tool).name ==
                 "default:copperblock" then
@@ -3187,7 +3225,8 @@ minetest.register_globalstep(function(dtime)
             q_command.tools_placed = true
 
             -- Place a cart entity
-            minetest.add_entity(cart_entity_pos, "carts:cart")
+            minetest.add_entity(cart_entity_1_pos, "carts:cart")
+            minetest.add_entity(cart_entity_2_pos, "carts:cart")
         end
     end
 end)
