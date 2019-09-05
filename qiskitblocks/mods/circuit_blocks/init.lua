@@ -129,6 +129,56 @@ TODO:
     • The results blocks could be changed to have a different 'water level' on one side than the other
     This means you'd easily be able to see these two perspectives, just by walking around the circuit. And it would mean that the info for both is available at the same time, so the system and player can easily see when a puzzle is solved
 
+[] Address feedback from users J & L:
+    * The design of the game is visually appealing. It made us want to explore the world!
+    * I love the music! It’s very relaxing and helped me focus on the experience. On the other hand, L would
+    prefer something more cheerful!
+    * When the game was first loaded, the room was very dark. It was probably because it took 86s to generate the map
+    and 27s to calculate the light on my old MacBook Pro. Is there a way to add a little note for players suggesting to
+    wait a moment for the map generation and light calculation?
+    * Is there a way to show the keys for control at the beginning of the game? For me, WASD for moving and space to
+    jump is very obvious. But L (who never plays games) had no idea about which keys to press to do anything at the
+    beginning.
+    * We like that there are instructions and a chest of tools in each area to start with. This helped us not to feel
+    lost in each area, and ensured some continuity in the gaming experience. For this reason, we think it might be even
+    better if the instructions and the chest were more obvious at the beginning (for example, by adding an arrow or make
+    the introductory instruction block different from the other instruction blocks)
+    * The use a wagon to move from the starting point to the garden is a great idea! However, in our case, the wagon
+    wasn’t at the starting point. We don’t know what the reason for this is, and although we restarted the game a few
+    times, the wagon never appeared.
+    * It’s a good idea to have tutorials for all the different blocks at the starting point. But I think as it is now,
+    it’s a bit overwhelming. Perhaps you could divide them in a few rooms, inserting in each case only the most relevant
+    information. For example, starting with the essential blocks: first room with X, H and the measurement block; second
+    room with CNOT; third room with Y, Z, Rx, Ry and Rz; fourth room with the rest. It would be good to tell the players
+    it’s not necessary to complete all the rooms before starting the games. They can come back any time when in doubt.
+    * There are <invalid wstrings> in the instruction boxes for X, Y and Z at the starting point
+    * In general, we think the instructions are too long and too technical for kids to understand (L had trouble to
+    follow at times, and by the time she reached the end of an explanation, she had forgotten the beginning and the aim of the stage!). We suggest to shorten them to one paragraph and to simplify the language.
+    There are also too many blocks in the chest. Maybe you could place only blocks that are useful for each area/stage.
+    Players would be less confused about which ones to choose.
+    * The measurement outcome for a qubit with H gate seems to have skewed probability to 1 and less often 0. Is it my
+    illusion?
+    * I think it’s a good idea to have an option to reset the circuit. When we started the game, we had no idea what to
+    do and accidentally destroyed some pre-placed blocks.
+    * Use gloomy/happy cat to represent 0/1 is a lovely idea, much more appropriate for kids than dead/alive. The
+    representation of measurement probability as liquid level is very visual and intuitive.
+    * In general, we find that the game is too instructive. It felt more like a tutorial than a game. It would be better
+    if you could divide the circuits in the garden/cat sandbox into individual rooms, so that the player feels like
+    moving forward and overcoming challenges! Each puzzle would allow the player to move to the next room. When the
+    puzzle is solved, visual or sound effects to congratulate the player would make it more exciting too, as the door to
+    the next puzzle opens. In this way, instead of a detailed set of instructions before the puzzle is solved, a very
+    brief hint could be given as the player enters each new room and the explanation be shown only after the puzzle is
+    solved to consolidate the knowledge while leaving space for exploration. Also, each puzzle could have a name, that
+    indicates the concept you’ll be learning.
+
+[] Address feedback from Elisa:
+    - Please provide some basics for people that have not played minecraft before! I got really lost in the beginning… :sweat_smile: First I had to figure out how to walk, but that was still ok since pressing esc gives the most important keys (some missing though, would be good to have a list of all of them!). However, then I dropped the Hadamard gate and was not able to get it back into my inventory. I started walking around to look for another chest and fell into a cave that I did not manage to get out. Eventually I had a friend helping me, explaining the basics like how to pick up things by klicking for a looong time on them, chopping wood and turning it into an axe, putting blocks of wood below me while jumping to get out of that cave etc. I guess I’m much more unskilled in computer games than the average physicist, but still I think it would be good to have a short introduction into the basics :slightly_smiling_face:
+    - I noticed that most of the puzzles I tried were not really puzzles, as it is not clear (at least to me) what you have to do unless you read the hints (e.g. the CNOT gate puzzle), which already tell you exactly which gate to place where. I think it would be much better if they would tell you to reach a specific state (which was actually the case for the Hadamard and X gates-puzzle, but for none of the other puzzles I have tried) and then you can either try by yourself or read the hints. So my suggestion would be to have a big sign on top of each puzzle that tells you which state you want to reach and maybe gives some limitations on which gates you are allowed to use? The hints could then still be there to give additional help
+    - I have seen a couple of times <invalid wstring> , where some parts of the sentence were missing. I can check again, but I think that happened mostly in the Bell states hints.
+    - From what I can see (some parts are missing because of the invalid wstrings), in the hints for |psi^-> the task is to build an equal superposition of |01> and |10> with opposite phases. It’s only allowed to get |10> - |01> though, while |01> - |10> is considered wrong. Maybe one should in general program it in a way that global phases do not matter?
+    - The cave I mentioned earlier that I fell in actually has some quantum circuit, where it was not clear to me whether this is considered decoration or whether there is a task that I have to solve. Maybe it will become clearer if I just play a bit more though
+    - That is all I got for now, I will let you know if I notice anything else once I played a bit more! Btw I am sorry for only pointing out the negative points now, my overall experience was definitely positive! I really think that this is a great idea and has lots of potential to attract people to play with quantum gates!! Also that friend who knows minecraft and helped me out loved it! For my taste it could involve more riddles, but maybe I have not played enough yet to get there
+
 Periodic TODO:
 [] Verify lines in dialog boxes are max 73 chars
 [] Keep used mods updated from https://github.com/minetest-game-mods
