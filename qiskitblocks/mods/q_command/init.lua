@@ -838,7 +838,8 @@ end
 function q_command:register_q_command_block(suffix_correct_solution,
                                             suffix_incorrect_solution,
                                             correct_solution_statevector,
-                                            block_represents_correct_solution)
+                                            block_represents_correct_solution,
+                                            door_pos)
     if not suffix_correct_solution or not suffix_incorrect_solution then
         suffix_incorrect_solution = "default"
         suffix_correct_solution = "default_success"
@@ -1312,8 +1313,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
                             end
 
-                            --local door_pos = {x = -41, y = 9, z = 72}
-                            --local door = doors.get(door_pos)
+                            local door = doors.get(door_pos)
 
                             if is_correct_solution then
                                 if mpd.playing then
@@ -1321,7 +1321,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                                 mpd.queue_next_song(MUSIC_ACTIVE)
 
-                                --door:open(nil)
+                                if door then
+                                    door:open(nil)
+                                end
                             else
                                 if mpd.playing then
                                     if mpd.playing == MUSIC_CHILL then
@@ -1335,7 +1337,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     end
                                 end
 
-                                --door:close(nil)
+                                if door then
+                                    door:close(nil)
+                                end
                             end
 
                             if LOG_DEBUG then
@@ -2418,9 +2422,9 @@ local solution_statevector_x_gate =
 	}
 }
 q_command:register_q_command_block( "x_gate_success", "x_gate",
-        solution_statevector_x_gate, true)
+        solution_statevector_x_gate, true, {x = 236, y = 0, z = 67})
 q_command:register_q_command_block( "x_gate_success", "x_gate",
-        solution_statevector_x_gate, false)
+        solution_statevector_x_gate, false, {x = 236, y = 0, z = 67})
 
 
 q_command.texts.h_gate =
@@ -2463,9 +2467,9 @@ local solution_statevector_h_gate =
 	}
 }
 q_command:register_q_command_block( "h_gate_success", "h_gate",
-        solution_statevector_h_gate, true)
+        solution_statevector_h_gate, true, {x = 243, y = 0, z = 60})
 q_command:register_q_command_block( "h_gate_success", "h_gate",
-        solution_statevector_h_gate, false)
+        solution_statevector_h_gate, false, {x = 243, y = 0, z = 60})
 
 
 q_command.texts.cnot_gate_puzzle =
@@ -2525,9 +2529,9 @@ local solution_statevector_cnot_gate_puzzle =
 	}
 }
 q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
-        solution_statevector_cnot_gate_puzzle, true)
+        solution_statevector_cnot_gate_puzzle, true, {x = 253, y = 0, z = 70})
 q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzle",
-        solution_statevector_cnot_gate_puzzle, false)
+        solution_statevector_cnot_gate_puzzle, false, {x = 253, y = 0, z = 70})
 
 
 q_command.texts.hxx_gates =
@@ -2874,9 +2878,9 @@ local solution_statevector_equal_super_2wire =
 	}
 }
 q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, true)
+        solution_statevector_equal_super_2wire, true, {x = 250, y = 0, z = 67})
 q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, false)
+        solution_statevector_equal_super_2wire, false, {x = 250, y = 0, z = 67})
 
 
 q_command.texts.rotate_yz_gates_puzzle =
