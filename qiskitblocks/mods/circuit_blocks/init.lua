@@ -29,6 +29,9 @@ TODO:
 [] Update world with updated help signs (for wire_extender_block and q_block)
 [] Stop auto-rotations after one minute, or when leaving game
 
+[] Incorporate Maddy Tod qubit-HSV mapping
+[] Incorporate Maddy Tod Tic-Tac-Toe game
+
 [] Automate replacing copper with bronze blocks? (Only have to replace the block under rotate tool)
 [] Add link to Minetest Tutorial, and more in-world instructions on getting around Minetest
 [] Copy to OpenQASM and put pointers to running it in IQX
@@ -172,8 +175,21 @@ TODO:
     indicates the concept you’ll be learning.
 
 [] Address feedback from Elisa:
-    - Please provide some basics for people that have not played minecraft before! I got really lost in the beginning… :sweat_smile: First I had to figure out how to walk, but that was still ok since pressing esc gives the most important keys (some missing though, would be good to have a list of all of them!). However, then I dropped the Hadamard gate and was not able to get it back into my inventory. I started walking around to look for another chest and fell into a cave that I did not manage to get out. Eventually I had a friend helping me, explaining the basics like how to pick up things by klicking for a looong time on them, chopping wood and turning it into an axe, putting blocks of wood below me while jumping to get out of that cave etc. I guess I’m much more unskilled in computer games than the average physicist, but still I think it would be good to have a short introduction into the basics :slightly_smiling_face:
-    - I noticed that most of the puzzles I tried were not really puzzles, as it is not clear (at least to me) what you have to do unless you read the hints (e.g. the CNOT gate puzzle), which already tell you exactly which gate to place where. I think it would be much better if they would tell you to reach a specific state (which was actually the case for the Hadamard and X gates-puzzle, but for none of the other puzzles I have tried) and then you can either try by yourself or read the hints. So my suggestion would be to have a big sign on top of each puzzle that tells you which state you want to reach and maybe gives some limitations on which gates you are allowed to use? The hints could then still be there to give additional help
+    - Please provide some basics for people that have not played minecraft before! I got really lost in the beginning.
+    First I had to figure out how to walk, but that was still ok since pressing esc gives the most important keys
+    (some missing though, would be good to have a list of all of them!). However, then I dropped the Hadamard gate and
+    was not able to get it back into my inventory. I started walking around to look for another chest and fell into a
+    cave that I did not manage to get out. Eventually I had a friend helping me, explaining the basics like how to pick
+    up things by klicking for a looong time on them, chopping wood and turning it into an axe, putting blocks of wood
+    below me while jumping to get out of that cave etc. I guess I’m much more unskilled in computer games than the
+    average physicist, but still I think it would be good to have a short introduction into the basics.
+    - I noticed that most of the puzzles I tried were not really puzzles, as it is not clear (at least to me) what you
+    have to do unless you read the hints (e.g. the CNOT gate puzzle), which already tell you exactly which gate to place
+    where. I think it would be much better if they would tell you to reach a specific state (which was actually the case
+    for the Hadamard and X gates-puzzle, but for none of the other puzzles I have tried) and then you can either try by
+    yourself or read the hints. So my suggestion would be to have a big sign on top of each puzzle that tells you which
+    state you want to reach and maybe gives some limitations on which gates you are allowed to use? The hints could then
+    still be there to give additional help
     - I have seen a couple of times <invalid wstring> , where some parts of the sentence were missing. I can check again, but I think that happened mostly in the Bell states hints.
     - From what I can see (some parts are missing because of the invalid wstrings), in the hints for |psi^-> the task is to build an equal superposition of |01> and |10> with opposite phases. It’s only allowed to get |10> - |01> though, while |01> - |10> is considered wrong. Maybe one should in general program it in a way that global phases do not matter?
     - The cave I mentioned earlier that I fell in actually has some quantum circuit, where it was not clear to me whether this is considered decoration or whether there is a task that I have to solve. Maybe it will become clearer if I just play a bit more though
