@@ -1321,7 +1321,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 end
                                 mpd.queue_next_song(MUSIC_ACTIVE)
 
-                                if door then
+                                if door and door.open then
                                     door:open(nil)
                                 end
                             else
@@ -1337,7 +1337,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     end
                                 end
 
-                                if door then
+                                if door and door.close then
                                     door:close(nil)
                                 end
                             end

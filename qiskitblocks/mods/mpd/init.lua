@@ -2,7 +2,7 @@
 mpd={}
 
 --config
-mpd.pause_between_songs=0
+mpd.pause_between_songs=1
 
 --end config
 

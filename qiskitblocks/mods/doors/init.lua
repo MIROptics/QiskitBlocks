@@ -866,3 +866,23 @@ minetest.register_craft({
 	recipe = "doors:gate_aspen_wood_closed",
 	burntime = 5,
 })
+
+
+doors.register("door_escape_room", {
+		tiles = {{ name = "doors_door_wood.png", backface_culling = true }},
+		description = "Escape Room Door",
+		inventory_image = "doors_item_wood.png",
+		groups = {choppy = 2, oddly_breakable_by_hand = 2, flammable = 2},
+		recipe = {
+			{"group:wood", "group:wood"},
+			{"group:wood", "group:wood"},
+			{"group:wood", "group:wood"},
+		},
+		on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+			minetest.debug("in door on_rightclick")
+			return itemstack
+		end
+})
+
+
+

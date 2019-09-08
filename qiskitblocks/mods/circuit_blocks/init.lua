@@ -29,6 +29,11 @@ TODO:
 [] Update world with updated help signs (for wire_extender_block and q_block)
 [] Stop auto-rotations after one minute, or when leaving game
 
+[] Open/close doors when circuit correct/incorrect
+[] Register escape room door without altering door mod (check forum for replies)
+
+[] Implement TLDR instructions at top of ? signs
+
 [] Incorporate Maddy Tod qubit-HSV mapping
 [] Incorporate Maddy Tod Tic-Tac-Toe game
 
