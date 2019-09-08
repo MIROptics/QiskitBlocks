@@ -1753,6 +1753,16 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
     })
 end
 
+function q_command:register_dirac_block(suffix)
+    local texture_name = "q_command_dirac_" .. suffix
+    minetest.register_node("q_command:" .. texture_name, {
+        description = "Dirac " .. suffix,
+        tiles = {texture_name .. ".png"},
+        paramtype2 = "facedir",
+        groups = {oddly_breakable_by_hand=2}
+    })
+end
+
 
 minetest.register_node("q_command:statevector_glass_no_arrow", {
     description = "Statevector Glass with no arrow",
@@ -3183,6 +3193,19 @@ local ROTATION_RESOLUTION = 32
 for idx = 0, ROTATION_RESOLUTION do
     q_command:register_statevector_liquid_block(idx)
 end
+
+q_command:register_dirac_block("vert")
+q_command:register_dirac_block("rangle")
+q_command:register_dirac_block("rangle_plus")
+q_command:register_dirac_block("rangle_minus")
+q_command:register_dirac_block("rangle_space_vert")
+q_command:register_dirac_block("rangle_plus_vert")
+q_command:register_dirac_block("rangle_minus_vert")
+--q_command:register_dirac_block("sqrt")
+q_command:register_dirac_block("sqrt_1_2")
+--q_command:register_dirac_block("sqrt_1_4")
+q_command:register_dirac_block("sqrt_1_2_vert")
+q_command:register_dirac_block("sqrt_1_4_vert")
 
 minetest.register_globalstep(function(dtime)
     q_command.game_running_time = q_command.game_running_time + dtime
