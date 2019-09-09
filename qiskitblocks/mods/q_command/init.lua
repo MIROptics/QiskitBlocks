@@ -3197,8 +3197,10 @@ for idx = 0, ROTATION_RESOLUTION do
     q_command:register_statevector_liquid_block(idx)
 end
 
+q_command:register_dirac_block("blank")
 q_command:register_dirac_block("vert")
 q_command:register_dirac_block("rangle")
+q_command:register_dirac_block("plus")
 q_command:register_dirac_block("rangle_plus")
 q_command:register_dirac_block("rangle_minus")
 q_command:register_dirac_block("rangle_space_vert")
@@ -3206,7 +3208,7 @@ q_command:register_dirac_block("rangle_plus_vert")
 q_command:register_dirac_block("rangle_minus_vert")
 --q_command:register_dirac_block("sqrt")
 q_command:register_dirac_block("sqrt_1_2")
---q_command:register_dirac_block("sqrt_1_4")
+q_command:register_dirac_block("sqrt_1_4")
 q_command:register_dirac_block("sqrt_1_2_vert")
 q_command:register_dirac_block("sqrt_1_4_vert")
 

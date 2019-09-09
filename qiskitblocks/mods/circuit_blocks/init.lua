@@ -34,6 +34,13 @@ TODO:
 
 [] Implement TLDR instructions at top of ? signs
 
+[] put kets on basis states blocks
+[] put Dirac blocks on wall plates
+[] Put more code in "if door_pos then"
+[] create separate puzzles for garden and escape rooms
+[] refactor and modularize q_command
+[] address Android fast mode == special/aux key
+
 [] Incorporate Maddy Tod qubit-HSV mapping
 [] Incorporate Maddy Tod Tic-Tac-Toe game
 
