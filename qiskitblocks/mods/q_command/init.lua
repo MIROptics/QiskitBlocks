@@ -1293,7 +1293,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            -- minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
@@ -1313,7 +1313,10 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
                             end
 
-                            local door = doors.get(door_pos)
+                            local door = nil
+                            if door_pos and doors then
+                                door = doors.get(door_pos)
+                            end
 
                             if is_correct_solution then
                                 if mpd.playing then
@@ -2772,11 +2775,11 @@ local solution_statevector_bell_psi_minus =
 		i = 0
 	},
 	{
-		r = -0.707,
+		r = 0.707,
 		i = 0
 	},
 	{
-		r = 0.707,
+		r = -0.707,
 		i = 0
 	},
 	{
