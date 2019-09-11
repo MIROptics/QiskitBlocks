@@ -17,6 +17,8 @@ limitations under the License.
 
 --[[
 TODO:
+[] Address The inventory list "main" @ "current_player" doesn't exist error
+
 [] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Identify debug logging strategy
 [.] Increase time for tools to appear to 30 seconds.
@@ -36,10 +38,13 @@ TODO:
 
 [] put kets on basis states blocks
 [] put Dirac blocks on wall plates
-[] Put more code in "if door_pos then"
+[] Put more code in "if door_pos then" (that obviates need for so many nil checks)
 [] create separate puzzles for garden and escape rooms
 [] refactor and modularize q_command
 [] address Android fast mode == special/aux key
+
+[] Display measurement on Bloch sphere
+[] Shift tiny measurement symbols on results over one pixel to left
 
 [] Incorporate Maddy Tod qubit-HSV mapping
 [] Incorporate Maddy Tod Tic-Tac-Toe game
