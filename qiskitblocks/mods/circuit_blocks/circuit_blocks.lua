@@ -971,6 +971,12 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         else
             texture_name = "circuit_blocks_qubit_bloch_" .. suffix
         end
+    elseif circuit_node_type == CircuitNodeTypes.COLOR_QUBIT then
+        if y_pi8rot and z_pi8rot then
+            texture_name = "circuit_blocks_qubit_hsv_y" .. y_pi8rot .. "p8_z" .. z_pi8rot .. "p8"
+        else
+            texture_name = "circuit_blocks_qubit_hsv_" .. suffix
+        end
     elseif circuit_node_type == CircuitNodeTypes.C_IF then
         texture_name = "circuit_blocks_if_" .. suffix
     elseif circuit_node_type == CircuitNodeTypes.QUBIT_BASIS then
@@ -1494,29 +1500,30 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                             minetest.chat_send_player(player:get_player_name(),
                                     "Wire connector may only be placed on rightmost column")
                         end
-                    elseif wielded_item:get_name() == "circuit_blocks:circuit_blocks_qubit_bloch_blank" then
+                    elseif wielded_item:get_name() == "circuit_blocks:circuit_blocks_qubit_bloch_blank" or
+                            wielded_item:get_name() == "circuit_blocks:circuit_blocks_qubit_hsv_blank" then
                         -- TODO: Try using node_type == ... instead
-                        -- Only allow placement on penultimate and rightmost and column
+                        -- Only allow placement on rightmost column
                         -- Assume dir_str is "+Z"
-                        local is_rightmost_columns = block.get_circuit_pos().x +
-                                block.get_circuit_num_columns() - 2 <= block.get_node_pos().x
+                        local is_rightmost_column = block.get_circuit_pos().x +
+                                block.get_circuit_num_columns() - 1 == block.get_node_pos().x
                         if circuit_dir_str == "+X" then
-                            is_rightmost_columns = block.get_circuit_pos().z -
-                                    block.get_circuit_num_columns() + 2 == block.get_node_pos().z
+                            is_rightmost_column = block.get_circuit_pos().z -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().z
                         elseif circuit_dir_str == "-X" then
-                            is_rightmost_columns = block.get_circuit_pos().z +
-                                    block.get_circuit_num_columns() - 2 == block.get_node_pos().z
+                            is_rightmost_column = block.get_circuit_pos().z +
+                                    block.get_circuit_num_columns() - 1 == block.get_node_pos().z
                         elseif circuit_dir_str == "-Z" then
-                            is_rightmost_columns = block.get_circuit_pos().x -
-                                    block.get_circuit_num_columns() + 2 == block.get_node_pos().x
+                            is_rightmost_column = block.get_circuit_pos().x -
+                                    block.get_circuit_num_columns() + 1 == block.get_node_pos().x
                         end
 
-                        if is_rightmost_columns then
+                        if is_rightmost_column then
                             circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                     wielded_item:get_name(), player)
                         else
                             minetest.chat_send_player(player:get_player_name(),
-                                    "Bloch sphere display may only be placed on the two rightmost columns")
+                                    "Blocks that do state tomography may only be placed on the rightmost column")
                         end
                     elseif wielded_item:get_name() == "circuit_blocks:control_tool" then
                         minetest.chat_send_player(player:get_player_name(),
@@ -1549,35 +1556,24 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                 local q_command_pos = block.get_q_command_pos()
 
                 if block.get_node_type() == CircuitNodeTypes.MEASURE_Z or
-                        block.get_node_type() == CircuitNodeTypes.BLOCH_SPHERE then
+                        block.get_node_type() == CircuitNodeTypes.BLOCH_SPHERE or
+                        block.get_node_type() == CircuitNodeTypes.COLOR_QUBIT then
                     local new_node_name = nil
 
-                    -- TODO: Remove?
-                    --minetest.punch_node(q_command_pos)
-
-                    if not player:get_player_control().aux1 then
-                        -- Use cat measure textures if measure block is cat-related
-                        new_node_name = "circuit_blocks:circuit_blocks_measure_z"
-                        if block.get_node_name():sub(1, 47) ==
-                                "circuit_blocks:circuit_blocks_measure_alice_cat" then
-                            new_node_name = "circuit_blocks:circuit_blocks_measure_alice_cat"
-                        elseif block.get_node_name():sub(1, 45) ==
-                                "circuit_blocks:circuit_blocks_measure_bob_cat" then
-                            new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat"
-                        end
-                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                                new_node_name, player)
-                    else
-                        q_command:get_q_command_block(q_command_pos).set_bloch_present_flag(1)
-                        new_node_name = "circuit_blocks:circuit_blocks_qubit_bloch_blank"
-                        circuit_blocks:set_node_with_circuit_specs_meta(pos,
-                                new_node_name, player)
+                    -- Use cat measure textures if measure block is cat-related
+                    new_node_name = "circuit_blocks:circuit_blocks_measure_z"
+                    if block.get_node_name():sub(1, 47) ==
+                            "circuit_blocks:circuit_blocks_measure_alice_cat" then
+                        new_node_name = "circuit_blocks:circuit_blocks_measure_alice_cat"
+                    elseif block.get_node_name():sub(1, 45) ==
+                            "circuit_blocks:circuit_blocks_measure_bob_cat" then
+                        new_node_name = "circuit_blocks:circuit_blocks_measure_bob_cat"
                     end
+                    circuit_blocks:set_node_with_circuit_specs_meta(pos,
+                            new_node_name, player)
 
-                    --minetest.debug("User requested measurement, measurement block present: " ..
-                    --q_command:get_q_command_block(q_command_pos).get_measure_present_flag() ..
-                    --", Bloch sphere block present: " ..
-                    --q_command:get_q_command_block(q_command_pos).get_bloch_present_flag())
+                    -- TODO: Remove/modify instructions to hold special key down while
+                    --       right-clicking a measurement block.
 
                     if q_command:get_q_command_block(q_command_pos).get_bloch_present_flag() == 1 then
                         -- Nil the tomo measurement data

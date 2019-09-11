@@ -364,14 +364,17 @@ end
 for y_rot = 0, 8 do
     for z_rot = 0, 15 do
         circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "", y_rot, z_rot)
+        circuit_blocks:register_circuit_block(CircuitNodeTypes.COLOR_QUBIT, false, false, 0, false, "", "", y_rot, z_rot)
     end
 end
 
--- Create a blank Block sphere
+-- Create blank and entangled Block spheres
 circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "blank", nil, nil)
-
--- Create an entangled Block sphere
 circuit_blocks:register_circuit_block(CircuitNodeTypes.BLOCH_SPHERE, false, false, 0, false, "", "entangled", nil, nil)
+
+-- Create blank and entangled color qubits spheres
+circuit_blocks:register_circuit_block(CircuitNodeTypes.COLOR_QUBIT, false, false, 0, false, "", "blank", nil, nil)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.COLOR_QUBIT, false, false, 0, false, "", "entangled", nil, nil)
 
 -- Create classical if blocks
 for wire_idx = 0, MAX_C_IF_WIRES - 1 do
