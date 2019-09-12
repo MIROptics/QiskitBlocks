@@ -3446,7 +3446,7 @@ q_command:register_dirac_wall_tile("q_command_state_4qb_15")
 minetest.register_globalstep(function(dtime)
     q_command.game_running_time = q_command.game_running_time + dtime
 
-    if not q_command.tools_placed and q_command.game_running_time > 30 then
+    if not q_command.tools_placed and q_command.game_running_time > 60 then
         local pos_beneath_rotate_tool = {x = 232, y = 8, z = 76}
         local rotate_tool_pos = {x = 232, y = 9, z = 76}
 
