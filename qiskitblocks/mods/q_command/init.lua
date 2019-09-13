@@ -2204,13 +2204,12 @@ q_command:register_help_button("bloch_sphere_block_desc", "The Bloch sphere", q_
 q_command.texts.hsv_color_qubit_block_desc =
 [[
 An HSV color block, like these on the wall, represent the quantum state
-of a qubit. For example, the top HSV color block represents state |0>
-and the bottom HSV color block represents state |1>. This method of
-representing qubit states with HSV color was invented by Maddy Tod.
-
-While wielding an HSV color block (noted by the letters HSV in a ket
-symbol as seen on the wall), right-click to place it on a quantum
-circuit.
+of a qubit. For example, the top-left HSV color block represents state
+|0> and the bottom-left HSV color block represents state |1>. This
+method of representing qubit states with HSV color was invented by
+Maddy Tod and Andy Stanford-Clark. The color a block is corresponds to a
+specific quantum state, with states that are close to each other having
+similar colors, and states that are far apart will have opposite colors.
 
 To make a measurement in the Z basis and display the measured basis
 state, right-click the HSV color block.
@@ -2220,7 +2219,7 @@ X, Y and Z bases. To make a measurement only in the Z basis and display
 the measured basis state, right-click the HSV color block.
 
 Whenever an HSV color block is on a circuit, the QASM simulator will
-automatically be run whenever any changes to the circuit occur.
+automatically be run whenever the any changes to the circuit occur.
 
 To remove an HSV color block, or any other block from a circuit,
 left-click it while wielding a block (or empty-handed if you are close
