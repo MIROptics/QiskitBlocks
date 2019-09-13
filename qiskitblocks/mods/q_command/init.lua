@@ -2848,6 +2848,10 @@ q_command:register_q_command_block( "cnot_gate_puzzle_success", "cnot_gate_puzzl
 
 q_command.texts.hxx_gates =
 [[
+TLDR: Using only H and X gates, make the blue liquid levels correspond
+to a quantum state of sqrt(1/2) |001> + sqrt(1/2) |101>.
+----
+
 This circuit leverages Hadamard and X gates to create a quantum state in
 which the measurement results |001> and |101> are equally likely, and no
 other measurement results are possible. This quantum state could be
@@ -2861,7 +2865,7 @@ gates on single-wire circuits.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("hxx_gates", "Hadamard and X gates", q_command.texts.hxx_gates)
+q_command:register_help_button("hxx_gates", "Hadamard and X gates 3 wires", q_command.texts.hxx_gates)
 local solution_statevector_hxx_gates =
 {
 	{
@@ -2898,9 +2902,9 @@ local solution_statevector_hxx_gates =
 	}
 }
 q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
-        solution_statevector_hxx_gates, true)
+        solution_statevector_hxx_gates, true, {x = 266, y = 0, z = 67})
 q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
-        solution_statevector_hxx_gates, false)
+        solution_statevector_hxx_gates, false, {x = 266, y = 0, z = 67})
 
 
 q_command.texts.bell_phi_plus =
@@ -3159,6 +3163,11 @@ q_command:register_q_command_block( "ghz_state_success", "ghz_state",
 
 q_command.texts.equal_super_2wire =
 [[
+TLDR: Using only H gates, make the blue liquid levels correspond to the
+following quantum state, commonly referred to as an equal superposition:
+sqrt(1/4) |00> + sqrt(1/4) |01> + sqrt(1/4) |10> + sqrt(1/4) |11>
+----
+
 This circuit leverages two Hadamard gates to create an equal
 superposition of |00>, |01>, |10>, and |11>. To solve this circuit
 puzzle, place an H block on each wire. Notice how the outcome
@@ -3190,9 +3199,9 @@ local solution_statevector_equal_super_2wire =
 	}
 }
 q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, true, {x = 0, y = 0, z = 0})
+        solution_statevector_equal_super_2wire, true, {x = 270, y = 0, z = 77})
 q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, false, {x = 0, y = 0, z = 0})
+        solution_statevector_equal_super_2wire, false, {x = 270, y = 0, z = 77})
 
 
 q_command.texts.rotate_yz_gates_puzzle =
