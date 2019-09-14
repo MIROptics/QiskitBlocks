@@ -2497,16 +2497,66 @@ local solution_statevector_x_gate =
 	}
 }
 q_command:register_q_command_block( "x_gate_success", "x_gate",
-        solution_statevector_x_gate, true, {x = 236, y = 0, z = 67})
+        solution_statevector_x_gate, true)
 q_command:register_q_command_block( "x_gate_success", "x_gate",
-        solution_statevector_x_gate, false, {x = 236, y = 0, z = 67})
+        solution_statevector_x_gate, false)
+
+
+q_command.texts.x_gate_escape =
+[[
+TLDR: For all of these puzzles, get blocks from the chest and place them
+on the circuit. The door to the next room will open when the liquid
+levels and arrows in the blue blocks correspond to the quantum state
+displayed on the wall behind the circuit in Dirac notation. The Bloch
+sphere at the end of each wire estimates the state of its qubit, and
+right-clicking it performs a measurement of the circuit.
+----
+
+This circuit, consisting of only one wire, leverages the X gate, also
+known as the Pauli-X, NOT, or bit-flip, gate. Its effect on the |0>
+state is to make it |1>, and vice-versa. To work through this puzzle,
+take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an X block out of the chest.
+
+3) While wielding the X block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 100% probability
+that the result will be |1> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |1> is
+always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("x_gate_escape",
+        "Make quantum state of |1>", q_command.texts.x_gate_escape)
+local solution_statevector_x_gate_escape =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 1,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "x_gate_escape_success", "x_gate_escape",
+        solution_statevector_x_gate_escape, true, {x = 236, y = 0, z = 67})
+q_command:register_q_command_block( "x_gate_escape_success", "x_gate_escape",
+        solution_statevector_x_gate_escape, false, {x = 236, y = 0, z = 67})
 
 
 q_command.texts.x_gates_2_wire =
 [[
-TLDR: Using only X gates, make the blue liquid levels correspond to a
-quantum state of |10>. Measure the circuit several times as extra
-validation of the correct solution.
+TLDR: Make the blue liquid levels correspond to a quantum state of |10>
+Measure the circuit several times as extra validation of the correct solution.
 ----
 
 This circuit, consisting of two wires, demonstrates that one or more X
@@ -2532,7 +2582,7 @@ always the result.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("x_gates_2_wire", "Classical 2 bit state with X gates",
+q_command:register_help_button("x_gates_2_wire", "Make quantum state of |10>",
         q_command.texts.x_gates_2_wire)
 local solution_statevector_x_gates_2_wire =
 {
@@ -2562,9 +2612,8 @@ q_command:register_q_command_block( "x_gates_2_wire_success", "x_gates_2_wire",
 
 q_command.texts.x_gates_3_wire =
 [[
-TLDR: Using only X gates, make the blue liquid levels correspond to a
-quantum state of |011>. Measure the circuit several times as extra
-validation of the correct solution.
+TLDR: Make the blue liquid levels correspond to a quantum state of |011>
+The exit door is behind the circuit, so use the ladder.
 ----
 
 This circuit, consisting of three wires, demonstrates that one or more X
@@ -2590,7 +2639,7 @@ always the result.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("x_gates_3_wire", "Classical 3 bit state with X gates",
+q_command:register_help_button("x_gates_3_wire", "Make quantum state of |011>",
         q_command.texts.x_gates_3_wire)
 local solution_statevector_x_gates_3_wire =
 {
@@ -2679,16 +2728,65 @@ local solution_statevector_h_gate =
 	}
 }
 q_command:register_q_command_block( "h_gate_success", "h_gate",
-        solution_statevector_h_gate, true, {x = 253, y = 0, z = 70})
+        solution_statevector_h_gate, true)
 q_command:register_q_command_block( "h_gate_success", "h_gate",
-        solution_statevector_h_gate, false, {x = 253, y = 0, z = 70})
+        solution_statevector_h_gate, false)
+
+
+q_command.texts.h_gate_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |0> + sqrt(1/2) |1>, which is commonly referred to as |+>
+----
+
+This circuit, consisting of only one wire, leverages the H gate, also
+known as the the Hadamard gate. Its effect on the |0> state is to put it
+into an equal superposition of |0> and |1>. Therefore, when the qubit is
+measured, there is a 50% probability that the result will be |0>, and a
+50% probability that the result will be |1>. To work through this
+puzzle, take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an H block out of the chest.
+
+3) While wielding the H block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 50% probability
+that the result will be |0> when the circuit is measured, and a 50%
+probability that the result will be |1> when the circuit is measured. Go
+ahead and right-click the measurement block several times to verify that
+the results are fairly evenly distributed between |0> and |1>.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("h_gate_escape", "Make a quantum state of |+>",
+        q_command.texts.h_gate_escape)
+local solution_statevector_h_gate_escape =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
+        solution_statevector_h_gate_escape, true, {x = 253, y = 0, z = 70})
+q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
+        solution_statevector_h_gate_escape, false, {x = 253, y = 0, z = 70})
 
 
 q_command.texts.h_x_gate =
 [[
-TLDR: Using only H and X gates, make the blue liquid levels correspond
-to a quantum state of sqrt(1/2) |0> - sqrt(1/2) |1>. Measure the circuit
-several times as extra validation of the correct solution.
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |0> - sqrt(1/2) |1>, which is commonly referred to as |->
 ----
 
 This circuit, consisting of only one wire, demonstrates that the order
@@ -2719,7 +2817,7 @@ results are fairly evenly distributed between |0> and |1>.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("h_x_gate", "H and X gates", q_command.texts.h_x_gate)
+q_command:register_help_button("h_x_gate", "Make a quantum state of |->", q_command.texts.h_x_gate)
 local solution_statevector_h_x_gate =
 {
 	{
@@ -3518,6 +3616,10 @@ q_command:register_wall_tile("q_command_dirac_sqrt_1_2")
 q_command:register_wall_tile("q_command_dirac_sqrt_1_4")
 q_command:register_wall_tile("q_command_dirac_sqrt_1_2_vert")
 q_command:register_wall_tile("q_command_dirac_sqrt_1_4_vert")
+
+q_command:register_wall_tile("q_command_dirac_plus_state")
+q_command:register_wall_tile("q_command_dirac_minus_state")
+q_command:register_wall_tile("q_command_dirac_equal_sign")
 
 q_command:register_wall_tile("q_command_state_1qb_0")
 q_command:register_wall_tile("q_command_state_1qb_1")
