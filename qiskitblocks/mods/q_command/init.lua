@@ -1970,14 +1970,9 @@ If want an escape room-like experience, check out the puzzle rooms at
 the bottom of the ladder located in this building.
 
 Wherever you choose to begin, please be sure to right-click the Help
-buttons (labeled with a question mark) as you encounter them.
-
-Wherever you go, remember that the sun may eventually set for a while.
-To skip a night-cycle, just right-click a nearby bed and you will
-immediately wake up the next morning. You may also grab a yellow lamp
-from a chest to shed some light at night.
+buttons (labeled with a question mark) as you encounter them. Good luck!
 ]]
-q_command:register_help_button("quantum_circuit_world", "Quantum circuit world", q_command.texts.quantum_circuit_world)
+q_command:register_help_button("quantum_circuit_world", "Read me first!", q_command.texts.quantum_circuit_world)
 
 
 q_command.texts.x_rx_gates =
@@ -2860,8 +2855,9 @@ q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
 
 q_command.texts.h_z_gate =
 [[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |0> - sqrt(1/2) |1>, which is commonly referred to as |->
+TLDR: Using a Z gate and one other gate, make the blue liquid levels
+correspond to a quantum state of sqrt(1/2) |0> - sqrt(1/2) |1>, which is
+commonly referred to as |->
 ----
 
 This circuit, consisting of only one wire, demonstrates how a block
@@ -2885,7 +2881,7 @@ reflect these probabilities and phases.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("h_z_gate", "Make a quantum state of |->", q_command.texts.h_z_gate)
+q_command:register_help_button("h_z_gate", "Make a quantum state of |-> using gates including Z", q_command.texts.h_z_gate)
 local solution_statevector_h_z_gate =
 {
 	{
@@ -3021,9 +3017,71 @@ local solution_statevector_hxx_gates =
 	}
 }
 q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
-        solution_statevector_hxx_gates, true, {x = 266, y = 0, z = 67})
+        solution_statevector_hxx_gates, true)
 q_command:register_q_command_block( "hxx_gates_success", "hxx_gates",
-        solution_statevector_hxx_gates, false, {x = 266, y = 0, z = 67})
+        solution_statevector_hxx_gates, false)
+
+
+q_command.texts.hxx_gates_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |001> + sqrt(1/2) |101>
+----
+
+This circuit leverages Hadamard and X gates to create a quantum state in
+which the measurement results |001> and |101> are equally likely, and no
+other measurement results are possible. This quantum state could be
+expressed as |001> + |101>
+
+To solve this circuit puzzle, place an H gate and an X gate on the
+appropriate wires.
+
+Hint: Use what you already have learned about the behaviors of H and X
+gates on single-wire circuits.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("hxx_gates_escape", "Make |001> + |101> quantum state",
+        q_command.texts.hxx_gates_escape)
+local solution_statevector_hxx_gates_escape =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
+        solution_statevector_hxx_gates_escape, true, {x = 266, y = 0, z = 67})
+q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
+        solution_statevector_hxx_gates_escape, false, {x = 266, y = 0, z = 67})
 
 
 q_command.texts.bell_phi_plus =
@@ -3317,10 +3375,59 @@ local solution_statevector_equal_super_2wire =
 		i = 0
 	}
 }
-q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, true, {x = 270, y = 0, z = 77})
-q_command:register_q_command_block( "equal_super_2wire_success", "equal_super_2wire",
-        solution_statevector_equal_super_2wire, false, {x = 270, y = 0, z = 77})
+q_command:register_q_command_block( "equal_super_2wire_success",
+        "equal_super_2wire",
+        solution_statevector_equal_super_2wire, true)
+q_command:register_q_command_block( "equal_super_2wire_success",
+        "equal_super_2wire",
+        solution_statevector_equal_super_2wire, false)
+
+
+q_command.texts.equal_super_2wire_escape =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state, commonly referred to as an equal superposition:
+sqrt(1/4) |00> + sqrt(1/4) |01> + sqrt(1/4) |10> + sqrt(1/4) |11>
+----
+
+This circuit leverages two Hadamard gates to create an equal
+superposition of |00>, |01>, |10>, and |11>. To solve this circuit
+puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed
+and added. This pattern of placing an H gate on each wire of a circuit
+is commonly used to create a superposition consisting of 2^numQubits
+states.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("equal_super_2wire_escape", "Equal superposition with two qubits", q_command.texts.equal_super_2wire_escape)
+local solution_statevector_equal_super_2wire_escape =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "equal_super_2wire_escape_success",
+        "equal_super_2wire_escape",
+        solution_statevector_equal_super_2wire_escape, true,
+        {x = 270, y = 0, z = 77})
+q_command:register_q_command_block( "equal_super_2wire_escape_success",
+        "equal_super_2wire_escape",
+        solution_statevector_equal_super_2wire_escape, false,
+        {x = 270, y = 0, z = 77})
 
 
 q_command.texts.rotate_yz_gates_puzzle =
@@ -3525,13 +3632,10 @@ minetest.register_on_joinplayer(function(player)
 		minetest.show_formspec(player:get_player_name(), "intro", formspec)
 	end
 
-    --[[
-    TODO: Put back in somewhere
     local inv = player:get_inventory()
     local inv_main_size = inv:get_size("main")
     inv:set_size("main", 0)
     inv:set_size("main", inv_main_size)
-    --]]
 end)
 
 
@@ -3678,6 +3782,7 @@ q_command:register_wall_tile("q_command_state_4qb_14")
 q_command:register_wall_tile("q_command_state_4qb_15")
 
 q_command:register_wall_tile("q_command_esc_room_exit_wall_tile")
+q_command:register_wall_tile("q_command_read_first_wall_tile")
 q_command:register_wall_tile("q_command_bloch_minus_state_wall_tile")
 
 q_command:register_wall_tile("q_command_silver_sandstone_wall_tile")
