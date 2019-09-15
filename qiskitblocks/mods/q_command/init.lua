@@ -1769,6 +1769,29 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
     })
 end
 
+minetest.register_node("q_command:q_command_liquid_full_0_rad", {
+    description = "Faux liquid block full, 0 radians",
+    tiles = {"q_command_liquid_full_0_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+})
+
+minetest.register_node("q_command:q_command_liquid_half_0_rad", {
+    description = "Faux liquid block half, 0 radians",
+    tiles = {"q_command_liquid_half_0_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+})
+
+minetest.register_node("q_command:q_command_liquid_half_pi_rad", {
+    description = "Faux liquid block half, pi radians",
+    tiles = {"q_command_liquid_half_pi_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+})
+
+minetest.register_node("q_command:q_command_liquid_quarter_0_rad", {
+    description = "Faux liquid block quarter, 0 radians",
+    tiles = {"q_command_liquid_quarter_0_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+})
 
 function q_command:register_wall_tile(texture_name)
 --    local texture_name = "q_command_dirac_" .. suffix
@@ -1778,9 +1801,9 @@ function q_command:register_wall_tile(texture_name)
         tiles = {texture_name .. ".png"},
         inventory_image = texture_name .. ".png",
         wield_image = texture_name .. ".png",
-        paramtype = "light",
+        --paramtype = "light",
         paramtype2 = "wallmounted",
-        sunlight_propagates = true,
+        sunlight_propagates = false,
         walkable = false,
         climbable = true,
         is_ground_content = false,
@@ -2837,9 +2860,8 @@ q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
 
 q_command.texts.h_z_gate =
 [[
-TLDR: Using only H and Z gates, make the blue liquid levels correspond
-to a quantum state of sqrt(1/2) |0> - sqrt(1/2) |1>. Notice how the
-Bloch sphere reflects the state of the qubit as gates are placed.
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |0> - sqrt(1/2) |1>, which is commonly referred to as |->
 ----
 
 This circuit, consisting of only one wire, demonstrates how a block
@@ -2863,7 +2885,7 @@ reflect these probabilities and phases.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("h_z_gate", "H and Z gates", q_command.texts.h_z_gate)
+q_command:register_help_button("h_z_gate", "Make a quantum state of |->", q_command.texts.h_z_gate)
 local solution_statevector_h_z_gate =
 {
 	{
@@ -3657,6 +3679,8 @@ q_command:register_wall_tile("q_command_state_4qb_15")
 
 q_command:register_wall_tile("q_command_esc_room_exit_wall_tile")
 q_command:register_wall_tile("q_command_bloch_minus_state_wall_tile")
+
+q_command:register_wall_tile("q_command_silver_sandstone_wall_tile")
 
 local NUM_ESCAPE_ROOMS = 16
 for idx = 1, NUM_ESCAPE_ROOMS do
