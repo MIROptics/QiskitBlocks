@@ -1771,30 +1771,54 @@ end
 
 minetest.register_node("q_command:q_command_liquid_full_0_rad", {
     description = "Faux liquid block full, 0 radians",
-    tiles = {"q_command_liquid_full_0_rad.png"},
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_full_0_rad.png"},
     groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
 minetest.register_node("q_command:q_command_liquid_half_0_rad", {
     description = "Faux liquid block half, 0 radians",
-    tiles = {"q_command_liquid_half_0_rad.png"},
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_half_0_rad.png"},
     groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
 minetest.register_node("q_command:q_command_liquid_half_pi_rad", {
     description = "Faux liquid block half, pi radians",
-    tiles = {"q_command_liquid_half_pi_rad.png"},
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_half_pi_rad.png"},
     groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
 minetest.register_node("q_command:q_command_liquid_quarter_0_rad", {
     description = "Faux liquid block quarter, 0 radians",
-    tiles = {"q_command_liquid_quarter_0_rad.png"},
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_quarter_0_rad.png"},
     groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
+--[[
 function q_command:register_wall_tile(texture_name)
---    local texture_name = "q_command_dirac_" .. suffix
     minetest.register_node("q_command:dr_" .. texture_name, {
         description = "Dirac " .. texture_name,
 	    drawtype = "signlike",
@@ -1812,6 +1836,21 @@ function q_command:register_wall_tile(texture_name)
         },
         legacy_wallmounted = true,
         groups = {oddly_breakable_by_hand=2}
+    })
+end
+--]]
+
+function q_command:register_wall_block(texture_name)
+    minetest.register_node("q_command:dr_" .. texture_name, {
+        description = "Wall block " .. texture_name,
+        tiles = {"q_command_silver_sandstone_wall_tile.png",
+                 "q_command_silver_sandstone_wall_tile.png",
+                 "q_command_silver_sandstone_wall_tile.png",
+                 "q_command_silver_sandstone_wall_tile.png",
+                 "q_command_silver_sandstone_wall_tile.png",
+                 texture_name .. ".png",},
+        groups = {oddly_breakable_by_hand=2},
+        paramtype2 = "facedir"
     })
 end
 
@@ -3727,69 +3766,69 @@ for idx = 0, ROTATION_RESOLUTION do
     q_command:register_statevector_liquid_block(idx)
 end
 
-q_command:register_wall_tile("q_command_dirac_blank")
-q_command:register_wall_tile("q_command_dirac_vert")
-q_command:register_wall_tile("q_command_dirac_rangle")
-q_command:register_wall_tile("q_command_dirac_plus")
-q_command:register_wall_tile("q_command_dirac_minus")
-q_command:register_wall_tile("q_command_dirac_rangle_plus")
-q_command:register_wall_tile("q_command_dirac_rangle_minus")
-q_command:register_wall_tile("q_command_dirac_rangle_space_vert")
-q_command:register_wall_tile("q_command_dirac_rangle_plus_vert")
-q_command:register_wall_tile("q_command_dirac_rangle_minus_vert")
+q_command:register_wall_block("q_command_dirac_blank")
+q_command:register_wall_block("q_command_dirac_vert")
+q_command:register_wall_block("q_command_dirac_rangle")
+q_command:register_wall_block("q_command_dirac_plus")
+q_command:register_wall_block("q_command_dirac_minus")
+q_command:register_wall_block("q_command_dirac_rangle_plus")
+q_command:register_wall_block("q_command_dirac_rangle_minus")
+q_command:register_wall_block("q_command_dirac_rangle_space_vert")
+q_command:register_wall_block("q_command_dirac_rangle_plus_vert")
+q_command:register_wall_block("q_command_dirac_rangle_minus_vert")
 --q_command:register_wall_tile("sqrt")
-q_command:register_wall_tile("q_command_dirac_sqrt_1_2")
-q_command:register_wall_tile("q_command_dirac_sqrt_1_4")
-q_command:register_wall_tile("q_command_dirac_sqrt_1_2_vert")
-q_command:register_wall_tile("q_command_dirac_sqrt_1_4_vert")
+q_command:register_wall_block("q_command_dirac_sqrt_1_2")
+q_command:register_wall_block("q_command_dirac_sqrt_1_4")
+q_command:register_wall_block("q_command_dirac_sqrt_1_2_vert")
+q_command:register_wall_block("q_command_dirac_sqrt_1_4_vert")
 
-q_command:register_wall_tile("q_command_dirac_plus_state")
-q_command:register_wall_tile("q_command_dirac_minus_state")
-q_command:register_wall_tile("q_command_dirac_equal_sign")
+q_command:register_wall_block("q_command_dirac_plus_state")
+q_command:register_wall_block("q_command_dirac_minus_state")
+q_command:register_wall_block("q_command_dirac_equal_sign")
 
-q_command:register_wall_tile("q_command_state_1qb_0")
-q_command:register_wall_tile("q_command_state_1qb_1")
+q_command:register_wall_block("q_command_state_1qb_0")
+q_command:register_wall_block("q_command_state_1qb_1")
 
-q_command:register_wall_tile("q_command_state_2qb_0")
-q_command:register_wall_tile("q_command_state_2qb_1")
-q_command:register_wall_tile("q_command_state_2qb_2")
-q_command:register_wall_tile("q_command_state_2qb_3")
+q_command:register_wall_block("q_command_state_2qb_0")
+q_command:register_wall_block("q_command_state_2qb_1")
+q_command:register_wall_block("q_command_state_2qb_2")
+q_command:register_wall_block("q_command_state_2qb_3")
 
-q_command:register_wall_tile("q_command_state_3qb_0")
-q_command:register_wall_tile("q_command_state_3qb_1")
-q_command:register_wall_tile("q_command_state_3qb_2")
-q_command:register_wall_tile("q_command_state_3qb_3")
-q_command:register_wall_tile("q_command_state_3qb_4")
-q_command:register_wall_tile("q_command_state_3qb_5")
-q_command:register_wall_tile("q_command_state_3qb_6")
-q_command:register_wall_tile("q_command_state_3qb_7")
+q_command:register_wall_block("q_command_state_3qb_0")
+q_command:register_wall_block("q_command_state_3qb_1")
+q_command:register_wall_block("q_command_state_3qb_2")
+q_command:register_wall_block("q_command_state_3qb_3")
+q_command:register_wall_block("q_command_state_3qb_4")
+q_command:register_wall_block("q_command_state_3qb_5")
+q_command:register_wall_block("q_command_state_3qb_6")
+q_command:register_wall_block("q_command_state_3qb_7")
 
-q_command:register_wall_tile("q_command_state_4qb_0")
-q_command:register_wall_tile("q_command_state_4qb_1")
-q_command:register_wall_tile("q_command_state_4qb_2")
-q_command:register_wall_tile("q_command_state_4qb_3")
-q_command:register_wall_tile("q_command_state_4qb_4")
-q_command:register_wall_tile("q_command_state_4qb_5")
-q_command:register_wall_tile("q_command_state_4qb_6")
-q_command:register_wall_tile("q_command_state_4qb_7")
-q_command:register_wall_tile("q_command_state_4qb_8")
-q_command:register_wall_tile("q_command_state_4qb_9")
-q_command:register_wall_tile("q_command_state_4qb_10")
-q_command:register_wall_tile("q_command_state_4qb_11")
-q_command:register_wall_tile("q_command_state_4qb_12")
-q_command:register_wall_tile("q_command_state_4qb_13")
-q_command:register_wall_tile("q_command_state_4qb_14")
-q_command:register_wall_tile("q_command_state_4qb_15")
+q_command:register_wall_block("q_command_state_4qb_0")
+q_command:register_wall_block("q_command_state_4qb_1")
+q_command:register_wall_block("q_command_state_4qb_2")
+q_command:register_wall_block("q_command_state_4qb_3")
+q_command:register_wall_block("q_command_state_4qb_4")
+q_command:register_wall_block("q_command_state_4qb_5")
+q_command:register_wall_block("q_command_state_4qb_6")
+q_command:register_wall_block("q_command_state_4qb_7")
+q_command:register_wall_block("q_command_state_4qb_8")
+q_command:register_wall_block("q_command_state_4qb_9")
+q_command:register_wall_block("q_command_state_4qb_10")
+q_command:register_wall_block("q_command_state_4qb_11")
+q_command:register_wall_block("q_command_state_4qb_12")
+q_command:register_wall_block("q_command_state_4qb_13")
+q_command:register_wall_block("q_command_state_4qb_14")
+q_command:register_wall_block("q_command_state_4qb_15")
 
-q_command:register_wall_tile("q_command_esc_room_exit_wall_tile")
-q_command:register_wall_tile("q_command_read_first_wall_tile")
-q_command:register_wall_tile("q_command_bloch_minus_state_wall_tile")
+q_command:register_wall_block("q_command_esc_room_exit_wall_tile")
+q_command:register_wall_block("q_command_read_first_wall_tile")
+q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
 
-q_command:register_wall_tile("q_command_silver_sandstone_wall_tile")
+q_command:register_wall_block("q_command_silver_sandstone_wall_tile")
 
 local NUM_ESCAPE_ROOMS = 16
 for idx = 1, NUM_ESCAPE_ROOMS do
-    q_command:register_wall_tile("q_command_esc_room_" .. tostring(idx) .. "_16")
+    q_command:register_wall_block("q_command_esc_room_" .. tostring(idx) .. "_16")
 end
 
 
