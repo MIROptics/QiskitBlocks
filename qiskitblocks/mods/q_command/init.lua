@@ -1817,6 +1817,18 @@ minetest.register_node("q_command:q_command_liquid_quarter_0_rad", {
     paramtype2 = "facedir"
 })
 
+minetest.register_node("q_command:q_command_liquid_eighth_0_rad", {
+    description = "Faux liquid block eighth, 0 radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_eighth_0_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 --[[
 function q_command:register_wall_tile(texture_name)
     minetest.register_node("q_command:dr_" .. texture_name, {
@@ -3469,6 +3481,69 @@ q_command:register_q_command_block( "equal_super_2wire_escape_success",
         {x = 270, y = 0, z = 77})
 
 
+q_command.texts.equal_super_3wire_escape =
+[[
+TLDR: Make the blue liquid levels correspond to an equal superposition
+of its eight basis states.
+----
+
+This circuit leverages two Hadamard gates to create an equal
+superposition of |000>, |001>, |010>, |011>, |100>, |101>, |110> and
+|111>. A convenient way to express this state is to use the math sum
+symbol as shown on the wall. To solve this circuit puzzle, place an H
+block on each wire. Notice how the outcome probabilities and measurement
+results change as these gates are removed and added. This pattern of
+placing an H gate on each wire of a circuit is commonly used to create a
+superposition consisting of 2^numQubits states.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("equal_super_3wire_escape", "Equal superposition with two qubits", q_command.texts.equal_super_3wire_escape)
+local solution_statevector_equal_super_3wire_escape =
+{
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	},
+	{
+		r = 0.354,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "equal_super_3wire_escape_success",
+        "equal_super_3wire_escape",
+        solution_statevector_equal_super_3wire_escape, true,
+        {x = 270, y = 0, z = 87})
+q_command:register_q_command_block( "equal_super_3wire_escape_success",
+        "equal_super_3wire_escape",
+        solution_statevector_equal_super_3wire_escape, false,
+        {x = 270, y = 0, z = 87})
+
+
 q_command.texts.rotate_yz_gates_puzzle =
 [[
 The Rx and X gates rotate a qubit state around the X axis of a Bloch
@@ -3779,12 +3854,20 @@ q_command:register_wall_block("q_command_dirac_rangle_minus_vert")
 --q_command:register_wall_tile("sqrt")
 q_command:register_wall_block("q_command_dirac_sqrt_1_2")
 q_command:register_wall_block("q_command_dirac_sqrt_1_4")
+q_command:register_wall_block("q_command_dirac_sqrt_1_8")
 q_command:register_wall_block("q_command_dirac_sqrt_1_2_vert")
 q_command:register_wall_block("q_command_dirac_sqrt_1_4_vert")
+q_command:register_wall_block("q_command_dirac_sqrt_1_8_vert")
 
 q_command:register_wall_block("q_command_dirac_plus_state")
 q_command:register_wall_block("q_command_dirac_minus_state")
+q_command:register_wall_block("q_command_dirac_i_state")
 q_command:register_wall_block("q_command_dirac_equal_sign")
+
+q_command:register_wall_block("q_command_dirac_111_bottom")
+q_command:register_wall_block("q_command_dirac_i_eq_000_top")
+
+q_command:register_wall_block("q_command_math_sum")
 
 q_command:register_wall_block("q_command_state_1qb_0")
 q_command:register_wall_block("q_command_state_1qb_1")
