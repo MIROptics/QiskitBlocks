@@ -3188,6 +3188,64 @@ q_command:register_q_command_block( "bell_phi_plus_success", "bell_phi_plus",
         solution_statevector_bell_phi_plus, false)
 
 
+q_command.texts.bell_phi_plus_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |00> + sqrt(1/2) |11> which is referred to as the phi+ Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+The most well-known Bell state, symbolized by phi+, may be
+realized with a Hadamard gate and a CNOT gate. The CNOT gate is a
+two-wire gate that has the appearance of cross-hairs and a vertical line
+with a dot. The cross-hairs symbol has the functionality of the X gate,
+with the difference being that it is conditional on the state of the
+other wire, performing the NOT operation whenever the other wire is |1>.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct phi+ Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward.
+
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, left-click until the control qubit is on the same
+wire as the Hadamard gate.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("bell_phi_plus_escape", "Make the phi+ Bell state", q_command.texts.bell_phi_plus_escape)
+local solution_statevector_bell_phi_plus_escape =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
+        solution_statevector_bell_phi_plus_escape, true,{x = 263, y = 0, z = 94})
+q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
+        solution_statevector_bell_phi_plus_escape, false,{x = 263, y = 0, z = 94})
+
+
 q_command.texts.bell_phi_minus =
 [[
 The four simplest examples of quantum entanglement are the Bell states.
@@ -3230,6 +3288,55 @@ q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
         solution_statevector_bell_phi_minus, true)
 q_command:register_q_command_block( "bell_phi_minus_success", "bell_phi_minus",
         solution_statevector_bell_phi_minus, false)
+
+
+q_command.texts.bell_phi_minus_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |00> - sqrt(1/2) |11> which is referred to as the phi- Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by phi- (phi minus), may be realized
+by placing an X gate on the top wire, and adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct phi- Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
+phase of pi radians.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("bell_phi_minus_escape", "Make the phi- Bell state", q_command.texts.bell_phi_minus_escape)
+local solution_statevector_bell_phi_minus_escape =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = -0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
+        solution_statevector_bell_phi_minus_escape, true,{x = 256, y = 0, z = 87})
+q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
+        solution_statevector_bell_phi_minus_escape, false,{x = 256, y = 0, z = 87})
 
 
 q_command.texts.bell_psi_plus =
@@ -3277,6 +3384,56 @@ q_command:register_q_command_block( "bell_psi_plus_success", "bell_psi_plus",
         solution_statevector_bell_psi_plus, false)
 
 
+q_command.texts.bell_psi_plus_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |01> + sqrt(1/2) |10> which is referred to as the psi+ Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by psi+ (psi plus), may be realized
+by placing an X gate on the second wire, and adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate,
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct psi+ Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. The psi+ Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("bell_psi_plus_escape", "Make the psi+ Bell state", q_command.texts.bell_psi_plus_escape)
+local solution_statevector_bell_psi_plus_escape =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
+        solution_statevector_bell_psi_plus_escape, true,{x = 253, y = 0, z = 80})
+q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
+        solution_statevector_bell_psi_plus_escape, false,{x = 253, y = 0, z = 80})
+
+
 q_command.texts.bell_psi_minus =
 [[
 The four simplest examples of quantum entanglement are the Bell states.
@@ -3322,6 +3479,58 @@ q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
         solution_statevector_bell_psi_minus, true)
 q_command:register_q_command_block( "bell_psi_minus_success", "bell_psi_minus",
         solution_statevector_bell_psi_minus, false)
+
+
+q_command.texts.bell_psi_minus_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |01> - sqrt(1/2) |10> which is referred to as the psi- Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by psi- (psi minus), may be realized
+by placing an X gate on the second wire, adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate,
+and adding a Z gate to the second wire after the phi+ Bell state circuit.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct psi- Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
+phase of pi radians. The psi- Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("bell_psi_minus_escape", "Make the psi- Bell state", q_command.texts.bell_psi_minus_escape)
+local solution_statevector_bell_psi_minus_escape =
+{
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = -0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
+        solution_statevector_bell_psi_minus_escape, true,{x = 250, y = 0, z = 87})
+q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
+        solution_statevector_bell_psi_minus_escape, false,{x = 250, y = 0, z = 87})
 
 
 q_command.texts.ghz_state =
@@ -3387,6 +3596,75 @@ q_command:register_q_command_block( "ghz_state_success", "ghz_state",
         solution_statevector_ghz_state, true)
 q_command:register_q_command_block( "ghz_state_success", "ghz_state",
         solution_statevector_ghz_state, false)
+
+
+q_command.texts.ghz_state_escape =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |000> - sqrt(1/2) |111> which is referred to as the GHZ state.
+----
+
+GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving
+three or more qubits, where the basis states involved contain all zeros
+or all ones. For example, the entangled state in this three-wire circuit
+puzzle has equal probabilities of being measured as |000> and |111>.
+Please refer to the Bell state circuit puzzles for more information on
+entanglement.
+
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, convert it to a CNOT gate by left-clicking, until
+the control qubit is on the same wire as the Hadamard gate. Repeat this
+process to place another CNOT gate whose X gate is on the third wire and
+control qubit is on the top wire.
+
+Note that measuring the circuit (by right-clicking the measurement
+blocks) results in either |000> or |111> each time.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("ghz_state_escape", "Make the GHZ state", q_command.texts.ghz_state_escape)
+local solution_statevector_ghz_state_escape =
+{
+	{
+		r = 0.707,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.707,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
+        solution_statevector_ghz_state_escape, true, {x = 243, y = 0, z = 94})
+q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
+        solution_statevector_ghz_state_escape, false, {x = 243, y = 0, z = 94})
 
 
 q_command.texts.equal_super_2wire =
