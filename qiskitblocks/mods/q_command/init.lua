@@ -1817,6 +1817,30 @@ minetest.register_node("q_command:q_command_liquid_quarter_0_rad", {
     paramtype2 = "facedir"
 })
 
+minetest.register_node("q_command:q_command_liquid_quarter_pi_2_rad", {
+    description = "Faux liquid block quarter, pi/2 radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_quarter_pi_2_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
+minetest.register_node("q_command:q_command_liquid_quarter_3pi_2_rad", {
+    description = "Faux liquid block quarter, 3pi/2 radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_quarter_3pi_2_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 minetest.register_node("q_command:q_command_liquid_eighth_0_rad", {
     description = "Faux liquid block eighth, 0 radians",
     tiles = {"q_command_silver_sandstone_wall_tile.png",
@@ -3935,6 +3959,56 @@ q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzl
         solution_statevector_swap_gate_puzzle, false)
 
 
+q_command.texts.phase_rot_2wire_escape =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state:
+sqrt(1/4) |00> + sqrt(1/4) e^i pi/2 |01> +
+sqrt(1/4) e^i 3pi/2 |10> + sqrt(1/4) |11>
+----
+
+This circuit leverages Hadamard gates and Rz gates to create a state
+that has equal probabilities of measuring |00>, |01>, |10> and |11>,
+with these basis states having various phase rotations. To solve this
+circuit puzzle, place an Rz between two H blocks on each wire. Then
+rotate the Rx gated by left and right-clicking them until the desired
+state is achieved. Notice that phase (Z axis) rotations that you apply
+become rotations on the X axis when sandwiched in-between Hadamard gates,
+converting changes in phase to changes in measurement probabilities.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("phase_rot_2wire_escape",
+        "Convert phase rotations into measurement probabilities", q_command.texts.phase_rot_2wire_escape)
+local solution_statevector_phase_rot_2wire_escape =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = -0,
+		i = 0.5
+	},
+	{
+		r = 0,
+		i = -0.5
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "phase_rot_2wire_escape_success",
+        "phase_rot_2wire_escape",
+        solution_statevector_phase_rot_2wire_escape, true,
+        {x = 236, y = 0, z = 87})
+q_command:register_q_command_block( "phase_rot_2wire_escape_success",
+        "phase_rot_2wire_escape",
+        solution_statevector_phase_rot_2wire_escape, false,
+        {x = 236, y = 0, z = 87})
+
+
 q_command.texts.deutsch_algo_puzzle =
 [[
 The Deutsch algorithm, first published in 1985, is the Hello World of
@@ -4146,6 +4220,8 @@ q_command:register_wall_block("q_command_dirac_111_bottom")
 q_command:register_wall_block("q_command_dirac_i_eq_000_top")
 
 q_command:register_wall_block("q_command_math_sum")
+q_command:register_wall_block("q_command_math_e_i_pi_2")
+q_command:register_wall_block("q_command_math_e_i_3pi_2")
 
 q_command:register_wall_block("q_command_state_1qb_0")
 q_command:register_wall_block("q_command_state_1qb_1")
