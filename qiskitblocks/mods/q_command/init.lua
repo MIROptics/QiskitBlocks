@@ -3983,6 +3983,45 @@ q_command:register_q_command_block( "swap_gate_puzzle_success", "swap_gate_puzzl
         solution_statevector_swap_gate_puzzle, false)
 
 
+q_command.texts.y_z_rot_1wire_escape =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state:
+sqrt(0.85) |0> + sqrt(0.15) e^i pi/2 |1>
+----
+
+This circuit leverages Ry and Rz gates to create a state that has approx
+85% probability of measuring |0> and approx 15% probability of measuring
+|1>. The latter basis states has a phase of pi/2. To solve this
+circuit puzzle, place Ry and Rz gates on the wire, and change their
+rotation angles by left and right-clicking the rotate tool until the
+desired state is achieved.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command:register_help_button("y_z_rot_1wire_escape",
+        "Rotate a qubit into a desired state", q_command.texts.y_z_rot_1wire_escape)
+local solution_statevector_y_z_rot_1wire_escape =
+{
+	{
+		r = 0.924,
+		i = 0
+	},
+	{
+		r = -0,
+		i = 0.383
+	}
+}
+q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
+        "y_z_rot_1wire_escape",
+        solution_statevector_y_z_rot_1wire_escape, true,
+        {x = 236, y = 0, z = 87})
+q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
+        "y_z_rot_1wire_escape",
+        solution_statevector_y_z_rot_1wire_escape, false,
+        {x = 236, y = 0, z = 87})
+
+
 q_command.texts.phase_rot_2wire_escape =
 [[
 TLDR: Make the blue liquid levels correspond to the following quantum
@@ -4026,11 +4065,11 @@ local solution_statevector_phase_rot_2wire_escape =
 q_command:register_q_command_block( "phase_rot_2wire_escape_success",
         "phase_rot_2wire_escape",
         solution_statevector_phase_rot_2wire_escape, true,
-        {x = 236, y = 0, z = 87})
+        {x = 240, y = 0, z = 77})
 q_command:register_q_command_block( "phase_rot_2wire_escape_success",
         "phase_rot_2wire_escape",
         solution_statevector_phase_rot_2wire_escape, false,
-        {x = 236, y = 0, z = 87})
+        {x = 240, y = 0, z = 77})
 
 
 q_command.texts.deutsch_algo_puzzle =
