@@ -1853,6 +1853,30 @@ minetest.register_node("q_command:q_command_liquid_eighth_0_rad", {
     paramtype2 = "facedir"
 })
 
+minetest.register_node("q_command:q_command_liquid_85pc_0_rad", {
+    description = "Faux liquid block 85%, 0 radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_85pc_0_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
+minetest.register_node("q_command:q_command_liquid_15pc_pi_2_rad", {
+    description = "Faux liquid block 15%, pi/2 radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_15pc_pi_2_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 --[[
 function q_command:register_wall_tile(texture_name)
     minetest.register_node("q_command:dr_" .. texture_name, {
@@ -4207,6 +4231,8 @@ q_command:register_wall_block("q_command_dirac_rangle_minus_vert")
 q_command:register_wall_block("q_command_dirac_sqrt_1_2")
 q_command:register_wall_block("q_command_dirac_sqrt_1_4")
 q_command:register_wall_block("q_command_dirac_sqrt_1_8")
+q_command:register_wall_block("q_command_dirac_sqrt_15")
+q_command:register_wall_block("q_command_dirac_sqrt_85")
 q_command:register_wall_block("q_command_dirac_sqrt_1_2_vert")
 q_command:register_wall_block("q_command_dirac_sqrt_1_4_vert")
 q_command:register_wall_block("q_command_dirac_sqrt_1_8_vert")
@@ -4221,6 +4247,7 @@ q_command:register_wall_block("q_command_dirac_i_eq_000_top")
 
 q_command:register_wall_block("q_command_math_sum")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
+q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
 
 q_command:register_wall_block("q_command_state_1qb_0")
