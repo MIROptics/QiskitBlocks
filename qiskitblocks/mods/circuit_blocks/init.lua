@@ -18,7 +18,7 @@ limitations under the License.
 --[[
 TODO:
 [] Address The inventory list "main" @ "current_player" doesn't exist error
-
+[] Put X on back of Exit door sign
 [] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Identify debug logging strategy
 [.] Increase time for tools to appear to 30 seconds.
