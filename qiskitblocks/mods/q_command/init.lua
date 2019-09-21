@@ -3846,7 +3846,7 @@ superposition consisting of 2^numQubits states.
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command:register_help_button("equal_super_3wire_escape", "Equal superposition with two qubits", q_command.texts.equal_super_3wire_escape)
+q_command:register_help_button("equal_super_3wire_escape", "Equal superposition with three qubits", q_command.texts.equal_super_3wire_escape)
 local solution_statevector_equal_super_3wire_escape =
 {
 	{
@@ -4606,6 +4606,7 @@ q_command:register_wall_block("q_command_state_4qb_14")
 q_command:register_wall_block("q_command_state_4qb_15")
 
 q_command:register_wall_block("q_command_esc_room_exit_wall_tile")
+q_command:register_wall_block("q_command_esc_room_exit_left")
 q_command:register_wall_block("q_command_read_first_wall_tile")
 q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
 

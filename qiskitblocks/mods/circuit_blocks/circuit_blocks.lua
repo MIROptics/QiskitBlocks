@@ -893,7 +893,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                                z_pi8rot)
     local texture_name = ""
     if circuit_node_type == CircuitNodeTypes.EMPTY then
-        texture_name = "circuit_blocks_empty_wire"
+        texture_name = "circuit_blocks_empty_wire" .. suffix
     elseif circuit_node_type == CircuitNodeTypes.X then
         texture_name = "circuit_blocks_x_gate"
         --if pi16rotation ~= 0 then
@@ -1518,7 +1518,7 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
                                     block.get_circuit_num_columns() + 1 == block.get_node_pos().x
                         end
 
-                        if is_rightmost_column then
+                        if is_rightmost_column or player:get_player_control().aux1 then
                             circuit_blocks:set_node_with_circuit_specs_meta(pos,
                                     wielded_item:get_name(), player)
                         else

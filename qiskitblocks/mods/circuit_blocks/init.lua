@@ -298,7 +298,9 @@ minetest.register_tool("circuit_blocks:swap_tool", {
 })
 
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false, "", "")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false, "", "_dashed")
+circuit_blocks:register_circuit_block(CircuitNodeTypes.EMPTY, false, false, 0, false, "", "_grayed")
 
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, false, false, 16, true)
 circuit_blocks:register_circuit_block(CircuitNodeTypes.X, true, true, 16, true)
