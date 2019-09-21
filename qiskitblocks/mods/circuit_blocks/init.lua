@@ -17,48 +17,19 @@ limitations under the License.
 
 --[[
 TODO:
-[] Address The inventory list "main" @ "current_player" doesn't exist error
-[] Put X on back of Exit door sign
+[] Drop award and play longer congrats music when 16 puzzles are solved
 [] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Identify debug logging strategy
-[.] Increase time for tools to appear to 30 seconds.
-[.] Make minecarts stay in-world (whitelist in xschem)
-[.] Make sneak code into aux code
-    [.] Modify help text to reflect aux key
-    [] Ask "are you sure" before deleting entire circuit, or put in right-click dialog?
-[.] Give more Q blocks,
-    [] perhaps earning them by solving puzzles
-[] Update world with updated help signs (for wire_extender_block and q_block)
 [] Stop auto-rotations after one minute, or when leaving game
-
-[] Open/close doors when circuit correct/incorrect
-[] Register escape room door without altering door mod (check forum for replies)
-
-[] Implement TLDR instructions at top of ? signs
-
-[] put kets on basis states blocks
-[] put Dirac blocks on wall plates
 [] Put more code in "if door_pos then" (that obviates need for so many nil checks)
-[] create separate puzzles for garden and escape rooms
 [] refactor and modularize q_command
 [] address Android fast mode == special/aux key
-
 [] Display measurement on Bloch sphere
 [] Shift tiny measurement symbols on results over one pixel to left
-
 [] Incorporate Maddy Tod qubit-HSV mapping
 [] Incorporate Maddy Tod Tic-Tac-Toe game
-
-[] Automate replacing copper with bronze blocks? (Only have to replace the block under rotate tool)
-[] Add link to Minetest Tutorial, and more in-world instructions on getting around Minetest
-[] Copy to OpenQASM and put pointers to running it in IQX
-    - (signing up for Q Experience), training, etc. as next steps
-[] Don't allow bloch sphere blocks to be placed directly?
-[] Check into readonly textarea instead of a table, see
-    https://github.com/minetest/minetest/blob/ded5da780002c17f2079a1d8ea09eb923a3b5e8f/doc/lua_api.txt#L2122-L2127.
-[] For the named gates like Hadamard it could be nice to have their name in the tooltips for searching
+[] Give more in-world instructions on getting around Minetest
 [] Make use of health indicator and design gameplay with mobs, etc.
-[] Find out how to give players initial inventory, and/or to stock the chests
 [] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
