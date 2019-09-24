@@ -4364,7 +4364,8 @@ local solution_statevector_phase_rot_2wire_escape =
 		i = 0
 	}
 }
-local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
+--local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
+local door_pos_phase_rot_2wire_escape = {x = 240, y = 0, z = 77}
 local chest_pos_phase_rot_2wire_escape = {x = 234, y = 0, z = 84}
 local chest_inv_phase_rot_2wire_escape = {
     inventory = {
