@@ -1308,7 +1308,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local statevector = q_command:parse_json_statevector(sv_data)
 
-                            -- minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
@@ -1343,17 +1343,17 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                     door:open(nil)
                                 end
 
-                                -- Restock the chest
+                                -- If there is a chest, erase player inventory and
+                                -- restock the chest
                                 if chest_pos and chest_inv then
                                     local chest_meta = minetest.get_meta(chest_pos)
                                     chest_meta:from_table(chest_inv)
-                                end
 
-                                -- Erase player inventory
-                                local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
-                                local player_inv_main_size = player_inv:get_size("main")
-                                player_inv:set_size("main", 0)
-                                player_inv:set_size("main", player_inv_main_size)
+                                    local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
+                                    local player_inv_main_size = player_inv:get_size("main")
+                                    player_inv:set_size("main", 0)
+                                    player_inv:set_size("main", player_inv_main_size)
+                                end
 
                             else
                                 if mpd.playing then
@@ -3254,6 +3254,72 @@ q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo
         solution_statevector_deutsch_algo_puzzle, true)
 q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo_puzzle",
         solution_statevector_deutsch_algo_puzzle, false)
+
+
+q_command.texts.quantum_teleportation =
+[[
+This circuit demonstrates quantum teleportation, and is an example from
+the paper entitled Open Quantum Assembly Language by Andrew W. Cross,
+Lev S. Bishop, John A. Smolin, and Jay M. Gambetta. It also demonstrates
+the ability of OpenQASM to conditionally apply gates based on prior
+measurement outcomes.
+
+To complete the quantum teleportation circuit, grab a classically
+controlled "if" block out of the chest. Place it to the left of the Z
+gate on the bottom wire by right-clicking on the space marked with a
+dashed line. Continue right-clicking until the block displays "if = 1"
+and the horizontal mark on the block corresponds with the measurement
+block on the top wire (in this case you will only need to click once).
+
+The Q block will turn gold when the circuit is correct. Then you may
+experiment with quantum teleportation by left and right clicking the Ry
+and Rz gates while wielding the Rotate Tool. The Bloch sphere at the top
+of the chasm should reflect the state that you set with rotations. Note
+that it is expected for the Q block to turn black again.
+
+]]
+q_command:register_help_button("quantum_teleportation", "Quantum teleportation", q_command.texts.quantum_teleportation)
+local solution_statevector_quantum_teleportation =
+{
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	},
+	{
+		r = 0.5,
+		i = 0
+	}
+}
+q_command:register_q_command_block( "quantum_teleportation_success",
+        "quantum_teleportation",
+        solution_statevector_quantum_teleportation, true)
+q_command:register_q_command_block( "quantum_teleportation_success",
+        "quantum_teleportation",
+        solution_statevector_quantum_teleportation, false)
 
 
 -- Escape room puzzles -------------------------------------------------
