@@ -35,6 +35,7 @@ dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
 dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
+dofile(minetest.get_modpath("q_command").."/prof_q.lua");
 
 
 request_http_api = minetest.request_http_api()
@@ -232,6 +233,15 @@ function q_command:get_q_command_block(pos)
 				return ret_exists
 			end,
 
+
+            -- Determine if circuit is solved
+            circuit_puzzle_solved = function()
+                local ret_circuit_puzzle_solved = false
+                if node_name and node_name:sub(-7) == "success" then
+                    ret_circuit_puzzle_solved = true
+                end
+                return ret_circuit_puzzle_solved
+            end,
 
             -- Compute ratio (numerator / 1) of |0> measurements in a given basis (X:1, Y:2, Z:3)
             compute_meas_ket_0_ratio = function(meas_basis, wire_num)
@@ -3269,7 +3279,8 @@ controlled "if" block out of the chest. Place it to the left of the Z
 gate on the bottom wire by right-clicking on the space marked with a
 dashed line. Continue right-clicking until the block displays "if = 1"
 and the horizontal mark on the block corresponds with the measurement
-block on the top wire (in this case you will only need to click once).
+block on the top wire (in this case you will only need to click once
+more).
 
 The Q block will turn gold when the circuit is correct. Then you may
 experiment with quantum teleportation by left and right clicking the Ry

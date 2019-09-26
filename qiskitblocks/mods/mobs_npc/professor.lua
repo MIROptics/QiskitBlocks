@@ -24,7 +24,7 @@ mobs:register_mob("mobs_npc:npc", {
 	drawtype = "front",
 	textures = {
 		--{"mobs_npc.png"},
-		{"mobs_npc2.png"}, -- female by nuttmeg20
+		{"mobs_prof_q.png"},
 	},
 	child_texture = {
 		{"mobs_npc_baby.png"}, -- derpy baby by AmirDerAssassine

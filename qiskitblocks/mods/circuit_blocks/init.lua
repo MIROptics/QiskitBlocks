@@ -17,6 +17,7 @@ limitations under the License.
 
 --[[
 TODO:
+[] Verify that ContentDB has debug false in minetest.conf
 [] Drop award and play longer congrats music when 16 puzzles are solved
 [] Perhaps allow other swap qubit to be deleted directly, tracking back to the original gate
 [] Identify debug logging strategy
