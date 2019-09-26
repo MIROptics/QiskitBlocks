@@ -50,7 +50,7 @@ prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
 prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 
--- x_gate_escape:
+-- x_gates_2_wire:
 prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 prof_q.areas.x_gates_2_wire.radius = 5
@@ -73,7 +73,6 @@ prof_q.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
 minetest.register_globalstep(function(dtime)
 
 	for key, area in pairs(prof_q.areas) do
-		minetest.debug("area:" .. tostring(area) .. ", area:" .. tostring(area))
 		for _,object in
 		ipairs(minetest.get_objects_inside_radius(
 				area.center_pos,
@@ -101,3 +100,4 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
