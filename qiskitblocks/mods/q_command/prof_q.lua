@@ -169,10 +169,14 @@ prof_q.areas.equal_super_2wire_escape = {}
 prof_q.areas.equal_super_2wire_escape.center_pos = {x = 268, y = 0, z = 72}
 prof_q.areas.equal_super_2wire_escape.radius = 5
 prof_q.areas.equal_super_2wire_escape.help_chat_msg = {
-	"Welcome to this equal_super_2wire_escape circuit puzzle!"
+	"Now put four basis states into equal superpositions"
 }
 prof_q.areas.equal_super_2wire_escape.help_success_msg = {
-	"equal_super_2wire_escape Congratulations!"
+	"Nicely done! By putting each wire in a superposition, you've caused all four of the",
+	"basis states in this quantum state to be in equal superpositions. As indicated by the",
+	"formula on the wall, each state has a 1/4 probability of being the result when measured.",
+	"Note that the measurement probability of a given basis state is the square of its",
+	"co-efficient (referred to by physicists as its amplitude)"
 }
 prof_q.areas.equal_super_2wire_escape.help_chat_sent = false
 prof_q.areas.equal_super_2wire_escape.success_chat_sent = false
@@ -184,10 +188,12 @@ prof_q.areas.equal_super_3wire_escape = {}
 prof_q.areas.equal_super_3wire_escape.center_pos = {x = 268, y = 0, z = 82}
 prof_q.areas.equal_super_3wire_escape.radius = 5
 prof_q.areas.equal_super_3wire_escape.help_chat_msg = {
-	"Welcome to this equal_super_3wire_escape circuit puzzle!"
+	"This time, put eight basis states into equal superpositions"
 }
 prof_q.areas.equal_super_3wire_escape.help_success_msg = {
-	"equal_super_3wire_escape Congratulations!"
+	"You've got this! You may be familiar with the 'sum' notation on the wall, which",
+	"provides a succinct way to express this state in which all of the basis states have",
+	"the same amplitude."
 }
 prof_q.areas.equal_super_3wire_escape.help_chat_sent = false
 prof_q.areas.equal_super_3wire_escape.success_chat_sent = false
