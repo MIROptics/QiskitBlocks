@@ -76,10 +76,13 @@ prof_q.areas.x_gates_3_wire = {}
 prof_q.areas.x_gates_3_wire.center_pos = {x = 248, y = 0, z = 62}
 prof_q.areas.x_gates_3_wire.radius = 5
 prof_q.areas.x_gates_3_wire.help_chat_msg = {
-	"Welcome to this x_gates_3_wire circuit puzzle!"
+	"Here you'll do more of the same, but with one additional wire and twice the",
+	"number of basis states."
 }
 prof_q.areas.x_gates_3_wire.help_success_msg = {
-	"x_gates_3_wire Congratulations!"
+	"You're catching on quickly! You're also noticing that there are 2 to the n power of",
+	"basis states, where n is the number of wires. Here, there are 3 wires, so 8 basis",
+	"states, |000> through |111>"
 }
 prof_q.areas.x_gates_3_wire.help_chat_sent = false
 prof_q.areas.x_gates_3_wire.success_chat_sent = false
@@ -91,10 +94,15 @@ prof_q.areas.h_gate_escape = {}
 prof_q.areas.h_gate_escape.center_pos = {x = 248, y = 0, z = 72}
 prof_q.areas.h_gate_escape.radius = 5
 prof_q.areas.h_gate_escape.help_chat_msg = {
-	"Welcome to this h_gate_escape circuit puzzle!"
+	"This room is where Schroedinger's cat starts getting nervous. Put the qubit in an equal",
+	"superposition of dead and alive, I mean |0> and |1>"
 }
 prof_q.areas.h_gate_escape.help_success_msg = {
-	"h_gate_escape Congratulations!"
+	"You've successfully put the qubit in the |+> state where it has an equal probability of",
+	"measurements resulting in |0> or |1>. You also made the marker on the Bloch sphere",
+	"move to its equator, where the distances to the north pole |0> and the south pole |1> ",
+	"are equal. Fun fact: The probability of a |0> measurement result is proportional to",
+	"the vertical (Z axis) distance of the qubit's state to the south pole on the Bloch sphere!"
 }
 prof_q.areas.h_gate_escape.help_chat_sent = false
 prof_q.areas.h_gate_escape.success_chat_sent = false
@@ -106,10 +114,15 @@ prof_q.areas.h_x_gate = {}
 prof_q.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
 prof_q.areas.h_x_gate.radius = 5
 prof_q.areas.h_x_gate.help_chat_msg = {
-	"Welcome to this h_x_gate circuit puzzle!"
+	"Now lets visit the back side of the Bloch sphere, in a state commonly known as |->",
+	"(where measurements resulting in |0> or |1> are also equally likely)"
 }
 prof_q.areas.h_x_gate.help_success_msg = {
-	"h_x_gate Congratulations!"
+	"Nice navigation! You're noticing how the quantum computing gates such as X and Hadamard",
+	"may be represented as rotations on the Bloch sphere. The X gate rotates 180 degrees, also",
+	"known as pi radians, around the X axis (which is the axis coming toward you but a bit down)",
+	"and to the left). You also may have noticed that the H gate rotates pi radians around an",
+	"axis that is halfway in-between the X and Z axes."
 }
 prof_q.areas.h_x_gate.help_chat_sent = false
 prof_q.areas.h_x_gate.success_chat_sent = false
