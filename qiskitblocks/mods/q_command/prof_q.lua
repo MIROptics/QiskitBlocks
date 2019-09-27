@@ -101,23 +101,3 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
---[[
-minetest.register_node("q_command:prof_q", {
-    description = "Professor Q",
-	drawtype = "mesh",
-	visual_scale = 0.007,
-    mesh = "prof_q.obj",
-	groups = {oddly_breakable_by_hand = 2},
-    on_rightclick = function(pos, node, clicker, itemstack)
-        if mpd.playing then
-            minetest.chat_send_player(clicker:get_player_name(),
-                    "Pausing music")
-            mpd.stop_song()
-        else
-            minetest.chat_send_player(clicker:get_player_name(),
-                    "Starting music")
-            mpd.play_song(MUSIC_CHILL)
-        end
-    end
-})
---]]

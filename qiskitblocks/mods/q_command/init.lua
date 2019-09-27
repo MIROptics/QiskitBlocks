@@ -4690,6 +4690,9 @@ q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
 
 q_command:register_wall_block("q_command_silver_sandstone_wall_tile")
 
+q_command:register_wall_block("prof_q_top_low_res")
+q_command:register_wall_block("prof_q_bottom_low_res")
+
 local NUM_ESCAPE_ROOMS = 16
 for idx = 1, NUM_ESCAPE_ROOMS do
     q_command:register_wall_block("q_command_esc_room_" .. tostring(idx) .. "_16")
