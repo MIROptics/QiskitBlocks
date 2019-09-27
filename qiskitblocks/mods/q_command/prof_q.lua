@@ -50,6 +50,7 @@ prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
 prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 
+
 -- x_gates_2_wire:
 prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
@@ -68,6 +69,217 @@ prof_q.areas.x_gates_2_wire.help_success_msg = {
 prof_q.areas.x_gates_2_wire.help_chat_sent = false
 prof_q.areas.x_gates_2_wire.success_chat_sent = false
 prof_q.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
+
+
+-- x_gates_3_wire:
+prof_q.areas.x_gates_3_wire = {}
+prof_q.areas.x_gates_3_wire.center_pos = {x = 248, y = 0, z = 62}
+prof_q.areas.x_gates_3_wire.radius = 5
+prof_q.areas.x_gates_3_wire.help_chat_msg = {
+	"Welcome to this x_gates_3_wire circuit puzzle!"
+}
+prof_q.areas.x_gates_3_wire.help_success_msg = {
+	"x_gates_3_wire Congratulations!"
+}
+prof_q.areas.x_gates_3_wire.help_chat_sent = false
+prof_q.areas.x_gates_3_wire.success_chat_sent = false
+prof_q.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
+
+
+-- h_gate_escape:
+prof_q.areas.h_gate_escape = {}
+prof_q.areas.h_gate_escape.center_pos = {x = 248, y = 0, z = 72}
+prof_q.areas.h_gate_escape.radius = 5
+prof_q.areas.h_gate_escape.help_chat_msg = {
+	"Welcome to this h_gate_escape circuit puzzle!"
+}
+prof_q.areas.h_gate_escape.help_success_msg = {
+	"h_gate_escape Congratulations!"
+}
+prof_q.areas.h_gate_escape.help_chat_sent = false
+prof_q.areas.h_gate_escape.success_chat_sent = false
+prof_q.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
+
+
+-- h_x_gate:
+prof_q.areas.h_x_gate = {}
+prof_q.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
+prof_q.areas.h_x_gate.radius = 5
+prof_q.areas.h_x_gate.help_chat_msg = {
+	"Welcome to this h_x_gate circuit puzzle!"
+}
+prof_q.areas.h_x_gate.help_success_msg = {
+	"h_x_gate Congratulations!"
+}
+prof_q.areas.h_x_gate.help_chat_sent = false
+prof_q.areas.h_x_gate.success_chat_sent = false
+prof_q.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
+
+
+-- h_z_gate:
+prof_q.areas.h_z_gate = {}
+prof_q.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
+prof_q.areas.h_z_gate.radius = 5
+prof_q.areas.h_z_gate.help_chat_msg = {
+	"Welcome to this h_z_gate circuit puzzle!"
+}
+prof_q.areas.h_z_gate.help_success_msg = {
+	"h_z_gate Congratulations!"
+}
+prof_q.areas.h_z_gate.help_chat_sent = false
+prof_q.areas.h_z_gate.success_chat_sent = false
+prof_q.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
+
+
+-- hxx_gates_escape:
+prof_q.areas.hxx_gates_escape = {}
+prof_q.areas.hxx_gates_escape.center_pos = {x = 268, y = 0, z = 62}
+prof_q.areas.hxx_gates_escape.radius = 5
+prof_q.areas.hxx_gates_escape.help_chat_msg = {
+	"Welcome to this hxx_gates_escape circuit puzzle!"
+}
+prof_q.areas.hxx_gates_escape.help_success_msg = {
+	"hxx_gates_escape Congratulations!"
+}
+prof_q.areas.hxx_gates_escape.help_chat_sent = false
+prof_q.areas.hxx_gates_escape.success_chat_sent = false
+prof_q.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
+
+
+-- equal_super_2wire_escape:
+prof_q.areas.equal_super_2wire_escape = {}
+prof_q.areas.equal_super_2wire_escape.center_pos = {x = 268, y = 0, z = 72}
+prof_q.areas.equal_super_2wire_escape.radius = 5
+prof_q.areas.equal_super_2wire_escape.help_chat_msg = {
+	"Welcome to this equal_super_2wire_escape circuit puzzle!"
+}
+prof_q.areas.equal_super_2wire_escape.help_success_msg = {
+	"equal_super_2wire_escape Congratulations!"
+}
+prof_q.areas.equal_super_2wire_escape.help_chat_sent = false
+prof_q.areas.equal_super_2wire_escape.success_chat_sent = false
+prof_q.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
+
+
+-- equal_super_3wire_escape:
+prof_q.areas.equal_super_3wire_escape = {}
+prof_q.areas.equal_super_3wire_escape.center_pos = {x = 268, y = 0, z = 82}
+prof_q.areas.equal_super_3wire_escape.radius = 5
+prof_q.areas.equal_super_3wire_escape.help_chat_msg = {
+	"Welcome to this equal_super_3wire_escape circuit puzzle!"
+}
+prof_q.areas.equal_super_3wire_escape.help_success_msg = {
+	"equal_super_3wire_escape Congratulations!"
+}
+prof_q.areas.equal_super_3wire_escape.help_chat_sent = false
+prof_q.areas.equal_super_3wire_escape.success_chat_sent = false
+prof_q.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
+
+
+-- bell_phi_plus_escape:
+prof_q.areas.bell_phi_plus_escape = {}
+prof_q.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
+prof_q.areas.bell_phi_plus_escape.radius = 5
+prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
+	"Welcome to this bell_phi_plus_escape circuit puzzle!"
+}
+prof_q.areas.bell_phi_plus_escape.help_success_msg = {
+	"bell_phi_plus_escape Congratulations!"
+}
+prof_q.areas.bell_phi_plus_escape.help_chat_sent = false
+prof_q.areas.bell_phi_plus_escape.success_chat_sent = false
+prof_q.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
+
+
+-- bell_phi_minus_escape:
+prof_q.areas.bell_phi_minus_escape = {}
+prof_q.areas.bell_phi_minus_escape.center_pos = {x = 258, y = 0, z = 92}
+prof_q.areas.bell_phi_minus_escape.radius = 5
+prof_q.areas.bell_phi_minus_escape.help_chat_msg = {
+	"Welcome to this bell_phi_minus_escape circuit puzzle!"
+}
+prof_q.areas.bell_phi_minus_escape.help_success_msg = {
+	"bell_phi_minus_escape Congratulations!"
+}
+prof_q.areas.bell_phi_minus_escape.help_chat_sent = false
+prof_q.areas.bell_phi_minus_escape.success_chat_sent = false
+prof_q.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
+
+
+-- bell_psi_plus_escape:
+prof_q.areas.bell_psi_plus_escape = {}
+prof_q.areas.bell_psi_plus_escape.center_pos = {x = 258, y = 0, z = 82}
+prof_q.areas.bell_psi_plus_escape.radius = 5
+prof_q.areas.bell_psi_plus_escape.help_chat_msg = {
+	"Welcome to this bell_psi_plus_escape circuit puzzle!"
+}
+prof_q.areas.bell_psi_plus_escape.help_success_msg = {
+	"bell_psi_plus_escape Congratulations!"
+}
+prof_q.areas.bell_psi_plus_escape.help_chat_sent = false
+prof_q.areas.bell_psi_plus_escape.success_chat_sent = false
+prof_q.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
+
+
+-- bell_psi_minus_escape:
+prof_q.areas.bell_psi_minus_escape = {}
+prof_q.areas.bell_psi_minus_escape.center_pos = {x = 248, y = 0, z = 82}
+prof_q.areas.bell_psi_minus_escape.radius = 5
+prof_q.areas.bell_psi_minus_escape.help_chat_msg = {
+	"Welcome to this bell_psi_minus_escape circuit puzzle!"
+}
+prof_q.areas.bell_psi_minus_escape.help_success_msg = {
+	"bell_psi_minus_escape Congratulations!"
+}
+prof_q.areas.bell_psi_minus_escape.help_chat_sent = false
+prof_q.areas.bell_psi_minus_escape.success_chat_sent = false
+prof_q.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
+
+
+-- ghz_state_escape:
+prof_q.areas.ghz_state_escape = {}
+prof_q.areas.ghz_state_escape.center_pos = {x = 248, y = 0, z = 92}
+prof_q.areas.ghz_state_escape.radius = 5
+prof_q.areas.ghz_state_escape.help_chat_msg = {
+	"Welcome to this ghz_state_escape circuit puzzle!"
+}
+prof_q.areas.ghz_state_escape.help_success_msg = {
+	"ghz_state_escape Congratulations!"
+}
+prof_q.areas.ghz_state_escape.help_chat_sent = false
+prof_q.areas.ghz_state_escape.success_chat_sent = false
+prof_q.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
+
+
+-- y_z_rot_1wire_escape:
+prof_q.areas.y_z_rot_1wire_escape = {}
+prof_q.areas.y_z_rot_1wire_escape.center_pos = {x = 238, y = 0, z = 92}
+prof_q.areas.y_z_rot_1wire_escape.radius = 5
+prof_q.areas.y_z_rot_1wire_escape.help_chat_msg = {
+	"Welcome to this y_z_rot_1wire_escape circuit puzzle!"
+}
+prof_q.areas.y_z_rot_1wire_escape.help_success_msg = {
+	"y_z_rot_1wire_escape Congratulations!"
+}
+prof_q.areas.y_z_rot_1wire_escape.help_chat_sent = false
+prof_q.areas.y_z_rot_1wire_escape.success_chat_sent = false
+prof_q.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
+
+
+-- phase_rot_2wire_escape:
+prof_q.areas.phase_rot_2wire_escape = {}
+prof_q.areas.phase_rot_2wire_escape.center_pos = {x = 238, y = 0, z = 82}
+prof_q.areas.phase_rot_2wire_escape.radius = 5
+prof_q.areas.phase_rot_2wire_escape.help_chat_msg = {
+	"Welcome to this phase_rot_2wire_escape circuit puzzle!"
+}
+prof_q.areas.phase_rot_2wire_escape.help_success_msg = {
+	"phase_rot_2wire_escape Congratulations!"
+}
+prof_q.areas.phase_rot_2wire_escape.help_chat_sent = false
+prof_q.areas.phase_rot_2wire_escape.success_chat_sent = false
+prof_q.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}
+
 
 -- Periodically check all areas for player
 minetest.register_globalstep(function(dtime)
