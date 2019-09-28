@@ -200,6 +200,7 @@ MAX_C_IF_WIRES = 7
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_blocks.lua");
 dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
 
+-- TODO: Define function to create these qubit blocks
 minetest.register_node("circuit_blocks:_qubit_0", {
     description = "Qubit 0 block",
     tiles = {"circuit_blocks_qubit_0.png"},
@@ -210,6 +211,48 @@ minetest.register_node("circuit_blocks:_qubit_0", {
 minetest.register_node("circuit_blocks:_qubit_1", {
     description = "Qubit 1 block",
     tiles = {"circuit_blocks_qubit_1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_0_color_1", {
+    description = "Red qubit 0 block",
+    tiles = {"circuit_blocks_qubit_0_color_1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_1_color_1", {
+    description = "Red qubit 1 block",
+    tiles = {"circuit_blocks_qubit_1_color_1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_0_color_2", {
+    description = "Green qubit 0 block",
+    tiles = {"circuit_blocks_qubit_0_color_2.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_1_color_2", {
+    description = "Green qubit 1 block",
+    tiles = {"circuit_blocks_qubit_1_color_2.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_0_color_3", {
+    description = "Blue qubit 0 block",
+    tiles = {"circuit_blocks_qubit_0_color_3.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_1_color_3", {
+    description = "Blue qubit 1 block",
+    tiles = {"circuit_blocks_qubit_1_color_3.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })

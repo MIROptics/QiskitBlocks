@@ -46,6 +46,8 @@ end
 complex = create_complex()
 
 BASIS_STATE_BLOCK_MAX_QUBITS = 4
+USE_COLOR_QUBITS = true
+MAX_COLOR_QUBITS = 3
 CIRCUIT_MAX_WIRES = 8
 CIRCUIT_MAX_COLUMNS = 64
 
@@ -443,8 +445,12 @@ function q_command:create_blank_circuit_grid()
                     ket_pos = {x = node_pos.x + 1, y = node_pos.y, z = node_pos.z}
                 end
 
+                local qubit_block_name = "circuit_blocks:_qubit_0"
+                if USE_COLOR_QUBITS and circuit_num_wires <= MAX_COLOR_QUBITS then
+                    qubit_block_name = qubit_block_name .. "_color_" .. tostring(circuit_num_wires - wire + 1)
+                end
                 minetest.set_node(ket_pos,
-                        {name="circuit_blocks:_qubit_0", param2=param2_dir})
+                        {name=qubit_block_name, param2=param2_dir})
             end
 
             minetest.set_node(node_pos,
@@ -1513,6 +1519,12 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                                 if num_wires <= BASIS_STATE_BLOCK_MAX_QUBITS then
                                     local node_name = "q_command:q_command_state_" .. num_wires .. "qb_" .. tostring(col_num - 1)
+                                    if USE_COLOR_QUBITS and num_wires <= MAX_COLOR_QUBITS then
+                                        node_name = node_name .. "_colors"
+                                    end
+
+                                    --minetest.debug("node_name:" .. node_name)
+
                                     minetest.set_node(basis_state_node_pos,
                                             {name=node_name, param2=param2_dir})
                                     minetest.set_node(under_hist_node_pos,
@@ -1792,6 +1804,18 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
         paramtype2 = "facedir",
         groups = {oddly_breakable_by_hand=2}
     })
+
+    -- Also create basis state blocks with colors
+    if num_qubits <= MAX_COLOR_QUBITS then
+        texture_name = texture_name .. "_colors"
+        minetest.register_node("q_command:" .. texture_name, {
+            description = "Basis state " .. tostring(basis_state_num) .. " block w/colors",
+            tiles = {texture_name .. ".png"},
+            paramtype2 = "facedir",
+            groups = {oddly_breakable_by_hand=2}
+        })
+    end
+
 end
 
 minetest.register_node("q_command:q_command_liquid_full_0_rad", {
@@ -4649,6 +4673,7 @@ q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
 
+-- TODO: Define function to create this basis state blocks
 q_command:register_wall_block("q_command_state_1qb_0")
 q_command:register_wall_block("q_command_state_1qb_1")
 
@@ -4682,6 +4707,24 @@ q_command:register_wall_block("q_command_state_4qb_12")
 q_command:register_wall_block("q_command_state_4qb_13")
 q_command:register_wall_block("q_command_state_4qb_14")
 q_command:register_wall_block("q_command_state_4qb_15")
+
+q_command:register_wall_block("q_command_state_1qb_0_colors")
+q_command:register_wall_block("q_command_state_1qb_1_colors")
+
+q_command:register_wall_block("q_command_state_2qb_0_colors")
+q_command:register_wall_block("q_command_state_2qb_1_colors")
+q_command:register_wall_block("q_command_state_2qb_2_colors")
+q_command:register_wall_block("q_command_state_2qb_3_colors")
+
+q_command:register_wall_block("q_command_state_3qb_0_colors")
+q_command:register_wall_block("q_command_state_3qb_1_colors")
+q_command:register_wall_block("q_command_state_3qb_2_colors")
+q_command:register_wall_block("q_command_state_3qb_3_colors")
+q_command:register_wall_block("q_command_state_3qb_4_colors")
+q_command:register_wall_block("q_command_state_3qb_5_colors")
+q_command:register_wall_block("q_command_state_3qb_6_colors")
+q_command:register_wall_block("q_command_state_3qb_7_colors")
+
 
 q_command:register_wall_block("q_command_esc_room_exit_wall_tile")
 q_command:register_wall_block("q_command_esc_room_exit_left")

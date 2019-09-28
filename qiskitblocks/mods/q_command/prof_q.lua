@@ -157,7 +157,7 @@ prof_q.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
 prof_q.areas.h_z_gate.radius = 5
 prof_q.areas.h_z_gate.help_chat_msg = {
 	"Let's take another trip to the |-> state, but this time via a different route. I've taken",
-	"the liberty of replacing your X gate with a Z gate. It's a bit experimental, so good luck!"
+	"the liberty of replacing your X gate with a Z gate, so you'll need to experiment. Good luck!"
 }
 prof_q.areas.h_z_gate.help_success_msg = {
 	"Fascinating! You've demonstrated that there are several different ways (an infinite amount)",
@@ -232,7 +232,8 @@ prof_q.areas.bell_phi_plus_escape = {}
 prof_q.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
 prof_q.areas.bell_phi_plus_escape.radius = 5
 prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
-	"Welcome to this bell_phi_plus_escape circuit puzzle!"
+	"Now we'll experiment with a phenomenon known as 'quantum entanglement', that Einstein",
+	"referred to as 'spooky actions at a distance'"
 }
 prof_q.areas.bell_phi_plus_escape.help_success_msg = {
 	"bell_phi_plus_escape Congratulations!"
