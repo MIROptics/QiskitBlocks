@@ -33,18 +33,17 @@ prof_q.areas.x_gate_escape = {}
 prof_q.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 prof_q.areas.x_gate_escape.radius = 5
 prof_q.areas.x_gate_escape.help_chat_msg = {
-	"Hello test subject #10576, er, I mean esteemed colleague. My name is Professor Q.",
-	"I'm standing behind this blast glass because we're going to try an experiment.",
-	"Hopefully this won't scramble your molecules or vaporize you :-)",
-	"Please grab the Pauli-X gate from the chest (right-click to open it),",
-	"and place it on the circuit in the box with the dashed-lines (by right-clicking)"
+	"Hello test subject #10576, I mean esteemed colleague! My name is Professor Q and I'm",
+	"standing behind this blast glass because we're going to try an experiment. Hopefully",
+	"it won't vaporize you or scramble your molecules :-) For this experiment, change the",
+	"quantum state of the circuit from |0> to the state shown on the wall."
 }
 prof_q.areas.x_gate_escape.help_success_msg = {
 	"That was great how you used the Pauli-X gate, or NOT gate, to change the quantum",
-	"state from |0> to the desired state shown on the wall. In addition to making the",
-	"liquid levels show 100% probability of measurement resulting in |1>, notice that",
-	"the marker on the Bloch sphere moved from the top representing |0>, to the bottom",
-	"representing |1>. Congrats, and now on to the next circuit puzzle!"
+	"state from |0> to |1>. In addition to making the liquid levels show 100% probability",
+	"of measurement resulting in |1>, notice that the marker on the Bloch sphere moved from",
+	"the top representing |0>, to the bottom representing |1>. Congrats, and now on to the ",
+	"next circuit puzzle!"
 }
 prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
@@ -56,9 +55,8 @@ prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 prof_q.areas.x_gates_2_wire.radius = 5
 prof_q.areas.x_gates_2_wire.help_chat_msg = {
-	"I see that you survived the previous experiment! Now let's experiment with multi-qubit",
-	"circuits like this one. Place one or more Pauli-X gates on the circuit so that its",
-	"quantum state matches what is on the wall, namely |10>"
+	"I see that you survived the previous experiment! Now let's play with multi-qubit circuits",
+	"like this one. Please make its quantum state match the state on the wall, namely |10>"
 }
 prof_q.areas.x_gates_2_wire.help_success_msg = {
 	"Well done! You made the |10> quantum state that consists of two qubits by making",
