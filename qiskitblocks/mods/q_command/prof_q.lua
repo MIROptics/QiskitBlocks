@@ -27,42 +27,54 @@ prof_q = {}
 -- Areas in the world in which Prof Q interacts with players
 prof_q.areas = {}
 
+
 -- Relevant data about areas
 -- x_gate_escape:
 prof_q.areas.x_gate_escape = {}
 prof_q.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 prof_q.areas.x_gate_escape.radius = 5
 prof_q.areas.x_gate_escape.help_chat_msg = {
-	"Hello test subject #10576, I mean esteemed colleague! My name is Professor Q and I'm",
+	"Hello test subject #576, I mean esteemed colleague! My name is Professor Q and I'm",
 	"standing behind this blast glass because we're going to try an experiment. Hopefully",
 	"it won't vaporize you or scramble your molecules :-) For this experiment, change the",
 	"quantum state of the circuit from |0> to the state shown on the wall."
 }
+--[[ Input from CJ:
+ Oh! The properties of the fluid changed, from 0 to 1! There goes my hypothesis about vaporization.
+ I'm glad we don't have to bring in a new test subject, er, colleague!
+ Try to move chat to lower middle area of screen
+ Color code |0> on left of wire with positions in basis states
+--]]
 prof_q.areas.x_gate_escape.help_success_msg = {
 	"That was great how you used the Pauli-X gate, or NOT gate, to change the quantum",
 	"state from |0> to |1>. In addition to making the liquid levels show 100% probability",
-	"of measurement resulting in |1>, notice that the marker on the Bloch sphere moved from",
-	"the top representing |0>, to the bottom representing |1>. Congrats, and now on to the ",
-	"next circuit puzzle!"
+	"that measurements will result in |1>, notice that the marker on the Bloch sphere moved",
+	"from the top representing |0>, to the bottom representing |1>. Congrats, and now on",
+	"to the next circuit puzzle!"
 }
 prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
 prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 
 
+--[[ Input from CJ:
+ Great discovery (that the X gate affects the qubit corresponding to the wire position)
+ Hopefully it doesn't cause molecular instability.
+ Please contact us immediately if you start to grow a third arm.
+ You've officially survived more tests than any of my previous subjects
+--]]
 -- x_gates_2_wire:
 prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 prof_q.areas.x_gates_2_wire.radius = 5
 prof_q.areas.x_gates_2_wire.help_chat_msg = {
-	"I see that you survived the previous experiment! Now let's play with multi-qubit circuits",
-	"like this one. Please make its quantum state match the state on the wall, namely |10>"
+	"Now let's play with multi-qubit circuits like this one. Please make its quantum state",
+	"match the state on the wall.",
 }
 prof_q.areas.x_gates_2_wire.help_success_msg = {
-	"Well done! You made the |10> quantum state that consists of two qubits by making",
-	"the bottom wire |1> with an X gate and leaving the top wire unchanged at |0>. Now",
-	"the liquid levels show 100% probability of measurement resulting in |10>, and the",
-	"marker on the bottom Bloch sphere moved from representing |0> to representing |1>"
+	"Well done! Now the liquid levels show 100% probability that measurements will",
+	"result in |10>",
+	"Also, the marker on the bottom Bloch sphere moved from representing |0> to |1>"
 }
 prof_q.areas.x_gates_2_wire.help_chat_sent = false
 prof_q.areas.x_gates_2_wire.success_chat_sent = false
@@ -77,6 +89,10 @@ prof_q.areas.x_gates_3_wire.help_chat_msg = {
 	"Here you'll do more of the same, but with one additional wire and twice the",
 	"number of basis states."
 }
+
+--[[ Input from CJ:
+ I'm noticing a pattern here (rather than "You're noticing"). Whoa, we're making history today!
+--]]
 prof_q.areas.x_gates_3_wire.help_success_msg = {
 	"You're catching on quickly! You're also noticing that there are 2 to the n power of",
 	"basis states, where n is the number of wires. Here, there are 3 wires, so 8 basis",
@@ -95,10 +111,15 @@ prof_q.areas.h_gate_escape.help_chat_msg = {
 	"This room is where Schroedinger's cat starts getting nervous. Put the qubit in an equal",
 	"superposition of dead and alive, I mean |0> and |1>"
 }
+--[[ Input from CJ:
+ Incredible. My hypothesis is correct! Some of the liquid is in each state. I see that the marker
+ moved to the equator. [convey the excitement of discovery]
+ [Use state equivalents in addition like zero, one, plus and minus states]
+--]]
 prof_q.areas.h_gate_escape.help_success_msg = {
-	"You've successfully put the qubit in the |+> state where it has an equal probability of",
-	"measurements resulting in |0> or |1>. You also made the marker on the Bloch sphere",
-	"move to its equator, where the distances to the north pole |0> and the south pole |1> ",
+	"You've put the qubit in the |+> (pronounced 'plus') state where it has an equal probability",
+	"that measurements will result in |0> or |1>. You also made the marker on the Bloch sphere",
+	"move to its equator, where the distances to the north pole |0> and the south pole |1>",
 	"are equal. Fun fact: The probability of a |0> measurement result is proportional to",
 	"the vertical (Z axis) distance of the qubit's state to the south pole on the Bloch sphere!"
 }
@@ -113,14 +134,17 @@ prof_q.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
 prof_q.areas.h_x_gate.radius = 5
 prof_q.areas.h_x_gate.help_chat_msg = {
 	"Now let's visit the back side of the Bloch sphere, in a state commonly known as |->",
-	"(where measurements resulting in |0> or |1> are also equally likely)"
+	"(pronounced 'minus'), where measurements resulting in |0> or |1> are also equally likely"
 }
+--[[ Input from CJ:
+ Christian: Use 3.14 in place of pi the first time
+--]]
 prof_q.areas.h_x_gate.help_success_msg = {
 	"Nice navigation! You're noticing how the quantum computing gates such as X and Hadamard",
 	"may be represented as rotations on the Bloch sphere. The X gate rotates 180 degrees, also",
-	"known as pi radians, around the X axis (which is the axis coming toward you but a bit down)",
-	"and to the left). You also may have noticed that the H gate rotates pi radians around an",
-	"axis that is halfway in-between the X and Z axes."
+	"known as pi (3.14...) radians, around the X axis (which is the axis coming toward you)",
+	"but a bit down and to the left). You also may have noticed that the H gate rotates pi",
+	"radians around an axis that is halfway in-between the X and Z axes."
 }
 prof_q.areas.h_x_gate.help_chat_sent = false
 prof_q.areas.h_x_gate.success_chat_sent = false
@@ -132,14 +156,15 @@ prof_q.areas.h_z_gate = {}
 prof_q.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
 prof_q.areas.h_z_gate.radius = 5
 prof_q.areas.h_z_gate.help_chat_msg = {
-	"Let's take another trip to the |-> state, but this time via a different route."
+	"Let's take another trip to the |-> state, but this time via a different route. I've taken",
+	"the liberty of replacing your X gate with a Z gate. It's a bit experimental, so good luck!"
 }
 prof_q.areas.h_z_gate.help_success_msg = {
-	"I like how you've demonstrated that there several (an infinite number of) ways for a quantum",
-	"state to evolve to a different quantum state. This time, you used the H gate to move to the",
-	"|+> state, and then you changed the phase of the quantum state by pi radians, using the Z gate",
-	"to rotate around the Z axis. You may have noticed that the arrows in the liquid blocks point",
-	"in opposite directions (pi radians out of phase) when this one-qubit circuit is in the |-> state."
+	"Fascinating! You've demonstrated that there are several different ways (an infinite amount)",
+	"for a quantum state to evolve to a different quantum state. This time, you used the H gate to",
+	"move to the |+> state, and then you changed the phase of the quantum state by pi radians, using",
+	"the Z gate to rotate around the Z axis. Did you notice that the arrows in the liquid blocks point",
+	"in opposite directions (pi radians out of phase) when this one-qubit circuit is in the |-> state?"
 }
 prof_q.areas.h_z_gate.help_chat_sent = false
 prof_q.areas.h_z_gate.success_chat_sent = false
@@ -153,6 +178,10 @@ prof_q.areas.hxx_gates_escape.radius = 5
 prof_q.areas.hxx_gates_escape.help_chat_msg = {
 	"Go ahead and solve this puzzle by thinking about one wire at a time"
 }
+--[[ Input from CJ:
+ At this point it's OK to compliment the player directly.
+ Also, add "These findings are truly remarkable"
+--]]
 prof_q.areas.hxx_gates_escape.help_success_msg = {
 	"You're really getting the hang of this! By thinking about the effects of various gates on",
 	"individual wires, you've successfully crafted the desired composite quantum state."
@@ -170,7 +199,7 @@ prof_q.areas.equal_super_2wire_escape.help_chat_msg = {
 	"Now put four basis states into equal superpositions"
 }
 prof_q.areas.equal_super_2wire_escape.help_success_msg = {
-	"Nicely done! By putting each wire in a superposition, you've caused all four of the",
+	"Incredible! By putting each wire into a superposition, you've caused all four of the",
 	"basis states in this quantum state to be in equal superpositions. As indicated by the",
 	"formula on the wall, each state has a 1/4 probability of being the result when measured.",
 	"Note that the measurement probability of a given basis state is the square of its",
