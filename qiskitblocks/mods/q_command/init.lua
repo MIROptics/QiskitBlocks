@@ -4667,6 +4667,8 @@ q_command:register_wall_block("q_command_dirac_equal_sign")
 
 q_command:register_wall_block("q_command_dirac_111_bottom")
 q_command:register_wall_block("q_command_dirac_i_eq_000_top")
+q_command:register_wall_block("q_command_dirac_111_bottom_colors")
+q_command:register_wall_block("q_command_dirac_i_eq_000_top_colors")
 
 q_command:register_wall_block("q_command_math_sum")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
