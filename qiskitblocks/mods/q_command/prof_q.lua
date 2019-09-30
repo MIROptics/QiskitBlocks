@@ -239,7 +239,9 @@ prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
 }
 prof_q.areas.bell_phi_plus_escape.help_success_msg = {
 	"Amazing! You've just entangled two qubits in one of the four Bell states. This one is",
-	"known as the 'phi +' state."
+	"known as the 'phi +' state. Did you notice that the Bloch spheres have question marks",
+	"in them? That's because an entangled state can't be expressed in terms of the states of",
+	"its qubits."
 }
 prof_q.areas.bell_phi_plus_escape.help_chat_sent = false
 prof_q.areas.bell_phi_plus_escape.success_chat_sent = false
