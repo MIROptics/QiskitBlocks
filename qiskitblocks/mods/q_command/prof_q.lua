@@ -232,11 +232,14 @@ prof_q.areas.bell_phi_plus_escape = {}
 prof_q.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
 prof_q.areas.bell_phi_plus_escape.radius = 5
 prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
-	"Now we'll experiment with a phenomenon known as 'quantum entanglement', that Einstein",
-	"referred to as 'spooky actions at a distance'"
+	"Now we'll experiment with a phenomenon known as 'quantum entanglement' that Einstein",
+	"referred to as 'spooky actions at a distance'. Your challenge is to entangle two",
+	"qubits so that each one will have the same measurement result. Hint: You'll click the",
+	"X gate while wielding the Control Tool to turn in into a CNOT gate."
 }
 prof_q.areas.bell_phi_plus_escape.help_success_msg = {
-	"bell_phi_plus_escape Congratulations!"
+	"Amazing! You've just entangled two qubits in one of the four Bell states. This one is",
+	"known as the 'phi +' state."
 }
 prof_q.areas.bell_phi_plus_escape.help_chat_sent = false
 prof_q.areas.bell_phi_plus_escape.success_chat_sent = false
@@ -248,10 +251,12 @@ prof_q.areas.bell_phi_minus_escape = {}
 prof_q.areas.bell_phi_minus_escape.center_pos = {x = 258, y = 0, z = 92}
 prof_q.areas.bell_phi_minus_escape.radius = 5
 prof_q.areas.bell_phi_minus_escape.help_chat_msg = {
-	"Welcome to this bell_phi_minus_escape circuit puzzle!"
+	"Now entangle two qubits in another way, known as the 'phi -' Bell state."
 }
 prof_q.areas.bell_phi_minus_escape.help_success_msg = {
-	"bell_phi_minus_escape Congratulations!"
+	"Congratulations! You entangled those qubits in such a way that the measurement results",
+	"are the same as the previous, 'phi +', Bell state. But did you notice that the phases",
+	"in the relevant basis states are pi radians out of phase?"
 }
 prof_q.areas.bell_phi_minus_escape.help_chat_sent = false
 prof_q.areas.bell_phi_minus_escape.success_chat_sent = false
@@ -263,10 +268,11 @@ prof_q.areas.bell_psi_plus_escape = {}
 prof_q.areas.bell_psi_plus_escape.center_pos = {x = 258, y = 0, z = 82}
 prof_q.areas.bell_psi_plus_escape.radius = 5
 prof_q.areas.bell_psi_plus_escape.help_chat_msg = {
-	"Welcome to this bell_psi_plus_escape circuit puzzle!"
+	"Go ahead and entangle the two qubits in yet another way, this time in which the",
+	"measurement result of one qubit is the opposite result of measuring the other qubit."
 }
 prof_q.areas.bell_psi_plus_escape.help_success_msg = {
-	"bell_psi_plus_escape Congratulations!"
+	"Well done! The state you made is known as the 'psi +', Bell state."
 }
 prof_q.areas.bell_psi_plus_escape.help_chat_sent = false
 prof_q.areas.bell_psi_plus_escape.success_chat_sent = false
@@ -278,10 +284,10 @@ prof_q.areas.bell_psi_minus_escape = {}
 prof_q.areas.bell_psi_minus_escape.center_pos = {x = 248, y = 0, z = 82}
 prof_q.areas.bell_psi_minus_escape.radius = 5
 prof_q.areas.bell_psi_minus_escape.help_chat_msg = {
-	"Welcome to this bell_psi_minus_escape circuit puzzle!"
+	"Let's tackle the fourth and final Bell state, this time also using a Z gate."
 }
 prof_q.areas.bell_psi_minus_escape.help_success_msg = {
-	"bell_psi_minus_escape Congratulations!"
+	"Awesome! This one is called the 'psi -', Bell state."
 }
 prof_q.areas.bell_psi_minus_escape.help_chat_sent = false
 prof_q.areas.bell_psi_minus_escape.success_chat_sent = false
@@ -293,10 +299,10 @@ prof_q.areas.ghz_state_escape = {}
 prof_q.areas.ghz_state_escape.center_pos = {x = 248, y = 0, z = 92}
 prof_q.areas.ghz_state_escape.radius = 5
 prof_q.areas.ghz_state_escape.help_chat_msg = {
-	"Welcome to this ghz_state_escape circuit puzzle!"
+	"Next you'll entangle three qubits so that they all either measure 0s or 1s"
 }
 prof_q.areas.ghz_state_escape.help_success_msg = {
-	"ghz_state_escape Congratulations!"
+	"Congratulations! You've successfully created a state know as GHZ."
 }
 prof_q.areas.ghz_state_escape.help_chat_sent = false
 prof_q.areas.ghz_state_escape.success_chat_sent = false
@@ -308,10 +314,13 @@ prof_q.areas.y_z_rot_1wire_escape = {}
 prof_q.areas.y_z_rot_1wire_escape.center_pos = {x = 238, y = 0, z = 92}
 prof_q.areas.y_z_rot_1wire_escape.radius = 5
 prof_q.areas.y_z_rot_1wire_escape.help_chat_msg = {
-	"Welcome to this y_z_rot_1wire_escape circuit puzzle!"
+	"In this puzzle you'll experiment with the effects of rotating the state of a",
+	"qubit in the Y and Z axes. Hint: You'll click the Ry and Rz blocks while wielding",
+	"the Rotate Tool."
 }
 prof_q.areas.y_z_rot_1wire_escape.help_success_msg = {
-	"y_z_rot_1wire_escape Congratulations!"
+	"Nice work! Did you notice that rotating the qubit on the Y axis changed the",
+	"measurement probabilities, but rotating on the Z axis didn't?"
 }
 prof_q.areas.y_z_rot_1wire_escape.help_chat_sent = false
 prof_q.areas.y_z_rot_1wire_escape.success_chat_sent = false
@@ -323,10 +332,14 @@ prof_q.areas.phase_rot_2wire_escape = {}
 prof_q.areas.phase_rot_2wire_escape.center_pos = {x = 238, y = 0, z = 82}
 prof_q.areas.phase_rot_2wire_escape.radius = 5
 prof_q.areas.phase_rot_2wire_escape.help_chat_msg = {
-	"Welcome to this phase_rot_2wire_escape circuit puzzle!"
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
 }
 prof_q.areas.phase_rot_2wire_escape.help_success_msg = {
-	"phase_rot_2wire_escape Congratulations!"
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
 }
 prof_q.areas.phase_rot_2wire_escape.help_chat_sent = false
 prof_q.areas.phase_rot_2wire_escape.success_chat_sent = false
