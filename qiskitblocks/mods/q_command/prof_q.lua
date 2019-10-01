@@ -49,8 +49,8 @@ prof_q.areas.x_gate_escape.help_success_msg = {
 	"That was great how you used the Pauli-X gate, or NOT gate, to change the quantum",
 	"state from |0> to |1>. In addition to making the liquid levels show 100% probability",
 	"that measurements will result in |1>, notice that the marker on the Bloch sphere moved",
-	"from the top representing |0>, to the bottom representing |1>. Congrats, and now on",
-	"to the next circuit puzzle!"
+	"from the top representing |0>, to the bottom representing |1>. Congrats, and now please",
+	"move on to the next circuit puzzle!"
 }
 prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
@@ -203,7 +203,7 @@ prof_q.areas.equal_super_2wire_escape.help_success_msg = {
 	"basis states in this quantum state to be in equal superpositions. As indicated by the",
 	"formula on the wall, each state has a 1/4 probability of being the result when measured.",
 	"Note that the measurement probability of a given basis state is the square of its",
-	"co-efficient (referred to by physicists as its amplitude)"
+	"coefficient (referred to by physicists as its amplitude)"
 }
 prof_q.areas.equal_super_2wire_escape.help_chat_sent = false
 prof_q.areas.equal_super_2wire_escape.success_chat_sent = false

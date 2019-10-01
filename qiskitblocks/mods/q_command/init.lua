@@ -2104,21 +2104,24 @@ will be available in chests along the way. Please leave them in this
 room, and come back anytime you have questions about what they do or how
 to use them.
 
-The first place outside this room that you may want to visit is the
+If want an escape room-like experience, check out the puzzle rooms at
+the bottom of the ladder located in this building. Professor Q will help
+guide you through the circuit puzzles by sending chat message to the
+upper-left corner of your window.
+
+Another place outside this room that you may want to visit is the
 quantum cats sandbox. In that area, some basic quantum computing
 circuits and gates are demonstrated with grumpy and happy cats instead
 of the usual qubits. To get there, follow the light blocks just outside
 the front doors into the woods.
 
-If you would rather skip the cats, then a good place to begin your
-journey would be in the quantum circuit garden on the other side of the
-large wall outside the front doors.
+Other places to visit include the quantum circuit garden on the other
+side of the large wall outside the front doors, and the 'OpenQASM Chasm'
+surrounded by a wooden gate.
 
-If want an escape room-like experience, check out the puzzle rooms at
-the bottom of the ladder located in this building.
-
-Wherever you choose to begin, please be sure to right-click the Help
-buttons (labeled with a question mark) as you encounter them. Good luck!
+Wherever you choose to begin, more help is available by right-clicking
+the Help buttons (labeled with a question mark) as you encounter them.
+Good luck!
 ]]
 q_command:register_help_button("quantum_circuit_world", "Read me first!", q_command.texts.quantum_circuit_world)
 
@@ -3258,8 +3261,6 @@ q_command.texts.deutsch_algo_puzzle =
 The Deutsch algorithm, first published in 1985, is the Hello World of
 quantum algorithms.
 
-TODO: Discuss the Deutsch algorithm and relevant concepts.
-
 To work through this puzzle, place appropriate gates between the
 barriers to implement a balanced oracle whose output on the bottom wire
 is the flipped state of its input on the top wire.
@@ -3311,7 +3312,6 @@ experiment with quantum teleportation by left and right clicking the Ry
 and Rz gates while wielding the Rotate Tool. The Bloch sphere at the top
 of the chasm should reflect the state that you set with rotations. Note
 that it is expected for the Q block to turn black again.
-
 ]]
 q_command:register_help_button("quantum_teleportation", "Quantum teleportation", q_command.texts.quantum_teleportation)
 local solution_statevector_quantum_teleportation =
@@ -3360,12 +3360,14 @@ q_command:register_q_command_block( "quantum_teleportation_success",
 -- Escape room puzzles -------------------------------------------------
 q_command.texts.x_gate_escape =
 [[
-TLDR: For all of these puzzles, get blocks from the chest and place them
-on the circuit. The door to the next room will open when the liquid
-levels and arrows in the blue blocks correspond to the quantum state
-displayed on the wall behind the circuit in Dirac notation. The Bloch
-sphere at the end of each wire estimates the state of its qubit, and
-right-clicking it performs a measurement of the circuit.
+TLDR: Most of the help that you'll need for these 'escape room' circuit
+puzzles will appear in the chat area (upper left corner of your window)
+by Professor Q. For all of these puzzles, get blocks from the chest and
+place them on the circuit. The door to the next room will open when the
+liquid levels and arrows in the blue blocks correspond to the quantum
+state displayed on the wall behind the circuit in Dirac notation. The
+Bloch sphere at the end of each wire estimates the state of its qubit,
+and right-clicking it performs a measurement of the circuit.
 ----
 
 This circuit, consisting of only one wire, leverages the X gate, also
