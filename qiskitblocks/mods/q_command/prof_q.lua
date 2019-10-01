@@ -20,6 +20,18 @@ other challenges, including navigation and understanding quantum
 computing concepts. Includes chat and an NPC (non-player character)
 --]]
 
+minetest.debug("language: " .. minetest.setting_get("language"))
+local lang = minetest.setting_get("language")
+if lang then
+	if not {
+		lang == "ja" or
+				lang == "es"}
+	then
+		lang = "en"
+	end
+else
+	lang = "en"
+end
 
 -- our API object
 prof_q = {}
@@ -39,6 +51,18 @@ prof_q.areas.x_gate_escape.help_chat_msg = {
 	"it won't vaporize you or scramble your molecules :-) For this experiment, change the",
 	"quantum state of the circuit from |0> to the state shown on the wall."
 }
+prof_q.areas.x_gate_escape.help_chat_msg.es = {
+	"Hola sujeto de prueba # 576, me refiero a estimado colega! Mi nombre es Profesor Q",
+	"y estoy parado detrás de este cristal de explosión porque vamos a intentar un experimento.",
+	"Esperemos que no te vaporice o revuelva tus moléculas :-) Para este experimento, cambia",
+	"el estado cuántico del circuito de | 0> al estado que se muestra en la pared."
+}
+prof_q.areas.x_gate_escape.help_chat_msg.ja = {
+	"こんにちは、被験者＃576、尊敬される同僚を意味します！ 私の名前はQ教授です。実験をし",
+	"ようと思っているので、このブラストガラスの後ろに立っています。 うまくいけば、気化した",
+	"り、分子をスクランブルしたりしないでください:-)この実験では、回路の量子状態を| 0>から",
+	"壁に表示される状態に変更します。"
+}
 --[[ Input from CJ:
  Oh! The properties of the fluid changed, from 0 to 1! There goes my hypothesis about vaporization.
  I'm glad we don't have to bring in a new test subject, er, colleague!
@@ -51,6 +75,18 @@ prof_q.areas.x_gate_escape.help_success_msg = {
 	"that measurements will result in |1>, notice that the marker on the Bloch sphere moved",
 	"from the top representing |0>, to the bottom representing |1>. Congrats, and now please",
 	"move on to the next circuit puzzle!"
+}
+prof_q.areas.x_gate_escape.help_success_msg.es = {
+	"Fue genial cómo usaste la puerta Pauli-X, o NOT, para cambiar el estado cuántico de | 0> a | 1>. Además ",
+	"de hacer que los niveles de líquido muestren un 100% de probabilidad de que las mediciones den como ",
+	"resultado | 1>, observe que el marcador en la esfera Bloch se movió desde la parte superior que representa | 0>,",
+	"hasta la parte inferior que representa | 1>. ¡Felicidades, y ahora pasa al siguiente rompecabezas de circuito!"
+}
+prof_q.areas.x_gate_escape.help_success_msg.ja = {
+	"Pauli-Xゲート（NOTゲート）を使用して量子状態を| 0>から| 1>に変更する方法は素晴らし",
+	"かったです。 液面レベルを測定すると100％の確率で| 1>が表示されることに加えて、ブロッ",
+	"ホ球のマーカーが| 0>を表す上部から| 1>を表す下部に移動したことに注意してください。 お",
+	"めでとう、そして次のサーキットパズルに進んでください！"
 }
 prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
@@ -359,10 +395,15 @@ minetest.register_globalstep(function(dtime)
 			if object:is_player() then
 				if not area.help_chat_sent then
 					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
-					for idx = 1, #area.help_chat_msg do
-        				minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[idx])
-      				end
-
+					if area.help_chat_msg[lang] then
+						for idx = 1, #area.help_chat_msg[lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[lang][idx])
+						end
+					elseif area.help_chat_msg then
+						for idx = 1, #area.help_chat_msg do
+							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[idx])
+						end
+					end
 					area.help_chat_sent = true
 				end
 
@@ -370,9 +411,15 @@ minetest.register_globalstep(function(dtime)
 						q_command:get_q_command_block(area.q_block_pos).circuit_puzzle_solved() and
 						not area.success_chat_sent then
 					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
-					for idx = 1, #area.help_success_msg do
-        				minetest.chat_send_player(object:get_player_name(), area.help_success_msg[idx])
-      				end
+					if area.help_success_msg[lang] then
+						for idx = 1, #area.help_success_msg[lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[lang][idx])
+						end
+					elseif area.help_success_msg then
+						for idx = 1, #area.help_success_msg do
+							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[idx])
+						end
+					end
 					area.success_chat_sent = true
 				end
 			end

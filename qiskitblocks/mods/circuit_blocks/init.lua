@@ -27,7 +27,6 @@ TODO:
 [] address Android fast mode == special/aux key
 [] Display measurement on Bloch sphere
 [] Shift tiny measurement symbols on results over one pixel to left
-[] Incorporate Maddy Tod qubit-HSV mapping
 [] Incorporate Maddy Tod Tic-Tac-Toe game
 [] Give more in-world instructions on getting around Minetest
 [] Make use of health indicator and design gameplay with mobs, etc.
@@ -67,7 +66,7 @@ TODO:
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
     [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
     [] Ability for measured output wire to feed into input of same circuit
-\[] Tighten up circuit connector blocks and wire extension appearance and behavior
+[] Tighten up circuit connector blocks and wire extension appearance and behavior
     [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
 	correct on the back side as well
     [] Make circuit extension M block item fall where it can easily be picked up
@@ -76,7 +75,6 @@ TODO:
     [] Set wire_extension itemstack count to 0 when deleting wire extension related elements
     [] Don't allow extenders to be placed on extensions.
     [] Prevent digging a wire connection block if wire extension exists
-[] Implement classical registers and conditionals supported by OpenQASM
 [] Implement games like Tiq Taq Toe (the following, or MTod's versions)
 - https://quantumfrontiers.com/2019/07/15/tiqtaqtoe/
 [] Prevent ket blocks from being deleted easily
@@ -89,6 +87,7 @@ TODO:
 [] Prevent right-clicking on wire_extension_block after wire_extension exists
 [] Don't allow creating circuit if already exists
 [] Create an area where a mob does a quantum random walk
+    [] Implement Christian’s Creeper conundrum random walk to survive passing through rooms with mobs
 [] Display wire local state
 [] Clicking basis state ellipse block shows a state vector display?
 [] Create game environment with rooms that are significant in quantum computing history

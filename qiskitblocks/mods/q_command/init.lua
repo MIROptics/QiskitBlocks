@@ -2549,7 +2549,7 @@ it from the upper to the lower section of the chest dialog box. The
 items that appear in the top row of the inventory will appear in the
 hotbar ready to be wielded.
 
-There are a some tools in the chest with which you may add control
+There are some tools in the chest with which you may add control
 qubits to a gate, as well as to rotate a gate. To use these tools,
 position the cursor on an appropriate gate and left-click or right-click.
 ]]
