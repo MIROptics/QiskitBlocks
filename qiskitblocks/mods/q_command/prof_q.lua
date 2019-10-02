@@ -20,21 +20,22 @@ other challenges, including navigation and understanding quantum
 computing concepts. Includes chat and an NPC (non-player character)
 --]]
 
-minetest.debug("language: " .. minetest.setting_get("language"))
-local lang = minetest.setting_get("language")
-if lang then
-	if not {
-		lang == "ja" or
-				lang == "es"}
-	then
-		lang = "en"
-	end
-else
-	lang = "en"
-end
 
 -- our API object
 prof_q = {}
+
+function prof_q:get_locale_lang()
+	local lang = minetest.setting_get("language")
+	if lang then
+		if lang ~= "ja" and
+				lang ~= "es" then
+			lang = "en"
+		end
+	else
+		lang = "en"
+	end
+	return lang
+end
 
 -- Areas in the world in which Prof Q interacts with players
 prof_q.areas = {}
@@ -45,6 +46,7 @@ prof_q.areas = {}
 prof_q.areas.x_gate_escape = {}
 prof_q.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 prof_q.areas.x_gate_escape.radius = 5
+prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 prof_q.areas.x_gate_escape.help_chat_msg = {
 	"Hello test subject #576, I mean esteemed colleague! My name is Professor Q and I'm",
 	"standing behind this blast glass because we're going to try an experiment. Hopefully",
@@ -52,10 +54,10 @@ prof_q.areas.x_gate_escape.help_chat_msg = {
 	"quantum state of the circuit from |0> to the state shown on the wall."
 }
 prof_q.areas.x_gate_escape.help_chat_msg.es = {
-	"Hola sujeto de prueba # 576, me refiero a estimado colega! Mi nombre es Profesor Q",
-	"y estoy parado detrás de este cristal de explosión porque vamos a intentar un experimento.",
-	"Esperemos que no te vaporice o revuelva tus moléculas :-) Para este experimento, cambia",
-	"el estado cuántico del circuito de | 0> al estado que se muestra en la pared."
+	"Hola, sujeto #576, digo... ¡estimado colega! Mi nombre es Profesor Q y me encuentro aquí,",
+	"detrás de esta mampara de cristal porque vamos a probar un experimento. Con suerte, ni te",
+	"vaporizará, ni esparcirá tus moléculas por ahí. Para este experimento, cambia el estado",
+	"cuántico del circuito de |0> al estado que se muestra en la pared."
 }
 prof_q.areas.x_gate_escape.help_chat_msg.ja = {
 	"こんにちは、被験者＃576、尊敬される同僚を意味します！ 私の名前はQ教授です。実験をし",
@@ -63,11 +65,9 @@ prof_q.areas.x_gate_escape.help_chat_msg.ja = {
 	"り、分子をスクランブルしたりしないでください:-)この実験では、回路の量子状態を| 0>から",
 	"壁に表示される状態に変更します。"
 }
+prof_q.areas.x_gate_escape.help_chat_sent = false
 --[[ Input from CJ:
- Oh! The properties of the fluid changed, from 0 to 1! There goes my hypothesis about vaporization.
- I'm glad we don't have to bring in a new test subject, er, colleague!
  Try to move chat to lower middle area of screen
- Color code |0> on left of wire with positions in basis states
 --]]
 prof_q.areas.x_gate_escape.help_success_msg = {
 	"That was great how you used the Pauli-X gate, or NOT gate, to change the quantum",
@@ -77,10 +77,10 @@ prof_q.areas.x_gate_escape.help_success_msg = {
 	"move on to the next circuit puzzle!"
 }
 prof_q.areas.x_gate_escape.help_success_msg.es = {
-	"Fue genial cómo usaste la puerta Pauli-X, o NOT, para cambiar el estado cuántico de | 0> a | 1>. Además ",
-	"de hacer que los niveles de líquido muestren un 100% de probabilidad de que las mediciones den como ",
-	"resultado | 1>, observe que el marcador en la esfera Bloch se movió desde la parte superior que representa | 0>,",
-	"hasta la parte inferior que representa | 1>. ¡Felicidades, y ahora pasa al siguiente rompecabezas de circuito!"
+	"Ha estado muy bien cómo has usado la puerta Pauli-X, también conocida como puerta NOT,",
+	"para cambiar el estado cuántico de |0> a |1>. Fíjate cómo la marca en la esfera de",
+	"Bloch se ha movido de arriba, representando |0>, a abajo, representando |1>.",
+	"¡Enhorabuena! Ahora, procede al siguiente puzzle."
 }
 prof_q.areas.x_gate_escape.help_success_msg.ja = {
 	"Pauli-Xゲート（NOTゲート）を使用して量子状態を| 0>から| 1>に変更する方法は素晴らし",
@@ -88,70 +88,76 @@ prof_q.areas.x_gate_escape.help_success_msg.ja = {
 	"ホ球のマーカーが| 0>を表す上部から| 1>を表す下部に移動したことに注意してください。 お",
 	"めでとう、そして次のサーキットパズルに進んでください！"
 }
-prof_q.areas.x_gate_escape.help_chat_sent = false
 prof_q.areas.x_gate_escape.success_chat_sent = false
-prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 
 
---[[ Input from CJ:
- Great discovery (that the X gate affects the qubit corresponding to the wire position)
- Hopefully it doesn't cause molecular instability.
- Please contact us immediately if you start to grow a third arm.
- You've officially survived more tests than any of my previous subjects
---]]
 -- x_gates_2_wire:
 prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 prof_q.areas.x_gates_2_wire.radius = 5
+prof_q.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
 prof_q.areas.x_gates_2_wire.help_chat_msg = {
 	"Now let's play with multi-qubit circuits like this one. Please make its quantum state",
 	"match the state on the wall.",
 }
+prof_q.areas.x_gates_2_wire.help_chat_msg.es = {
+	"Vamos a trabajar ahora con circuitos multi-cúbit, como este. Por favor, haz que el",
+	"estado cuántico del mismo se corresponda con el estado en la pared.",
+}
+prof_q.areas.x_gates_2_wire.help_chat_sent = false
 prof_q.areas.x_gates_2_wire.help_success_msg = {
 	"Well done! Now the liquid levels show 100% probability that measurements will",
 	"result in |10>",
 	"Also, the marker on the bottom Bloch sphere moved from representing |0> to |1>"
 }
-prof_q.areas.x_gates_2_wire.help_chat_sent = false
+prof_q.areas.x_gates_2_wire.help_success_msg.es = {
+	"¡Bien hecho! Ahora los niveles de líquido muestran que, al 100% de probabilidad,",
+	"las mediciones resultarán en |10>. Además, la marca en la esfera de Bloch se ha",
+	"movido desde la representación de |0> a |1>."
+}
 prof_q.areas.x_gates_2_wire.success_chat_sent = false
-prof_q.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
 
 
 -- x_gates_3_wire:
 prof_q.areas.x_gates_3_wire = {}
 prof_q.areas.x_gates_3_wire.center_pos = {x = 248, y = 0, z = 62}
 prof_q.areas.x_gates_3_wire.radius = 5
+prof_q.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
 prof_q.areas.x_gates_3_wire.help_chat_msg = {
 	"Here you'll do more of the same, but with one additional wire and twice the",
 	"number of basis states."
 }
-
---[[ Input from CJ:
- I'm noticing a pattern here (rather than "You're noticing"). Whoa, we're making history today!
---]]
+prof_q.areas.x_gates_3_wire.help_chat_msg.es = {
+	"Aquí vas a hacer lo mismo, pero con una línea adicional y el doble de estados base."
+}
+prof_q.areas.x_gates_3_wire.help_chat_sent = false
 prof_q.areas.x_gates_3_wire.help_success_msg = {
 	"You're catching on quickly! You're also noticing that there are 2 to the n power of",
 	"basis states, where n is the number of wires. Here, there are 3 wires, so 8 basis",
 	"states, |000> through |111>"
 }
-prof_q.areas.x_gates_3_wire.help_chat_sent = false
+prof_q.areas.x_gates_3_wire.help_success_msg.es = {
+	"¡Lo pillas rápido! También te habrás dado cuenta de que el número de estados bae es 2",
+	"elevado a la n potencia, donde n es el número de líneas. En este caso hay 3 líneas,",
+	"luego 8 estados base, del |000> al |111>"
+}
 prof_q.areas.x_gates_3_wire.success_chat_sent = false
-prof_q.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
 
 
 -- h_gate_escape:
 prof_q.areas.h_gate_escape = {}
 prof_q.areas.h_gate_escape.center_pos = {x = 248, y = 0, z = 72}
 prof_q.areas.h_gate_escape.radius = 5
+prof_q.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
 prof_q.areas.h_gate_escape.help_chat_msg = {
 	"This room is where Schroedinger's cat starts getting nervous. Put the qubit in an equal",
 	"superposition of dead and alive, I mean |0> and |1>"
 }
---[[ Input from CJ:
- Incredible. My hypothesis is correct! Some of the liquid is in each state. I see that the marker
- moved to the equator. [convey the excitement of discovery]
- [Use state equivalents in addition like zero, one, plus and minus states]
---]]
+prof_q.areas.h_gate_escape.help_chat_msg.es = {
+	"Esta es la habitación donde el gato de Schrodinger comienza a ponerse nervioso. Pon",
+	"el cúbit en igual superposición de vivo y muerto. Quiero decir, de |0> y |1>"
+}
+prof_q.areas.h_gate_escape.help_chat_sent = false
 prof_q.areas.h_gate_escape.help_success_msg = {
 	"You've put the qubit in the |+> (pronounced 'plus') state where it has an equal probability",
 	"that measurements will result in |0> or |1>. You also made the marker on the Bloch sphere",
@@ -159,22 +165,30 @@ prof_q.areas.h_gate_escape.help_success_msg = {
 	"are equal. Fun fact: The probability of a |0> measurement result is proportional to",
 	"the vertical (Z axis) distance of the qubit's state to the south pole on the Bloch sphere!"
 }
-prof_q.areas.h_gate_escape.help_chat_sent = false
+prof_q.areas.h_gate_escape.help_success_msg.es = {
+	"Acabas de poner el cúbit en el estado |+> (pronunciado, “más”). También has hecho que la",
+	"marca de la esfera de Bloch se mueva hacia el ecuador, donde las distancias al polo norte,",
+	"|0>, y al polo sur, |1>, son iguales. Dato interesante: la probabilidad de medir |0> es",
+	"proporcional a la distancia vertical (eje Z) del estado del cúbit al polo sur, en la",
+	"esfera de Bloch."
+}
 prof_q.areas.h_gate_escape.success_chat_sent = false
-prof_q.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
 
 
 -- h_x_gate:
 prof_q.areas.h_x_gate = {}
 prof_q.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
 prof_q.areas.h_x_gate.radius = 5
+prof_q.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
 prof_q.areas.h_x_gate.help_chat_msg = {
 	"Now let's visit the back side of the Bloch sphere, in a state commonly known as |->",
 	"(pronounced 'minus'), where measurements resulting in |0> or |1> are also equally likely"
 }
---[[ Input from CJ:
- Christian: Use 3.14 in place of pi the first time
---]]
+prof_q.areas.h_x_gate.help_chat_msg.es = {
+	"Visitemos ahora el otro lado de la esfera de Bloch, un estado conocido como |-> (pronunciado",
+	"“menos”), donde las mediciones que resultan en |0> o |1> son igualmente probables."
+}
+prof_q.areas.h_x_gate.help_chat_sent = false
 prof_q.areas.h_x_gate.help_success_msg = {
 	"Nice navigation! You're noticing how the quantum computing gates such as X and Hadamard",
 	"may be represented as rotations on the Bloch sphere. The X gate rotates 180 degrees, also",
@@ -182,19 +196,31 @@ prof_q.areas.h_x_gate.help_success_msg = {
 	"but a bit down and to the left). You also may have noticed that the H gate rotates pi",
 	"radians around an axis that is halfway in-between the X and Z axes."
 }
-prof_q.areas.h_x_gate.help_chat_sent = false
+prof_q.areas.h_x_gate.help_success_msg.es = {
+	"¡Bien dirigido! Te estarás percatando de cómo las puertas X y Hadamard se pueden",
+	"representar como rotaciones en la esfera de Bloch. La puerta X rota 180 grados, o PI (3.14…) ",
+	"radianes, la marca, alrededor del eje X (que es el eje que apunta hacia ti, aunque un",
+	"poco más hacia abajo y a la izquierda). También habrás notado que la puerta H rota PI",
+	"radianes la marca, alrededor de un eje que se encuentra a medio camino entre los ejes X y Z."
+}
 prof_q.areas.h_x_gate.success_chat_sent = false
-prof_q.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
 
 
 -- h_z_gate:
 prof_q.areas.h_z_gate = {}
 prof_q.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
 prof_q.areas.h_z_gate.radius = 5
+prof_q.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
 prof_q.areas.h_z_gate.help_chat_msg = {
 	"Let's take another trip to the |-> state, but this time via a different route. I've taken",
 	"the liberty of replacing your X gate with a Z gate, so you'll need to experiment. Good luck!"
 }
+prof_q.areas.h_z_gate.help_chat_msg.es = {
+	"Vamos a alcanzar de nuevo el estado |->, esta vez siguiendo otra ruta. Me he tomado",
+	"la libertad de reemplazar tu puerta X con una puerta Z, así que tendrás que experimentar",
+	"un poco. ¡Buena suerte!"
+}
+prof_q.areas.h_z_gate.help_chat_sent = false
 prof_q.areas.h_z_gate.help_success_msg = {
 	"Fascinating! You've demonstrated that there are several different ways (an infinite amount)",
 	"for a quantum state to evolve to a different quantum state. This time, you used the H gate to",
@@ -202,38 +228,51 @@ prof_q.areas.h_z_gate.help_success_msg = {
 	"the Z gate to rotate around the Z axis. Did you notice that the arrows in the liquid blocks point",
 	"in opposite directions (pi radians out of phase) when this one-qubit circuit is in the |-> state?"
 }
-prof_q.areas.h_z_gate.help_chat_sent = false
+prof_q.areas.h_z_gate.help_success_msg.es = {
+	"¡Fascinante! Acabas de demostrar que existen distintas formas (infinitas, de hecho) para que un estado",
+	"cuántico evolucione hacia otro distinto. Esta vez, has usado una puerta H para alcanzar el estado |+>,",
+	"y después has cambiado la fase del estado cuántico en PI radianes, usando la puerta Z para rotar alrededor",
+	"del eje Z. ¿Te has dado cuenta de que las flechas de los bloques líquidos apuntan en direcciones",
+	"opuestas (desfasadas PI radianes), cuando este circuito de un cúbit se encuentra en el estado |->?"
+}
 prof_q.areas.h_z_gate.success_chat_sent = false
-prof_q.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
 
 
 -- hxx_gates_escape:
 prof_q.areas.hxx_gates_escape = {}
 prof_q.areas.hxx_gates_escape.center_pos = {x = 268, y = 0, z = 62}
 prof_q.areas.hxx_gates_escape.radius = 5
+prof_q.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
 prof_q.areas.hxx_gates_escape.help_chat_msg = {
 	"Go ahead and solve this puzzle by thinking about one wire at a time"
 }
---[[ Input from CJ:
- At this point it's OK to compliment the player directly.
- Also, add "These findings are truly remarkable"
---]]
+prof_q.areas.hxx_gates_escape.help_chat_msg.es = {
+	"Continua y resuelve este puzzle línea por línea."
+}
+prof_q.areas.hxx_gates_escape.help_chat_sent = false
 prof_q.areas.hxx_gates_escape.help_success_msg = {
 	"You're really getting the hang of this! By thinking about the effects of various gates on",
 	"individual wires, you've successfully crafted the desired composite quantum state."
 }
-prof_q.areas.hxx_gates_escape.help_chat_sent = false
+prof_q.areas.hxx_gates_escape.help_success_msg.es = {
+	"¡Le vas cogiendo el truco! Pensando en el efecto de múltiples puertas en líneas individuales,",
+	"has conseguido crear el estado cuántico deseado."
+}
 prof_q.areas.hxx_gates_escape.success_chat_sent = false
-prof_q.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
 
 
 -- equal_super_2wire_escape:
 prof_q.areas.equal_super_2wire_escape = {}
 prof_q.areas.equal_super_2wire_escape.center_pos = {x = 268, y = 0, z = 72}
 prof_q.areas.equal_super_2wire_escape.radius = 5
+prof_q.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
 prof_q.areas.equal_super_2wire_escape.help_chat_msg = {
 	"Now put four basis states into equal superpositions"
 }
+prof_q.areas.equal_super_2wire_escape.help_chat_msg.es = {
+	"Ahora pon los cuatro estados base en igual superposición."
+}
+prof_q.areas.equal_super_2wire_escape.help_chat_sent = false
 prof_q.areas.equal_super_2wire_escape.help_success_msg = {
 	"Incredible! By putting each wire into a superposition, you've caused all four of the",
 	"basis states in this quantum state to be in equal superpositions. As indicated by the",
@@ -241,147 +280,222 @@ prof_q.areas.equal_super_2wire_escape.help_success_msg = {
 	"Note that the measurement probability of a given basis state is the square of its",
 	"coefficient (referred to by physicists as its amplitude)"
 }
-prof_q.areas.equal_super_2wire_escape.help_chat_sent = false
+prof_q.areas.equal_super_2wire_escape.help_success_msg.es = {
+	"¡Increíble! Poniendo cada línea en superposición, has hecho que los cuatro estados base de",
+	"este estado cuántico estén en igual superposición. Como indica la fórmula en la pared, cada",
+	"estado tiene una probabilidad de ¼ de ser el resultado, tras una medición. Fíjate que la",
+	"probabilidad de medición de un estado base cualquiera es el cuadrado de su coeficiente",
+	"(llamado “amplitud”, por los físicos)."
+}
 prof_q.areas.equal_super_2wire_escape.success_chat_sent = false
-prof_q.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
 
 
 -- equal_super_3wire_escape:
 prof_q.areas.equal_super_3wire_escape = {}
 prof_q.areas.equal_super_3wire_escape.center_pos = {x = 268, y = 0, z = 82}
 prof_q.areas.equal_super_3wire_escape.radius = 5
+prof_q.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
 prof_q.areas.equal_super_3wire_escape.help_chat_msg = {
 	"This time, put eight basis states into equal superpositions"
 }
+prof_q.areas.equal_super_3wire_escape.help_chat_msg.es = {
+	"Esta vez, pon ocho estados base en igual superposición."
+}
+prof_q.areas.equal_super_3wire_escape.help_chat_sent = false
 prof_q.areas.equal_super_3wire_escape.help_success_msg = {
 	"You've got this! You may be familiar with the 'sum' notation on the wall, which",
 	"provides a succinct way to express this state in which all of the basis states have",
 	"the same amplitude."
 }
-prof_q.areas.equal_super_3wire_escape.help_chat_sent = false
+prof_q.areas.equal_super_3wire_escape.help_success_msg.es = {
+	"¡Ya lo has pillado! Puede que te suene la notación “sumatorio” de la pared, que proporciona",
+	"una forma breve de expresar este estado en el que todos los estados base tienen la misma",
+	"amplitud."
+}
 prof_q.areas.equal_super_3wire_escape.success_chat_sent = false
-prof_q.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
 
 
 -- bell_phi_plus_escape:
 prof_q.areas.bell_phi_plus_escape = {}
 prof_q.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
 prof_q.areas.bell_phi_plus_escape.radius = 5
+prof_q.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
 prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
 	"Now we'll experiment with a phenomenon known as 'quantum entanglement' that Einstein",
 	"referred to as 'spooky actions at a distance'. Your challenge is to entangle two",
 	"qubits so that each one will have the same measurement result. Hint: You'll click the",
 	"X gate while wielding the Control Tool to turn in into a CNOT gate."
 }
+prof_q.areas.bell_phi_plus_escape.help_chat_msg.es = {
+	"Ahora vamos a experimentar con un fenómeno llamado “entrelazamiento cuántico”, y al que",
+	"Einstein se refería como “acciones espeluznantes a distancia”. El reto consiste en entrelazar",
+	"dos cubits de tal forma que se obtenga la misma medida para ambos. Pista: sostén la",
+	"Herramienta Control y haz clic en la puerta X para convertirla en una puerta CNOT."
+}
+prof_q.areas.bell_phi_plus_escape.help_chat_sent = false
 prof_q.areas.bell_phi_plus_escape.help_success_msg = {
 	"Amazing! You've just entangled two qubits in one of the four Bell states. This one is",
 	"known as the 'phi +' state. Did you notice that the Bloch spheres have question marks",
 	"in them? That's because an entangled state can't be expressed in terms of the states of",
 	"its qubits."
 }
-prof_q.areas.bell_phi_plus_escape.help_chat_sent = false
+prof_q.areas.bell_phi_plus_escape.help_success_msg.es = {
+	"¡Impresionante! Acabas de entrelazar dos cubits en uno de los cuatro estados de Bell. Este se",
+	"conoce con el nombre de estado “phi +”. ¿Te has dado cuenta de que la esfera de Bloch",
+	"muestra símbolos de interrogación en ella? Esto se debe a que un estado entrelazado no",
+	"puede exprese en términos de los estados de sus cúbits."
+}
 prof_q.areas.bell_phi_plus_escape.success_chat_sent = false
-prof_q.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
 
 
 -- bell_phi_minus_escape:
 prof_q.areas.bell_phi_minus_escape = {}
 prof_q.areas.bell_phi_minus_escape.center_pos = {x = 258, y = 0, z = 92}
 prof_q.areas.bell_phi_minus_escape.radius = 5
+prof_q.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
 prof_q.areas.bell_phi_minus_escape.help_chat_msg = {
 	"Now entangle two qubits in another way, known as the 'phi -' Bell state."
 }
+prof_q.areas.bell_phi_minus_escape.help_chat_msg.es = {
+	"Ahora entrelaza dos cúbits de otra manera, conocida como el estado de Bell “phi -“."
+}
+prof_q.areas.bell_phi_minus_escape.help_chat_sent = false
 prof_q.areas.bell_phi_minus_escape.help_success_msg = {
 	"Congratulations! You entangled those qubits in such a way that the measurement results",
 	"are the same as the previous, 'phi +', Bell state. But did you notice that the phases",
 	"in the relevant basis states are pi radians out of phase?"
 }
-prof_q.areas.bell_phi_minus_escape.help_chat_sent = false
+prof_q.areas.bell_phi_minus_escape.help_success_msg.es = {
+	"¡Enhorabuena! Has entrelazado esos cúbits de forma que los resultados medidos son los",
+	"mismos que en el estado anterior, “phi +”. ¿Pero te has dado cuenta de que las fases de los",
+	"estados se encuentran desfasadas PI radianes?"
+}
 prof_q.areas.bell_phi_minus_escape.success_chat_sent = false
-prof_q.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
 
 
 -- bell_psi_plus_escape:
 prof_q.areas.bell_psi_plus_escape = {}
 prof_q.areas.bell_psi_plus_escape.center_pos = {x = 258, y = 0, z = 82}
 prof_q.areas.bell_psi_plus_escape.radius = 5
+prof_q.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
 prof_q.areas.bell_psi_plus_escape.help_chat_msg = {
 	"Go ahead and entangle the two qubits in yet another way, this time in which the",
 	"measurement result of one qubit is the opposite result of measuring the other qubit."
 }
+prof_q.areas.bell_psi_plus_escape.help_chat_msg.es = {
+	"Continua y entrelaza ambos cúbits de otra forma más, esta vez en una en la que el resultado",
+	"de un cúbit sea siempre opuesto al resultado del otro."
+}
+prof_q.areas.bell_psi_plus_escape.help_chat_sent = false
 prof_q.areas.bell_psi_plus_escape.help_success_msg = {
 	"Well done! The state you made is known as the 'psi +', Bell state."
 }
-prof_q.areas.bell_psi_plus_escape.help_chat_sent = false
+prof_q.areas.bell_psi_plus_escape.help_success_msg.es = {
+	"¡Bien hecho! Este estado se conoce como el estado de Bell “psi +”."
+}
 prof_q.areas.bell_psi_plus_escape.success_chat_sent = false
-prof_q.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
 
 
 -- bell_psi_minus_escape:
 prof_q.areas.bell_psi_minus_escape = {}
 prof_q.areas.bell_psi_minus_escape.center_pos = {x = 248, y = 0, z = 82}
 prof_q.areas.bell_psi_minus_escape.radius = 5
+prof_q.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
 prof_q.areas.bell_psi_minus_escape.help_chat_msg = {
 	"Let's tackle the fourth and final Bell state, this time also using a Z gate."
 }
+prof_q.areas.bell_psi_minus_escape.help_chat_msg.es = {
+	"Vamos a por el cuarto estado de Bell, esta vez usando una puerta Z."
+}
+prof_q.areas.bell_psi_minus_escape.help_chat_sent = false
 prof_q.areas.bell_psi_minus_escape.help_success_msg = {
 	"Awesome! This one is called the 'psi -', Bell state."
 }
-prof_q.areas.bell_psi_minus_escape.help_chat_sent = false
+prof_q.areas.bell_psi_minus_escape.help_success_msg.es = {
+	"¡Alucinante! Este es el estado de Bell “psi -“."
+}
 prof_q.areas.bell_psi_minus_escape.success_chat_sent = false
-prof_q.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
 
 
 -- ghz_state_escape:
 prof_q.areas.ghz_state_escape = {}
 prof_q.areas.ghz_state_escape.center_pos = {x = 248, y = 0, z = 92}
 prof_q.areas.ghz_state_escape.radius = 5
+prof_q.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
 prof_q.areas.ghz_state_escape.help_chat_msg = {
 	"Next you'll entangle three qubits so that they all either measure 0s or 1s"
 }
-prof_q.areas.ghz_state_escape.help_success_msg = {
-	"Congratulations! You've successfully created a state know as GHZ."
+prof_q.areas.ghz_state_escape.help_chat_msg.es = {
+	"Ahora entrelazarás tres cúbits de forma que todos midan o 0, o 1."
 }
 prof_q.areas.ghz_state_escape.help_chat_sent = false
+prof_q.areas.ghz_state_escape.help_success_msg = {
+	"Congratulations! You've successfully created a state known as GHZ."
+}
+prof_q.areas.ghz_state_escape.help_success_msg.es = {
+	"¡Enhorabuena! Has creado el estado conocido como “GHZ”."
+}
 prof_q.areas.ghz_state_escape.success_chat_sent = false
-prof_q.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
 
 
 -- y_z_rot_1wire_escape:
 prof_q.areas.y_z_rot_1wire_escape = {}
 prof_q.areas.y_z_rot_1wire_escape.center_pos = {x = 238, y = 0, z = 92}
 prof_q.areas.y_z_rot_1wire_escape.radius = 5
+prof_q.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
 prof_q.areas.y_z_rot_1wire_escape.help_chat_msg = {
 	"In this puzzle you'll experiment with the effects of rotating the state of a",
 	"qubit in the Y and Z axes. Hint: You'll click the Ry and Rz blocks while wielding",
 	"the Rotate Tool."
 }
+prof_q.areas.y_z_rot_1wire_escape.help_chat_msg.es = {
+	"En este puzzle experimentarás con los efectos de rotar el estado de un cúbit alrededor de los",
+	"ejes Y y Z. Pista: sostén la Herramienta Rotación y haz clic en los bloques Ry y Rz."
+}
+prof_q.areas.y_z_rot_1wire_escape.help_chat_sent = false
 prof_q.areas.y_z_rot_1wire_escape.help_success_msg = {
 	"Nice work! Did you notice that rotating the qubit on the Y axis changed the",
 	"measurement probabilities, but rotating on the Z axis didn't?"
 }
-prof_q.areas.y_z_rot_1wire_escape.help_chat_sent = false
+prof_q.areas.y_z_rot_1wire_escape.help_success_msg.es = {
+	"¡Bien hecho! ¿Te has dado cuenta de que, rotando el cúbit alrededor del eje Y, cambian las",
+	"probabilidades de la medida, pero rotándolo alrededor de Z, no cambian?"
+}
 prof_q.areas.y_z_rot_1wire_escape.success_chat_sent = false
-prof_q.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
 
 
 -- phase_rot_2wire_escape:
 prof_q.areas.phase_rot_2wire_escape = {}
 prof_q.areas.phase_rot_2wire_escape.center_pos = {x = 238, y = 0, z = 82}
 prof_q.areas.phase_rot_2wire_escape.radius = 5
+prof_q.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}
 prof_q.areas.phase_rot_2wire_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
 }
+prof_q.areas.phase_rot_2wire_escape.help_chat_msg.es = {
+	"Ahora experimentarás con un patrón comúnmente utilizado en algoritmos cuánticos, donde",
+	"rotaciones alrededor del eje Z se encuentran en medio de pares de puertas H, como si fueran",
+	"el relleno de un sándwich."
+}
+prof_q.areas.phase_rot_2wire_escape.help_chat_sent = false
 prof_q.areas.phase_rot_2wire_escape.help_success_msg = {
 	"Well done! The H gates transformed changes in phase to changes in measurement",
 	"probabilities.",
 	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
 	"and then explore other areas after climbing the ladder back to the main room."
 }
-prof_q.areas.phase_rot_2wire_escape.help_chat_sent = false
+prof_q.areas.phase_rot_2wire_escape.help_success_msg.es = {
+	"¡Muy bien! Las puertas H transforman cambios en la fase en cambios en la probabilidad.",
+	"¡Mi más sentida enhorabuena por haber resuelto estos puzzles de circuitos! Vuelve a",
+	"cualquiera de ellos si quieres y explora otras áreas tras subir las escaleras de vuelta",
+	"a la habitación principal."
+}
 prof_q.areas.phase_rot_2wire_escape.success_chat_sent = false
-prof_q.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}
+
+
+local locale_lang = prof_q:get_locale_lang()
+minetest.debug("prof_q_locale_lang: " .. locale_lang)
 
 
 -- Periodically check all areas for player
@@ -395,9 +509,9 @@ minetest.register_globalstep(function(dtime)
 			if object:is_player() then
 				if not area.help_chat_sent then
 					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
-					if area.help_chat_msg[lang] then
-						for idx = 1, #area.help_chat_msg[lang] do
-							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[lang][idx])
+					if area.help_chat_msg[locale_lang] then
+						for idx = 1, #area.help_chat_msg[locale_lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[locale_lang][idx])
 						end
 					elseif area.help_chat_msg then
 						for idx = 1, #area.help_chat_msg do
@@ -411,9 +525,9 @@ minetest.register_globalstep(function(dtime)
 						q_command:get_q_command_block(area.q_block_pos).circuit_puzzle_solved() and
 						not area.success_chat_sent then
 					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
-					if area.help_success_msg[lang] then
-						for idx = 1, #area.help_success_msg[lang] do
-							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[lang][idx])
+					if area.help_success_msg[locale_lang] then
+						for idx = 1, #area.help_success_msg[locale_lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[locale_lang][idx])
 						end
 					elseif area.help_success_msg then
 						for idx = 1, #area.help_success_msg do

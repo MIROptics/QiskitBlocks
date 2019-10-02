@@ -57,6 +57,9 @@ MUSIC_ACTIVE = 2
 MUSIC_EXCITED = 3
 MUSIC_CONGRATS = 4
 
+local locale_lang = prof_q:get_locale_lang()
+minetest.debug("q_command_locale_lang: " .. locale_lang)
+
 -- our API object
 q_command = {}
 
@@ -2024,7 +2027,7 @@ end
 
 --- Help buttons ---
 function q_command:register_help_button(suffix, caption, fulltext)
-	--q_command.captions[itemstringpart] = caption
+    local localized_fulltext = fulltext[locale_lang]
 	minetest.register_node("q_command:q_command_button_wall_help_" .. suffix, {
 		description = suffix .. " help button",
 		drawtype = "nodebox",
@@ -2044,7 +2047,7 @@ function q_command:register_help_button(suffix, caption, fulltext)
 		},
 		groups = {cracky = 2, attached_node = 1},
 		legacy_wallmounted = true,
-		on_construct = function(pos)
+		on_rightclick = function(pos)
 			local meta = minetest.get_meta(pos)
 			local formspec = ""..
 			"size[12,6]"..
@@ -2052,7 +2055,7 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			"tablecolumns[text]"..
 			"tableoptions[background=#000000;highlight=#000000;border=false]"..
 			"table[0,0.25;12,5.2;infosign_text;"..
-			q_command:convert_newlines(minetest.formspec_escape(S(fulltext)))..
+			q_command:convert_newlines(minetest.formspec_escape(S(localized_fulltext)))..
 			"]"..
 			"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
 			meta:set_string("formspec", formspec)
@@ -2060,6 +2063,22 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			--meta:set_string("id", itemstringpart)
 			meta:set_string("caption", caption)
 		end,
+		--on_construct = function(pos)
+		--	local meta = minetest.get_meta(pos)
+		--	local formspec = ""..
+		--	"size[12,6]"..
+		--	"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
+		--	"tablecolumns[text]"..
+		--	"tableoptions[background=#000000;highlight=#000000;border=false]"..
+		--	"table[0,0.25;12,5.2;infosign_text;"..
+		--	q_command:convert_newlines(minetest.formspec_escape(S(localized_fulltext)))..
+		--	"]"..
+		--	"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
+		--	meta:set_string("formspec", formspec)
+		--	meta:set_string("infotext", string.format(S("%s (Right-click for hints)"), S(caption)))
+		--	--meta:set_string("id", itemstringpart)
+		--	meta:set_string("caption", caption)
+		--end,
 		on_receive_fields = function(pos, formname, fields, sender)
 			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
 			local player_name = sender:get_player_name()
@@ -2084,9 +2103,10 @@ function q_command:register_help_button(suffix, caption, fulltext)
 	})
 end
 
-q_command.texts = {}
 
-q_command.texts.quantum_circuit_world =
+q_command.texts = {}
+q_command.texts.quantum_circuit_world = {}
+q_command.texts.quantum_circuit_world.en =
 [[
 Welcome to the world of quantum computing circuits! The block-world
 environment you are currently in is created with the Minetest.net
@@ -2123,10 +2143,35 @@ Wherever you choose to begin, more help is available by right-clicking
 the Help buttons (labeled with a question mark) as you encounter them.
 Good luck!
 ]]
+q_command.texts.quantum_circuit_world.es = q_command.texts.quantum_circuit_world.en
+q_command.texts.quantum_circuit_world.ja =
+[[
+量子計算回路の世界へようこそ！現在のブロックワールド環境は、Minetest.netオープンソースライブラリ
+を使用して作成されます。 Minetestでの移動や操作のためのコントロールのリストは、ゲームを一時停止することで
+利用できます（たとえば、一部のプラットフォームではEscキーで）。相互作用する量子ゲートと回路は、
+<https://qiskit.org/>量子シミュレーターを使用しています。
+
+この環境で探索できる領域は増え続けています。まず、この部屋の標識を右クリックして読むと便利です。
+これらの標識は、発生するさまざまな量子コンピューティング関連ブロックの動作を説明しているためです。
+ちなみに、この部屋からブロックやツールを取り出す必要はありません。それらは道に沿ってチェストで利用できるからです。
+この部屋にそれらを残し、彼らが何をするか、またはそれらをどのように使用するかについて質問があるときはいつでも戻って来てください。
+
+脱出室のような体験が必要な場合は、この建物にあるはしごの下部にあるパズルルームをチェックしてください。
+教授Qは、ウィンドウの左上隅にチャットメッセージを送信して、サーキットパズルをガイドします。
+
+この部屋の外にある別の場所は、量子猫の砂場です。その分野では、いくつかの基本的な量子計算回路とゲートが、
+通常のキュービットの代わりに不機嫌で幸せな猫で示されています。そこに着くには、
+正面玄関のすぐ外にあるライトブロックをたどって森に入ります。
+
+訪問する他の場所には、正面玄関の外側の大きな壁の反対側の量子回路庭園、および木製の門に囲まれた「OpenQASM Chasm」が含まれます。
+
+開始する場所を選択すると、ヘルプボタン（疑問符のラベルが付いている）を右クリックすると、ヘルプが表示されます。幸運を！
+]]
 q_command:register_help_button("quantum_circuit_world", "Read me first!", q_command.texts.quantum_circuit_world)
 
 
-q_command.texts.x_rx_gates =
+q_command.texts.x_rx_gates = {}
+q_command.texts.x_rx_gates.en =
 [[
 The X and Rx gates rotate a qubit state around the X axis of a Bloch
 sphere (refer to the Bloch spheres on the wall). While wielding one of
@@ -4555,6 +4600,7 @@ end)
 
 
 -- TODO: Remove this code after removing blocks in-world
+--[[
 local function register_sign(desc, def)
 	minetest.register_node("q_command:level_progression", {
 		description = desc,
@@ -4573,44 +4619,19 @@ local function register_sign(desc, def)
 			wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
 			wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
 		},
-		groups = def.groups,
+		groups = {oddly_breakable_by_hand=2},
 		legacy_wallmounted = true,
 		sounds = def.sounds,
 
-		on_construct = function(pos)
-			--local n = minetest.get_node(pos)
-			local meta = minetest.get_meta(pos)
-			meta:set_string("formspec", "field[text;;${text}]")
-		end,
-		on_receive_fields = function(pos, formname, fields, sender)
-			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
-			local player_name = sender:get_player_name()
-			if minetest.is_protected(pos, player_name) then
-				minetest.record_protection_violation(pos, player_name)
-				return
-			end
-			local text = fields.text
-			if not text then
-				return
-			end
-			if string.len(text) > 512 then
-				minetest.chat_send_player(player_name, "Text too long")
-				return
-			end
-			minetest.log("action", (player_name or "") .. " wrote \"" ..
-				text .. "\" to sign at " .. minetest.pos_to_string(pos))
-			local meta = minetest.get_meta(pos)
-			meta:set_string("text", text)
-			meta:set_string("infotext", '"' .. text .. '"')
-		end,
 	})
 end
 
 -- TODO: Remove this code after removing blocks in-world
 register_sign("Level sign", "Wooden", {
 	--sounds = default.node_sound_wood_defaults(),
-	groups = {choppy = 2, attached_node = 1, flammable = 2, oddly_breakable_by_hand = 3}
+	groups = {oddly_breakable_by_hand = 2}
 })
+--]]
 
 minetest.register_node("q_command:block_no_function", {
     description = "Non-functional Q command block",
