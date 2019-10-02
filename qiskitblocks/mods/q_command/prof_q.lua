@@ -26,6 +26,7 @@ prof_q = {}
 
 function prof_q:get_locale_lang()
 	local lang = minetest.setting_get("language")
+	minetest.debug("minetest.setting_get('language'):" .. minetest.setting_get('language'))
 	if lang then
 		if lang ~= "ja" and
 				lang ~= "es" then
