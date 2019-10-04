@@ -1342,6 +1342,62 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     end
 
 
+                    local function react_solution_attempt(player_correct)
+                        local door = nil
+                        if door_pos and doors then
+                            door = doors.get(door_pos)
+                        end
+
+                        if player_correct then
+                            if mpd.playing then
+                                mpd.play_song(MUSIC_CONGRATS)
+                            end
+                            mpd.queue_next_song(MUSIC_ACTIVE)
+
+                            if door and door.open then
+                                door:open(nil)
+                            end
+
+                            -- If there is a chest, erase player inventory and
+                            -- restock the chest
+                            if chest_pos and chest_inv then
+                                local chest_meta = minetest.get_meta(chest_pos)
+                                chest_meta:from_table(chest_inv)
+
+                                local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
+                                local player_inv_main_size = player_inv:get_size("main")
+                                player_inv:set_size("main", 0)
+                                player_inv:set_size("main", player_inv_main_size)
+                            end
+
+                        else
+                            if mpd.playing then
+                                if mpd.playing == MUSIC_CHILL then
+                                    mpd.play_song(MUSIC_ACTIVE)
+                                elseif mpd.playing == MUSIC_ACTIVE then
+                                    mpd.queue_next_song(MUSIC_ACTIVE)
+                                elseif mpd.playing == MUSIC_EXCITED then
+                                    mpd.queue_next_song(MUSIC_ACTIVE)
+                                elseif mpd.playing == MUSIC_CONGRATS then
+                                    mpd.queue_next_song(MUSIC_ACTIVE)
+                                end
+                            end
+
+                            if door and door.close then
+                                door:close(nil)
+                            end
+                        end
+
+                        if LOG_DEBUG then
+                            minetest.debug("player_correct: " .. tostring(player_correct))
+                        end
+                        if (player_correct and not block_represents_correct_solution) or
+                                (not player_correct and block_represents_correct_solution) then
+                            minetest.swap_node(q_block.get_node_pos(), {name = other_q_block_node_name})
+                        end
+                    end
+
+
                     local function process_backend_statevector_result(http_request_response)
                         if LOG_DEBUG then
                             minetest.debug("http_request_response (statevector):\n" .. dump(http_request_response))
@@ -1355,75 +1411,22 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             -- minetest.debug("statevector:\n" .. dump(statevector))
                             minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
-                            local is_correct_solution = true
+                            local is_correct_solution_statevector = true
                             if statevector and correct_solution_statevector and
                                     #statevector == #correct_solution_statevector then
                                 for sv_idx = 1, #statevector do
                                     if not complex.nearly_equals(statevector[sv_idx],
                                             correct_solution_statevector[sv_idx]) then
-                                        is_correct_solution = false
+                                        is_correct_solution_statevector = false
                                         break
                                     end
                                 end
 
                             else
-                                is_correct_solution = false
-                                --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
+                                is_correct_solution_statevector = false
                             end
 
-                            local door = nil
-                            if door_pos and doors then
-                                door = doors.get(door_pos)
-                            end
-
-                            if is_correct_solution then
-                                if mpd.playing then
-                                    mpd.play_song(MUSIC_CONGRATS)
-                                end
-                                mpd.queue_next_song(MUSIC_ACTIVE)
-
-                                if door and door.open then
-                                    door:open(nil)
-                                end
-
-                                -- If there is a chest, erase player inventory and
-                                -- restock the chest
-                                if chest_pos and chest_inv then
-                                    local chest_meta = minetest.get_meta(chest_pos)
-                                    chest_meta:from_table(chest_inv)
-
-                                    local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
-                                    local player_inv_main_size = player_inv:get_size("main")
-                                    player_inv:set_size("main", 0)
-                                    player_inv:set_size("main", player_inv_main_size)
-                                end
-
-                            else
-                                if mpd.playing then
-                                    if mpd.playing == MUSIC_CHILL then
-                                        mpd.play_song(MUSIC_ACTIVE)
-                                    elseif mpd.playing == MUSIC_ACTIVE then
-                                        mpd.queue_next_song(MUSIC_ACTIVE)
-                                    elseif mpd.playing == MUSIC_EXCITED then
-                                        mpd.queue_next_song(MUSIC_ACTIVE)
-                                    elseif mpd.playing == MUSIC_CONGRATS then
-                                        mpd.queue_next_song(MUSIC_ACTIVE)
-                                    end
-                                end
-
-                                if door and door.close then
-                                    door:close(nil)
-                                end
-                            end
-
-                            if LOG_DEBUG then
-                                minetest.debug("is_correct_solution: " .. tostring(is_correct_solution))
-                            end
-                            if (is_correct_solution and not block_represents_correct_solution) or
-                                    (not is_correct_solution and block_represents_correct_solution) then
-                                minetest.swap_node(q_block.get_node_pos(), {name = other_q_block_node_name})
-                            else
-                            end
+                            react_solution_attempt(is_correct_solution_statevector)
 
                             -- Update the histogram
                             local hist_node_pos = nil
@@ -1657,27 +1660,30 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             minetest.debug("unitary:\n" .. dump(unitary))
                             minetest.debug("correct_solution_unitary:\n" .. dump(correct_solution_unitary))
 
-                            --[[
-                            local is_correct_solution = true
-                            if statevector and correct_solution_statevector and
-                                    #statevector == #correct_solution_statevector then
-                                for sv_idx = 1, #statevector do
-                                    if not complex.nearly_equals(statevector[sv_idx],
-                                            correct_solution_statevector[sv_idx]) then
-                                        is_correct_solution = false
-                                        break
+                            local is_correct_solution_unitary = true
+                            if unitary and correct_solution_unitary and
+                                    #unitary == #correct_solution_unitary then
+                                for uni_row_idx = 1, #unitary do
+                                    for uni_col_idx = 1, #unitary do
+                                        if not complex.nearly_equals(unitary[uni_row_idx][uni_col_idx],
+                                                correct_solution_unitary[uni_row_idx][uni_col_idx]) then
+                                            is_correct_solution_unitary = false
+                                            break
+                                        end
                                     end
                                 end
 
                             else
-                                is_correct_solution = false
-                                --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
+                                is_correct_solution_unitary = false
                             end
-                            --]]
+                            -- minetest.debug("is_correct_solution_unitary: " .. tostring(is_correct_solution_unitary))
+
+                            react_solution_attempt(is_correct_solution_unitary)
 
                         else
                             minetest.debug("Call to unitary_simulator Didn't succeed")
                         end
+
                     end
 
 
@@ -1833,7 +1839,9 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                         -- If there is a correct unitary solution, run the unitary_simulator
                         -- TODO: Add code that creates and checks for a correct unitary
-                        request_http_api.fetch(http_request_unitary, process_backend_unitary_result)
+                        if correct_solution_unitary then
+                            request_http_api.fetch(http_request_unitary, process_backend_unitary_result)
+                        end
                     end
                 end
 
