@@ -17,6 +17,11 @@ limitations under the License.
 
 --[[
 TODO:
+[] Track down this error:
+    2019-10-04 18:21:24: WARNING[Server]: ServerEnv: Trying to store id = 0 statically but
+    block (14,0,4) already contains 64 objects.
+[] Diagnose problem of QUBIT_BASIS making unitary incorrect
+    [] Exclude some other blocks from unitary (and statevector) simulators?
 [] Move Prof Q guidance from chat area to HUD?
 [] Verify that ContentDB has debug false in minetest.conf
 [] Drop award and play longer congrats music when 16 puzzles are solved

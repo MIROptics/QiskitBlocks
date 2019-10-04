@@ -38,6 +38,14 @@ function prof_q:get_locale_lang()
 	return lang
 end
 
+function prof_q:erase_player_inventory()
+	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
+	local player_inv_main_size = player_inv:get_size("main")
+	player_inv:set_size("main", 0)
+	player_inv:set_size("main", player_inv_main_size)
+end
+
+
 -- Areas in the world in which Prof Q interacts with players
 prof_q.areas = {}
 
@@ -520,6 +528,7 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					area.help_chat_sent = true
+					prof_q:erase_player_inventory()
 				end
 
 				if area.q_block_pos and
@@ -536,6 +545,7 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					area.success_chat_sent = true
+					--prof_q:erase_player_inventory()
 				end
 			end
 		end

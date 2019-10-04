@@ -1358,16 +1358,17 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                 door:open(nil)
                             end
 
-                            -- If there is a chest, erase player inventory and
-                            -- restock the chest
+                            -- If there is a chest, restock it
                             if chest_pos and chest_inv then
                                 local chest_meta = minetest.get_meta(chest_pos)
                                 chest_meta:from_table(chest_inv)
 
+                                --[[
                                 local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
                                 local player_inv_main_size = player_inv:get_size("main")
                                 player_inv:set_size("main", 0)
                                 player_inv:set_size("main", player_inv_main_size)
+                                --]]
                             end
 
                         else
@@ -1409,24 +1410,25 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local sv_data = http_request_response.data
                             local statevector = q_command:parse_json_statevector(sv_data)
                             -- minetest.debug("statevector:\n" .. dump(statevector))
-                            minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
 
-                            local is_correct_solution_statevector = true
-                            if statevector and correct_solution_statevector and
-                                    #statevector == #correct_solution_statevector then
-                                for sv_idx = 1, #statevector do
-                                    if not complex.nearly_equals(statevector[sv_idx],
-                                            correct_solution_statevector[sv_idx]) then
-                                        is_correct_solution_statevector = false
-                                        break
+                            -- Only check for a correct player solution if correct_solution_statevector exists
+                            if correct_solution_statevector then
+                                minetest.debug("correct_solution_statevector:\n" .. dump(correct_solution_statevector))
+                                local is_correct_solution_statevector = true
+                                if statevector and correct_solution_statevector and
+                                        #statevector == #correct_solution_statevector then
+                                    for sv_idx = 1, #statevector do
+                                        if not complex.nearly_equals(statevector[sv_idx],
+                                                correct_solution_statevector[sv_idx]) then
+                                            is_correct_solution_statevector = false
+                                            break
+                                        end
                                     end
+                                else
+                                    is_correct_solution_statevector = false
                                 end
-
-                            else
-                                is_correct_solution_statevector = false
+                                react_solution_attempt(is_correct_solution_statevector)
                             end
-
-                            react_solution_attempt(is_correct_solution_statevector)
 
                             -- Update the histogram
                             local hist_node_pos = nil
@@ -1658,28 +1660,28 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             local uni_data = http_request_response.data
                             local unitary = q_command:parse_json_unitary(uni_data)
                             minetest.debug("unitary:\n" .. dump(unitary))
-                            minetest.debug("correct_solution_unitary:\n" .. dump(correct_solution_unitary))
 
-                            local is_correct_solution_unitary = true
-                            if unitary and correct_solution_unitary and
-                                    #unitary == #correct_solution_unitary then
-                                for uni_row_idx = 1, #unitary do
-                                    for uni_col_idx = 1, #unitary do
-                                        if not complex.nearly_equals(unitary[uni_row_idx][uni_col_idx],
-                                                correct_solution_unitary[uni_row_idx][uni_col_idx]) then
-                                            is_correct_solution_unitary = false
-                                            break
+                            -- Only check for a correct player solution if correct_solution_unitary exists
+                            if correct_solution_unitary then
+                                minetest.debug("correct_solution_unitary:\n" .. dump(correct_solution_unitary))
+                                local is_correct_solution_unitary = true
+                                if unitary and correct_solution_unitary and
+                                        #unitary == #correct_solution_unitary then
+                                    for uni_row_idx = 1, #unitary do
+                                        for uni_col_idx = 1, #unitary do
+                                            if not complex.nearly_equals(unitary[uni_row_idx][uni_col_idx],
+                                                    correct_solution_unitary[uni_row_idx][uni_col_idx]) then
+                                                is_correct_solution_unitary = false
+                                                break
+                                            end
                                         end
                                     end
+                                else
+                                    is_correct_solution_unitary = false
                                 end
-
-                            else
-                                is_correct_solution_unitary = false
+                                minetest.debug("is_correct_solution_unitary: " .. tostring(is_correct_solution_unitary))
+                                react_solution_attempt(is_correct_solution_unitary)
                             end
-                            -- minetest.debug("is_correct_solution_unitary: " .. tostring(is_correct_solution_unitary))
-
-                            react_solution_attempt(is_correct_solution_unitary)
-
                         else
                             minetest.debug("Call to unitary_simulator Didn't succeed")
                         end
@@ -4900,9 +4902,8 @@ local solution_unitary_xor_escape =
 		}
 	}
 }
---[[
-local door_pos_xor_escape = {x = 236, y = 0, z = 67}
-local chest_pos_xor_escape = {x = 236, y = 0, z = 76}
+local door_pos_xor_escape = {x = -44, y = 8.5, z = 337}
+local chest_pos_xor_escape = {x = -50, y = 8.5, z = 332}
 local chest_inv_xor_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
@@ -4912,17 +4913,18 @@ local chest_inv_xor_escape = {
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "", [32] = ""
+                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
         }
     }
 }
---]]
+--[[
 local door_pos_xor_escape = nil
 local chest_pos_xor_escape = nil
 local chest_inv_xor_escape = nil
+--]]
 q_command:register_q_command_block( "xor_escape_success", "xor_escape",
         nil, solution_unitary_xor_escape,true,
-        door_pos_x_gate_escape, chest_pos_x_gate_escape, chest_inv_x_gate_escape)
+        door_pos_xor_escape, chest_pos_xor_escape, chest_inv_xor_escape)
 q_command:register_q_command_block( "xor_escape_success", "xor_escape",
         nil, solution_unitary_xor_escape,false,
         door_pos_xor_escape, chest_pos_xor_escape, chest_inv_xor_escape)
