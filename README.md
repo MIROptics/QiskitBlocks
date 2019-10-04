@@ -1,7 +1,7 @@
 # QiskitBlocks
 Teaches quantum computing and Qiskit in a Minetest block world. 
 - Here are the [Quantum Computing Workshop with QiskitBlocks web-based slides](https://slides.com/javafxpert/qiskitblocks).
-- See a QiskitBlocks tour in the [Learn how to play and build a Minetest-based game using Qiskit](youtu.be/kmCSxfrK_Mg) from IBM Q. 
+- See a QiskitBlocks tour in the [Learn how to play and build a Minetest-based game using Qiskit](https://youtu.be/kmCSxfrK_Mg) from IBM Q. 
 - Here's a [brief video demo of QiskitBlocks](https://vimeo.com/356185384). 
 
 Please choose one of the *Installing and running* options below and follow the instructions.
