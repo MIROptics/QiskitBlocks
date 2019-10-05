@@ -5103,6 +5103,63 @@ q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
 q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
         nil, solution_unitary_toffoli_escape,false,
         door_pos_toffoli_escape, chest_pos_toffoli_escape, chest_inv_toffoli_escape)
+
+
+--------
+q_command.texts.toffoli_mixed_escape = {}
+q_command.texts.toffoli_mixed_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.toffoli_mixed_escape.es = q_command.texts.toffoli_mixed_escape.en
+q_command.texts.toffoli_mixed_escape.ja = q_command.texts.toffoli_mixed_escape.en
+q_command:register_help_button("toffoli_mixed_escape",
+        "Make Toffoli gate", q_command.texts.toffoli_mixed_escape)
+local solution_unitary_toffoli_mixed_escape =
+{
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
+}
+local door_pos_toffoli_mixed_escape = {x = -44, y = 8.5, z = 337}
+local chest_pos_toffoli_mixed_escape = {x = -50, y = 8.5, z = 332}
+local chest_inv_toffoli_mixed_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mixed_escape",
+        nil, solution_unitary_toffoli_mixed_escape,true,
+        door_pos_toffoli_mixed_escape, chest_pos_toffoli_mixed_escape, chest_inv_toffoli_mixed_escape)
+q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mixed_escape",
+        nil, solution_unitary_toffoli_mixed_escape,false,
+        door_pos_toffoli_mixed_escape, chest_pos_toffoli_mixed_escape, chest_inv_toffoli_mixed_escape)
 -- END Escape room puzzles Level II ---------------------------------------------
 
 
