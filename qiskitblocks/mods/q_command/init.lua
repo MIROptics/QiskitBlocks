@@ -4927,17 +4927,182 @@ local chest_inv_xor_escape = {
         }
     }
 }
---[[
-local door_pos_xor_escape = nil
-local chest_pos_xor_escape = nil
-local chest_inv_xor_escape = nil
---]]
 q_command:register_q_command_block( "xor_escape_success", "xor_escape",
         nil, solution_unitary_xor_escape,true,
         door_pos_xor_escape, chest_pos_xor_escape, chest_inv_xor_escape)
 q_command:register_q_command_block( "xor_escape_success", "xor_escape",
         nil, solution_unitary_xor_escape,false,
         door_pos_xor_escape, chest_pos_xor_escape, chest_inv_xor_escape)
+
+
+--------
+q_command.texts.dj_bal_flip_ora_escape = {}
+q_command.texts.dj_bal_flip_ora_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.dj_bal_flip_ora_escape.es = q_command.texts.dj_bal_flip_ora_escape.en
+q_command.texts.dj_bal_flip_ora_escape.ja = q_command.texts.dj_bal_flip_ora_escape.en
+q_command:register_help_button("dj_bal_flip_ora_escape",
+        "Make balanced oracle for Deutsch", q_command.texts.dj_bal_flip_ora_escape)
+local solution_unitary_dj_bal_flip_ora_escape =
+{
+	{
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 1,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		}
+	},
+	{
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 1,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		}
+	},
+	{
+		{
+			r = 1,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		}
+	},
+	{
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 0,
+			i = 0
+		},
+		{
+			r = 1,
+			i = 0
+		}
+	}
+}
+local door_pos_dj_bal_flip_ora_escape = {x = -44, y = 8.5, z = 337}
+local chest_pos_dj_bal_flip_ora_escape = {x = -50, y = 8.5, z = 332}
+local chest_inv_dj_bal_flip_ora_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+q_command:register_q_command_block( "dj_bal_flip_ora_escape_success", "dj_bal_flip_ora_escape",
+        nil, solution_unitary_dj_bal_flip_ora_escape,true,
+        door_pos_dj_bal_flip_ora_escape, chest_pos_dj_bal_flip_ora_escape, chest_inv_dj_bal_flip_ora_escape)
+q_command:register_q_command_block( "dj_bal_flip_ora_escape_success", "dj_bal_flip_ora_escape",
+        nil, solution_unitary_dj_bal_flip_ora_escape,false,
+        door_pos_dj_bal_flip_ora_escape, chest_pos_dj_bal_flip_ora_escape, chest_inv_dj_bal_flip_ora_escape)
+
+
+--------
+q_command.texts.toffoli_escape = {}
+q_command.texts.toffoli_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.toffoli_escape.es = q_command.texts.toffoli_escape.en
+q_command.texts.toffoli_escape.ja = q_command.texts.toffoli_escape.en
+q_command:register_help_button("toffoli_escape",
+        "Make Toffoli gate", q_command.texts.toffoli_escape)
+local solution_unitary_toffoli_escape =
+{
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}}
+}
+local door_pos_toffoli_escape = {x = -44, y = 8.5, z = 337}
+local chest_pos_toffoli_escape = {x = -50, y = 8.5, z = 332}
+local chest_inv_toffoli_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
+        nil, solution_unitary_toffoli_escape,true,
+        door_pos_toffoli_escape, chest_pos_toffoli_escape, chest_inv_toffoli_escape)
+q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
+        nil, solution_unitary_toffoli_escape,false,
+        door_pos_toffoli_escape, chest_pos_toffoli_escape, chest_inv_toffoli_escape)
 -- END Escape room puzzles Level II ---------------------------------------------
 
 
