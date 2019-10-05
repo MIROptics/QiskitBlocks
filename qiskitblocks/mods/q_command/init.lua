@@ -478,7 +478,7 @@ end
 
 
 function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
-                                        include_measurement_blocks, c_if_table, tomo_meas_basis)
+                                        include_measurement_blocks, c_if_table, tomo_meas_basis, exclude_reset_blocks)
     local qasm_str = ""
     local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
     local q_block = q_command:get_q_command_block(circuit_node_pos)
@@ -621,9 +621,11 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
                 qasm_str = qasm_str .. 'measure q[' .. wire_num_idx .. '] -> c' .. wire_num_idx .. '[0];'
             end
         elseif node_type == CircuitNodeTypes.QUBIT_BASIS then
-            qasm_str = qasm_str .. 'reset q[' .. wire_num_idx .. '];'
-            if circuit_node_block.get_node_name():sub(-2) == "_1" then
-                qasm_str = qasm_str .. 'x q[' .. wire_num_idx .. '];'
+            if not exclude_reset_blocks then
+                qasm_str = qasm_str .. 'reset q[' .. wire_num_idx .. '];'
+                if circuit_node_block.get_node_name():sub(-2) == "_1" then
+                    qasm_str = qasm_str .. 'x q[' .. wire_num_idx .. '];'
+                end
             end
         elseif node_type == CircuitNodeTypes.CONNECTOR_M then
             -- Connector to wire extension, so traverse
@@ -647,22 +649,22 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
 
                         if wire_extension_dir_str == "+X" then
                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                y = wire_extension_circuit_pos.y,
-                                                z = wire_extension_circuit_pos.z - column_num + 1}
+                                             y = wire_extension_circuit_pos.y,
+                                             z = wire_extension_circuit_pos.z - column_num + 1}
                         elseif wire_extension_dir_str == "-X" then
                             circ_node_pos = {x = wire_extension_circuit_pos.x,
-                                                y = wire_extension_circuit_pos.y,
-                                                z = wire_extension_circuit_pos.z + column_num - 1}
+                                             y = wire_extension_circuit_pos.y,
+                                             z = wire_extension_circuit_pos.z + column_num - 1}
                         elseif wire_extension_dir_str == "-Z" then
                             circ_node_pos = {x = wire_extension_circuit_pos.x - column_num + 1,
-                                                y = wire_extension_circuit_pos.y,
-                                                z = wire_extension_circuit_pos.z}
+                                             y = wire_extension_circuit_pos.y,
+                                             z = wire_extension_circuit_pos.z}
                         end
 
                         qasm_str = qasm_str ..
-                                 q_command:create_qasm_for_node(circ_node_pos,
-                                         extension_wire_num, include_measurement_blocks,
-                                         c_if_table, tomo_meas_basis)
+                                q_command:create_qasm_for_node(circ_node_pos,
+                                        extension_wire_num, include_measurement_blocks,
+                                        c_if_table, tomo_meas_basis, exclude_reset_blocks)
                     end
                 end
             end
@@ -714,7 +716,7 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
     return qasm_str
 end
 
-function q_command:compute_circuit(circuit_block, include_measurement_blocks, tomo_meas_basis)
+function q_command:compute_circuit(circuit_block, include_measurement_blocks, tomo_meas_basis, exclude_reset_blocks)
     local num_wires = circuit_block.get_circuit_num_wires()
     local num_columns = circuit_block.get_circuit_num_columns()
     local circuit_dir_str = circuit_block.get_circuit_dir_str()
@@ -763,7 +765,7 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks, to
 
 
             qasm_str = qasm_str .. q_command:create_qasm_for_node(circuit_node_pos, wire_num,
-                    include_measurement_blocks, c_if_table, tomo_meas_basis)
+                    include_measurement_blocks, c_if_table, tomo_meas_basis, exclude_reset_blocks)
         end
     end
 
@@ -947,7 +949,8 @@ function q_command:register_q_command_block(suffix_correct_solution,
                 end
 
                 local circuit_block = circuit_blocks:get_circuit_block(q_block.get_circuit_pos())
-                local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
+                local qasm_with_measurement_str = q_command:compute_circuit(circuit_block,
+                        true, 0, false)
 
 		        formspec = "size[12,7]"..
                     "textarea[0.3,0.3;12,7;qasm_str;To run on a real quantum computer copy/paste into Circuit Composer at quantum-computing.ibm.com;"..
@@ -1058,11 +1061,18 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     local circuit_grid_pos = q_block.get_circuit_pos()
                     local circuit_block = circuit_blocks:get_circuit_block(circuit_grid_pos)
 
-                    local qasm_str = q_command:compute_circuit(circuit_block, false)
-                    local qasm_with_measurement_str = q_command:compute_circuit(circuit_block, true)
-                    local qasm_with_tomo_x_str = q_command:compute_circuit(circuit_block, true, 1)
-                    local qasm_with_tomo_y_str = q_command:compute_circuit(circuit_block, true, 2)
-                    local qasm_with_tomo_z_str = q_command:compute_circuit(circuit_block, true, 3)
+                    local qasm_str = q_command:compute_circuit(circuit_block, false,
+                            0, false)
+                    local qasm_for_unitary_str = q_command:compute_circuit(circuit_block,
+                            false, 0, true)
+                    local qasm_with_measurement_str = q_command:compute_circuit(circuit_block,
+                            true, 0, false)
+                    local qasm_with_tomo_x_str = q_command:compute_circuit(circuit_block, true,
+                            1, false)
+                    local qasm_with_tomo_y_str = q_command:compute_circuit(circuit_block, true,
+                            2, false)
+                    local qasm_with_tomo_z_str = q_command:compute_circuit(circuit_block, true,
+                            3, false)
 
                     local http_request_statevector = {
                         url = qiskit_service_host .. "/api/run/statevector?backend=statevector_simulator&qasm=" ..
@@ -1072,7 +1082,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                     local http_request_unitary = {
                         url = qiskit_service_host .. "/api/run/unitary?backend=unitary_simulator&qasm=" ..
-                                url_code.urlencode(qasm_str),
+                                url_code.urlencode(qasm_for_unitary_str),
                         timeout = qiskit_service_timeout
                     }
 

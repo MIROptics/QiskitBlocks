@@ -17,6 +17,7 @@ limitations under the License.
 
 --[[
 TODO:
+[] Create constants for tomography measurement bases
 [] Track down this error:
     2019-10-04 18:21:24: WARNING[Server]: ServerEnv: Trying to store id = 0 statically but
     block (14,0,4) already contains 64 objects.
@@ -36,7 +37,6 @@ TODO:
 [] Incorporate Maddy Tod Tic-Tac-Toe game
 [] Give more in-world instructions on getting around Minetest
 [] Make use of health indicator and design gameplay with mobs, etc.
-[] Create constants for tomography measurement bases
 [] Change flags to have binary set/get methods
 [] Create special q_command block mode with increased circuit size capabilities (by holding special key when placing?)
 [] Standardize on naming conventions for help buttons. For example, h_gate_puzzle and h_gate_desc
