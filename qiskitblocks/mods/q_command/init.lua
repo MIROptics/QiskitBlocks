@@ -5274,6 +5274,63 @@ q_command:register_q_command_block( "swap_escape_success", "swap_escape",
 q_command:register_q_command_block( "swap_escape_success", "swap_escape",
         nil, solution_unitary_swap_escape,false,
         door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
+
+
+--------
+q_command.texts.ctrl_swap_escape = {}
+q_command.texts.ctrl_swap_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.ctrl_swap_escape.es = q_command.texts.ctrl_swap_escape.en
+q_command.texts.ctrl_swap_escape.ja = q_command.texts.ctrl_swap_escape.en
+q_command:register_help_button("ctrl_swap_escape",
+        "Make controlled Swap gate", q_command.texts.ctrl_swap_escape)
+local solution_unitary_ctrl_swap_escape =
+{
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
+}
+local door_pos_ctrl_swap_escape = {x = -44, y = 8.5, z = 337}
+local chest_pos_ctrl_swap_escape = {x = -50, y = 8.5, z = 332}
+local chest_inv_ctrl_swap_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
+        nil, solution_unitary_ctrl_swap_escape,true,
+        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
+q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
+        nil, solution_unitary_ctrl_swap_escape,false,
+        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
 -- END Escape room puzzles Level II ---------------------------------------------
 
 
