@@ -5084,18 +5084,19 @@ local solution_unitary_toffoli_escape =
 	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
      {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}}
 }
-local door_pos_toffoli_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_toffoli_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_toffoli_escape = {x = 206, y = 0, z = 67}
+local chest_pos_toffoli_escape = {x = 210, y = 0, z = 66}
 local chest_inv_toffoli_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
                 [13] = "", [14] = "", [15] = "", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
@@ -5105,6 +5106,64 @@ q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
 q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
         nil, solution_unitary_toffoli_escape,false,
         door_pos_toffoli_escape, chest_pos_toffoli_escape, chest_inv_toffoli_escape)
+
+
+--------
+q_command.texts.toffoli_nand_escape = {}
+q_command.texts.toffoli_nand_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.toffoli_nand_escape.es = q_command.texts.toffoli_nand_escape.en
+q_command.texts.toffoli_nand_escape.ja = q_command.texts.toffoli_nand_escape.en
+q_command:register_help_button("toffoli_nand_escape",
+        "Make classical NAND gate", q_command.texts.toffoli_nand_escape)
+local solution_unitary_toffoli_nand_escape =
+{
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
+}
+local door_pos_toffoli_nand_escape = {x = 210, y = 0, z = 77}
+local chest_pos_toffoli_nand_escape = {x = 206, y = 0, z = 76}
+local chest_inv_toffoli_nand_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "toffoli_nand_escape_success", "toffoli_nand_escape",
+        nil, solution_unitary_toffoli_nand_escape,true,
+        door_pos_toffoli_nand_escape, chest_pos_toffoli_nand_escape, chest_inv_toffoli_nand_escape)
+q_command:register_q_command_block( "toffoli_nand_escape_success", "toffoli_nand_escape",
+        nil, solution_unitary_toffoli_nand_escape,false,
+        door_pos_toffoli_nand_escape, chest_pos_toffoli_nand_escape, chest_inv_toffoli_nand_escape)
 
 
 --------
@@ -5510,6 +5569,10 @@ q_command:register_wall_block("q_command_char_lower_b")
 q_command:register_wall_block("q_command_chars_lower_b_paren")
 q_command:register_wall_block("q_command_char_lower_c")
 q_command:register_wall_block("q_command_char_lower_d")
+q_command:register_wall_block("q_command_chars_and_1")
+q_command:register_wall_block("q_command_chars_and_2")
+q_command:register_wall_block("q_command_chars_nand_1")
+q_command:register_wall_block("q_command_chars_nand_2")
 q_command:register_wall_block("q_command_chars_not_1")
 q_command:register_wall_block("q_command_chars_not_2")
 q_command:register_wall_block("q_command_chars_xor_1")
