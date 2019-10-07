@@ -5316,18 +5316,19 @@ local solution_unitary_toffoli_mixed_escape =
 	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
      {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
 }
-local door_pos_toffoli_mixed_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_toffoli_mixed_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_toffoli_mixed_escape = {x = 213, y = 0, z = 94}
+local chest_pos_toffoli_mixed_escape = {x = 214, y = 0, z = 90}
 local chest_inv_toffoli_mixed_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
                 [13] = "", [14] = "", [15] = "", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
@@ -5373,18 +5374,19 @@ local solution_unitary_swap_escape =
 	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
      {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
 }
-local door_pos_swap_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_swap_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_swap_escape = {x = 203, y = 0, z = 90}
+local chest_pos_swap_escape = {x = 210, y = 0, z = 96}
 local chest_inv_swap_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
+                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
+                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
@@ -5430,18 +5432,19 @@ local solution_unitary_ctrl_swap_escape =
 	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
      {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
 }
-local door_pos_ctrl_swap_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_ctrl_swap_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_ctrl_swap_escape = {x = 193, y = 0, z = 94}
+local chest_pos_ctrl_swap_escape = {x = 200, y = 0, z = 88}
 local chest_inv_ctrl_swap_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
+                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
+                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
