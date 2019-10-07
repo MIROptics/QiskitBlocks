@@ -4912,18 +4912,19 @@ local solution_unitary_xor_escape =
 		}
 	}
 }
-local door_pos_xor_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_xor_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_xor_escape = {x = 220, y = 0, z = 67}
+local chest_pos_xor_escape = {x = 222, y = 0, z = 70}
 local chest_inv_xor_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
                 [13] = "", [14] = "", [15] = "", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
@@ -5025,18 +5026,19 @@ local solution_unitary_dj_bal_flip_ora_escape =
 		}
 	}
 }
-local door_pos_dj_bal_flip_ora_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_dj_bal_flip_ora_escape = {x = -50, y = 8.5, z = 332}
+local door_pos_dj_bal_flip_ora_escape = {x = 213, y = 0, z = 60}
+local chest_pos_dj_bal_flip_ora_escape = {x = 222, y = 0, z = 64}
 local chest_inv_dj_bal_flip_ora_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
                 [13] = "", [14] = "", [15] = "", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
@@ -5501,6 +5503,18 @@ q_command:register_wall_block("q_command_math_sum")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
+
+q_command:register_wall_block("q_command_char_lower_a")
+q_command:register_wall_block("q_command_chars_paren_lower_a")
+q_command:register_wall_block("q_command_char_lower_b")
+q_command:register_wall_block("q_command_chars_lower_b_paren")
+q_command:register_wall_block("q_command_char_lower_c")
+q_command:register_wall_block("q_command_char_lower_d")
+q_command:register_wall_block("q_command_chars_not_1")
+q_command:register_wall_block("q_command_chars_not_2")
+q_command:register_wall_block("q_command_chars_xor_1")
+q_command:register_wall_block("q_command_chars_xor_2")
+q_command:register_wall_block("q_command_horiz_line_mid")
 
 -- TODO: Define function to create this basis state blocks
 q_command:register_wall_block("q_command_state_1qb_0")
