@@ -5167,6 +5167,122 @@ q_command:register_q_command_block( "toffoli_nand_escape_success", "toffoli_nand
 
 
 --------
+q_command.texts.or_escape = {}
+q_command.texts.or_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.or_escape.es = q_command.texts.or_escape.en
+q_command.texts.or_escape.ja = q_command.texts.or_escape.en
+q_command:register_help_button("or_escape",
+        "Make classical OR gate", q_command.texts.or_escape)
+local solution_unitary_or_escape =
+{
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}}
+}
+local door_pos_or_escape = {x = 220, y = 0, z = 87}
+local chest_pos_or_escape = {x = 214, y = 0, z = 84}
+local chest_inv_or_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "or_escape_success", "or_escape",
+        nil, solution_unitary_or_escape,true,
+        door_pos_or_escape, chest_pos_or_escape, chest_inv_or_escape)
+q_command:register_q_command_block( "or_escape_success", "or_escape",
+        nil, solution_unitary_or_escape,false,
+        door_pos_or_escape, chest_pos_or_escape, chest_inv_or_escape)
+
+
+--------
+q_command.texts.nor_escape = {}
+q_command.texts.nor_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.nor_escape.es = q_command.texts.nor_escape.en
+q_command.texts.nor_escape.ja = q_command.texts.nor_escape.en
+q_command:register_help_button("nor_escape",
+        "Make classical NOR gate", q_command.texts.nor_escape)
+local solution_unitary_nor_escape =
+{
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
+	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
+     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}}
+}
+local door_pos_nor_escape = {x = 220, y = 0, z = 87}
+local chest_pos_nor_escape = {x = 214, y = 0, z = 84}
+local chest_inv_nor_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "nor_escape_success", "nor_escape",
+        nil, solution_unitary_nor_escape,true,
+        door_pos_nor_escape, chest_pos_nor_escape, chest_inv_nor_escape)
+q_command:register_q_command_block( "nor_escape_success", "nor_escape",
+        nil, solution_unitary_nor_escape,false,
+        door_pos_nor_escape, chest_pos_nor_escape, chest_inv_nor_escape)
+
+
+--------
 q_command.texts.toffoli_mixed_escape = {}
 q_command.texts.toffoli_mixed_escape.en =
 [[
@@ -5221,63 +5337,6 @@ q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mix
 q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mixed_escape",
         nil, solution_unitary_toffoli_mixed_escape,false,
         door_pos_toffoli_mixed_escape, chest_pos_toffoli_mixed_escape, chest_inv_toffoli_mixed_escape)
-
-
---------
-q_command.texts.or_escape = {}
-q_command.texts.or_escape.en =
-[[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.or_escape.es = q_command.texts.or_escape.en
-q_command.texts.or_escape.ja = q_command.texts.or_escape.en
-q_command:register_help_button("or_escape",
-        "Make classical OR gate", q_command.texts.or_escape)
-local solution_unitary_or_escape =
-{
-	{{r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0}, {r = 0, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}},
-	{{r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 1, i = 0},
-     {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}, {r = 0, i = 0}}
-}
-local door_pos_or_escape = {x = -44, y = 8.5, z = 337}
-local chest_pos_or_escape = {x = -50, y = 8.5, z = 332}
-local chest_inv_or_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "or_escape_success", "or_escape",
-        nil, solution_unitary_or_escape,true,
-        door_pos_or_escape, chest_pos_or_escape, chest_inv_or_escape)
-q_command:register_q_command_block( "or_escape_success", "or_escape",
-        nil, solution_unitary_or_escape,false,
-        door_pos_or_escape, chest_pos_or_escape, chest_inv_or_escape)
 
 
 --------
@@ -5571,10 +5630,13 @@ q_command:register_wall_block("q_command_char_lower_c")
 q_command:register_wall_block("q_command_char_lower_d")
 q_command:register_wall_block("q_command_chars_and_1")
 q_command:register_wall_block("q_command_chars_and_2")
+q_command:register_wall_block("q_command_chars_or")
 q_command:register_wall_block("q_command_chars_nand_1")
 q_command:register_wall_block("q_command_chars_nand_2")
 q_command:register_wall_block("q_command_chars_not_1")
 q_command:register_wall_block("q_command_chars_not_2")
+q_command:register_wall_block("q_command_chars_nor_1")
+q_command:register_wall_block("q_command_chars_nor_2")
 q_command:register_wall_block("q_command_chars_xor_1")
 q_command:register_wall_block("q_command_chars_xor_2")
 q_command:register_wall_block("q_command_horiz_line_mid")
