@@ -5642,7 +5642,15 @@ q_command:register_wall_block("q_command_chars_nor_1")
 q_command:register_wall_block("q_command_chars_nor_2")
 q_command:register_wall_block("q_command_chars_xor_1")
 q_command:register_wall_block("q_command_chars_xor_2")
+q_command:register_wall_block("q_command_chars_if_c_underlined")
+q_command:register_wall_block("q_command_chars_equal_underlined")
+q_command:register_wall_block("q_command_chars_not_equal_underlined")
+q_command:register_wall_block("q_command_chars_one_state_underlined")
+
+
 q_command:register_wall_block("q_command_horiz_line_mid")
+q_command:register_wall_block("q_command_lines_swap_1")
+q_command:register_wall_block("q_command_lines_swap_2")
 
 -- TODO: Define function to create this basis state blocks
 q_command:register_wall_block("q_command_state_1qb_0")
