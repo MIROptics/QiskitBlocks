@@ -17,12 +17,19 @@ limitations under the License.
 
 --[[
 TODO:
-[] Create constants for tomography measurement bases
+[] Make state tomography more efficient and maintainable
+    [] Seems that tomography is being performed for all measurement blocks
+        when there is at least on Bloch sphere in the circuit
+    [] Is there a way to share measurement information among all Bloch spheres in circuit?
+    [] Remove one-shot from state tomography measurements?
+    [] Create constants for tomography measurement bases
+[] Don't play congrats music twice for solving same circuit
+[] Add circuits to level I to cover CNOT prior to Bell state circuits?
+[] Add circuits to Level II escape rooms that use oracles created in other rooms
+[] Fix Control Tool chat message to include SWAP gates
 [] Track down this error:
     2019-10-04 18:21:24: WARNING[Server]: ServerEnv: Trying to store id = 0 statically but
     block (14,0,4) already contains 64 objects.
-[] Diagnose problem of QUBIT_BASIS making unitary incorrect
-    [] Exclude some other blocks from unitary (and statevector) simulators?
 [] Move Prof Q guidance from chat area to HUD?
 [] Verify that ContentDB has debug false in minetest.conf
 [] Drop award and play longer congrats music when 16 puzzles are solved
@@ -31,6 +38,8 @@ TODO:
 [] Stop auto-rotations after one minute, or when leaving game
 [] Put more code in "if door_pos then" (that obviates need for so many nil checks)
 [] refactor and modularize q_command
+[] Redesign behavior of clicking (left/right/special/shift) measurement and Bloch sphere blocks
+[] Create Lua-based library for things like implementing blocks for variational algorithms
 [] address Android fast mode == special/aux key
 [] Display measurement on Bloch sphere
 [] Shift tiny measurement symbols on results over one pixel to left
@@ -70,7 +79,6 @@ TODO:
 [] Implement appropriate gate images for CRZ gate
 [] Improve appearance of measurement results blocks
 [] Ability for measurement block to actuate (e.g. turn on a light or open a door)
-    [] Investigate use of http://mesecons.net/items.html for in-world activation and sensing
     [] Ability for measured output wire to feed into input of same circuit
 [] Tighten up circuit connector blocks and wire extension appearance and behavior
     [] Modify texture configuration on circuit connector blocks (M & F) so that they appear
@@ -86,7 +94,6 @@ TODO:
 [] Prevent ket blocks from being deleted easily
     [] Right-clicking input ket flips to opposite state
 [] Make rest of tools and blocks reach farther in non-creative mode
-[] Create Alice and Bob mobs that coach the player in some small way
 [] Create basement under the quantum circuits in the garden that show matrices/vectors/geometric interpretation of 2D vector spaces
 [] SPECIAL-right-click make X/Y/Z gates automatically rotate clockwise
 [] Check for pos x and z being nil instead of ~= 0 so that things don't break on pos x==0 or z==0
@@ -107,7 +114,6 @@ TODO:
 [] Remove circuit_gate group code
 [] Understand and standardize on when to use colon, or dot, as function separator
 [] Find alternative to hardcoding node name strings everywhere
-[] Remove hearts from creative mode?
 [] Update music and sounds
 [] Create blocks (e.g. classical optimizer) to demonstrate variational algorithms
 [] Should this warning be addressed?

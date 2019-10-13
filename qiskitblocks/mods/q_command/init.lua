@@ -2230,42 +2230,44 @@ Good luck!
 ]]
 q_command.texts.quantum_circuit_world.es =
 [[
-TODO: REPLACE THIS MACHINE TRANSLATED TEXT
-¡Bienvenido al mundo de los circuitos de computación cuántica! El
-entorno mundial de bloques en el que se encuentra actualmente se crea
-con la biblioteca de código abierto Minetest.net. Una lista de controles
-para moverse y hacer cosas en Minetest está disponible al pausar el
-juego (por ejemplo, con la tecla Esc en algunas plataformas). Las
-puertas y circuitos cuánticos con los que interactuarás están
-alimentados por <https://qiskit.org/> simuladores cuánticos.
+¡Bienvenido al mundo de los circuitos cuánticos! El mundo lleno de
+bloques en el que te encuentras ha sido creado con la biblioteca de
+código abierto Minetest.net. Una lista de controles para moverte y hacer
+cosas en Minetest se encuentra disponible al pausar el juego (pulsando
+la tecla Esc en algunas plataformas). Las puertas cuánticas y los
+circuitos con los que interactuarás funcionan gracias a los simuladores
+cuánticos de <https://qiskit.org>.
 
-Hay un número creciente de áreas que puede explorar en este entorno.
-Primero, sería útil leer los signos en esta sala (haciendo clic derecho
-sobre ellos), ya que describen el comportamiento de varios bloques
-relacionados con la computación cuántica que encontrará. Por cierto, no
-hay necesidad de sacar los bloques y las herramientas de esta habitación,
-ya que estarán disponibles en cofres en el camino. Déjelos en esta sala
-y regrese cada vez que tenga preguntas sobre lo que hacen o cómo usarlos.
+Existe un creciente número de salas que puedes explorar en este entorno.
+Para empezar, sería conveniente que leyeras los símbolos en esta sala
+(haciendo clic derecho en ellos), puesto que describen el comportamiento
+de los múltiples bloques relacionados con la computación cuántica que
+encontrarás. Por cierto, no hace falta que cojas los bloques y
+herramientas de esta habitación puesto que los mismos se encuentran
+disponibles en cofres por el camino. Puedes volver en cualquier momento
+a esta sala si tienes dudas acerca del comportamiento o uso de
+cualquiera de ellos.
 
-Si desea una experiencia similar a una sala de escape, eche un vistazo a
-las salas de rompecabezas en la parte inferior de la escalera ubicada en
-este edificio. El Profesor Q lo guiará a través de los rompecabezas del
-circuito enviando un mensaje de chat a la esquina superior izquierda de
-su ventana.
+Si quieres vivir una experiencia a lo escape room, prueba las
+habitaciones-puzzle que se encuentran al final de las escaleras que
+bajan, localizadas en este edificio. El Profesor Q te guiará a través de
+los puzzles de circuitos mediante mensajes de texto que aparecerán en la
+esquina superior izquierda.
 
-Otro lugar fuera de esta sala que es posible que desee visitar es el
-cajón de arena para gatos cuánticos. En esa área, algunos circuitos
-básicos de computación cuántica y puertas se demuestran con gatos
-gruñones y felices en lugar de los qubits habituales. Para llegar allí,
-sigue los bloques de luz justo afuera de las puertas de entrada al bosque.
+Otro lugar fuera de esta sala que podrías querer visitar es el cajón de
+arena de los gatos cuánticos. En este área, se muestra el comportamiento
+de algunas puertas y circuitos cuánticos básicos mediante gatos gruñones
+y felices, en lugar de los cúbits al uso. Para llegar hasta allí, sigue
+los bloques de luz cerca de las puertas frontales, hacia los bosques.
 
-Otros lugares para visitar incluyen el jardín del circuito cuántico en
-el otro lado de la gran pared fuera de las puertas de entrada, y el
-'Abismo OpenQASM' rodeado por una puerta de madera.
+Otros lugares a visitar incluyen el jardín de los circuitos cuánticos,
+al otro lado de la gran pared, saliendo por las puertas frontales y el
+"Abismo OpenQASM”. rodeado por una puerta de madera.
 
-Dondequiera que elija comenzar, hay más ayuda disponible haciendo clic
-con el botón derecho en los botones de Ayuda (etiquetados con un signo
-de interrogación) cuando los encuentre. ¡Buena suerte!
+Sea por donde sea que decidas comenzar, más información se encuentra
+disponible haciendo clic derecho sobre los bloques de ayuda (marcados
+con un símbolo de interrogación) conforme te los encuentres.
+¡Buena suerte!
 ]]
 q_command.texts.quantum_circuit_world.ja =
 [[
