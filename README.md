@@ -55,7 +55,7 @@ Please choose one of the *Installing and running* options below and follow the i
 
 Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http://qiskit.org)) with questions or feedback.
 
-![QiskitBlocks escape rooms](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskit_blocks_first_escape_room.png)
+![QiskitBlocks escape rooms](https://github.com/JavaFXpert/QiskitBlocks/raw/master/escape_room_psi_minus.png)
 
 ![Quantum Blocks Academy in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_blocks_academy.png)
 
