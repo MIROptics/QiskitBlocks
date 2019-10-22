@@ -1918,6 +1918,18 @@ minetest.register_node("q_command:q_command_liquid_full_0_rad", {
     paramtype2 = "facedir"
 })
 
+minetest.register_node("q_command:q_command_liquid_full_pi_rad", {
+    description = "Faux liquid block full, pi radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_full_pi_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 minetest.register_node("q_command:q_command_liquid_half_0_rad", {
     description = "Faux liquid block half, 0 radians",
     tiles = {"q_command_silver_sandstone_wall_tile.png",
@@ -5245,7 +5257,7 @@ q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escap
         door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
 
 
--------- Room 10 (Level II)
+-------- Room 9 (Level II)
 q_command.texts.and_3_operands_x_escape = {}
 q_command.texts.and_3_operands_x_escape.en =
 [[
@@ -5389,8 +5401,8 @@ local solution_unitary_and_3_operands_x_escape =
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_and_3_operands_x_escape = {x = 190, y = 0, z = 87}
-local chest_pos_and_3_operands_x_escape = {x = 192, y = 0, z = 90}
+local door_pos_and_3_operands_x_escape = {x = 193, y = 0, z = 94}
+local chest_pos_and_3_operands_x_escape = {x = 200, y = 0, z = 88}
 local chest_inv_and_3_operands_x_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
@@ -5830,6 +5842,106 @@ q_command:register_q_command_block( "a_or_b_and_c_escape_success", "a_or_b_and_c
 -- END Escape room puzzles Level II ---------------------------------------------
 
 
+-- Escape room puzzles Level III -------------------------------------------------
+-------- Room 1 (Level III)
+q_command.texts.swap_escape = {}
+q_command.texts.swap_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.swap_escape.es = q_command.texts.swap_escape.en
+q_command.texts.swap_escape.ja = q_command.texts.swap_escape.en
+q_command:register_help_button("swap_escape",
+        "Make Swap gate", q_command.texts.swap_escape)
+local solution_unitary_swap_escape =
+{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+local door_pos_swap_escape = {x = 213, y = 0, z = 44}
+local chest_pos_swap_escape = {x = 210, y = 0, z = 46}
+local chest_inv_swap_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "",
+                [31] = "", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "swap_escape_success", "swap_escape",
+        nil, solution_unitary_swap_escape,true,
+        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
+q_command:register_q_command_block( "swap_escape_success", "swap_escape",
+        nil, solution_unitary_swap_escape,false,
+        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
+
+
+-------- Room 2 (Level III)
+q_command.texts.ctrl_swap_escape = {}
+q_command.texts.ctrl_swap_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.ctrl_swap_escape.es = q_command.texts.ctrl_swap_escape.en
+q_command.texts.ctrl_swap_escape.ja = q_command.texts.ctrl_swap_escape.en
+q_command:register_help_button("ctrl_swap_escape",
+        "Make controlled Swap gate", q_command.texts.ctrl_swap_escape)
+local solution_unitary_ctrl_swap_escape =
+{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+local door_pos_ctrl_swap_escape = {x = 220, y = 0, z = 37}
+local chest_pos_ctrl_swap_escape = {x = 214, y = 0, z = 40}
+local chest_inv_ctrl_swap_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
+        nil, solution_unitary_ctrl_swap_escape,true,
+        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
+q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
+        nil, solution_unitary_ctrl_swap_escape,false,
+        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
+
+
+-- END Escape room puzzles Level III ---------------------------------------------
+
+
 
 
 q_command.texts.notsingleplayer = {}
@@ -6006,6 +6118,11 @@ q_command:register_wall_block("q_command_char_lower_c")
 q_command:register_wall_block("q_command_char_lower_d")
 q_command:register_wall_block("q_command_char_lower_e")
 q_command:register_wall_block("q_command_char_lower_f")
+q_command:register_wall_block("q_command_chars_xor_2")
+q_command:register_wall_block("q_command_chars_lower_ot")
+q_command:register_wall_block("q_command_chars_lower_he")
+q_command:register_wall_block("q_command_chars_lower_rw")
+q_command:register_wall_block("q_command_chars_lower_ise")
 q_command:register_wall_block("q_command_chars_and_1")
 q_command:register_wall_block("q_command_chars_and_2")
 q_command:register_wall_block("q_command_chars_or")
