@@ -1669,7 +1669,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local uni_data = http_request_response.data
                             local unitary = q_command:parse_json_unitary(uni_data)
-                            minetest.debug("unitary:\n" .. dump(unitary))
+                            --minetest.debug("unitary:\n" .. dump(unitary))
 
                             -- Only check for a correct player solution if correct_solution_unitary exists
                             if correct_solution_unitary then
@@ -5753,6 +5753,78 @@ q_command:register_q_command_block( "phase_a_and_b_and_c_escape_success", "phase
 q_command:register_q_command_block( "phase_a_and_b_and_c_escape_success", "phase_a_and_b_and_c_escape",
         nil, solution_unitary_phase_a_and_b_and_c_escape,false,
         door_pos_phase_a_and_b_and_c_escape, chest_pos_phase_a_and_b_and_c_escape, chest_inv_phase_a_and_b_and_c_escape)
+
+
+-------- Room 16 (Level II)
+q_command.texts.a_or_b_and_c_escape = {}
+q_command.texts.a_or_b_and_c_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.a_or_b_and_c_escape.es = q_command.texts.a_or_b_and_c_escape.en
+q_command.texts.a_or_b_and_c_escape.ja = q_command.texts.a_or_b_and_c_escape.en
+q_command:register_help_button("a_or_b_and_c_escape",
+        "Make (a OR b) AND c", q_command.texts.a_or_b_and_c_escape)
+local solution_unitary_a_or_b_and_c_escape =
+{{{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=-0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=-0},{r=0,i=0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=-0},{r=0,i=0}},
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
+{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=-0}}}
+local door_pos_a_or_b_and_c_escape = {x = 199, y = 0, z = 56}
+local chest_pos_a_or_b_and_c_escape = {x = 196, y = 0, z = 58}
+local chest_inv_a_or_b_and_c_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "a_or_b_and_c_escape_success", "a_or_b_and_c_escape",
+        nil, solution_unitary_a_or_b_and_c_escape,true,
+        door_pos_a_or_b_and_c_escape, chest_pos_a_or_b_and_c_escape, chest_inv_a_or_b_and_c_escape)
+q_command:register_q_command_block( "a_or_b_and_c_escape_success", "a_or_b_and_c_escape",
+        nil, solution_unitary_a_or_b_and_c_escape,false,
+        door_pos_a_or_b_and_c_escape, chest_pos_a_or_b_and_c_escape, chest_inv_a_or_b_and_c_escape)
 
 
 -- END Escape room puzzles Level II ---------------------------------------------
