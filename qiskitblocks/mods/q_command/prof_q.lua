@@ -503,6 +503,312 @@ prof_q.areas.phase_rot_2wire_escape.help_success_msg.es = {
 prof_q.areas.phase_rot_2wire_escape.success_chat_sent = false
 
 
+-- Escape room puzzles Level II -------------------------------------------------
+-------- Room 1 (Level II)
+prof_q.areas.xor_escape = {}
+prof_q.areas.xor_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.xor_escape.radius = 5
+prof_q.areas.xor_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.xor_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.xor_escape.help_chat_sent = false
+prof_q.areas.xor_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.xor_escape.success_chat_sent = false
+
+
+-------- Room 2 (Level II)
+prof_q.areas.dj_bal_flip_ora_escape = {}
+prof_q.areas.dj_bal_flip_ora_escape.center_pos = {x = 218, y = 0, z = 62}
+prof_q.areas.dj_bal_flip_ora_escape.radius = 5
+prof_q.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 60}
+prof_q.areas.dj_bal_flip_ora_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.dj_bal_flip_ora_escape.help_chat_sent = false
+prof_q.areas.dj_bal_flip_ora_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.dj_bal_flip_ora_escape.success_chat_sent = false
+
+
+-------- Room 3 (Level II)
+prof_q.areas.toffoli_escape = {}
+prof_q.areas.toffoli_escape.center_pos = {x = 208, y = 0, z = 62}
+prof_q.areas.toffoli_escape.radius = 5
+prof_q.areas.toffoli_escape.q_block_pos = {x = 204, y = 0, z = 58}
+prof_q.areas.toffoli_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.toffoli_escape.help_chat_sent = false
+prof_q.areas.toffoli_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.toffoli_escape.success_chat_sent = false
+
+
+-------- Room 4 (Level II)
+prof_q.areas.toffoli_nand_escape = {}
+prof_q.areas.toffoli_nand_escape.center_pos = {x = 208, y = 0, z = 72}
+prof_q.areas.toffoli_nand_escape.radius = 5
+prof_q.areas.toffoli_nand_escape.q_block_pos = {x = 212, y = 0, z = 76}
+prof_q.areas.toffoli_nand_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.toffoli_nand_escape.help_chat_sent = false
+prof_q.areas.toffoli_nand_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.toffoli_nand_escape.success_chat_sent = false
+
+
+-------- Room 5 (Level II)
+prof_q.areas.or_escape = {}
+prof_q.areas.or_escape.center_pos = {x = 208, y = 0, z = 82}
+prof_q.areas.or_escape.radius = 5
+prof_q.areas.or_escape.q_block_pos = {x = 204, y = 0, z = 86}
+prof_q.areas.or_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.or_escape.help_chat_sent = false
+prof_q.areas.or_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.or_escape.success_chat_sent = false
+
+
+-------- Room 6 (Level II)
+prof_q.areas.nor_escape = {}
+prof_q.areas.nor_escape.center_pos = {x = 218, y = 0, z = 82}
+prof_q.areas.nor_escape.radius = 5
+prof_q.areas.nor_escape.q_block_pos = {x = 222, y = 0, z = 78}
+prof_q.areas.nor_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.nor_escape.help_chat_sent = false
+prof_q.areas.nor_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.nor_escape.success_chat_sent = false
+
+
+-------- Room 7 (Level II)
+prof_q.areas.toffoli_mixed_escape = {}
+prof_q.areas.toffoli_mixed_escape.center_pos = {x = 218, y = 0, z = 92}
+prof_q.areas.toffoli_mixed_escape.radius = 5
+prof_q.areas.toffoli_mixed_escape.q_block_pos = {x = 214, y = 0, z = 96}
+prof_q.areas.toffoli_mixed_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.toffoli_mixed_escape.help_chat_sent = false
+prof_q.areas.toffoli_mixed_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.toffoli_mixed_escape.success_chat_sent = false
+
+
+-------- Room 8 (Level II)
+prof_q.areas.superpos_logic_and_escape = {}
+prof_q.areas.superpos_logic_and_escape.center_pos = {x = 208, y = 0, z = 92}
+prof_q.areas.superpos_logic_and_escape.radius = 5
+prof_q.areas.superpos_logic_and_escape.q_block_pos = {x = 212, y = 0, z = 88}
+prof_q.areas.superpos_logic_and_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.superpos_logic_and_escape.help_chat_sent = false
+prof_q.areas.superpos_logic_and_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.superpos_logic_and_escape.success_chat_sent = false
+
+
+-------- Room 9 (Level II)
+prof_q.areas.and_3_operands_x_escape = {}
+prof_q.areas.and_3_operands_x_escape.center_pos = {x = 198, y = 0, z = 92}
+prof_q.areas.and_3_operands_x_escape.radius = 5
+prof_q.areas.and_3_operands_x_escape.q_block_pos = {x = 194, y = -1, z = 88}
+prof_q.areas.and_3_operands_x_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.and_3_operands_x_escape.help_chat_sent = false
+prof_q.areas.and_3_operands_x_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.and_3_operands_x_escape.success_chat_sent = false
+
+
+-------- Room 10 (Level II) TODO: LEFT OFF COORDS HERE
+prof_q.areas.and_not_3_operands_x_escape = {}
+prof_q.areas.and_not_3_operands_x_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.and_not_3_operands_x_escape.radius = 5
+prof_q.areas.and_not_3_operands_x_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.and_not_3_operands_x_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.and_not_3_operands_x_escape.help_chat_sent = false
+prof_q.areas.and_not_3_operands_x_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.and_not_3_operands_x_escape.success_chat_sent = false
+
+
+-------- Room 11 (Level II)
+prof_q.areas.phase_a_and_b_escape = {}
+prof_q.areas.phase_a_and_b_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_escape.radius = 5
+prof_q.areas.phase_a_and_b_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.phase_a_and_b_escape.help_chat_sent = false
+prof_q.areas.phase_a_and_b_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
+
+
+-------- Room 12 (Level II)
+prof_q.areas.superpos_phase_and_escape = {}
+prof_q.areas.superpos_phase_and_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.superpos_phase_and_escape.radius = 5
+prof_q.areas.superpos_phase_and_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.superpos_phase_and_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.superpos_phase_and_escape.help_chat_sent = false
+prof_q.areas.superpos_phase_and_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.superpos_phase_and_escape.success_chat_sent = false
+
+
+-------- Room 13 (Level II)
+prof_q.areas.phase_a_or_b_escape = {}
+prof_q.areas.phase_a_or_b_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_or_b_escape.radius = 5
+prof_q.areas.phase_a_or_b_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_or_b_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.phase_a_or_b_escape.help_chat_sent = false
+prof_q.areas.phase_a_or_b_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.phase_a_or_b_escape.success_chat_sent = false
+
+
+-------- Room 14 (Level II)
+prof_q.areas.phase_a_and_b_no_z_escape = {}
+prof_q.areas.phase_a_and_b_no_z_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_no_z_escape.radius = 5
+prof_q.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_no_z_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.phase_a_and_b_no_z_escape.help_chat_sent = false
+prof_q.areas.phase_a_and_b_no_z_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.phase_a_and_b_no_z_escape.success_chat_sent = false
+
+
+-------- Room 15 (Level II)
+prof_q.areas.phase_a_and_b_and_c_escape = {}
+prof_q.areas.phase_a_and_b_and_c_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_and_c_escape.radius = 5
+prof_q.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_and_c_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.phase_a_and_b_and_c_escape.help_chat_sent = false
+prof_q.areas.phase_a_and_b_and_c_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
+
+
+-------- Room 16 (Level II)
+prof_q.areas.a_or_b_and_c_escape = {}
+prof_q.areas.a_or_b_and_c_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.a_or_b_and_c_escape.radius = 5
+prof_q.areas.a_or_b_and_c_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.a_or_b_and_c_escape.help_chat_msg = {
+	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
+	"in which Z axis rotations are sandwiched between pairs of H gates."
+}
+prof_q.areas.a_or_b_and_c_escape.help_chat_sent = false
+prof_q.areas.a_or_b_and_c_escape.help_success_msg = {
+	"Well done! The H gates transformed changes in phase to changes in measurement",
+	"probabilities.",
+	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
+	"and then explore other areas after climbing the ladder back to the main room."
+}
+prof_q.areas.a_or_b_and_c_escape.success_chat_sent = false
+-- END Escape room puzzles Level II ---------------------------------------------
+
+
 local locale_lang = prof_q:get_locale_lang()
 minetest.debug("prof_q_locale_lang: " .. locale_lang)
 

@@ -4803,7 +4803,7 @@ local solution_statevector_phase_rot_2wire_escape =
 	}
 }
 --local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
-local door_pos_phase_rot_2wire_escape = {x = 240, y = 0, z = 77}
+local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
 local chest_pos_phase_rot_2wire_escape = {x = 234, y = 0, z = 84}
 local chest_inv_phase_rot_2wire_escape = {
     inventory = {
@@ -5539,7 +5539,7 @@ q_command:register_q_command_block( "and_not_3_operands_x_escape_success", "and_
         door_pos_and_not_3_operands_x_escape, chest_pos_and_not_3_operands_x_escape, chest_inv_and_not_3_operands_x_escape)
 
 
--------- Room 12 (Level II)
+-------- Room 11 (Level II)
 q_command.texts.phase_a_and_b_escape = {}
 q_command.texts.phase_a_and_b_escape.en =
 [[
@@ -5557,8 +5557,8 @@ q_command:register_help_button("phase_a_and_b_escape",
 local solution_unitary_phase_a_and_b_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
-local door_pos_phase_a_and_b_escape = {x = 196, y = 0, z = 77}
-local chest_pos_phase_a_and_b_escape = {x = 200, y = 0, z = 78}
+local door_pos_phase_a_and_b_escape = {x = 193, y = 0, z = 80}
+local chest_pos_phase_a_and_b_escape = {x = 192, y = 0, z = 84}
 local chest_inv_phase_a_and_b_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
@@ -5568,7 +5568,7 @@ local chest_inv_phase_a_and_b_escape = {
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate",
+                [29] = "", [30] = "",
                 [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
@@ -5579,6 +5579,48 @@ q_command:register_q_command_block( "phase_a_and_b_escape_success", "phase_a_and
 q_command:register_q_command_block( "phase_a_and_b_escape_success", "phase_a_and_b_escape",
         nil, solution_unitary_phase_a_and_b_escape,false,
         door_pos_phase_a_and_b_escape, chest_pos_phase_a_and_b_escape, chest_inv_phase_a_and_b_escape)
+
+
+-------- Room 12 (Level II)
+q_command.texts.superpos_phase_and_escape = {}
+q_command.texts.superpos_phase_and_escape.en =
+[[
+TLDR:
+----
+
+TODO: Fill in
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+q_command.texts.superpos_phase_and_escape.es = q_command.texts.superpos_phase_and_escape.en
+q_command.texts.superpos_phase_and_escape.ja = q_command.texts.superpos_phase_and_escape.en
+q_command:register_help_button("superpos_phase_and_escape",
+        "Compute a AND b in superposition", q_command.texts.superpos_phase_and_escape)
+local solution_statevector_superpos_phase_and_escape =
+{{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0},{r=-0.5,i=0}}
+local door_pos_superpos_phase_and_escape = {x = 196, y = 0, z = 77}
+local chest_pos_superpos_phase_and_escape = {x = 200, y = 0, z = 78}
+local chest_inv_superpos_phase_and_escape = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "", [26] = "",
+                [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate",
+                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
+        }
+    }
+}
+q_command:register_q_command_block( "superpos_phase_and_escape_success", "superpos_phase_and_escape",
+        solution_statevector_superpos_phase_and_escape,nil, true,
+        door_pos_superpos_phase_and_escape, chest_pos_superpos_phase_and_escape, chest_inv_superpos_phase_and_escape)
+q_command:register_q_command_block( "superpos_phase_and_escape_success", "superpos_phase_and_escape",
+        solution_statevector_superpos_phase_and_escape,nil, false,
+        door_pos_superpos_phase_and_escape, chest_pos_superpos_phase_and_escape, chest_inv_superpos_phase_and_escape)
 
 
 -------- Room 13 (Level II)
@@ -5610,7 +5652,7 @@ local chest_inv_phase_a_or_b_escape = {
                 [17] = "", [18] = "", [19] = "", [20] = "",
                 [21] = "", [22] = "", [23] = "", [24] = "",
                 [25] = "", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate",
+                [29] = "", [30] = "",
                 [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
