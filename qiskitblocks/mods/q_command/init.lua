@@ -1419,7 +1419,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local sv_data = http_request_response.data
                             local statevector = q_command:parse_json_statevector(sv_data)
-                            -- minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- Only check for a correct player solution if correct_solution_statevector exists
                             if correct_solution_statevector then
@@ -5162,8 +5162,8 @@ q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mix
 
 
 -------- Room 8 (Level II)
-q_command.texts.swap_escape = {}
-q_command.texts.swap_escape.en =
+q_command.texts.superpos_logic_and_escape = {}
+q_command.texts.superpos_logic_and_escape.en =
 [[
 TLDR:
 ----
@@ -5172,89 +5172,35 @@ TODO: Fill in
 
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
-q_command.texts.swap_escape.es = q_command.texts.swap_escape.en
-q_command.texts.swap_escape.ja = q_command.texts.swap_escape.en
-q_command:register_help_button("swap_escape",
-        "Make Swap gate", q_command.texts.swap_escape)
-local solution_unitary_swap_escape =
-{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_swap_escape = {x = 203, y = 0, z = 90}
-local chest_pos_swap_escape = {x = 210, y = 0, z = 96}
-local chest_inv_swap_escape = {
+q_command.texts.superpos_logic_and_escape.es = q_command.texts.superpos_logic_and_escape.en
+q_command.texts.superpos_logic_and_escape.ja = q_command.texts.superpos_logic_and_escape.en
+q_command:register_help_button("superpos_logic_and_escape",
+        "Compute a AND b in superposition", q_command.texts.superpos_logic_and_escape)
+local solution_statevector_superpos_logic_and_escape =
+{{r=0.5,i=0},{r=0.5,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0}}
+local door_pos_superpos_logic_and_escape = {x = 203, y = 0, z = 90}
+local chest_pos_superpos_logic_and_escape = {x = 210, y = 0, z = 96}
+local chest_inv_superpos_logic_and_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
                 [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
                 [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "",
-                [31] = "", [32] = "circuit_blocks:circuit_blocks_measure_z"
-        }
-    }
-}
-q_command:register_q_command_block( "swap_escape_success", "swap_escape",
-        nil, solution_unitary_swap_escape,true,
-        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
-q_command:register_q_command_block( "swap_escape_success", "swap_escape",
-        nil, solution_unitary_swap_escape,false,
-        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
-
-
--------- Room 9 (Level II)
-q_command.texts.ctrl_swap_escape = {}
-q_command.texts.ctrl_swap_escape.en =
-[[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.ctrl_swap_escape.es = q_command.texts.ctrl_swap_escape.en
-q_command.texts.ctrl_swap_escape.ja = q_command.texts.ctrl_swap_escape.en
-q_command:register_help_button("ctrl_swap_escape",
-        "Make controlled Swap gate", q_command.texts.ctrl_swap_escape)
-local solution_unitary_ctrl_swap_escape =
-{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_ctrl_swap_escape = {x = 193, y = 0, z = 94}
-local chest_pos_ctrl_swap_escape = {x = 200, y = 0, z = 88}
-local chest_inv_ctrl_swap_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "",
+                [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate",
                 [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
-q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
-        nil, solution_unitary_ctrl_swap_escape,true,
-        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
-q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
-        nil, solution_unitary_ctrl_swap_escape,false,
-        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
+q_command:register_q_command_block( "superpos_logic_and_escape_success", "superpos_logic_and_escape",
+        solution_statevector_superpos_logic_and_escape,nil, true,
+        door_pos_superpos_logic_and_escape, chest_pos_superpos_logic_and_escape, chest_inv_superpos_logic_and_escape)
+q_command:register_q_command_block( "superpos_logic_and_escape_success", "superpos_logic_and_escape",
+        solution_statevector_superpos_logic_and_escape,nil, false,
+        door_pos_superpos_logic_and_escape, chest_pos_superpos_logic_and_escape, chest_inv_superpos_logic_and_escape)
 
 
 -------- Room 9 (Level II)
@@ -5401,7 +5347,7 @@ local solution_unitary_and_3_operands_x_escape =
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_and_3_operands_x_escape = {x = 193, y = 0, z = 94}
+local door_pos_and_3_operands_x_escape = {x = 193, y = 0, z = 94    }
 local chest_pos_and_3_operands_x_escape = {x = 200, y = 0, z = 88}
 local chest_inv_and_3_operands_x_escape = {
     inventory = {
@@ -5425,7 +5371,7 @@ q_command:register_q_command_block( "and_3_operands_x_escape_success", "and_3_op
         door_pos_and_3_operands_x_escape, chest_pos_and_3_operands_x_escape, chest_inv_and_3_operands_x_escape)
 
 
--------- Room 11 (Level II)
+-------- Room 10 (Level II)
 q_command.texts.and_not_3_operands_x_escape = {}
 q_command.texts.and_not_3_operands_x_escape.en =
 [[
@@ -5569,8 +5515,8 @@ local solution_unitary_and_not_3_operands_x_escape =
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}}
-local door_pos_and_not_3_operands_x_escape = {x = 193, y = 0, z = 80}
-local chest_pos_and_not_3_operands_x_escape = {x = 192, y = 0, z = 84}
+local door_pos_and_not_3_operands_x_escape = {x = 190, y = 0, z = 87}
+local chest_pos_and_not_3_operands_x_escape = {x = 192, y = 0, z = 90}
 local chest_inv_and_not_3_operands_x_escape = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "",
