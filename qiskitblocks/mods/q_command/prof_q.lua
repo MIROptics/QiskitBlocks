@@ -585,8 +585,8 @@ prof_q.areas.or_escape.help_chat_msg = {
 }
 prof_q.areas.or_escape.help_chat_sent = false
 prof_q.areas.or_escape.help_success_msg = {
-	"I like how you negated both inputs, as well as the output, of the previous AND circuit",
-	"to make an OR circuit!"
+	"I like how you negated both inputs, as well as the output, of the",
+	"previous AND circuit to make an OR circuit!"
 }
 prof_q.areas.or_escape.success_chat_sent = false
 
@@ -597,7 +597,7 @@ prof_q.areas.nor_escape.center_pos = {x = 218, y = 0, z = 82}
 prof_q.areas.nor_escape.radius = 5
 prof_q.areas.nor_escape.q_block_pos = {x = 222, y = 0, z = 78}
 prof_q.areas.nor_escape.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as indicated by the NOR",
+	"Make a circuit similar to the last one, taking into account the NOR",
 	"(NOT OR) shown on the wall."
 }
 prof_q.areas.nor_escape.help_chat_sent = false
@@ -618,8 +618,8 @@ prof_q.areas.toffoli_mixed_escape.help_chat_msg = {
 }
 prof_q.areas.toffoli_mixed_escape.help_chat_sent = false
 prof_q.areas.toffoli_mixed_escape.help_success_msg = {
-	"Excellent, however only digital logic has been demonstrated to this point. ",
-	"You'll rectify that in the next room."
+	"Excellent! Did you notice that only digital logic has been demonstrated to this",
+	"point? You'll rectify that in the next room."
 }
 prof_q.areas.toffoli_mixed_escape.success_chat_sent = false
 
@@ -671,15 +671,15 @@ prof_q.areas.and_not_3_operands_x_escape.center_pos = {x = 188, y = 0, z = 92}
 prof_q.areas.and_not_3_operands_x_escape.radius = 5
 prof_q.areas.and_not_3_operands_x_escape.q_block_pos = {x = 184, y = 0, z = 88}
 prof_q.areas.and_not_3_operands_x_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Try your hand at creating a circuit that realizes the logic on the wall"
 }
 prof_q.areas.and_not_3_operands_x_escape.help_chat_sent = false
 prof_q.areas.and_not_3_operands_x_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Very nice! You've created lots of circuits to this point, each of which affect",
+	"the magnitude of relevant states, and therefore measurement probabilities.",
+	"Did you notice that this worked well when using |0> and |1> as inputs, but when",
+	"computing in superposition all of the relevant probabilities were equal? To",
+	"address that, I'll show you a helpful companion to magnitude quantum logic."
 }
 prof_q.areas.and_not_3_operands_x_escape.success_chat_sent = false
 
@@ -690,15 +690,16 @@ prof_q.areas.phase_a_and_b_escape.center_pos = {x = 188, y = 0, z = 82}
 prof_q.areas.phase_a_and_b_escape.radius = 5
 prof_q.areas.phase_a_and_b_escape.q_block_pos = {x = 190, y = 0, z = 79}
 prof_q.areas.phase_a_and_b_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Go ahead and make the circuit realize the boolean expression on the wall,",
+	"with the appearance of the liquid blocks and phase arrows as indicated",
+	"(arrow points left when the inputs make the boolean expression true)"
 }
 prof_q.areas.phase_a_and_b_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Well done! You made the phase rotate to pi radians whenever the boolean",
+	"expression on the wall is satisfied (made true) by your input. This type",
+	"of quantum logic is known as 'phase logic', so you just made a 'phase AND'",
+	"logic gate. Did you notice that the 'phase AND' required only two qubits?"
 }
 prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
 
@@ -709,15 +710,15 @@ prof_q.areas.superpos_phase_and_escape.center_pos = {x = 198, y = 0, z = 82}
 prof_q.areas.superpos_phase_and_escape.radius = 5
 prof_q.areas.superpos_phase_and_escape.q_block_pos = {x = 201, y = 0, z = 84}
 prof_q.areas.superpos_phase_and_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Now realize the same logic as you did in the previous room, but compute the",
+	"logic with its inputs in equal superposition, resulting in the state shown",
+	"on the wall."
 }
 prof_q.areas.superpos_phase_and_escape.help_chat_sent = false
 prof_q.areas.superpos_phase_and_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Excellent! You've again managed to demonstrate quantum parallelism, in which",
+	"all of the 2^n combinations are represented in the state vector. This time",
+	"the combinations that satisfy the boolean expression are marked by a phase."
 }
 prof_q.areas.superpos_phase_and_escape.success_chat_sent = false
 
@@ -728,15 +729,12 @@ prof_q.areas.phase_a_or_b_escape.center_pos = {x = 198, y = 0, z = 72}
 prof_q.areas.phase_a_or_b_escape.radius = 5
 prof_q.areas.phase_a_or_b_escape.q_block_pos = {x = 201, y = 0, z = 69}
 prof_q.areas.phase_a_or_b_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Now make the circuit realize the boolean expression on the wall,",
+	"with the appearance of the liquid blocks and phase arrows as indicated",
 }
 prof_q.areas.phase_a_or_b_escape.help_chat_sent = false
 prof_q.areas.phase_a_or_b_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Congratulations! You just made a 'phase OR' logic gate"
 }
 prof_q.areas.phase_a_or_b_escape.success_chat_sent = false
 
@@ -747,15 +745,15 @@ prof_q.areas.phase_a_and_b_no_z_escape.center_pos = {x = 188, y = 0, z = 72}
 prof_q.areas.phase_a_and_b_no_z_escape.radius = 5
 prof_q.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 185, y = 0, z = 69}
 prof_q.areas.phase_a_and_b_no_z_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Your challenge here will be to create a 'phase AND' logic gate without a Z",
+	"block as used previously."
 }
 prof_q.areas.phase_a_and_b_no_z_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_no_z_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Very resourceful! You've found a combination of gates that perform the same",
+	"conditional unitary evolution as a controlled-Z gate. This will be useful in",
+	"more complex phase logic gates, as the Z gate may only have one control qubit,",
+	"but the X gate may have two (in a Toffoli gate)."
 }
 prof_q.areas.phase_a_and_b_no_z_escape.success_chat_sent = false
 
@@ -766,15 +764,13 @@ prof_q.areas.phase_a_and_b_and_c_escape.center_pos = {x = 188, y = 0, z = 62}
 prof_q.areas.phase_a_and_b_and_c_escape.radius = 5
 prof_q.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 184, y = 0, z = 58}
 prof_q.areas.phase_a_and_b_and_c_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Go ahead and make the circuit realize the boolean expression on the wall,",
+	"with the appearance of the liquid blocks and phase arrows as indicated",
 }
 prof_q.areas.phase_a_and_b_and_c_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_and_c_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Outstanding. See, I told you that this alternative to a controlled-Z gate",
+	"would come in handy!"
 }
 prof_q.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
 
@@ -785,15 +781,18 @@ prof_q.areas.a_or_b_and_c_escape.center_pos = {x = 198, y = 0, z = 62}
 prof_q.areas.a_or_b_and_c_escape.radius = 5
 prof_q.areas.a_or_b_and_c_escape.q_block_pos = {x = 202, y = 0, z = 66}
 prof_q.areas.a_or_b_and_c_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Here you may use a combination of magnitude logic and phase logic gates",
+	"to satisfy the boolean expression on the wall, with the liquid blocks",
+	"and phase arrows appearing as indicated. As a hint, remember to have good",
+	"qubit hygiene :-)"
 }
 prof_q.areas.a_or_b_and_c_escape.help_chat_sent = false
 prof_q.areas.a_or_b_and_c_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Excellent work! You've really done well in these quantum logic focused",
+	"circuit puzzles. There is, however one more step required for being able",
+	"to detect the marked states via measurement. This step is known as",
+	"'amplitude amplification', and is an idea from Grover's algorithm. The",
+	"circuit right outside the exit door demonstrates these concepts together."
 }
 prof_q.areas.a_or_b_and_c_escape.success_chat_sent = false
 -- END Escape room puzzles Level II ---------------------------------------------
