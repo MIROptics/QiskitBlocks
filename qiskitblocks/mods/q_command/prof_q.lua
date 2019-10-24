@@ -527,7 +527,7 @@ prof_q.areas.xor_escape.success_chat_sent = false
 prof_q.areas.dj_bal_flip_ora_escape = {}
 prof_q.areas.dj_bal_flip_ora_escape.center_pos = {x = 218, y = 0, z = 62}
 prof_q.areas.dj_bal_flip_ora_escape.radius = 5
-prof_q.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 60}
+prof_q.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 59}
 prof_q.areas.dj_bal_flip_ora_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -675,11 +675,11 @@ prof_q.areas.and_3_operands_x_escape.help_success_msg = {
 prof_q.areas.and_3_operands_x_escape.success_chat_sent = false
 
 
--------- Room 10 (Level II) TODO: LEFT OFF COORDS HERE
+-------- Room 10 (Level II)
 prof_q.areas.and_not_3_operands_x_escape = {}
-prof_q.areas.and_not_3_operands_x_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.and_not_3_operands_x_escape.center_pos = {x = 188, y = 0, z = 92}
 prof_q.areas.and_not_3_operands_x_escape.radius = 5
-prof_q.areas.and_not_3_operands_x_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.and_not_3_operands_x_escape.q_block_pos = {x = 184, y = 0, z = 88}
 prof_q.areas.and_not_3_operands_x_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -696,9 +696,9 @@ prof_q.areas.and_not_3_operands_x_escape.success_chat_sent = false
 
 -------- Room 11 (Level II)
 prof_q.areas.phase_a_and_b_escape = {}
-prof_q.areas.phase_a_and_b_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_escape.center_pos = {x = 188, y = 0, z = 82}
 prof_q.areas.phase_a_and_b_escape.radius = 5
-prof_q.areas.phase_a_and_b_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_escape.q_block_pos = {x = 190, y = 0, z = 79}
 prof_q.areas.phase_a_and_b_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -715,9 +715,9 @@ prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
 
 -------- Room 12 (Level II)
 prof_q.areas.superpos_phase_and_escape = {}
-prof_q.areas.superpos_phase_and_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.superpos_phase_and_escape.center_pos = {x = 198, y = 0, z = 82}
 prof_q.areas.superpos_phase_and_escape.radius = 5
-prof_q.areas.superpos_phase_and_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.superpos_phase_and_escape.q_block_pos = {x = 201, y = 0, z = 84}
 prof_q.areas.superpos_phase_and_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -734,9 +734,9 @@ prof_q.areas.superpos_phase_and_escape.success_chat_sent = false
 
 -------- Room 13 (Level II)
 prof_q.areas.phase_a_or_b_escape = {}
-prof_q.areas.phase_a_or_b_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_or_b_escape.center_pos = {x = 198, y = 0, z = 72}
 prof_q.areas.phase_a_or_b_escape.radius = 5
-prof_q.areas.phase_a_or_b_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_or_b_escape.q_block_pos = {x = 201, y = 0, z = 69}
 prof_q.areas.phase_a_or_b_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -753,9 +753,9 @@ prof_q.areas.phase_a_or_b_escape.success_chat_sent = false
 
 -------- Room 14 (Level II)
 prof_q.areas.phase_a_and_b_no_z_escape = {}
-prof_q.areas.phase_a_and_b_no_z_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_no_z_escape.center_pos = {x = 188, y = 0, z = 72}
 prof_q.areas.phase_a_and_b_no_z_escape.radius = 5
-prof_q.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 185, y = 0, z = 69}
 prof_q.areas.phase_a_and_b_no_z_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -772,9 +772,9 @@ prof_q.areas.phase_a_and_b_no_z_escape.success_chat_sent = false
 
 -------- Room 15 (Level II)
 prof_q.areas.phase_a_and_b_and_c_escape = {}
-prof_q.areas.phase_a_and_b_and_c_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.phase_a_and_b_and_c_escape.center_pos = {x = 188, y = 0, z = 62}
 prof_q.areas.phase_a_and_b_and_c_escape.radius = 5
-prof_q.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 184, y = 0, z = 58}
 prof_q.areas.phase_a_and_b_and_c_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
@@ -791,9 +791,9 @@ prof_q.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
 
 -------- Room 16 (Level II)
 prof_q.areas.a_or_b_and_c_escape = {}
-prof_q.areas.a_or_b_and_c_escape.center_pos = {x = 218, y = 0, z = 72}
+prof_q.areas.a_or_b_and_c_escape.center_pos = {x = 198, y = 0, z = 62}
 prof_q.areas.a_or_b_and_c_escape.radius = 5
-prof_q.areas.a_or_b_and_c_escape.q_block_pos = {x = 215, y = 0, z = 70}
+prof_q.areas.a_or_b_and_c_escape.q_block_pos = {x = 202, y = 0, z = 66}
 prof_q.areas.a_or_b_and_c_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."

@@ -1966,6 +1966,18 @@ minetest.register_node("q_command:q_command_liquid_quarter_0_rad", {
     paramtype2 = "facedir"
 })
 
+minetest.register_node("q_command:q_command_liquid_quarter_pi_rad", {
+    description = "Faux liquid block quarter, pi radians",
+    tiles = {"q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_silver_sandstone_wall_tile.png",
+             "q_command_liquid_quarter_pi_rad.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 minetest.register_node("q_command:q_command_liquid_quarter_pi_2_rad", {
     description = "Faux liquid block quarter, pi/2 radians",
     tiles = {"q_command_silver_sandstone_wall_tile.png",
@@ -5041,7 +5053,7 @@ local solution_unitary_or_escape =
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}}
-local door_pos_or_escape = {x = 220, y = 0, z = 87}
+local door_pos_or_escape = {x = 213, y = 0, z = 80}
 local chest_pos_or_escape = {x = 207, y = 0, z = 78}
 local chest_inv_or_escape = {
     inventory = {
