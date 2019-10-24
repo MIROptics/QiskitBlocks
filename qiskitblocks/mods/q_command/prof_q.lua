@@ -510,15 +510,17 @@ prof_q.areas.xor_escape.center_pos = {x = 218, y = 0, z = 72}
 prof_q.areas.xor_escape.radius = 5
 prof_q.areas.xor_escape.q_block_pos = {x = 215, y = 0, z = 70}
 prof_q.areas.xor_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"We meet again, esteemed colleague! You may recall that my name is Professor Q and",
+	"I'm standing safely behind this blast glass because we're conducting quantum",
+	"experiments. I'm sure that you'll be fine :-) For this experiment, make a circuit",
+	"that realizes a digital 'exclusive or' gate as shown on the wall. You may use the",
+	"|1> block to test input combinations to avoid repeatedly swinging the exit door."
 }
 prof_q.areas.xor_escape.help_chat_sent = false
 prof_q.areas.xor_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Well done! You may know that the CNOT gate its own inverse, so supplying the output",
+	"as input will give you the original input as output. That's reversible computing,",
+	"with no qubits falling in the bit bucket!"
 }
 prof_q.areas.xor_escape.success_chat_sent = false
 
@@ -529,15 +531,12 @@ prof_q.areas.dj_bal_flip_ora_escape.center_pos = {x = 218, y = 0, z = 62}
 prof_q.areas.dj_bal_flip_ora_escape.radius = 5
 prof_q.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 59}
 prof_q.areas.dj_bal_flip_ora_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Make a circuit like the last one, but negate the output as shown on the wall"
 }
 prof_q.areas.dj_bal_flip_ora_escape.help_chat_sent = false
 prof_q.areas.dj_bal_flip_ora_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Nice job! I'll keep adding twists like that X gate so that you'll be creating",
+	"circuits with increasingly complex quantum logic."
 }
 prof_q.areas.dj_bal_flip_ora_escape.success_chat_sent = false
 
@@ -548,15 +547,14 @@ prof_q.areas.toffoli_escape.center_pos = {x = 208, y = 0, z = 62}
 prof_q.areas.toffoli_escape.radius = 5
 prof_q.areas.toffoli_escape.q_block_pos = {x = 204, y = 0, z = 58}
 prof_q.areas.toffoli_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Go ahead and create a circuit that realizes the logic shown on the wall. I'd",
+	"suggest using a Toffoli gate, but you do you! :-)"
 }
 prof_q.areas.toffoli_escape.help_chat_sent = false
 prof_q.areas.toffoli_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Nicely done! Did you notice that this time the output isn't on one of the input",
+	"wires? Instead, it is on an additional 'scratch' wire, often referred to as an",
+	"'ancilla' qubit."
 }
 prof_q.areas.toffoli_escape.success_chat_sent = false
 
@@ -567,15 +565,12 @@ prof_q.areas.toffoli_nand_escape.center_pos = {x = 208, y = 0, z = 72}
 prof_q.areas.toffoli_nand_escape.radius = 5
 prof_q.areas.toffoli_nand_escape.q_block_pos = {x = 212, y = 0, z = 76}
 prof_q.areas.toffoli_nand_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Make a circuit like the last one, but negate the output as indicated by the NAND",
+	"(NOT AND) shown on the wall."
 }
 prof_q.areas.toffoli_nand_escape.help_chat_sent = false
 prof_q.areas.toffoli_nand_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"You're really getting the hang of this. On to the next room!"
 }
 prof_q.areas.toffoli_nand_escape.success_chat_sent = false
 
@@ -586,15 +581,12 @@ prof_q.areas.or_escape.center_pos = {x = 208, y = 0, z = 82}
 prof_q.areas.or_escape.radius = 5
 prof_q.areas.or_escape.q_block_pos = {x = 204, y = 0, z = 86}
 prof_q.areas.or_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Again, make a circuit that realizes the logic on the wall."
 }
 prof_q.areas.or_escape.help_chat_sent = false
 prof_q.areas.or_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"I like how you negated both inputs, as well as the output, of the previous AND circuit",
+	"to make an OR circuit!"
 }
 prof_q.areas.or_escape.success_chat_sent = false
 
@@ -605,15 +597,12 @@ prof_q.areas.nor_escape.center_pos = {x = 218, y = 0, z = 82}
 prof_q.areas.nor_escape.radius = 5
 prof_q.areas.nor_escape.q_block_pos = {x = 222, y = 0, z = 78}
 prof_q.areas.nor_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Make a circuit like the last one, but negate the output as indicated by the NOR",
+	"(NOT OR) shown on the wall."
 }
 prof_q.areas.nor_escape.help_chat_sent = false
 prof_q.areas.nor_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Nicely done. Carry on!"
 }
 prof_q.areas.nor_escape.success_chat_sent = false
 
@@ -624,15 +613,13 @@ prof_q.areas.toffoli_mixed_escape.center_pos = {x = 218, y = 0, z = 92}
 prof_q.areas.toffoli_mixed_escape.radius = 5
 prof_q.areas.toffoli_mixed_escape.q_block_pos = {x = 214, y = 0, z = 96}
 prof_q.areas.toffoli_mixed_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Go ahead and make a circuit that realizes the logic on the wall, remembering",
+	"that NOT takes precedence over AND in digital logic."
 }
 prof_q.areas.toffoli_mixed_escape.help_chat_sent = false
 prof_q.areas.toffoli_mixed_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Excellent, however only digital logic has been demonstrated to this point. ",
+	"You'll rectify that in the next room."
 }
 prof_q.areas.toffoli_mixed_escape.success_chat_sent = false
 
@@ -643,15 +630,15 @@ prof_q.areas.superpos_logic_and_escape.center_pos = {x = 208, y = 0, z = 92}
 prof_q.areas.superpos_logic_and_escape.radius = 5
 prof_q.areas.superpos_logic_and_escape.q_block_pos = {x = 212, y = 0, z = 88}
 prof_q.areas.superpos_logic_and_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"For your next trick, realize the same logic as you did in the previous room.",
+	"This time, however, compute the logic with its inputs in equal superposition,",
+	"resulting in the state shown on the wall."
 }
 prof_q.areas.superpos_logic_and_escape.help_chat_sent = false
 prof_q.areas.superpos_logic_and_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Outstanding! You've managed to demonstrate quantum parallelism, in which all",
+	"of the 2^n (where n is number of inputs) combinations and their associated",
+	"outputs are represented in the state vector."
 }
 prof_q.areas.superpos_logic_and_escape.success_chat_sent = false
 
@@ -662,15 +649,18 @@ prof_q.areas.and_3_operands_x_escape.center_pos = {x = 198, y = 0, z = 92}
 prof_q.areas.and_3_operands_x_escape.radius = 5
 prof_q.areas.and_3_operands_x_escape.q_block_pos = {x = 194, y = -1, z = 88}
 prof_q.areas.and_3_operands_x_escape.help_chat_msg = {
-	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
-	"in which Z axis rotations are sandwiched between pairs of H gates."
+	"Here you'll realize a logical expression that contains more than one AND.",
+	"I'd probably fashion a circuit out of a couple of Toffoli gates, adding",
+	"a third to undo what the first one did. That's easy for me to say because",
+	"I'm safely behind this explosion-proof glass, so use your best judgment :-)"
 }
 prof_q.areas.and_3_operands_x_escape.help_chat_sent = false
 prof_q.areas.and_3_operands_x_escape.help_success_msg = {
-	"Well done! The H gates transformed changes in phase to changes in measurement",
-	"probabilities.",
-	"Congratulations on solving these circuit puzzles! Feel free to revisit any of them,",
-	"and then explore other areas after climbing the ladder back to the main room."
+	"Very impressive! You found a way to leverage Toffoli gates to realize",
+	"logic that consists of more than two inputs. You also used a technique known",
+	"as 'uncomputing' to clean up after yourself, leaving an ancilla qubit",
+	"(labeled 'd' on the wall) the way you found it. Good qubit hygiene is",
+	"important, especially when they are entangled."
 }
 prof_q.areas.and_3_operands_x_escape.success_chat_sent = false
 

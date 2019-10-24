@@ -17,6 +17,8 @@ limitations under the License.
 
 --[[
 TODO:
+[] Fix sqrt(1/4) wall blocks
+[] Don't play congratulation music if puzzle already solved
 [] Make state tomography more efficient and maintainable
     [] Seems that tomography is being performed for all measurement blocks
         when there is at least on Bloch sphere in the circuit
