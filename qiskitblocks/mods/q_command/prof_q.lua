@@ -511,16 +511,17 @@ prof_q.areas.xor_escape.radius = 5
 prof_q.areas.xor_escape.q_block_pos = {x = 215, y = 0, z = 70}
 prof_q.areas.xor_escape.help_chat_msg = {
 	"We meet again, esteemed colleague! You may recall that my name is Professor Q and",
-	"I'm standing safely behind this blast glass because we're conducting quantum",
-	"experiments. I'm sure that you'll be fine :-) For this experiment, make a circuit",
-	"that realizes a digital 'exclusive or' gate as shown on the wall. You may use the",
-	"|1> block to test input combinations to avoid repeatedly swinging the exit door."
+	"that I'm standing behind this glass because we're conducting quantum experiments.",
+	"I'm sure that you'll be fine though :-) For this experiment, make a circuit that",
+	"realizes a digital 'exclusive or' gate as shown on the wall. You may place |1>",
+	"blocks on wires to test input combinations without affecting the exit door."
 }
 prof_q.areas.xor_escape.help_chat_sent = false
 prof_q.areas.xor_escape.help_success_msg = {
 	"Well done! You may know that the CNOT gate its own inverse, so supplying the output",
 	"as input will give you the original input as output. That's reversible computing,",
-	"with no qubits falling in the bit bucket!"
+	"with no qubits falling in the bit bucket! Perhaps play with that before leaving",
+	"this room to see reversible computing in action."
 }
 prof_q.areas.xor_escape.success_chat_sent = false
 
@@ -698,7 +699,7 @@ prof_q.areas.phase_a_and_b_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_escape.help_success_msg = {
 	"Well done! You made the phase rotate to pi radians whenever the boolean",
 	"expression on the wall is satisfied (made true) by your input. This type",
-	"of quantum logic is known as 'phase logic', so you just made a 'phase AND'",
+	"of quantum logic is known as phase logic, so you just made a phase AND",
 	"logic gate. Did you notice that the 'phase AND' required only two qubits?"
 }
 prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
@@ -745,8 +746,8 @@ prof_q.areas.phase_a_and_b_no_z_escape.center_pos = {x = 188, y = 0, z = 72}
 prof_q.areas.phase_a_and_b_no_z_escape.radius = 5
 prof_q.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 185, y = 0, z = 69}
 prof_q.areas.phase_a_and_b_no_z_escape.help_chat_msg = {
-	"Your challenge here will be to create a 'phase AND' logic gate without a Z",
-	"block as used previously."
+	"Your challenge here will be to create a 'phase AND' logic gate ",
+	"without a Z block as used previously."
 }
 prof_q.areas.phase_a_and_b_no_z_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_no_z_escape.help_success_msg = {

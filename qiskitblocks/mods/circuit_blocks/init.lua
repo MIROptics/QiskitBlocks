@@ -18,6 +18,7 @@ limitations under the License.
 --[[
 TODO:
 [] Fix sqrt(1/4) wall blocks
+[] Put minimal help signs in Level II escape rooms
 [] Don't play congratulation music if puzzle already solved
 [] Make state tomography more efficient and maintainable
     [] Seems that tomography is being performed for all measurement blocks
