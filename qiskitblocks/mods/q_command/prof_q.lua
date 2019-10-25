@@ -784,7 +784,8 @@ prof_q.areas.a_or_b_and_c_escape.help_chat_msg = {
 	"Here you may use a combination of magnitude logic and phase logic gates ",
 	"to satisfy the boolean expression on the wall, with the liquid blocks ",
 	"and phase arrows appearing as indicated. As a hint, remember to have good ",
-	"qubit hygiene :-)"
+	"qubit hygiene :-)  By the way, I put an H block in the chest in case you ",
+	"want to compute the logic with its inputs in equal superposition."
 }
 prof_q.areas.a_or_b_and_c_escape.help_chat_sent = false
 prof_q.areas.a_or_b_and_c_escape.help_success_msg = {

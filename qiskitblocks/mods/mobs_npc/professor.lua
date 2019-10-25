@@ -8,11 +8,11 @@ mobs.npc_drops = {}
 mobs:register_mob("mobs_npc:npc", {
 	nametag = "",
 	type = "npc",
-	passive = true,
+	passive = false,
 	damage = 3,
 	attack_type = "dogfight",
 	attacks_monsters = true,
-	attack_npcs = false,
+	attack_npcs = true,
 	owner_loyal = true,
 	pathfinding = true,
 	hp_min = 10,
@@ -23,8 +23,8 @@ mobs:register_mob("mobs_npc:npc", {
 	mesh = "mobs_character.b3d",
 	drawtype = "front",
 	textures = {
-		--{"mobs_npc.png"},
-		{"mobs_prof_q.png"},
+		{"mobs_npc.png"},
+		--{"mobs_prof_q.png"},
 	},
 	child_texture = {
 		{"mobs_npc_baby.png"}, -- derpy baby by AmirDerAssassine
@@ -41,7 +41,7 @@ mobs:register_mob("mobs_npc:npc", {
 	--follow = {"q_command:q_block_x_gate"},
 	view_range = 30,
 	owner = "",
-	order = "stand",
+	order = "follow",
 	fear_height = 1,
 	animation = {
 		speed_normal = 30,

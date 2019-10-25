@@ -230,43 +230,57 @@ minetest.register_node("circuit_blocks:_qubit_1", {
 })
 
 minetest.register_node("circuit_blocks:_qubit_0_color_1", {
-    description = "Red qubit 0 block",
+    description = "Magenta qubit 0 block",
     tiles = {"circuit_blocks_qubit_0_color_1.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:_qubit_1_color_1", {
-    description = "Red qubit 1 block",
+    description = "Magenta qubit 1 block",
     tiles = {"circuit_blocks_qubit_1_color_1.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:_qubit_0_color_2", {
-    description = "Green qubit 0 block",
+    description = "Yellow qubit 0 block",
     tiles = {"circuit_blocks_qubit_0_color_2.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:_qubit_1_color_2", {
-    description = "Green qubit 1 block",
+    description = "Yellow qubit 1 block",
     tiles = {"circuit_blocks_qubit_1_color_2.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:_qubit_0_color_3", {
-    description = "Blue qubit 0 block",
+    description = "Cyan qubit 0 block",
     tiles = {"circuit_blocks_qubit_0_color_3.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })
 
 minetest.register_node("circuit_blocks:_qubit_1_color_3", {
-    description = "Blue qubit 1 block",
+    description = "Cyan qubit 1 block",
     tiles = {"circuit_blocks_qubit_1_color_3.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_0_color_4", {
+    description = "Orange qubit 0 block",
+    tiles = {"circuit_blocks_qubit_0_color_4.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_qubit_1_color_4", {
+    description = "Orange qubit 1 block",
+    tiles = {"circuit_blocks_qubit_1_color_4.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir"
 })

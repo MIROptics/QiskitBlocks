@@ -47,7 +47,7 @@ complex = create_complex()
 
 BASIS_STATE_BLOCK_MAX_QUBITS = 4
 USE_COLOR_QUBITS = true
-MAX_COLOR_QUBITS = 3
+MAX_COLOR_QUBITS = 4
 CIRCUIT_MAX_WIRES = 8
 CIRCUIT_MAX_COLUMNS = 64
 
@@ -5747,7 +5747,8 @@ q_command.texts.a_or_b_and_c_escape.en =
 Here you may use a combination of magnitude logic and phase logic gates
 to satisfy the boolean expression on the wall, with the liquid blocks
 and phase arrows appearing as indicated. As a hint, remember to have
-good qubit hygiene :-)
+good qubit hygiene :-)  By the way, I put an H block in the chest in case
+you want to compute the logic with its inputs in equal superposition.
 ]]
 q_command.texts.a_or_b_and_c_escape.es = q_command.texts.a_or_b_and_c_escape.en
 q_command.texts.a_or_b_and_c_escape.ja = q_command.texts.a_or_b_and_c_escape.en
@@ -6077,6 +6078,7 @@ q_command:register_wall_block("q_command_dirac_111_bottom_colors")
 q_command:register_wall_block("q_command_dirac_i_eq_000_top_colors")
 
 q_command:register_wall_block("q_command_math_sum")
+q_command:register_wall_block("q_command_math_e_i_pi")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
@@ -6170,6 +6172,7 @@ q_command:register_wall_block("q_command_state_3qb_7_colors")
 
 q_command:register_wall_block("q_command_esc_room_exit_wall_tile")
 q_command:register_wall_block("q_command_esc_room_exit_left")
+q_command:register_wall_block("q_command_esc_room_no_entry_wall_tile")
 q_command:register_wall_block("q_command_read_first_wall_tile")
 q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
 
