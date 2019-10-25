@@ -915,7 +915,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
         paramtype2 = "facedir",
         on_construct = function(pos)
             local meta = minetest.get_meta(pos)
-            meta:set_string("infotext", "Quantum circuit command block")
+            meta:set_string("infotext", "Q block (right-click for QASM code to run on IBM quantum hardware)")
             q_command.block_pos = pos
 
             --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
@@ -4846,24 +4846,37 @@ q_command:register_q_command_block( "phase_rot_2wire_escape_success",
 q_command.texts.xor_escape = {}
 q_command.texts.xor_escape.en =
 [[
-TLDR: Most of the help that you'll need for these 'escape room' circuit
+We meet again, esteemed colleague! You may recall that my name is
+Professor Q and that I'm standing behind this glass because we're
+conducting quantum experiments. I'm sure that you'll be fine though :-)
+For this experiment, make a circuit that realizes a digital
+'exclusive or' gate as shown on the wall. You may place |1> blocks on
+wires to test input combinations without affecting the exit door.
+
+Notes: Most of the help that you'll need for these 'escape room' circuit
 puzzles will appear in the chat area (upper left corner of your window)
 by Professor Q. For all of these puzzles, get blocks from the chest and
-place them on the circuit. The door to the next room will open when the
-liquid levels and arrows in the blue blocks correspond to the quantum
-state displayed on the wall behind the circuit in Dirac notation. The
-Bloch sphere at the end of each wire estimates the state of its qubit,
-and right-clicking it performs a measurement of the circuit.
-----
+place them on the circuit. When you solve a puzzle, the Q block will
+turn gold, celebration music will play, and the door to the next room
+will open. Please solve the Level I escape rooms if you haven't already,
+as they help build knowledge and skills for these Level II puzzles.
 
-TODO: Fill in from CNOT puzzle
+To perform a measurement on a circuit, right-click a measurement block.
 
-If the Q block turned gold, congratulations on solving the puzzle!
+To convert an X gate into a controlled-X gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool in the chest). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-X gate is also known as the controlled-NOT, or CNOT
+gate. It acts on a pair of qubits, with one acting as control and the
+other as target. It performs an X operation on the target whenever the
+control is in state |1>. If the control qubit is in a superposition,
+this gate creates entanglement.
 ]]
 q_command.texts.xor_escape.es = q_command.texts.xor_escape.en
 q_command.texts.xor_escape.ja = q_command.texts.xor_escape.en
 q_command:register_help_button("xor_escape",
-        "Make quantum XOR gate", q_command.texts.xor_escape)
+        "Make a quantum logic XOR gate", q_command.texts.xor_escape)
 local solution_unitary_xor_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}}}
@@ -4895,17 +4908,12 @@ q_command:register_q_command_block( "xor_escape_success", "xor_escape",
 q_command.texts.dj_bal_flip_ora_escape = {}
 q_command.texts.dj_bal_flip_ora_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Make a circuit like the last one, but negate the output as shown on the wall
 ]]
 q_command.texts.dj_bal_flip_ora_escape.es = q_command.texts.dj_bal_flip_ora_escape.en
 q_command.texts.dj_bal_flip_ora_escape.ja = q_command.texts.dj_bal_flip_ora_escape.en
 q_command:register_help_button("dj_bal_flip_ora_escape",
-        "Make balanced oracle for Deutsch", q_command.texts.dj_bal_flip_ora_escape)
+        "Make a NOT XOR quantum logic gate", q_command.texts.dj_bal_flip_ora_escape)
 local solution_unitary_dj_bal_flip_ora_escape =
 {{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
@@ -4937,17 +4945,22 @@ q_command:register_q_command_block( "dj_bal_flip_ora_escape_success", "dj_bal_fl
 q_command.texts.toffoli_escape = {}
 q_command.texts.toffoli_escape.en =
 [[
-TLDR:
-----
+Go ahead and create a circuit that realizes the logic shown on the wall.
+I'd suggest using a Toffoli gate, but you do you! :-)
 
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Note: To convert a controlled-X gate into a Toffoli gate (and vice-versa),
+hold the Special key down while wielding the Control Tool and
+left-clicking or right-clicking. Left-clicking moves the second control
+qubit up one wire, and right-clicking moves the second control qubit
+down one wire. There is a blue dot on the second control qubit to help
+you distinguish it from the first control qubit. The Special key
+mentioned earlier may be known, and set, by pausing the game and choosing
+the Change Keys button.
 ]]
 q_command.texts.toffoli_escape.es = q_command.texts.toffoli_escape.en
 q_command.texts.toffoli_escape.ja = q_command.texts.toffoli_escape.en
 q_command:register_help_button("toffoli_escape",
-        "Make classical AND gate", q_command.texts.toffoli_escape)
+        "Make a quantum logic AND gate", q_command.texts.toffoli_escape)
 local solution_unitary_toffoli_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -4985,17 +4998,13 @@ q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
 q_command.texts.toffoli_nand_escape = {}
 q_command.texts.toffoli_nand_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Make a circuit like the last one, but negate the output as indicated by
+the NAND (NOT AND) shown on the wall.
 ]]
 q_command.texts.toffoli_nand_escape.es = q_command.texts.toffoli_nand_escape.en
 q_command.texts.toffoli_nand_escape.ja = q_command.texts.toffoli_nand_escape.en
 q_command:register_help_button("toffoli_nand_escape",
-        "Make classical NAND gate", q_command.texts.toffoli_nand_escape)
+        "Make a quantum logic NAND gate", q_command.texts.toffoli_nand_escape)
 local solution_unitary_toffoli_nand_escape =
 {{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5033,17 +5042,12 @@ q_command:register_q_command_block( "toffoli_nand_escape_success", "toffoli_nand
 q_command.texts.or_escape = {}
 q_command.texts.or_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Again, make a circuit that realizes the logic on the wall.
 ]]
 q_command.texts.or_escape.es = q_command.texts.or_escape.en
 q_command.texts.or_escape.ja = q_command.texts.or_escape.en
 q_command:register_help_button("or_escape",
-        "Make classical OR gate", q_command.texts.or_escape)
+        "Make a quantum logic OR gate", q_command.texts.or_escape)
 local solution_unitary_or_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5081,17 +5085,13 @@ q_command:register_q_command_block( "or_escape_success", "or_escape",
 q_command.texts.nor_escape = {}
 q_command.texts.nor_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Make a circuit similar to the last one, taking into account the NOR
+(NOT OR) shown on the wall.
 ]]
 q_command.texts.nor_escape.es = q_command.texts.nor_escape.en
 q_command.texts.nor_escape.ja = q_command.texts.nor_escape.en
 q_command:register_help_button("nor_escape",
-        "Make classical NOR gate", q_command.texts.nor_escape)
+        "Make a quantum logic NOR gate", q_command.texts.nor_escape)
 local solution_unitary_nor_escape =
 {{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5129,17 +5129,13 @@ q_command:register_q_command_block( "nor_escape_success", "nor_escape",
 q_command.texts.toffoli_mixed_escape = {}
 q_command.texts.toffoli_mixed_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Go ahead and make a circuit that realizes the logic on the wall,
+remembering that NOT takes precedence over AND in digital logic.
 ]]
 q_command.texts.toffoli_mixed_escape.es = q_command.texts.toffoli_mixed_escape.en
 q_command.texts.toffoli_mixed_escape.ja = q_command.texts.toffoli_mixed_escape.en
 q_command:register_help_button("toffoli_mixed_escape",
-        "Make mixed Toffoli gate", q_command.texts.toffoli_mixed_escape)
+        "Make a quantum logic AND gate with negated input", q_command.texts.toffoli_mixed_escape)
 local solution_unitary_toffoli_mixed_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5177,17 +5173,14 @@ q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mix
 q_command.texts.superpos_logic_and_escape = {}
 q_command.texts.superpos_logic_and_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+For your next trick, realize the same logic as you did in the previous
+room. This time, however, compute the logic with its inputs in equal
+superposition, resulting in the state shown on the wall.
 ]]
 q_command.texts.superpos_logic_and_escape.es = q_command.texts.superpos_logic_and_escape.en
 q_command.texts.superpos_logic_and_escape.ja = q_command.texts.superpos_logic_and_escape.en
 q_command:register_help_button("superpos_logic_and_escape",
-        "Compute a AND b in superposition", q_command.texts.superpos_logic_and_escape)
+        "Compute NOT a AND b in superposition", q_command.texts.superpos_logic_and_escape)
 local solution_statevector_superpos_logic_and_escape =
 {{r=0.5,i=0},{r=0.5,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0}}
 local door_pos_superpos_logic_and_escape = {x = 203, y = 0, z = 90}
@@ -5219,17 +5212,18 @@ q_command:register_q_command_block( "superpos_logic_and_escape_success", "superp
 q_command.texts.and_3_operands_x_escape = {}
 q_command.texts.and_3_operands_x_escape.en =
 [[
-TLDR:
-----
+Here you'll realize a logical expression that contains more than one AND.
+I'd probably fashion a circuit out of a couple of Toffoli gates, adding
+a third to undo what the first one did. That's easy for me to say because
+I'm safely behind this explosion-proof glass, so use your best judgment :-)
 
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Note: You can ignore the liquid blocks in this puzzle, as there are many
+more of them than can be displayed here.
 ]]
 q_command.texts.and_3_operands_x_escape.es = q_command.texts.and_3_operands_x_escape.en
 q_command.texts.and_3_operands_x_escape.ja = q_command.texts.and_3_operands_x_escape.en
 q_command:register_help_button("and_3_operands_x_escape",
-        "Make oracle with three operands", q_command.texts.and_3_operands_x_escape)
+        "Create quantum logic gate with multiple operands", q_command.texts.and_3_operands_x_escape)
 local solution_unitary_and_3_operands_x_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
@@ -5387,17 +5381,12 @@ q_command:register_q_command_block( "and_3_operands_x_escape_success", "and_3_op
 q_command.texts.and_not_3_operands_x_escape = {}
 q_command.texts.and_not_3_operands_x_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Try your hand at creating a circuit that realizes the logic on the wall.
 ]]
 q_command.texts.and_not_3_operands_x_escape.es = q_command.texts.and_not_3_operands_x_escape.en
 q_command.texts.and_not_3_operands_x_escape.ja = q_command.texts.and_not_3_operands_x_escape.en
 q_command:register_help_button("and_not_3_operands_x_escape",
-        "Make oracle with three operands", q_command.texts.and_not_3_operands_x_escape)
+        "Make quantum logic gate with multiple operands", q_command.texts.and_not_3_operands_x_escape)
 local solution_unitary_and_not_3_operands_x_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
@@ -5555,17 +5544,15 @@ q_command:register_q_command_block( "and_not_3_operands_x_escape_success", "and_
 q_command.texts.phase_a_and_b_escape = {}
 q_command.texts.phase_a_and_b_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Go ahead and make the circuit realize the boolean expression on the
+wall, with the appearance of the liquid blocks and phase arrows as
+indicated (arrow points left when the inputs make the boolean
+expression true)
 ]]
 q_command.texts.phase_a_and_b_escape.es = q_command.texts.phase_a_and_b_escape.en
 q_command.texts.phase_a_and_b_escape.ja = q_command.texts.phase_a_and_b_escape.en
 q_command:register_help_button("phase_a_and_b_escape",
-        "Make three operand phase AND gate", q_command.texts.phase_a_and_b_escape)
+        "Make two operand phase AND gate", q_command.texts.phase_a_and_b_escape)
 local solution_unitary_phase_a_and_b_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
@@ -5597,17 +5584,14 @@ q_command:register_q_command_block( "phase_a_and_b_escape_success", "phase_a_and
 q_command.texts.superpos_phase_and_escape = {}
 q_command.texts.superpos_phase_and_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Now realize the same logic as you did in the previous room, but compute
+the logic with its inputs in equal superposition, resulting in the state
+shown on the wall.
 ]]
 q_command.texts.superpos_phase_and_escape.es = q_command.texts.superpos_phase_and_escape.en
 q_command.texts.superpos_phase_and_escape.ja = q_command.texts.superpos_phase_and_escape.en
 q_command:register_help_button("superpos_phase_and_escape",
-        "Compute a AND b in superposition", q_command.texts.superpos_phase_and_escape)
+        "Compute phase a AND b in superposition", q_command.texts.superpos_phase_and_escape)
 local solution_statevector_superpos_phase_and_escape =
 {{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0},{r=-0.5,i=0}}
 local door_pos_superpos_phase_and_escape = {x = 196, y = 0, z = 77}
@@ -5639,12 +5623,8 @@ q_command:register_q_command_block( "superpos_phase_and_escape_success", "superp
 q_command.texts.phase_a_or_b_escape = {}
 q_command.texts.phase_a_or_b_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Now make the circuit realize the boolean expression on the wall, with
+the appearance of the liquid blocks and phase arrows as indicated
 ]]
 q_command.texts.phase_a_or_b_escape.es = q_command.texts.phase_a_or_b_escape.en
 q_command.texts.phase_a_or_b_escape.ja = q_command.texts.phase_a_or_b_escape.en
@@ -5681,17 +5661,13 @@ q_command:register_q_command_block( "phase_a_or_b_escape_success", "phase_a_or_b
 q_command.texts.phase_a_and_b_no_z_escape = {}
 q_command.texts.phase_a_and_b_no_z_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Your challenge here will be to create a 'phase AND' logic gate
+without a Z block as used previously.
 ]]
 q_command.texts.phase_a_and_b_no_z_escape.es = q_command.texts.phase_a_and_b_no_z_escape.en
 q_command.texts.phase_a_and_b_no_z_escape.ja = q_command.texts.phase_a_and_b_no_z_escape.en
 q_command:register_help_button("phase_a_and_b_no_z_escape",
-        "Make three operand phase AND gate", q_command.texts.phase_a_and_b_no_z_escape)
+        "Make two operand phase AND gate w/o Z gate", q_command.texts.phase_a_and_b_no_z_escape)
 local solution_unitary_phase_a_and_b_no_z_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
@@ -5723,12 +5699,9 @@ q_command:register_q_command_block( "phase_a_and_b_no_z_escape_success", "phase_
 q_command.texts.phase_a_and_b_and_c_escape = {}
 q_command.texts.phase_a_and_b_and_c_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Go ahead and make the circuit realize the boolean expression on the
+wall, with the appearance of the liquid blocks and phase arrows as
+indicated.
 ]]
 q_command.texts.phase_a_and_b_and_c_escape.es = q_command.texts.phase_a_and_b_and_c_escape.en
 q_command.texts.phase_a_and_b_and_c_escape.ja = q_command.texts.phase_a_and_b_and_c_escape.en
@@ -5771,12 +5744,10 @@ q_command:register_q_command_block( "phase_a_and_b_and_c_escape_success", "phase
 q_command.texts.a_or_b_and_c_escape = {}
 q_command.texts.a_or_b_and_c_escape.en =
 [[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
+Here you may use a combination of magnitude logic and phase logic gates
+to satisfy the boolean expression on the wall, with the liquid blocks
+and phase arrows appearing as indicated. As a hint, remember to have
+good qubit hygiene :-)
 ]]
 q_command.texts.a_or_b_and_c_escape.es = q_command.texts.a_or_b_and_c_escape.en
 q_command.texts.a_or_b_and_c_escape.ja = q_command.texts.a_or_b_and_c_escape.en

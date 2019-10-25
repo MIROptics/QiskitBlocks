@@ -518,10 +518,10 @@ prof_q.areas.xor_escape.help_chat_msg = {
 }
 prof_q.areas.xor_escape.help_chat_sent = false
 prof_q.areas.xor_escape.help_success_msg = {
-	"Well done! You may know that the CNOT gate its own inverse, so supplying the output",
-	"as input will give you the original input as output. That's reversible computing,",
-	"with no qubits falling in the bit bucket! Perhaps play with that before leaving",
-	"this room to see reversible computing in action."
+	"Well done! You may know that the CNOT gate is its own inverse, so supplying the ",
+	"output as input will give you the original input as output. That's reversible ",
+	"computing, with no qubits falling in the bit bucket! Perhaps experiment with ",
+	"that before leaving this room to see reversible computing in action."
 }
 prof_q.areas.xor_escape.success_chat_sent = false
 
@@ -536,8 +536,8 @@ prof_q.areas.dj_bal_flip_ora_escape.help_chat_msg = {
 }
 prof_q.areas.dj_bal_flip_ora_escape.help_chat_sent = false
 prof_q.areas.dj_bal_flip_ora_escape.help_success_msg = {
-	"Nice job! I'll keep adding twists like that X gate so that you'll be creating",
-	"circuits with increasingly complex quantum logic."
+	"Nice job. I'll keep adding twists like that X gate so you'll be creating",
+	"circuits with increasingly complex quantum logic in no time!"
 }
 prof_q.areas.dj_bal_flip_ora_escape.success_chat_sent = false
 
@@ -554,8 +554,7 @@ prof_q.areas.toffoli_escape.help_chat_msg = {
 prof_q.areas.toffoli_escape.help_chat_sent = false
 prof_q.areas.toffoli_escape.help_success_msg = {
 	"Nicely done! Did you notice that this time the output isn't on one of the input",
-	"wires? Instead, it is on an additional 'scratch' wire, often referred to as an",
-	"'ancilla' qubit."
+	"wires, but rather, on an additional wire?"
 }
 prof_q.areas.toffoli_escape.success_chat_sent = false
 
@@ -614,13 +613,13 @@ prof_q.areas.toffoli_mixed_escape.center_pos = {x = 218, y = 0, z = 92}
 prof_q.areas.toffoli_mixed_escape.radius = 5
 prof_q.areas.toffoli_mixed_escape.q_block_pos = {x = 214, y = 0, z = 96}
 prof_q.areas.toffoli_mixed_escape.help_chat_msg = {
-	"Go ahead and make a circuit that realizes the logic on the wall, remembering",
+	"Go ahead and make a circuit that realizes the logic on the wall, remembering ",
 	"that NOT takes precedence over AND in digital logic."
 }
 prof_q.areas.toffoli_mixed_escape.help_chat_sent = false
 prof_q.areas.toffoli_mixed_escape.help_success_msg = {
-	"Excellent! Did you notice that only digital logic has been demonstrated to this",
-	"point? You'll rectify that in the next room."
+	"Excellent! Did you notice that only digital logic has been demonstrated to this ",
+	"point? We'll rectify that in the next room."
 }
 prof_q.areas.toffoli_mixed_escape.success_chat_sent = false
 
@@ -657,10 +656,10 @@ prof_q.areas.and_3_operands_x_escape.help_chat_msg = {
 }
 prof_q.areas.and_3_operands_x_escape.help_chat_sent = false
 prof_q.areas.and_3_operands_x_escape.help_success_msg = {
-	"Very impressive! You found a way to leverage Toffoli gates to realize",
-	"logic that consists of more than two inputs. You also used a technique known",
-	"as 'uncomputing' to clean up after yourself, leaving an ancilla qubit",
-	"(labeled 'd' on the wall) the way you found it. Good qubit hygiene is",
+	"Very impressive! You found a way to leverage Toffoli gates to realize logic ",
+	"that consists of more than two inputs. You also used a technique known as ",
+	"'uncomputing' to clean up after yourself, leaving a scratch qubit (AKA ancilla ",
+	"qubit, labeled 'd' on the wall) the way you found it. Good qubit hygiene is",
 	"important, especially when they are entangled."
 }
 prof_q.areas.and_3_operands_x_escape.success_chat_sent = false
@@ -672,7 +671,7 @@ prof_q.areas.and_not_3_operands_x_escape.center_pos = {x = 188, y = 0, z = 92}
 prof_q.areas.and_not_3_operands_x_escape.radius = 5
 prof_q.areas.and_not_3_operands_x_escape.q_block_pos = {x = 184, y = 0, z = 88}
 prof_q.areas.and_not_3_operands_x_escape.help_chat_msg = {
-	"Try your hand at creating a circuit that realizes the logic on the wall"
+	"Try your hand at creating a circuit that realizes the logic on the wall."
 }
 prof_q.areas.and_not_3_operands_x_escape.help_chat_sent = false
 prof_q.areas.and_not_3_operands_x_escape.help_success_msg = {
@@ -691,15 +690,15 @@ prof_q.areas.phase_a_and_b_escape.center_pos = {x = 188, y = 0, z = 82}
 prof_q.areas.phase_a_and_b_escape.radius = 5
 prof_q.areas.phase_a_and_b_escape.q_block_pos = {x = 190, y = 0, z = 79}
 prof_q.areas.phase_a_and_b_escape.help_chat_msg = {
-	"Go ahead and make the circuit realize the boolean expression on the wall,",
-	"with the appearance of the liquid blocks and phase arrows as indicated",
-	"(arrow points left when the inputs make the boolean expression true)"
+	"Go ahead and make the circuit realize the boolean expression on the wall, ",
+	"with the appearance of the liquid blocks and phase arrows as indicated ",
+	"(arrow points left when the inputs make the boolean expression true) "
 }
 prof_q.areas.phase_a_and_b_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_escape.help_success_msg = {
-	"Well done! You made the phase rotate to pi radians whenever the boolean",
-	"expression on the wall is satisfied (made true) by your input. This type",
-	"of quantum logic is known as phase logic, so you just made a phase AND",
+	"Well done! You made the phase rotate to pi radians whenever the boolean ",
+	"expression on the wall is satisfied (made true) by your input. This type ",
+	"of quantum logic is known as phase logic, so you just made a 'phase AND' ",
 	"logic gate. Did you notice that the 'phase AND' required only two qubits?"
 }
 prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
@@ -730,8 +729,8 @@ prof_q.areas.phase_a_or_b_escape.center_pos = {x = 198, y = 0, z = 72}
 prof_q.areas.phase_a_or_b_escape.radius = 5
 prof_q.areas.phase_a_or_b_escape.q_block_pos = {x = 201, y = 0, z = 69}
 prof_q.areas.phase_a_or_b_escape.help_chat_msg = {
-	"Now make the circuit realize the boolean expression on the wall,",
-	"with the appearance of the liquid blocks and phase arrows as indicated",
+	"Now make the circuit realize the boolean expression on the wall, with ",
+	"the appearance of the liquid blocks and phase arrows as indicated",
 }
 prof_q.areas.phase_a_or_b_escape.help_chat_sent = false
 prof_q.areas.phase_a_or_b_escape.help_success_msg = {
@@ -770,7 +769,7 @@ prof_q.areas.phase_a_and_b_and_c_escape.help_chat_msg = {
 }
 prof_q.areas.phase_a_and_b_and_c_escape.help_chat_sent = false
 prof_q.areas.phase_a_and_b_and_c_escape.help_success_msg = {
-	"Outstanding. See, I told you that this alternative to a controlled-Z gate",
+	"Outstanding. See, I told you that an alternative to a controlled-Z gate",
 	"would come in handy!"
 }
 prof_q.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
@@ -782,9 +781,9 @@ prof_q.areas.a_or_b_and_c_escape.center_pos = {x = 198, y = 0, z = 62}
 prof_q.areas.a_or_b_and_c_escape.radius = 5
 prof_q.areas.a_or_b_and_c_escape.q_block_pos = {x = 202, y = 0, z = 66}
 prof_q.areas.a_or_b_and_c_escape.help_chat_msg = {
-	"Here you may use a combination of magnitude logic and phase logic gates",
-	"to satisfy the boolean expression on the wall, with the liquid blocks",
-	"and phase arrows appearing as indicated. As a hint, remember to have good",
+	"Here you may use a combination of magnitude logic and phase logic gates ",
+	"to satisfy the boolean expression on the wall, with the liquid blocks ",
+	"and phase arrows appearing as indicated. As a hint, remember to have good ",
 	"qubit hygiene :-)"
 }
 prof_q.areas.a_or_b_and_c_escape.help_chat_sent = false
