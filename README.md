@@ -25,7 +25,7 @@ Please choose one of the *Installing and running* options below and follow the i
 
 - Jump to the `Explore and learn` section below.
 
-## Installing and running (by cloning this repo instead instead of using the Minetest Content Database)
+## Installing and running (clone this repo instead of using the Minetest Content Database)
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
 - Clone this QiskitBlocks project, and copy the `qiskitblocks_games` folder of this QiskitBlocks project into the `games` folder of your 
