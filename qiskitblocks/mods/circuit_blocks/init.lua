@@ -17,8 +17,9 @@ limitations under the License.
 
 --[[
 TODO:
-[] Fix sqrt(1/4) wall blocks
-[] Put minimal help signs in Level II escape rooms
+[] Generate Python code for Jupyter notebook
+[] Combine barrier statements when available
+[] Modify Prof Q instructions in Level I 16/16 in all languages
 [] Don't play congratulation music if puzzle already solved
 [] Make state tomography more efficient and maintainable
     [] Seems that tomography is being performed for all measurement blocks

@@ -36,6 +36,8 @@ dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
 dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
 dofile(minetest.get_modpath("q_command").."/prof_q.lua");
+dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
+dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
 
 
 request_http_api = minetest.request_http_api()
