@@ -35,9 +35,9 @@ dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
 dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
-dofile(minetest.get_modpath("q_command").."/prof_q.lua");
-dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
-dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
+--dofile(minetest.get_modpath("q_command").."/prof_q.lua");
+--dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
+--dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
 
 
 request_http_api = minetest.request_http_api()
@@ -58,9 +58,6 @@ MUSIC_CHILL = 1
 MUSIC_ACTIVE = 2
 MUSIC_EXCITED = 3
 MUSIC_CONGRATS = 4
-
-local locale_lang = prof_q:get_locale_lang()
-minetest.debug("q_command_locale_lang: " .. locale_lang)
 
 -- our API object
 q_command = {}
@@ -369,6 +366,26 @@ function q_command:get_q_command_block(pos)
 		return nil
 	end
 end
+
+
+function q_command:get_locale_lang()
+	local lang = minetest.setting_get("language")
+	minetest.debug("minetest.setting_get('language'):" .. minetest.setting_get('language'))
+	if lang then
+		if lang ~= "ja" and
+				lang ~= "es" then
+			lang = "en"
+		end
+	else
+		lang = "en"
+	end
+	return lang
+end
+
+local locale_lang = q_command:get_locale_lang()
+minetest.debug("q_command_locale_lang: " .. locale_lang)
+
+
 
 
 function q_command:debug_node_info(pos, message)
@@ -3659,45 +3676,6 @@ q_command:register_q_command_block( "quantum_teleportation_success",
 
 
 -- Escape room puzzles Level I -------------------------------------------------
-q_command.texts.x_gate_escape = {}
-q_command.texts.x_gate_escape.en =
-[[
-TLDR: Most of the help that you'll need for these 'escape room' circuit
-puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
-place them on the circuit. The door to the next room will open when the
-liquid levels and arrows in the blue blocks correspond to the quantum
-state displayed on the wall behind the circuit in Dirac notation. The
-Bloch sphere at the end of each wire estimates the state of its qubit,
-and right-clicking it performs a measurement of the circuit.
-----
-
-This circuit, consisting of only one wire, leverages the X gate, also
-known as the Pauli-X, NOT, or bit-flip, gate. Its effect on the |0>
-state is to make it |1>, and vice-versa. To work through this puzzle,
-take the following steps:
-
-1) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |0> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |0> is
-always the result.
-
-2) Get an X block out of the chest.
-
-3) While wielding the X block, position the cursor on the empty place
-on the circuit wire, and right-click.
-
-4) Notice that the blue liquid now indicates there is a 100% probability
-that the result will be |1> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |1> is
-always the result.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.x_gate_escape.es = q_command.texts.x_gate_escape.en
-q_command.texts.x_gate_escape.ja = q_command.texts.x_gate_escape.en
-q_command:register_help_button("x_gate_escape",
-        "Make quantum state of |1>", q_command.texts.x_gate_escape)
 local solution_statevector_x_gate_escape =
 {
 	{
@@ -3732,40 +3710,6 @@ q_command:register_q_command_block( "x_gate_escape_success", "x_gate_escape",
         door_pos_x_gate_escape, chest_pos_x_gate_escape, chest_inv_x_gate_escape)
 
 
-q_command.texts.x_gates_2_wire = {}
-q_command.texts.x_gates_2_wire.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of |10>
-Measure the circuit several times as extra validation of the correct solution.
-----
-
-This circuit, consisting of two wires, demonstrates that one or more X
-gates may be leveraged to create a classical state. To work through this
-puzzle, take the following steps:
-
-1) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |00> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |00> is
-always the result.
-
-2) Get an X block out of the chest.
-
-3) While wielding the X block, position the cursor on the circuit wire
-corresponding to each |1> qubit in the desired measurement result, and
-right-click. Note that the bottom-most wire corresponds to the left-most
-qubit.
-
-4) Notice that the blue liquid now indicates there is a 100% probability
-that the result will be |10> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |10> is
-always the result.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.x_gates_2_wire.es = q_command.texts.x_gates_2_wire.en
-q_command.texts.x_gates_2_wire.ja = q_command.texts.x_gates_2_wire.en
-q_command:register_help_button("x_gates_2_wire", "Make quantum state of |10>",
-        q_command.texts.x_gates_2_wire)
 local solution_statevector_x_gates_2_wire =
 {
 	{
@@ -3809,40 +3753,6 @@ q_command:register_q_command_block( "x_gates_2_wire_success", "x_gates_2_wire",
         door_pos_x_gates_2_wire, chest_pos_x_gates_2_wire, chest_inv_x_gates_2_wire)
 
 
-q_command.texts.x_gates_3_wire = {}
-q_command.texts.x_gates_3_wire.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of |011>
-The exit door is behind the circuit, so use the ladder.
-----
-
-This circuit, consisting of three wires, demonstrates that one or more X
-gates may be leveraged to create a classical state. To work through this
-puzzle, take the following steps:
-
-1) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |000> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |000> is
-always the result.
-
-2) Get an X block out of the chest.
-
-3) While wielding the X block, position the cursor on the circuit wire
-corresponding to each |1> qubit in the desired measurement result, and
-right-click. Note that the bottom-most wire corresponds to the left-most
-qubit.
-
-4) Notice that the blue liquid now indicates there is a 100% probability
-that the result will be |011> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |011> is
-always the result.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.x_gates_3_wire.es = q_command.texts.x_gates_3_wire.en
-q_command.texts.x_gates_3_wire.ja = q_command.texts.x_gates_3_wire.en
-q_command:register_help_button("x_gates_3_wire", "Make quantum state of |011>",
-        q_command.texts.x_gates_3_wire)
 local solution_statevector_x_gates_3_wire =
 {
 	{
@@ -3902,42 +3812,6 @@ q_command:register_q_command_block( "x_gates_3_wire_success", "x_gates_3_wire",
         door_pos_x_gates_3_wire, chest_pos_x_gates_3_wire, chest_inv_x_gates_3_wire)
 
 
-q_command.texts.h_gate_escape = {}
-q_command.texts.h_gate_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |0> + sqrt(1/2) |1>, which is commonly referred to as |+>
-----
-
-This circuit, consisting of only one wire, leverages the H gate, also
-known as the the Hadamard gate. Its effect on the |0> state is to put it
-into an equal superposition of |0> and |1>. Therefore, when the qubit is
-measured, there is a 50% probability that the result will be |0>, and a
-50% probability that the result will be |1>. To work through this
-puzzle, take the following steps:
-
-1) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |0> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |0> is
-always the result.
-
-2) Get an H block out of the chest.
-
-3) While wielding the H block, position the cursor on the empty place
-on the circuit wire, and right-click.
-
-4) Notice that the blue liquid now indicates there is a 50% probability
-that the result will be |0> when the circuit is measured, and a 50%
-probability that the result will be |1> when the circuit is measured. Go
-ahead and right-click the measurement block several times to verify that
-the results are fairly evenly distributed between |0> and |1>.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.h_gate_escape.es = q_command.texts.h_gate_escape.en
-q_command.texts.h_gate_escape.ja = q_command.texts.h_gate_escape.en
-q_command:register_help_button("h_gate_escape", "Make a quantum state of |+>",
-        q_command.texts.h_gate_escape)
 local solution_statevector_h_gate_escape =
 {
 	{
@@ -3972,44 +3846,6 @@ q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
         door_pos_h_gate_escape, chest_pos_h_gate_escape, chest_inv_h_gate_escape)
 
 
-q_command.texts.h_x_gate = {}
-q_command.texts.h_x_gate.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |0> - sqrt(1/2) |1>, which is commonly referred to as |->
-----
-
-This circuit, consisting of only one wire, demonstrates that the order
-of gates on a wire often matters. It also show that the basis states in
-a quantum state may have different phases. To work through this puzzle,
-take the following steps:
-
-1) Notice that the blue liquid indicates there is a 100% probability
-that the result will be |0> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that |0> is
-always the result.
-
-2) Get an H block and an X block out of the chest, placing both on the
-circuit.
-
-3) The solution will have probabilities indicating that measurement
-results |0> and |1> are equally likely, as well has having opposite
-phases. The notation for a phase on these block-world circuits is an
-arrow that points in a direction signifying its counterclockwise
-rotation, from 0 radians pointing rightward. As an example, a leftward
-pointing arrow signifies a phase of pi radians.
-
-4) The blue liquid should indicate there is a 50% probability that the
-result will be |0> when the circuit is measured, and a 50% probability
-that the result will be |1> when the circuit is measured. Go ahead and
-right-click the measurement block several times to verify that the
-results are fairly evenly distributed between |0> and |1>.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.h_x_gate.es = q_command.texts.h_x_gate.en
-q_command.texts.h_x_gate.ja = q_command.texts.h_x_gate.en
-q_command:register_help_button("h_x_gate", "Make a quantum state of |->", q_command.texts.h_x_gate)
 local solution_statevector_h_x_gate =
 {
 	{
@@ -4044,38 +3880,6 @@ q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
         door_pos_h_x_gate, chest_pos_h_x_gate, chest_inv_h_x_gate)
 
 
-q_command.texts.h_z_gate = {}
-q_command.texts.h_z_gate.en =
-[[
-TLDR: Using a Z gate and one other gate, make the blue liquid levels
-correspond to a quantum state of sqrt(1/2) |0> - sqrt(1/2) |1>, which is
-commonly referred to as |->
-----
-
-This circuit, consisting of only one wire, demonstrates how a block
-sphere models the state of a qubit. To work through this puzzle, take
-the following steps:
-
-1) Notice that instead of the usual measurement block, this circuit has
-a (very pixelated) Bloch sphere. You can read more about this Bloch
-sphere in the building you started in when first playing this game.
-
-2) Get an H block and a Z block out of the chest, placing them on the
-circuit. As you place each one, notice how the Bloch sphere changes,
-reflecting the updated state of the qubit. Try placing them in a
-different order, noticing the effects on the Bloch sphere and liquid
-blocks.
-
-3) The solution will have probabilities indicating that measurement
-results |0> and |1> are equally likely, as well has having opposite
-phases. Note that both the Bloch sphere, and the blue liquid blocks,
-reflect these probabilities and phases.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.h_z_gate.es = q_command.texts.h_z_gate.en
-q_command.texts.h_z_gate.ja = q_command.texts.h_z_gate.en
-q_command:register_help_button("h_z_gate", "Make a quantum state of |-> using gates including Z", q_command.texts.h_z_gate)
 local solution_statevector_h_z_gate =
 {
 	{
@@ -4110,30 +3914,6 @@ q_command:register_q_command_block( "h_z_gate_success", "h_z_gate",
         door_pos_h_z_gate, chest_pos_h_z_gate, chest_inv_h_z_gate)
 
 
-q_command.texts.hxx_gates_escape = {}
-q_command.texts.hxx_gates_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |001> + sqrt(1/2) |101>
-----
-
-This circuit leverages Hadamard and X gates to create a quantum state in
-which the measurement results |001> and |101> are equally likely, and no
-other measurement results are possible. This quantum state could be
-expressed as |001> + |101>
-
-To solve this circuit puzzle, place an H gate and an X gate on the
-appropriate wires.
-
-Hint: Use what you already have learned about the behaviors of H and X
-gates on single-wire circuits.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.hxx_gates_escape.es = q_command.texts.hxx_gates_escape.en
-q_command.texts.hxx_gates_escape.ja = q_command.texts.hxx_gates_escape.en
-q_command:register_help_button("hxx_gates_escape", "Make |001> + |101> quantum state",
-        q_command.texts.hxx_gates_escape)
 local solution_statevector_hxx_gates_escape =
 {
 	{
@@ -4192,27 +3972,6 @@ q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escap
         door_pos_hxx_gates_escape, chest_pos_hxx_gates_escape, chest_inv_hxx_gates_escape)
 
 
-q_command.texts.equal_super_2wire_escape = {}
-q_command.texts.equal_super_2wire_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to the following quantum
-state, commonly referred to as an equal superposition:
-sqrt(1/4) |00> + sqrt(1/4) |01> + sqrt(1/4) |10> + sqrt(1/4) |11>
-----
-
-This circuit leverages two Hadamard gates to create an equal
-superposition of |00>, |01>, |10>, and |11>. To solve this circuit
-puzzle, place an H block on each wire. Notice how the outcome
-probabilities and measurement results change as these gates are removed
-and added. This pattern of placing an H gate on each wire of a circuit
-is commonly used to create a superposition consisting of 2^numQubits
-states.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.equal_super_2wire_escape.es = q_command.texts.equal_super_2wire_escape.en
-q_command.texts.equal_super_2wire_escape.ja = q_command.texts.equal_super_2wire_escape.en
-q_command:register_help_button("equal_super_2wire_escape", "Equal superposition with two qubits", q_command.texts.equal_super_2wire_escape)
 local solution_statevector_equal_super_2wire_escape =
 {
 	{
@@ -4257,27 +4016,6 @@ q_command:register_q_command_block( "equal_super_2wire_escape_success",
         door_pos_equal_super_2wire_escape, chest_pos_equal_super_2wire_escape, chest_inv_equal_super_2wire_escape)
 
 
-q_command.texts.equal_super_3wire_escape = {}
-q_command.texts.equal_super_3wire_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to an equal superposition
-of its eight basis states.
-----
-
-This circuit leverages two Hadamard gates to create an equal
-superposition of |000>, |001>, |010>, |011>, |100>, |101>, |110> and
-|111>. A convenient way to express this state is to use the math sum
-symbol as shown on the wall. To solve this circuit puzzle, place an H
-block on each wire. Notice how the outcome probabilities and measurement
-results change as these gates are removed and added. This pattern of
-placing an H gate on each wire of a circuit is commonly used to create a
-superposition consisting of 2^numQubits states.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.equal_super_3wire_escape.es = q_command.texts.equal_super_3wire_escape.en
-q_command.texts.equal_super_3wire_escape.ja = q_command.texts.equal_super_3wire_escape.en
-q_command:register_help_button("equal_super_3wire_escape", "Equal superposition with three qubits", q_command.texts.equal_super_3wire_escape)
 local solution_statevector_equal_super_3wire_escape =
 {
 	{
@@ -4338,42 +4076,6 @@ q_command:register_q_command_block( "equal_super_3wire_escape_success",
         door_pos_equal_super_3wire_escape, chest_pos_equal_super_3wire_escape, chest_inv_equal_super_3wire_escape)
 
 
-q_command.texts.bell_phi_plus_escape = {}
-q_command.texts.bell_phi_plus_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |00> + sqrt(1/2) |11> which is referred to as the phi+ Bell
-state.
-----
-
-The four simplest examples of quantum entanglement are the Bell states.
-The most well-known Bell state, symbolized by phi+, may be
-realized with a Hadamard gate and a CNOT gate. The CNOT gate is a
-two-wire gate that has the appearance of cross-hairs and a vertical line
-with a dot. The cross-hairs symbol has the functionality of the X gate,
-with the difference being that it is conditional on the state of the
-other wire, performing the NOT operation whenever the other wire is |1>.
-
-Measuring one of the qubits results in the measured state of the other
-qubit to be determined. A correct phi+ Bell state solution will have
-probabilities indicating that measurement results |00> and |11> are
-equally likely, as well has having identical phases. The notation for a
-phase on these block-world circuits is an arrow that points in a
-direction signifying its counterclockwise rotation, from 0 radians
-pointing rightward.
-
-One way to realize this state is to place a Hadamard gate on the top
-wire, and an X gate on the second wire in a column to the right of the
-Hadamard gate. Then select the control tool from the hotbar (after
-having retrieved it from the chest). While positioning the cursor on the
-X gate in the circuit, left-click until the control qubit is on the same
-wire as the Hadamard gate.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.bell_phi_plus_escape.es = q_command.texts.bell_phi_plus_escape.en
-q_command.texts.bell_phi_plus_escape.ja = q_command.texts.bell_phi_plus_escape.en
-q_command:register_help_button("bell_phi_plus_escape", "Make the phi+ Bell state", q_command.texts.bell_phi_plus_escape)
 local solution_statevector_bell_phi_plus_escape =
 {
 	{
@@ -4416,33 +4118,6 @@ q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_pl
         door_pos_bell_phi_plus_escape, chest_pos_bell_phi_plus_escape, chest_inv_bell_phi_plus_escape)
 
 
-q_command.texts.bell_phi_minus_escape = {}
-q_command.texts.bell_phi_minus_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |00> - sqrt(1/2) |11> which is referred to as the phi- Bell
-state.
-----
-
-The four simplest examples of quantum entanglement are the Bell states.
-One of these Bell states, symbolized by phi- (phi minus), may be realized
-by placing an X gate on the top wire, and adding the phi+ Bell state
-circuit (as instructed in another puzzle) to the right of the X gate.
-
-Measuring one of the qubits results in the measured state of the other
-qubit to be determined. A correct phi- Bell state solution will have
-probabilities indicating that measurement results |00> and |11> are
-equally likely, as well has having opposite phases. The notation for a
-phase on these block-world circuits is an arrow that points in a
-direction signifying its counterclockwise rotation, from 0 radians
-pointing rightward. As an example, a leftward pointing arrow signifies a
-phase of pi radians.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.bell_phi_minus_escape.es = q_command.texts.bell_phi_minus_escape.en
-q_command.texts.bell_phi_minus_escape.ja = q_command.texts.bell_phi_minus_escape.en
-q_command:register_help_button("bell_phi_minus_escape", "Make the phi- Bell state", q_command.texts.bell_phi_minus_escape)
 local solution_statevector_bell_phi_minus_escape =
 {
 	{
@@ -4485,34 +4160,6 @@ q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_m
         door_pos_bell_phi_minus_escape, chest_pos_bell_phi_minus_escape, chest_inv_bell_phi_minus_escape)
 
 
-q_command.texts.bell_psi_plus_escape = {}
-q_command.texts.bell_psi_plus_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |01> + sqrt(1/2) |10> which is referred to as the psi+ Bell
-state.
-----
-
-The four simplest examples of quantum entanglement are the Bell states.
-One of these Bell states, symbolized by psi+ (psi plus), may be realized
-by placing an X gate on the second wire, and adding the phi+ Bell state
-circuit (as instructed in another puzzle) to the right of the X gate,
-
-Measuring one of the qubits results in the measured state of the other
-qubit to be determined. A correct psi+ Bell state solution will have
-probabilities indicating that measurement results |01> and |10> are
-equally likely, as well has having identical phases. The notation for a
-phase on these block-world circuits is an arrow that points in a
-direction signifying its counterclockwise rotation, from 0 radians
-pointing rightward. The psi+ Bell state is known as one of the singlet
-states, where measuring one of the qubits determines that the other
-qubit will be measured as the opposite state.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.bell_psi_plus_escape.es = q_command.texts.bell_psi_plus_escape.en
-q_command.texts.bell_psi_plus_escape.ja = q_command.texts.bell_psi_plus_escape.en
-q_command:register_help_button("bell_psi_plus_escape", "Make the psi+ Bell state", q_command.texts.bell_psi_plus_escape)
 local solution_statevector_bell_psi_plus_escape =
 {
 	{
@@ -4555,36 +4202,6 @@ q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_pl
         door_pos_bell_psi_plus_escape, chest_pos_bell_psi_plus_escape, chest_inv_bell_psi_plus_escape)
 
 
-q_command.texts.bell_psi_minus_escape = {}
-q_command.texts.bell_psi_minus_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |01> - sqrt(1/2) |10> which is referred to as the psi- Bell
-state.
-----
-
-The four simplest examples of quantum entanglement are the Bell states.
-One of these Bell states, symbolized by psi- (psi minus), may be realized
-by placing an X gate on the second wire, adding the phi+ Bell state
-circuit (as instructed in another puzzle) to the right of the X gate,
-and adding a Z gate to the second wire after the phi+ Bell state circuit.
-
-Measuring one of the qubits results in the measured state of the other
-qubit to be determined. A correct psi- Bell state solution will have
-probabilities indicating that measurement results |01> and |10> are
-equally likely, as well has having opposite phases. The notation for a
-phase on these block-world circuits is an arrow that points in a
-direction signifying its counterclockwise rotation, from 0 radians
-pointing rightward. As an example, a leftward pointing arrow signifies a
-phase of pi radians. The psi- Bell state is known as one of the singlet
-states, where measuring one of the qubits determines that the other
-qubit will be measured as the opposite state.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.bell_psi_minus_escape.es = q_command.texts.bell_psi_minus_escape.en
-q_command.texts.bell_psi_minus_escape.ja = q_command.texts.bell_psi_minus_escape.en
-q_command:register_help_button("bell_psi_minus_escape", "Make the psi- Bell state", q_command.texts.bell_psi_minus_escape)
 local solution_statevector_bell_psi_minus_escape =
 {
 	{
@@ -4627,37 +4244,6 @@ q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_m
         door_pos_bell_psi_minus_escape, chest_pos_bell_psi_minus_escape, chest_inv_bell_psi_minus_escape)
 
 
-q_command.texts.ghz_state_escape = {}
-q_command.texts.ghz_state_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to a quantum state of
-sqrt(1/2) |000> - sqrt(1/2) |111> which is referred to as the GHZ state.
-----
-
-GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving
-three or more qubits, where the basis states involved contain all zeros
-or all ones. For example, the entangled state in this three-wire circuit
-puzzle has equal probabilities of being measured as |000> and |111>.
-Please refer to the Bell state circuit puzzles for more information on
-entanglement.
-
-One way to realize this state is to place a Hadamard gate on the top
-wire, and an X gate on the second wire in a column to the right of the
-Hadamard gate. Then select the control tool from the hotbar (after
-having retrieved it from the chest). While positioning the cursor on the
-X gate in the circuit, convert it to a CNOT gate by left-clicking, until
-the control qubit is on the same wire as the Hadamard gate. Repeat this
-process to place another CNOT gate whose X gate is on the third wire and
-control qubit is on the top wire.
-
-Note that measuring the circuit (by right-clicking the measurement
-blocks) results in either |000> or |111> each time.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.ghz_state_escape.es = q_command.texts.ghz_state_escape.en
-q_command.texts.ghz_state_escape.ja = q_command.texts.ghz_state_escape.en
-q_command:register_help_button("ghz_state_escape", "Make the GHZ state", q_command.texts.ghz_state_escape)
 local solution_statevector_ghz_state_escape =
 {
 	{
@@ -4716,27 +4302,6 @@ q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escap
         door_pos_ghz_state_escape, chest_pos_ghz_state_escape, chest_inv_ghz_state_escape)
 
 
-q_command.texts.y_z_rot_1wire_escape = {}
-q_command.texts.y_z_rot_1wire_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to the following quantum
-state:
-sqrt(0.85) |0> + sqrt(0.15) e^i pi/2 |1>
-----
-
-This circuit leverages Ry and Rz gates to create a state that has approx
-85% probability of measuring |0> and approx 15% probability of measuring
-|1>. The latter basis states has a phase of pi/2. To solve this
-circuit puzzle, place Ry and Rz gates on the wire, and change their
-rotation angles by left and right-clicking the rotate tool until the
-desired state is achieved.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.y_z_rot_1wire_escape.es = q_command.texts.y_z_rot_1wire_escape.en
-q_command.texts.y_z_rot_1wire_escape.ja = q_command.texts.y_z_rot_1wire_escape.en
-q_command:register_help_button("y_z_rot_1wire_escape",
-        "Rotate a qubit into a desired state", q_command.texts.y_z_rot_1wire_escape)
 local solution_statevector_y_z_rot_1wire_escape =
 {
 	{
@@ -4773,30 +4338,6 @@ q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
         door_pos_y_z_rot_1wire_escape, chest_pos_y_z_rot_1wire_escape, chest_inv_y_z_rot_1wire_escape)
 
 
-q_command.texts.phase_rot_2wire_escape = {}
-q_command.texts.phase_rot_2wire_escape.en =
-[[
-TLDR: Make the blue liquid levels correspond to the following quantum
-state:
-sqrt(1/4) |00> + sqrt(1/4) e^i pi/2 |01> +
-sqrt(1/4) e^i 3pi/2 |10> + sqrt(1/4) |11>
-----
-
-This circuit leverages Hadamard gates and Rz gates to create a state
-that has equal probabilities of measuring |00>, |01>, |10> and |11>,
-with these basis states having various phase rotations. To solve this
-circuit puzzle, place an Rz between two H blocks on each wire. Then
-rotate the Rx gated by left and right-clicking them until the desired
-state is achieved. Notice that phase (Z axis) rotations that you apply
-become rotations on the X axis when sandwiched in-between Hadamard gates,
-converting changes in phase to changes in measurement probabilities.
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.phase_rot_2wire_escape.es = q_command.texts.phase_rot_2wire_escape.en
-q_command.texts.phase_rot_2wire_escape.ja = q_command.texts.phase_rot_2wire_escape.en
-q_command:register_help_button("phase_rot_2wire_escape",
-        "Convert phase rotations into measurement probabilities", q_command.texts.phase_rot_2wire_escape)
 local solution_statevector_phase_rot_2wire_escape =
 {
 	{
@@ -4816,7 +4357,6 @@ local solution_statevector_phase_rot_2wire_escape =
 		i = 0
 	}
 }
---local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
 local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
 local chest_pos_phase_rot_2wire_escape = {x = 234, y = 0, z = 84}
 local chest_inv_phase_rot_2wire_escape = {
@@ -4845,40 +4385,6 @@ q_command:register_q_command_block( "phase_rot_2wire_escape_success",
 
 -- Escape room puzzles Level II -------------------------------------------------
 -------- Room 1 (Level II)
-q_command.texts.xor_escape = {}
-q_command.texts.xor_escape.en =
-[[
-We meet again, esteemed colleague! You may recall that my name is
-Professor Q and that I'm standing behind this glass because we're
-conducting quantum experiments. I'm sure that you'll be fine though :-)
-For this experiment, make a circuit that realizes a digital
-'exclusive or' gate as shown on the wall. You may place |1> blocks on
-wires to test input combinations without affecting the exit door.
-
-Notes: Most of the help that you'll need for these 'escape room' circuit
-puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
-place them on the circuit. When you solve a puzzle, the Q block will
-turn gold, celebration music will play, and the door to the next room
-will open. Please solve the Level I escape rooms if you haven't already,
-as they help build knowledge and skills for these Level II puzzles.
-
-To perform a measurement on a circuit, right-click a measurement block.
-
-To convert an X gate into a controlled-X gate (and vice-versa),
-left-click or right-click the block while wielding the Control Tool (the
-wand-shaped tool in the chest). Left-clicking moves the control
-qubit up one wire, and right-clicking moves the control qubit down one
-wire. The controlled-X gate is also known as the controlled-NOT, or CNOT
-gate. It acts on a pair of qubits, with one acting as control and the
-other as target. It performs an X operation on the target whenever the
-control is in state |1>. If the control qubit is in a superposition,
-this gate creates entanglement.
-]]
-q_command.texts.xor_escape.es = q_command.texts.xor_escape.en
-q_command.texts.xor_escape.ja = q_command.texts.xor_escape.en
-q_command:register_help_button("xor_escape",
-        "Make a quantum logic XOR gate", q_command.texts.xor_escape)
 local solution_unitary_xor_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}}}
@@ -4907,15 +4413,6 @@ q_command:register_q_command_block( "xor_escape_success", "xor_escape",
 
 
 -------- Room 2 (Level II)
-q_command.texts.dj_bal_flip_ora_escape = {}
-q_command.texts.dj_bal_flip_ora_escape.en =
-[[
-Make a circuit like the last one, but negate the output as shown on the wall
-]]
-q_command.texts.dj_bal_flip_ora_escape.es = q_command.texts.dj_bal_flip_ora_escape.en
-q_command.texts.dj_bal_flip_ora_escape.ja = q_command.texts.dj_bal_flip_ora_escape.en
-q_command:register_help_button("dj_bal_flip_ora_escape",
-        "Make a NOT XOR quantum logic gate", q_command.texts.dj_bal_flip_ora_escape)
 local solution_unitary_dj_bal_flip_ora_escape =
 {{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
@@ -4944,25 +4441,6 @@ q_command:register_q_command_block( "dj_bal_flip_ora_escape_success", "dj_bal_fl
 
 
 -------- Room 3 (Level II)
-q_command.texts.toffoli_escape = {}
-q_command.texts.toffoli_escape.en =
-[[
-Go ahead and create a circuit that realizes the logic shown on the wall.
-I'd suggest using a Toffoli gate, but you do you! :-)
-
-Note: To convert a controlled-X gate into a Toffoli gate (and vice-versa),
-hold the Special key down while wielding the Control Tool and
-left-clicking or right-clicking. Left-clicking moves the second control
-qubit up one wire, and right-clicking moves the second control qubit
-down one wire. There is a blue dot on the second control qubit to help
-you distinguish it from the first control qubit. The Special key
-mentioned earlier may be known, and set, by pausing the game and choosing
-the Change Keys button.
-]]
-q_command.texts.toffoli_escape.es = q_command.texts.toffoli_escape.en
-q_command.texts.toffoli_escape.ja = q_command.texts.toffoli_escape.en
-q_command:register_help_button("toffoli_escape",
-        "Make a quantum logic AND gate", q_command.texts.toffoli_escape)
 local solution_unitary_toffoli_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -4997,16 +4475,6 @@ q_command:register_q_command_block( "toffoli_escape_success", "toffoli_escape",
 
 
 -------- Room 4 (Level II)
-q_command.texts.toffoli_nand_escape = {}
-q_command.texts.toffoli_nand_escape.en =
-[[
-Make a circuit like the last one, but negate the output as indicated by
-the NAND (NOT AND) shown on the wall.
-]]
-q_command.texts.toffoli_nand_escape.es = q_command.texts.toffoli_nand_escape.en
-q_command.texts.toffoli_nand_escape.ja = q_command.texts.toffoli_nand_escape.en
-q_command:register_help_button("toffoli_nand_escape",
-        "Make a quantum logic NAND gate", q_command.texts.toffoli_nand_escape)
 local solution_unitary_toffoli_nand_escape =
 {{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5041,15 +4509,6 @@ q_command:register_q_command_block( "toffoli_nand_escape_success", "toffoli_nand
 
 
 -------- Room 5 (Level II)
-q_command.texts.or_escape = {}
-q_command.texts.or_escape.en =
-[[
-Again, make a circuit that realizes the logic on the wall.
-]]
-q_command.texts.or_escape.es = q_command.texts.or_escape.en
-q_command.texts.or_escape.ja = q_command.texts.or_escape.en
-q_command:register_help_button("or_escape",
-        "Make a quantum logic OR gate", q_command.texts.or_escape)
 local solution_unitary_or_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5084,16 +4543,6 @@ q_command:register_q_command_block( "or_escape_success", "or_escape",
 
 
 -------- Room 6 (Level II)
-q_command.texts.nor_escape = {}
-q_command.texts.nor_escape.en =
-[[
-Make a circuit similar to the last one, taking into account the NOR
-(NOT OR) shown on the wall.
-]]
-q_command.texts.nor_escape.es = q_command.texts.nor_escape.en
-q_command.texts.nor_escape.ja = q_command.texts.nor_escape.en
-q_command:register_help_button("nor_escape",
-        "Make a quantum logic NOR gate", q_command.texts.nor_escape)
 local solution_unitary_nor_escape =
 {{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5128,16 +4577,6 @@ q_command:register_q_command_block( "nor_escape_success", "nor_escape",
 
 
 -------- Room 7 (Level II)
-q_command.texts.toffoli_mixed_escape = {}
-q_command.texts.toffoli_mixed_escape.en =
-[[
-Go ahead and make a circuit that realizes the logic on the wall,
-remembering that NOT takes precedence over AND in digital logic.
-]]
-q_command.texts.toffoli_mixed_escape.es = q_command.texts.toffoli_mixed_escape.en
-q_command.texts.toffoli_mixed_escape.ja = q_command.texts.toffoli_mixed_escape.en
-q_command:register_help_button("toffoli_mixed_escape",
-        "Make a quantum logic AND gate with negated input", q_command.texts.toffoli_mixed_escape)
 local solution_unitary_toffoli_mixed_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5172,17 +4611,6 @@ q_command:register_q_command_block( "toffoli_mixed_escape_success", "toffoli_mix
 
 
 -------- Room 8 (Level II)
-q_command.texts.superpos_logic_and_escape = {}
-q_command.texts.superpos_logic_and_escape.en =
-[[
-For your next trick, realize the same logic as you did in the previous
-room. This time, however, compute the logic with its inputs in equal
-superposition, resulting in the state shown on the wall.
-]]
-q_command.texts.superpos_logic_and_escape.es = q_command.texts.superpos_logic_and_escape.en
-q_command.texts.superpos_logic_and_escape.ja = q_command.texts.superpos_logic_and_escape.en
-q_command:register_help_button("superpos_logic_and_escape",
-        "Compute NOT a AND b in superposition", q_command.texts.superpos_logic_and_escape)
 local solution_statevector_superpos_logic_and_escape =
 {{r=0.5,i=0},{r=0.5,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0},{r=0,i=0},{r=0.5,i=0},{r=0,i=0}}
 local door_pos_superpos_logic_and_escape = {x = 203, y = 0, z = 90}
@@ -5211,21 +4639,6 @@ q_command:register_q_command_block( "superpos_logic_and_escape_success", "superp
 
 
 -------- Room 9 (Level II)
-q_command.texts.and_3_operands_x_escape = {}
-q_command.texts.and_3_operands_x_escape.en =
-[[
-Here you'll realize a logical expression that contains more than one AND.
-I'd probably fashion a circuit out of a couple of Toffoli gates, adding
-a third to undo what the first one did. That's easy for me to say because
-I'm safely behind this explosion-proof glass, so use your best judgment :-)
-
-Note: You can ignore the liquid blocks in this puzzle, as there are many
-more of them than can be displayed here.
-]]
-q_command.texts.and_3_operands_x_escape.es = q_command.texts.and_3_operands_x_escape.en
-q_command.texts.and_3_operands_x_escape.ja = q_command.texts.and_3_operands_x_escape.en
-q_command:register_help_button("and_3_operands_x_escape",
-        "Create quantum logic gate with multiple operands", q_command.texts.and_3_operands_x_escape)
 local solution_unitary_and_3_operands_x_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
@@ -5380,15 +4793,6 @@ q_command:register_q_command_block( "and_3_operands_x_escape_success", "and_3_op
 
 
 -------- Room 10 (Level II)
-q_command.texts.and_not_3_operands_x_escape = {}
-q_command.texts.and_not_3_operands_x_escape.en =
-[[
-Try your hand at creating a circuit that realizes the logic on the wall.
-]]
-q_command.texts.and_not_3_operands_x_escape.es = q_command.texts.and_not_3_operands_x_escape.en
-q_command.texts.and_not_3_operands_x_escape.ja = q_command.texts.and_not_3_operands_x_escape.en
-q_command:register_help_button("and_not_3_operands_x_escape",
-        "Make quantum logic gate with multiple operands", q_command.texts.and_not_3_operands_x_escape)
 local solution_unitary_and_not_3_operands_x_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
   {r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},
@@ -5543,18 +4947,6 @@ q_command:register_q_command_block( "and_not_3_operands_x_escape_success", "and_
 
 
 -------- Room 11 (Level II)
-q_command.texts.phase_a_and_b_escape = {}
-q_command.texts.phase_a_and_b_escape.en =
-[[
-Go ahead and make the circuit realize the boolean expression on the
-wall, with the appearance of the liquid blocks and phase arrows as
-indicated (arrow points left when the inputs make the boolean
-expression true)
-]]
-q_command.texts.phase_a_and_b_escape.es = q_command.texts.phase_a_and_b_escape.en
-q_command.texts.phase_a_and_b_escape.ja = q_command.texts.phase_a_and_b_escape.en
-q_command:register_help_button("phase_a_and_b_escape",
-        "Make two operand phase AND gate", q_command.texts.phase_a_and_b_escape)
 local solution_unitary_phase_a_and_b_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
@@ -5583,17 +4975,6 @@ q_command:register_q_command_block( "phase_a_and_b_escape_success", "phase_a_and
 
 
 -------- Room 12 (Level II)
-q_command.texts.superpos_phase_and_escape = {}
-q_command.texts.superpos_phase_and_escape.en =
-[[
-Now realize the same logic as you did in the previous room, but compute
-the logic with its inputs in equal superposition, resulting in the state
-shown on the wall.
-]]
-q_command.texts.superpos_phase_and_escape.es = q_command.texts.superpos_phase_and_escape.en
-q_command.texts.superpos_phase_and_escape.ja = q_command.texts.superpos_phase_and_escape.en
-q_command:register_help_button("superpos_phase_and_escape",
-        "Compute phase a AND b in superposition", q_command.texts.superpos_phase_and_escape)
 local solution_statevector_superpos_phase_and_escape =
 {{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0},{r=-0.5,i=0}}
 local door_pos_superpos_phase_and_escape = {x = 196, y = 0, z = 77}
@@ -5622,16 +5003,6 @@ q_command:register_q_command_block( "superpos_phase_and_escape_success", "superp
 
 
 -------- Room 13 (Level II)
-q_command.texts.phase_a_or_b_escape = {}
-q_command.texts.phase_a_or_b_escape.en =
-[[
-Now make the circuit realize the boolean expression on the wall, with
-the appearance of the liquid blocks and phase arrows as indicated
-]]
-q_command.texts.phase_a_or_b_escape.es = q_command.texts.phase_a_or_b_escape.en
-q_command.texts.phase_a_or_b_escape.ja = q_command.texts.phase_a_or_b_escape.en
-q_command:register_help_button("phase_a_or_b_escape",
-        "Make two operand phase OR gate", q_command.texts.phase_a_or_b_escape)
 local solution_unitary_phase_a_or_b_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=-1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=-1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
@@ -5660,16 +5031,6 @@ q_command:register_q_command_block( "phase_a_or_b_escape_success", "phase_a_or_b
 
 
 -------- Room 14 (Level II)
-q_command.texts.phase_a_and_b_no_z_escape = {}
-q_command.texts.phase_a_and_b_no_z_escape.en =
-[[
-Your challenge here will be to create a 'phase AND' logic gate
-without a Z block as used previously.
-]]
-q_command.texts.phase_a_and_b_no_z_escape.es = q_command.texts.phase_a_and_b_no_z_escape.en
-q_command.texts.phase_a_and_b_no_z_escape.ja = q_command.texts.phase_a_and_b_no_z_escape.en
-q_command:register_help_button("phase_a_and_b_no_z_escape",
-        "Make two operand phase AND gate w/o Z gate", q_command.texts.phase_a_and_b_no_z_escape)
 local solution_unitary_phase_a_and_b_no_z_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
@@ -5698,17 +5059,6 @@ q_command:register_q_command_block( "phase_a_and_b_no_z_escape_success", "phase_
 
 
 -------- Room 15 (Level II)
-q_command.texts.phase_a_and_b_and_c_escape = {}
-q_command.texts.phase_a_and_b_and_c_escape.en =
-[[
-Go ahead and make the circuit realize the boolean expression on the
-wall, with the appearance of the liquid blocks and phase arrows as
-indicated.
-]]
-q_command.texts.phase_a_and_b_and_c_escape.es = q_command.texts.phase_a_and_b_and_c_escape.en
-q_command.texts.phase_a_and_b_and_c_escape.ja = q_command.texts.phase_a_and_b_and_c_escape.en
-q_command:register_help_button("phase_a_and_b_and_c_escape",
-        "Make three operand phase AND gate", q_command.texts.phase_a_and_b_and_c_escape)
 local solution_unitary_phase_a_and_b_and_c_escape =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
  {{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
@@ -5944,6 +5294,83 @@ q_command.texts.creative.es = q_command.texts.creative.en
 q_command.texts.creative.ja = q_command.texts.creative.en
 
 
+-- TODO: Move this prof and escape room code to a more appropriate area
+-- our API object
+prof_q = {}
+
+-- Areas in the world in which Prof Q interacts with players
+prof_q.areas = {}
+
+dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
+dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
+
+function prof_q:erase_player_inventory()
+	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
+	local player_inv_main_size = player_inv:get_size("main")
+	player_inv:set_size("main", 0)
+	player_inv:set_size("main", player_inv_main_size)
+end
+
+-- Register help buttons for escape rooms
+for key, area in pairs(prof_q.areas) do
+    if area.help_btn_text then
+        --minetest.debug("area.help_btn_text.en")
+        --minetest.debug(area.help_btn_text.en)
+        minetest.debug(tostring(key))
+        q_command:register_help_button(key,
+                area.help_btn_caption, area.help_btn_text)
+    end
+end
+
+-- Periodically check all areas for player
+minetest.register_globalstep(function(dtime)
+
+	for key, area in pairs(prof_q.areas) do
+		for _,object in
+		ipairs(minetest.get_objects_inside_radius(
+				area.center_pos,
+				area.radius)) do
+			if object:is_player() then
+				if not area.help_chat_sent then
+					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
+					if area.help_chat_msg[locale_lang] then
+						for idx = 1, #area.help_chat_msg[locale_lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[locale_lang][idx])
+						end
+					elseif area.help_chat_msg then
+						for idx = 1, #area.help_chat_msg do
+							minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[idx])
+						end
+					end
+					area.help_chat_sent = true
+					prof_q:erase_player_inventory()
+				end
+
+				if area.q_block_pos and
+						q_command:get_q_command_block(area.q_block_pos).circuit_puzzle_solved() and
+						not area.success_chat_sent then
+					minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
+					if area.help_success_msg[locale_lang] then
+						for idx = 1, #area.help_success_msg[locale_lang] do
+							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[locale_lang][idx])
+						end
+					elseif area.help_success_msg then
+						for idx = 1, #area.help_success_msg do
+							minetest.chat_send_player(object:get_player_name(), area.help_success_msg[idx])
+						end
+					end
+					area.success_chat_sent = true
+					--prof_q:erase_player_inventory()
+				end
+			end
+		end
+	end
+end)
+-- END TODO: Move this prof and escape room code to a more appropriate area
+
+
+
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(fields.leave) then
         minetest.kick_player(player:get_player_name(), S("You have voluntarily exited QiskitBlocks"))
@@ -5984,40 +5411,6 @@ minetest.register_on_joinplayer(function(player)
     inv:set_size("main", inv_main_size)
 end)
 
-
--- TODO: Remove this code after removing blocks in-world
---[[
-local function register_sign(desc, def)
-	minetest.register_node("q_command:level_progression", {
-		description = desc,
-		drawtype = "nodebox",
-		tiles = {"q_command_level_progression.png"},
-		inventory_image = "q_command_level_progression.png",
-		wield_image = "q_command_level_progression.png",
-		paramtype = "light",
-		paramtype2 = "wallmounted",
-		sunlight_propagates = true,
-		is_ground_content = false,
-		walkable = false,
-		node_box = {
-			type = "wallmounted",
-			wall_top    = {-0.4375, 0.4375, -0.3125, 0.4375, 0.5, 0.3125},
-			wall_bottom = {-0.4375, -0.5, -0.3125, 0.4375, -0.4375, 0.3125},
-			wall_side   = {-0.5, -0.3125, -0.4375, -0.4375, 0.3125, 0.4375},
-		},
-		groups = {oddly_breakable_by_hand=2},
-		legacy_wallmounted = true,
-		sounds = def.sounds,
-
-	})
-end
-
--- TODO: Remove this code after removing blocks in-world
-register_sign("Level sign", "Wooden", {
-	--sounds = default.node_sound_wood_defaults(),
-	groups = {oddly_breakable_by_hand = 2}
-})
---]]
 
 minetest.register_node("q_command:block_no_function", {
     description = "Non-functional Q command block",
@@ -6252,3 +5645,5 @@ minetest.register_globalstep(function(dtime)
         end
     end
 end)
+
+

@@ -68,6 +68,45 @@ prof_q.areas.x_gate_escape.help_success_msg.ja = {
 }
 prof_q.areas.x_gate_escape.success_chat_sent = false
 
+prof_q.areas.x_gate_escape.help_btn_text = {}
+prof_q.areas.x_gate_escape.help_btn_text.en =
+[[
+TLDR: Most of the help that you'll need for these 'escape room' circuit
+puzzles will appear in the chat area (upper left corner of your window)
+by Professor Q. For all of these puzzles, get blocks from the chest and
+place them on the circuit. The door to the next room will open when the
+liquid levels and arrows in the blue blocks correspond to the quantum
+state displayed on the wall behind the circuit in Dirac notation. The
+Bloch sphere at the end of each wire estimates the state of its qubit,
+and right-clicking it performs a measurement of the circuit.
+----
+
+This circuit, consisting of only one wire, leverages the X gate, also
+known as the Pauli-X, NOT, or bit-flip, gate. Its effect on the |0>
+state is to make it |1>, and vice-versa. To work through this puzzle,
+take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an X block out of the chest.
+
+3) While wielding the X block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 100% probability
+that the result will be |1> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |1> is
+always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.x_gate_escape.help_btn_text.es = prof_q.areas.x_gate_escape.help_btn_text.en
+prof_q.areas.x_gate_escape.help_btn_text.ja = prof_q.areas.x_gate_escape.help_btn_text.en
+prof_q.areas.x_gate_escape.help_btn_caption = "Make quantum state of |1>"
+
 
 -------- Room 2 (Level I)
 prof_q.areas.x_gates_2_wire = {}
@@ -95,6 +134,40 @@ prof_q.areas.x_gates_2_wire.help_success_msg.es = {
 }
 prof_q.areas.x_gates_2_wire.success_chat_sent = false
 
+prof_q.areas.x_gates_2_wire.help_btn_text = {}
+prof_q.areas.x_gates_2_wire.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of |10>
+Measure the circuit several times as extra validation of the correct solution.
+----
+
+This circuit, consisting of two wires, demonstrates that one or more X
+gates may be leveraged to create a classical state. To work through this
+puzzle, take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |00> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |00> is
+always the result.
+
+2) Get an X block out of the chest.
+
+3) While wielding the X block, position the cursor on the circuit wire
+corresponding to each |1> qubit in the desired measurement result, and
+right-click. Note that the bottom-most wire corresponds to the left-most
+qubit.
+
+4) Notice that the blue liquid now indicates there is a 100% probability
+that the result will be |10> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |10> is
+always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.x_gates_2_wire.help_btn_text.es = prof_q.areas.x_gates_2_wire.help_btn_text.en
+prof_q.areas.x_gates_2_wire.help_btn_text.ja = prof_q.areas.x_gates_2_wire.help_btn_text.en
+prof_q.areas.x_gates_2_wire.help_btn_caption = "Make quantum state of |10>"
+
 
 -------- Room 3 (Level I)
 prof_q.areas.x_gates_3_wire = {}
@@ -120,6 +193,40 @@ prof_q.areas.x_gates_3_wire.help_success_msg.es = {
 	"luego 8 estados base, del |000> al |111>"
 }
 prof_q.areas.x_gates_3_wire.success_chat_sent = false
+
+prof_q.areas.x_gates_3_wire.help_btn_text = {}
+prof_q.areas.x_gates_3_wire.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of |011>
+The exit door is behind the circuit, so use the ladder.
+----
+
+This circuit, consisting of three wires, demonstrates that one or more X
+gates may be leveraged to create a classical state. To work through this
+puzzle, take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |000> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |000> is
+always the result.
+
+2) Get an X block out of the chest.
+
+3) While wielding the X block, position the cursor on the circuit wire
+corresponding to each |1> qubit in the desired measurement result, and
+right-click. Note that the bottom-most wire corresponds to the left-most
+qubit.
+
+4) Notice that the blue liquid now indicates there is a 100% probability
+that the result will be |011> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |011> is
+always the result.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.x_gates_3_wire.help_btn_text.es = prof_q.areas.x_gates_3_wire.help_btn_text.en
+prof_q.areas.x_gates_3_wire.help_btn_text.ja = prof_q.areas.x_gates_3_wire.help_btn_text.en
+prof_q.areas.x_gates_3_wire.help_btn_caption = "Make quantum state of |011>"
 
 
 -------- Room 4 (Level I)
@@ -152,6 +259,42 @@ prof_q.areas.h_gate_escape.help_success_msg.es = {
 }
 prof_q.areas.h_gate_escape.success_chat_sent = false
 
+prof_q.areas.h_gate_escape.help_btn_text = {}
+prof_q.areas.h_gate_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |0> + sqrt(1/2) |1>, which is commonly referred to as |+>
+----
+
+This circuit, consisting of only one wire, leverages the H gate, also
+known as the the Hadamard gate. Its effect on the |0> state is to put it
+into an equal superposition of |0> and |1>. Therefore, when the qubit is
+measured, there is a 50% probability that the result will be |0>, and a
+50% probability that the result will be |1>. To work through this
+puzzle, take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an H block out of the chest.
+
+3) While wielding the H block, position the cursor on the empty place
+on the circuit wire, and right-click.
+
+4) Notice that the blue liquid now indicates there is a 50% probability
+that the result will be |0> when the circuit is measured, and a 50%
+probability that the result will be |1> when the circuit is measured. Go
+ahead and right-click the measurement block several times to verify that
+the results are fairly evenly distributed between |0> and |1>.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.h_gate_escape.help_btn_text.es = prof_q.areas.h_gate_escape.help_btn_text.en
+prof_q.areas.h_gate_escape.help_btn_text.ja = prof_q.areas.h_gate_escape.help_btn_text.en
+prof_q.areas.h_gate_escape.help_btn_caption = "Make a quantum state of |+>"
+
 
 -------- Room 5 (Level I)
 prof_q.areas.h_x_gate = {}
@@ -182,6 +325,45 @@ prof_q.areas.h_x_gate.help_success_msg.es = {
 	"radianes la marca, alrededor de un eje que se encuentra a medio camino entre los ejes X y Z."
 }
 prof_q.areas.h_x_gate.success_chat_sent = false
+
+prof_q.areas.h_x_gate.help_btn_text = {}
+prof_q.areas.h_x_gate.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |0> - sqrt(1/2) |1>, which is commonly referred to as |->
+----
+
+This circuit, consisting of only one wire, demonstrates that the order
+of gates on a wire often matters. It also show that the basis states in
+a quantum state may have different phases. To work through this puzzle,
+take the following steps:
+
+1) Notice that the blue liquid indicates there is a 100% probability
+that the result will be |0> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that |0> is
+always the result.
+
+2) Get an H block and an X block out of the chest, placing both on the
+circuit.
+
+3) The solution will have probabilities indicating that measurement
+results |0> and |1> are equally likely, as well has having opposite
+phases. The notation for a phase on these block-world circuits is an
+arrow that points in a direction signifying its counterclockwise
+rotation, from 0 radians pointing rightward. As an example, a leftward
+pointing arrow signifies a phase of pi radians.
+
+4) The blue liquid should indicate there is a 50% probability that the
+result will be |0> when the circuit is measured, and a 50% probability
+that the result will be |1> when the circuit is measured. Go ahead and
+right-click the measurement block several times to verify that the
+results are fairly evenly distributed between |0> and |1>.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.h_x_gate.help_btn_text.es = prof_q.areas.h_x_gate.help_btn_text.en
+prof_q.areas.h_x_gate.help_btn_text.ja = prof_q.areas.h_x_gate.help_btn_text.en
+prof_q.areas.h_x_gate.help_btn_caption = "Make a quantum state of |->"
 
 
 -------- Room 6 (Level I)
@@ -215,6 +397,39 @@ prof_q.areas.h_z_gate.help_success_msg.es = {
 }
 prof_q.areas.h_z_gate.success_chat_sent = false
 
+prof_q.areas.h_z_gate.help_btn_text = {}
+prof_q.areas.h_z_gate.help_btn_text.en =
+[[
+TLDR: Using a Z gate and one other gate, make the blue liquid levels
+correspond to a quantum state of sqrt(1/2) |0> - sqrt(1/2) |1>, which is
+commonly referred to as |->
+----
+
+This circuit, consisting of only one wire, demonstrates how a block
+sphere models the state of a qubit. To work through this puzzle, take
+the following steps:
+
+1) Notice that instead of the usual measurement block, this circuit has
+a (very pixelated) Bloch sphere. You can read more about this Bloch
+sphere in the building you started in when first playing this game.
+
+2) Get an H block and a Z block out of the chest, placing them on the
+circuit. As you place each one, notice how the Bloch sphere changes,
+reflecting the updated state of the qubit. Try placing them in a
+different order, noticing the effects on the Bloch sphere and liquid
+blocks.
+
+3) The solution will have probabilities indicating that measurement
+results |0> and |1> are equally likely, as well has having opposite
+phases. Note that both the Bloch sphere, and the blue liquid blocks,
+reflect these probabilities and phases.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.h_z_gate.help_btn_text.es = prof_q.areas.h_z_gate.help_btn_text.en
+prof_q.areas.h_z_gate.help_btn_text.ja = prof_q.areas.h_z_gate.help_btn_text.en
+prof_q.areas.h_z_gate.help_btn_caption = "Make a quantum state of |-> using gates including Z"
+
 
 -------- Room 7 (Level I)
 prof_q.areas.hxx_gates_escape = {}
@@ -237,6 +452,30 @@ prof_q.areas.hxx_gates_escape.help_success_msg.es = {
 	"has conseguido crear el estado cuántico deseado."
 }
 prof_q.areas.hxx_gates_escape.success_chat_sent = false
+
+prof_q.areas.hxx_gates_escape.help_btn_text = {}
+prof_q.areas.hxx_gates_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |001> + sqrt(1/2) |101>
+----
+
+This circuit leverages Hadamard and X gates to create a quantum state in
+which the measurement results |001> and |101> are equally likely, and no
+other measurement results are possible. This quantum state could be
+expressed as |001> + |101>
+
+To solve this circuit puzzle, place an H gate and an X gate on the
+appropriate wires.
+
+Hint: Use what you already have learned about the behaviors of H and X
+gates on single-wire circuits.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.hxx_gates_escape.help_btn_text.es = prof_q.areas.hxx_gates_escape.help_btn_text.en
+prof_q.areas.hxx_gates_escape.help_btn_text.ja = prof_q.areas.hxx_gates_escape.help_btn_text.en
+prof_q.areas.hxx_gates_escape.help_btn_caption = "Make |001> + |101> quantum state"
 
 
 -------- Room 8 (Level I)
@@ -267,6 +506,28 @@ prof_q.areas.equal_super_2wire_escape.help_success_msg.es = {
 }
 prof_q.areas.equal_super_2wire_escape.success_chat_sent = false
 
+prof_q.areas.equal_super_2wire_escape.help_btn_text = {}
+prof_q.areas.equal_super_2wire_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state, commonly referred to as an equal superposition:
+sqrt(1/4) |00> + sqrt(1/4) |01> + sqrt(1/4) |10> + sqrt(1/4) |11>
+----
+
+This circuit leverages two Hadamard gates to create an equal
+superposition of |00>, |01>, |10>, and |11>. To solve this circuit
+puzzle, place an H block on each wire. Notice how the outcome
+probabilities and measurement results change as these gates are removed
+and added. This pattern of placing an H gate on each wire of a circuit
+is commonly used to create a superposition consisting of 2^numQubits
+states.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.equal_super_2wire_escape.help_btn_text.es = prof_q.areas.equal_super_2wire_escape.help_btn_text.en
+prof_q.areas.equal_super_2wire_escape.help_btn_text.ja = prof_q.areas.equal_super_2wire_escape.help_btn_text.en
+prof_q.areas.equal_super_2wire_escape.help_btn_caption = "Equal superposition with two qubits"
+
 
 -------- Room 9 (Level I)
 prof_q.areas.equal_super_3wire_escape = {}
@@ -291,6 +552,28 @@ prof_q.areas.equal_super_3wire_escape.help_success_msg.es = {
 	"amplitud."
 }
 prof_q.areas.equal_super_3wire_escape.success_chat_sent = false
+
+prof_q.areas.equal_super_3wire_escape.help_btn_text = {}
+prof_q.areas.equal_super_3wire_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to an equal superposition
+of its eight basis states.
+----
+
+This circuit leverages two Hadamard gates to create an equal
+superposition of |000>, |001>, |010>, |011>, |100>, |101>, |110> and
+|111>. A convenient way to express this state is to use the math sum
+symbol as shown on the wall. To solve this circuit puzzle, place an H
+block on each wire. Notice how the outcome probabilities and measurement
+results change as these gates are removed and added. This pattern of
+placing an H gate on each wire of a circuit is commonly used to create a
+superposition consisting of 2^numQubits states.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.equal_super_3wire_escape.help_btn_text.es = prof_q.areas.equal_super_3wire_escape.help_btn_text.en
+prof_q.areas.equal_super_3wire_escape.help_btn_text.ja = prof_q.areas.equal_super_3wire_escape.help_btn_text.en
+prof_q.areas.equal_super_3wire_escape.help_btn_caption = "Equal superposition with three qubits"
 
 
 -------- Room 10 (Level I)
@@ -325,6 +608,43 @@ prof_q.areas.bell_phi_plus_escape.help_success_msg.es = {
 }
 prof_q.areas.bell_phi_plus_escape.success_chat_sent = false
 
+prof_q.areas.bell_phi_plus_escape.help_btn_text = {}
+prof_q.areas.bell_phi_plus_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |00> + sqrt(1/2) |11> which is referred to as the phi+ Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+The most well-known Bell state, symbolized by phi+, may be
+realized with a Hadamard gate and a CNOT gate. The CNOT gate is a
+two-wire gate that has the appearance of cross-hairs and a vertical line
+with a dot. The cross-hairs symbol has the functionality of the X gate,
+with the difference being that it is conditional on the state of the
+other wire, performing the NOT operation whenever the other wire is |1>.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct phi+ Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward.
+
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, left-click until the control qubit is on the same
+wire as the Hadamard gate.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.bell_phi_plus_escape.help_btn_text.es = prof_q.areas.bell_phi_plus_escape.help_btn_text.en
+prof_q.areas.bell_phi_plus_escape.help_btn_text.ja = prof_q.areas.bell_phi_plus_escape.help_btn_text.en
+prof_q.areas.bell_phi_plus_escape.help_btn_caption = "Make the phi+ Bell state"
+
 
 -------- Room 11 (Level I)
 prof_q.areas.bell_phi_minus_escape = {}
@@ -350,6 +670,34 @@ prof_q.areas.bell_phi_minus_escape.help_success_msg.es = {
 }
 prof_q.areas.bell_phi_minus_escape.success_chat_sent = false
 
+prof_q.areas.bell_phi_minus_escape.help_btn_text = {}
+prof_q.areas.bell_phi_minus_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |00> - sqrt(1/2) |11> which is referred to as the phi- Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by phi- (phi minus), may be realized
+by placing an X gate on the top wire, and adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct phi- Bell state solution will have
+probabilities indicating that measurement results |00> and |11> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
+phase of pi radians.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.bell_phi_minus_escape.help_btn_text.es = prof_q.areas.bell_phi_minus_escape.help_btn_text.en
+prof_q.areas.bell_phi_minus_escape.help_btn_text.ja = prof_q.areas.bell_phi_minus_escape.help_btn_text.en
+prof_q.areas.bell_phi_minus_escape.help_btn_caption = "Make the phi- Bell state"
+
 
 -------- Room 12 (Level I)
 prof_q.areas.bell_psi_plus_escape = {}
@@ -373,6 +721,35 @@ prof_q.areas.bell_psi_plus_escape.help_success_msg.es = {
 }
 prof_q.areas.bell_psi_plus_escape.success_chat_sent = false
 
+prof_q.areas.bell_psi_plus_escape.help_btn_text = {}
+prof_q.areas.bell_psi_plus_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |01> + sqrt(1/2) |10> which is referred to as the psi+ Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by psi+ (psi plus), may be realized
+by placing an X gate on the second wire, and adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate,
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct psi+ Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having identical phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. The psi+ Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.bell_psi_plus_escape.help_btn_text.es = prof_q.areas.bell_psi_plus_escape.help_btn_text.en
+prof_q.areas.bell_psi_plus_escape.help_btn_text.ja = prof_q.areas.bell_psi_plus_escape.help_btn_text.en
+prof_q.areas.bell_psi_plus_escape.help_btn_caption = "Make the psi+ Bell state"
+
 
 -------- Room 13 (Level I)
 prof_q.areas.bell_psi_minus_escape = {}
@@ -394,6 +771,37 @@ prof_q.areas.bell_psi_minus_escape.help_success_msg.es = {
 }
 prof_q.areas.bell_psi_minus_escape.success_chat_sent = false
 
+prof_q.areas.bell_psi_minus_escape.help_btn_text = {}
+prof_q.areas.bell_psi_minus_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |01> - sqrt(1/2) |10> which is referred to as the psi- Bell
+state.
+----
+
+The four simplest examples of quantum entanglement are the Bell states.
+One of these Bell states, symbolized by psi- (psi minus), may be realized
+by placing an X gate on the second wire, adding the phi+ Bell state
+circuit (as instructed in another puzzle) to the right of the X gate,
+and adding a Z gate to the second wire after the phi+ Bell state circuit.
+
+Measuring one of the qubits results in the measured state of the other
+qubit to be determined. A correct psi- Bell state solution will have
+probabilities indicating that measurement results |01> and |10> are
+equally likely, as well has having opposite phases. The notation for a
+phase on these block-world circuits is an arrow that points in a
+direction signifying its counterclockwise rotation, from 0 radians
+pointing rightward. As an example, a leftward pointing arrow signifies a
+phase of pi radians. The psi- Bell state is known as one of the singlet
+states, where measuring one of the qubits determines that the other
+qubit will be measured as the opposite state.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.bell_psi_minus_escape.help_btn_text.es = prof_q.areas.bell_psi_minus_escape.help_btn_text.en
+prof_q.areas.bell_psi_minus_escape.help_btn_text.ja = prof_q.areas.bell_psi_minus_escape.help_btn_text.en
+prof_q.areas.bell_psi_minus_escape.help_btn_caption = "Make the psi- Bell state"
+
 
 -------- Room 14 (Level I)
 prof_q.areas.ghz_state_escape = {}
@@ -414,6 +822,38 @@ prof_q.areas.ghz_state_escape.help_success_msg.es = {
 	"¡Enhorabuena! Has creado el estado conocido como “GHZ”."
 }
 prof_q.areas.ghz_state_escape.success_chat_sent = false
+
+prof_q.areas.ghz_state_escape.help_btn_text = {}
+prof_q.areas.ghz_state_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to a quantum state of
+sqrt(1/2) |000> - sqrt(1/2) |111> which is referred to as the GHZ state.
+----
+
+GHZ (Greenberger–Horne–Zeilinger) states are entangled states involving
+three or more qubits, where the basis states involved contain all zeros
+or all ones. For example, the entangled state in this three-wire circuit
+puzzle has equal probabilities of being measured as |000> and |111>.
+Please refer to the Bell state circuit puzzles for more information on
+entanglement.
+
+One way to realize this state is to place a Hadamard gate on the top
+wire, and an X gate on the second wire in a column to the right of the
+Hadamard gate. Then select the control tool from the hotbar (after
+having retrieved it from the chest). While positioning the cursor on the
+X gate in the circuit, convert it to a CNOT gate by left-clicking, until
+the control qubit is on the same wire as the Hadamard gate. Repeat this
+process to place another CNOT gate whose X gate is on the third wire and
+control qubit is on the top wire.
+
+Note that measuring the circuit (by right-clicking the measurement
+blocks) results in either |000> or |111> each time.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.ghz_state_escape.help_btn_text.es = prof_q.areas.ghz_state_escape.help_btn_text.en
+prof_q.areas.ghz_state_escape.help_btn_text.ja = prof_q.areas.ghz_state_escape.help_btn_text.en
+prof_q.areas.ghz_state_escape.help_btn_caption = "Make the GHZ state"
 
 
 -------- Room 15 (Level I)
@@ -440,6 +880,27 @@ prof_q.areas.y_z_rot_1wire_escape.help_success_msg.es = {
 	"probabilidades de la medida, pero rotándolo alrededor de Z, no cambian?"
 }
 prof_q.areas.y_z_rot_1wire_escape.success_chat_sent = false
+
+prof_q.areas.y_z_rot_1wire_escape.help_btn_text = {}
+prof_q.areas.y_z_rot_1wire_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state:
+sqrt(0.85) |0> + sqrt(0.15) e^i pi/2 |1>
+----
+
+This circuit leverages Ry and Rz gates to create a state that has approx
+85% probability of measuring |0> and approx 15% probability of measuring
+|1>. The latter basis states has a phase of pi/2. To solve this
+circuit puzzle, place Ry and Rz gates on the wire, and change their
+rotation angles by left and right-clicking the rotate tool until the
+desired state is achieved.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.y_z_rot_1wire_escape.help_btn_text.es = prof_q.areas.y_z_rot_1wire_escape.help_btn_text.en
+prof_q.areas.y_z_rot_1wire_escape.help_btn_text.ja = prof_q.areas.y_z_rot_1wire_escape.help_btn_text.en
+prof_q.areas.y_z_rot_1wire_escape.help_btn_caption = "Rotate a qubit into a desired state"
 
 
 -------- Room 16 (Level I)
@@ -470,5 +931,29 @@ prof_q.areas.phase_rot_2wire_escape.help_success_msg.es = {
 	"a la habitación principal."
 }
 prof_q.areas.phase_rot_2wire_escape.success_chat_sent = false
+
+prof_q.areas.phase_rot_2wire_escape.help_btn_text = {}
+prof_q.areas.phase_rot_2wire_escape.help_btn_text.en =
+[[
+TLDR: Make the blue liquid levels correspond to the following quantum
+state:
+sqrt(1/4) |00> + sqrt(1/4) e^i pi/2 |01> +
+sqrt(1/4) e^i 3pi/2 |10> + sqrt(1/4) |11>
+----
+
+This circuit leverages Hadamard gates and Rz gates to create a state
+that has equal probabilities of measuring |00>, |01>, |10> and |11>,
+with these basis states having various phase rotations. To solve this
+circuit puzzle, place an Rz between two H blocks on each wire. Then
+rotate the Rx gated by left and right-clicking them until the desired
+state is achieved. Notice that phase (Z axis) rotations that you apply
+become rotations on the X axis when sandwiched in-between Hadamard gates,
+converting changes in phase to changes in measurement probabilities.
+
+If the Q block turned gold, congratulations on solving the puzzle!
+]]
+prof_q.areas.phase_rot_2wire_escape.help_btn_text.es = prof_q.areas.phase_rot_2wire_escape.help_btn_text.en
+prof_q.areas.phase_rot_2wire_escape.help_btn_text.ja = prof_q.areas.phase_rot_2wire_escape.help_btn_text.en
+prof_q.areas.phase_rot_2wire_escape.help_btn_caption = "Convert phase rotations into measurement probabilities"
 -- END Escape room puzzles Level I ---------------------------------------------
 

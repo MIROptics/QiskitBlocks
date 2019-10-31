@@ -41,6 +41,39 @@ prof_q.areas.xor_escape.help_success_msg = {
 }
 prof_q.areas.xor_escape.success_chat_sent = false
 
+prof_q.areas.xor_escape.help_btn_text = {}
+prof_q.areas.xor_escape.help_btn_text.en =
+[[
+We meet again, esteemed colleague! You may recall that my name is
+Professor Q and that I'm standing behind this glass because we're
+conducting quantum experiments. I'm sure that you'll be fine though :-)
+For this experiment, make a circuit that realizes a digital
+'exclusive or' gate as shown on the wall. You may place |1> blocks on
+wires to test input combinations without affecting the exit door.
+
+Notes: Most of the help that you'll need for these 'escape room' circuit
+puzzles will appear in the chat area (upper left corner of your window)
+by Professor Q. For all of these puzzles, get blocks from the chest and
+place them on the circuit. When you solve a puzzle, the Q block will
+turn gold, celebration music will play, and the door to the next room
+will open. Please solve the Level I escape rooms if you haven't already,
+as they help build knowledge and skills for these Level II puzzles.
+
+To perform a measurement on a circuit, right-click a measurement block.
+
+To convert an X gate into a controlled-X gate (and vice-versa),
+left-click or right-click the block while wielding the Control Tool (the
+wand-shaped tool in the chest). Left-clicking moves the control
+qubit up one wire, and right-clicking moves the control qubit down one
+wire. The controlled-X gate is also known as the controlled-NOT, or CNOT
+gate. It acts on a pair of qubits, with one acting as control and the
+other as target. It performs an X operation on the target whenever the
+control is in state |1>. If the control qubit is in a superposition,
+this gate creates entanglement.
+]]
+prof_q.areas.xor_escape.help_btn_text.es = prof_q.areas.xor_escape.help_btn_text.en
+prof_q.areas.xor_escape.help_btn_text.ja = prof_q.areas.xor_escape.help_btn_text.en
+prof_q.areas.xor_escape.help_btn_caption = "Make a quantum logic XOR gate!"
 
 -------- Room 2 (Level II)
 prof_q.areas.dj_bal_flip_ora_escape = {}
@@ -56,6 +89,15 @@ prof_q.areas.dj_bal_flip_ora_escape.help_success_msg = {
 	"circuits with increasingly complex quantum logic in no time!"
 }
 prof_q.areas.dj_bal_flip_ora_escape.success_chat_sent = false
+
+prof_q.areas.dj_bal_flip_ora_escape.help_btn_text = {}
+prof_q.areas.dj_bal_flip_ora_escape.help_btn_text.en =
+[[
+Make a circuit like the last one, but negate the output as shown on the wall
+]]
+prof_q.areas.dj_bal_flip_ora_escape.help_btn_text.es = prof_q.areas.dj_bal_flip_ora_escape.help_btn_text.en
+prof_q.areas.dj_bal_flip_ora_escape.help_btn_text.ja = prof_q.areas.dj_bal_flip_ora_escape.help_btn_text.en
+prof_q.areas.dj_bal_flip_ora_escape.help_btn_caption = "Make a NOT XOR quantum logic gate"
 
 
 -------- Room 3 (Level II)
@@ -74,6 +116,25 @@ prof_q.areas.toffoli_escape.help_success_msg = {
 }
 prof_q.areas.toffoli_escape.success_chat_sent = false
 
+prof_q.areas.toffoli_escape.help_btn_text = {}
+prof_q.areas.toffoli_escape.help_btn_text.en =
+[[
+Go ahead and create a circuit that realizes the logic shown on the wall.
+I'd suggest using a Toffoli gate, but you do you! :-)
+
+Note: To convert a controlled-X gate into a Toffoli gate (and vice-versa),
+hold the Special key down while wielding the Control Tool and
+left-clicking or right-clicking. Left-clicking moves the second control
+qubit up one wire, and right-clicking moves the second control qubit
+down one wire. There is a blue dot on the second control qubit to help
+you distinguish it from the first control qubit. The Special key
+mentioned earlier may be known, and set, by pausing the game and choosing
+the Change Keys button.
+]]
+prof_q.areas.toffoli_escape.help_btn_text.es = prof_q.areas.toffoli_escape.help_btn_text.en
+prof_q.areas.toffoli_escape.help_btn_text.ja = prof_q.areas.toffoli_escape.help_btn_text.en
+prof_q.areas.toffoli_escape.help_btn_caption = "Make a quantum logic AND gate"
+
 
 -------- Room 4 (Level II)
 prof_q.areas.toffoli_nand_escape = {}
@@ -89,6 +150,16 @@ prof_q.areas.toffoli_nand_escape.help_success_msg = {
 	"You're really getting the hang of this. On to the next room!"
 }
 prof_q.areas.toffoli_nand_escape.success_chat_sent = false
+
+prof_q.areas.toffoli_nand_escape.help_btn_text = {}
+prof_q.areas.toffoli_nand_escape.help_btn_text.en =
+[[
+Make a circuit like the last one, but negate the output as indicated by
+the NAND (NOT AND) shown on the wall.
+]]
+prof_q.areas.toffoli_nand_escape.help_btn_text.es = prof_q.areas.toffoli_nand_escape.help_btn_text.en
+prof_q.areas.toffoli_nand_escape.help_btn_text.ja = prof_q.areas.toffoli_nand_escape.help_btn_text.en
+prof_q.areas.toffoli_nand_escape.help_btn_caption = "Make a quantum logic NAND gate"
 
 
 -------- Room 5 (Level II)
@@ -106,6 +177,15 @@ prof_q.areas.or_escape.help_success_msg = {
 }
 prof_q.areas.or_escape.success_chat_sent = false
 
+prof_q.areas.or_escape.help_btn_text = {}
+prof_q.areas.or_escape.help_btn_text.en =
+[[
+Again, make a circuit that realizes the logic on the wall.
+]]
+prof_q.areas.or_escape.help_btn_text.es = prof_q.areas.or_escape.help_btn_text.en
+prof_q.areas.or_escape.help_btn_text.ja = prof_q.areas.or_escape.help_btn_text.en
+prof_q.areas.or_escape.help_btn_caption = "Make a quantum logic OR gate"
+
 
 -------- Room 6 (Level II)
 prof_q.areas.nor_escape = {}
@@ -121,6 +201,16 @@ prof_q.areas.nor_escape.help_success_msg = {
 	"Nicely done. Carry on!"
 }
 prof_q.areas.nor_escape.success_chat_sent = false
+
+prof_q.areas.nor_escape.help_btn_text = {}
+prof_q.areas.nor_escape.help_btn_text.en =
+[[
+Make a circuit similar to the last one, taking into account the NOR
+(NOT OR) shown on the wall.
+]]
+prof_q.areas.nor_escape.help_btn_text.es = prof_q.areas.nor_escape.help_btn_text.en
+prof_q.areas.nor_escape.help_btn_text.ja = prof_q.areas.nor_escape.help_btn_text.en
+prof_q.areas.nor_escape.help_btn_caption = "Make a quantum logic NOR gate"
 
 
 -------- Room 7 (Level II)
@@ -138,6 +228,16 @@ prof_q.areas.toffoli_mixed_escape.help_success_msg = {
 	"point? We'll rectify that in the next room."
 }
 prof_q.areas.toffoli_mixed_escape.success_chat_sent = false
+
+prof_q.areas.toffoli_mixed_escape.help_btn_text = {}
+prof_q.areas.toffoli_mixed_escape.help_btn_text.en =
+[[
+Go ahead and make a circuit that realizes the logic on the wall,
+remembering that NOT takes precedence over AND in digital logic.
+]]
+prof_q.areas.toffoli_mixed_escape.help_btn_text.es = prof_q.areas.toffoli_mixed_escape.help_btn_text.en
+prof_q.areas.toffoli_mixed_escape.help_btn_text.ja = prof_q.areas.toffoli_mixed_escape.help_btn_text.en
+prof_q.areas.toffoli_mixed_escape.help_btn_caption = "Make a quantum logic AND gate with negated input"
 
 
 -------- Room 8 (Level II)
@@ -157,6 +257,17 @@ prof_q.areas.superpos_logic_and_escape.help_success_msg = {
 	"outputs are represented in the state vector."
 }
 prof_q.areas.superpos_logic_and_escape.success_chat_sent = false
+
+prof_q.areas.superpos_logic_and_escape.help_btn_text = {}
+prof_q.areas.superpos_logic_and_escape.help_btn_text.en =
+[[
+For your next trick, realize the same logic as you did in the previous
+room. This time, however, compute the logic with its inputs in equal
+superposition, resulting in the state shown on the wall.
+]]
+prof_q.areas.superpos_logic_and_escape.help_btn_text.es = prof_q.areas.superpos_logic_and_escape.help_btn_text.en
+prof_q.areas.superpos_logic_and_escape.help_btn_text.ja = prof_q.areas.superpos_logic_and_escape.help_btn_text.en
+prof_q.areas.superpos_logic_and_escape.help_btn_caption = "Compute NOT a AND b in superposition"
 
 
 -------- Room 9 (Level II)
@@ -180,6 +291,21 @@ prof_q.areas.and_3_operands_x_escape.help_success_msg = {
 }
 prof_q.areas.and_3_operands_x_escape.success_chat_sent = false
 
+prof_q.areas.and_3_operands_x_escape.help_btn_text = {}
+prof_q.areas.and_3_operands_x_escape.help_btn_text.en =
+[[
+Here you'll realize a logical expression that contains more than one AND.
+I'd probably fashion a circuit out of a couple of Toffoli gates, adding
+a third to undo what the first one did. That's easy for me to say because
+I'm safely behind this explosion-proof glass, so use your best judgment :-)
+
+Note: You can ignore the liquid blocks in this puzzle, as there are many
+more of them than can be displayed here.
+]]
+prof_q.areas.and_3_operands_x_escape.help_btn_text.es = prof_q.areas.and_3_operands_x_escape.help_btn_text.en
+prof_q.areas.and_3_operands_x_escape.help_btn_text.ja = prof_q.areas.and_3_operands_x_escape.help_btn_text.en
+prof_q.areas.and_3_operands_x_escape.help_btn_caption = "Create quantum logic gate with multiple operands"
+
 
 -------- Room 10 (Level II)
 prof_q.areas.and_not_3_operands_x_escape = {}
@@ -198,6 +324,15 @@ prof_q.areas.and_not_3_operands_x_escape.help_success_msg = {
 	"address that, I'll show you a helpful companion to magnitude quantum logic."
 }
 prof_q.areas.and_not_3_operands_x_escape.success_chat_sent = false
+
+prof_q.areas.and_not_3_operands_x_escape.help_btn_text = {}
+prof_q.areas.and_not_3_operands_x_escape.help_btn_text.en =
+[[
+Try your hand at creating a circuit that realizes the logic on the wall.
+]]
+prof_q.areas.and_not_3_operands_x_escape.help_btn_text.es = prof_q.areas.and_not_3_operands_x_escape.help_btn_text.en
+prof_q.areas.and_not_3_operands_x_escape.help_btn_text.ja = prof_q.areas.and_not_3_operands_x_escape.help_btn_text.en
+prof_q.areas.and_not_3_operands_x_escape.help_btn_caption = "Make quantum logic gate with multiple operands"
 
 
 -------- Room 11 (Level II)
@@ -219,6 +354,18 @@ prof_q.areas.phase_a_and_b_escape.help_success_msg = {
 }
 prof_q.areas.phase_a_and_b_escape.success_chat_sent = false
 
+prof_q.areas.phase_a_and_b_escape.help_btn_text = {}
+prof_q.areas.phase_a_and_b_escape.help_btn_text.en =
+[[
+Go ahead and make the circuit realize the boolean expression on the
+wall, with the appearance of the liquid blocks and phase arrows as
+indicated (arrow points left when the inputs make the boolean
+expression true)
+]]
+prof_q.areas.phase_a_and_b_escape.help_btn_text.es = prof_q.areas.phase_a_and_b_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_escape.help_btn_text.ja = prof_q.areas.phase_a_and_b_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_escape.help_btn_caption = "Make two operand phase AND gate"
+
 
 -------- Room 12 (Level II)
 prof_q.areas.superpos_phase_and_escape = {}
@@ -238,6 +385,17 @@ prof_q.areas.superpos_phase_and_escape.help_success_msg = {
 }
 prof_q.areas.superpos_phase_and_escape.success_chat_sent = false
 
+prof_q.areas.superpos_phase_and_escape.help_btn_text = {}
+prof_q.areas.superpos_phase_and_escape.help_btn_text.en =
+[[
+Now realize the same logic as you did in the previous room, but compute
+the logic with its inputs in equal superposition, resulting in the state
+shown on the wall.
+]]
+prof_q.areas.superpos_phase_and_escape.help_btn_text.es = prof_q.areas.superpos_phase_and_escape.help_btn_text.en
+prof_q.areas.superpos_phase_and_escape.help_btn_text.ja = prof_q.areas.superpos_phase_and_escape.help_btn_text.en
+prof_q.areas.superpos_phase_and_escape.help_btn_caption = "Compute phase a AND b in superposition"
+
 
 -------- Room 13 (Level II)
 prof_q.areas.phase_a_or_b_escape = {}
@@ -253,6 +411,16 @@ prof_q.areas.phase_a_or_b_escape.help_success_msg = {
 	"Congratulations! You just made a 'phase OR' logic gate"
 }
 prof_q.areas.phase_a_or_b_escape.success_chat_sent = false
+
+prof_q.areas.phase_a_or_b_escape.help_btn_text = {}
+prof_q.areas.phase_a_or_b_escape.help_btn_text.en =
+[[
+Now make the circuit realize the boolean expression on the wall, with
+the appearance of the liquid blocks and phase arrows as indicated
+]]
+prof_q.areas.phase_a_or_b_escape.help_btn_text.es = prof_q.areas.phase_a_or_b_escape.help_btn_text.en
+prof_q.areas.phase_a_or_b_escape.help_btn_text.ja = prof_q.areas.phase_a_or_b_escape.help_btn_text.en
+prof_q.areas.phase_a_or_b_escape.help_btn_caption = "Make two operand phase OR gate"
 
 
 -------- Room 14 (Level II)
@@ -273,6 +441,16 @@ prof_q.areas.phase_a_and_b_no_z_escape.help_success_msg = {
 }
 prof_q.areas.phase_a_and_b_no_z_escape.success_chat_sent = false
 
+prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text = {}
+prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text.en =
+[[
+Your challenge here will be to create a 'phase AND' logic gate
+without a Z block as used previously.
+]]
+prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text.es = prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text.ja = prof_q.areas.phase_a_and_b_no_z_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_no_z_escape.help_btn_caption = "Make two operand phase AND gate w/o Z gate"
+
 
 -------- Room 15 (Level II)
 prof_q.areas.phase_a_and_b_and_c_escape = {}
@@ -289,6 +467,17 @@ prof_q.areas.phase_a_and_b_and_c_escape.help_success_msg = {
 	"would come in handy!"
 }
 prof_q.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
+
+prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text = {}
+prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text.en =
+[[
+Go ahead and make the circuit realize the boolean expression on the
+wall, with the appearance of the liquid blocks and phase arrows as
+indicated.
+]]
+prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text.es = prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text.ja = prof_q.areas.phase_a_and_b_and_c_escape.help_btn_text.en
+prof_q.areas.phase_a_and_b_and_c_escape.help_btn_caption = "Make three operand phase AND gate"
 
 
 -------- Room 16 (Level II)
@@ -312,4 +501,17 @@ prof_q.areas.a_or_b_and_c_escape.help_success_msg = {
 	"circuit right outside the exit door demonstrates these concepts together."
 }
 prof_q.areas.a_or_b_and_c_escape.success_chat_sent = false
+
+prof_q.areas.a_or_b_and_c_escape.help_btn_text = {}
+prof_q.areas.a_or_b_and_c_escape.help_btn_text.en =
+[[
+Here you may use a combination of magnitude logic and phase logic gates
+to satisfy the boolean expression on the wall, with the liquid blocks
+and phase arrows appearing as indicated. As a hint, remember to have
+good qubit hygiene :-)  By the way, I put an H block in the chest in case
+you want to compute the logic with its inputs in equal superposition.
+]]
+prof_q.areas.a_or_b_and_c_escape.help_btn_text.es = prof_q.areas.a_or_b_and_c_escape.help_btn_text.en
+prof_q.areas.a_or_b_and_c_escape.help_btn_text.ja = prof_q.areas.a_or_b_and_c_escape.help_btn_text.en
+prof_q.areas.a_or_b_and_c_escape.help_btn_caption = "Make (a OR b) AND c"
 -- END Escape room puzzles Level II ---------------------------------------------
