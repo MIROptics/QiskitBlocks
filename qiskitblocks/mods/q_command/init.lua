@@ -3676,710 +3676,678 @@ q_command:register_q_command_block( "quantum_teleportation_success",
 
 
 -- Escape room puzzles Level I -------------------------------------------------
-local solution_statevector_x_gate_escape =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 1,
-		i = 0
-	}
-}
-local door_pos_x_gate_escape = {x = 236, y = 0, z = 67}
-local chest_pos_x_gate_escape = {x = 236, y = 0, z = 76}
-local chest_inv_x_gate_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "x_gate_escape_success", "x_gate_escape",
-        solution_statevector_x_gate_escape, nil,true,
-        door_pos_x_gate_escape, chest_pos_x_gate_escape, chest_inv_x_gate_escape)
-q_command:register_q_command_block( "x_gate_escape_success", "x_gate_escape",
-        solution_statevector_x_gate_escape, nil,false,
-        door_pos_x_gate_escape, chest_pos_x_gate_escape, chest_inv_x_gate_escape)
-
-
-local solution_statevector_x_gates_2_wire =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 1,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-local door_pos_x_gates_2_wire = {x = 243, y = 0, z = 60}
-local chest_pos_x_gates_2_wire = {x = 234, y = 0, z = 64}
-local chest_inv_x_gates_2_wire = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "x_gates_2_wire_success",
-        "x_gates_2_wire",
-        solution_statevector_x_gates_2_wire, nil,true,
-        door_pos_x_gates_2_wire, chest_pos_x_gates_2_wire, chest_inv_x_gates_2_wire)
-q_command:register_q_command_block( "x_gates_2_wire_success", "x_gates_2_wire",
-        solution_statevector_x_gates_2_wire, nil,false,
-        door_pos_x_gates_2_wire, chest_pos_x_gates_2_wire, chest_inv_x_gates_2_wire)
-
-
-local solution_statevector_x_gates_3_wire =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 1,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-local door_pos_x_gates_3_wire = {x = 250, y = 0, z = 67}
-local chest_pos_x_gates_3_wire = {x = 252, y = 0, z = 60}
-local chest_inv_x_gates_3_wire = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "x_gates_3_wire_success",
-        "x_gates_3_wire",
-        solution_statevector_x_gates_3_wire, nil,true,
-        door_pos_x_gates_3_wire, chest_pos_x_gates_3_wire, chest_inv_x_gates_3_wire)
-q_command:register_q_command_block( "x_gates_3_wire_success", "x_gates_3_wire",
-        solution_statevector_x_gates_3_wire, nil,false,
-        door_pos_x_gates_3_wire, chest_pos_x_gates_3_wire, chest_inv_x_gates_3_wire)
-
-
-local solution_statevector_h_gate_escape =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	}
-}
-local door_pos_h_gate_escape = {x = 253, y = 0, z = 70}
-local chest_pos_h_gate_escape = {x = 244, y = 0, z = 70}
-local chest_inv_h_gate_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
-        solution_statevector_h_gate_escape, nil,true,
-        door_pos_h_gate_escape, chest_pos_h_gate_escape, chest_inv_h_gate_escape)
-q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
-        solution_statevector_h_gate_escape, nil,false,
-        door_pos_h_gate_escape, chest_pos_h_gate_escape, chest_inv_h_gate_escape)
-
-
-local solution_statevector_h_x_gate =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = -0.707,
-		i = 0
-	}
-}
-local door_pos_h_x_gate = {x = 256, y = 0, z = 67}
-local chest_pos_h_x_gate = {x = 256, y = 0, z = 76}
-local chest_inv_h_x_gate = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
-        solution_statevector_h_x_gate, nil,true,
-        door_pos_h_x_gate, chest_pos_h_x_gate, chest_inv_h_x_gate)
-q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
-        solution_statevector_h_x_gate, nil,false,
-        door_pos_h_x_gate, chest_pos_h_x_gate, chest_inv_h_x_gate)
-
-
-local solution_statevector_h_z_gate =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = -0.707,
-		i = 0
-	}
-}
-local door_pos_h_z_gate = {x = 263, y = 0, z = 60}
-local chest_pos_h_z_gate = {x = 254, y = 0, z = 64}
-local chest_inv_h_z_gate = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "h_z_gate_success", "h_z_gate",
-        solution_statevector_h_z_gate, nil,true,
-        door_pos_h_z_gate, chest_pos_h_z_gate, chest_inv_h_z_gate)
-q_command:register_q_command_block( "h_z_gate_success", "h_z_gate",
-        solution_statevector_h_z_gate, nil,false,
-        door_pos_h_z_gate, chest_pos_h_z_gate, chest_inv_h_z_gate)
-
-
-local solution_statevector_hxx_gates_escape =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-local door_pos_hxx_gates_escape = {x = 266, y = 0, z = 67}
-local chest_pos_hxx_gates_escape = {x = 266, y = 0, z = 58}
-local chest_inv_hxx_gates_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
-        solution_statevector_hxx_gates_escape, nil,true,
-        door_pos_hxx_gates_escape, chest_pos_hxx_gates_escape, chest_inv_hxx_gates_escape)
-q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
-        solution_statevector_hxx_gates_escape, nil,false,
-        door_pos_hxx_gates_escape, chest_pos_hxx_gates_escape, chest_inv_hxx_gates_escape)
-
-
-local solution_statevector_equal_super_2wire_escape =
-{
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	}
-}
-local door_pos_equal_super_2wire_escape = {x = 270, y = 0, z = 77}
-local chest_pos_equal_super_2wire_escape = {x = 264, y = 0, z = 70}
-local chest_inv_equal_super_2wire_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "equal_super_2wire_escape_success",
-        "equal_super_2wire_escape",
-        solution_statevector_equal_super_2wire_escape, nil,true,
-        door_pos_equal_super_2wire_escape, chest_pos_equal_super_2wire_escape, chest_inv_equal_super_2wire_escape)
-q_command:register_q_command_block( "equal_super_2wire_escape_success",
-        "equal_super_2wire_escape",
-        solution_statevector_equal_super_2wire_escape, nil,false,
-        door_pos_equal_super_2wire_escape, chest_pos_equal_super_2wire_escape, chest_inv_equal_super_2wire_escape)
-
-
-local solution_statevector_equal_super_3wire_escape =
-{
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	},
-	{
-		r = 0.354,
-		i = 0
-	}
-}
-local door_pos_equal_super_3wire_escape = {x = 270, y = 0, z = 87}
-local chest_pos_equal_super_3wire_escape = {x = 272, y = 0, z = 80}
-local chest_inv_equal_super_3wire_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "equal_super_3wire_escape_success",
-        "equal_super_3wire_escape",
-        solution_statevector_equal_super_3wire_escape, nil,true,
-        door_pos_equal_super_3wire_escape, chest_pos_equal_super_3wire_escape, chest_inv_equal_super_3wire_escape)
-q_command:register_q_command_block( "equal_super_3wire_escape_success",
-        "equal_super_3wire_escape",
-        solution_statevector_equal_super_3wire_escape, nil,false,
-        door_pos_equal_super_3wire_escape, chest_pos_equal_super_3wire_escape, chest_inv_equal_super_3wire_escape)
-
-
-local solution_statevector_bell_phi_plus_escape =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	}
-}
-local door_pos_bell_phi_plus_escape = {x = 263, y = 0, z = 94}
-local chest_pos_bell_phi_plus_escape = {x = 272, y = 0, z = 90}
-local chest_inv_bell_phi_plus_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
-        solution_statevector_bell_phi_plus_escape, nil,true,
-        door_pos_bell_phi_plus_escape, chest_pos_bell_phi_plus_escape, chest_inv_bell_phi_plus_escape)
-q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
-        solution_statevector_bell_phi_plus_escape, nil,false,
-        door_pos_bell_phi_plus_escape, chest_pos_bell_phi_plus_escape, chest_inv_bell_phi_plus_escape)
-
-
-local solution_statevector_bell_phi_minus_escape =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = -0.707,
-		i = 0
-	}
-}
-local door_pos_bell_phi_minus_escape = {x = 256, y = 0, z = 87}
-local chest_pos_bell_phi_minus_escape = {x = 260, y = 0, z = 96}
-local chest_inv_bell_phi_minus_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
-        solution_statevector_bell_phi_minus_escape, nil,true,
-        door_pos_bell_phi_minus_escape, chest_pos_bell_phi_minus_escape, chest_inv_bell_phi_minus_escape)
-q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
-        solution_statevector_bell_phi_minus_escape, nil,false,
-        door_pos_bell_phi_minus_escape, chest_pos_bell_phi_minus_escape, chest_inv_bell_phi_minus_escape)
-
-
-local solution_statevector_bell_psi_plus_escape =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-local door_pos_bell_psi_plus_escape = {x = 253, y = 0, z = 80}
-local chest_pos_bell_psi_plus_escape = {x = 254, y = 0, z = 84}
-local chest_inv_bell_psi_plus_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
-        solution_statevector_bell_psi_plus_escape, nil,true,
-        door_pos_bell_psi_plus_escape, chest_pos_bell_psi_plus_escape, chest_inv_bell_psi_plus_escape)
-q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
-        solution_statevector_bell_psi_plus_escape, nil,false,
-        door_pos_bell_psi_plus_escape, chest_pos_bell_psi_plus_escape, chest_inv_bell_psi_plus_escape)
-
-
-local solution_statevector_bell_psi_minus_escape =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = -0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	}
-}
-local door_pos_bell_psi_minus_escape = {x = 250, y = 0, z = 87}
-local chest_pos_bell_psi_minus_escape = {x = 250, y = 0, z = 78}
-local chest_inv_bell_psi_minus_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
-        solution_statevector_bell_psi_minus_escape, nil,true,
-        door_pos_bell_psi_minus_escape, chest_pos_bell_psi_minus_escape, chest_inv_bell_psi_minus_escape)
-q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
-        solution_statevector_bell_psi_minus_escape, nil,false,
-        door_pos_bell_psi_minus_escape, chest_pos_bell_psi_minus_escape, chest_inv_bell_psi_minus_escape)
-
-
-local solution_statevector_ghz_state_escape =
-{
-	{
-		r = 0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	}
-}
-local door_pos_ghz_state_escape = {x = 243, y = 0, z = 94}
-local chest_pos_ghz_state_escape = {x = 252, y = 0, z = 90}
-local chest_inv_ghz_state_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "", [23] = "", [24] = "",
-                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
-        solution_statevector_ghz_state_escape, nil,true,
-        door_pos_ghz_state_escape, chest_pos_ghz_state_escape, chest_inv_ghz_state_escape)
-q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
-        solution_statevector_ghz_state_escape, nil,false,
-        door_pos_ghz_state_escape, chest_pos_ghz_state_escape, chest_inv_ghz_state_escape)
-
-
-local solution_statevector_y_z_rot_1wire_escape =
-{
-	{
-		r = 0.924,
-		i = 0
-	},
-	{
-		r = -0,
-		i = 0.383
-	}
-}
-local door_pos_y_z_rot_1wire_escape = {x = 236, y = 0, z = 87}
-local chest_pos_y_z_rot_1wire_escape = {x = 240, y = 0, z = 96}
-local chest_inv_y_z_rot_1wire_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
-                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
-        "y_z_rot_1wire_escape",
-        solution_statevector_y_z_rot_1wire_escape, nil,true,
-        door_pos_y_z_rot_1wire_escape, chest_pos_y_z_rot_1wire_escape, chest_inv_y_z_rot_1wire_escape)
-q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
-        "y_z_rot_1wire_escape",
-        solution_statevector_y_z_rot_1wire_escape, nil,false,
-        door_pos_y_z_rot_1wire_escape, chest_pos_y_z_rot_1wire_escape, chest_inv_y_z_rot_1wire_escape)
-
-
-local solution_statevector_phase_rot_2wire_escape =
-{
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = -0,
-		i = 0.5
-	},
-	{
-		r = 0,
-		i = -0.5
-	},
-	{
-		r = 0.5,
-		i = 0
-	}
-}
-local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
-local chest_pos_phase_rot_2wire_escape = {x = 234, y = 0, z = 84}
-local chest_inv_phase_rot_2wire_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "", [16] = "",
-                [17] = "", [18] = "", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
-                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
-        }
-    }
-}
-q_command:register_q_command_block( "phase_rot_2wire_escape_success",
-        "phase_rot_2wire_escape",
-        solution_statevector_phase_rot_2wire_escape, nil,true,
-        door_pos_phase_rot_2wire_escape, chest_pos_phase_rot_2wire_escape, chest_inv_phase_rot_2wire_escape)
-q_command:register_q_command_block( "phase_rot_2wire_escape_success",
-        "phase_rot_2wire_escape",
-        solution_statevector_phase_rot_2wire_escape, nil,false,
-        door_pos_phase_rot_2wire_escape, chest_pos_phase_rot_2wire_escape, chest_inv_phase_rot_2wire_escape)
+--
+--
+--local solution_statevector_x_gates_2_wire =
+--{
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 1,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	}
+--}
+--local door_pos_x_gates_2_wire = {x = 243, y = 0, z = 60}
+--local chest_pos_x_gates_2_wire = {x = 234, y = 0, z = 64}
+--local chest_inv_x_gates_2_wire = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "x_gates_2_wire_success",
+--        "x_gates_2_wire",
+--        solution_statevector_x_gates_2_wire, nil,true,
+--        door_pos_x_gates_2_wire, chest_pos_x_gates_2_wire, chest_inv_x_gates_2_wire)
+--q_command:register_q_command_block( "x_gates_2_wire_success", "x_gates_2_wire",
+--        solution_statevector_x_gates_2_wire, nil,false,
+--        door_pos_x_gates_2_wire, chest_pos_x_gates_2_wire, chest_inv_x_gates_2_wire)
+--
+--
+--local solution_statevector_x_gates_3_wire =
+--{
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 1,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	}
+--}
+--local door_pos_x_gates_3_wire = {x = 250, y = 0, z = 67}
+--local chest_pos_x_gates_3_wire = {x = 252, y = 0, z = 60}
+--local chest_inv_x_gates_3_wire = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "x_gates_3_wire_success",
+--        "x_gates_3_wire",
+--        solution_statevector_x_gates_3_wire, nil,true,
+--        door_pos_x_gates_3_wire, chest_pos_x_gates_3_wire, chest_inv_x_gates_3_wire)
+--q_command:register_q_command_block( "x_gates_3_wire_success", "x_gates_3_wire",
+--        solution_statevector_x_gates_3_wire, nil,false,
+--        door_pos_x_gates_3_wire, chest_pos_x_gates_3_wire, chest_inv_x_gates_3_wire)
+--
+--
+--local solution_statevector_h_gate_escape =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_h_gate_escape = {x = 253, y = 0, z = 70}
+--local chest_pos_h_gate_escape = {x = 244, y = 0, z = 70}
+--local chest_inv_h_gate_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
+--        solution_statevector_h_gate_escape, nil,true,
+--        door_pos_h_gate_escape, chest_pos_h_gate_escape, chest_inv_h_gate_escape)
+--q_command:register_q_command_block( "h_gate_escape_success", "h_gate_escape",
+--        solution_statevector_h_gate_escape, nil,false,
+--        door_pos_h_gate_escape, chest_pos_h_gate_escape, chest_inv_h_gate_escape)
+--
+--
+--local solution_statevector_h_x_gate =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = -0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_h_x_gate = {x = 256, y = 0, z = 67}
+--local chest_pos_h_x_gate = {x = 256, y = 0, z = 76}
+--local chest_inv_h_x_gate = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
+--        solution_statevector_h_x_gate, nil,true,
+--        door_pos_h_x_gate, chest_pos_h_x_gate, chest_inv_h_x_gate)
+--q_command:register_q_command_block( "h_x_gate_success", "h_x_gate",
+--        solution_statevector_h_x_gate, nil,false,
+--        door_pos_h_x_gate, chest_pos_h_x_gate, chest_inv_h_x_gate)
+--
+--
+--local solution_statevector_h_z_gate =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = -0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_h_z_gate = {x = 263, y = 0, z = 60}
+--local chest_pos_h_z_gate = {x = 254, y = 0, z = 64}
+--local chest_inv_h_z_gate = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "h_z_gate_success", "h_z_gate",
+--        solution_statevector_h_z_gate, nil,true,
+--        door_pos_h_z_gate, chest_pos_h_z_gate, chest_inv_h_z_gate)
+--q_command:register_q_command_block( "h_z_gate_success", "h_z_gate",
+--        solution_statevector_h_z_gate, nil,false,
+--        door_pos_h_z_gate, chest_pos_h_z_gate, chest_inv_h_z_gate)
+--
+--
+--local solution_statevector_hxx_gates_escape =
+--{
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	}
+--}
+--local door_pos_hxx_gates_escape = {x = 266, y = 0, z = 67}
+--local chest_pos_hxx_gates_escape = {x = 266, y = 0, z = 58}
+--local chest_inv_hxx_gates_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
+--        solution_statevector_hxx_gates_escape, nil,true,
+--        door_pos_hxx_gates_escape, chest_pos_hxx_gates_escape, chest_inv_hxx_gates_escape)
+--q_command:register_q_command_block( "hxx_gates_escape_success", "hxx_gates_escape",
+--        solution_statevector_hxx_gates_escape, nil,false,
+--        door_pos_hxx_gates_escape, chest_pos_hxx_gates_escape, chest_inv_hxx_gates_escape)
+--
+--
+--local solution_statevector_equal_super_2wire_escape =
+--{
+--	{
+--		r = 0.5,
+--		i = 0
+--	},
+--	{
+--		r = 0.5,
+--		i = 0
+--	},
+--	{
+--		r = 0.5,
+--		i = 0
+--	},
+--	{
+--		r = 0.5,
+--		i = 0
+--	}
+--}
+--local door_pos_equal_super_2wire_escape = {x = 270, y = 0, z = 77}
+--local chest_pos_equal_super_2wire_escape = {x = 264, y = 0, z = 70}
+--local chest_inv_equal_super_2wire_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "equal_super_2wire_escape_success",
+--        "equal_super_2wire_escape",
+--        solution_statevector_equal_super_2wire_escape, nil,true,
+--        door_pos_equal_super_2wire_escape, chest_pos_equal_super_2wire_escape, chest_inv_equal_super_2wire_escape)
+--q_command:register_q_command_block( "equal_super_2wire_escape_success",
+--        "equal_super_2wire_escape",
+--        solution_statevector_equal_super_2wire_escape, nil,false,
+--        door_pos_equal_super_2wire_escape, chest_pos_equal_super_2wire_escape, chest_inv_equal_super_2wire_escape)
+--
+--
+--local solution_statevector_equal_super_3wire_escape =
+--{
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	},
+--	{
+--		r = 0.354,
+--		i = 0
+--	}
+--}
+--local door_pos_equal_super_3wire_escape = {x = 270, y = 0, z = 87}
+--local chest_pos_equal_super_3wire_escape = {x = 272, y = 0, z = 80}
+--local chest_inv_equal_super_3wire_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "equal_super_3wire_escape_success",
+--        "equal_super_3wire_escape",
+--        solution_statevector_equal_super_3wire_escape, nil,true,
+--        door_pos_equal_super_3wire_escape, chest_pos_equal_super_3wire_escape, chest_inv_equal_super_3wire_escape)
+--q_command:register_q_command_block( "equal_super_3wire_escape_success",
+--        "equal_super_3wire_escape",
+--        solution_statevector_equal_super_3wire_escape, nil,false,
+--        door_pos_equal_super_3wire_escape, chest_pos_equal_super_3wire_escape, chest_inv_equal_super_3wire_escape)
+--
+--
+--local solution_statevector_bell_phi_plus_escape =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_bell_phi_plus_escape = {x = 263, y = 0, z = 94}
+--local chest_pos_bell_phi_plus_escape = {x = 272, y = 0, z = 90}
+--local chest_inv_bell_phi_plus_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
+--        solution_statevector_bell_phi_plus_escape, nil,true,
+--        door_pos_bell_phi_plus_escape, chest_pos_bell_phi_plus_escape, chest_inv_bell_phi_plus_escape)
+--q_command:register_q_command_block( "bell_phi_plus_escape_success", "bell_phi_plus_escape",
+--        solution_statevector_bell_phi_plus_escape, nil,false,
+--        door_pos_bell_phi_plus_escape, chest_pos_bell_phi_plus_escape, chest_inv_bell_phi_plus_escape)
+--
+--
+--local solution_statevector_bell_phi_minus_escape =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = -0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_bell_phi_minus_escape = {x = 256, y = 0, z = 87}
+--local chest_pos_bell_phi_minus_escape = {x = 260, y = 0, z = 96}
+--local chest_inv_bell_phi_minus_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
+--        solution_statevector_bell_phi_minus_escape, nil,true,
+--        door_pos_bell_phi_minus_escape, chest_pos_bell_phi_minus_escape, chest_inv_bell_phi_minus_escape)
+--q_command:register_q_command_block( "bell_phi_minus_escape_success", "bell_phi_minus_escape",
+--        solution_statevector_bell_phi_minus_escape, nil,false,
+--        door_pos_bell_phi_minus_escape, chest_pos_bell_phi_minus_escape, chest_inv_bell_phi_minus_escape)
+--
+--
+--local solution_statevector_bell_psi_plus_escape =
+--{
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	}
+--}
+--local door_pos_bell_psi_plus_escape = {x = 253, y = 0, z = 80}
+--local chest_pos_bell_psi_plus_escape = {x = 254, y = 0, z = 84}
+--local chest_inv_bell_psi_plus_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
+--        solution_statevector_bell_psi_plus_escape, nil,true,
+--        door_pos_bell_psi_plus_escape, chest_pos_bell_psi_plus_escape, chest_inv_bell_psi_plus_escape)
+--q_command:register_q_command_block( "bell_psi_plus_escape_success", "bell_psi_plus_escape",
+--        solution_statevector_bell_psi_plus_escape, nil,false,
+--        door_pos_bell_psi_plus_escape, chest_pos_bell_psi_plus_escape, chest_inv_bell_psi_plus_escape)
+--
+--
+--local solution_statevector_bell_psi_minus_escape =
+--{
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = -0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	}
+--}
+--local door_pos_bell_psi_minus_escape = {x = 250, y = 0, z = 87}
+--local chest_pos_bell_psi_minus_escape = {x = 250, y = 0, z = 78}
+--local chest_inv_bell_psi_minus_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
+--        solution_statevector_bell_psi_minus_escape, nil,true,
+--        door_pos_bell_psi_minus_escape, chest_pos_bell_psi_minus_escape, chest_inv_bell_psi_minus_escape)
+--q_command:register_q_command_block( "bell_psi_minus_escape_success", "bell_psi_minus_escape",
+--        solution_statevector_bell_psi_minus_escape, nil,false,
+--        door_pos_bell_psi_minus_escape, chest_pos_bell_psi_minus_escape, chest_inv_bell_psi_minus_escape)
+--
+--
+--local solution_statevector_ghz_state_escape =
+--{
+--	{
+--		r = 0.707,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0,
+--		i = 0
+--	},
+--	{
+--		r = 0.707,
+--		i = 0
+--	}
+--}
+--local door_pos_ghz_state_escape = {x = 243, y = 0, z = 94}
+--local chest_pos_ghz_state_escape = {x = 252, y = 0, z = 90}
+--local chest_inv_ghz_state_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "", [20] = "",
+--                [21] = "", [22] = "", [23] = "", [24] = "",
+--                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
+--        solution_statevector_ghz_state_escape, nil,true,
+--        door_pos_ghz_state_escape, chest_pos_ghz_state_escape, chest_inv_ghz_state_escape)
+--q_command:register_q_command_block( "ghz_state_escape_success", "ghz_state_escape",
+--        solution_statevector_ghz_state_escape, nil,false,
+--        door_pos_ghz_state_escape, chest_pos_ghz_state_escape, chest_inv_ghz_state_escape)
+--
+--
+--local solution_statevector_y_z_rot_1wire_escape =
+--{
+--	{
+--		r = 0.924,
+--		i = 0
+--	},
+--	{
+--		r = -0,
+--		i = 0.383
+--	}
+--}
+--local door_pos_y_z_rot_1wire_escape = {x = 236, y = 0, z = 87}
+--local chest_pos_y_z_rot_1wire_escape = {x = 240, y = 0, z = 96}
+--local chest_inv_y_z_rot_1wire_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
+--                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
+--                [25] = "", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
+--        "y_z_rot_1wire_escape",
+--        solution_statevector_y_z_rot_1wire_escape, nil,true,
+--        door_pos_y_z_rot_1wire_escape, chest_pos_y_z_rot_1wire_escape, chest_inv_y_z_rot_1wire_escape)
+--q_command:register_q_command_block( "y_z_rot_1wire_escape_success",
+--        "y_z_rot_1wire_escape",
+--        solution_statevector_y_z_rot_1wire_escape, nil,false,
+--        door_pos_y_z_rot_1wire_escape, chest_pos_y_z_rot_1wire_escape, chest_inv_y_z_rot_1wire_escape)
+--
+--
+--local solution_statevector_phase_rot_2wire_escape =
+--{
+--	{
+--		r = 0.5,
+--		i = 0
+--	},
+--	{
+--		r = -0,
+--		i = 0.5
+--	},
+--	{
+--		r = 0,
+--		i = -0.5
+--	},
+--	{
+--		r = 0.5,
+--		i = 0
+--	}
+--}
+--local door_pos_phase_rot_2wire_escape = {x = 233, y = 0, z = 80}
+--local chest_pos_phase_rot_2wire_escape = {x = 234, y = 0, z = 84}
+--local chest_inv_phase_rot_2wire_escape = {
+--    inventory = {
+--        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+--                [5] = "", [6] = "", [7] = "", [8] = "",
+--                [9] = "", [10] = "", [11] = "", [12] = "",
+--                [13] = "", [14] = "", [15] = "", [16] = "",
+--                [17] = "", [18] = "", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
+--                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
+--                [25] = "", [26] = "", [27] = "", [28] = "",
+--                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+--        }
+--    }
+--}
+--q_command:register_q_command_block( "phase_rot_2wire_escape_success",
+--        "phase_rot_2wire_escape",
+--        solution_statevector_phase_rot_2wire_escape, nil,true,
+--        door_pos_phase_rot_2wire_escape, chest_pos_phase_rot_2wire_escape, chest_inv_phase_rot_2wire_escape)
+--q_command:register_q_command_block( "phase_rot_2wire_escape_success",
+--        "phase_rot_2wire_escape",
+--        solution_statevector_phase_rot_2wire_escape, nil,false,
+--        door_pos_phase_rot_2wire_escape, chest_pos_phase_rot_2wire_escape, chest_inv_phase_rot_2wire_escape)
 -- END Escape room puzzles Level I ---------------------------------------------
 
 
@@ -5314,11 +5282,25 @@ end
 -- Register help buttons for escape rooms
 for key, area in pairs(prof_q.areas) do
     if area.help_btn_text then
-        --minetest.debug("area.help_btn_text.en")
-        --minetest.debug(area.help_btn_text.en)
         minetest.debug(tostring(key))
         q_command:register_help_button(key,
                 area.help_btn_caption, area.help_btn_text)
+        q_command:register_q_command_block( key .. "_success",
+                key,
+                area.solution_statevector,
+                area.unitary_statevector,
+                true,
+                area.door_pos,
+                area.chest_pos,
+                area.chest_inv)
+        q_command:register_q_command_block( key .. "_success",
+                key,
+                area.solution_statevector,
+                area.unitary_statevector,
+                false,
+                area.door_pos,
+                area.chest_pos,
+                area.chest_inv)
     end
 end
 

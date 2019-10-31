@@ -25,6 +25,25 @@ prof_q.areas.x_gate_escape = {}
 prof_q.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 prof_q.areas.x_gate_escape.radius = 5
 prof_q.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
+
+prof_q.areas.x_gate_escape.door_pos = {x = 236, y = 0, z = 67}
+prof_q.areas.x_gate_escape.chest_pos = {x = 236, y = 0, z = 76}
+prof_q.areas.x_gate_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.x_gate_escape.solution_statevector =
+{{r=0,i=0},{r=1,i=0}}
+
 prof_q.areas.x_gate_escape.help_chat_msg = {
 	"Hello test subject #576, I mean esteemed colleague! My name is Professor Q and I'm",
 	"standing behind this blast glass because we're going to try an experiment. Hopefully",
@@ -113,6 +132,25 @@ prof_q.areas.x_gates_2_wire = {}
 prof_q.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 prof_q.areas.x_gates_2_wire.radius = 5
 prof_q.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
+
+prof_q.areas.x_gates_2_wire.door_pos = {x = 243, y = 0, z = 60}
+prof_q.areas.x_gates_2_wire.chest_pos = {x = 234, y = 0, z = 64}
+prof_q.areas.x_gates_2_wire.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.x_gates_2_wire.solution_statevector =
+{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}}
+
 prof_q.areas.x_gates_2_wire.help_chat_msg = {
 	"Now let's play with multi-qubit circuits like this one. Please make its quantum state",
 	"match the state on the wall.",
@@ -174,6 +212,25 @@ prof_q.areas.x_gates_3_wire = {}
 prof_q.areas.x_gates_3_wire.center_pos = {x = 248, y = 0, z = 62}
 prof_q.areas.x_gates_3_wire.radius = 5
 prof_q.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
+
+prof_q.areas.x_gates_3_wire.door_pos = {x = 250, y = 0, z = 67}
+prof_q.areas.x_gates_3_wire.chest_pos = {x = 252, y = 0, z = 60}
+prof_q.areas.x_gates_3_wire.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.x_gates_3_wire.solution_statevector =
+{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
+
 prof_q.areas.x_gates_3_wire.help_chat_msg = {
 	"Here you'll do more of the same, but with one additional wire and twice the",
 	"number of basis states."
@@ -234,6 +291,25 @@ prof_q.areas.h_gate_escape = {}
 prof_q.areas.h_gate_escape.center_pos = {x = 248, y = 0, z = 72}
 prof_q.areas.h_gate_escape.radius = 5
 prof_q.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
+
+prof_q.areas.h_gate_escape.door_pos = {x = 253, y = 0, z = 70}
+prof_q.areas.h_gate_escape.chest_pos = {x = 244, y = 0, z = 70}
+prof_q.areas.h_gate_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.h_gate_escape.solution_statevector =
+{{r=0.707,i=0},{r=0.707,i=0}}
+
 prof_q.areas.h_gate_escape.help_chat_msg = {
 	"This room is where Schroedinger's cat starts getting nervous. Put the qubit in an equal",
 	"superposition of dead and alive, I mean |0> and |1>"
@@ -301,6 +377,25 @@ prof_q.areas.h_x_gate = {}
 prof_q.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
 prof_q.areas.h_x_gate.radius = 5
 prof_q.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
+
+prof_q.areas.h_x_gate.door_pos = {x = 256, y = 0, z = 67}
+prof_q.areas.h_x_gate.chest_pos = {x = 256, y = 0, z = 76}
+prof_q.areas.h_x_gate.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.h_x_gate.solution_statevector =
+{{r=0.707,i=0},{r=-0.707,i=0}}
+
 prof_q.areas.h_x_gate.help_chat_msg = {
 	"Now let's visit the back side of the Bloch sphere, in a state commonly known as |->",
 	"(pronounced 'minus'), where measurements resulting in |0> or |1> are also equally likely"
@@ -371,6 +466,25 @@ prof_q.areas.h_z_gate = {}
 prof_q.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
 prof_q.areas.h_z_gate.radius = 5
 prof_q.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
+
+prof_q.areas.h_z_gate.door_pos = {x = 263, y = 0, z = 60}
+prof_q.areas.h_z_gate.chest_pos = {x = 254, y = 0, z = 64}
+prof_q.areas.h_z_gate.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.h_z_gate.solution_statevector =
+{{r=0.707,i=0},{r=-0.707,i=0}}
+
 prof_q.areas.h_z_gate.help_chat_msg = {
 	"Let's take another trip to the |-> state, but this time via a different route. I've taken",
 	"the liberty of replacing your X gate with a Z gate, so you'll need to experiment. Good luck!"
@@ -436,6 +550,25 @@ prof_q.areas.hxx_gates_escape = {}
 prof_q.areas.hxx_gates_escape.center_pos = {x = 268, y = 0, z = 62}
 prof_q.areas.hxx_gates_escape.radius = 5
 prof_q.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
+
+prof_q.areas.hxx_gates_escape.door_pos = {x = 266, y = 0, z = 67}
+prof_q.areas.hxx_gates_escape.chest_pos = {x = 266, y = 0, z = 58}
+prof_q.areas.hxx_gates_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.hxx_gates_escape.solution_statevector =
+{{r=0,i=0},{r=0.707,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0.707,i=0},{r=0,i=0},{r=0,i=0}}
+
 prof_q.areas.hxx_gates_escape.help_chat_msg = {
 	"Go ahead and solve this puzzle by thinking about one wire at a time"
 }
@@ -483,6 +616,25 @@ prof_q.areas.equal_super_2wire_escape = {}
 prof_q.areas.equal_super_2wire_escape.center_pos = {x = 268, y = 0, z = 72}
 prof_q.areas.equal_super_2wire_escape.radius = 5
 prof_q.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
+
+prof_q.areas.equal_super_2wire_escape.door_pos = {x = 270, y = 0, z = 77}
+prof_q.areas.equal_super_2wire_escape.chest_pos = {x = 264, y = 0, z = 70}
+prof_q.areas.equal_super_2wire_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.equal_super_2wire_escape.solution_statevector =
+{{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0}}
+
 prof_q.areas.equal_super_2wire_escape.help_chat_msg = {
 	"Now put four basis states into equal superpositions"
 }
@@ -534,6 +686,25 @@ prof_q.areas.equal_super_3wire_escape = {}
 prof_q.areas.equal_super_3wire_escape.center_pos = {x = 268, y = 0, z = 82}
 prof_q.areas.equal_super_3wire_escape.radius = 5
 prof_q.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
+
+prof_q.areas.equal_super_3wire_escape.door_pos = {x = 270, y = 0, z = 87}
+prof_q.areas.equal_super_3wire_escape.chest_pos = {x = 272, y = 0, z = 80}
+prof_q.areas.equal_super_3wire_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.equal_super_3wire_escape.solution_statevector =
+{{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0}}
+
 prof_q.areas.equal_super_3wire_escape.help_chat_msg = {
 	"This time, put eight basis states into equal superpositions"
 }
@@ -581,6 +752,25 @@ prof_q.areas.bell_phi_plus_escape = {}
 prof_q.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
 prof_q.areas.bell_phi_plus_escape.radius = 5
 prof_q.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
+
+prof_q.areas.bell_phi_plus_escape.door_pos = {x = 263, y = 0, z = 94}
+prof_q.areas.bell_phi_plus_escape.chest_pos = {x = 272, y = 0, z = 90}
+prof_q.areas.bell_phi_plus_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+prof_q.areas.bell_phi_plus_escape.solution_statevector =
+{{r=0.707,i=0},{r=0,i=0},{r=0,i=0},{r=0.707,i=0}}
+
 prof_q.areas.bell_phi_plus_escape.help_chat_msg = {
 	"Now we'll experiment with a phenomenon known as 'quantum entanglement' that Einstein",
 	"referred to as 'spooky actions at a distance'. Your challenge is to entangle two",
@@ -651,6 +841,25 @@ prof_q.areas.bell_phi_minus_escape = {}
 prof_q.areas.bell_phi_minus_escape.center_pos = {x = 258, y = 0, z = 92}
 prof_q.areas.bell_phi_minus_escape.radius = 5
 prof_q.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
+
+prof_q.areas.bell_phi_minus_escape.door_pos = {x = 256, y = 0, z = 87}
+prof_q.areas.bell_phi_minus_escape.chest_pos = {x = 260, y = 0, z = 96}
+prof_q.areas.bell_phi_minus_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+prof_q.areas.bell_phi_minus_escape.solution_statevector =
+{{r=0.707,i=0},{r=0,i=0},{r=0,i=0},{r=-0.707,i=0}}
+
 prof_q.areas.bell_phi_minus_escape.help_chat_msg = {
 	"Now entangle two qubits in another way, known as the 'phi -' Bell state."
 }
@@ -704,6 +913,25 @@ prof_q.areas.bell_psi_plus_escape = {}
 prof_q.areas.bell_psi_plus_escape.center_pos = {x = 258, y = 0, z = 82}
 prof_q.areas.bell_psi_plus_escape.radius = 5
 prof_q.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
+
+prof_q.areas.bell_psi_plus_escape.door_pos = {x = 253, y = 0, z = 80}
+prof_q.areas.bell_psi_plus_escape.chest_pos = {x = 254, y = 0, z = 84}
+prof_q.areas.bell_psi_plus_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+prof_q.areas.bell_psi_plus_escape.solution_statevector =
+{{r=0,i=0},{r=0.707,i=0},{r=0.707,i=0},{r=0,i=0}}
+
 prof_q.areas.bell_psi_plus_escape.help_chat_msg = {
 	"Go ahead and entangle the two qubits in yet another way, this time in which the",
 	"measurement result of one qubit is the opposite result of measuring the other qubit."
@@ -756,6 +984,25 @@ prof_q.areas.bell_psi_minus_escape = {}
 prof_q.areas.bell_psi_minus_escape.center_pos = {x = 248, y = 0, z = 82}
 prof_q.areas.bell_psi_minus_escape.radius = 5
 prof_q.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
+
+prof_q.areas.bell_psi_minus_escape.door_pos = {x = 250, y = 0, z = 87}
+prof_q.areas.bell_psi_minus_escape.chest_pos = {x = 250, y = 0, z = 78}
+prof_q.areas.bell_psi_minus_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "circuit_blocks:circuit_blocks_z_gate", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+prof_q.areas.bell_psi_minus_escape.solution_statevector =
+{{r=0,i=0},{r=0.707,i=0},{r=-0.707,i=0},{r=0,i=0}}
+
 prof_q.areas.bell_psi_minus_escape.help_chat_msg = {
 	"Let's tackle the fourth and final Bell state, this time also using a Z gate."
 }
@@ -808,6 +1055,25 @@ prof_q.areas.ghz_state_escape = {}
 prof_q.areas.ghz_state_escape.center_pos = {x = 248, y = 0, z = 92}
 prof_q.areas.ghz_state_escape.radius = 5
 prof_q.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
+
+prof_q.areas.ghz_state_escape.door_pos = {x = 243, y = 0, z = 94}
+prof_q.areas.ghz_state_escape.chest_pos = {x = 252, y = 0, z = 90}
+prof_q.areas.ghz_state_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "", [20] = "",
+                [21] = "", [22] = "", [23] = "", [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_x_gate", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "circuit_blocks:control_tool", [32] = ""
+        }
+    }
+}
+prof_q.areas.ghz_state_escape.solution_statevector =
+{{r=0.707,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0.707,i=0}}
+
 prof_q.areas.ghz_state_escape.help_chat_msg = {
 	"Next you'll entangle three qubits so that they all either measure 0s or 1s"
 }
@@ -861,6 +1127,25 @@ prof_q.areas.y_z_rot_1wire_escape = {}
 prof_q.areas.y_z_rot_1wire_escape.center_pos = {x = 238, y = 0, z = 92}
 prof_q.areas.y_z_rot_1wire_escape.radius = 5
 prof_q.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
+
+prof_q.areas.y_z_rot_1wire_escape.door_pos = {x = 236, y = 0, z = 87}
+prof_q.areas.y_z_rot_1wire_escape.chest_pos = {x = 240, y = 0, z = 96}
+prof_q.areas.y_z_rot_1wire_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
+                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.y_z_rot_1wire_escape.solution_statevector =
+{{r=0.924,i=0},{r=-0,i=0.383}}
+
 prof_q.areas.y_z_rot_1wire_escape.help_chat_msg = {
 	"In this puzzle you'll experiment with the effects of rotating the state of a",
 	"qubit in the Y and Z axes. Hint: You'll click the Ry and Rz blocks while wielding",
@@ -908,6 +1193,25 @@ prof_q.areas.phase_rot_2wire_escape = {}
 prof_q.areas.phase_rot_2wire_escape.center_pos = {x = 238, y = 0, z = 82}
 prof_q.areas.phase_rot_2wire_escape.radius = 5
 prof_q.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}
+
+prof_q.areas.phase_rot_2wire_escape.door_pos = {x = 233, y = 0, z = 80}
+prof_q.areas.phase_rot_2wire_escape.chest_pos = {x = 234, y = 0, z = 84}
+prof_q.areas.phase_rot_2wire_escape.chest_inv = {
+    inventory = {
+        main = {[1] = "", [2] = "", [3] = "", [4] = "",
+                [5] = "", [6] = "", [7] = "", [8] = "",
+                [9] = "", [10] = "", [11] = "", [12] = "",
+                [13] = "", [14] = "", [15] = "", [16] = "",
+                [17] = "", [18] = "", [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16", [20] = "",
+                [21] = "", [22] = "", [23] = "circuit_blocks:rotate_tool", [24] = "",
+                [25] = "", [26] = "", [27] = "", [28] = "",
+                [29] = "", [30] = "circuit_blocks:circuit_blocks_h_gate", [31] = "", [32] = ""
+        }
+    }
+}
+prof_q.areas.phase_rot_2wire_escape.solution_statevector =
+{{r=0.5,i=0},{r=-0,i=0.5},{r=0,i=-0.5},{r=0.5,i=0}}
+
 prof_q.areas.phase_rot_2wire_escape.help_chat_msg = {
 	"Now you'll experiment with a pattern commonly used in quantum computing algorithms,",
 	"in which Z axis rotations are sandwiched between pairs of H gates."
