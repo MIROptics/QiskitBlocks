@@ -17,6 +17,7 @@ limitations under the License.
 
 --[[
 TODO:
+[] Make Grover circuit after Level two deeper?
 [] Generate Python code for Jupyter notebook
 [] Combine barrier statements when available
 [] Modify Prof Q instructions in Level I 16/16 in all languages
@@ -27,7 +28,6 @@ TODO:
     [] Is there a way to share measurement information among all Bloch spheres in circuit?
     [] Remove one-shot from state tomography measurements?
     [] Create constants for tomography measurement bases
-[] Don't play congrats music twice for solving same circuit
 [] Add circuits to level I to cover CNOT prior to Bell state circuits?
 [] Add circuits to Level II escape rooms that use oracles created in other rooms
 [] Fix Control Tool chat message to include SWAP gates
