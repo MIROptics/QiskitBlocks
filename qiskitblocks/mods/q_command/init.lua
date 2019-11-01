@@ -2777,56 +2777,6 @@ q_command.texts.q_block_desc.ja = q_command.texts.q_block_desc.en
 q_command:register_help_button("q_block_desc", "Q block", q_command.texts.q_block_desc)
 
 
-q_command.texts.quantum_cats_sandbox = {}
-q_command.texts.quantum_cats_sandbox.en =
-[[
-There are so many ones and zeros in quantum computing that some folks
-find it easier to initially relate to states with real world concepts
-(e.g. cats) rather than jumping straight to qubits. In the Quantum Cats
-Sandbox, each of the circuits start out with cats (Alice Cat and Bob
-Cat) in their grumpy state. The gates in the circuits evolve their
-quantum states, resulting in various probabilities of the cats being
-being grumpy or happy when observed (measured). These probabilities are
-expressed by the liquid levels in the glass blocks below each circuit.
-The binary digits 0 and 1 in front of the liquid blocks represent grumpy
-and happy states, respectively, with the rightmost digit representing
-the topmost cat.
-
-Take a look at the circuits, beginning with the one-wire circuits on the
-opposite wall, and right-click their Help buttons to learn more about
-them. Feel free to remove (by left-clicking) and add (by right-clicking)
-gates on a circuit to see the effects on the probabilities as well as
-measurements. To measure a circuit, right-click on a block that has the
-appearance of a measuring device. You will find a couple of gates and
-some other items in the chest, which you may open and close by
-right-clicking. To move an item from the chest into your inventory, drag
-it from the upper to the lower section of the chest dialog box. The
-items that appear in the top row of the inventory will appear in the
-hotbar ready to be wielded.
-
-There are some tools in the chest with which you may add control
-qubits to a gate, as well as to rotate a gate. To use these tools,
-position the cursor on an appropriate gate and left-click or right-click.
-]]
-q_command.texts.quantum_cats_sandbox.es = q_command.texts.quantum_cats_sandbox.en
-q_command.texts.quantum_cats_sandbox.ja = q_command.texts.quantum_cats_sandbox.en
-q_command:register_help_button("quantum_cats_sandbox", "Quantum cats sandbox", q_command.texts.quantum_cats_sandbox)
-
-
-q_command.texts.making_cats_happy = {}
-q_command.texts.making_cats_happy.en =
-[[
-This circuit, consisting of only one wire (cat), leverages the Pauli-X
-gate, also known as the NOT, or bit-flip, gate. Its effect on a grumpy
-cat is to make it happy, and vice-versa. Notice how the outcome
-probabilities and measurement results change as this gate is removed and
-added.
-]]
-q_command.texts.making_cats_happy.es = q_command.texts.making_cats_happy.en
-q_command.texts.making_cats_happy.ja = q_command.texts.making_cats_happy.en
-q_command:register_help_button("making_cats_happy", "Making a cat happy", q_command.texts.making_cats_happy)
-
-
 q_command.texts.superpositional_cat = {}
 q_command.texts.superpositional_cat.en =
 [[
@@ -2898,113 +2848,6 @@ q_command:register_help_button("quantum_circuit_garden", "Quantum circuit garden
 q_command:register_q_command_block("default")
 
 
-q_command.texts.deutsch_algo_puzzle = {}
-q_command.texts.deutsch_algo_puzzle.en =
-[[
-The Deutsch algorithm, first published in 1985, is the Hello World of
-quantum algorithms.
-
-To work through this puzzle, place appropriate gates between the
-barriers to implement a balanced oracle whose output on the bottom wire
-is the flipped state of its input on the top wire.
-]]
-q_command.texts.deutsch_algo_puzzle.es = q_command.texts.deutsch_algo_puzzle.en
-q_command.texts.deutsch_algo_puzzle.ja = q_command.texts.deutsch_algo_puzzle.en
-q_command:register_help_button("deutsch_algo_puzzle", "Deutsch's algorithm puzzle", q_command.texts.deutsch_algo_puzzle)
-local solution_statevector_deutsch_algo_puzzle =
-{
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = -0.707,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.707,
-		i = 0
-	}
-}
-q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo_puzzle",
-        solution_statevector_deutsch_algo_puzzle, nil,true)
-q_command:register_q_command_block( "deutsch_algo_puzzle_success", "deutsch_algo_puzzle",
-        solution_statevector_deutsch_algo_puzzle, nil,false)
-
-
-q_command.texts.quantum_teleportation = {}
-q_command.texts.quantum_teleportation.en =
-[[
-This circuit demonstrates quantum teleportation, and is an example from
-the paper entitled Open Quantum Assembly Language by Andrew W. Cross,
-Lev S. Bishop, John A. Smolin, and Jay M. Gambetta. It also demonstrates
-the ability of OpenQASM to conditionally apply gates based on prior
-measurement outcomes.
-
-To complete the quantum teleportation circuit, grab a classically
-controlled "if" block out of the chest. Place it to the left of the Z
-gate on the bottom wire by right-clicking on the space marked with a
-dashed line. Continue right-clicking until the block displays "if = 1"
-and the horizontal mark on the block corresponds with the measurement
-block on the top wire (in this case you will only need to click once
-more).
-
-The Q block will turn gold when the circuit is correct. Then you may
-experiment with quantum teleportation by left and right clicking the Ry
-and Rz gates while wielding the Rotate Tool. The Bloch sphere at the top
-of the chasm should reflect the state that you set with rotations. Note
-that it is expected for the Q block to turn black again.
-]]
-q_command.texts.quantum_teleportation.es = q_command.texts.quantum_teleportation.en
-q_command.texts.quantum_teleportation.ja = q_command.texts.quantum_teleportation.en
-q_command:register_help_button("quantum_teleportation", "Quantum teleportation", q_command.texts.quantum_teleportation)
-local solution_statevector_quantum_teleportation =
-{
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	},
-	{
-		r = 0.5,
-		i = 0
-	}
-}
-q_command:register_q_command_block( "quantum_teleportation_success",
-        "quantum_teleportation",
-        solution_statevector_quantum_teleportation, nil,true)
-q_command:register_q_command_block( "quantum_teleportation_success",
-        "quantum_teleportation",
-        solution_statevector_quantum_teleportation, nil,false)
-
-
 q_command.texts.notsingleplayer = {}
 q_command.texts.notsingleplayer.en =
 [[
@@ -3035,10 +2878,13 @@ q_command.texts.creative.ja = q_command.texts.creative.en
 -- Areas in the world in which Prof Q interacts with players
 q_command.areas = {}
 
-dofile(minetest.get_modpath("q_command").."/esc_rooms_level_1.lua");
-dofile(minetest.get_modpath("q_command").."/esc_rooms_level_2.lua");
-dofile(minetest.get_modpath("q_command").."/esc_rooms_level_3.lua");
-dofile(minetest.get_modpath("q_command").."/circuit_garden_puzzles.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
+dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
+dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
+dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
+dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
 
 function q_command:erase_player_inventory()
 	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
@@ -3053,6 +2899,8 @@ for key, area in pairs(q_command.areas) do
         --minetest.debug(tostring(key))
         q_command:register_help_button(key,
                 area.help_btn_caption, area.help_btn_text)
+    end
+    if area.solution_statevector or area.solution_unitary then
         q_command:register_q_command_block( key .. "_success",
                 key,
                 area.solution_statevector,

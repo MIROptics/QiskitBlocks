@@ -15,8 +15,7 @@ limitations under the License.
 --]]
 
 --[[
-Elements of the q_command table that supply information about areas in the game,
-used by Professor Q to interact with the player
+Elements of the q_command table that supply information about areas in the game
 --]]
 
 -- Escape room puzzles Level I -------------------------------------------------
