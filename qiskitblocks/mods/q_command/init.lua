@@ -3675,108 +3675,6 @@ q_command:register_q_command_block( "quantum_teleportation_success",
         solution_statevector_quantum_teleportation, nil,false)
 
 
--- Escape room puzzles Level III -------------------------------------------------
--------- Room 1 (Level III)
-q_command.texts.swap_escape = {}
-q_command.texts.swap_escape.en =
-[[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.swap_escape.es = q_command.texts.swap_escape.en
-q_command.texts.swap_escape.ja = q_command.texts.swap_escape.en
-q_command:register_help_button("swap_escape",
-        "Make Swap gate", q_command.texts.swap_escape)
-local solution_unitary_swap_escape =
-{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_swap_escape = {x = 213, y = 0, z = 44}
-local chest_pos_swap_escape = {x = 210, y = 0, z = 46}
-local chest_inv_swap_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "",
-                [31] = "", [32] = "circuit_blocks:circuit_blocks_measure_z"
-        }
-    }
-}
-q_command:register_q_command_block( "swap_escape_success", "swap_escape",
-        nil, solution_unitary_swap_escape,true,
-        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
-q_command:register_q_command_block( "swap_escape_success", "swap_escape",
-        nil, solution_unitary_swap_escape,false,
-        door_pos_swap_escape, chest_pos_swap_escape, chest_inv_swap_escape)
-
-
--------- Room 2 (Level III)
-q_command.texts.ctrl_swap_escape = {}
-q_command.texts.ctrl_swap_escape.en =
-[[
-TLDR:
-----
-
-TODO: Fill in
-
-If the Q block turned gold, congratulations on solving the puzzle!
-]]
-q_command.texts.ctrl_swap_escape.es = q_command.texts.ctrl_swap_escape.en
-q_command.texts.ctrl_swap_escape.ja = q_command.texts.ctrl_swap_escape.en
-q_command:register_help_button("ctrl_swap_escape",
-        "Make controlled Swap gate", q_command.texts.ctrl_swap_escape)
-local solution_unitary_ctrl_swap_escape =
-{{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
-local door_pos_ctrl_swap_escape = {x = 220, y = 0, z = 37}
-local chest_pos_ctrl_swap_escape = {x = 214, y = 0, z = 40}
-local chest_inv_ctrl_swap_escape = {
-    inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "",
-                [5] = "", [6] = "circuit_blocks:circuit_blocks_gate_qubit_1", [7] = "", [8] = "",
-                [9] = "", [10] = "", [11] = "", [12] = "",
-                [13] = "", [14] = "", [15] = "circuit_blocks:swap_tool", [16] = "",
-                [17] = "", [18] = "", [19] = "", [20] = "",
-                [21] = "", [22] = "circuit_blocks:circuit_blocks_swap", [23] = "", [24] = "",
-                [25] = "", [26] = "", [27] = "", [28] = "",
-                [29] = "", [30] = "",
-                [31] = "circuit_blocks:control_tool", [32] = "circuit_blocks:circuit_blocks_measure_z"
-        }
-    }
-}
-q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
-        nil, solution_unitary_ctrl_swap_escape,true,
-        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
-q_command:register_q_command_block( "ctrl_swap_escape_success", "ctrl_swap_escape",
-        nil, solution_unitary_ctrl_swap_escape,false,
-        door_pos_ctrl_swap_escape, chest_pos_ctrl_swap_escape, chest_inv_ctrl_swap_escape)
-
-
--- END Escape room puzzles Level III ---------------------------------------------
-
-
-
-
 q_command.texts.notsingleplayer = {}
 q_command.texts.notsingleplayer.en =
 [[
@@ -3812,6 +3710,7 @@ prof_q.areas = {}
 
 dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
 dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
+dofile(minetest.get_modpath("q_command").."/prof_q_level_3.lua");
 
 function prof_q:erase_player_inventory()
 	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
