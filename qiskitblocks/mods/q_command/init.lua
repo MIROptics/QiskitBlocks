@@ -35,9 +35,6 @@ dofile(minetest.get_modpath("q_command").."/dkjson.lua");
 dofile(minetest.get_modpath("q_command").."/url_code.lua");
 dofile(minetest.get_modpath("q_command").."/complex_module.lua");
 dofile(minetest.get_modpath("q_command").."/wire_extension.lua");
---dofile(minetest.get_modpath("q_command").."/prof_q.lua");
---dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
---dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
 
 
 request_http_api = minetest.request_http_api()
@@ -3701,18 +3698,15 @@ q_command.texts.creative.es = q_command.texts.creative.en
 q_command.texts.creative.ja = q_command.texts.creative.en
 
 
--- TODO: Move this prof and escape room code to a more appropriate area
--- our API object
-prof_q = {}
-
+-- TODO: Move this "areas" and escape room code to a more appropriate area
 -- Areas in the world in which Prof Q interacts with players
-prof_q.areas = {}
+q_command.areas = {}
 
-dofile(minetest.get_modpath("q_command").."/prof_q_level_1.lua");
-dofile(minetest.get_modpath("q_command").."/prof_q_level_2.lua");
-dofile(minetest.get_modpath("q_command").."/prof_q_level_3.lua");
+dofile(minetest.get_modpath("q_command").."/esc_rooms_level_1.lua");
+dofile(minetest.get_modpath("q_command").."/esc_rooms_level_2.lua");
+dofile(minetest.get_modpath("q_command").."/esc_rooms_level_3.lua");
 
-function prof_q:erase_player_inventory()
+function q_command:erase_player_inventory()
 	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
 	local player_inv_main_size = player_inv:get_size("main")
 	player_inv:set_size("main", 0)
@@ -3720,7 +3714,7 @@ function prof_q:erase_player_inventory()
 end
 
 -- Register help buttons for escape rooms
-for key, area in pairs(prof_q.areas) do
+for key, area in pairs(q_command.areas) do
     if area.help_btn_text then
         minetest.debug(tostring(key))
         q_command:register_help_button(key,
@@ -3747,7 +3741,7 @@ end
 -- Periodically check all areas for player
 minetest.register_globalstep(function(dtime)
 
-	for key, area in pairs(prof_q.areas) do
+	for key, area in pairs(q_command.areas) do
 		for _,object in
 		ipairs(minetest.get_objects_inside_radius(
 				area.center_pos,
@@ -3765,7 +3759,7 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					area.help_chat_sent = true
-					prof_q:erase_player_inventory()
+					q_command:erase_player_inventory()
 				end
 
 				if area.q_block_pos and
@@ -3782,7 +3776,6 @@ minetest.register_globalstep(function(dtime)
 						end
 					end
 					area.success_chat_sent = true
-					--prof_q:erase_player_inventory()
 				end
 			end
 		end
