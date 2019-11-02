@@ -18,6 +18,39 @@ limitations under the License.
 Elements of the q_command table that supply information about areas in the game
 --]]
 
+-- Quantum circuit garden main help --------------------------------------------
+q_command.areas.quantum_circuit_garden = {}
+q_command.areas.quantum_circuit_garden.help_btn_text = {}
+q_command.areas.quantum_circuit_garden.help_btn_text.en =
+[[
+Welcome to the quantum circuit garden, which contains various
+circuit-based puzzles to solve. For more information on the challenge
+for a given circuit, right-click its Help button. To solve a puzzle, add
+the appropriate gates to its circuit. You can find the necessary gates
+in the chest below this sign, which you may open and close by
+right-clicking. To move an item from the chest into your inventory, drag
+it from the upper to the lower section of the chest dialog box. The
+items that appear in the top row of the inventory will appear in the
+hotbar ready to be wielded. To add a gate to a circuit, choose the gate
+block from the hotbar, position the cursor on the circuit, and
+right-click. Left-clicking a gate while wielding a block (or empty
+handed if you are close enough) removes it from the circuit. When you
+solve a given circuit puzzle, the black Q block will turn gold.
+
+There are a couple of tools in the chest with which you may add control
+qubits to a gate, as well as to rotate a gate. To use these tools,
+position the cursor on an appropriate gate and left-click or right-click.
+
+Notice that each circuit has a set of glass blocks with liquid levels
+that express the measurement probability of each basis state. The
+rightmost digit of each basis state represents the topmost wire. To
+measure a circuit, right-click on a block that has the appearance of a
+measuring device.
+]]
+q_command.areas.quantum_circuit_garden.help_btn_text.es = q_command.areas.quantum_circuit_garden.help_btn_text.en
+q_command.areas.quantum_circuit_garden.help_btn_text.ja = q_command.areas.quantum_circuit_garden.help_btn_text.en
+q_command.areas.quantum_circuit_garden.help_btn_caption = "Quantum circuit garden"
+
 -- Quantum circuit garden puzzles ------------------------------------------------
 q_command.areas.x_gate = {}
 q_command.areas.x_gate.solution_statevector =

@@ -54,8 +54,8 @@ position the cursor on an appropriate gate and left-click or right-click.
 q_command.areas.quantum_cats_sandbox.help_btn_text.es = q_command.areas.quantum_cats_sandbox.help_btn_text.en
 q_command.areas.quantum_cats_sandbox.help_btn_text.ja = q_command.areas.quantum_cats_sandbox.help_btn_text.en
 q_command.areas.quantum_cats_sandbox.help_btn_caption = "Quantum cats sandbox :-)"
-------------------------------
 
+------------------------------
 q_command.areas.making_cats_happy = {}
 q_command.areas.making_cats_happy.help_btn_text = {}
 q_command.areas.making_cats_happy.help_btn_text.en =
@@ -69,6 +69,47 @@ added.
 q_command.areas.making_cats_happy.help_btn_text.es = q_command.areas.making_cats_happy.help_btn_text.en
 q_command.areas.making_cats_happy.help_btn_text.ja = q_command.areas.making_cats_happy.help_btn_text.en
 q_command.areas.making_cats_happy.help_btn_caption = "Making a cat happy :-)"
+
+------------------------------
+q_command.areas.superpositional_cat = {}
+q_command.areas.superpositional_cat.help_btn_text = {}
+q_command.areas.superpositional_cat.help_btn_text.en =
+[[
+This circuit leverages the Hadamard gate to put a cat into an equal
+superposition of grumpy and happy. Notice how the outcome probabilities
+and measurement results change as this gate is removed and added.
+]]
+q_command.areas.superpositional_cat.help_btn_text.es = q_command.areas.superpositional_cat.help_btn_text.en
+q_command.areas.superpositional_cat.help_btn_text.ja = q_command.areas.superpositional_cat.help_btn_text.en
+q_command.areas.superpositional_cat.help_btn_caption = "Superposition of grumpy and happy cat :-)"
+
+------------------------------
+q_command.areas.entangling_cats = {}
+q_command.areas.entangling_cats.help_btn_text = {}
+q_command.areas.entangling_cats.help_btn_text.en =
+[[
+This two-wire circuit demonstrates the property known as quantum
+entanglement. Notice that each of the wires in the circuit are continued
+by blocks separated from the main circuit. This illustrates the idea
+that two entangled quantum particles may be separated by a great
+distance and continue to be entangled. Measuring one of the particles
+(cats) results in the measured state of the other particle to be
+determined. Try it out by right-clicking one of the measurement blocks.
+Also notice that the probabilities indicate that states 00 (grumpy-grumpy)
+and 11 (happy-happy) are equally likely.
+
+The CNOT gate (the two-wire gate that has the appearance of cross-hairs
+and a vertical line with a dot), is partially responsible for the
+entanglement. The cross-hairs symbol has the functionality of a NOT gate
+used in another circuit in this cat sandbox. The difference is that it
+is conditional on the state of the other wire, performing the NOT
+operation whenever the other wire is in the happy cat state.
+]]
+q_command.areas.entangling_cats.help_btn_text.es = q_command.areas.entangling_cats.help_btn_text.en
+q_command.areas.entangling_cats.help_btn_text.ja = q_command.areas.entangling_cats.help_btn_text.en
+q_command.areas.entangling_cats.help_btn_caption = "Entangling cats :-)"
+
+
 
 -- END Cat sandbox help buttons --------------------------------------------
 
