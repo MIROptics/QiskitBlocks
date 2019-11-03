@@ -66,6 +66,17 @@ q_command.block_pos = {}
 q_command.circuit_specs = {} -- dir_str, pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
 
+q_command.areas = {} -- Holds definitions for help signs and Prof Q chat
+
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
+dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
+dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
+dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
+dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
+dofile(minetest.get_modpath("q_command").."/q_starting_room_help.lua");
+
 
 -- returns q_command object or nil
 function q_command:get_q_command_block(pos)
@@ -522,16 +533,6 @@ function q_command:create_qasm_for_node(circuit_node_pos, wire_num,
 
         local radians = circuit_node_block.get_radians()
 
-        -- For convenience and brevity, create a zero-based, string, wire number
-        --local wire_num_idx = tostring(wire_num - 1 +
-        --        circuit_node_block.get_circuit_specs_wire_num_offset())
-        --local ctrl_a_idx = tostring(ctrl_a - 1 +
-        --        circuit_node_block.get_circuit_specs_wire_num_offset())
-        --local ctrl_b_idx = tostring(ctrl_b - 1 +
-        --        circuit_node_block.get_circuit_specs_wire_num_offset())
-
-        -- TODO: Replace above with below?
-
         local wire_num_idx = tostring(wire_num - 1)
         local ctrl_a_idx = tostring(ctrl_a - 1)
         local ctrl_b_idx = tostring(ctrl_b - 1)
@@ -933,12 +934,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
             local meta = minetest.get_meta(pos)
             meta:set_string("infotext", "Q block (right-click for QASM code to run on IBM quantum hardware)")
             q_command.block_pos = pos
-
             --minetest.debug("mpd.playing:" .. tostring(mpd.playing))
-            -- TODO: Remove?
-            --if mpd.playing and mpd.playing ~= MUSIC_ACTIVE then
-            --    mpd.play_song(MUSIC_ACTIVE)
-            --end
         end,
         on_rightclick = function(pos, node, clicker, itemstack)
             local q_block = q_command:get_q_command_block(pos)
@@ -1388,13 +1384,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             if chest_pos and chest_inv then
                                 local chest_meta = minetest.get_meta(chest_pos)
                                 chest_meta:from_table(chest_inv)
-
-                                --[[
-                                local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
-                                local player_inv_main_size = player_inv:get_size("main")
-                                player_inv:set_size("main", 0)
-                                player_inv:set_size("main", player_inv_main_size)
-                                --]]
                             end
 
                         else
@@ -1715,8 +1704,6 @@ function q_command:register_q_command_block(suffix_correct_solution,
                     end
 
 
-
-
                     local function common_process_backend_qasm_result(http_request_response, state_tomo_basis)
                         if LOG_DEBUG then
                             minetest.debug("http_request_response (qasm):\n" .. dump(http_request_response))
@@ -1922,6 +1909,7 @@ function q_command:register_basis_state_block(num_qubits, basis_state_num)
 
 end
 
+-- TODO: Create function to create these liquid wall blocks
 minetest.register_node("q_command:q_command_liquid_full_0_rad", {
     description = "Faux liquid block full, 0 radians",
     tiles = {"q_command_silver_sandstone_wall_tile.png",
@@ -2054,28 +2042,6 @@ minetest.register_node("q_command:q_command_liquid_15pc_pi_2_rad", {
     paramtype2 = "facedir"
 })
 
---[[
-function q_command:register_wall_tile(texture_name)
-    minetest.register_node("q_command:dr_" .. texture_name, {
-        description = "Dirac " .. texture_name,
-	    drawtype = "signlike",
-        tiles = {texture_name .. ".png"},
-        inventory_image = texture_name .. ".png",
-        wield_image = texture_name .. ".png",
-        --paramtype = "light",
-        paramtype2 = "wallmounted",
-        sunlight_propagates = false,
-        walkable = false,
-        climbable = true,
-        is_ground_content = false,
-        selection_box = {
-            type = "wallmounted"
-        },
-        legacy_wallmounted = true,
-        groups = {oddly_breakable_by_hand=2}
-    })
-end
---]]
 
 function q_command:register_wall_block(texture_name)
     minetest.register_node("q_command:dr_" .. texture_name, {
@@ -2188,22 +2154,6 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			--meta:set_string("id", itemstringpart)
 			meta:set_string("caption", caption)
 		end,
-		--on_construct = function(pos)
-		--	local meta = minetest.get_meta(pos)
-		--	local formspec = ""..
-		--	"size[12,6]"..
-		--	"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
-		--	"tablecolumns[text]"..
-		--	"tableoptions[background=#000000;highlight=#000000;border=false]"..
-		--	"table[0,0.25;12,5.2;infosign_text;"..
-		--	q_command:convert_newlines(minetest.formspec_escape(S(localized_fulltext)))..
-		--	"]"..
-		--	"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
-		--	meta:set_string("formspec", formspec)
-		--	meta:set_string("infotext", string.format(S("%s (Right-click for hints)"), S(caption)))
-		--	--meta:set_string("id", itemstringpart)
-		--	meta:set_string("caption", caption)
-		--end,
 		on_receive_fields = function(pos, formname, fields, sender)
 			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))
 			local player_name = sender:get_player_name()
@@ -2263,16 +2213,16 @@ q_command.texts.creative.ja = q_command.texts.creative.en
 
 -- TODO: Move this "areas" and escape room code to a more appropriate area
 -- Areas in the world in which Prof Q interacts with players
-q_command.areas = {}
+-- q_command.areas = {}
 
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
-dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
-dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
-dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
-dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
-dofile(minetest.get_modpath("q_command").."/q_starting_room_help.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
+--dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
+--dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
+--dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
+--dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
+--dofile(minetest.get_modpath("q_command").."/q_starting_room_help.lua");
 
 function q_command:erase_player_inventory()
 	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()
