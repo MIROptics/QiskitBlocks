@@ -46,7 +46,23 @@ of the chasm should reflect the state that you set with rotations. Note
 that it is expected for the Q block to turn black again.
 ]]
 q_command.areas.quantum_teleportation.help_btn_text.es = q_command.areas.quantum_teleportation.help_btn_text.en
-q_command.areas.quantum_teleportation.help_btn_text.ja = q_command.areas.quantum_teleportation.help_btn_text.en
+q_command.areas.quantum_teleportation.help_btn_text.ja =
+[[
+この回路は、量子テレポーテーションを示しており、Andrew W. Cross、Lev S. Bishop、John
+A. Smolin、およびJay M. Gambettaによる「Open Quantum Assembly Language」という題名
+の論文の例です。また、以前の測定結果に基づいて条件付きでゲートを適用するOpenQASMの
+機能も示しています。
+
+量子テレポーテーション回路を完成させるには、古典的に制御された「if」ブロックをチェスト
+から取り出します。破線でマークされたスペースを右クリックして、一番下の線のZゲートの
+左側に配置します。ブロックに「if = 1」が表示され、ブロックの水平マークが上部の線の測定
+ブロックに対応するまで右クリックを続けます（この場合、一度クリックするだけです）。
+
+回路が正しい場合、Qブロックは金色に変わります。次に、回転ツールを使用しながらRyおよ
+びRzゲートを左右にクリックして、量子テレポーテーションを試すことができます。キャズム
+の上部にあるブロッホ球は、回転で設定した状態が反映されています。 Qブロックが再び黒く
+なることに注意してください。
+]]
 q_command.areas.quantum_teleportation.help_btn_caption = "Quantum teleportation"
 
 -- END QASM Chasm puzzles --------------------------------------------

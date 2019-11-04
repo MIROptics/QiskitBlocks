@@ -33,7 +33,13 @@ barriers to implement a balanced oracle whose output on the bottom wire
 is the flipped state of its input on the top wire.
 ]]
 q_command.areas.deutsch_algo_puzzle.help_btn_text.es = q_command.areas.deutsch_algo_puzzle.help_btn_text.en
-q_command.areas.deutsch_algo_puzzle.help_btn_text.ja = q_command.areas.deutsch_algo_puzzle.help_btn_text.en
+q_command.areas.deutsch_algo_puzzle.help_btn_text.ja =
+[[
+1985年に最初に公開されたドイチのアルゴリズムは、量子アルゴリズムのHello Worldです。
+
+このパズルは、バリア間に適切なゲートを配置して、一番下の線の出力が一番上の線の入力の
+反転状態になるバランスのとれたオラクルを実装することによって解くことができます。
+]]
 q_command.areas.deutsch_algo_puzzle.help_btn_caption = "Deutsch's algorithm"
 
 -- END Basic algos lodge puzzles --------------------------------------------

@@ -236,7 +236,30 @@ always the result.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.x_gates_2_wire.help_btn_text.es = q_command.areas.x_gates_2_wire.help_btn_text.en
-q_command.areas.x_gates_2_wire.help_btn_text.ja = q_command.areas.x_gates_2_wire.help_btn_text.en
+q_command.areas.x_gates_2_wire.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを量子状態|10>に対応させます。解が正しいことを追加検証するため
+に、回路を数回測定します。
+----
+
+2本の線で構成されるこの回路は、1つ以上のXゲートを活用して古典的な状態を作成できるこ
+とを示しています。このパズルを解くには、次の手順を実行します。
+
+1）青い液体は、回路の測定時に結果が|00>になる確率が100％を示していることに注目してく
+ださい。測定ブロックを数回右クリックして、|00>が常に結果であることを確認します。
+
+2）チェストからXブロックを取り出します。
+
+3）Xブロックを使用しながら、目的の測定結果の各|1>量子ビットに対応する回路の線にカー
+ソルを置き、右クリックします。一番下の線が一番左の量子ビットに対応することに注意して
+ください。
+
+4）青い液体は、回路を測定したときに結果が|10>になる確率が100％を示していることに注目
+してください。測定ブロックを数回右クリックして、常に結果が|10>であることを確認しま
+す。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.x_gates_2_wire.help_btn_caption = "Make quantum state of |10>"
 
 
@@ -323,7 +346,31 @@ always the result.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.x_gates_3_wire.help_btn_text.es = q_command.areas.x_gates_3_wire.help_btn_text.en
-q_command.areas.x_gates_3_wire.help_btn_text.ja = q_command.areas.x_gates_3_wire.help_btn_text.en
+q_command.areas.x_gates_3_wire.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを量子状態|011>に対応させます。出口のドアは回路の後ろにあるの
+で、はしごを使用します。
+----
+
+3本のワイヤで構成されるこの回路は、1つ以上のXゲートを活用して古典的な状態を作成でき
+ることを示しています。このパズルを解くには、次の手順を実行します。
+
+1）青い液体は、回路を測定したときに結果が|000>になる確率が100％であることを示してい
+ることに注意してください。測定ブロックを数回右クリックして、​​常に結果が|000>であること
+を確認します。
+
+2）チェストからXブロックを取り出します。
+
+3）Xブロックを使用しながら、目的の測定結果の各|1>の量子ビットに対応する回路の線に
+カーソルを置き、右クリックします。一番下の線が一番左の量子ビットに対応することに注意
+してください。
+
+4）青い液体が、回路の測定時に結果が|011>になる確率が100％であることを示していること
+に注意してください。測定ブロックを数回右クリックして、|011>が常に結果であることを確認
+します。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.x_gates_3_wire.help_btn_caption = "Make quantum state of |011>"
 
 
@@ -420,7 +467,32 @@ the results are fairly evenly distributed between |0> and |1>.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.h_gate_escape.help_btn_text.es = q_command.areas.h_gate_escape.help_btn_text.en
-q_command.areas.h_gate_escape.help_btn_text.ja = q_command.areas.h_gate_escape.help_btn_text.en
+q_command.areas.h_gate_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルをsqrt（1/2）|0> + sqrt（1/2）|1>の量子状態に対応させます。これは
+一般に|+>と呼ばれます
+----
+
+1本の線のみで構成されるこの回路は、アダマールゲートとも呼ばれるHゲートを活用します。
+Hは、|0>状態を|0>と|1>の等しい重ね合わせします。したがって、量子ビットを測定すると
+50%の確率で結果が|0>になり、50%の確率で結果が|1>になります。このパズルを解くには、
+次の手順を実行します。
+
+1）青い液体は、回路を測定したときに結果が|0>になる確率が100％であることを示している
+ことに注意してください。測定ブロックを数回右クリックして、結果が常に|0>であることを確
+認します。
+
+2）チェストからHブロックを取り出します。
+
+3）Hブロックを保持しながら、回路の線の空いている場所にカーソルを置き、右クリックしま
+す。
+
+4）青色の液体は、回路の測定結果が|0>になる確率が50％であり、|1>となる確率が50％であ
+ることに注意してください。次に、測定ブロックを数回右クリックして、結果が|0>と|1>の間
+でほぼ均等に分布していることを確認します。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.h_gate_escape.help_btn_caption = "Make a quantum state of |+>"
 
 
@@ -520,7 +592,32 @@ results are fairly evenly distributed between |0> and |1>.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.h_x_gate.help_btn_text.es = q_command.areas.h_x_gate.help_btn_text.en
-q_command.areas.h_x_gate.help_btn_text.ja = q_command.areas.h_x_gate.help_btn_text.en
+q_command.areas.h_x_gate.help_btn_text.ja =
+[[
+TLDR：青い液体レベルをsqrt（1/2）|0>-sqrt（1/2）|1>の量子状態に対応させます。これは一
+般的に|->と呼ばれます
+----
+
+1本の線のみで構成されるこの回路は、線上のゲートの順序が重要であることを示します。ま
+た、量子状態の基底状態は異なる位相を持つ可能性があることも示しています。このパズルを
+解くには、次の手順を実行します。
+
+1）青い液体は、回路を測定したときに結果が|0>になる確率が100％であることを示している
+ことに注意してください。測定ブロックを数回右クリックして、常に測定結果が |0>であるこ
+とを確認します。
+
+2）チェストからHブロックとXブロックを取り出し、両方を回路に置きます。
+
+3）解は、測定結果が|0>と|1>が等しく存在し、位相が逆である確率をもちます。ここのブロッ
+クワールドの回路上の位相の表記は、右向きの0ラジアンで、そこから反時計回りの回転で
+す。例として、左向きの矢印は、πラジアンの位相を示します。
+
+4）青い液体は、回路が測定されると結果が|0>になる確率が50％、|1>となる確率が50％であ
+ることを示している必要があります。測定ブロックを数回右クリックして、結果が|0>と|1>の
+間でほぼ均等に分布していることを確認します。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.h_x_gate.help_btn_caption = "Make a quantum state of |->"
 
 
@@ -616,7 +713,30 @@ reflect these probabilities and phases.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.h_z_gate.help_btn_text.es = q_command.areas.h_z_gate.help_btn_text.en
-q_command.areas.h_z_gate.help_btn_text.ja = q_command.areas.h_z_gate.help_btn_text.en
+q_command.areas.h_z_gate.help_btn_text.ja =
+[[
+TLDR：Zゲートと他の1つのゲートを使用して、青い液体レベルをsqrt（1/2）|0>-sqrt（1/2）|1>
+の量子状態に対応させます。これは一般に|->と呼ばれます
+----
+
+1本の線のみで構成されるこの回路は、ブロッホ球が量子ビットの状態をモデル化する方法を
+示しています。このパズルを解くには、次の手順を実行します。
+
+1）通常の測定ブロックの代わりに、この回路には（ピクセル化された）ブロッホ球がありま
+す。このゲームを初めてプレイしたときにいた建物で、このブロッホ球体について詳しく読む
+ことができます。
+
+2）チェストからHブロックとZブロックを取り出し、回路に配置します。それぞれを配置する
+ときに、更新された量子ビットの状態を反映して、ブロッホ球がどのように変化するかに注目
+してください。ブロッホ球と液体ブロックにどのように影響するか注目しながら、それらを異
+なる順序で配置してみてください。
+
+3）解は、測定結果|0>と|1>が等しい確率で存在し、逆の位相を持つことを示しています。ブ
+ロッホ球と青い液体ブロックの両方がこれらの確率と位相を反映していることに注目してくだ
+さい。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.h_z_gate.help_btn_caption = "Make a quantum state of |-> using gates including Z"
 
 
@@ -768,7 +888,18 @@ states.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.equal_super_2wire_escape.help_btn_text.es = q_command.areas.equal_super_2wire_escape.help_btn_text.en
-q_command.areas.equal_super_2wire_escape.help_btn_text.ja = q_command.areas.equal_super_2wire_escape.help_btn_text.en
+q_command.areas.equal_super_2wire_escape.help_btn_text.ja =
+[[
+この回路は、アダマールゲートとXゲートを活用して、|001>と|101>が得られる可能性が等し
+く、他の測定結果が得られない量子状態を作成します。 この量子状態は、|001> + |101>と表現
+できます。
+
+この回路パズルを解決するには、適切な線にHゲートとXゲートを配置します。
+
+ヒント：単線回路でのHおよびXゲートの動作について既に学んだことを使用してください。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.equal_super_2wire_escape.help_btn_caption = "Equal superposition with two qubits"
 
 
@@ -841,7 +972,18 @@ superposition consisting of 2^numQubits states.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.equal_super_3wire_escape.help_btn_text.es = q_command.areas.equal_super_3wire_escape.help_btn_text.en
-q_command.areas.equal_super_3wire_escape.help_btn_text.ja = q_command.areas.equal_super_3wire_escape.help_btn_text.en
+q_command.areas.equal_super_3wire_escape.help_btn_text.ja =
+[[
+この回路は、2つのアダマールゲートを活用して、|000>、|001>、|010>、|011>、|100>、
+|101>、|110>および|111>の等しい重ね合わせを作成します。 この状態を表現する便利な方法
+は、壁に示されているように数学和記号を使用することです。 この回路パズルを解決するに
+は、各ワイヤにHブロックを配置します。 これらのゲートが削除および追加されると、結果の
+確率と測定結果がどのように変化するかに注目してください。 回路の各線にHゲートを配置す
+るこのパターンは、2 ^ （量子ビット数）個の状態で構成される重ね合わせを作成するために
+一般的に使用されます。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.equal_super_3wire_escape.help_btn_caption = "Equal superposition with three qubits"
 
 
@@ -941,7 +1083,30 @@ wire as the Hadamard gate.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.bell_phi_plus_escape.help_btn_text.es = q_command.areas.bell_phi_plus_escape.help_btn_text.en
-q_command.areas.bell_phi_plus_escape.help_btn_text.ja = q_command.areas.bell_phi_plus_escape.help_btn_text.en
+q_command.areas.bell_phi_plus_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを、phi +ベル状態と呼ばれるsqrt（1/2）|00> + sqrt（1/2）|11>の量子
+状態に対応させます。
+----
+
+量子エンタングルメントの最もシンプルな4つの例は、ベル状態です。Φ+に象徴される最も有
+名なベル状態は、アダマールゲートとCNOTゲートで実現できます。 CNOTゲートは、十字線
+と点のある垂直線の外観を持つ2線式のゲートです。十字記号にはXゲートの機能があります
+が、違いはもう一方の線の状態を条件とし、その線が|1>である場合は常にNOT演算を実行する
+ことです。
+
+片方の量子ビットを測定すると、もう一方の量子ビットの測定状態が決定されます。正しいΦ+
+のベル状態の解には、|00>と|11>の測定される確率が等しく、同じ位相になります。ここのブ
+ロックワールドの回路上の位相の表記は、右向きの0ラジアンで、そこから反時計回りの回転
+です。
+
+この状態を実現する1つの方法は、上の線にアダマールゲートを配置し、アダマールゲートの
+右の列の上から2番目の線にXゲートを配置し、ホットバーからコントロールツールを選択
+（チェストから取得した後）ます。回路内のXゲートにカーソルを置きながら、制御量子ビッ
+トがアダマールゲートと同じ線上にくるまで左クリックします。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.bell_phi_plus_escape.help_btn_caption = "Make the phi+ Bell state"
 
 
@@ -1022,7 +1187,23 @@ phase of pi radians.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.bell_phi_minus_escape.help_btn_text.es = q_command.areas.bell_phi_minus_escape.help_btn_text.en
-q_command.areas.bell_phi_minus_escape.help_btn_text.ja = q_command.areas.bell_phi_minus_escape.help_btn_text.en
+q_command.areas.bell_phi_minus_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを、sqrt（1/2）|00>-sqrt（1/2）|11>の量子状態に対応させます。これ
+は、Φ-のベル状態と呼ばれます。
+----
+
+量子エンタングルメントの最もシンプルな4つの例は、ベル状態です。これらのベル状態の1つ
+は、Φ-（phi -）と呼ばれXゲートを上の線に配置し、Xゲートの右側にΦ+ ノベル状態回路（別
+のパズルで示しました）を追加することで実現できます。
+
+片方の量子ビットを測定すると、もう一方の量子ビットの測定状態が決定されます。正しいΦ-
+のベル状態の解は、|00>と|11>の測定される確率が等しく、位相が逆です。ここのブロック
+ワールドの回路上の位相の表記は、右向きの0ラジアンで、そこから反時計回りの回転です。
+例として、左向きの矢印は、πラジアンの位相を示します。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.bell_phi_minus_escape.help_btn_caption = "Make the phi- Bell state"
 
 
@@ -1100,7 +1281,24 @@ qubit will be measured as the opposite state.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.bell_psi_plus_escape.help_btn_text.es = q_command.areas.bell_psi_plus_escape.help_btn_text.en
-q_command.areas.bell_psi_plus_escape.help_btn_text.ja = q_command.areas.bell_psi_plus_escape.help_btn_text.en
+q_command.areas.bell_psi_plus_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルをΨ+ のベル状態と呼ばれるsqrt（1/2）|01> + sqrt（1/2）|10>の量子状
+態に対応させます。
+----
+
+量子エンタングルメントの最もシンプルな4つの例は、ベル状態です。これらのベル状態の1つ
+は、Ψ+（psi +）で表され、2番目の線にXゲートを配置し、Xゲートの右側にΦ+のベル状態回
+路（別のパズルで指示されています）を追加することで実現できます。
+
+片方の量子ビットを測定すると、もう一方の量子ビットの測定状態が決定されます。正しいΨ+
+のベル状態の解は、 |01>と|10>が測定される可能性が等しく、位相が等しくなります。ここの
+ブロックワールドの回路上の位相の表記は、右向きの0ラジアンで、そこから反時計回りの回
+転です。Ψ+のベル状態は一重項状態の1つとして知られており、量子ビットの1つを測定する
+と、もう一方の量子ビットが反対の状態となることが決まります。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.bell_psi_plus_escape.help_btn_caption = "Make the psi+ Bell state"
 
 
@@ -1177,7 +1375,26 @@ qubit will be measured as the opposite state.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.bell_psi_minus_escape.help_btn_text.es = q_command.areas.bell_psi_minus_escape.help_btn_text.en
-q_command.areas.bell_psi_minus_escape.help_btn_text.ja = q_command.areas.bell_psi_minus_escape.help_btn_text.en
+q_command.areas.bell_psi_minus_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルをsqrt（1/2）|01>-sqrt（1/2）|10>の量子状態に対応させます。これ
+は、Ψ-のベル状態と呼ばれます。
+----
+
+量子エンタングルメントの最もシンプルな4つの例は、ベル状態です。これらのベル状態の1つ
+は、Ψ-（psi -）と呼ばれ、Xゲートを2番目の線に配置し、Xゲートの右側にΦ +のベル状態の
+回路（別のパズルで示されました）を追加し、その後に2番目の線にZゲートを追加することで
+実現できます。
+
+片方の量子ビットを測定すると、もう片方の量子ビットの測定状態が決定されます。正確なΨ-
+のベル状態の解は、|01>と|10>が測定される確率が等しく、逆の位相を持ちます。ここのブ
+ロックワールドの回路上の位相の表記は、右向きの0ラジアンで、そこから反時計回りの回転
+です。例として、左向きの矢印は、πラジアンの位相を示します。 Ψ-のベル状態は一重項状態
+の1つとして知られており、片方の量子ビットを測定すると、もう片方の量子ビットが反対の
+状態となることが決まります。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.bell_psi_minus_escape.help_btn_caption = "Make the psi- Bell state"
 
 
@@ -1256,7 +1473,29 @@ blocks) results in either |000> or |111> each time.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.ghz_state_escape.help_btn_text.es = q_command.areas.ghz_state_escape.help_btn_text.en
-q_command.areas.ghz_state_escape.help_btn_text.ja = q_command.areas.ghz_state_escape.help_btn_text.en
+q_command.areas.ghz_state_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルをGHZ状態と呼ばれるsqrt（1/2）|000>-sqrt（1/2）|111>の量子状態に
+対応させます。
+----
+
+GHZ（グリーンバーガー＝ホーン＝ツァイリンガー）状態は、3つ以上の量子ビットが関与す
+るもつれ状態であり、基底状態はすべて0またはすべて1です。たとえば、この3線式回路パズ
+ルのもつれ状態は、|000>と|111>の測定される確率が等しくなります。エンタングルメントの
+詳細については、ベル状態の回路パズルを参照してください。
+
+この状態を実現する1つの方法は、上の線にアダマールゲートを配置し、アダマールゲートの
+右側の列の2番目の線にXゲートを配置し、次に、ホットバーからコントロールツールを選択
+（チェストから取得した後）します。回路内のXゲートにカーソルを置きながら、制御量子
+ビットがアダマールゲートと同じ線上に来るまで左クリックして、カーソルをCNOTゲートに
+変換します。同じようにして、Xゲートを3番目に、制御量子ビットが最上部の線にあるように
+別のCNOTゲートを配置します。
+
+（測定ブロックを右クリックして）回路を測定すると、毎回|000>または|111>になります。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
+ます！
+]]
 q_command.areas.ghz_state_escape.help_btn_caption = "Make the GHZ state"
 
 
@@ -1330,7 +1569,20 @@ desired state is achieved.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.y_z_rot_1wire_escape.help_btn_text.es = q_command.areas.y_z_rot_1wire_escape.help_btn_text.en
-q_command.areas.y_z_rot_1wire_escape.help_btn_text.ja = q_command.areas.y_z_rot_1wire_escape.help_btn_text.en
+q_command.areas.y_z_rot_1wire_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを次の量子状態に対応させます：
+sqrt（0.85）|0> + sqrt（0.15）e ^ i pi/2 |1>
+----
+
+この回路は、RyおよびRzゲートを使って、|0>を測定する確率が約85％、|1>を測定する確率が
+約15％になる状態を作成します。 後者の基底状態の位相はpi/2です。 この回路パズルを解くに
+は、線上にRyおよびRzゲートを配置し、回転ツールを左および右クリックして、目的の状態に
+なるまで回転角度を調整します。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
+ます！
+]]
 q_command.areas.y_z_rot_1wire_escape.help_btn_caption = "Rotate a qubit into a desired state"
 
 
@@ -1413,7 +1665,22 @@ converting changes in phase to changes in measurement probabilities.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.phase_rot_2wire_escape.help_btn_text.es = q_command.areas.phase_rot_2wire_escape.help_btn_text.en
-q_command.areas.phase_rot_2wire_escape.help_btn_text.ja = q_command.areas.phase_rot_2wire_escape.help_btn_text.en
+q_command.areas.phase_rot_2wire_escape.help_btn_text.ja =
+[[
+TLDR：青い液体レベルを次の量子状態に対応させます：
+sqrt（1/4）|00> + sqrt（1/4）e ^ i pi/2 |01> +
+sqrt（1/4）e ^ i 3pi/2 |10> + sqrt（1/4）|11>
+----
+
+この回路は、アダマールゲートとRzゲートを使って、|00>、|01>、|10>、および|11>が等しい
+確率で測定される状態を作ります。これらの基底状態はさまざまに回転された位相を持ちま
+す。 この回路パズルを解くには、各線の2つのHブロックの間にRzを配置し、 目的の状態にな
+るまで、Rzを左および右クリックして回転させます。 適用する位相（Z軸）回転は、アダマー
+ルゲートの間に挟まれるとX軸の回転になり、位相の変化を測定確率の変化に変換することに
+注意してください。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
+]]
 q_command.areas.phase_rot_2wire_escape.help_btn_caption = "Convert phase rotations into measurement probabilities"
 -- END Escape room puzzles Level I ---------------------------------------------
 

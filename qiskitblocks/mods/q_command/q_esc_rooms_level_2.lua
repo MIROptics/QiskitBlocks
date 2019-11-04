@@ -181,7 +181,10 @@ q_command.areas.dj_bal_flip_ora_escape.help_btn_text.en =
 Make a circuit like the last one, but negate the output as shown on the wall
 ]]
 q_command.areas.dj_bal_flip_ora_escape.help_btn_text.es = q_command.areas.dj_bal_flip_ora_escape.help_btn_text.en
-q_command.areas.dj_bal_flip_ora_escape.help_btn_text.ja = q_command.areas.dj_bal_flip_ora_escape.help_btn_text.en
+q_command.areas.dj_bal_flip_ora_escape.help_btn_text.ja =
+[[
+先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
+]]
 q_command.areas.dj_bal_flip_ora_escape.help_btn_caption = "Make a NOT XOR quantum logic gate"
 
 
@@ -304,6 +307,10 @@ q_command.areas.toffoli_nand_escape.help_chat_msg = {
 	"Make a circuit like the last one, but negate the output as indicated by the NAND",
 	"(NOT AND) shown on the wall."
 }
+q_command.areas.toffoli_nand_escape.help_chat_msg.ja = {
+	"先ほどと同じような回路を作成しますが、壁に表示されているようにNAND（NOT AND）で出 ",
+	"力を否定します。"
+}
 q_command.areas.toffoli_nand_escape.help_chat_sent = false
 q_command.areas.toffoli_nand_escape.help_success_msg = {
 	"You're really getting the hang of this. On to the next room!"
@@ -320,7 +327,11 @@ Make a circuit like the last one, but negate the output as indicated by
 the NAND (NOT AND) shown on the wall.
 ]]
 q_command.areas.toffoli_nand_escape.help_btn_text.es = q_command.areas.toffoli_nand_escape.help_btn_text.en
-q_command.areas.toffoli_nand_escape.help_btn_text.ja = q_command.areas.toffoli_nand_escape.help_btn_text.en
+q_command.areas.toffoli_nand_escape.help_btn_text.ja =
+[[
+先ほどと同じような回路を作成しますが、壁に表示されているようにNAND（NOT AND）で出
+力を否定します。
+]]
 q_command.areas.toffoli_nand_escape.help_btn_caption = "Make a quantum logic NAND gate"
 
 
@@ -359,6 +370,9 @@ q_command.areas.or_escape.solution_unitary =
 q_command.areas.or_escape.help_chat_msg = {
 	"Again, make a circuit that realizes the logic on the wall."
 }
+q_command.areas.or_escape.help_chat_msg.ja = {
+	"再び、壁のロジックを実現する回路を作成します。"
+}
 q_command.areas.or_escape.help_chat_sent = false
 q_command.areas.or_escape.help_success_msg = {
 	"I like how you negated both inputs, as well as the output, of the",
@@ -375,7 +389,10 @@ q_command.areas.or_escape.help_btn_text.en =
 Again, make a circuit that realizes the logic on the wall.
 ]]
 q_command.areas.or_escape.help_btn_text.es = q_command.areas.or_escape.help_btn_text.en
-q_command.areas.or_escape.help_btn_text.ja = q_command.areas.or_escape.help_btn_text.en
+q_command.areas.or_escape.help_btn_text.ja =
+[[
+再び、壁のロジックを実現する回路を作成します。
+]]
 q_command.areas.or_escape.help_btn_caption = "Make a quantum logic OR gate"
 
 
@@ -415,6 +432,9 @@ q_command.areas.nor_escape.help_chat_msg = {
 	"Make a circuit similar to the last one, taking into account the NOR",
 	"(NOT OR) shown on the wall."
 }
+q_command.areas.nor_escape.help_chat_msg.ja = {
+	"壁に表示されているNOR（NOT OR）を考慮して、さきほどと似たような回路を作成します。"
+}
 q_command.areas.nor_escape.help_chat_sent = false
 q_command.areas.nor_escape.help_success_msg = {
 	"Nicely done. Carry on!"
@@ -431,7 +451,10 @@ Make a circuit similar to the last one, taking into account the NOR
 (NOT OR) shown on the wall.
 ]]
 q_command.areas.nor_escape.help_btn_text.es = q_command.areas.nor_escape.help_btn_text.en
-q_command.areas.nor_escape.help_btn_text.ja = q_command.areas.nor_escape.help_btn_text.en
+q_command.areas.nor_escape.help_btn_text.ja =
+[[
+壁に表示されているNOR（NOT OR）を考慮して、さきほどと似たような回路を作成します。
+]]
 q_command.areas.nor_escape.help_btn_caption = "Make a quantum logic NOR gate"
 
 
@@ -471,6 +494,10 @@ q_command.areas.toffoli_mixed_escape.help_chat_msg = {
 	"Go ahead and make a circuit that realizes the logic on the wall, remembering ",
 	"that NOT takes precedence over AND in digital logic."
 }
+q_command.areas.toffoli_mixed_escape.help_chat_msg.ja = {
+	"壁のロジックを実現する回路を作成します。デジタル回路ではNOTがANDに優先することを忘 ",
+	"れないでください。"
+}
 q_command.areas.toffoli_mixed_escape.help_chat_sent = false
 q_command.areas.toffoli_mixed_escape.help_success_msg = {
 	"Excellent! Did you notice that only digital logic has been demonstrated to this ",
@@ -489,7 +516,11 @@ Go ahead and make a circuit that realizes the logic on the wall,
 remembering that NOT takes precedence over AND in digital logic.
 ]]
 q_command.areas.toffoli_mixed_escape.help_btn_text.es = q_command.areas.toffoli_mixed_escape.help_btn_text.en
-q_command.areas.toffoli_mixed_escape.help_btn_text.ja = q_command.areas.toffoli_mixed_escape.help_btn_text.en
+q_command.areas.toffoli_mixed_escape.help_btn_text.ja =
+[[
+壁のロジックを実現する回路を作成します。デジタル回路ではNOTがANDに優先することを忘
+れないでください。
+]]
 q_command.areas.toffoli_mixed_escape.help_btn_caption = "Make a quantum logic AND gate with negated input"
 
 
@@ -524,6 +555,10 @@ q_command.areas.superpos_logic_and_escape.help_chat_msg = {
 	"This time, however, compute the logic with its inputs in equal superposition,",
 	"resulting in the state shown on the wall."
 }
+q_command.areas.superpos_logic_and_escape.help_chat_msg.ja = {
+	"次のトリックでは、前に入った部屋で行ったのと同じロジックを実現します。 ただし、今回は ",
+	"均等な重ね合わせを入力に使うと、壁に表示される状態になります。"
+}
 q_command.areas.superpos_logic_and_escape.help_chat_sent = false
 q_command.areas.superpos_logic_and_escape.help_success_msg = {
 	"Outstanding! You've managed to demonstrate quantum parallelism, in which all ",
@@ -544,7 +579,11 @@ room. This time, however, compute the logic with its inputs in equal
 superposition, resulting in the state shown on the wall.
 ]]
 q_command.areas.superpos_logic_and_escape.help_btn_text.es = q_command.areas.superpos_logic_and_escape.help_btn_text.en
-q_command.areas.superpos_logic_and_escape.help_btn_text.ja = q_command.areas.superpos_logic_and_escape.help_btn_text.en
+q_command.areas.superpos_logic_and_escape.help_btn_text.ja =
+[[
+次のトリックでは、前に入った部屋で行ったのと同じロジックを実現します。 ただし、今回は
+均等な重ね合わせを入力に使うと、壁に表示される状態になります。
+]]
 q_command.areas.superpos_logic_and_escape.help_btn_caption = "Compute NOT a AND b in superposition"
 
 
@@ -706,6 +745,11 @@ q_command.areas.and_3_operands_x_escape.help_chat_msg = {
 	"a third to undo what the first one did. That's easy for me to say because",
 	"I'm safely behind this explosion-proof glass, so use your best judgment :-)"
 }
+q_command.areas.and_3_operands_x_escape.help_chat_msg.ja = {
+	"ここでは、複数のANDを含む論理式を実現します。 おそらく、いくつかのトフォリゲートから ",
+	"回路を作り、最初のゲートを元に戻すために3つ目を追加します。 私はこの防爆ガラスの後ろ ",
+	"に安全にいるので簡単に言うことができますが、最善の判断をしてください:-)"
+}
 q_command.areas.and_3_operands_x_escape.help_chat_sent = false
 q_command.areas.and_3_operands_x_escape.help_success_msg = {
 	"Very impressive! You found a way to leverage Toffoli gates to realize logic ",
@@ -735,7 +779,15 @@ Note: You can ignore the liquid blocks in this puzzle, as there are many
 more of them than can be displayed here.
 ]]
 q_command.areas.and_3_operands_x_escape.help_btn_text.es = q_command.areas.and_3_operands_x_escape.help_btn_text.en
-q_command.areas.and_3_operands_x_escape.help_btn_text.ja = q_command.areas.and_3_operands_x_escape.help_btn_text.en
+q_command.areas.and_3_operands_x_escape.help_btn_text.ja =
+[[
+ここでは、複数のANDを含む論理式を実現します。 おそらく、いくつかのトフォリゲートから
+回路を作り、最初のゲートを元に戻すために3つ目を追加します。 私はこの防爆ガラスの後ろ
+に安全にいるので簡単に言うことができますが、最善の判断をしてください:-)
+
+注：ここでは、液体ブロックの状態が表示できるよりも多くあるため、このパズルの液体ブ
+ロックは無視してください。
+]]
 q_command.areas.and_3_operands_x_escape.help_btn_caption = "Create quantum logic gate with multiple operands"
 
 
@@ -894,6 +946,9 @@ q_command.areas.and_not_3_operands_x_escape.solution_unitary =
 q_command.areas.and_not_3_operands_x_escape.help_chat_msg = {
 	"Try your hand at creating a circuit that realizes the logic on the wall."
 }
+q_command.areas.and_not_3_operands_x_escape.help_chat_msg.ja = {
+	"壁のロジックを実現する回路を作成してみてください。"
+}
 q_command.areas.and_not_3_operands_x_escape.help_chat_sent = false
 q_command.areas.and_not_3_operands_x_escape.help_success_msg = {
 	"Very nice! You've created lots of circuits to this point, each of which affect",
@@ -916,7 +971,10 @@ q_command.areas.and_not_3_operands_x_escape.help_btn_text.en =
 Try your hand at creating a circuit that realizes the logic on the wall.
 ]]
 q_command.areas.and_not_3_operands_x_escape.help_btn_text.es = q_command.areas.and_not_3_operands_x_escape.help_btn_text.en
-q_command.areas.and_not_3_operands_x_escape.help_btn_text.ja = q_command.areas.and_not_3_operands_x_escape.help_btn_text.en
+q_command.areas.and_not_3_operands_x_escape.help_btn_text.ja =
+[[
+壁のロジックを実現する回路を作成してみてください。
+]]
 q_command.areas.and_not_3_operands_x_escape.help_btn_caption = "Make quantum logic gate with multiple operands"
 
 
@@ -951,6 +1009,10 @@ q_command.areas.phase_a_and_b_escape.help_chat_msg = {
 	"with the appearance of the liquid blocks and phase arrows as indicated ",
 	"(arrow points left when the inputs make the boolean expression true) "
 }
+q_command.areas.phase_a_and_b_escape.help_chat_msg.ja = {
+	"壁にあるブール式を回路で実現し、液体ブロックの見た目と位相の矢印が示されたようになる ",
+	"ようにします（入力がブール式を真にすると矢印が左向きになります）。"
+}
 q_command.areas.phase_a_and_b_escape.help_chat_sent = false
 q_command.areas.phase_a_and_b_escape.help_success_msg = {
 	"Well done! You made the phase rotate to pi radians whenever the boolean ",
@@ -975,7 +1037,11 @@ indicated (arrow points left when the inputs make the boolean
 expression true)
 ]]
 q_command.areas.phase_a_and_b_escape.help_btn_text.es = q_command.areas.phase_a_and_b_escape.help_btn_text.en
-q_command.areas.phase_a_and_b_escape.help_btn_text.ja = q_command.areas.phase_a_and_b_escape.help_btn_text.en
+q_command.areas.phase_a_and_b_escape.help_btn_text.ja =
+[[
+壁にあるブール式を回路で実現し、液体ブロックの見た目と位相の矢印が示されたようになる
+ようにします（入力がブール式を真にすると矢印が左向きになります）。
+]]
 q_command.areas.phase_a_and_b_escape.help_btn_caption = "Make two operand phase AND gate"
 
 
@@ -1006,9 +1072,13 @@ q_command.areas.superpos_phase_and_escape.solution_statevector =
 {{r=0.5,i=0},{r=0.5,i=0},{r=0.5,i=0},{r=-0.5,i=0}}
 
 q_command.areas.superpos_phase_and_escape.help_chat_msg = {
-	"Now realize the same logic as you did in the previous room, but compute the",
-	"logic with its inputs in equal superposition, resulting in the state shown",
+	"Now realize the same logic as you did in the previous room, but compute the ",
+	"logic with its inputs in equal superposition, resulting in the state shown ",
 	"on the wall."
+}
+q_command.areas.superpos_phase_and_escape.help_chat_msg.ja = {
+	"ここでは、前の部屋で行ったのと同じロジックを実現しますが、均等な重ね合わせを入力する ",
+	"と、壁に表示される状態になります。"
 }
 q_command.areas.superpos_phase_and_escape.help_chat_sent = false
 q_command.areas.superpos_phase_and_escape.help_success_msg = {
@@ -1030,7 +1100,11 @@ the logic with its inputs in equal superposition, resulting in the state
 shown on the wall.
 ]]
 q_command.areas.superpos_phase_and_escape.help_btn_text.es = q_command.areas.superpos_phase_and_escape.help_btn_text.en
-q_command.areas.superpos_phase_and_escape.help_btn_text.ja = q_command.areas.superpos_phase_and_escape.help_btn_text.en
+q_command.areas.superpos_phase_and_escape.help_btn_text.ja =
+[[
+ここでは、前の部屋で行ったのと同じロジックを実現しますが、均等な重ね合わせを入力する
+と、壁に表示される状態になります。
+]]
 q_command.areas.superpos_phase_and_escape.help_btn_caption = "Compute phase a AND b in superposition"
 
 
@@ -1064,6 +1138,9 @@ q_command.areas.phase_a_or_b_escape.help_chat_msg = {
 	"Now make the circuit realize the boolean expression on the wall, with ",
 	"the appearance of the liquid blocks and phase arrows as indicated",
 }
+q_command.areas.phase_a_or_b_escape.help_chat_msg.ja = {
+	"液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現します。",
+}
 q_command.areas.phase_a_or_b_escape.help_chat_sent = false
 q_command.areas.phase_a_or_b_escape.help_success_msg = {
 	"Congratulations! You just made a 'phase OR' logic gate."
@@ -1080,7 +1157,10 @@ Now make the circuit realize the boolean expression on the wall, with
 the appearance of the liquid blocks and phase arrows as indicated
 ]]
 q_command.areas.phase_a_or_b_escape.help_btn_text.es = q_command.areas.phase_a_or_b_escape.help_btn_text.en
-q_command.areas.phase_a_or_b_escape.help_btn_text.ja = q_command.areas.phase_a_or_b_escape.help_btn_text.en
+q_command.areas.phase_a_or_b_escape.help_btn_text.ja =
+[[
+液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現します。
+]]
 q_command.areas.phase_a_or_b_escape.help_btn_caption = "Make two operand phase OR gate"
 
 
@@ -1114,6 +1194,9 @@ q_command.areas.phase_a_and_b_no_z_escape.help_chat_msg = {
 	"Your challenge here will be to create a 'phase AND' logic gate ",
 	"without a Z block as used previously."
 }
+q_command.areas.phase_a_and_b_no_z_escape.help_chat_msg.ja = {
+	"ここでの課題は、Zブロックなしで「位相AND」論理ゲートを作成することです。"
+}
 q_command.areas.phase_a_and_b_no_z_escape.help_chat_sent = false
 q_command.areas.phase_a_and_b_no_z_escape.help_success_msg = {
 	"Very resourceful! You've found a combination of gates that perform the same",
@@ -1135,7 +1218,10 @@ Your challenge here will be to create a 'phase AND' logic gate
 without a Z block as used previously.
 ]]
 q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.es = q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.en
-q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.ja = q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.en
+q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.ja =
+[[
+ここでの課題は、Zブロックなしで「位相AND」論理ゲートを作成することです。
+]]
 q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption = "Make two operand phase AND gate w/o Z gate"
 
 
@@ -1172,8 +1258,12 @@ q_command.areas.phase_a_and_b_and_c_escape.solution_unitary =
  {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=-1,i=0}}}
 
 q_command.areas.phase_a_and_b_and_c_escape.help_chat_msg = {
-	"Go ahead and make the circuit realize the boolean expression on the wall,",
+	"Go ahead and make the circuit realize the boolean expression on the wall, ",
 	"with the appearance of the liquid blocks and phase arrows as indicated",
+}
+q_command.areas.phase_a_and_b_and_c_escape.help_chat_msg.ja = {
+	"先に進み、液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現 ",
+	"します。",
 }
 q_command.areas.phase_a_and_b_and_c_escape.help_chat_sent = false
 q_command.areas.phase_a_and_b_and_c_escape.help_success_msg = {
@@ -1194,7 +1284,11 @@ wall, with the appearance of the liquid blocks and phase arrows as
 indicated.
 ]]
 q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.es = q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.en
-q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.ja = q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.en
+q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.ja =
+[[
+先に進み、液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現
+します。
+]]
 q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption = "Make three operand phase AND gate"
 
 
@@ -1261,6 +1355,12 @@ q_command.areas.a_or_b_and_c_escape.help_chat_msg = {
 	"qubit hygiene :-)  By the way, I put an H block in the chest in case you ",
 	"want to compute the logic with its inputs in equal superposition."
 }
+q_command.areas.a_or_b_and_c_escape.help_chat_msg.ja = {
+	"ここでは、絶対値のロジックと位相ロジックゲートの組み合わせを使用して、液体ブロックと ",
+	"位相の矢印の見た目と同じになるように、壁のブール式を満たすようにします。ヒントとし ",
+	"て、量子ビットの健康状態に注意してください:-) ところで、均等な重ね合わせを入力に使いた ",
+	"い場合に備えて、チェストにHブロックを置きました。"
+}
 q_command.areas.a_or_b_and_c_escape.help_chat_sent = false
 q_command.areas.a_or_b_and_c_escape.help_success_msg = {
 	"Excellent work! You've really done well in these quantum logic focused",
@@ -1287,6 +1387,12 @@ good qubit hygiene :-)  By the way, I put an H block in the chest in case
 you want to compute the logic with its inputs in equal superposition.
 ]]
 q_command.areas.a_or_b_and_c_escape.help_btn_text.es = q_command.areas.a_or_b_and_c_escape.help_btn_text.en
-q_command.areas.a_or_b_and_c_escape.help_btn_text.ja = q_command.areas.a_or_b_and_c_escape.help_btn_text.en
+q_command.areas.a_or_b_and_c_escape.help_btn_text.ja =
+[[
+ここでは、絶対値のロジックと位相ロジックゲートの組み合わせを使用して、液体ブロックと
+位相の矢印の見た目と同じになるように、壁のブール式を満たすようにします。ヒントとし
+て、量子ビットの健康状態に注意してください:-) ところで、均等な重ね合わせを入力に使いた
+い場合に備えて、チェストにHブロックを置きました。
+]]
 q_command.areas.a_or_b_and_c_escape.help_btn_caption = "Make (a OR b) AND c"
 -- END Escape room puzzles Level II ---------------------------------------------

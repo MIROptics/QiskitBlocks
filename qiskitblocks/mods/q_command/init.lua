@@ -2195,7 +2195,14 @@ Unless you are sure no other players will join, please exit now and
 start QiskitBlocks in singleplayer mode.
 ]]
 q_command.texts.notsingleplayer.es = q_command.texts.notsingleplayer.en
-q_command.texts.notsingleplayer.ja = q_command.texts.notsingleplayer.en
+q_command.texts.notsingleplayer.ja =
+[[
+現在、マルチプレイヤーモードでQiskitBlocksをプレイしていますが、QiskitBlocksはシングル
+プレイヤーモード用に最適化されています。
+
+他のプレイヤーが参加しないことが確実でない限り、今すぐ終了し、シングルプレイ
+ヤーモードでQiskitBlocksを起動してください。
+]]
 
 
 q_command.texts.creative = {}
@@ -2208,21 +2215,14 @@ You can leave now by clicking the Leave QiskitBlocks button, or later by
 pressing [Esc].
 ]]
 q_command.texts.creative.es = q_command.texts.creative.en
-q_command.texts.creative.ja = q_command.texts.creative.en
+q_command.texts.creative.ja =
+[[
+クリエイティブモードはオンになっていますが、QiskitBlocksは、クリエイティブモードの
+チェックボックスをオフにしてプレイするように設計されています。
 
+「QiskitBlocksを退出」ボタンをクリックするか、後で[Esc]を押して退出できます。
+]]
 
--- TODO: Move this "areas" and escape room code to a more appropriate area
--- Areas in the world in which Prof Q interacts with players
--- q_command.areas = {}
-
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
---dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
---dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
---dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
---dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
---dofile(minetest.get_modpath("q_command").."/q_starting_room_help.lua");
 
 function q_command:erase_player_inventory()
 	local player_inv = minetest.get_player_by_name("singleplayer"):get_inventory()

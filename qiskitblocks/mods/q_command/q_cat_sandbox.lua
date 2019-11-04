@@ -52,7 +52,30 @@ qubits to a gate, as well as to rotate a gate. To use these tools,
 position the cursor on an appropriate gate and left-click or right-click.
 ]]
 q_command.areas.quantum_cats_sandbox.help_btn_text.es = q_command.areas.quantum_cats_sandbox.help_btn_text.en
-q_command.areas.quantum_cats_sandbox.help_btn_text.ja = q_command.areas.quantum_cats_sandbox.help_btn_text.en
+q_command.areas.quantum_cats_sandbox.help_btn_text.ja =
+[[
+量子コンピューティングには非常に多くの1と0が存在するため、一部の人々は、最初
+は、量子ビットの世界に直接飛び込むよりも、現実世界の概念（猫など）の状態に関連
+付ける方が簡単だと感じています。 量子猫のサンドボックスでは、各回路は不機嫌な
+状態の猫（Alice CatとBob Cat）で始まります。回路内のゲートは量子状態を進化さ
+せ、その結果、観測された（測定された）ときに猫が不機嫌になったり幸せになったり
+するさまざまな確率が生じます。これらの確率は、各回路の下のガラスブロック内の液
+体レベルで表されます。液体ブロックの前の2進数0と1は、それぞれ不機嫌な状態と幸
+せな状態を表し、右端の数字は最上位の猫を表します。
+
+反対側の壁にある一つの線の回路から見始めてください。？のヘルプボタンを右クリッ
+クして、回路の詳細をご覧ください。回路上のゲートを左クリックして削除し、右ク
+リックして追加して、確率と測定値への影響を確認してください。回路を測定するに
+は、測定デバイスがついているブロックを右クリックします。チェストの中には、いく
+つかのゲートと他のアイテムがあり、右クリックで開閉できます。アイテムをチェスト
+からあなたのインベントリーに移動するには、チェストのダイアログボックスの上部か
+ら下部にアイテムをドラッグします。インベントリーの一番上の行に表示されるアイテ
+ムは、使用可能なアイテムとしてホットバーに表示されます。
+
+チェストには、ゲートに制御量子ビットを追加したり、ゲートを回転させたりするため
+のツールがいくつかあります。これらのツールを使用するには、適切なゲートにカーソ
+ルを置き、左クリックまたは右クリックします。
+]]
 q_command.areas.quantum_cats_sandbox.help_btn_caption = "Quantum cats sandbox"
 
 ------------------------------
@@ -67,7 +90,13 @@ probabilities and measurement results change as this gate is removed and
 added.
 ]]
 q_command.areas.making_cats_happy.help_btn_text.es = q_command.areas.making_cats_happy.help_btn_text.en
-q_command.areas.making_cats_happy.help_btn_text.ja = q_command.areas.making_cats_happy.help_btn_text.en
+q_command.areas.making_cats_happy.help_btn_text.ja =
+[[
+この回路は、1本の線（猫）のみで構成されており、NOT（ビットフリップ）ゲートと
+もよばれるパウリのXゲートを使用しています。 不機嫌な猫に対するその効果は、猫を
+幸せにすることであり、逆もまた同様です。 このゲートを削除して追加したとき、そ
+の結果の確率と測定結果がどのように変化するか注目してください。
+]]
 q_command.areas.making_cats_happy.help_btn_caption = "Making a cat happy"
 
 ------------------------------
@@ -80,7 +109,12 @@ superposition of grumpy and happy. Notice how the outcome probabilities
 and measurement results change as this gate is removed and added.
 ]]
 q_command.areas.superpositional_cat.help_btn_text.es = q_command.areas.superpositional_cat.help_btn_text.en
-q_command.areas.superpositional_cat.help_btn_text.ja = q_command.areas.superpositional_cat.help_btn_text.en
+q_command.areas.superpositional_cat.help_btn_text.ja =
+[[
+この回路はアダマールゲートを使用して、猫を不機嫌な状態と幸せな状態の均等な重ね
+合わせ状態にします。 このゲートを削除して追加すると、結果の確率と測定結果がど
+のように変化するか注目してください。
+]]
 q_command.areas.superpositional_cat.help_btn_caption = "Superposition of grumpy and happy cat"
 
 ------------------------------
@@ -106,7 +140,21 @@ is conditional on the state of the other wire, performing the NOT
 operation whenever the other wire is in the happy cat state.
 ]]
 q_command.areas.entangling_cats.help_btn_text.es = q_command.areas.entangling_cats.help_btn_text.en
-q_command.areas.entangling_cats.help_btn_text.ja = q_command.areas.entangling_cats.help_btn_text.en
+q_command.areas.entangling_cats.help_btn_text.ja =
+[[
+この2つの線の回路は、量子エンタングルメントとして知られる特性を示しています。
+回路内の各線は、主回路から分離されたブロックでつながっていることに注意してくだ
+さい。これは、2つのエンタングル状態の量子の粒子が遠く離れた距離に分離されて
+も、エンタングルしつづける可能性があるという考えを示しています。粒子（猫）の1
+つを測定すると、他の粒子の測定状態が決定されます。測定ブロックの1つを右クリッ
+クして試してください。また、確率は、状態00（不機嫌-不機嫌）と11（幸せ-幸せ）が
+等しく発生する可能性があることを示していることに注意してください。
+
+CNOTゲート（十字線と点のある垂直線を持つ2線のゲート）は、エンタングルメント
+の原因の一部です。十字記号には、この猫のサンドボックス内の別の回路で使用される
+NOTゲートの機能があります。違いは、一方の線の状態を条件とし、その線が幸せな
+猫状態にあるときにNOT操作を実行することです。
+]]
 q_command.areas.entangling_cats.help_btn_caption = "Entangling cats"
 
 
