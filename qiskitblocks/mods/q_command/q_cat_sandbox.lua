@@ -53,7 +53,7 @@ position the cursor on an appropriate gate and left-click or right-click.
 ]]
 q_command.areas.quantum_cats_sandbox.help_btn_text.es = q_command.areas.quantum_cats_sandbox.help_btn_text.en
 q_command.areas.quantum_cats_sandbox.help_btn_text.ja = q_command.areas.quantum_cats_sandbox.help_btn_text.en
-q_command.areas.quantum_cats_sandbox.help_btn_caption = "Quantum cats sandbox :-)"
+q_command.areas.quantum_cats_sandbox.help_btn_caption = "Quantum cats sandbox"
 
 ------------------------------
 q_command.areas.making_cats_happy = {}
@@ -68,7 +68,7 @@ added.
 ]]
 q_command.areas.making_cats_happy.help_btn_text.es = q_command.areas.making_cats_happy.help_btn_text.en
 q_command.areas.making_cats_happy.help_btn_text.ja = q_command.areas.making_cats_happy.help_btn_text.en
-q_command.areas.making_cats_happy.help_btn_caption = "Making a cat happy :-)"
+q_command.areas.making_cats_happy.help_btn_caption = "Making a cat happy"
 
 ------------------------------
 q_command.areas.superpositional_cat = {}
@@ -81,7 +81,7 @@ and measurement results change as this gate is removed and added.
 ]]
 q_command.areas.superpositional_cat.help_btn_text.es = q_command.areas.superpositional_cat.help_btn_text.en
 q_command.areas.superpositional_cat.help_btn_text.ja = q_command.areas.superpositional_cat.help_btn_text.en
-q_command.areas.superpositional_cat.help_btn_caption = "Superposition of grumpy and happy cat :-)"
+q_command.areas.superpositional_cat.help_btn_caption = "Superposition of grumpy and happy cat"
 
 ------------------------------
 q_command.areas.entangling_cats = {}
@@ -107,7 +107,7 @@ operation whenever the other wire is in the happy cat state.
 ]]
 q_command.areas.entangling_cats.help_btn_text.es = q_command.areas.entangling_cats.help_btn_text.en
 q_command.areas.entangling_cats.help_btn_text.ja = q_command.areas.entangling_cats.help_btn_text.en
-q_command.areas.entangling_cats.help_btn_caption = "Entangling cats :-)"
+q_command.areas.entangling_cats.help_btn_caption = "Entangling cats"
 
 
 

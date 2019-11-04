@@ -520,7 +520,30 @@ left-click it while wielding a block (or empty-handed if you are close
 enough).
 ]]
 q_command.areas.measurement_z_desc.help_btn_text.es = q_command.areas.measurement_z_desc.help_btn_text.en
-q_command.areas.measurement_z_desc.help_btn_text.ja = q_command.areas.measurement_z_desc.help_btn_text.en
+q_command.areas.measurement_z_desc.help_btn_text.ja =
+[[
+測定ブロックは、Z基底で量子ビットを測定します（計算基底または標準基底ともよば
+れます）。壁のブロッホ球を参照し、この基底は赤道を切断する平面で表されることに
+注意してください。測定後、量子ビットの状態は|0>（左上のブロッホ球で表される）
+または|1>（左下のブロッホ球で表される）になります。測定ブロックを量子回路に配
+置するには、ブロックを保持しながら、右クリックします。
+
+Z基底で測定を行うには、測定ブロックを右クリックします。他の基底での測定は、こ
+のブロックで測定を実行する前に適切なゲートで量子ビットの状態を回転させることで
+実現できます。測定は可逆的な操作ではありません。
+
+測定ブロックは、測定前に量子ビットの状態の推定値を表示するブロッホ球に変換でき
+ます。これを行うには、スペシャルキーを押しながら測定ブロックを右クリックしま
+す。これにより、状態トモグラフィ測定が回路に挿入さ
+れ、予想される状態が計算され表示されます。スペシャルキーは、ゲームを一時停止
+し、[キー変更]メニューを選択することで知ることができ、また設定可能です。
+
+注：ブロッホ球が回路上にあるときは常に、回路に何らかの変更が発生するたびに
+QASMシミュレーターが自動的に実行されます。
+
+測定ブロック、または他のブロックを回路から削除するには、そのブロックを保持しな
+がら（または十分に近い場合は手ぶらで）、左クリックします。
+]]
 q_command.areas.measurement_z_desc.help_btn_caption = "Measurement in Z basis"
 
 ----------------------------
@@ -551,7 +574,25 @@ left-click it while wielding a block (or empty-handed if you are close
 enough).
 ]]
 q_command.areas.bloch_sphere_block_desc.help_btn_text.es = q_command.areas.bloch_sphere_block_desc.help_btn_text.en
-q_command.areas.bloch_sphere_block_desc.help_btn_text.ja = q_command.areas.bloch_sphere_block_desc.help_btn_text.en
+q_command.areas.bloch_sphere_block_desc.help_btn_text.ja =
+[[
+この壁にあるようなブロッホ球は、量子ビットの量子状態を表します。球の表面のすべ
+てが量子状態となりえます。たとえば、左上のブロッホ球は状態|0>を表し、左下のブ
+ロッホ球は状態|1>を表します。これらのブロッホ球はわずかに時計回りに回転し、手
+前に傾いていることに注意してください。緑のマーカーはブロッホ球の見える側の状態
+を表し、紫のマーカーは隠れた側の状態を表します。
+
+ブロッホ球のブロックを量子回路に配置するには、ブロックを保持しながら、右クリッ
+クします。ブロッホ球のブロックは、状態トモグラフィーを使用して、X、Y、およびZ
+基底での測定を行います。 Z基底のみで測定を行い、測定された基底状態を表示するに
+は、ブロッホ球のブロックを右クリックします。
+
+ブロッホ球のブロックが回路上にあるときは、回路に何らかの変更が発生するたびに
+QASMシミュレーターが自動的に実行されます。
+
+ブロッホ球のブロック、または他のブロックを回路から削除するには、そのブロックを
+保持しながら（または十分に近い場合は手ぶらで）、左クリックします。
+]]
 q_command.areas.bloch_sphere_block_desc.help_btn_caption = "The Bloch sphere"
 
 ----------------------------
@@ -582,7 +623,27 @@ left-click it while wielding a block (or empty-handed if you are close
 enough).
 ]]
 q_command.areas.hsv_color_qubit_block_desc.help_btn_text.es = q_command.areas.hsv_color_qubit_block_desc.help_btn_text.en
-q_command.areas.hsv_color_qubit_block_desc.help_btn_text.ja = q_command.areas.hsv_color_qubit_block_desc.help_btn_text.en
+q_command.areas.hsv_color_qubit_block_desc.help_btn_text.ja =
+[[
+この壁にあるHSVのカラーブロックは、量子ビットの量子状態を表します。たとえ
+ば、左上のHSVカラーブロックは状態| 0>を表し、左下のHSVカラーブロックは状態|
+1>を表します。 HSVカラーで量子ビットの状態を表すこの方法は、Maddy TodとAndy
+Stanford-Clarkによって考案されました。ブロックの色は特定の量子状態に対応し、互
+いに近い状態は類似した色を持ち、遠く離れた状態は反対の色を持ちます。
+
+Z基底で測定を行い、測定された基底状態を表示するには、HSVカラーブロックを右ク
+リックします。
+
+HSVのカラーブロックは状態トモグラフィーを使用して、X、Y、Z基底で測定を行い
+ます。 Z基底のみで測定を行い、測定された基底状態を表示するには、HSVカラーブ
+ロックを右クリックします。
+
+HSVカラーブロックが回路上にあるときは、回路に何らかの変更が発生するたびに
+QASMシミュレーターが自動的に実行されます。
+
+回路からHSVカラーブロックまたは他のブロックを削除するには、そのブロックを保
+持しながら（または十分に近い場合は手ぶらで）左クリックします。
+]]
 q_command.areas.hsv_color_qubit_block_desc.help_btn_caption = "The HSV color block"
 
 ----------------------------
@@ -601,7 +662,17 @@ To remove a Reset block, or any other block from a circuit, left-click
 it while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command.areas.reset_op_desc.help_btn_text.es = q_command.areas.reset_op_desc.help_btn_text.en
-q_command.areas.reset_op_desc.help_btn_text.ja = q_command.areas.reset_op_desc.help_btn_text.en
+q_command.areas.reset_op_desc.help_btn_text.ja =
+[[
+リセット操作は、それまでの状態に関係なく、量子ビットを|0>状態（壁にあるブロッ
+ホ球では左上の状態）に戻します。 可逆な操作ではありません。
+
+リセットブロックを量子回路に配置するには、ブロックを保持しながら、右クリックし
+ます。
+
+リセットブロック、または他のブロックを回路から削除するには、そのブロックを保持
+しながら（または十分に近い場合は手ぶらで）、左クリックします。
+]]
 q_command.areas.reset_op_desc.help_btn_caption = "Reset or |0> operation"
 
 ----------------------------
@@ -620,7 +691,17 @@ To remove a Barrier block, or any other block from a circuit, left-click
 it while wielding a block (or empty-handed if you are close enough).
 ]]
 q_command.areas.barrier_op_desc.help_btn_text.es = q_command.areas.barrier_op_desc.help_btn_text.en
-q_command.areas.barrier_op_desc.help_btn_text.ja = q_command.areas.barrier_op_desc.help_btn_text.en
+q_command.areas.barrier_op_desc.help_btn_text.ja =
+[[
+量子プログラムをより効果的に実行するために、コンパイラーはゲートを結合しようと
+します。 バリアーは、この結合が行われないようにコンパイラーへ命令します。
+
+バリアブロックを量子回路に配置するには、ブロックを保持しながら、右クリックしま
+す。
+
+バリアブロック、または他のブロックを回路から削除するには、そのブロックを保持し
+ながら（または十分に近い場合は手ぶらで）左クリックします。
+]]
 q_command.areas.barrier_op_desc.help_btn_caption = "Barrier operation"
 
 ----------------------------
@@ -646,7 +727,21 @@ left-click it while wielding a block (or empty-handed if you are close
 enough).
 ]]
 q_command.areas.if_op_block_desc.help_btn_text.es = q_command.areas.if_op_block_desc.help_btn_text.en
-q_command.areas.if_op_block_desc.help_btn_text.ja = q_command.areas.if_op_block_desc.help_btn_text.en
+q_command.areas.if_op_block_desc.help_btn_text.ja =
+[[
+If操作は、古典的なレジスターの状態に応じて、量子ゲートを条件付きで適用します。
+If操作ブロックを保持しながら、If条件付きで使うゲートのすぐ左をポイントしながら
+右クリックします。 次に、目的の測定ブロックと古典的な条件値（0または1）を含む
+線がブロックに表示されるまで、Ifブロックを右クリックします。
+
+OpenQASMとQiskitは複数ビットの古典レジスターをサポートしていますが、このアプ
+リケーションは現在、シングルビットの古典レジスターのみをサポートしていることに
+注意してください。 これらの古典レジスターは、回路内の各量子レジスター（暗黙的
+に単一量子ビットとして作成される）に1つずつ作成されます。
+
+If操作ブロック、または他のブロックを回路から削除するには、そのブロックを保持し
+ながら（または十分に近い場合は手ぶらで）、左クリックします。
+]]
 q_command.areas.if_op_block_desc.help_btn_caption = "If operation"
 
 ----------------------------
@@ -682,7 +777,30 @@ Continuation block. The Special key may be known, and set, by pausing
 the game and choosing the Change Keys button.
 ]]
 q_command.areas.wire_extender_block_desc.help_btn_text.es = q_command.areas.wire_extender_block_desc.help_btn_text.en
-q_command.areas.wire_extender_block_desc.help_btn_text.ja = q_command.areas.wire_extender_block_desc.help_btn_text.en
+q_command.areas.wire_extender_block_desc.help_btn_text.ja =
+[[
+Qiskitの操作を表すものではありませんが、配線延長ブロックにより、回路の線を別の
+場所に延長できます。手順は次のとおりです。
+
+1）配線延長ブロックを保持し、目的の線の右端のブロックをポイントしながら、右ク
+リックして配置します。
+
+2）配線延長ブロックを左クリックすると、配線継続ブロック（床の上で回転する立方
+体のアイテム）がドロップされます。注：ドロップされる方向は、左クリックした場所
+に依存します。
+
+3）配線継続ブロックを左クリックして、インベントリーに入れます。このブロックが
+まだホットバーに存在しない場合は、ホットバーに移動させます。
+
+4）この配線継続ブロックを保持しながら、右クリックして、ワイアーを伸ばしたい位
+置と方向に配置します。
+
+5）配線継続ブロックを右クリックし、線の継続幅をいくつにするかを指定します。
+
+配線継続とそれに関連する配線延長ブロックを回路から削除するには、スペシャルキー
+を押しながら配線継続ブロックを左クリックします。スペシャルキーは、ゲームを一時
+停止し、[キー変更]メニューを選択することで知ることができ、また設定可能です。
+]]
 q_command.areas.wire_extender_block_desc.help_btn_caption = "Wire Extender block"
 
 ----------------------------
@@ -728,7 +846,42 @@ left-click the Q block. The Special key may be known, and set, by
 pausing the game and choosing the Change Keys button.
 ]]
 q_command.areas.q_block_desc.help_btn_text.es = q_command.areas.q_block_desc.help_btn_text.en
-q_command.areas.q_block_desc.help_btn_text.ja = q_command.areas.q_block_desc.help_btn_text.en
+q_command.areas.q_block_desc.help_btn_text.ja =
+[[
+Qブロックを使用すると、Qiskitシミュレーターで実行できる量子回路を作成できま
+す。量子回路を作成する手順は次のとおりです。
+
+1）Qブロックを保持しながら、回路を配置したいワールド内の位置をポイントし、右
+クリックします。
+
+2）Qブロックを右クリックし、ダイアログで回路に必要な配線数と列の数を指定し
+て、[作成]ボタンをクリックします。
+
+3）回路上にブロックを配置し、この部屋の各ブロックの近くにある説明を参照して、
+回路を作成します。
+
+量子回路が作成されると、ブロックで構成される基盤も作成されます。この基盤には、
+状態ベクトルの各基底状態の確率と位相を視覚化する液体ブロックが含まれています。
+
+Qブロックを左クリックすると、Qiskitの状態ベクトルシミュレーターが実行されま
+す。これは、回路が変更されるたびに実行されるため、通常は必要ありません。Q ブ
+ロックを左クリックする一般的な理由は、測定ブロックを最後の測定状態で表示するの
+ではなく、元の見た目に戻すためです。
+
+回路がすでに作成されているときにQブロックを右クリックすると、音楽が停止および
+開始されます。また、同時に、回路のOpenQASMコードも表示します。この
+OpenQASMコードは、IBMの実際の量子コンピューターで実行することができます。
+
+そのためには、OpenQASMコードをコピーして、Circuits Composer（
+https://quantum-computing.ibm.com）のCircuit Editor パネルに貼り付けます。
+
+この機能のないQブロックを右クリックすることで、音楽を停止または開始することも
+できます。
+
+Qブロックとその回路を削除するには、スペシャルキーを押しながらQブロックを左ク
+リックします。スペシャルキーは、ゲームを一時停止し、[キー変更]メニューを選択す
+ることで知ることができ、また設定可能です。
+]]
 q_command.areas.q_block_desc.help_btn_caption = "Q block"
 
 -- END Starting room help buttons --------------------------------------------

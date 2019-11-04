@@ -52,12 +52,25 @@ q_command.areas.xor_escape.help_chat_msg = {
 	"realizes a digital 'exclusive or' gate as shown on the wall. You may place |1>",
 	"blocks on wires to test input combinations without affecting the exit door."
 }
+q_command.areas.xor_escape.help_chat_msg.ja = {
+	"また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ",
+	"ラスの後ろに立っていることを思い出してください。私はあなたが元気だと確信しています:-)",
+	"この実験では、壁にあるようにデジタルの「排他的OR」ゲートを実現する回路を作成します。",
+	"出口のドアが開くかどうかに影響を与えることなく、入力をテストするために、ワイアー線上",
+	"に|1>のブロックを配置できます。"
+}
 q_command.areas.xor_escape.help_chat_sent = false
 q_command.areas.xor_escape.help_success_msg = {
 	"Well done! You may know that the CNOT gate is its own inverse, so supplying the ",
 	"output as input will give you the original input as output. That's reversible ",
 	"computing, with no qubits falling in the bit bucket! Perhaps experiment with ",
 	"that before leaving this room to see reversible computing in action."
+}
+q_command.areas.xor_escape.help_success_msg.ja = {
+	"よくできました！ CNOTゲートはそれ自体が可逆であることがわかっているため、出力を入力 ",
+	"として提供すると、元の入力が出力として提供されます。 これは、ビットのバケツに量子ビッ ",
+	"トが入らないリバーシブルなコンピューティングです。この部屋を出る前にそれを試して、リ ",
+	"バーシブルコンピューティングの動作を確認してください。"
 }
 q_command.areas.xor_escape.success_chat_sent = false
 
@@ -92,7 +105,31 @@ control is in state |1>. If the control qubit is in a superposition,
 this gate creates entanglement.
 ]]
 q_command.areas.xor_escape.help_btn_text.es = q_command.areas.xor_escape.help_btn_text.en
-q_command.areas.xor_escape.help_btn_text.ja = q_command.areas.xor_escape.help_btn_text.en
+q_command.areas.xor_escape.help_btn_text.ja =
+[[
+また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ
+ラスの後ろに立っていることを思い出してください。私はあなたが元気だと確信しています:-)
+この実験では、壁にあるようにデジタルの「排他的OR」ゲートを実現する回路を作成します。
+出口のドアが開くかどうかに影響を与えることなく、入力をテストするために、ワイアー線上
+に|1>のブロックを配置できます。
+
+注：これらの「脱出ルーム」サーキットパズルに必要なほとんどのヘルプは、教授Qのチャッ
+トエリア（ウィンドウの左上隅）に表示されます。これらのパズルはみな、チェストからブ
+ロックを取得し、回路に配置するというものです。パズルを解くと、Qブロックが金色に変
+わって、お祝いの音楽がなり、隣の部屋への扉が開きます。レベル II パズルのための知識とス
+キルの構築に役立つため、レベル I 脱出ルームをまだ解いていない場合は解いてから始めてく
+ださい。
+
+回路で測定を実行するには、測定ブロックを右クリックします。
+
+Xゲートを制御Xゲートに（およびその逆に）変換するには、コントロールツール（チェストの
+杖型ツール）を持ちながらブロックを左クリックまたは右クリックします。左クリックすると
+制御量子ビットが1ワイヤ上に移動し、右クリックすると制御量子ビットが1ワイヤ下に移動し
+ます。制御Xゲートは、制御NOTゲートまたはCNOTゲートとも呼ばれます。一対の量子ビッ
+トに作用し、一方がコントロール側として機能し、もう一方がターゲット側として機能しま
+す。コントロール側が|1>の状態の時、ターゲット側でX操作を実行します。制御量子ビットが
+重ね合わせにある場合、このゲートはエンタングルメント状態を作ります。
+]]
 q_command.areas.xor_escape.help_btn_caption = "Make a quantum logic XOR gate"
 
 -------- Room 2 (Level II)
@@ -122,12 +159,19 @@ q_command.areas.dj_bal_flip_ora_escape.solution_unitary =
 {{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
 
 q_command.areas.dj_bal_flip_ora_escape.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as shown on the wall"
+	"Make a circuit like the last one, but negate the output as shown on the wall."
+}
+q_command.areas.dj_bal_flip_ora_escape.help_chat_msg.ja = {
+	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
 }
 q_command.areas.dj_bal_flip_ora_escape.help_chat_sent = false
 q_command.areas.dj_bal_flip_ora_escape.help_success_msg = {
-	"Nice job. I'll keep adding twists like that X gate so you'll be creating",
+	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
 	"circuits with increasingly complex quantum logic in no time!"
+}
+q_command.areas.dj_bal_flip_ora_escape.help_success_msg = {
+	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
+	"ジックを備えた回路をすぐに作成できるようになります。"
 }
 q_command.areas.dj_bal_flip_ora_escape.success_chat_sent = false
 
@@ -174,13 +218,21 @@ q_command.areas.toffoli_escape.solution_unitary =
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}}
 
 q_command.areas.toffoli_escape.help_chat_msg = {
-	"Go ahead and create a circuit that realizes the logic shown on the wall. I'd",
+	"Go ahead and create a circuit that realizes the logic shown on the wall. I'd ",
 	"suggest using a Toffoli gate, but you do you! :-)"
+}
+q_command.areas.toffoli_escape.help_chat_msg.ja = {
+	"壁に示されているロジックを実現する回路を作成します。 トフォリ(Toffoli)ゲートを使用する ",
+	"ことをお勧めしますが、あなた自身で好きに作ってください！ :-)"
 }
 q_command.areas.toffoli_escape.help_chat_sent = false
 q_command.areas.toffoli_escape.help_success_msg = {
-	"Nicely done! Did you notice that this time the output isn't on one of the input",
+	"Nicely done! Did you notice that this time the output isn't on one of the input ",
 	"wires, but rather, on an additional wire?"
+}
+q_command.areas.toffoli_escape.help_success_msg.ja = {
+	"うまくできました！ 今回は出力が入力線のうちの1つではなく、追加の線上にあることに気付 ",
+	"きましたか？"
 }
 q_command.areas.toffoli_escape.success_chat_sent = false
 
@@ -200,7 +252,19 @@ mentioned earlier may be known, and set, by pausing the game and choosing
 the Change Keys button.
 ]]
 q_command.areas.toffoli_escape.help_btn_text.es = q_command.areas.toffoli_escape.help_btn_text.en
-q_command.areas.toffoli_escape.help_btn_text.ja = q_command.areas.toffoli_escape.help_btn_text.en
+q_command.areas.toffoli_escape.help_btn_text.ja =
+[[
+壁に示されているロジックを実現する回路を作成します。 トフォリ(Toffoli)ゲートを使用する
+ことをお勧めしますが、あなた自身で好きに作ってください！ :-)
+
+注：制御されたXゲートをトフォリゲートに変換するには（逆も同様です）、コントロール
+ツールを使用して左クリックまたは右クリックしながら、スペシャルキーを押したままにしま
+す。 左クリックすると、2番目の制御量子ビットが1ワイヤ上に移動し、右クリックすると、2
+番目の制御量子ビットが1ワイヤ下に移動します。 2番目の制御量子ビットには、最初の制御量
+子ビットと区別するのに役立つ青い点があります。 スペシャルキーは、ゲームを一時停止し、
+[キーの変更]ボタンを選択すると、何に設定されているか分かり、また変更することもできま
+す。
+]]
 q_command.areas.toffoli_escape.help_btn_caption = "Make a quantum logic AND gate"
 
 
@@ -243,6 +307,9 @@ q_command.areas.toffoli_nand_escape.help_chat_msg = {
 q_command.areas.toffoli_nand_escape.help_chat_sent = false
 q_command.areas.toffoli_nand_escape.help_success_msg = {
 	"You're really getting the hang of this. On to the next room!"
+}
+q_command.areas.toffoli_nand_escape.help_success_msg.ja = {
+	"あなたは本当にこつを得ていますね。 次の部屋へ！"
 }
 q_command.areas.toffoli_nand_escape.success_chat_sent = false
 
@@ -297,6 +364,9 @@ q_command.areas.or_escape.help_success_msg = {
 	"I like how you negated both inputs, as well as the output, of the",
 	"previous AND circuit to make an OR circuit!"
 }
+q_command.areas.or_escape.help_success_msg.ja = {
+	"前のAND回路の入力と出力の両方を否定してOR回路を作成する方法が気に入っています！"
+}
 q_command.areas.or_escape.success_chat_sent = false
 
 q_command.areas.or_escape.help_btn_text = {}
@@ -348,6 +418,9 @@ q_command.areas.nor_escape.help_chat_msg = {
 q_command.areas.nor_escape.help_chat_sent = false
 q_command.areas.nor_escape.help_success_msg = {
 	"Nicely done. Carry on!"
+}
+q_command.areas.nor_escape.help_success_msg.ja = {
+	"よくできました。 続けましょう！"
 }
 q_command.areas.nor_escape.success_chat_sent = false
 
@@ -403,6 +476,10 @@ q_command.areas.toffoli_mixed_escape.help_success_msg = {
 	"Excellent! Did you notice that only digital logic has been demonstrated to this ",
 	"point? We'll rectify that in the next room."
 }
+q_command.areas.toffoli_mixed_escape.help_success_msg.ja = {
+	"素晴らしいです！ この時点でデジタルのロジックのみが実証されていることに気付き ",
+	"ましたか？ 次の部屋でそれを変えていきます。"
+}
 q_command.areas.toffoli_mixed_escape.success_chat_sent = false
 
 q_command.areas.toffoli_mixed_escape.help_btn_text = {}
@@ -449,9 +526,13 @@ q_command.areas.superpos_logic_and_escape.help_chat_msg = {
 }
 q_command.areas.superpos_logic_and_escape.help_chat_sent = false
 q_command.areas.superpos_logic_and_escape.help_success_msg = {
-	"Outstanding! You've managed to demonstrate quantum parallelism, in which all",
-	"of the 2^n (where n is number of inputs) combinations and their associated",
+	"Outstanding! You've managed to demonstrate quantum parallelism, in which all ",
+	"of the 2^n (where n is number of inputs) combinations and their associated ",
 	"outputs are represented in the state vector."
+}
+q_command.areas.superpos_logic_and_escape.help_success_msg.ja = {
+	"素晴らしい！ 2 ^ n（nは入力の数）のすべての組み合わせとそれらに関連する出力が状 ",
+	"態ベクトルで表される量子の並列性を実証できました。"
 }
 q_command.areas.superpos_logic_and_escape.success_chat_sent = false
 
@@ -632,6 +713,13 @@ q_command.areas.and_3_operands_x_escape.help_success_msg = {
 	"'uncomputing' to clean up after yourself, leaving a scratch qubit (AKA ancilla ",
 	"qubit, labeled 'd' on the wall) the way you found it. Good qubit hygiene is",
 	"important, especially when they are entangled."
+}
+q_command.areas.and_3_operands_x_escape.help_success_msg.ja = {
+	"大変お見事です！ トフォリゲートを使って、3つ以上の入力で構成されるロジックを実 ",
+	"現する方法を見つけました。 また、「uncomputing」と呼ばれる手法を使用して、最 ",
+	"後にクリーンアップし、スクラッチ量子ビット（壁に「d」というラベルが付けられ ",
+	"た、別名補助量子ビット）を残します。特にエンタングル状態では、量子ビットを健全 ",
+	"に保つことが重要です。"
 }
 q_command.areas.and_3_operands_x_escape.success_chat_sent = false
 
@@ -814,6 +902,12 @@ q_command.areas.and_not_3_operands_x_escape.help_success_msg = {
 	"computing in superposition all of the relevant probabilities were equal? To",
 	"address that, I'll show you a helpful companion to magnitude quantum logic."
 }
+q_command.areas.and_not_3_operands_x_escape.help_success_msg.ja = {
+	"非常に素晴らしいです！ これまでに多くの回路を作成しましたが、それぞれが関連する状態の ",
+	"大きさ、つまり測定確率に影響します。 入力として|0>および|1>を使用した場合、うまく機能 ",
+	"しましたが、重ね合わせで計算した場合、すべての確率が等しいことに気付きましたか？ これ ",
+	"を理解するために、大きさの量子ロジックに役立つ仲間を紹介します。"
+}
 q_command.areas.and_not_3_operands_x_escape.success_chat_sent = false
 
 q_command.areas.and_not_3_operands_x_escape.help_btn_text = {}
@@ -863,6 +957,12 @@ q_command.areas.phase_a_and_b_escape.help_success_msg = {
 	"expression on the wall is satisfied (made true) by your input. This type ",
 	"of quantum logic is known as phase logic, so you just made a 'phase AND' ",
 	"logic gate. Did you notice that the 'phase AND' required only two qubits?"
+}
+q_command.areas.phase_a_and_b_escape.help_success_msg.ja = {
+	"よくやりました！壁のブール式が入力によって満たされる（真になる）たびに、位相をπラジ ",
+	"アン回転させました。 このタイプの量子ロジックは位相ロジックとして知られていて、つま ",
+	"り、あなたは「位相AND」ロジックゲートを作成したということです。 「位相AND」に必要な ",
+	"量子ビットは2つだけということに気づきましたか？"
 }
 q_command.areas.phase_a_and_b_escape.success_chat_sent = false
 
@@ -916,6 +1016,10 @@ q_command.areas.superpos_phase_and_escape.help_success_msg = {
 	"all of the 2^n combinations are represented in the state vector. This time",
 	"the combinations that satisfy the boolean expression are marked by a phase."
 }
+q_command.areas.superpos_phase_and_escape.help_success_msg.ja = {
+	"優秀です！ 2^ nのすべての組み合わせが状態ベクトルで表された、量子並列性を再び実証する ",
+	"ことができました。 今回は、ブール式を満たす組み合わせが位相でマークされます。"
+}
 q_command.areas.superpos_phase_and_escape.success_chat_sent = false
 
 q_command.areas.superpos_phase_and_escape.help_btn_text = {}
@@ -962,7 +1066,10 @@ q_command.areas.phase_a_or_b_escape.help_chat_msg = {
 }
 q_command.areas.phase_a_or_b_escape.help_chat_sent = false
 q_command.areas.phase_a_or_b_escape.help_success_msg = {
-	"Congratulations! You just made a 'phase OR' logic gate"
+	"Congratulations! You just made a 'phase OR' logic gate."
+}
+q_command.areas.phase_a_or_b_escape.help_success_msg.ja = {
+	"おめでとうございます！ 「位相OR」論理ゲートを作成しました。"
 }
 q_command.areas.phase_a_or_b_escape.success_chat_sent = false
 
@@ -1013,6 +1120,11 @@ q_command.areas.phase_a_and_b_no_z_escape.help_success_msg = {
 	"conditional unitary evolution as a controlled-Z gate. This will be useful in",
 	"more complex phase logic gates, as the Z gate may only have one control qubit,",
 	"but the X gate may have two (in a Toffoli gate)."
+}
+q_command.areas.phase_a_and_b_no_z_escape.help_success_msg.ja = {
+	"とても賢いですね！ 制御Zゲートと同じ条件付きユニタリーの変化を実行するゲートの組み合 ",
+	"わせが見つかりました。 これは、Zゲートには制御量子ビットが1つしかありませんが、Xゲー ",
+	"トには（トフォリゲート内に）2つあるため、より複雑な位相ロジックゲートで役立ちます。"
 }
 q_command.areas.phase_a_and_b_no_z_escape.success_chat_sent = false
 
@@ -1067,6 +1179,10 @@ q_command.areas.phase_a_and_b_and_c_escape.help_chat_sent = false
 q_command.areas.phase_a_and_b_and_c_escape.help_success_msg = {
 	"Outstanding. See, I told you that an alternative to a controlled-Z gate",
 	"would come in handy!"
+}
+q_command.areas.phase_a_and_b_and_c_escape.help_success_msg.ja = {
+	"非常に素晴らしいです。 見てください。先ほど、私が制御Zゲートの代替品は便利だと言った ",
+	"通りになりました！"
 }
 q_command.areas.phase_a_and_b_and_c_escape.success_chat_sent = false
 
@@ -1148,10 +1264,16 @@ q_command.areas.a_or_b_and_c_escape.help_chat_msg = {
 q_command.areas.a_or_b_and_c_escape.help_chat_sent = false
 q_command.areas.a_or_b_and_c_escape.help_success_msg = {
 	"Excellent work! You've really done well in these quantum logic focused",
-	"circuit puzzles. There is, however one more step required for being able",
+	"circuit puzzles. There is, however, one more step required for being able",
 	"to detect the marked states via measurement. This step is known as",
 	"'amplitude amplification', and is an idea from Grover's algorithm. The",
 	"circuit right outside the exit door demonstrates these concepts together."
+}
+q_command.areas.a_or_b_and_c_escape.help_success_msg.ja = {
+	"すばらしい仕事です！ あなたはこれらの量子ロジックにフォーカスした回路パズルで本当によ ",
+	"くやりました。 ただし、測定によってマークされた状態を検出できるようにするには、もう1 ",
+	"つの手順が必要です。 このステップは「振幅増幅」として知られ、グローバーのアルゴリズム ",
+	"のアイデアです。 出口ドアのすぐ外側の回路は、この概念を示しています。"
 }
 q_command.areas.a_or_b_and_c_escape.success_chat_sent = false
 
