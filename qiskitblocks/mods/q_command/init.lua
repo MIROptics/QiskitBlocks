@@ -2519,7 +2519,7 @@ for idx = 1, NUM_ESCAPE_ROOMS do
     q_command:register_wall_block("q_command_esc_room_" .. tostring(idx) .. "_16")
 end
 
-local NUM_ESCAPE_ROOM_LEVELS = 4
+local NUM_ESCAPE_ROOM_LEVELS = 14
 for idx = 1, NUM_ESCAPE_ROOM_LEVELS do
     q_command:register_wall_block("q_command_esc_room_level_" .. tostring(idx))
 end
