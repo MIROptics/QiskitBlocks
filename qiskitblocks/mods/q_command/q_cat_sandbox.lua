@@ -76,7 +76,10 @@ q_command.areas.quantum_cats_sandbox.help_btn_text.ja =
 のツールがいくつかあります。これらのツールを使用するには、適切なゲートにカーソ
 ルを置き、左クリックまたは右クリックします。
 ]]
-q_command.areas.quantum_cats_sandbox.help_btn_caption = "Quantum cats sandbox"
+q_command.areas.quantum_cats_sandbox.help_btn_caption = {}
+q_command.areas.quantum_cats_sandbox.help_btn_caption.en = "Quantum cats sandbox"
+q_command.areas.quantum_cats_sandbox.help_btn_caption.es = q_command.areas.quantum_cats_sandbox.help_btn_caption.en
+q_command.areas.quantum_cats_sandbox.help_btn_caption.ja = "量子猫のサンドボックス"
 
 ------------------------------
 q_command.areas.making_cats_happy = {}
@@ -97,7 +100,10 @@ q_command.areas.making_cats_happy.help_btn_text.ja =
 幸せにすることであり、逆もまた同様です。 このゲートを削除して追加したとき、そ
 の結果の確率と測定結果がどのように変化するか注目してください。
 ]]
-q_command.areas.making_cats_happy.help_btn_caption = "Making a cat happy"
+q_command.areas.making_cats_happy.help_btn_caption = {}
+q_command.areas.making_cats_happy.help_btn_caption.en = "Making a cat happy"
+q_command.areas.making_cats_happy.help_btn_caption.es = q_command.areas.making_cats_happy.help_btn_caption.en
+q_command.areas.making_cats_happy.help_btn_caption.ja = "猫を幸せにする"
 
 ------------------------------
 q_command.areas.superpositional_cat = {}
@@ -115,7 +121,10 @@ q_command.areas.superpositional_cat.help_btn_text.ja =
 合わせ状態にします。 このゲートを削除して追加すると、結果の確率と測定結果がど
 のように変化するか注目してください。
 ]]
-q_command.areas.superpositional_cat.help_btn_caption = "Superposition of grumpy and happy cat"
+q_command.areas.superpositional_cat.help_btn_caption = {}
+q_command.areas.superpositional_cat.help_btn_caption.en = "Superposition of grumpy and happy cat"
+q_command.areas.superpositional_cat.help_btn_caption.es = q_command.areas.superpositional_cat.help_btn_caption.en
+q_command.areas.superpositional_cat.help_btn_caption.ja = "不機嫌な猫と幸せな猫の重ね合わせ"
 
 ------------------------------
 q_command.areas.entangling_cats = {}
@@ -155,7 +164,10 @@ CNOTゲート（十字線と点のある垂直線を持つ2線のゲート）は
 NOTゲートの機能があります。違いは、一方の線の状態を条件とし、その線が幸せな
 猫状態にあるときにNOT操作を実行することです。
 ]]
-q_command.areas.entangling_cats.help_btn_caption = "Entangling cats"
+q_command.areas.entangling_cats.help_btn_caption = {}
+q_command.areas.entangling_cats.help_btn_caption.en = "Entangling cats"
+q_command.areas.entangling_cats.help_btn_caption.es = q_command.areas.entangling_cats.help_btn_caption.en
+q_command.areas.entangling_cats.help_btn_caption.ja = "猫をエンタングルする"
 
 
 

@@ -2119,6 +2119,7 @@ end
 --- Help buttons ---
 function q_command:register_help_button(suffix, caption, fulltext)
     local localized_fulltext = fulltext[locale_lang]
+    local localized_caption = caption[locale_lang]
 	minetest.register_node("q_command:q_command_button_wall_help_" .. suffix, {
 		description = suffix .. " help button",
 		drawtype = "nodebox",
@@ -2142,7 +2143,7 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			local meta = minetest.get_meta(pos)
 			local formspec = ""..
 			"size[12,6]"..
-			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
+			"label[-0.15,-0.4;"..minetest.formspec_escape(S(localized_caption)).."]"..
 			"tablecolumns[text]"..
 			"tableoptions[background=#000000;highlight=#000000;border=false]"..
 			"table[0,0.25;12,5.2;infosign_text;"..
@@ -2150,9 +2151,9 @@ function q_command:register_help_button(suffix, caption, fulltext)
 			"]"..
 			"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("Close")).."]"
 			meta:set_string("formspec", formspec)
-			meta:set_string("infotext", string.format(S("%s (Right-click for hints)"), S(caption)))
+			meta:set_string("infotext", string.format(S("%s (Right-click for hints)"), S(localized_caption)))
 			--meta:set_string("id", itemstringpart)
-			meta:set_string("caption", caption)
+			meta:set_string("caption", localized_caption)
 		end,
 		on_receive_fields = function(pos, formname, fields, sender)
 			--print("Sign at "..minetest.pos_to_string(pos).." got "..dump(fields))

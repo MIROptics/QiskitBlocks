@@ -70,7 +70,10 @@ q_command.areas.quantum_circuit_garden.help_btn_text.ja =
 ます。各基底状態の右端の数字は、最上位の線を表します。回路を測定するには、測定
 デバイスのついたブロックを右クリックします。
 ]]
-q_command.areas.quantum_circuit_garden.help_btn_caption = "Quantum circuit garden"
+q_command.areas.quantum_circuit_garden.help_btn_caption = {}
+q_command.areas.quantum_circuit_garden.help_btn_caption.en = "Quantum circuit garden"
+q_command.areas.quantum_circuit_garden.help_btn_caption.es = q_command.areas.quantum_circuit_garden.help_btn_caption.en
+q_command.areas.quantum_circuit_garden.help_btn_caption.ja = "量子回路ガーデン"
 
 -- Quantum circuit garden puzzles ------------------------------------------------
 q_command.areas.x_gate = {}
@@ -132,7 +135,10 @@ TLDR：チェストの中からXブロックを取り、回路上に配置して
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.x_gate.help_btn_caption = "Quantum NOT gate"
+q_command.areas.x_gate.help_btn_caption = {}
+q_command.areas.x_gate.help_btn_caption.en = "Quantum NOT gate"
+q_command.areas.x_gate.help_btn_caption.es = q_command.areas.x_gate.help_btn_caption.en
+q_command.areas.x_gate.help_btn_caption.ja = "量子NOTゲート"
 
 ------------------------------
 q_command.areas.h_gate = {}
@@ -200,7 +206,10 @@ TLDR：Hゲートのみを使用して、青い液体レベルをsqrt（1/2）|0
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.h_gate.help_btn_caption = "Hadamard gate"
+q_command.areas.h_gate.help_btn_caption = {}
+q_command.areas.h_gate.help_btn_caption.en = "Hadamard gate"
+q_command.areas.h_gate.help_btn_caption.es = q_command.areas.h_gate.help_btn_caption.en
+q_command.areas.h_gate.help_btn_caption.ja = "アダマールゲート"
 
 ------------------------------
 q_command.areas.cnot_gate_puzzle = {}
@@ -276,7 +285,10 @@ CNOTゲートは、制御NOTゲートまたは制御Xゲートとも呼ばれ、
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.cnot_gate_puzzle.help_btn_caption = "CNOT gate puzzle"
+q_command.areas.cnot_gate_puzzle.help_btn_caption = {}
+q_command.areas.cnot_gate_puzzle.help_btn_caption.en = "CNOT gate puzzle"
+q_command.areas.cnot_gate_puzzle.help_btn_caption.es = q_command.areas.cnot_gate_puzzle.help_btn_caption.en
+q_command.areas.cnot_gate_puzzle.help_btn_caption.ja = "CNOTゲートパズル"
 
 ------------------------------
 q_command.areas.hxx_gates = {}
@@ -321,7 +333,10 @@ sqrt（1/2）|001> + sqrt（1/2）|101>の量子状態に対応させます。
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.hxx_gates.help_btn_caption = "Hadamard and X gates 3 wires"
+q_command.areas.hxx_gates.help_btn_caption = {}
+q_command.areas.hxx_gates.help_btn_caption.en = "Hadamard and X gates 3 wires"
+q_command.areas.hxx_gates.help_btn_caption.es = q_command.areas.hxx_gates.help_btn_caption.en
+q_command.areas.hxx_gates.help_btn_caption.ja = "アダマールとXゲート・３線"
 
 ------------------------------
 q_command.areas.bell_phi_plus = {}
@@ -379,7 +394,10 @@ q_command.areas.bell_phi_plus.help_btn_text.ja =
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.bell_phi_plus.help_btn_caption = "Bell State: phi+"
+q_command.areas.bell_phi_plus.help_btn_caption = {}
+q_command.areas.bell_phi_plus.help_btn_caption.en = "Bell State: phi+"
+q_command.areas.bell_phi_plus.help_btn_caption.es = q_command.areas.bell_phi_plus.help_btn_caption.en
+q_command.areas.bell_phi_plus.help_btn_caption.ja = "ベル状態：Φ+"
 
 ------------------------------
 q_command.areas.bell_phi_minus = {}
@@ -422,7 +440,10 @@ q_command.areas.bell_phi_minus.help_btn_text.ja =
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.bell_phi_minus.help_btn_caption = "Bell State: phi-"
+q_command.areas.bell_phi_minus.help_btn_caption = {}
+q_command.areas.bell_phi_minus.help_btn_caption.en = "Bell State: phi-"
+q_command.areas.bell_phi_minus.help_btn_caption.es = q_command.areas.bell_phi_minus.help_btn_caption.en
+q_command.areas.bell_phi_minus.help_btn_caption.ja = "ベル状態：Φ-"
 
 ------------------------------
 q_command.areas.bell_psi_plus = {}
@@ -467,7 +488,10 @@ q_command.areas.bell_psi_plus.help_btn_text.ja =
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.bell_psi_plus.help_btn_caption = "Bell State: psi+"
+q_command.areas.bell_psi_plus.help_btn_caption = {}
+q_command.areas.bell_psi_plus.help_btn_caption.en = "Bell State: psi+"
+q_command.areas.bell_psi_plus.help_btn_caption.es = q_command.areas.bell_psi_plus.help_btn_caption.en
+q_command.areas.bell_psi_plus.help_btn_caption.ja = "ベル状態：Ψ+"
 
 ------------------------------
 q_command.areas.bell_psi_minus = {}
@@ -514,7 +538,10 @@ Xゲートの右側にΦ+ ベル状態回路（別のパズルで指示されて
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.bell_psi_minus.help_btn_caption = "Bell State: psi-"
+q_command.areas.bell_psi_minus.help_btn_caption = {}
+q_command.areas.bell_psi_minus.help_btn_caption.en = "Bell State: psi-"
+q_command.areas.bell_psi_minus.help_btn_caption.es = q_command.areas.bell_psi_minus.help_btn_caption.en
+q_command.areas.bell_psi_minus.help_btn_caption.ja = "ベル状態：Ψ-"
 
 ------------------------------
 q_command.areas.ghz_state = {}
@@ -565,7 +592,10 @@ GHZ（グリーンバーガー＝ホーン＝ツァイリンガー）状態は�
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.ghz_state.help_btn_caption = "GHZ state"
+q_command.areas.ghz_state.help_btn_caption = {}
+q_command.areas.ghz_state.help_btn_caption.en = "GHZ state"
+q_command.areas.ghz_state.help_btn_caption.es = q_command.areas.ghz_state.help_btn_caption.en
+q_command.areas.ghz_state.help_btn_caption.ja = "GHZ状態"
 
 ------------------------------
 q_command.areas.equal_super_2wire = {}
@@ -607,7 +637,10 @@ sqrt（1/4）|00> + sqrt（1/4）|01> + sqrt（1 / 4）|10> + sqrt（1/4）|11>
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.equal_super_2wire.help_btn_caption = "Equal superposition with two qubits"
+q_command.areas.equal_super_2wire.help_btn_caption = {}
+q_command.areas.equal_super_2wire.help_btn_caption.en = "Equal superposition with two qubits"
+q_command.areas.equal_super_2wire.help_btn_caption.es = q_command.areas.equal_super_2wire.help_btn_caption.en
+q_command.areas.equal_super_2wire.help_btn_caption.ja = "２量子ビットの均等な重ね合わせ"
 
 ------------------------------
 q_command.areas.rotate_yz_gates_puzzle = {}
@@ -678,7 +711,10 @@ Z軸を中心にπラジアン（180度）回転することに注目してく�
 達できるゲート操作に多くの組み合わせ（実際には無限の数）があることを示していま
 す。
 ]]
-q_command.areas.rotate_yz_gates_puzzle.help_btn_caption = "Rotate X/Y/Z gates puzzle"
+q_command.areas.rotate_yz_gates_puzzle.help_btn_caption = {}
+q_command.areas.rotate_yz_gates_puzzle.help_btn_caption.en = "Rotate X/Y/Z gates puzzle"
+q_command.areas.rotate_yz_gates_puzzle.help_btn_caption.es = q_command.areas.rotate_yz_gates_puzzle.help_btn_caption.en
+q_command.areas.rotate_yz_gates_puzzle.help_btn_caption.ja = "X/Y/Z 回転ゲートのパズル"
 
 ------------------------------
 q_command.areas.swap_gate_puzzle = {}
@@ -736,6 +772,9 @@ q_command.areas.swap_gate_puzzle.help_btn_text.ja =
 を切り替えたことを示しています。測定ブロックの1つを右クリックして、|10>が常に結果であ
 ることを確認します。
 ]]
-q_command.areas.swap_gate_puzzle.help_btn_caption = "Swap gate puzzle"
+q_command.areas.swap_gate_puzzle.help_btn_caption = {}
+q_command.areas.swap_gate_puzzle.help_btn_caption.en = "Swap gate puzzle"
+q_command.areas.swap_gate_puzzle.help_btn_caption.es = q_command.areas.swap_gate_puzzle.help_btn_caption.en
+q_command.areas.swap_gate_puzzle.help_btn_caption.ja = "スワップゲートパズル"
 
 -- END Quantum circuit garden puzzles --------------------------------------------

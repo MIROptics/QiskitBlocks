@@ -89,7 +89,10 @@ TODO: Insert instructions for using a Swap block and Swap Tool
 ]]
 q_command.areas.swap_escape.help_btn_text.es = q_command.areas.swap_escape.help_btn_text.en
 q_command.areas.swap_escape.help_btn_text.ja = q_command.areas.swap_escape.help_btn_text.en
-q_command.areas.swap_escape.help_btn_caption = "Swap the qubit states of two wires"
+q_command.areas.swap_escape.help_btn_caption = {}
+q_command.areas.swap_escape.help_btn_caption.en = "Swap the qubit states of two wires"
+q_command.areas.swap_escape.help_btn_caption.es = q_command.areas.swap_escape.help_btn_caption.en
+q_command.areas.swap_escape.help_btn_caption.ja = q_command.areas.swap_escape.help_btn_caption.en
 
 -------- Room 2 (Level III)
 q_command.areas.ctrl_swap_escape = {}
@@ -140,5 +143,8 @@ Make a circuit that conditionally swaps the qubits as shown on the wall
 ]]
 q_command.areas.ctrl_swap_escape.help_btn_text.es = q_command.areas.ctrl_swap_escape.help_btn_text.en
 q_command.areas.ctrl_swap_escape.help_btn_text.ja = q_command.areas.ctrl_swap_escape.help_btn_text.en
-q_command.areas.ctrl_swap_escape.help_btn_caption = "Conditionally swap the qubit states of two wires"
+q_command.areas.ctrl_swap_escape.help_btn_caption = {}
+q_command.areas.ctrl_swap_escape.help_btn_caption.en = "Conditionally swap the qubit states of two wires"
+q_command.areas.ctrl_swap_escape.help_btn_caption.es = q_command.areas.ctrl_swap_escape.help_btn_caption.en
+q_command.areas.ctrl_swap_escape.help_btn_caption.ja = q_command.areas.ctrl_swap_escape.help_btn_caption.en
 -- END Escape room puzzles Level III --------------------------------------------

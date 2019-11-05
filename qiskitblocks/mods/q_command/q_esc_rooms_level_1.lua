@@ -148,7 +148,10 @@ TLDR：この「脱出ルーム」型の回路パズルに必要なほとんど�
 Qブロックがゴールドになったとき、パズルが解けたという意味です。おめでとうござ
 います！
 ]]
-q_command.areas.x_gate_escape.help_btn_caption = "Make quantum state of |1>"
+q_command.areas.x_gate_escape.help_btn_caption = {}
+q_command.areas.x_gate_escape.help_btn_caption.en = "Make quantum state of |1>"
+q_command.areas.x_gate_escape.help_btn_caption.es = q_command.areas.x_gate_escape.help_btn_caption.en
+q_command.areas.x_gate_escape.help_btn_caption.ja = "|1>の量子状態を作る"
 
 
 -------- Room 2 (Level I)
@@ -260,7 +263,10 @@ TLDR：青い液体レベルを量子状態|10>に対応させます。解が正
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.x_gates_2_wire.help_btn_caption = "Make quantum state of |10>"
+q_command.areas.x_gates_2_wire.help_btn_caption = {}
+q_command.areas.x_gates_2_wire.help_btn_caption.en = "Make quantum state of |10>"
+q_command.areas.x_gates_2_wire.help_btn_caption.es = q_command.areas.x_gates_2_wire.help_btn_caption.en
+q_command.areas.x_gates_2_wire.help_btn_caption.ja = "|0>の量子状態を作る"
 
 
 -------- Room 3 (Level I)
@@ -371,7 +377,10 @@ TLDR：青い液体レベルを量子状態|011>に対応させます。出口�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.x_gates_3_wire.help_btn_caption = "Make quantum state of |011>"
+q_command.areas.x_gates_3_wire.help_btn_caption = {}
+q_command.areas.x_gates_3_wire.help_btn_caption.en = "Make quantum state of |011>"
+q_command.areas.x_gates_3_wire.help_btn_caption.es = q_command.areas.x_gates_3_wire.help_btn_caption.en
+q_command.areas.x_gates_3_wire.help_btn_caption.ja = "|011>の量子状態を作る"
 
 
 -------- Room 4 (Level I)
@@ -493,7 +502,10 @@ Hは、|0>状態を|0>と|1>の等しい重ね合わせします。したがっ�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.h_gate_escape.help_btn_caption = "Make a quantum state of |+>"
+q_command.areas.h_gate_escape.help_btn_caption = {}
+q_command.areas.h_gate_escape.help_btn_caption.en = "Make a quantum state of |+>"
+q_command.areas.h_gate_escape.help_btn_caption.es = q_command.areas.h_gate_escape.help_btn_caption.en
+q_command.areas.h_gate_escape.help_btn_caption.ja = "|+>の量子状態を作る"
 
 
 -------- Room 5 (Level I)
@@ -618,7 +630,10 @@ TLDR：青い液体レベルをsqrt（1/2）|0>-sqrt（1/2）|1>の量子状態�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.h_x_gate.help_btn_caption = "Make a quantum state of |->"
+q_command.areas.h_x_gate.help_btn_caption = {}
+q_command.areas.h_x_gate.help_btn_caption.en = "Make a quantum state of |->"
+q_command.areas.h_x_gate.help_btn_caption.es = q_command.areas.h_x_gate.help_btn_caption.en
+q_command.areas.h_x_gate.help_btn_caption.ja = "|->の量子状態を作る"
 
 
 -------- Room 6 (Level I)
@@ -737,7 +752,10 @@ TLDR：Zゲートと他の1つのゲートを使用して、青い液体レベ�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.h_z_gate.help_btn_caption = "Make a quantum state of |-> using gates including Z"
+q_command.areas.h_z_gate.help_btn_caption = {}
+q_command.areas.h_z_gate.help_btn_caption.en = "Make a quantum state of |-> using gates including Z"
+q_command.areas.h_z_gate.help_btn_caption.es = q_command.areas.h_z_gate.help_btn_caption.en
+q_command.areas.h_z_gate.help_btn_caption.ja = "Zを含むゲートを使用して|->の量子状態を作る"
 
 
 -------- Room 7 (Level I)
@@ -809,8 +827,28 @@ gates on single-wire circuits.
 If the Q block turned gold, congratulations on solving the puzzle!
 ]]
 q_command.areas.hxx_gates_escape.help_btn_text.es = q_command.areas.hxx_gates_escape.help_btn_text.en
-q_command.areas.hxx_gates_escape.help_btn_text.ja = q_command.areas.hxx_gates_escape.help_btn_text.en
-q_command.areas.hxx_gates_escape.help_btn_caption = "Make |001> + |101> quantum state"
+q_command.areas.hxx_gates_escape.help_btn_text.ja =
+[[
+TLDR：HおよびXゲートのみを使用して、青い液体レベルをsqrt（1/2）|001> +
+sqrt（1/2）|101>の量子状態に対応させます。
+----
+
+この回路は、アダマールゲートとXゲートを活用して、測定結果が|001>または|101>に
+なる可能性が等しく、その他の測定結果が得られない量子状態を作成します。 この量
+子状態は、|001> + |101>と表現できます。
+
+この回路パズルを解決するには、適切な線にHゲートとXゲートを配置します。
+
+ヒント：単線回路でのHゲートおよびXゲートの動作について既に学んだことを使用し
+てください。
+
+Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
+ます！
+]]
+q_command.areas.hxx_gates_escape.help_btn_caption = {}
+q_command.areas.hxx_gates_escape.help_btn_caption.en = "Make |001> + |101> quantum state"
+q_command.areas.hxx_gates_escape.help_btn_caption.es = q_command.areas.hxx_gates_escape.help_btn_caption.en
+q_command.areas.hxx_gates_escape.help_btn_caption.ja = "|001> + |101> の量子状態を作る"
 
 
 -------- Room 8 (Level I)
@@ -900,7 +938,10 @@ q_command.areas.equal_super_2wire_escape.help_btn_text.ja =
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.equal_super_2wire_escape.help_btn_caption = "Equal superposition with two qubits"
+q_command.areas.equal_super_2wire_escape.help_btn_caption = {}
+q_command.areas.equal_super_2wire_escape.help_btn_caption.en = "Equal superposition with two qubits"
+q_command.areas.equal_super_2wire_escape.help_btn_caption.es = q_command.areas.equal_super_2wire_escape.help_btn_caption.en
+q_command.areas.equal_super_2wire_escape.help_btn_caption.ja = "2量子ビットの均等な重ね合わせ"
 
 
 -------- Room 9 (Level I)
@@ -984,7 +1025,10 @@ q_command.areas.equal_super_3wire_escape.help_btn_text.ja =
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.equal_super_3wire_escape.help_btn_caption = "Equal superposition with three qubits"
+q_command.areas.equal_super_3wire_escape.help_btn_caption = {}
+q_command.areas.equal_super_3wire_escape.help_btn_caption.en = "Equal superposition with three qubits"
+q_command.areas.equal_super_3wire_escape.help_btn_caption.es = q_command.areas.equal_super_3wire_escape.help_btn_caption.en
+q_command.areas.equal_super_3wire_escape.help_btn_caption.ja = "3量子ビットの均等な重ね合わせ"
 
 
 -------- Room 10 (Level I)
@@ -1107,7 +1151,10 @@ TLDR：青い液体レベルを、phi +ベル状態と呼ばれるsqrt（1/2）|
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.bell_phi_plus_escape.help_btn_caption = "Make the phi+ Bell state"
+q_command.areas.bell_phi_plus_escape.help_btn_caption = {}
+q_command.areas.bell_phi_plus_escape.help_btn_caption.en = "Make the phi+ Bell state"
+q_command.areas.bell_phi_plus_escape.help_btn_caption.es = q_command.areas.bell_phi_plus_escape.help_btn_caption.en
+q_command.areas.bell_phi_plus_escape.help_btn_caption.ja = "Φ+ のベル状態を作る"
 
 
 -------- Room 11 (Level I)
@@ -1204,7 +1251,10 @@ TLDR：青い液体レベルを、sqrt（1/2）|00>-sqrt（1/2）|11>の量子�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.bell_phi_minus_escape.help_btn_caption = "Make the phi- Bell state"
+q_command.areas.bell_phi_minus_escape.help_btn_caption = {}
+q_command.areas.bell_phi_minus_escape.help_btn_caption.en = "Make the phi- Bell state"
+q_command.areas.bell_phi_minus_escape.help_btn_caption.es = q_command.areas.bell_phi_minus_escape.help_btn_caption.en
+q_command.areas.bell_phi_minus_escape.help_btn_caption.ja = "Φ- のベル状態を作る"
 
 
 -------- Room 12 (Level I)
@@ -1299,7 +1349,10 @@ TLDR：青い液体レベルをΨ+ のベル状態と呼ばれるsqrt（1/2）|0
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.bell_psi_plus_escape.help_btn_caption = "Make the psi+ Bell state"
+q_command.areas.bell_psi_plus_escape.help_btn_caption = {}
+q_command.areas.bell_psi_plus_escape.help_btn_caption.en = "Make the psi+ Bell state"
+q_command.areas.bell_psi_plus_escape.help_btn_caption.es = q_command.areas.bell_psi_plus_escape.help_btn_caption.en
+q_command.areas.bell_psi_plus_escape.help_btn_caption.ja = "Ψ+ のベル状態を作る"
 
 
 -------- Room 13 (Level I)
@@ -1395,7 +1448,10 @@ TLDR：青い液体レベルをsqrt（1/2）|01>-sqrt（1/2）|10>の量子状�
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.bell_psi_minus_escape.help_btn_caption = "Make the psi- Bell state"
+q_command.areas.bell_psi_minus_escape.help_btn_caption = {}
+q_command.areas.bell_psi_minus_escape.help_btn_caption.en = "Make the psi- Bell state"
+q_command.areas.bell_psi_minus_escape.help_btn_caption.es = q_command.areas.bell_psi_minus_escape.help_btn_caption.en
+q_command.areas.bell_psi_minus_escape.help_btn_caption.ja = "Ψ- のベル状態を作る"
 
 
 -------- Room 14 (Level I)
@@ -1496,7 +1552,10 @@ GHZ（グリーンバーガー＝ホーン＝ツァイリンガー）状態は�
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.ghz_state_escape.help_btn_caption = "Make the GHZ state"
+q_command.areas.ghz_state_escape.help_btn_caption = {}
+q_command.areas.ghz_state_escape.help_btn_caption.en = "Make the GHZ state"
+q_command.areas.ghz_state_escape.help_btn_caption.es = q_command.areas.ghz_state_escape.help_btn_caption.en
+q_command.areas.ghz_state_escape.help_btn_caption.ja = "GHZ状態を作る"
 
 
 -------- Room 15 (Level I)
@@ -1583,7 +1642,10 @@ sqrt（0.85）|0> + sqrt（0.15）e ^ i pi/2 |1>
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうござい
 ます！
 ]]
-q_command.areas.y_z_rot_1wire_escape.help_btn_caption = "Rotate a qubit into a desired state"
+q_command.areas.y_z_rot_1wire_escape.help_btn_caption = {}
+q_command.areas.y_z_rot_1wire_escape.help_btn_caption.en = "Rotate a qubit into a desired state"
+q_command.areas.y_z_rot_1wire_escape.help_btn_caption.es = q_command.areas.y_z_rot_1wire_escape.help_btn_caption.en
+q_command.areas.y_z_rot_1wire_escape.help_btn_caption.ja = "量子ビットを求める状態に回転する"
 
 
 -------- Room 16 (Level I)
@@ -1681,6 +1743,9 @@ sqrt（1/4）e ^ i 3pi/2 |10> + sqrt（1/4）|11>
 
 Qブロックがゴールドになったら、パズルが解けたという意味です。おめでとうございます！
 ]]
-q_command.areas.phase_rot_2wire_escape.help_btn_caption = "Convert phase rotations into measurement probabilities"
+q_command.areas.phase_rot_2wire_escape.help_btn_caption = {}
+q_command.areas.phase_rot_2wire_escape.help_btn_caption.en = "Convert phase rotations into measurement probabilities"
+q_command.areas.phase_rot_2wire_escape.help_btn_caption.es = q_command.areas.phase_rot_2wire_escape.help_btn_caption.en
+q_command.areas.phase_rot_2wire_escape.help_btn_caption.ja = "位相回転を測定確率に変換する"
 -- END Escape room puzzles Level I ---------------------------------------------
 

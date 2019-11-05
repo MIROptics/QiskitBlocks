@@ -63,7 +63,10 @@ A. Smolin、およびJay M. Gambettaによる「Open Quantum Assembly Language�
 の上部にあるブロッホ球は、回転で設定した状態が反映されています。 Qブロックが再び黒く
 なることに注意してください。
 ]]
-q_command.areas.quantum_teleportation.help_btn_caption = "Quantum teleportation"
+q_command.areas.quantum_teleportation.help_btn_caption = {}
+q_command.areas.quantum_teleportation.help_btn_caption.en = "Quantum teleportation"
+q_command.areas.quantum_teleportation.help_btn_caption.es = q_command.areas.quantum_teleportation.help_btn_caption.en
+q_command.areas.quantum_teleportation.help_btn_caption.ja = "量子テレポーテーション"
 
 -- END QASM Chasm puzzles --------------------------------------------
 

@@ -130,7 +130,10 @@ Xゲートを制御Xゲートに（およびその逆に）変換するには、
 す。コントロール側が|1>の状態の時、ターゲット側でX操作を実行します。制御量子ビットが
 重ね合わせにある場合、このゲートはエンタングルメント状態を作ります。
 ]]
-q_command.areas.xor_escape.help_btn_caption = "Make a quantum logic XOR gate"
+q_command.areas.xor_escape.help_btn_caption = {}
+q_command.areas.xor_escape.help_btn_caption.en = "Make a quantum logic XOR gate"
+q_command.areas.xor_escape.help_btn_caption.es = q_command.areas.xor_escape.help_btn_caption.en
+q_command.areas.xor_escape.help_btn_caption.ja = "量子論理XORゲートを作る"
 
 -------- Room 2 (Level II)
 q_command.areas.dj_bal_flip_ora_escape = {}
@@ -185,7 +188,10 @@ q_command.areas.dj_bal_flip_ora_escape.help_btn_text.ja =
 [[
 先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
 ]]
-q_command.areas.dj_bal_flip_ora_escape.help_btn_caption = "Make a NOT XOR quantum logic gate"
+q_command.areas.dj_bal_flip_ora_escape.help_btn_caption = {}
+q_command.areas.dj_bal_flip_ora_escape.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
+q_command.areas.dj_bal_flip_ora_escape.help_btn_caption.es = q_command.areas.dj_bal_flip_ora_escape.help_btn_caption.en
+q_command.areas.dj_bal_flip_ora_escape.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
 
 
 -------- Room 3 (Level II)
@@ -268,7 +274,10 @@ q_command.areas.toffoli_escape.help_btn_text.ja =
 [キーの変更]ボタンを選択すると、何に設定されているか分かり、また変更することもできま
 す。
 ]]
-q_command.areas.toffoli_escape.help_btn_caption = "Make a quantum logic AND gate"
+q_command.areas.toffoli_escape.help_btn_caption = {}
+q_command.areas.toffoli_escape.help_btn_caption.en = "Make a quantum logic AND gate"
+q_command.areas.toffoli_escape.help_btn_caption.es = q_command.areas.toffoli_escape.help_btn_caption.en
+q_command.areas.toffoli_escape.help_btn_caption.ja = "量子論理ANDゲートを作る"
 
 
 -------- Room 4 (Level II)
@@ -332,7 +341,10 @@ q_command.areas.toffoli_nand_escape.help_btn_text.ja =
 先ほどと同じような回路を作成しますが、壁に表示されているようにNAND（NOT AND）で出
 力を否定します。
 ]]
-q_command.areas.toffoli_nand_escape.help_btn_caption = "Make a quantum logic NAND gate"
+q_command.areas.toffoli_nand_escape.help_btn_caption = {}
+q_command.areas.toffoli_nand_escape.help_btn_caption.en = "Make a quantum logic NAND gate"
+q_command.areas.toffoli_nand_escape.help_btn_caption.es = q_command.areas.toffoli_nand_escape.help_btn_caption.en
+q_command.areas.toffoli_nand_escape.help_btn_caption.ja = "量子論理NANDゲートを作る"
 
 
 -------- Room 5 (Level II)
@@ -393,7 +405,10 @@ q_command.areas.or_escape.help_btn_text.ja =
 [[
 再び、壁のロジックを実現する回路を作成します。
 ]]
-q_command.areas.or_escape.help_btn_caption = "Make a quantum logic OR gate"
+q_command.areas.or_escape.help_btn_caption = {}
+q_command.areas.or_escape.help_btn_caption.en = "Make a quantum logic OR gate"
+q_command.areas.or_escape.help_btn_caption.es = q_command.areas.or_escape.help_btn_caption.en
+q_command.areas.or_escape.help_btn_caption.ja = "量子論理ORゲートを作る"
 
 
 -------- Room 6 (Level II)
@@ -455,7 +470,10 @@ q_command.areas.nor_escape.help_btn_text.ja =
 [[
 壁に表示されているNOR（NOT OR）を考慮して、さきほどと似たような回路を作成します。
 ]]
-q_command.areas.nor_escape.help_btn_caption = "Make a quantum logic NOR gate"
+q_command.areas.nor_escape.help_btn_caption = {}
+q_command.areas.nor_escape.help_btn_caption.en = "Make a quantum logic NOR gate"
+q_command.areas.nor_escape.help_btn_caption.es = q_command.areas.nor_escape.help_btn_caption.en
+q_command.areas.nor_escape.help_btn_caption.ja = "量子論理NORゲートを作る"
 
 
 -------- Room 7 (Level II)
@@ -521,7 +539,10 @@ q_command.areas.toffoli_mixed_escape.help_btn_text.ja =
 壁のロジックを実現する回路を作成します。デジタル回路ではNOTがANDに優先することを忘
 れないでください。
 ]]
-q_command.areas.toffoli_mixed_escape.help_btn_caption = "Make a quantum logic AND gate with negated input"
+q_command.areas.toffoli_mixed_escape.help_btn_caption = {}
+q_command.areas.toffoli_mixed_escape.help_btn_caption.en = "Make a quantum logic AND gate with negated input"
+q_command.areas.toffoli_mixed_escape.help_btn_caption.es = q_command.areas.toffoli_mixed_escape.help_btn_caption.en
+q_command.areas.toffoli_mixed_escape.help_btn_caption.ja = "入力を否定した量子論理ANDゲートを作る"
 
 
 -------- Room 8 (Level II)
@@ -584,7 +605,10 @@ q_command.areas.superpos_logic_and_escape.help_btn_text.ja =
 次のトリックでは、前に入った部屋で行ったのと同じロジックを実現します。 ただし、今回は
 均等な重ね合わせを入力に使うと、壁に表示される状態になります。
 ]]
-q_command.areas.superpos_logic_and_escape.help_btn_caption = "Compute NOT a AND b in superposition"
+q_command.areas.superpos_logic_and_escape.help_btn_caption = {}
+q_command.areas.superpos_logic_and_escape.help_btn_caption.en = "Compute NOT a AND b in superposition"
+q_command.areas.superpos_logic_and_escape.help_btn_caption.es = q_command.areas.superpos_logic_and_escape.help_btn_caption.en
+q_command.areas.superpos_logic_and_escape.help_btn_caption.ja = "重ね合わせでNOT a AND bを計算する"
 
 
 -------- Room 9 (Level II)
@@ -788,7 +812,10 @@ q_command.areas.and_3_operands_x_escape.help_btn_text.ja =
 注：ここでは、液体ブロックの状態が表示できるよりも多くあるため、このパズルの液体ブ
 ロックは無視してください。
 ]]
-q_command.areas.and_3_operands_x_escape.help_btn_caption = "Create quantum logic gate with multiple operands"
+q_command.areas.and_3_operands_x_escape.help_btn_caption = {}
+q_command.areas.and_3_operands_x_escape.help_btn_caption.en = "Create quantum logic gate with multiple operands"
+q_command.areas.and_3_operands_x_escape.help_btn_caption.es = q_command.areas.and_3_operands_x_escape.help_btn_caption.en
+q_command.areas.and_3_operands_x_escape.help_btn_caption.ja = "複数のオペランドを持つ量子論理ゲートを作る"
 
 
 -------- Room 10 (Level II)
@@ -975,7 +1002,10 @@ q_command.areas.and_not_3_operands_x_escape.help_btn_text.ja =
 [[
 壁のロジックを実現する回路を作成してみてください。
 ]]
-q_command.areas.and_not_3_operands_x_escape.help_btn_caption = "Make quantum logic gate with multiple operands"
+q_command.areas.and_not_3_operands_x_escape.help_btn_caption = {}
+q_command.areas.and_not_3_operands_x_escape.help_btn_caption.en = "Make quantum logic gate with multiple operands"
+q_command.areas.and_not_3_operands_x_escape.help_btn_caption.es = q_command.areas.and_not_3_operands_x_escape.help_btn_caption.en
+q_command.areas.and_not_3_operands_x_escape.help_btn_caption.ja = "複数のオペランドを持つ量子論理ゲートを作る"
 
 
 -------- Room 11 (Level II)
@@ -1042,7 +1072,10 @@ q_command.areas.phase_a_and_b_escape.help_btn_text.ja =
 壁にあるブール式を回路で実現し、液体ブロックの見た目と位相の矢印が示されたようになる
 ようにします（入力がブール式を真にすると矢印が左向きになります）。
 ]]
-q_command.areas.phase_a_and_b_escape.help_btn_caption = "Make two operand phase AND gate"
+q_command.areas.phase_a_and_b_escape.help_btn_caption = {}
+q_command.areas.phase_a_and_b_escape.help_btn_caption.en = "Make two operand phase AND gate"
+q_command.areas.phase_a_and_b_escape.help_btn_caption.es = q_command.areas.phase_a_and_b_escape.help_btn_caption.en
+q_command.areas.phase_a_and_b_escape.help_btn_caption.ja = "2つのオペランドの位相ANDゲートを作る"
 
 
 -------- Room 12 (Level II)
@@ -1105,7 +1138,10 @@ q_command.areas.superpos_phase_and_escape.help_btn_text.ja =
 ここでは、前の部屋で行ったのと同じロジックを実現しますが、均等な重ね合わせを入力する
 と、壁に表示される状態になります。
 ]]
-q_command.areas.superpos_phase_and_escape.help_btn_caption = "Compute phase a AND b in superposition"
+q_command.areas.superpos_phase_and_escape.help_btn_caption = {}
+q_command.areas.superpos_phase_and_escape.help_btn_caption.en = "Compute phase a AND b in superposition"
+q_command.areas.superpos_phase_and_escape.help_btn_caption.es = q_command.areas.superpos_phase_and_escape.help_btn_caption.en
+q_command.areas.superpos_phase_and_escape.help_btn_caption.ja = "重ね合わせで位相 a AND b を計算する"
 
 
 -------- Room 13 (Level II)
@@ -1161,7 +1197,10 @@ q_command.areas.phase_a_or_b_escape.help_btn_text.ja =
 [[
 液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現します。
 ]]
-q_command.areas.phase_a_or_b_escape.help_btn_caption = "Make two operand phase OR gate"
+q_command.areas.phase_a_or_b_escape.help_btn_caption = {}
+q_command.areas.phase_a_or_b_escape.help_btn_caption.en = "Make two operand phase OR gate"
+q_command.areas.phase_a_or_b_escape.help_btn_caption.es = q_command.areas.phase_a_or_b_escape.help_btn_caption.en
+q_command.areas.phase_a_or_b_escape.help_btn_caption.ja = "2つのオペランドの位相ORゲートを作る"
 
 
 -------- Room 14 (Level II)
@@ -1222,7 +1261,10 @@ q_command.areas.phase_a_and_b_no_z_escape.help_btn_text.ja =
 [[
 ここでの課題は、Zブロックなしで「位相AND」論理ゲートを作成することです。
 ]]
-q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption = "Make two operand phase AND gate w/o Z gate"
+q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption = {}
+q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption.en = "Make two operand phase AND gate w/o Z gate"
+q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption.es = q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption.en
+q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption.ja = "2つのオペランドの位相ANDゲートをZゲートなしで作る"
 
 
 -------- Room 15 (Level II)
@@ -1289,7 +1331,10 @@ q_command.areas.phase_a_and_b_and_c_escape.help_btn_text.ja =
 先に進み、液体ブロックと位相矢印の見た目と同じになるように、壁のブール式を回路で実現
 します。
 ]]
-q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption = "Make three operand phase AND gate"
+q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption = {}
+q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption.en = "Make three operand phase AND gate"
+q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption.es = q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption.en
+q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption.ja = "3つのオペランドの位相ANDゲートを作る"
 
 
 -------- Room 16 (Level II)
@@ -1394,5 +1439,8 @@ q_command.areas.a_or_b_and_c_escape.help_btn_text.ja =
 て、量子ビットの健康状態に注意してください:-) ところで、均等な重ね合わせを入力に使いた
 い場合に備えて、チェストにHブロックを置きました。
 ]]
-q_command.areas.a_or_b_and_c_escape.help_btn_caption = "Make (a OR b) AND c"
+q_command.areas.a_or_b_and_c_escape.help_btn_caption = {}
+q_command.areas.a_or_b_and_c_escape.help_btn_caption.en = "Make (a OR b) AND c"
+q_command.areas.a_or_b_and_c_escape.help_btn_caption.es = q_command.areas.a_or_b_and_c_escape.help_btn_caption.en
+q_command.areas.a_or_b_and_c_escape.help_btn_caption.ja = "(a OR b) AND c を作る"
 -- END Escape room puzzles Level II ---------------------------------------------

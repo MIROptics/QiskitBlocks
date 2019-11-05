@@ -129,7 +129,10 @@ Minetest.net オープン・ソース・ライブラリーを使用して作成�
 どの場所から始めても、ヘルプボタン（?マークが付いている）を右クリックすると、
 ヘルプが表示されます。 幸運をお祈りします！
 ]]
-q_command.areas.quantum_circuit_world.help_btn_caption = "Read me first!"
+q_command.areas.quantum_circuit_world.help_btn_caption = {}
+q_command.areas.quantum_circuit_world.help_btn_caption.en = "Read me first!"
+q_command.areas.quantum_circuit_world.help_btn_caption.es = q_command.areas.quantum_circuit_world.help_btn_caption.en
+q_command.areas.quantum_circuit_world.help_btn_caption.ja = "最初にお読みください"
 
 ----------------------------
 q_command.areas.x_rx_gates = {}
@@ -203,7 +206,10 @@ Xゲートを制御Xゲートに（およびその逆に）変換するには、
 回路からXゲートまたはその他のゲートを削除するには、ブロックを保持しながら（ま
 たは十分に近い場合は手ぶらで）左クリックします。
 ]]
-q_command.areas.x_rx_gates.help_btn_caption = "X and Rx gates"
+q_command.areas.x_rx_gates.help_btn_caption = {}
+q_command.areas.x_rx_gates.help_btn_caption.en = "X and Rx gates"
+q_command.areas.x_rx_gates.help_btn_caption.es = q_command.areas.x_rx_gates.help_btn_caption.en
+q_command.areas.x_rx_gates.help_btn_caption.ja = "XおよびRxゲート"
 
 ----------------------------
 q_command.areas.y_ry_gates = {}
@@ -253,7 +259,10 @@ Yゲートを制御Yゲートに（およびその逆に）変換するには、
 回路からYゲート、その他のゲートを削除するには、そのブロックを保持しながら（ま
 たは十分に近い場合は手ぶらで）左クリックします。
 ]]
-q_command.areas.y_ry_gates.help_btn_caption = "Y and Ry gates"
+q_command.areas.y_ry_gates.help_btn_caption = {}
+q_command.areas.y_ry_gates.help_btn_caption.en = "Y and Ry gates"
+q_command.areas.y_ry_gates.help_btn_caption.es = q_command.areas.y_ry_gates.help_btn_caption.en
+q_command.areas.y_ry_gates.help_btn_caption.ja = "Y および Ryゲート"
 
 ----------------------------
 q_command.areas.z_rz_gates = {}
@@ -306,7 +315,10 @@ Zゲートを制御Zゲートに（およびその逆に）変換するには、
 回路からZゲート、または他のゲートを削除するには、そのブロックを保持しながら
 （十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.z_rz_gates.help_btn_caption = "Z and Rz gates"
+q_command.areas.z_rz_gates.help_btn_caption = {}
+q_command.areas.z_rz_gates.help_btn_caption.en = "Z and Rz gates"
+q_command.areas.z_rz_gates.help_btn_caption.es = q_command.areas.z_rz_gates.help_btn_caption.en
+q_command.areas.z_rz_gates.help_btn_caption.ja = "Z および Rzゲート"
 
 ----------------------------
 q_command.areas.h_gate_desc = {}
@@ -360,7 +372,10 @@ Hゲートを制御Hゲートに変換する（またはその逆）には、コ
 回路から、Hゲート、または他のゲートを削除するには、ブロックを保持しながら（ま
 たは十分近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.h_gate_desc.help_btn_caption = "Hadamard gate"
+q_command.areas.h_gate_desc.help_btn_caption = {}
+q_command.areas.h_gate_desc.help_btn_caption.en = "Hadamard gate"
+q_command.areas.h_gate_desc.help_btn_caption.es = q_command.areas.h_gate_desc.help_btn_caption.en
+q_command.areas.h_gate_desc.help_btn_caption.ja = "アダマールゲート"
 
 ----------------------------
 q_command.areas.swap_gate_desc = {}
@@ -410,7 +425,10 @@ q_command.areas.swap_gate_desc.help_btn_text.ja =
 スワップゲートまたはその他のゲートを回路から削除するには、そのブロックを保持し
 ながら（または十分に近い場合は手ぶらで）左クリックします。
 ]]
-q_command.areas.swap_gate_desc.help_btn_caption = "Swap gate"
+q_command.areas.swap_gate_desc.help_btn_caption = {}
+q_command.areas.swap_gate_desc.help_btn_caption.en = "Swap gate"
+q_command.areas.swap_gate_desc.help_btn_caption.es = q_command.areas.swap_gate_desc.help_btn_caption.en
+q_command.areas.swap_gate_desc.help_btn_caption.ja = "スワップゲート"
 
 ----------------------------
 q_command.areas.s_sdg_gates_desc = {}
@@ -446,7 +464,10 @@ SゲートおよびSdgゲートは、ブロッホ球のZ軸の周りに量子ビ
 Sゲート、または他のゲートを回路から削除するには、ブロックを保持しながら（また
 は十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.s_sdg_gates_desc.help_btn_caption = "S and Sdg gates"
+q_command.areas.s_sdg_gates_desc.help_btn_caption = {}
+q_command.areas.s_sdg_gates_desc.help_btn_caption.en = "S and Sdg gates"
+q_command.areas.s_sdg_gates_desc.help_btn_caption.es = q_command.areas.s_sdg_gates_desc.help_btn_caption.en
+q_command.areas.s_sdg_gates_desc.help_btn_caption.ja = "S および Sdg ゲート"
 
 ----------------------------
 q_command.areas.t_tdg_gates_desc = {}
@@ -483,7 +504,10 @@ TゲートおよびTdgゲートは、ブロッホ球のZ軸の周りに量子ビ
 Tゲート、または他のゲートを回路から削除するには、ブロックを保持しながら（十分
 近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.t_tdg_gates_desc.help_btn_caption = "T and Tdg gates"
+q_command.areas.t_tdg_gates_desc.help_btn_caption = {}
+q_command.areas.t_tdg_gates_desc.help_btn_caption.en = "T and Tdg gates"
+q_command.areas.t_tdg_gates_desc.help_btn_caption.es = q_command.areas.t_tdg_gates_desc.help_btn_caption.en
+q_command.areas.t_tdg_gates_desc.help_btn_caption.ja = "T および Tdg ゲート"
 
 ----------------------------
 q_command.areas.measurement_z_desc = {}
@@ -544,7 +568,10 @@ QASMシミュレーターが自動的に実行されます。
 測定ブロック、または他のブロックを回路から削除するには、そのブロックを保持しな
 がら（または十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.measurement_z_desc.help_btn_caption = "Measurement in Z basis"
+q_command.areas.measurement_z_desc.help_btn_caption = {}
+q_command.areas.measurement_z_desc.help_btn_caption.en = "Measurement in Z basis"
+q_command.areas.measurement_z_desc.help_btn_caption.es = q_command.areas.measurement_z_desc.help_btn_caption.en
+q_command.areas.measurement_z_desc.help_btn_caption.ja = "Z基底での測定"
 
 ----------------------------
 q_command.areas.bloch_sphere_block_desc = {}
@@ -593,7 +620,10 @@ QASMシミュレーターが自動的に実行されます。
 ブロッホ球のブロック、または他のブロックを回路から削除するには、そのブロックを
 保持しながら（または十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.bloch_sphere_block_desc.help_btn_caption = "The Bloch sphere"
+q_command.areas.bloch_sphere_block_desc.help_btn_caption = {}
+q_command.areas.bloch_sphere_block_desc.help_btn_caption.en = "The Bloch sphere"
+q_command.areas.bloch_sphere_block_desc.help_btn_caption.es = q_command.areas.bloch_sphere_block_desc.help_btn_caption.en
+q_command.areas.bloch_sphere_block_desc.help_btn_caption.ja = "ブロッホ球"
 
 ----------------------------
 q_command.areas.hsv_color_qubit_block_desc = {}
@@ -644,7 +674,10 @@ QASMシミュレーターが自動的に実行されます。
 回路からHSVカラーブロックまたは他のブロックを削除するには、そのブロックを保
 持しながら（または十分に近い場合は手ぶらで）左クリックします。
 ]]
-q_command.areas.hsv_color_qubit_block_desc.help_btn_caption = "The HSV color block"
+q_command.areas.hsv_color_qubit_block_desc.help_btn_caption = {}
+q_command.areas.hsv_color_qubit_block_desc.help_btn_caption.en = "The HSV color block"
+q_command.areas.hsv_color_qubit_block_desc.help_btn_caption.es = q_command.areas.hsv_color_qubit_block_desc.help_btn_caption.en
+q_command.areas.hsv_color_qubit_block_desc.help_btn_caption.ja = "HSVのカラーブロック"
 
 ----------------------------
 q_command.areas.reset_op_desc = {}
@@ -673,7 +706,10 @@ q_command.areas.reset_op_desc.help_btn_text.ja =
 リセットブロック、または他のブロックを回路から削除するには、そのブロックを保持
 しながら（または十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.reset_op_desc.help_btn_caption = "Reset or |0> operation"
+q_command.areas.reset_op_desc.help_btn_caption = {}
+q_command.areas.reset_op_desc.help_btn_caption.en = "Reset or |0> operation"
+q_command.areas.reset_op_desc.help_btn_caption.es = q_command.areas.reset_op_desc.help_btn_caption.en
+q_command.areas.reset_op_desc.help_btn_caption.ja = "リセットまたは |0> 操作"
 
 ----------------------------
 q_command.areas.barrier_op_desc = {}
@@ -702,7 +738,10 @@ q_command.areas.barrier_op_desc.help_btn_text.ja =
 バリアブロック、または他のブロックを回路から削除するには、そのブロックを保持し
 ながら（または十分に近い場合は手ぶらで）左クリックします。
 ]]
-q_command.areas.barrier_op_desc.help_btn_caption = "Barrier operation"
+q_command.areas.barrier_op_desc.help_btn_caption = {}
+q_command.areas.barrier_op_desc.help_btn_caption.en = "Barrier operation"
+q_command.areas.barrier_op_desc.help_btn_caption.es = q_command.areas.barrier_op_desc.help_btn_caption.en
+q_command.areas.barrier_op_desc.help_btn_caption.ja = "バリアー操作"
 
 ----------------------------
 q_command.areas.if_op_block_desc = {}
@@ -742,7 +781,10 @@ OpenQASMとQiskitは複数ビットの古典レジスターをサポートして
 If操作ブロック、または他のブロックを回路から削除するには、そのブロックを保持し
 ながら（または十分に近い場合は手ぶらで）、左クリックします。
 ]]
-q_command.areas.if_op_block_desc.help_btn_caption = "If operation"
+q_command.areas.if_op_block_desc.help_btn_caption = {}
+q_command.areas.if_op_block_desc.help_btn_caption.en = "If operation"
+q_command.areas.if_op_block_desc.help_btn_caption.es = q_command.areas.if_op_block_desc.help_btn_caption.en
+q_command.areas.if_op_block_desc.help_btn_caption.ja = "If 操作"
 
 ----------------------------
 q_command.areas.wire_extender_block_desc = {}
@@ -801,7 +843,10 @@ Qiskitの操作を表すものではありませんが、配線延長ブロッ�
 を押しながら配線継続ブロックを左クリックします。スペシャルキーは、ゲームを一時
 停止し、[キー変更]メニューを選択することで知ることができ、また設定可能です。
 ]]
-q_command.areas.wire_extender_block_desc.help_btn_caption = "Wire Extender block"
+q_command.areas.wire_extender_block_desc.help_btn_caption = {}
+q_command.areas.wire_extender_block_desc.help_btn_caption.en = "Wire Extender block"
+q_command.areas.wire_extender_block_desc.help_btn_caption.es = q_command.areas.wire_extender_block_desc.help_btn_caption.en
+q_command.areas.wire_extender_block_desc.help_btn_caption.ja = "ワイアー延長ブロック"
 
 ----------------------------
 q_command.areas.q_block_desc = {}
@@ -882,7 +927,10 @@ Qブロックとその回路を削除するには、スペシャルキーを押�
 リックします。スペシャルキーは、ゲームを一時停止し、[キー変更]メニューを選択す
 ることで知ることができ、また設定可能です。
 ]]
-q_command.areas.q_block_desc.help_btn_caption = "Q block"
+q_command.areas.q_block_desc.help_btn_caption = {}
+q_command.areas.q_block_desc.help_btn_caption.en = "Q block"
+q_command.areas.q_block_desc.help_btn_caption.es = q_command.areas.q_block_desc.help_btn_caption.en
+q_command.areas.q_block_desc.help_btn_caption.ja = "Qブロック"
 
 -- END Starting room help buttons --------------------------------------------
 

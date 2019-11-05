@@ -40,7 +40,10 @@ q_command.areas.deutsch_algo_puzzle.help_btn_text.ja =
 このパズルは、バリア間に適切なゲートを配置して、一番下の線の出力が一番上の線の入力の
 反転状態になるバランスのとれたオラクルを実装することによって解くことができます。
 ]]
-q_command.areas.deutsch_algo_puzzle.help_btn_caption = "Deutsch's algorithm"
+q_command.areas.deutsch_algo_puzzle.help_btn_caption = {}
+q_command.areas.deutsch_algo_puzzle.help_btn_caption.en = "Deutsch's algorithm"
+q_command.areas.deutsch_algo_puzzle.help_btn_caption.es = q_command.areas.deutsch_algo_puzzle.help_btn_caption.en
+q_command.areas.deutsch_algo_puzzle.help_btn_caption.ja = "ドイチのアルゴリズム"
 
 -- END Basic algos lodge puzzles --------------------------------------------
 
