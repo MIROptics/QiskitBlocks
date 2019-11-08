@@ -25,7 +25,7 @@ Please choose one of the *Installing and running* options below and follow the i
 
 - Click the `Play Game` button, waiting a few seconds while the new world is generated and lighted.
 
-- Jump to the `Explore and learn` section below.
+- Jump to the [Explore and learn](https://github.com/JavaFXpert/QiskitBlocks#explore-and-learn) section below.
 
 ## Installing and running (clone this repo instead of using the Minetest Content Database)
 - Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
