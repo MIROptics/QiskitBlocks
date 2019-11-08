@@ -15,7 +15,7 @@ Please choose one of the *Installing and running* options below and follow the i
 - When on the page shown shown here, type `QiskitBlocks`, click the `Search` button, and click the `Install` button beside the `QiskitBlocks` row. Click the `Back to Main Menu` button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
 
-- Although Minetest typically uses your computer's default language, you must select a language in Minetest for QiskitBlocks messages to be displayed in your desired language. Currently, QiskitBlocks messages have been translated to Japanese, so please refer to the `Selecting a language` section below for instructions.
+- Although Minetest typically uses your computer's default language, you must select a language in Minetest for QiskitBlocks messages to be displayed in your desired language. Currently, QiskitBlocks messages have been translated to Japanese, so please refer to the [Selecting a language](https://github.com/JavaFXpert/QiskitBlocks#selecting-a-language) section below for instructions.
 
 - Click the `Start Game` tab shown here, select the round `QiskitBlocks` game from the lower left, deselect the three checkboxes, and click the `New` button.
 ![Minetest Start Game QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_startgame_qiskitblocks.png)
