@@ -58,7 +58,7 @@ Due to the great translation work of [Kifumi Numata](https://twitter.com/kifumin
 - From the `Settings` tab, click the `All Settings` button:
 ![Minetest All Settings](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_all_settings_button.png)
 
-- Click `Client and Server` to expand it, then click `language`. Click the edit button, select `ja` from the dropdown list, and click the Save button. After clicking the `< Back to Settings page` button, exit Minetest and run it again so that your language selection takes effect in QiskitBlocks messages:  
+- Click `Client and Server` to expand it, then click `language`. Click the edit button, select `ja` from the dropdown list, and click the *`Save`* button. After clicking the `< Back to Settings page` button, exit Minetest and run it again so that your language selection takes effect in QiskitBlocks messages:  
 ![Minetest select language](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_select_language.png)
 
 ## Explore and learn!
