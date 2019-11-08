@@ -53,12 +53,12 @@ Please choose one of the *Installing and running* options below and follow the i
 ![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
 
 ## Selecting a language
-Due to the great translation work of [Kifumi Numata](https://twitter.com/kifuminumata) , you may choose for QiskitBlocks messages to be displayed in Japanese (ja). To accomplish this, take the following steps: 
+Due to the great translation work of [Kifumi Numata](https://twitter.com/kifuminumata) , you may choose for QiskitBlocks messages to be displayed in Japanese (`ja`). To accomplish this, take the following steps: 
 
 - From the `Settings` tab, click the `All Settings` button:
 ![Minetest All Settings](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_all_settings_button.png)
 
-- Click `Client and Server` to expand it, then click `language`. Click the edit button, select `ja` from the dropdown list, and click the *`Save`* button. After clicking the `< Back to Settings page` button, exit Minetest and run it again so that your language selection takes effect in QiskitBlocks messages:  
+- Click `Client and Server` to expand it, then click `language`. Click the edit button, select `ja` from the dropdown list, and click the `Save` button. After clicking the `< Back to Settings page` button, exit Minetest and run it again so that your language selection takes effect in QiskitBlocks messages:  
 ![Minetest select language](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_select_language.png)
 
 ## Explore and learn!
