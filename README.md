@@ -7,13 +7,15 @@ Teaches quantum computing and Qiskit in a Minetest block world.
 Please choose one of the *Installing and running* options below and follow the instructions.
 
 ## Installing and running (the quick and easy way using the Minetest Content Database)
-- Download, install and run [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
+- Download, install and run [Minetest 5.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
 
 - Click the `Content` tab shown here, then click the `Browse online content` button. 
 ![Minetest Content Tab](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_content_tab.png)
 
 - When on the page shown shown here, type `QiskitBlocks`, click the `Search` button, and click the `Install` button beside the `QiskitBlocks` row. Click the `Back to Main Menu` button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
+
+- Although Minetest typically uses your computer's default language, you must select a language in Minetest for QiskitBlocks messages to be displayed in your desired language. Currently, QiskitBlocks messages have been translated to Japanese, so please refer to the `Selecting a language` section below for instructions.
 
 - Click the `Start Game` tab shown here, select the round `QiskitBlocks` game from the lower left, deselect the three checkboxes, and click the `New` button.
 ![Minetest Start Game QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_startgame_qiskitblocks.png)
@@ -49,6 +51,15 @@ Please choose one of the *Installing and running* options below and follow the i
 
 - Open the Minetest application, select the round `QiskitBlocks` game from the lower left, and uncheck the `Creative Mode`, `Enable Damage`, and `Host Server` checkboxes. Then select the world `quantum_circuits_world [qiskitblocks]` from the menu, and click `Play Game`.
 ![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
+
+## Selecting a language
+Due to the great translation work of [Kifumi Numata](https://twitter.com/kifuminumata) , you may choose for QiskitBlocks messages to be displayed in Japanese (ja). To accomplish this, take the following steps: 
+
+- From the `Settings` tab, click the `All Settings` button:
+![Minetest All Settings](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_all_settings_button.png)
+
+- Click `Client and Server` to expand it, then click `language`. Click the edit button, select `ja` from the dropdown list, and click the Save button. After clicking the `< Back to Settings page` button, exit Minetest and run it again so that your language selection takes effect in QiskitBlocks messages:  
+![Minetest select language](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_select_language.png)
 
 ## Explore and learn!
 - When you're in the starting room with all of the quantum operation blocks on the wall, use the W, A, S, D keys to walk up to the sign on the right side of the door. Right-click the sign and follow the instructions. Have fun exploring and solving quantum circuit puzzles! 
