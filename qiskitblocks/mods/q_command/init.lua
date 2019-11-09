@@ -64,6 +64,8 @@ CIRCUIT_GARDEN_REGION_ID = 17
 NUM_AREAS_IN_EACH_ESC_ROOM = 16
 NUM_AREAS_IN_CIRCUIT_GARDEN = 0 --TODO: Plug in correct number
 
+HUB_PORTALS_RADIUS = 1
+
 -- our API object
 q_command = {}
 
@@ -81,6 +83,8 @@ q_command.regions.esc_rooms_level_1 = {}
 q_command.regions.esc_rooms_level_1.id = ESC_ROOMS_LEVEL_1_REGION_ID
 q_command.regions.esc_rooms_level_1.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_1.cur_area = 1  -- One-indexed
+q_command.regions.esc_rooms_level_1.hub_portal = {}
+q_command.regions.esc_rooms_level_1.hub_portal.center_pos = {x = 223, y = 0, z = 98}
 
 q_command.regions.esc_rooms_level_2 = {}
 q_command.regions.esc_rooms_level_2.id = ESC_ROOMS_LEVEL_2_REGION_ID
@@ -91,6 +95,7 @@ q_command.regions.circuit_garden = {}
 q_command.regions.circuit_garden.id = CIRCUIT_GARDEN_REGION_ID
 q_command.regions.circuit_garden.num_areas = NUM_AREAS_IN_CIRCUIT_GARDEN
 q_command.regions.circuit_garden.cur_area = 1  -- One-indexed
+
 
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
@@ -2308,9 +2313,12 @@ minetest.register_globalstep(function(dtime)
                         q_command:erase_player_inventory()
 
                         -- Make note of the current area within the region
-                        minetest.debug("Cur region ID: " .. area.region.id)
-                        area.region.cur_area = area.area_num
-                        minetest.debug("cur_area in region: " .. area.region.cur_area)
+                        if area.region and area.region.id and area.region.cur_area and
+                                area.area_num then
+                            minetest.debug("Cur region ID: " .. area.region.id)
+                            area.region.cur_area = area.area_num
+                            minetest.debug("cur_area in region: " .. area.region.cur_area)
+                        end
                     end
 
                     if area.q_block_pos and
@@ -2332,6 +2340,24 @@ minetest.register_globalstep(function(dtime)
             end
         end
 	end
+
+    -- Check hub portals and teleport
+	for key, region in pairs(q_command.regions) do
+        if region.hub_portal and region.hub_portal.center_pos then
+            for _,object in
+            ipairs(minetest.get_objects_inside_radius(
+                    region.hub_portal.center_pos,
+                    HUB_PORTALS_RADIUS)) do
+                if object:is_player() then
+                    -- Teleport to area
+                    minetest.chat_send_player(object:get_player_name(), "Going to teleport")
+                    object:set_pos(q_command.areas.x_gate_escape.center_pos)
+                end
+            end
+        end
+	end
+
+
 end)
 -- END TODO: Move this prof and escape room code to a more appropriate area
 
