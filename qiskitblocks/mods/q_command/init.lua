@@ -85,6 +85,8 @@ q_command.regions.esc_rooms_level_1.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_1.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_1.hub_portal = {}
 q_command.regions.esc_rooms_level_1.hub_portal.center_pos = {x = 223, y = 0, z = 98}
+q_command.regions.esc_rooms_level_1.hub_portal.return_pos = {x = 225, y = 0, z = 98}
+q_command.regions.esc_rooms_level_1.hub_portal.return_look_rad = 3 * (math.pi / 2)
 
 q_command.regions.esc_rooms_level_2 = {}
 q_command.regions.esc_rooms_level_2.id = ESC_ROOMS_LEVEL_2_REGION_ID
@@ -2339,6 +2341,23 @@ minetest.register_globalstep(function(dtime)
                 end
             end
         end
+
+        -- Check to see if player wants to teleport to the hub
+        if area.chest_pos then
+            for _,object in
+            ipairs(minetest.get_objects_inside_radius(
+                    area.chest_pos,
+                    HUB_PORTALS_RADIUS)) do
+                if object:is_player() then
+                    -- Teleport to area
+                    minetest.chat_send_player(object:get_player_name(), "Teleporting back to hub")
+                    --object:set_pos(q_command.areas.x_gate_escape.center_pos)
+                    --object:set_pos(q_command.regions.esc_rooms_level_1[2].center_pos)
+                    --object:set_pos(area.region.hub_portal.return_pos)
+                    --object:set_look_horizontal(area.region.hub_portal.return_look_rad)
+                end
+            end
+        end
 	end
 
     -- Check hub portals and teleport
@@ -2351,7 +2370,9 @@ minetest.register_globalstep(function(dtime)
                 if object:is_player() then
                     -- Teleport to area
                     minetest.chat_send_player(object:get_player_name(), "Going to teleport")
-                    object:set_pos(q_command.areas.x_gate_escape.center_pos)
+                    --object:set_pos(q_command.areas.x_gate_escape.center_pos)
+                    --object:set_pos(q_command.regions.esc_rooms_level_1[2].center_pos)
+                    object:set_pos(q_command.regions.esc_rooms_level_1[region.cur_area].center_pos)
                 end
             end
         end
