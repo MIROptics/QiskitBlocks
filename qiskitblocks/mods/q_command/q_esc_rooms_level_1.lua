@@ -21,6 +21,9 @@ Elements of the q_command table that supply information about areas in the game
 -- Escape room puzzles Level I -------------------------------------------------
 -------- Room 1 (Level I)
 q_command.areas.x_gate_escape = {}
+q_command.areas.x_gate_escape.region = q_command.regions.esc_rooms_level_1
+q_command.areas.x_gate_escape.area_num = 1 -- Escape room 1 of 16 in Level I
+
 q_command.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 q_command.areas.x_gate_escape.radius = 5
 q_command.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
@@ -156,6 +159,9 @@ q_command.areas.x_gate_escape.help_btn_caption.ja = "|1>の量子状態を作る
 
 -------- Room 2 (Level I)
 q_command.areas.x_gates_2_wire = {}
+q_command.areas.x_gates_2_wire.region = q_command.regions.esc_rooms_level_1
+q_command.areas.x_gates_2_wire.area_num = 2 -- Escape room 2 of 16 in Level I
+
 q_command.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 q_command.areas.x_gates_2_wire.radius = 5
 q_command.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}

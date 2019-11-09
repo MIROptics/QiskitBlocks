@@ -56,6 +56,14 @@ MUSIC_ACTIVE = 2
 MUSIC_EXCITED = 3
 MUSIC_CONGRATS = 4
 
+-- Regions (e.g. escape room levels and circuit garden)
+ESC_ROOMS_LEVEL_1_REGION_ID = 1
+ESC_ROOMS_LEVEL_2_REGION_ID = 2
+CIRCUIT_GARDEN_REGION_ID = 17
+
+NUM_AREAS_IN_EACH_ESC_ROOM = 16
+NUM_AREAS_IN_CIRCUIT_GARDEN = 0 --TODO: Plug in correct number
+
 -- our API object
 q_command = {}
 
@@ -67,6 +75,22 @@ q_command.circuit_specs = {} -- dir_str, pos, num_wires, num_columns, is_on_grid
 q_command.circuit_specs.pos = {} -- x, y, z
 
 q_command.areas = {} -- Holds definitions for help signs and Prof Q chat
+q_command.regions = {} -- Holds areas, and information about a given region
+
+q_command.regions.esc_rooms_level_1 = {}
+q_command.regions.esc_rooms_level_1.id = ESC_ROOMS_LEVEL_1_REGION_ID
+q_command.regions.esc_rooms_level_1.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
+q_command.regions.esc_rooms_level_1.cur_area = 1  -- One-indexed
+
+q_command.regions.esc_rooms_level_2 = {}
+q_command.regions.esc_rooms_level_2.id = ESC_ROOMS_LEVEL_2_REGION_ID
+q_command.regions.esc_rooms_level_2.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
+q_command.regions.esc_rooms_level_2.cur_area = 1  -- One-indexed
+
+q_command.regions.circuit_garden = {}
+q_command.regions.circuit_garden.id = CIRCUIT_GARDEN_REGION_ID
+q_command.regions.circuit_garden.num_areas = NUM_AREAS_IN_CIRCUIT_GARDEN
+q_command.regions.circuit_garden.cur_area = 1  -- One-indexed
 
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
@@ -2232,7 +2256,7 @@ function q_command:erase_player_inventory()
 	player_inv:set_size("main", player_inv_main_size)
 end
 
--- Register help buttons for escape rooms
+-- Register help buttons and q_command blocks for areas such as escape rooms
 for key, area in pairs(q_command.areas) do
     if area.help_btn_text then
         --minetest.debug(tostring(key))
@@ -2282,6 +2306,11 @@ minetest.register_globalstep(function(dtime)
                         end
                         area.help_chat_sent = true
                         q_command:erase_player_inventory()
+
+                        -- Make note of the current area within the region
+                        minetest.debug("Cur region ID: " .. area.region.id)
+                        area.region.cur_area = area.area_num
+                        minetest.debug("cur_area in region: " .. area.region.cur_area)
                     end
 
                     if area.q_block_pos and
