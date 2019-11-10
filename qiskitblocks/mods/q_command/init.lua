@@ -59,6 +59,21 @@ MUSIC_CONGRATS = 4
 -- Regions (e.g. escape room levels and circuit garden)
 ESC_ROOMS_LEVEL_1_REGION_ID = 1
 ESC_ROOMS_LEVEL_2_REGION_ID = 2
+ESC_ROOMS_LEVEL_3_REGION_ID = 3
+ESC_ROOMS_LEVEL_4_REGION_ID = 4
+ESC_ROOMS_LEVEL_5_REGION_ID = 5
+ESC_ROOMS_LEVEL_6_REGION_ID = 6
+ESC_ROOMS_LEVEL_7_REGION_ID = 7
+ESC_ROOMS_LEVEL_8_REGION_ID = 8
+ESC_ROOMS_LEVEL_9_REGION_ID = 9
+ESC_ROOMS_LEVEL_10_REGION_ID = 10
+ESC_ROOMS_LEVEL_11_REGION_ID = 11
+ESC_ROOMS_LEVEL_12_REGION_ID = 12
+ESC_ROOMS_LEVEL_13_REGION_ID = 13
+ESC_ROOMS_LEVEL_14_REGION_ID = 14
+ESC_ROOMS_LEVEL_15_REGION_ID = 15
+ESC_ROOMS_LEVEL_16_REGION_ID = 16
+
 CIRCUIT_GARDEN_REGION_ID = 17
 
 NUM_AREAS_IN_EACH_ESC_ROOM = 16
@@ -234,6 +249,7 @@ q_command.regions.esc_rooms_level_16.hub_portal.return_look_rad = RETURN_LOOK_RA
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_1.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_4.lua");
 dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
@@ -2501,7 +2517,7 @@ minetest.register_globalstep(function(dtime)
                     HUB_PORTALS_RADIUS)) do
                 if object:is_player() then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Going to teleport")
+                    minetest.chat_send_player(object:get_player_name(), "Attempting to teleport")
                     --object:set_pos(q_command.regions.esc_rooms_level_1[region.cur_area].center_pos)
                     if region[region.cur_area] and region[region.cur_area].center_pos then
                         object:set_pos(region[region.cur_area].center_pos)

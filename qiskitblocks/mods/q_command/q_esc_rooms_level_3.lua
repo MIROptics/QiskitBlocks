@@ -21,6 +21,10 @@ Elements of the q_command table that supply information about areas in the game
 -- Escape room puzzles Level III ------------------------------------------------
 -------- Room 1 (Level III)
 q_command.areas.swap_escape = {}
+q_command.areas.swap_escape.region = q_command.regions.esc_rooms_level_3
+table.insert(q_command.regions.esc_rooms_level_3, q_command.areas.swap_escape)
+q_command.areas.swap_escape.area_num = #q_command.regions.esc_rooms_level_3
+
 q_command.areas.swap_escape.center_pos = {x = 208, y = 0, z = 42}
 q_command.areas.swap_escape.radius = 5
 q_command.areas.swap_escape.q_block_pos = {x = 212, y = 0, z = 38}
@@ -96,6 +100,10 @@ q_command.areas.swap_escape.help_btn_caption.ja = q_command.areas.swap_escape.he
 
 -------- Room 2 (Level III)
 q_command.areas.ctrl_swap_escape = {}
+q_command.areas.ctrl_swap_escape.region = q_command.regions.esc_rooms_level_3
+table.insert(q_command.regions.esc_rooms_level_3, q_command.areas.ctrl_swap_escape)
+q_command.areas.ctrl_swap_escape.area_num = #q_command.regions.esc_rooms_level_3
+
 q_command.areas.ctrl_swap_escape.center_pos = {x = 218, y = 0, z = 42}
 q_command.areas.ctrl_swap_escape.radius = 5
 q_command.areas.ctrl_swap_escape.q_block_pos = {x = 222, y = 0, z = 46}
