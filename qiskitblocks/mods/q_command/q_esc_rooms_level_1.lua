@@ -22,8 +22,8 @@ Elements of the q_command table that supply information about areas in the game
 -------- Room 1 (Level I)
 q_command.areas.x_gate_escape = {}
 q_command.areas.x_gate_escape.region = q_command.regions.esc_rooms_level_1
-q_command.areas.x_gate_escape.area_num = 1 -- Escape room 1 of 16 in Level I
-q_command.regions.esc_rooms_level_1[1] = q_command.areas.x_gate_escape
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.x_gate_escape)
+q_command.areas.x_gate_escape.area_num = #q_command.regions.esc_rooms_level_1
 
 q_command.areas.x_gate_escape.center_pos = {x = 238, y = 0, z = 72}
 q_command.areas.x_gate_escape.radius = 5
@@ -161,8 +161,8 @@ q_command.areas.x_gate_escape.help_btn_caption.ja = "|1>の量子状態を作る
 -------- Room 2 (Level I)
 q_command.areas.x_gates_2_wire = {}
 q_command.areas.x_gates_2_wire.region = q_command.regions.esc_rooms_level_1
-q_command.areas.x_gates_2_wire.area_num = 2 -- Escape room 2 of 16 in Level I
-q_command.regions.esc_rooms_level_1[2] = q_command.areas.x_gates_2_wire
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.x_gates_2_wire)
+q_command.areas.x_gates_2_wire.area_num = #q_command.regions.esc_rooms_level_1 -- Escape room 2 of 16 in Level I
 
 q_command.areas.x_gates_2_wire.center_pos = {x = 238, y = 0, z = 62}
 q_command.areas.x_gates_2_wire.radius = 5
@@ -279,6 +279,10 @@ q_command.areas.x_gates_2_wire.help_btn_caption.ja = "|10>の量子状態を作�
 
 -------- Room 3 (Level I)
 q_command.areas.x_gates_3_wire = {}
+q_command.areas.x_gates_3_wire.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.x_gates_3_wire)
+q_command.areas.x_gates_3_wire.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.x_gates_3_wire.center_pos = {x = 248, y = 0, z = 62}
 q_command.areas.x_gates_3_wire.radius = 5
 q_command.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
@@ -393,6 +397,10 @@ q_command.areas.x_gates_3_wire.help_btn_caption.ja = "|011>の量子状態を作
 
 -------- Room 4 (Level I)
 q_command.areas.h_gate_escape = {}
+q_command.areas.h_gate_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.h_gate_escape)
+q_command.areas.h_gate_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.h_gate_escape.center_pos = {x = 248, y = 0, z = 72}
 q_command.areas.h_gate_escape.radius = 5
 q_command.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
@@ -518,6 +526,10 @@ q_command.areas.h_gate_escape.help_btn_caption.ja = "|+>の量子状態を作る
 
 -------- Room 5 (Level I)
 q_command.areas.h_x_gate = {}
+q_command.areas.h_x_gate.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.h_x_gate)
+q_command.areas.h_x_gate.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.h_x_gate.center_pos = {x = 258, y = 0, z = 72}
 q_command.areas.h_x_gate.radius = 5
 q_command.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
@@ -646,6 +658,10 @@ q_command.areas.h_x_gate.help_btn_caption.ja = "|->の量子状態を作る"
 
 -------- Room 6 (Level I)
 q_command.areas.h_z_gate = {}
+q_command.areas.h_z_gate.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.h_z_gate)
+q_command.areas.h_z_gate.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.h_z_gate.center_pos = {x = 258, y = 0, z = 62}
 q_command.areas.h_z_gate.radius = 5
 q_command.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
@@ -768,6 +784,10 @@ q_command.areas.h_z_gate.help_btn_caption.ja = "Zを含むゲートを使用し�
 
 -------- Room 7 (Level I)
 q_command.areas.hxx_gates_escape = {}
+q_command.areas.hxx_gates_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.hxx_gates_escape)
+q_command.areas.hxx_gates_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.hxx_gates_escape.center_pos = {x = 268, y = 0, z = 62}
 q_command.areas.hxx_gates_escape.radius = 5
 q_command.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
@@ -861,6 +881,10 @@ q_command.areas.hxx_gates_escape.help_btn_caption.ja = "|001> + |101> の量子�
 
 -------- Room 8 (Level I)
 q_command.areas.equal_super_2wire_escape = {}
+q_command.areas.equal_super_2wire_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.equal_super_2wire_escape)
+q_command.areas.equal_super_2wire_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.equal_super_2wire_escape.center_pos = {x = 268, y = 0, z = 72}
 q_command.areas.equal_super_2wire_escape.radius = 5
 q_command.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
@@ -957,6 +981,10 @@ q_command.areas.equal_super_2wire_escape.help_btn_caption.ja = "2量子ビット
 
 -------- Room 9 (Level I)
 q_command.areas.equal_super_3wire_escape = {}
+q_command.areas.equal_super_3wire_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.equal_super_3wire_escape)
+q_command.areas.equal_super_3wire_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.equal_super_3wire_escape.center_pos = {x = 268, y = 0, z = 82}
 q_command.areas.equal_super_3wire_escape.radius = 5
 q_command.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
@@ -1044,6 +1072,10 @@ q_command.areas.equal_super_3wire_escape.help_btn_caption.ja = "3量子ビット
 
 -------- Room 10 (Level I)
 q_command.areas.bell_phi_plus_escape = {}
+q_command.areas.bell_phi_plus_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.bell_phi_plus_escape)
+q_command.areas.bell_phi_plus_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.bell_phi_plus_escape.center_pos = {x = 268, y = 0, z = 92}
 q_command.areas.bell_phi_plus_escape.radius = 5
 q_command.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
@@ -1170,6 +1202,10 @@ q_command.areas.bell_phi_plus_escape.help_btn_caption.ja = "Φ+ のベル状態�
 
 -------- Room 11 (Level I)
 q_command.areas.bell_phi_minus_escape = {}
+q_command.areas.bell_phi_minus_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.bell_phi_minus_escape)
+q_command.areas.bell_phi_minus_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.bell_phi_minus_escape.center_pos = {x = 258, y = 0, z = 92}
 q_command.areas.bell_phi_minus_escape.radius = 5
 q_command.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
@@ -1270,6 +1306,10 @@ q_command.areas.bell_phi_minus_escape.help_btn_caption.ja = "Φ- のベル状態
 
 -------- Room 12 (Level I)
 q_command.areas.bell_psi_plus_escape = {}
+q_command.areas.bell_psi_plus_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.bell_psi_plus_escape)
+q_command.areas.bell_psi_plus_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.bell_psi_plus_escape.center_pos = {x = 258, y = 0, z = 82}
 q_command.areas.bell_psi_plus_escape.radius = 5
 q_command.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
@@ -1368,6 +1408,10 @@ q_command.areas.bell_psi_plus_escape.help_btn_caption.ja = "Ψ+ のベル状態�
 
 -------- Room 13 (Level I)
 q_command.areas.bell_psi_minus_escape = {}
+q_command.areas.bell_psi_minus_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.bell_psi_minus_escape)
+q_command.areas.bell_psi_minus_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.bell_psi_minus_escape.center_pos = {x = 248, y = 0, z = 82}
 q_command.areas.bell_psi_minus_escape.radius = 5
 q_command.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
@@ -1467,6 +1511,10 @@ q_command.areas.bell_psi_minus_escape.help_btn_caption.ja = "Ψ- のベル状態
 
 -------- Room 14 (Level I)
 q_command.areas.ghz_state_escape = {}
+q_command.areas.ghz_state_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.ghz_state_escape)
+q_command.areas.ghz_state_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.ghz_state_escape.center_pos = {x = 248, y = 0, z = 92}
 q_command.areas.ghz_state_escape.radius = 5
 q_command.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
@@ -1571,6 +1619,10 @@ q_command.areas.ghz_state_escape.help_btn_caption.ja = "GHZ状態を作る"
 
 -------- Room 15 (Level I)
 q_command.areas.y_z_rot_1wire_escape = {}
+q_command.areas.y_z_rot_1wire_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.y_z_rot_1wire_escape)
+q_command.areas.y_z_rot_1wire_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.y_z_rot_1wire_escape.center_pos = {x = 238, y = 0, z = 92}
 q_command.areas.y_z_rot_1wire_escape.radius = 5
 q_command.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
@@ -1661,6 +1713,10 @@ q_command.areas.y_z_rot_1wire_escape.help_btn_caption.ja = "量子ビットを�
 
 -------- Room 16 (Level I)
 q_command.areas.phase_rot_2wire_escape = {}
+q_command.areas.phase_rot_2wire_escape.region = q_command.regions.esc_rooms_level_1
+table.insert(q_command.regions.esc_rooms_level_1, q_command.areas.phase_rot_2wire_escape)
+q_command.areas.phase_rot_2wire_escape.area_num = #q_command.regions.esc_rooms_level_1
+
 q_command.areas.phase_rot_2wire_escape.center_pos = {x = 238, y = 0, z = 82}
 q_command.areas.phase_rot_2wire_escape.radius = 5
 q_command.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}

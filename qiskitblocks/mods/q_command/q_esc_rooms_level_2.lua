@@ -21,6 +21,10 @@ Elements of the q_command table that supply information about areas in the game
 -- Escape room puzzles Level II -------------------------------------------------
 -------- Room 1 (Level II)
 q_command.areas.xor_escape = {}
+q_command.areas.xor_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.xor_escape)
+q_command.areas.xor_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.xor_escape.center_pos = {x = 218, y = 0, z = 72}
 q_command.areas.xor_escape.radius = 5
 q_command.areas.xor_escape.q_block_pos = {x = 215, y = 0, z = 70}
@@ -137,6 +141,10 @@ q_command.areas.xor_escape.help_btn_caption.ja = "量子論理XORゲートを作
 
 -------- Room 2 (Level II)
 q_command.areas.dj_bal_flip_ora_escape = {}
+q_command.areas.dj_bal_flip_ora_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.dj_bal_flip_ora_escape)
+q_command.areas.dj_bal_flip_ora_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.dj_bal_flip_ora_escape.center_pos = {x = 218, y = 0, z = 62}
 q_command.areas.dj_bal_flip_ora_escape.radius = 5
 q_command.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 59}
@@ -196,6 +204,10 @@ q_command.areas.dj_bal_flip_ora_escape.help_btn_caption.ja = "NOT XOR量子論�
 
 -------- Room 3 (Level II)
 q_command.areas.toffoli_escape = {}
+q_command.areas.toffoli_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.toffoli_escape)
+q_command.areas.toffoli_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.toffoli_escape.center_pos = {x = 208, y = 0, z = 62}
 q_command.areas.toffoli_escape.radius = 5
 q_command.areas.toffoli_escape.q_block_pos = {x = 204, y = 0, z = 58}
@@ -282,6 +294,10 @@ q_command.areas.toffoli_escape.help_btn_caption.ja = "量子論理ANDゲート�
 
 -------- Room 4 (Level II)
 q_command.areas.toffoli_nand_escape = {}
+q_command.areas.toffoli_nand_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.toffoli_nand_escape)
+q_command.areas.toffoli_nand_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.toffoli_nand_escape.center_pos = {x = 208, y = 0, z = 72}
 q_command.areas.toffoli_nand_escape.radius = 5
 q_command.areas.toffoli_nand_escape.q_block_pos = {x = 212, y = 0, z = 76}
@@ -349,6 +365,10 @@ q_command.areas.toffoli_nand_escape.help_btn_caption.ja = "量子論理NANDゲ�
 
 -------- Room 5 (Level II)
 q_command.areas.or_escape = {}
+q_command.areas.or_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.or_escape)
+q_command.areas.or_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.or_escape.center_pos = {x = 208, y = 0, z = 82}
 q_command.areas.or_escape.radius = 5
 q_command.areas.or_escape.q_block_pos = {x = 204, y = 0, z = 86}
@@ -413,6 +433,10 @@ q_command.areas.or_escape.help_btn_caption.ja = "量子論理ORゲートを作�
 
 -------- Room 6 (Level II)
 q_command.areas.nor_escape = {}
+q_command.areas.nor_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.nor_escape)
+q_command.areas.nor_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.nor_escape.center_pos = {x = 218, y = 0, z = 82}
 q_command.areas.nor_escape.radius = 5
 q_command.areas.nor_escape.q_block_pos = {x = 222, y = 0, z = 78}
@@ -478,6 +502,10 @@ q_command.areas.nor_escape.help_btn_caption.ja = "量子論理NORゲートを作
 
 -------- Room 7 (Level II)
 q_command.areas.toffoli_mixed_escape = {}
+q_command.areas.toffoli_mixed_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.toffoli_mixed_escape)
+q_command.areas.toffoli_mixed_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.toffoli_mixed_escape.center_pos = {x = 218, y = 0, z = 92}
 q_command.areas.toffoli_mixed_escape.radius = 5
 q_command.areas.toffoli_mixed_escape.q_block_pos = {x = 214, y = 0, z = 96}
@@ -547,6 +575,10 @@ q_command.areas.toffoli_mixed_escape.help_btn_caption.ja = "入力を否定し�
 
 -------- Room 8 (Level II)
 q_command.areas.superpos_logic_and_escape = {}
+q_command.areas.superpos_logic_and_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.superpos_logic_and_escape)
+q_command.areas.superpos_logic_and_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.superpos_logic_and_escape.center_pos = {x = 208, y = 0, z = 92}
 q_command.areas.superpos_logic_and_escape.radius = 5
 q_command.areas.superpos_logic_and_escape.q_block_pos = {x = 212, y = 0, z = 88}
@@ -613,6 +645,10 @@ q_command.areas.superpos_logic_and_escape.help_btn_caption.ja = "重ね合わせ
 
 -------- Room 9 (Level II)
 q_command.areas.and_3_operands_x_escape = {}
+q_command.areas.and_3_operands_x_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.and_3_operands_x_escape)
+q_command.areas.and_3_operands_x_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.and_3_operands_x_escape.center_pos = {x = 198, y = 0, z = 92}
 q_command.areas.and_3_operands_x_escape.radius = 5
 q_command.areas.and_3_operands_x_escape.q_block_pos = {x = 194, y = -1, z = 88}
@@ -820,6 +856,10 @@ q_command.areas.and_3_operands_x_escape.help_btn_caption.ja = "複数のオペ�
 
 -------- Room 10 (Level II)
 q_command.areas.and_not_3_operands_x_escape = {}
+q_command.areas.and_not_3_operands_x_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.and_not_3_operands_x_escape)
+q_command.areas.and_not_3_operands_x_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.and_not_3_operands_x_escape.center_pos = {x = 188, y = 0, z = 92}
 q_command.areas.and_not_3_operands_x_escape.radius = 5
 q_command.areas.and_not_3_operands_x_escape.q_block_pos = {x = 184, y = 0, z = 88}
@@ -1010,6 +1050,10 @@ q_command.areas.and_not_3_operands_x_escape.help_btn_caption.ja = "複数のオ�
 
 -------- Room 11 (Level II)
 q_command.areas.phase_a_and_b_escape = {}
+q_command.areas.phase_a_and_b_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.phase_a_and_b_escape)
+q_command.areas.phase_a_and_b_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.phase_a_and_b_escape.center_pos = {x = 188, y = 0, z = 82}
 q_command.areas.phase_a_and_b_escape.radius = 5
 q_command.areas.phase_a_and_b_escape.q_block_pos = {x = 190, y = 0, z = 79}
@@ -1080,6 +1124,10 @@ q_command.areas.phase_a_and_b_escape.help_btn_caption.ja = "2つのオペラン�
 
 -------- Room 12 (Level II)
 q_command.areas.superpos_phase_and_escape = {}
+q_command.areas.superpos_phase_and_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.superpos_phase_and_escape)
+q_command.areas.superpos_phase_and_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.superpos_phase_and_escape.center_pos = {x = 198, y = 0, z = 82}
 q_command.areas.superpos_phase_and_escape.radius = 5
 q_command.areas.superpos_phase_and_escape.q_block_pos = {x = 201, y = 0, z = 84}
@@ -1146,6 +1194,10 @@ q_command.areas.superpos_phase_and_escape.help_btn_caption.ja = "重ね合わせ
 
 -------- Room 13 (Level II)
 q_command.areas.phase_a_or_b_escape = {}
+q_command.areas.phase_a_or_b_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.phase_a_or_b_escape)
+q_command.areas.phase_a_or_b_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.phase_a_or_b_escape.center_pos = {x = 198, y = 0, z = 72}
 q_command.areas.phase_a_or_b_escape.radius = 5
 q_command.areas.phase_a_or_b_escape.q_block_pos = {x = 201, y = 0, z = 69}
@@ -1205,6 +1257,10 @@ q_command.areas.phase_a_or_b_escape.help_btn_caption.ja = "2つのオペラン�
 
 -------- Room 14 (Level II)
 q_command.areas.phase_a_and_b_no_z_escape = {}
+q_command.areas.phase_a_and_b_no_z_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.phase_a_and_b_no_z_escape)
+q_command.areas.phase_a_and_b_no_z_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.phase_a_and_b_no_z_escape.center_pos = {x = 188, y = 0, z = 72}
 q_command.areas.phase_a_and_b_no_z_escape.radius = 5
 q_command.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 185, y = 0, z = 69}
@@ -1269,6 +1325,10 @@ q_command.areas.phase_a_and_b_no_z_escape.help_btn_caption.ja = "2つのオペ�
 
 -------- Room 15 (Level II)
 q_command.areas.phase_a_and_b_and_c_escape = {}
+q_command.areas.phase_a_and_b_and_c_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.phase_a_and_b_and_c_escape)
+q_command.areas.phase_a_and_b_and_c_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.phase_a_and_b_and_c_escape.center_pos = {x = 188, y = 0, z = 62}
 q_command.areas.phase_a_and_b_and_c_escape.radius = 5
 q_command.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 184, y = 0, z = 58}
@@ -1339,6 +1399,10 @@ q_command.areas.phase_a_and_b_and_c_escape.help_btn_caption.ja = "3つのオペ�
 
 -------- Room 16 (Level II)
 q_command.areas.a_or_b_and_c_escape = {}
+q_command.areas.a_or_b_and_c_escape.region = q_command.regions.esc_rooms_level_2
+table.insert(q_command.regions.esc_rooms_level_2, q_command.areas.a_or_b_and_c_escape)
+q_command.areas.a_or_b_and_c_escape.area_num = #q_command.regions.esc_rooms_level_2
+
 q_command.areas.a_or_b_and_c_escape.center_pos = {x = 198, y = 0, z = 62}
 q_command.areas.a_or_b_and_c_escape.radius = 5
 q_command.areas.a_or_b_and_c_escape.q_block_pos = {x = 202, y = 0, z = 66}
