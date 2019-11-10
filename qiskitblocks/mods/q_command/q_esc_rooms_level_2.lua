@@ -180,7 +180,7 @@ q_command.areas.dj_bal_flip_ora_escape.help_success_msg = {
 	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
 	"circuits with increasingly complex quantum logic in no time!"
 }
-q_command.areas.dj_bal_flip_ora_escape.help_success_msg = {
+q_command.areas.dj_bal_flip_ora_escape.help_success_msg.ja = {
 	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
 	"ジックを備えた回路をすぐに作成できるようになります。"
 }
