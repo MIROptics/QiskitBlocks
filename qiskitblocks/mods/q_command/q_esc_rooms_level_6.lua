@@ -31,7 +31,7 @@ q_command.areas.lev_6_rm_1.area_num = #q_command.regions.esc_rooms_level_6
 -- block in the floor of the room. This is used, along with radius, to identify when a
 -- player is in the room. This enables mechanisms such as greeting the player and
 -- erasing their inventory when they enter an escape room.
-q_command.areas.lev_6_rm_1.center_pos = {x = 238, y = 0, z = 32}
+q_command.areas.lev_6_rm_1.center_pos = {x = 318, y = 0, z = -28}
 q_command.areas.lev_6_rm_1.radius = 5
 
 -- Note to devs: The q_block_pos x/y/z values should indicate where the Q block is,
@@ -44,14 +44,14 @@ q_command.areas.lev_6_rm_1.radius = 5
 -- level number and Y is room number. Right-click to place the Q block in the
 -- desired location in the room, and supply the desired number of rows/columns in the
 -- circuit. You'll need to be in Creative Mode to search the inventory for Q blocks.
-q_command.areas.lev_6_rm_1.q_block_pos = {x = 241, y = 0, z = 34}
+q_command.areas.lev_6_rm_1.q_block_pos = {x = 315, y = 0, z = -30}
 
 -- Note to devs: The door_pos x/y/z values should indicate where the exit door is.
-q_command.areas.lev_6_rm_1.door_pos = {x = 236, y = 0, z = 37}
+q_command.areas.lev_6_rm_1.door_pos = {x = 320, y = 0, z = -33}
 
 -- Note to devs: The chest_pos x/y/z values should indicate where the chest is, so
 -- that it may be restocked when a puzzle is solved.
-q_command.areas.lev_6_rm_1.chest_pos = {x = 234, y = 0, z = 34}
+q_command.areas.lev_6_rm_1.chest_pos = {x = 322, y = 0, z = -30}
 
 -- Note to devs: Remove chest inventory items not required for the circuit puzzle,
 -- by making their relevant strings empty.
