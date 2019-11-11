@@ -36,7 +36,7 @@ q_command.areas.lev_4_rm_1.radius = 5
 
 -- Note to devs: The q_block_pos x/y/z values should indicate where the Q block is,
 -- for input to mechanisms such as opening the exit door when a puzzle is solved.
--- Since the escape rooms in this level are already preloaded with default circuit
+-- Since the escape rooms in this level are already pre-loaded with default circuit
 -- puzzles, it will often be necessary to change the q_block_pos when replacing it
 -- with a different sized puzzle. To delete a puzzle from an escape room, hold the
 -- shift key while left-clicking the Q block. To create a circuit puzzle in a room,
@@ -53,8 +53,8 @@ q_command.areas.lev_4_rm_1.door_pos = {x = 236, y = 0, z = 37}
 -- that it may be restocked when a puzzle is solved.
 q_command.areas.lev_4_rm_1.chest_pos = {x = 234, y = 0, z = 34}
 
--- Note to devs: Remove chest inventory items not required, by making their relevant
--- strings empty.
+-- Note to devs: Remove chest inventory items not required for the circuit puzzle,
+-- by making their relevant strings empty.
 q_command.areas.lev_4_rm_1.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -87,7 +87,7 @@ q_command.areas.lev_4_rm_1.chest_inv = {
 -- of complex numbers that represent the solution to a circuit puzzle. Use this
 -- variable when the puzzle is expressed in terms of transforming various inputs
 -- to corresponding outputs. For example, the circuit puzzle challenge in this
--- room is to create a CNOT gate, which is defined by a unique unitary matrix.
+-- room is to create a CNOT gate, which is modeled by a unique unitary matrix.
 -- To obtain the value to supply here, *temporarily* uncomment the relevant line
 -- in the init.lua file in the q_command directory:
 --      minetest.debug("unitary:\n" .. dump(unitary))
@@ -112,10 +112,10 @@ q_command.areas.lev_4_rm_1.solution_statevector =
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}}
 --]]
 
--- Note to devs: The variable ending in help_chat_msg holds the English version of
--- the message that Professor Q will chat to the player when entering an escape room
--- for the first time since the application is invoked. Note that for chat messages,
--- ".en" is *not* added to the end of the variable.
+-- Note to devs: The variable ending in help_chat_msg holds the English localized version
+-- of the message that Professor Q will chat to the player when entering an escape room
+-- for the first time since the application is invoked. Note that for help_chat_msg,
+-- ".en" is *not* added to the end of the variable name for the English language.
 q_command.areas.lev_4_rm_1.help_chat_msg = {
 	"We meet again, esteemed colleague! You may recall that my name is Professor Q and",
 	"that I'm standing behind this glass because we're conducting quantum experiments.",
@@ -124,8 +124,8 @@ q_command.areas.lev_4_rm_1.help_chat_msg = {
 	"blocks on wires to test input combinations without affecting the exit door."
 }
 -- Note to devs: The variable ending in help_chat_msg and a language code holds the
--- localized version of the message that Professor Q will chat to the player when
--- entering an escape room for the first time since the application is invoked.
+-- non-English localized version of the message that Professor Q will chat to the
+-- player when entering an escape room for the first time since the application is invoked.
 q_command.areas.lev_4_rm_1.help_chat_msg.ja = {
 	"また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ",
 	"ラスの後ろに立っていることを思い出してください。私はあなたが元気だと確信しています:-)",
@@ -135,10 +135,11 @@ q_command.areas.lev_4_rm_1.help_chat_msg.ja = {
 }
 q_command.areas.lev_4_rm_1.help_chat_sent = false
 
--- Note to devs: The variable ending in help_success_msg holds the English version of
--- the message that Professor Q will chat to the player when solving an escape room
--- puzzle for the first time since the application is invoked. Note that for chat
--- messages, ".en" is *not* added to the end of the variable.
+-- Note to devs: The variable ending in help_success_msg holds the English localized
+-- version of the message that Professor Q will chat to the player when solving an
+-- escape room puzzle for the first time since the application is invoked. Note that
+-- for help_success_msg, ".en" is *not* added to the end of the variable name for the
+-- English language.
 q_command.areas.lev_4_rm_1.help_success_msg = {
 	"Well done! You may know that the CNOT gate is its own inverse, so supplying the ",
 	"output as input will give you the original input as output. That's reversible ",
@@ -163,7 +164,8 @@ q_command.areas.lev_4_rm_1.success_chat_sent = false
 -- the localized help_chat_msg variables discussed previously. If it seems prudent,
 -- additional notes and hints should be included in the text, but be careful not to
 -- make it too easy for the player to solve the puzzle. Note that for help_btn_text
--- it is necessary to include the language code (".en") when supplying English text.
+-- it is necessary to include the language code for all localized text, including
+-- (".en") for English text.
 -- Whenever you change the text on a sign, delete it from the wall by left-clicking,
 -- and put it back on the wall by wielding the sign and right-clicking. To find the
 -- sign in inventory for a given escape room, search with the pattern "lev_X_rm_Y",
@@ -226,10 +228,10 @@ Xゲートを制御Xゲートに（およびその逆に）変換するには、
 ]]
 
 
--- Note to devs: The variable ending in help_btn_caption followed by a language code
--- holds the text that appears in the caption of a help sign. Note that for
--- help_btn_caption it is necessary to include the language code (".en") when
--- supplying English text.
+-- Note to devs: The variable ending in help_btn_caption followed by a language
+-- code holds the text that appears in the caption of a help sign. Note that
+-- for help_btn_caption it is necessary to include the language code for all
+-- localized text, including (".en") for English text.
 q_command.areas.lev_4_rm_1.help_btn_caption = {}
 q_command.areas.lev_4_rm_1.help_btn_caption.en = "Make a quantum logic XOR gate"
 q_command.areas.lev_4_rm_1.help_btn_caption.es = q_command.areas.lev_4_rm_1.help_btn_caption.en
