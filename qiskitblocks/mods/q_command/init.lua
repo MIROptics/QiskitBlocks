@@ -101,8 +101,8 @@ q_command.regions.esc_rooms_level_1.id = ESC_ROOMS_LEVEL_1_REGION_ID
 q_command.regions.esc_rooms_level_1.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_1.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_1.hub_portal = {}
-q_command.regions.esc_rooms_level_1.hub_portal.center_pos = {x = 223, y = 0, z = 98}
-q_command.regions.esc_rooms_level_1.hub_portal.return_pos = {x = 225, y = 0, z = 98}
+q_command.regions.esc_rooms_level_1.hub_portal.center_pos = {x = 224, y = 0, z = 98}
+q_command.regions.esc_rooms_level_1.hub_portal.return_pos = {x = 226, y = 0, z = 98}
 q_command.regions.esc_rooms_level_1.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_2 = {}
@@ -110,8 +110,8 @@ q_command.regions.esc_rooms_level_2.id = ESC_ROOMS_LEVEL_2_REGION_ID
 q_command.regions.esc_rooms_level_2.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_2.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_2.hub_portal = {}
-q_command.regions.esc_rooms_level_2.hub_portal.center_pos = {x = 223, y = 0, z = 100}
-q_command.regions.esc_rooms_level_2.hub_portal.return_pos = {x = 225, y = 0, z = 100}
+q_command.regions.esc_rooms_level_2.hub_portal.center_pos = {x = 224, y = 0, z = 100}
+q_command.regions.esc_rooms_level_2.hub_portal.return_pos = {x = 226, y = 0, z = 100}
 q_command.regions.esc_rooms_level_2.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_3 = {}
@@ -119,8 +119,8 @@ q_command.regions.esc_rooms_level_3.id = ESC_ROOMS_LEVEL_3_REGION_ID
 q_command.regions.esc_rooms_level_3.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_3.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_3.hub_portal = {}
-q_command.regions.esc_rooms_level_3.hub_portal.center_pos = {x = 223, y = 0, z = 102}
-q_command.regions.esc_rooms_level_3.hub_portal.return_pos = {x = 225, y = 0, z = 102}
+q_command.regions.esc_rooms_level_3.hub_portal.center_pos = {x = 224, y = 0, z = 102}
+q_command.regions.esc_rooms_level_3.hub_portal.return_pos = {x = 226, y = 0, z = 102}
 q_command.regions.esc_rooms_level_3.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_4 = {}
@@ -128,8 +128,8 @@ q_command.regions.esc_rooms_level_4.id = ESC_ROOMS_LEVEL_4_REGION_ID
 q_command.regions.esc_rooms_level_4.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_4.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_4.hub_portal = {}
-q_command.regions.esc_rooms_level_4.hub_portal.center_pos = {x = 223, y = 0, z = 104}
-q_command.regions.esc_rooms_level_4.hub_portal.return_pos = {x = 225, y = 0, z = 104}
+q_command.regions.esc_rooms_level_4.hub_portal.center_pos = {x = 224, y = 0, z = 104}
+q_command.regions.esc_rooms_level_4.hub_portal.return_pos = {x = 226, y = 0, z = 104}
 q_command.regions.esc_rooms_level_4.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_5 = {}
@@ -137,8 +137,8 @@ q_command.regions.esc_rooms_level_5.id = ESC_ROOMS_LEVEL_5_REGION_ID
 q_command.regions.esc_rooms_level_5.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_5.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_5.hub_portal = {}
-q_command.regions.esc_rooms_level_5.hub_portal.center_pos = {x = 223, y = 0, z = 106}
-q_command.regions.esc_rooms_level_5.hub_portal.return_pos = {x = 225, y = 0, z = 106}
+q_command.regions.esc_rooms_level_5.hub_portal.center_pos = {x = 224, y = 0, z = 106}
+q_command.regions.esc_rooms_level_5.hub_portal.return_pos = {x = 226, y = 0, z = 106}
 q_command.regions.esc_rooms_level_5.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_6 = {}
@@ -146,8 +146,8 @@ q_command.regions.esc_rooms_level_6.id = ESC_ROOMS_LEVEL_6_REGION_ID
 q_command.regions.esc_rooms_level_6.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_6.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_6.hub_portal = {}
-q_command.regions.esc_rooms_level_6.hub_portal.center_pos = {x = 223, y = 0, z = 108}
-q_command.regions.esc_rooms_level_6.hub_portal.return_pos = {x = 225, y = 0, z = 108}
+q_command.regions.esc_rooms_level_6.hub_portal.center_pos = {x = 224, y = 0, z = 108}
+q_command.regions.esc_rooms_level_6.hub_portal.return_pos = {x = 226, y = 0, z = 108}
 q_command.regions.esc_rooms_level_6.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_7 = {}
@@ -156,7 +156,7 @@ q_command.regions.esc_rooms_level_7.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_7.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_7.hub_portal = {}
 q_command.regions.esc_rooms_level_7.hub_portal.center_pos = {x = 223, y = 0, z = 110}
-q_command.regions.esc_rooms_level_7.hub_portal.return_pos = {x = 225, y = 0, z = 110}
+q_command.regions.esc_rooms_level_7.hub_portal.return_pos = {x = 226, y = 0, z = 110}
 q_command.regions.esc_rooms_level_7.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_8 = {}
@@ -165,7 +165,7 @@ q_command.regions.esc_rooms_level_8.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_8.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_8.hub_portal = {}
 q_command.regions.esc_rooms_level_8.hub_portal.center_pos = {x = 223, y = 0, z = 112}
-q_command.regions.esc_rooms_level_8.hub_portal.return_pos = {x = 225, y = 0, z = 112}
+q_command.regions.esc_rooms_level_8.hub_portal.return_pos = {x = 226, y = 0, z = 112}
 q_command.regions.esc_rooms_level_8.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_9 = {}
@@ -174,7 +174,7 @@ q_command.regions.esc_rooms_level_9.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_9.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_9.hub_portal = {}
 q_command.regions.esc_rooms_level_9.hub_portal.center_pos = {x = 223, y = 0, z = 114}
-q_command.regions.esc_rooms_level_9.hub_portal.return_pos = {x = 225, y = 0, z = 114}
+q_command.regions.esc_rooms_level_9.hub_portal.return_pos = {x = 226, y = 0, z = 114}
 q_command.regions.esc_rooms_level_9.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_10 = {}
@@ -183,7 +183,7 @@ q_command.regions.esc_rooms_level_10.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_10.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_10.hub_portal = {}
 q_command.regions.esc_rooms_level_10.hub_portal.center_pos = {x = 223, y = 0, z = 116}
-q_command.regions.esc_rooms_level_10.hub_portal.return_pos = {x = 225, y = 0, z = 116}
+q_command.regions.esc_rooms_level_10.hub_portal.return_pos = {x = 226, y = 0, z = 116}
 q_command.regions.esc_rooms_level_10.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_11 = {}
@@ -192,7 +192,7 @@ q_command.regions.esc_rooms_level_11.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_11.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_11.hub_portal = {}
 q_command.regions.esc_rooms_level_11.hub_portal.center_pos = {x = 223, y = 0, z = 118}
-q_command.regions.esc_rooms_level_11.hub_portal.return_pos = {x = 225, y = 0, z = 118}
+q_command.regions.esc_rooms_level_11.hub_portal.return_pos = {x = 226, y = 0, z = 118}
 q_command.regions.esc_rooms_level_11.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_12 = {}
@@ -201,7 +201,7 @@ q_command.regions.esc_rooms_level_12.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_12.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_12.hub_portal = {}
 q_command.regions.esc_rooms_level_12.hub_portal.center_pos = {x = 223, y = 0, z = 120}
-q_command.regions.esc_rooms_level_12.hub_portal.return_pos = {x = 225, y = 0, z = 120}
+q_command.regions.esc_rooms_level_12.hub_portal.return_pos = {x = 226, y = 0, z = 120}
 q_command.regions.esc_rooms_level_12.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_13 = {}
@@ -210,7 +210,7 @@ q_command.regions.esc_rooms_level_13.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_13.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_13.hub_portal = {}
 q_command.regions.esc_rooms_level_13.hub_portal.center_pos = {x = 223, y = 0, z = 122}
-q_command.regions.esc_rooms_level_13.hub_portal.return_pos = {x = 225, y = 0, z = 122}
+q_command.regions.esc_rooms_level_13.hub_portal.return_pos = {x = 226, y = 0, z = 122}
 q_command.regions.esc_rooms_level_13.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_14 = {}
@@ -219,7 +219,7 @@ q_command.regions.esc_rooms_level_14.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_14.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_14.hub_portal = {}
 q_command.regions.esc_rooms_level_14.hub_portal.center_pos = {x = 223, y = 0, z = 124}
-q_command.regions.esc_rooms_level_14.hub_portal.return_pos = {x = 225, y = 0, z = 124}
+q_command.regions.esc_rooms_level_14.hub_portal.return_pos = {x = 226, y = 0, z = 124}
 q_command.regions.esc_rooms_level_14.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_15 = {}
@@ -228,7 +228,7 @@ q_command.regions.esc_rooms_level_15.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_15.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_15.hub_portal = {}
 q_command.regions.esc_rooms_level_15.hub_portal.center_pos = {x = 223, y = 0, z = 126}
-q_command.regions.esc_rooms_level_15.hub_portal.return_pos = {x = 225, y = 0, z = 126}
+q_command.regions.esc_rooms_level_15.hub_portal.return_pos = {x = 226, y = 0, z = 126}
 q_command.regions.esc_rooms_level_15.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 q_command.regions.esc_rooms_level_16 = {}
@@ -237,7 +237,7 @@ q_command.regions.esc_rooms_level_16.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_16.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_16.hub_portal = {}
 q_command.regions.esc_rooms_level_16.hub_portal.center_pos = {x = 223, y = 0, z = 128}
-q_command.regions.esc_rooms_level_16.hub_portal.return_pos = {x = 225, y = 0, z = 128}
+q_command.regions.esc_rooms_level_16.hub_portal.return_pos = {x = 226, y = 0, z = 128}
 q_command.regions.esc_rooms_level_16.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
 --q_command.regions.circuit_garden = {}
@@ -267,6 +267,7 @@ dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
 dofile(minetest.get_modpath("q_command").."/q_cat_sandbox.lua");
 dofile(minetest.get_modpath("q_command").."/q_starting_room_help.lua");
+dofile(minetest.get_modpath("q_command").."/q_portal_room.lua");
 
 
 -- returns q_command object or nil
@@ -2743,6 +2744,9 @@ q_command:register_wall_block("q_command_state_3qb_7_colors")
 q_command:register_wall_block("q_command_esc_room_exit_wall_tile")
 q_command:register_wall_block("q_command_esc_room_exit_left")
 q_command:register_wall_block("q_command_esc_room_no_entry_wall_tile")
+q_command:register_wall_block("q_command_construction_wall_tile")
+q_command:register_wall_block("q_command_portal_top_wall_tile")
+q_command:register_wall_block("q_command_portal_bottom_wall_tile")
 q_command:register_wall_block("q_command_read_first_wall_tile")
 q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
 
