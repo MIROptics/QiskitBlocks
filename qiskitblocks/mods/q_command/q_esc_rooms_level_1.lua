@@ -30,6 +30,7 @@ q_command.areas.x_gate_escape.radius = 5
 q_command.areas.x_gate_escape.q_block_pos = {x = 240, y = 0, z = 74}
 
 q_command.areas.x_gate_escape.door_pos = {x = 236, y = 0, z = 67}
+q_command.areas.x_gate_escape.portal_pos = {x = 235, y = 0, z = 77}
 q_command.areas.x_gate_escape.chest_pos = {x = 236, y = 0, z = 76}
 q_command.areas.x_gate_escape.chest_inv = {
     inventory = {
@@ -169,6 +170,7 @@ q_command.areas.x_gates_2_wire.radius = 5
 q_command.areas.x_gates_2_wire.q_block_pos = {x = 240, y = 0, z = 65}
 
 q_command.areas.x_gates_2_wire.door_pos = {x = 243, y = 0, z = 60}
+q_command.areas.x_gates_2_wire.portal_pos = {x = 233, y = 0, z = 63}
 q_command.areas.x_gates_2_wire.chest_pos = {x = 234, y = 0, z = 64}
 q_command.areas.x_gates_2_wire.chest_inv = {
     inventory = {
@@ -288,6 +290,7 @@ q_command.areas.x_gates_3_wire.radius = 5
 q_command.areas.x_gates_3_wire.q_block_pos = {x = 244, y = -1, z = 64}
 
 q_command.areas.x_gates_3_wire.door_pos = {x = 250, y = 0, z = 67}
+q_command.areas.x_gates_3_wire.portal_pos = {x = 253, y = 0, z = 61}
 q_command.areas.x_gates_3_wire.chest_pos = {x = 252, y = 0, z = 60}
 q_command.areas.x_gates_3_wire.chest_inv = {
     inventory = {
@@ -406,6 +409,7 @@ q_command.areas.h_gate_escape.radius = 5
 q_command.areas.h_gate_escape.q_block_pos = {x = 247, y = 0, z = 74}
 
 q_command.areas.h_gate_escape.door_pos = {x = 253, y = 0, z = 70}
+q_command.areas.h_gate_escape.portal_pos = {x = 243, y = 0, z = 69}
 q_command.areas.h_gate_escape.chest_pos = {x = 244, y = 0, z = 70}
 q_command.areas.h_gate_escape.chest_inv = {
     inventory = {
@@ -535,6 +539,7 @@ q_command.areas.h_x_gate.radius = 5
 q_command.areas.h_x_gate.q_block_pos = {x = 260, y = 0, z = 73}
 
 q_command.areas.h_x_gate.door_pos = {x = 256, y = 0, z = 67}
+q_command.areas.h_x_gate.portal_pos = {x = 255, y = 0, z = 77}
 q_command.areas.h_x_gate.chest_pos = {x = 256, y = 0, z = 76}
 q_command.areas.h_x_gate.chest_inv = {
     inventory = {
@@ -667,6 +672,7 @@ q_command.areas.h_z_gate.radius = 5
 q_command.areas.h_z_gate.q_block_pos = {x = 259, y = 0, z = 60}
 
 q_command.areas.h_z_gate.door_pos = {x = 263, y = 0, z = 60}
+q_command.areas.h_z_gate.portal_pos = {x = 253, y = 0, z = 63}
 q_command.areas.h_z_gate.chest_pos = {x = 254, y = 0, z = 64}
 q_command.areas.h_z_gate.chest_inv = {
     inventory = {
@@ -793,6 +799,7 @@ q_command.areas.hxx_gates_escape.radius = 5
 q_command.areas.hxx_gates_escape.q_block_pos = {x = 271, y = -1, z = 66}
 
 q_command.areas.hxx_gates_escape.door_pos = {x = 266, y = 0, z = 67}
+q_command.areas.hxx_gates_escape.portal_pos = {x = 267, y = 0, z = 57}
 q_command.areas.hxx_gates_escape.chest_pos = {x = 266, y = 0, z = 58}
 q_command.areas.hxx_gates_escape.chest_inv = {
     inventory = {
@@ -890,6 +897,7 @@ q_command.areas.equal_super_2wire_escape.radius = 5
 q_command.areas.equal_super_2wire_escape.q_block_pos = {x = 266, y = 0, z = 75}
 
 q_command.areas.equal_super_2wire_escape.door_pos = {x = 270, y = 0, z = 77}
+q_command.areas.equal_super_2wire_escape.portal_pos = {x = 263, y = 0, z = 69}
 q_command.areas.equal_super_2wire_escape.chest_pos = {x = 264, y = 0, z = 70}
 q_command.areas.equal_super_2wire_escape.chest_inv = {
     inventory = {
@@ -990,6 +998,7 @@ q_command.areas.equal_super_3wire_escape.radius = 5
 q_command.areas.equal_super_3wire_escape.q_block_pos = {x = 264, y = -1, z = 78}
 
 q_command.areas.equal_super_3wire_escape.door_pos = {x = 270, y = 0, z = 87}
+q_command.areas.equal_super_3wire_escape.portal_pos = {x = 273, y = 0, z = 81}
 q_command.areas.equal_super_3wire_escape.chest_pos = {x = 272, y = 0, z = 80}
 q_command.areas.equal_super_3wire_escape.chest_inv = {
     inventory = {
@@ -1081,6 +1090,7 @@ q_command.areas.bell_phi_plus_escape.radius = 5
 q_command.areas.bell_phi_plus_escape.q_block_pos = {x = 266, y = 0, z = 94}
 
 q_command.areas.bell_phi_plus_escape.door_pos = {x = 263, y = 0, z = 94}
+q_command.areas.bell_phi_plus_escape.portal_pos = {x = 273, y = 0, z = 91}
 q_command.areas.bell_phi_plus_escape.chest_pos = {x = 272, y = 0, z = 90}
 q_command.areas.bell_phi_plus_escape.chest_inv = {
     inventory = {
@@ -1211,6 +1221,7 @@ q_command.areas.bell_phi_minus_escape.radius = 5
 q_command.areas.bell_phi_minus_escape.q_block_pos = {x = 256, y = 0, z = 90}
 
 q_command.areas.bell_phi_minus_escape.door_pos = {x = 256, y = 0, z = 87}
+q_command.areas.bell_phi_minus_escape.portal_pos = {x = 259, y = 0, z = 97}
 q_command.areas.bell_phi_minus_escape.chest_pos = {x = 260, y = 0, z = 96}
 q_command.areas.bell_phi_minus_escape.chest_inv = {
     inventory = {
@@ -1315,6 +1326,7 @@ q_command.areas.bell_psi_plus_escape.radius = 5
 q_command.areas.bell_psi_plus_escape.q_block_pos = {x = 260, y = 0, z = 80}
 
 q_command.areas.bell_psi_plus_escape.door_pos = {x = 253, y = 0, z = 80}
+q_command.areas.bell_psi_plus_escape.portal_pos = {x = 253, y = 0, z = 83}
 q_command.areas.bell_psi_plus_escape.chest_pos = {x = 254, y = 0, z = 84}
 q_command.areas.bell_psi_plus_escape.chest_inv = {
     inventory = {
@@ -1417,6 +1429,7 @@ q_command.areas.bell_psi_minus_escape.radius = 5
 q_command.areas.bell_psi_minus_escape.q_block_pos = {x = 245, y = 0, z = 80}
 
 q_command.areas.bell_psi_minus_escape.door_pos = {x = 250, y = 0, z = 87}
+q_command.areas.bell_psi_minus_escape.portal_pos = {x = 251, y = 0, z = 77}
 q_command.areas.bell_psi_minus_escape.chest_pos = {x = 250, y = 0, z = 78}
 q_command.areas.bell_psi_minus_escape.chest_inv = {
     inventory = {
@@ -1520,6 +1533,7 @@ q_command.areas.ghz_state_escape.radius = 5
 q_command.areas.ghz_state_escape.q_block_pos = {x = 244, y = 0, z = 96}
 
 q_command.areas.ghz_state_escape.door_pos = {x = 243, y = 0, z = 94}
+q_command.areas.ghz_state_escape.portal_pos = {x = 253, y = 0, z = 91}
 q_command.areas.ghz_state_escape.chest_pos = {x = 252, y = 0, z = 90}
 q_command.areas.ghz_state_escape.chest_inv = {
     inventory = {
@@ -1628,6 +1642,7 @@ q_command.areas.y_z_rot_1wire_escape.radius = 5
 q_command.areas.y_z_rot_1wire_escape.q_block_pos = {x = 236, y = 0, z = 90}
 
 q_command.areas.y_z_rot_1wire_escape.door_pos = {x = 236, y = 0, z = 87}
+q_command.areas.y_z_rot_1wire_escape.portal_pos = {x = 239, y = 0, z = 97}
 q_command.areas.y_z_rot_1wire_escape.chest_pos = {x = 240, y = 0, z = 96}
 q_command.areas.y_z_rot_1wire_escape.chest_inv = {
     inventory = {
@@ -1722,6 +1737,7 @@ q_command.areas.phase_rot_2wire_escape.radius = 5
 q_command.areas.phase_rot_2wire_escape.q_block_pos = {x = 240, y = -1, z = 80}
 
 q_command.areas.phase_rot_2wire_escape.door_pos = {x = 233, y = 0, z = 80}
+q_command.areas.phase_rot_2wire_escape.portal_pos = {x = 233, y = 0, z = 83}
 q_command.areas.phase_rot_2wire_escape.chest_pos = {x = 234, y = 0, z = 84}
 q_command.areas.phase_rot_2wire_escape.chest_inv = {
     inventory = {
