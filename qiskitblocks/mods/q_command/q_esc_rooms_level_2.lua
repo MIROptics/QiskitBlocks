@@ -30,7 +30,7 @@ q_command.areas.xor_escape.radius = 5
 q_command.areas.xor_escape.q_block_pos = {x = 215, y = 0, z = 70}
 
 q_command.areas.xor_escape.door_pos = {x = 220, y = 0, z = 67}
-q_command.areas.xor_escape.portal_pos = {x = 223, y = 0, z = 71}
+q_command.areas.xor_escape.portal_pos = {x = 223, y = 1, z = 72}
 q_command.areas.xor_escape.chest_pos = {x = 222, y = 0, z = 70}
 q_command.areas.xor_escape.chest_inv = {
     inventory = {
@@ -151,7 +151,7 @@ q_command.areas.dj_bal_flip_ora_escape.radius = 5
 q_command.areas.dj_bal_flip_ora_escape.q_block_pos = {x = 220, y = 0, z = 59}
 
 q_command.areas.dj_bal_flip_ora_escape.door_pos = {x = 213, y = 0, z = 60}
-q_command.areas.dj_bal_flip_ora_escape.portal_pos = {x = 223, y = 0, z = 65}
+q_command.areas.dj_bal_flip_ora_escape.portal_pos = {x = 223, y = 1, z = 62}
 q_command.areas.dj_bal_flip_ora_escape.chest_pos = {x = 222, y = 0, z = 64}
 q_command.areas.dj_bal_flip_ora_escape.chest_inv = {
     inventory = {
@@ -215,7 +215,7 @@ q_command.areas.toffoli_escape.radius = 5
 q_command.areas.toffoli_escape.q_block_pos = {x = 204, y = 0, z = 58}
 
 q_command.areas.toffoli_escape.door_pos = {x = 206, y = 0, z = 67}
-q_command.areas.toffoli_escape.portal_pos = {x = 209, y = 0, z = 67}
+q_command.areas.toffoli_escape.portal_pos = {x = 213, y = 1, z = 62}
 q_command.areas.toffoli_escape.chest_pos = {x = 210, y = 0, z = 66}
 q_command.areas.toffoli_escape.chest_inv = {
     inventory = {
@@ -306,7 +306,7 @@ q_command.areas.toffoli_nand_escape.radius = 5
 q_command.areas.toffoli_nand_escape.q_block_pos = {x = 212, y = 0, z = 76}
 
 q_command.areas.toffoli_nand_escape.door_pos = {x = 210, y = 0, z = 77}
-q_command.areas.toffoli_nand_escape.portal_pos = {x = 205, y = 0, z = 77}
+q_command.areas.toffoli_nand_escape.portal_pos = {x = 208, y = 1, z = 67}
 q_command.areas.toffoli_nand_escape.chest_pos = {x = 206, y = 0, z = 76}
 q_command.areas.toffoli_nand_escape.chest_inv = {
     inventory = {
@@ -378,7 +378,7 @@ q_command.areas.or_escape.radius = 5
 q_command.areas.or_escape.q_block_pos = {x = 204, y = 0, z = 86}
 
 q_command.areas.or_escape.door_pos = {x = 213, y = 0, z = 80}
-q_command.areas.or_escape.portal_pos = {x = 208, y = 0, z = 77}
+q_command.areas.or_escape.portal_pos = {x = 213, y = 1, z = 85}
 q_command.areas.or_escape.chest_pos = {x = 207, y = 0, z = 78}
 q_command.areas.or_escape.chest_inv = {
     inventory = {
@@ -447,7 +447,7 @@ q_command.areas.nor_escape.radius = 5
 q_command.areas.nor_escape.q_block_pos = {x = 222, y = 0, z = 78}
 
 q_command.areas.nor_escape.door_pos = {x = 220, y = 0, z = 87}
-q_command.areas.nor_escape.portal_pos = {x = 213, y = 0, z = 83}
+q_command.areas.nor_escape.portal_pos = {x = 223, y = 1, z = 79}
 q_command.areas.nor_escape.chest_pos = {x = 214, y = 0, z = 84}
 q_command.areas.nor_escape.chest_inv = {
     inventory = {
@@ -517,7 +517,7 @@ q_command.areas.toffoli_mixed_escape.radius = 5
 q_command.areas.toffoli_mixed_escape.q_block_pos = {x = 214, y = 0, z = 96}
 
 q_command.areas.toffoli_mixed_escape.door_pos = {x = 213, y = 0, z = 94}
-q_command.areas.toffoli_mixed_escape.portal_pos = {x = 213, y = 0, z = 89}
+q_command.areas.toffoli_mixed_escape.portal_pos = {x = 221, y = 1, z = 87}
 q_command.areas.toffoli_mixed_escape.chest_pos = {x = 214, y = 0, z = 90}
 q_command.areas.toffoli_mixed_escape.chest_inv = {
     inventory = {
@@ -591,7 +591,7 @@ q_command.areas.superpos_logic_and_escape.radius = 5
 q_command.areas.superpos_logic_and_escape.q_block_pos = {x = 212, y = 0, z = 88}
 
 q_command.areas.superpos_logic_and_escape.door_pos = {x = 203, y = 0, z = 90}
-q_command.areas.superpos_logic_and_escape.portal_pos = {x = 209, y = 0, z = 97}
+q_command.areas.superpos_logic_and_escape.portal_pos = {x = 213, y = 1, z = 92}
 q_command.areas.superpos_logic_and_escape.chest_pos = {x = 210, y = 0, z = 96}
 q_command.areas.superpos_logic_and_escape.chest_inv = {
     inventory = {
@@ -662,7 +662,7 @@ q_command.areas.and_3_operands_x_escape.radius = 5
 q_command.areas.and_3_operands_x_escape.q_block_pos = {x = 194, y = -1, z = 88}
 
 q_command.areas.and_3_operands_x_escape.door_pos = {x = 193, y = 0, z = 94}
-q_command.areas.and_3_operands_x_escape.portal_pos = {x = 201, y = 0, z = 87}
+q_command.areas.and_3_operands_x_escape.portal_pos = {x = 203, y = 1, z = 92}
 q_command.areas.and_3_operands_x_escape.chest_pos = {x = 200, y = 0, z = 88}
 q_command.areas.and_3_operands_x_escape.chest_inv = {
     inventory = {
@@ -874,7 +874,7 @@ q_command.areas.and_not_3_operands_x_escape.radius = 5
 q_command.areas.and_not_3_operands_x_escape.q_block_pos = {x = 184, y = 0, z = 88}
 
 q_command.areas.and_not_3_operands_x_escape.door_pos = {x = 190, y = 0, z = 87}
-q_command.areas.and_not_3_operands_x_escape.portal_pos = {x = 193, y = 0, z = 91}
+q_command.areas.and_not_3_operands_x_escape.portal_pos = {x = 193, y = 1, z = 92}
 q_command.areas.and_not_3_operands_x_escape.chest_pos = {x = 192, y = 0, z = 90}
 q_command.areas.and_not_3_operands_x_escape.chest_inv = {
     inventory = {
@@ -1069,7 +1069,7 @@ q_command.areas.phase_a_and_b_escape.radius = 5
 q_command.areas.phase_a_and_b_escape.q_block_pos = {x = 190, y = 0, z = 79}
 
 q_command.areas.phase_a_and_b_escape.door_pos = {x = 193, y = 0, z = 80}
-q_command.areas.phase_a_and_b_escape.portal_pos = {x = 193, y = 0, z = 85}
+q_command.areas.phase_a_and_b_escape.portal_pos = {x = 193, y = 1, z = 82}
 q_command.areas.phase_a_and_b_escape.chest_pos = {x = 192, y = 0, z = 84}
 q_command.areas.phase_a_and_b_escape.chest_inv = {
     inventory = {
@@ -1144,7 +1144,7 @@ q_command.areas.superpos_phase_and_escape.radius = 5
 q_command.areas.superpos_phase_and_escape.q_block_pos = {x = 201, y = 0, z = 84}
 
 q_command.areas.superpos_phase_and_escape.door_pos = {x = 196, y = 0, z = 77}
-q_command.areas.superpos_phase_and_escape.portal_pos = {x = 201, y = 0, z = 77}
+q_command.areas.superpos_phase_and_escape.portal_pos = {x = 198, y = 1, z = 87}
 q_command.areas.superpos_phase_and_escape.chest_pos = {x = 200, y = 0, z = 78}
 q_command.areas.superpos_phase_and_escape.chest_inv = {
     inventory = {
@@ -1215,7 +1215,7 @@ q_command.areas.phase_a_or_b_escape.radius = 5
 q_command.areas.phase_a_or_b_escape.q_block_pos = {x = 201, y = 0, z = 69}
 
 q_command.areas.phase_a_or_b_escape.door_pos = {x = 193, y = 0, z = 74}
-q_command.areas.phase_a_or_b_escape.portal_pos = {x = 198, y = 0, z = 77}
+q_command.areas.phase_a_or_b_escape.portal_pos = {x = 203, y = 1, z = 71}
 q_command.areas.phase_a_or_b_escape.chest_pos = {x = 199, y = 0, z = 76}
 q_command.areas.phase_a_or_b_escape.chest_inv = {
     inventory = {
@@ -1279,7 +1279,7 @@ q_command.areas.phase_a_and_b_no_z_escape.radius = 5
 q_command.areas.phase_a_and_b_no_z_escape.q_block_pos = {x = 185, y = 0, z = 69}
 
 q_command.areas.phase_a_and_b_no_z_escape.door_pos = {x = 186, y = 0, z = 67}
-q_command.areas.phase_a_and_b_no_z_escape.portal_pos = {x = 191, y = 0, z = 67}
+q_command.areas.phase_a_and_b_no_z_escape.portal_pos = {x = 193, y = 1, z = 72}
 q_command.areas.phase_a_and_b_no_z_escape.chest_pos = {x = 190, y = 0, z = 68}
 q_command.areas.phase_a_and_b_no_z_escape.chest_inv = {
     inventory = {
@@ -1348,7 +1348,7 @@ q_command.areas.phase_a_and_b_and_c_escape.radius = 5
 q_command.areas.phase_a_and_b_and_c_escape.q_block_pos = {x = 184, y = 0, z = 58}
 
 q_command.areas.phase_a_and_b_and_c_escape.door_pos = {x = 193, y = 0, z = 60}
-q_command.areas.phase_a_and_b_and_c_escape.portal_pos = {x = 193, y = 0, z = 65}
+q_command.areas.phase_a_and_b_and_c_escape.portal_pos = {x = 193, y = 1, z = 62}
 q_command.areas.phase_a_and_b_and_c_escape.chest_pos = {x = 192, y = 0, z = 64}
 q_command.areas.phase_a_and_b_and_c_escape.chest_inv = {
     inventory = {
@@ -1423,7 +1423,7 @@ q_command.areas.a_or_b_and_c_escape.radius = 5
 q_command.areas.a_or_b_and_c_escape.q_block_pos = {x = 202, y = 0, z = 66}
 
 q_command.areas.a_or_b_and_c_escape.door_pos = {x = 199, y = 0, z = 56}
-q_command.areas.a_or_b_and_c_escape.portal_pos = {x = 197, y = 0, z = 57}
+q_command.areas.a_or_b_and_c_escape.portal_pos = {x = 198, y = 1, z = 57}
 q_command.areas.a_or_b_and_c_escape.chest_pos = {x = 196, y = 0, z = 58}
 q_command.areas.a_or_b_and_c_escape.chest_inv = {
     inventory = {

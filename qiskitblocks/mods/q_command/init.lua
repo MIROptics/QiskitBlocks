@@ -2249,6 +2249,20 @@ function q_command:register_wall_block(texture_name)
     })
 end
 
+function q_command:register_wall_block_4_sides(texture_name)
+    minetest.register_node("q_command:dr_" .. texture_name, {
+        description = "Wall block " .. texture_name,
+        tiles = {"q_command_silver_sandstone_wall_tile.png",
+                 "q_command_silver_sandstone_wall_tile.png",
+                 texture_name .. ".png",
+                 texture_name .. ".png",
+                 texture_name .. ".png",
+                 texture_name .. ".png"},
+        groups = {oddly_breakable_by_hand=2},
+        paramtype2 = "facedir"
+    })
+end
+
 
 minetest.register_node("q_command:statevector_glass_no_arrow", {
     description = "Statevector Glass with no arrow",

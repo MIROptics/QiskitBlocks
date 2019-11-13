@@ -25,7 +25,7 @@ q_command.areas.portal_room.help_btn_text.en =
 [[
 Welcome to the portal room, where you can teleport to other areas of this
 world such as escape room levels. After entering a portal, you may return
-to this room by running into a chest.
+to this room by entering an orange portal.
 ]]
 q_command.areas.portal_room.help_btn_text.es = q_command.areas.portal_room.help_btn_text.en
 q_command.areas.portal_room.help_btn_text.ja = q_command.areas.portal_room.help_btn_text.en
