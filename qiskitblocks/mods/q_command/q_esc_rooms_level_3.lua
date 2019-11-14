@@ -30,6 +30,7 @@ q_command.areas.swap_escape.radius = 5
 q_command.areas.swap_escape.q_block_pos = {x = 212, y = 0, z = 38}
 
 q_command.areas.swap_escape.door_pos = {x = 213, y = 0, z = 44}
+q_command.areas.swap_escape.portal_pos = {x = 213, y = 1, z = 43}
 q_command.areas.swap_escape.chest_pos = {x = 210, y = 0, z = 46}
 q_command.areas.swap_escape.chest_inv = {
     inventory = {
@@ -109,6 +110,7 @@ q_command.areas.ctrl_swap_escape.radius = 5
 q_command.areas.ctrl_swap_escape.q_block_pos = {x = 222, y = 0, z = 46}
 
 q_command.areas.ctrl_swap_escape.door_pos = {x = 220, y = 0, z = 37}
+q_command.areas.ctrl_swap_escape.portal_pos = {x = 218, y = 1, z = 37}
 q_command.areas.ctrl_swap_escape.chest_pos = {x = 214, y = 0, z = 40}
 q_command.areas.ctrl_swap_escape.chest_inv = {
     inventory = {

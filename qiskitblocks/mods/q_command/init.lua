@@ -2546,9 +2546,11 @@ minetest.register_globalstep(function(dtime)
                 if object:is_player() then
                     -- Teleport to area
                     minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
-                    --object:set_pos(q_command.regions.esc_rooms_level_1[region.cur_area].center_pos)
                     if region[region.cur_area] and region[region.cur_area].center_pos then
-                        object:set_pos(region[region.cur_area].center_pos)
+                        --object:set_pos(region[region.cur_area].center_pos)
+
+                        -- For now, just teleport to the first area in the region
+                        object:set_pos(region[1].center_pos)
                     end
                 end
             end
