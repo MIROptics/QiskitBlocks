@@ -49,6 +49,15 @@ q_command.areas.lev_6_rm_1.q_block_pos = {x = 315, y = 0, z = -30}
 -- Note to devs: The door_pos x/y/z values should indicate where the exit door is.
 q_command.areas.lev_6_rm_1.door_pos = {x = 320, y = 0, z = -33}
 
+-- Note to devs: The portal_pos x/y/z values should indicate where the orange portal
+-- is, so that it may be used to teleport from the hub into the room, and entered by
+-- the player to teleport back to the hub. It is good practice to place it one block
+-- above floor level so that player doesn't accidentally get teleported when bumping
+-- into it. It is also good practice to place the portal to the West of the center_pos
+-- if possible, so that the portal is behind the player when teleporting into the room
+-- (players enter from the West into the blue portals in the portal room.)
+q_command.areas.lev_6_rm_1.portal_pos = {x = 323, y = 1, z = -28}
+
 -- Note to devs: The chest_pos x/y/z values should indicate where the chest is, so
 -- that it may be restocked when a puzzle is solved.
 q_command.areas.lev_6_rm_1.chest_pos = {x = 322, y = 0, z = -30}
@@ -249,6 +258,7 @@ q_command.areas.lev_6_rm_2.radius = 5
 q_command.areas.lev_6_rm_2.q_block_pos = {x = 321, y = 0, z = -36}
 
 q_command.areas.lev_6_rm_2.door_pos = {x = 313, y = 0, z = -40}
+q_command.areas.lev_6_rm_2.portal_pos = {x = 323, y = 1, z = -35}
 q_command.areas.lev_6_rm_2.chest_pos = {x = 316, y = 0, z = -42}
 q_command.areas.lev_6_rm_2.chest_inv = {
     inventory = {
@@ -325,6 +335,7 @@ q_command.areas.lev_6_rm_3.radius = 5
 q_command.areas.lev_6_rm_3.q_block_pos = {x = 310, y = 0, z = -41}
 
 q_command.areas.lev_6_rm_3.door_pos = {x = 306, y = 0, z = -33}
+q_command.areas.lev_6_rm_3.portal_pos = {x = 313, y = 1, z = -38}
 q_command.areas.lev_6_rm_3.chest_pos = {x = 304, y = 0, z = -36}
 q_command.areas.lev_6_rm_3.chest_inv = {
     inventory = {
@@ -401,6 +412,7 @@ q_command.areas.lev_6_rm_4.radius = 5
 q_command.areas.lev_6_rm_4.q_block_pos = {x = 311, y = 0, z = -26}
 
 q_command.areas.lev_6_rm_4.door_pos = {x = 310, y = 0, z = -23}
+q_command.areas.lev_6_rm_4.portal_pos = {x = 313, y = 1, z = -31}
 q_command.areas.lev_6_rm_4.chest_pos = {x = 306, y = 0, z = -24}
 q_command.areas.lev_6_rm_4.chest_inv = {
     inventory = {
@@ -477,6 +489,7 @@ q_command.areas.lev_6_rm_5.radius = 5
 q_command.areas.lev_6_rm_5.q_block_pos = {x = 305, y = 0, z = -20}
 
 q_command.areas.lev_6_rm_5.door_pos = {x = 313, y = 0, z = -20}
+q_command.areas.lev_6_rm_5.portal_pos = {x = 313, y = 1, z = -18}
 q_command.areas.lev_6_rm_5.chest_pos = {x = 312, y = 0, z = -16}
 q_command.areas.lev_6_rm_5.chest_inv = {
     inventory = {
@@ -553,6 +566,7 @@ q_command.areas.lev_6_rm_6.radius = 5
 q_command.areas.lev_6_rm_6.q_block_pos = {x = 316, y = 0, z = -15}
 
 q_command.areas.lev_6_rm_6.door_pos = {x = 320, y = 0, z = -13}
+q_command.areas.lev_6_rm_6.portal_pos = {x = 323, y = 1, z = -18}
 q_command.areas.lev_6_rm_6.chest_pos = {x = 320, y = 0, z = -22}
 q_command.areas.lev_6_rm_6.chest_inv = {
     inventory = {
@@ -629,6 +643,7 @@ q_command.areas.lev_6_rm_7.radius = 5
 q_command.areas.lev_6_rm_7.q_block_pos = {x = 316, y = 0, z = -5}
 
 q_command.areas.lev_6_rm_7.door_pos = {x = 313, y = 0, z = -6}
+q_command.areas.lev_6_rm_7.portal_pos = {x = 323, y = 1, z = -8}
 q_command.areas.lev_6_rm_7.chest_pos = {x = 322, y = 0, z = -10}
 q_command.areas.lev_6_rm_7.chest_inv = {
     inventory = {
@@ -705,6 +720,7 @@ q_command.areas.lev_6_rm_8.radius = 5
 q_command.areas.lev_6_rm_8.q_block_pos = {x = 310, y = 0, z = -11}
 
 q_command.areas.lev_6_rm_8.door_pos = {x = 303, y = 0, z = -10}
+q_command.areas.lev_6_rm_8.portal_pos = {x = 313, y = 1, z = -8}
 q_command.areas.lev_6_rm_8.chest_pos = {x = 310, y = 0, z = -4}
 q_command.areas.lev_6_rm_8.chest_inv = {
     inventory = {
@@ -781,6 +797,7 @@ q_command.areas.lev_6_rm_9.radius = 5
 q_command.areas.lev_6_rm_9.q_block_pos = {x = 296, y = 0, z = -5}
 
 q_command.areas.lev_6_rm_9.door_pos = {x = 293, y = 0, z = -6}
+q_command.areas.lev_6_rm_9.portal_pos = {x = 303, y = 1, z = -8}
 q_command.areas.lev_6_rm_9.chest_pos = {x = 302, y = 0, z = -6}
 q_command.areas.lev_6_rm_9.chest_inv = {
     inventory = {
@@ -857,6 +874,7 @@ q_command.areas.lev_6_rm_10.radius = 5
 q_command.areas.lev_6_rm_10.q_block_pos = {x = 285, y = 0, z = -10}
 
 q_command.areas.lev_6_rm_10.door_pos = {x = 290, y = 0, z = -13}
+q_command.areas.lev_6_rm_10.portal_pos = {x = 293, y = 1, z = -8}
 q_command.areas.lev_6_rm_10.chest_pos = {x = 290, y = 0, z = -4}
 q_command.areas.lev_6_rm_10.chest_inv = {
     inventory = {
@@ -933,6 +951,7 @@ q_command.areas.lev_6_rm_11.radius = 5
 q_command.areas.lev_6_rm_11.q_block_pos = {x = 285, y = 0, z = -20}
 
 q_command.areas.lev_6_rm_11.door_pos = {x = 293, y = 0, z = -20}
+q_command.areas.lev_6_rm_11.portal_pos = {x = 293, y = 1, z = -18}
 q_command.areas.lev_6_rm_11.chest_pos = {x = 292, y = 0, z = -16}
 q_command.areas.lev_6_rm_11.chest_inv = {
     inventory = {
@@ -1009,6 +1028,7 @@ q_command.areas.lev_6_rm_12.radius = 5
 q_command.areas.lev_6_rm_12.q_block_pos = {x = 296, y = 0, z = -15}
 
 q_command.areas.lev_6_rm_12.door_pos = {x = 296, y = 0, z = -23}
+q_command.areas.lev_6_rm_12.portal_pos = {x = 303, y = 1, z = -18}
 q_command.areas.lev_6_rm_12.chest_pos = {x = 300, y = 0, z = -22}
 q_command.areas.lev_6_rm_12.chest_inv = {
     inventory = {
@@ -1085,6 +1105,7 @@ q_command.areas.lev_6_rm_13.radius = 5
 q_command.areas.lev_6_rm_13.q_block_pos = {x = 300, y = 0, z = -31}
 
 q_command.areas.lev_6_rm_13.door_pos = {x = 293, y = 0, z = -26}
+q_command.areas.lev_6_rm_13.portal_pos = {x = 303, y = 1, z = -28}
 q_command.areas.lev_6_rm_13.chest_pos = {x = 302, y = 0, z = -30}
 q_command.areas.lev_6_rm_13.chest_inv = {
     inventory = {
@@ -1161,6 +1182,7 @@ q_command.areas.lev_6_rm_14.radius = 5
 q_command.areas.lev_6_rm_14.q_block_pos = {x = 286, y = 0, z = -25}
 
 q_command.areas.lev_6_rm_14.door_pos = {x = 286, y = 0, z = -33}
+q_command.areas.lev_6_rm_14.portal_pos = {x = 293, y = 1, z = -28}
 q_command.areas.lev_6_rm_14.chest_pos = {x = 284, y = 0, z = -26}
 q_command.areas.lev_6_rm_14.chest_inv = {
     inventory = {
@@ -1237,6 +1259,7 @@ q_command.areas.lev_6_rm_15.radius = 5
 q_command.areas.lev_6_rm_15.q_block_pos = {x = 290, y = 0, z = -41}
 
 q_command.areas.lev_6_rm_15.door_pos = {x = 293, y = 0, z = -40}
+q_command.areas.lev_6_rm_15.portal_pos = {x = 293, y = 1, z = -38}
 q_command.areas.lev_6_rm_15.chest_pos = {x = 284, y = 0, z = -36}
 q_command.areas.lev_6_rm_15.chest_inv = {
     inventory = {
@@ -1313,6 +1336,7 @@ q_command.areas.lev_6_rm_16.radius = 5
 q_command.areas.lev_6_rm_16.q_block_pos = {x = 296, y = 0, z = -36}
 
 q_command.areas.lev_6_rm_16.door_pos = {x = 300, y = 0, z = -43}
+q_command.areas.lev_6_rm_16.portal_pos = {x = 303, y = 1, z = -38}
 q_command.areas.lev_6_rm_16.chest_pos = {x = 296, y = 0, z = -42}
 q_command.areas.lev_6_rm_16.chest_inv = {
     inventory = {

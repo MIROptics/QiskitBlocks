@@ -251,7 +251,7 @@ dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_4.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_5.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_6.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_6.lua");
 --dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_7.lua");
 --dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_8.lua");
 --dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_9.lua");
