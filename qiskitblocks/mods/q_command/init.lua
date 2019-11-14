@@ -251,17 +251,17 @@ dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_2.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_3.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_4.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_5.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_6.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_7.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_8.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_9.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_10.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_11.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_12.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_13.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_14.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_15.lua");
-dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_16.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_6.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_7.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_8.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_9.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_10.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_11.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_12.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_13.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_14.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_15.lua");
+--dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_16.lua");
 dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
@@ -2528,7 +2528,7 @@ minetest.register_globalstep(function(dtime)
                         area.region.hub_portal.return_pos and
                         area.region.hub_portal.return_look_rad then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Teleporting back to hub")
+                    minetest.chat_send_player(object:get_player_name(), "Teleporting back to the portal room")
                     object:set_pos(area.region.hub_portal.return_pos)
                     object:set_look_horizontal(area.region.hub_portal.return_look_rad)
                 end
@@ -2545,7 +2545,7 @@ minetest.register_globalstep(function(dtime)
                     HUB_PORTALS_RADIUS)) do
                 if object:is_player() then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Attempting to teleport")
+                    minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
                     --object:set_pos(q_command.regions.esc_rooms_level_1[region.cur_area].center_pos)
                     if region[region.cur_area] and region[region.cur_area].center_pos then
                         object:set_pos(region[region.cur_area].center_pos)
