@@ -68,12 +68,15 @@ Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http:/
 
 ![QiskitBlocks escape rooms](https://github.com/JavaFXpert/QiskitBlocks/raw/master/escape_room_psi_minus.png)
 
+![Portal Room in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_portal_room.png)
+
 ![Quantum Blocks Academy in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_blocks_academy.png)
 
 ![Quantum Circuits Garden in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png)
 
-![Portal Room in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_portal_room.png)
-
 ![Quantum Cats Sandbox in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_cats_sandbox.png)
 
-![Final Level II escape room in Japanese](https://github.com/JavaFXpert/QiskitBlocks/blob/master/a_or_b_and_c_ja.png)
+![Final Level II escape room in Japanese](https://github.com/JavaFXpert/QiskitBlocks/raw/master/a_or_b_and_c_ja.png)
+
+## Creating escape rooms in QiskitBlocks
+Here are some instructions for [creating a series of escape rooms in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/collaborating/creating_escape_rooms.md).

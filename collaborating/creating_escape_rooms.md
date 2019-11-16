@@ -1,4 +1,4 @@
-# Creating Escape Rooms in QiskitBlocks
+# Creating escape rooms in QiskitBlocks
 
 One of the ways that QiskitBlocks may be leveraged to teach quantum computing is with the use of *escape rooms*, arranged in a pedagogical sequence in a *level*. For example, Level I teaches some fundamental concepts of quantum circuits and gates, and Level II teaches how to create quantum logic gates and oracles. Other levels are currently being developed to teach additional quantum computing related concepts, so this document is intended to serve as a guide for those who would like to contribute a level of escape rooms.
 
