@@ -79,4 +79,4 @@ Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http:/
 ![Final Level II escape room in Japanese](https://github.com/JavaFXpert/QiskitBlocks/raw/master/a_or_b_and_c_ja.png)
 
 ## Creating escape rooms in QiskitBlocks
-Here are some instructions for [creating a series of escape rooms in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/collaborating/creating_escape_rooms.md).
+Here are some instructions for [creating a series of escape rooms in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/blob/master/collaborating/creating_escape_rooms.md).
