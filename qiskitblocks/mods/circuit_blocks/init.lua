@@ -20,6 +20,7 @@ TODO:
 [] Make Grover circuit after Level two deeper?
 [] Generate Python code for Jupyter notebook
 [] Combine barrier statements when available
+[] Add portal sound effect?
 [] Modify Prof Q instructions in Level I 16/16 in all languages
 [] Don't play congratulation music if puzzle already solved
 [] Make state tomography more efficient and maintainable
