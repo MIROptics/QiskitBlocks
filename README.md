@@ -72,6 +72,8 @@ Please reach out to James Weaver on Qiskit Slack (located at [qiskit.org](http:/
 
 ![Quantum Circuits Garden in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_circuits_garden.png)
 
+![Portal Room in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_portal_room.png)
+
 ![Quantum Cats Sandbox in QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/quantum_cats_sandbox.png)
 
 ![Final Level II escape room in Japanese](https://github.com/JavaFXpert/QiskitBlocks/blob/master/a_or_b_and_c_ja.png)
