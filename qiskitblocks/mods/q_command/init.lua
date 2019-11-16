@@ -2602,6 +2602,13 @@ minetest.register_node("q_command:optimizer_nelder_mead_block", {
 	paramtype2 = "facedir",
 })
 
+minetest.register_node("q_command:hamiltonian_operator_block", {
+    description = "Hamiltonian operator block",
+    tiles = {"q_command_hamiltonian_operator.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir",
+})
+
 
 for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
     for basis_state_num = 0, 2^num_qubits - 1 do
