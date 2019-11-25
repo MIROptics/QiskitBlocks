@@ -1617,7 +1617,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local sv_data = http_request_response.data
                             local statevector = q_command:parse_json_statevector(sv_data)
-                            --minetest.debug("statevector:\n" .. dump(statevector))
+                            minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- Only check for a correct player solution if correct_solution_statevector exists
                             if correct_solution_statevector then

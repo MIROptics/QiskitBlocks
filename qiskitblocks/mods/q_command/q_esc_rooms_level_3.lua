@@ -175,65 +175,65 @@ q_command.areas.lev_3_rm_3.chest_pos = {x = 216, y = 0, z = 28}
 q_command.areas.lev_3_rm_3.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
-                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
-                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
+                [7] = "",
+                [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
-                [15] = "circuit_blocks:swap_tool",
-                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
-                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
-                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
-                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
+                [15] = "",
+                [16] = "",
+                [17] = "",
+                [18] = "",
+                [19] = "",
                 [20] = "circuit_blocks:circuit_blocks_sdg_gate",
                 [21] = "circuit_blocks:circuit_blocks_tdg_gate",
-                [22] = "circuit_blocks:circuit_blocks_swap",
-                [23] = "circuit_blocks:rotate_tool",
-                [24] = "circuit_blocks:circuit_blocks_barrier",
-                [25] = "circuit_blocks:circuit_blocks_x_gate",
-                [26] = "circuit_blocks:circuit_blocks_y_gate",
-                [27] = "circuit_blocks:circuit_blocks_z_gate",
+                [22] = "",
+                [23] = "",
+                [24] = "",
+                [25] = "",
+                [26] = "",
+                [27] = "",
                 [28] = "circuit_blocks:circuit_blocks_s_gate",
                 [29] = "circuit_blocks:circuit_blocks_t_gate",
                 [30] = "circuit_blocks:circuit_blocks_h_gate",
-                [31] = "circuit_blocks:control_tool",
+                [31] = "",
                 [32] = "circuit_blocks:circuit_blocks_measure_z"
         }
     }
 }
+--[[
 q_command.areas.lev_3_rm_3.solution_unitary =
 {{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
 {{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+--]]
+
+q_command.areas.lev_3_rm_3.solution_statevector =
+{{r=0.5,i=0},{r=0.354,i=-0.354},{r=0,i=0.5},{r=0.354,i=0.354}}
+
 
 q_command.areas.lev_3_rm_3.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as shown on the wall. (3)"
+	"Make a circuit that produces the statevector shown on the wall."
 }
-q_command.areas.lev_3_rm_3.help_chat_msg.ja = {
-	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
-}
+q_command.areas.lev_3_rm_3.help_chat_msg.ja = q_command.areas.lev_3_rm_3.help_chat_msg
+q_command.areas.lev_3_rm_3.help_chat_msg.es = q_command.areas.lev_3_rm_3.help_chat_msg
 q_command.areas.lev_3_rm_3.help_chat_sent = false
 q_command.areas.lev_3_rm_3.help_success_msg = {
-	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
-	"circuits with increasingly complex quantum logic in no time!"
+	"Nice job. As you can see, the S and T gates rotate the phase by ",
+    "pi/2 and pi/4 respectively."
 }
-q_command.areas.lev_3_rm_3.help_success_msg.ja = {
-	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
-	"ジックを備えた回路をすぐに作成できるようになります。"
-}
+q_command.areas.lev_3_rm_3.help_success_msg.ja = q_command.areas.lev_3_rm_3.help_success_msg
+q_command.areas.lev_3_rm_3.help_success_msg.es = q_command.areas.lev_3_rm_3.help_success_msg
 q_command.areas.lev_3_rm_3.success_chat_sent = false
 
 q_command.areas.lev_3_rm_3.help_btn_text = {}
 q_command.areas.lev_3_rm_3.help_btn_text.en =
 [[
-Make a circuit like the last one, but negate the output as shown on the wall
+Make a circuit that produces the statevector shown on the wall.
 ]]
 q_command.areas.lev_3_rm_3.help_btn_text.es = q_command.areas.lev_3_rm_3.help_btn_text.en
-q_command.areas.lev_3_rm_3.help_btn_text.ja =
-[[
-先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
-]]
+q_command.areas.lev_3_rm_3.help_btn_text.ja = q_command.areas.lev_3_rm_3.help_btn_text.en
 q_command.areas.lev_3_rm_3.help_btn_caption = {}
-q_command.areas.lev_3_rm_3.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
+q_command.areas.lev_3_rm_3.help_btn_caption.en = "Experiment with S and T gates"
 q_command.areas.lev_3_rm_3.help_btn_caption.es = q_command.areas.lev_3_rm_3.help_btn_caption.en
-q_command.areas.lev_3_rm_3.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
+q_command.areas.lev_3_rm_3.help_btn_caption.ja = q_command.areas.lev_3_rm_3.help_btn_caption.en
 
 
 -------- Room 4 (Level III)
