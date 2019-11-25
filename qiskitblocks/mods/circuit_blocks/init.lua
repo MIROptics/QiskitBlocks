@@ -430,3 +430,35 @@ for wire_idx = 0, MAX_C_IF_WIRES - 1 do
                 0, false, "", "c" .. tostring(wire_idx) .. "_eq" .. tostring(eq_val))
     end
 end
+
+
+-- Create pulse blocks
+minetest.register_node("circuit_blocks:_pulse_u", {
+    description = "Pulse u block",
+    tiles = {"circuit_blocks_pulse_u.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_pulse_d0", {
+    description = "Pulse d0 block",
+    tiles = {"circuit_blocks_pulse_d0.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+minetest.register_node("circuit_blocks:_pulse_d1", {
+    description = "Pulse d1 block",
+    tiles = {"circuit_blocks_pulse_d1.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_UP, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_DOWN, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_UP, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_DOWN, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN, false, false, 0, false)
+

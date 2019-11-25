@@ -36,6 +36,14 @@ CircuitNodeTypes = {
     BLOCH_SPHERE = 16, -- Block that depicts the state of a qubit on a Bloch sphere
     C_IF = 17, -- Block that indicates classical "if" functionality
     QUBIT_BASIS = 18, -- Block that represents |0> or |1>
-    COLOR_QUBIT = 19 -- Block that depicts the state of a qubit with an HSV color
+    COLOR_QUBIT = 19, -- Block that depicts the state of a qubit with an HSV color
                      -- TODO: Reference a paper, Maddy Tod, etc.
+    PULSE_GAUSSIAN = 20, -- Block that depicts a gaussian pulse
+    PULSE_FRACTAL_GAUSSIAN_UP = 21, -- Block that depicts a fractal gaussian pulse up
+    PULSE_FRACTAL_GAUSSIAN_DOWN = 22, -- Block that depicts a fractal gaussian pulse down
+    PULSE_CANCELLATION_UP = 23, -- Block that depicts a cancellation pulse up
+    PULSE_CANCELLATION_DOWN = 24, -- Block that depicts a cancellation pulse down
+    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP = 25, -- Block that depicts a fractal gaussian cancellation pulse up
+    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN = 26 -- Block that depicts a fractal gaussian cancellation pulse down
+
 }

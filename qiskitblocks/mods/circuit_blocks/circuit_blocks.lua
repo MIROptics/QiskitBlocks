@@ -981,6 +981,22 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_if_" .. suffix
     elseif circuit_node_type == CircuitNodeTypes.QUBIT_BASIS then
         texture_name = "circuit_blocks_gate_" .. suffix
+
+    -- Register pulse blocks
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN then
+        texture_name = "circuit_blocks_pulse_gaussian"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_UP then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_up"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_DOWN then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_down"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_UP then
+        texture_name = "circuit_blocks_pulse_cancellation_up"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_DOWN then
+        texture_name = "circuit_blocks_pulse_cancellation_down"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_up"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_down"
     end
 
     -- TODO: Work out way to pass in a meaningful description

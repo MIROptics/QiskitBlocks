@@ -66,28 +66,29 @@ q_command.areas.lev_7_rm_1.chest_pos = {x = 296, y = 0, z = -54}
 -- by making their relevant strings empty.
 q_command.areas.lev_7_rm_1.chest_inv = {
     inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
-                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
-                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
+        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "",
+                [6] = "",
+                [7] = "",
+                [8] = "",
                 [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
-                [15] = "circuit_blocks:swap_tool",
-                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
-                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
-                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
-                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
-                [20] = "circuit_blocks:circuit_blocks_sdg_gate",
-                [21] = "circuit_blocks:circuit_blocks_tdg_gate",
-                [22] = "circuit_blocks:circuit_blocks_swap",
-                [23] = "circuit_blocks:rotate_tool",
-                [24] = "circuit_blocks:circuit_blocks_barrier",
-                [25] = "circuit_blocks:circuit_blocks_x_gate",
-                [26] = "circuit_blocks:circuit_blocks_y_gate",
-                [27] = "circuit_blocks:circuit_blocks_z_gate",
-                [28] = "circuit_blocks:circuit_blocks_s_gate",
-                [29] = "circuit_blocks:circuit_blocks_t_gate",
-                [30] = "circuit_blocks:circuit_blocks_h_gate",
-                [31] = "circuit_blocks:control_tool",
-                [32] = "circuit_blocks:circuit_blocks_measure_z"
+                [15] = "",
+                [16] = "",
+                [17] = "circuit_blocks:circuit_blocks_pulse_cancellation_up",
+                [18] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_up",
+                [19] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_up",
+                [20] = "circuit_blocks:circuit_blocks_pulse_gaussian",
+                [21] = "",
+                [22] = "",
+                [23] = "",
+                [24] = "",
+                [25] = "circuit_blocks:circuit_blocks_pulse_cancellation_down",
+                [26] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_down",
+                [27] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_down",
+                [28] = "",
+                [29] = "",
+                [30] = "",
+                [31] = "",
+                [32] = ""
         }
     }
 }
@@ -103,9 +104,11 @@ q_command.areas.lev_7_rm_1.chest_inv = {
 -- This will cause the unitary matrix to appear in the debug.txt log file every
 -- time the circuit is modified or measured. This matrix can be quite large, so
 -- remove spaces, tabs, and newline characters before inserting here.
+--[[
 q_command.areas.lev_7_rm_1.solution_unitary =
 {{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}},
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}}}
+--]]
 
 -- Note to devs: The variable ending in solution_statevector holds the statevector
 -- of complex numbers that represent the solution to a circuit puzzle. Use this
@@ -116,10 +119,8 @@ q_command.areas.lev_7_rm_1.solution_unitary =
 -- This will cause the statevector to appear in the debug.txt log file every
 -- time the circuit is modified or measured. This vector can be quite large, so
 -- remove spaces, tabs, and newline characters before inserting here.
---[[
 q_command.areas.lev_7_rm_1.solution_statevector =
-{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}}
---]]
+{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
 
 -- Note to devs: The variable ending in help_chat_msg holds the English localized version
 -- of the message that Professor Q will chat to the player when entering an escape room
