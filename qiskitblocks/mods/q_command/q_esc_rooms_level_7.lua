@@ -44,7 +44,7 @@ q_command.areas.lev_7_rm_1.radius = 5
 -- level number and Y is room number. Right-click to place the Q block in the
 -- desired location in the room, and supply the desired number of rows/columns in the
 -- circuit. You'll need to be in Creative Mode to search the inventory for Q blocks.
-q_command.areas.lev_7_rm_1.q_block_pos = {x = 300, y = 0, z = -61}
+q_command.areas.lev_7_rm_1.q_block_pos = {x = 298, y = 0, z = -61}
 
 -- Note to devs: The door_pos x/y/z values should indicate where the exit door is.
 q_command.areas.lev_7_rm_1.door_pos = {x = 293, y = 0, z = -56}
@@ -66,38 +66,41 @@ q_command.areas.lev_7_rm_1.chest_pos = {x = 296, y = 0, z = -54}
 -- by making their relevant strings empty.
 q_command.areas.lev_7_rm_1.chest_inv = {
     inventory = {
-        main = {[1] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_plus",
-                [2] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_plus",
-                [3] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_plus",
-                [4] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_plus",
-                [5] = "",
-                [6] = "",
+        main = {[1] = "",
+                [2] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_plus",
+                [3] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_plus",
+                [4] = "",
+                [5] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_plus",
+                [6] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_plus",
                 [7] = "",
                 [8] = "",
-                [9] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_minus",
-                [10] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_minus",
-                [11] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_minus",
-                [12] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_minus",
-                [13] = "",
-                [14] = "",
+
+                [9] = "",
+                [10] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_minus",
+                [11] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_minus",
+                [12] = "",
+                [13] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_minus",
+                [14] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_minus",
                 [15] = "",
                 [16] = "",
+
                 [17] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_plus",
                 [18] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_plus",
-                [19] = "circuit_blocks:circuit_blocks_pulse_cancellation_plus",
-                [20] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_plus",
+                [19] = "",
+                [20] = "",
                 [21] = "",
                 [22] = "",
-                [23] = "",
-                [24] = "",
+                [23] = "circuit_blocks:circuit_blocks_pulse_cancellation_plus",
+                [24] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_plus",
+
                 [25] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_minus",
                 [26] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_minus",
-                [27] = "circuit_blocks:circuit_blocks_pulse_cancellation_minus",
-                [28] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_minus",
+                [27] = "",
+                [28] = "",
                 [29] = "",
                 [30] = "",
-                [31] = "",
-                [32] = ""
+                [31] = "circuit_blocks:circuit_blocks_pulse_cancellation_minus",
+                [32] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_minus"
         }
     }
 }
@@ -136,15 +139,16 @@ q_command.areas.lev_7_rm_1.solution_statevector =
 -- for the first time since the application is invoked. Note that for help_chat_msg,
 -- ".en" is *not* added to the end of the variable name for the English language.
 q_command.areas.lev_7_rm_1.help_chat_msg = {
-	"We meet again, esteemed colleague! You may recall that my name is Professor Q and",
-	"that I'm standing behind this glass because we're conducting quantum experiments.",
-	"I'm sure that you'll be fine though :-) For this experiment, make a circuit that",
-	"realizes a digital 'exclusive or' gate as shown on the wall. You may place |1>",
-	"blocks on wires to test input combinations without affecting the exit door."
+	"Let's assume a system composed of two qubits q0 and q1 coupled by a bus resonator. Each qubit has a drive ",
+	"channel and pulse frequency of the channel is set to equal to the resonance frequency of connected qubit. ",
+	"Additional control channel u0 is connected q0, and the pulse frequency of this channel is set to the resonance ",
+	"frequency of q1. The system has no tunability of qubit frequencies. You can assume both qubits are two level ",
+	"system and no cross-talk. Now you need to create a unitary of ZX(-pi/2) as a foundation of a CNOT gate."
 }
 -- Note to devs: The variable ending in help_chat_msg and a language code holds the
 -- non-English localized version of the message that Professor Q will chat to the
 -- player when entering an escape room for the first time since the application is invoked.
+--[[
 q_command.areas.lev_7_rm_1.help_chat_msg.ja = {
 	"また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ",
 	"ラスの後ろに立っていることを思い出してください。私はあなたが元気だと確信しています:-)",
@@ -152,6 +156,7 @@ q_command.areas.lev_7_rm_1.help_chat_msg.ja = {
 	"出口のドアが開くかどうかに影響を与えることなく、入力をテストするために、ワイアー線上",
 	"に|1>のブロックを配置できます。"
 }
+--]]
 q_command.areas.lev_7_rm_1.help_chat_sent = false
 
 -- Note to devs: The variable ending in help_success_msg holds the English localized
@@ -160,10 +165,7 @@ q_command.areas.lev_7_rm_1.help_chat_sent = false
 -- for help_success_msg, ".en" is *not* added to the end of the variable name for the
 -- English language.
 q_command.areas.lev_7_rm_1.help_success_msg = {
-	"Well done! You may know that the CNOT gate is its own inverse, so supplying the ",
-	"output as input will give you the original input as output. That's reversible ",
-	"computing, with no qubits falling in the bit bucket! Perhaps experiment with ",
-	"that before leaving this room to see reversible computing in action."
+	"Well done! TODO: Supply more instructional feedback"
 }
 -- Note to devs: The variable ending in help_success_msg and a language code holds the
 -- localized version of the message that Professor Q will chat to the player when
@@ -195,56 +197,17 @@ q_command.areas.lev_7_rm_1.help_btn_text.en =
 We meet again, esteemed colleague! You may recall that my name is
 Professor Q and that I'm standing behind this glass because we're
 conducting quantum experiments. I'm sure that you'll be fine though :-)
-For this experiment, make a circuit that realizes a digital
-'exclusive or' gate as shown on the wall. You may place |1> blocks on
-wires to test input combinations without affecting the exit door.
-
-Notes: Most of the help that you'll need for these 'escape room' circuit
-puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
-place them on the circuit. When you solve a puzzle, the Q block will
-turn gold, celebration music will play, and the door to the next room
-will open. Please solve the Level I escape rooms if you haven't already,
-as they help build knowledge and skills for these Level II puzzles.
-
-To perform a measurement on a circuit, right-click a measurement block.
-
-To convert an X gate into a controlled-X gate (and vice-versa),
-left-click or right-click the block while wielding the Control Tool (the
-wand-shaped tool in the chest). Left-clicking moves the control
-qubit up one wire, and right-clicking moves the control qubit down one
-wire. The controlled-X gate is also known as the controlled-NOT, or CNOT
-gate. It acts on a pair of qubits, with one acting as control and the
-other as target. It performs an X operation on the target whenever the
-control is in state |1>. If the control qubit is in a superposition,
-this gate creates entanglement.
+For this experiment, let's assume a system composed of two qubits q0 and
+q1 coupled by a bus resonator. Each qubit has a drive channel and pulse
+frequency of the channel is set to equal to the resonance frequency of
+connected qubit. Additional control channel u0 is connected q0, and the
+pulse frequency of this channel is set to the resonance frequency of q1.
+The system has no tunability of qubit frequencies. You can assume both
+qubits are two level system and no cross-talk. Now you need to create a
+unitary of ZX(-pi/2) as a foundation of a CNOT gate.
 ]]
 q_command.areas.lev_7_rm_1.help_btn_text.es = q_command.areas.lev_7_rm_1.help_btn_text.en
-q_command.areas.lev_7_rm_1.help_btn_text.ja =
-[[
-また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ
-ラスの後ろに立っていることを思い出してください。私はあなたが元気だと確信しています:-)
-この実験では、壁にあるようにデジタルの「排他的OR」ゲートを実現する回路を作成します。
-出口のドアが開くかどうかに影響を与えることなく、入力をテストするために、ワイアー線上
-に|1>のブロックを配置できます。
-
-注：これらの「脱出ルーム」サーキットパズルに必要なほとんどのヘルプは、教授Qのチャッ
-トエリア（ウィンドウの左上隅）に表示されます。これらのパズルはみな、チェストからブ
-ロックを取得し、回路に配置するというものです。パズルを解くと、Qブロックが金色に変
-わって、お祝いの音楽がなり、隣の部屋への扉が開きます。レベル II パズルのための知識とス
-キルの構築に役立つため、レベル I 脱出ルームをまだ解いていない場合は解いてから始めてく
-ださい。
-
-回路で測定を実行するには、測定ブロックを右クリックします。
-
-Xゲートを制御Xゲートに（およびその逆に）変換するには、コントロールツール（チェストの
-杖型ツール）を持ちながらブロックを左クリックまたは右クリックします。左クリックすると
-制御量子ビットが1ワイヤ上に移動し、右クリックすると制御量子ビットが1ワイヤ下に移動し
-ます。制御Xゲートは、制御NOTゲートまたはCNOTゲートとも呼ばれます。一対の量子ビッ
-トに作用し、一方がコントロール側として機能し、もう一方がターゲット側として機能しま
-す。コントロール側が|1>の状態の時、ターゲット側でX操作を実行します。制御量子ビットが
-重ね合わせにある場合、このゲートはエンタングルメント状態を作ります。
-]]
+q_command.areas.lev_7_rm_1.help_btn_text.ja = q_command.areas.lev_7_rm_1.help_btn_text.en
 
 
 -- Note to devs: The variable ending in help_btn_caption followed by a language
@@ -254,7 +217,7 @@ Xゲートを制御Xゲートに（およびその逆に）変換するには、
 q_command.areas.lev_7_rm_1.help_btn_caption = {}
 q_command.areas.lev_7_rm_1.help_btn_caption.en = "Make a quantum logic XOR gate"
 q_command.areas.lev_7_rm_1.help_btn_caption.es = q_command.areas.lev_7_rm_1.help_btn_caption.en
-q_command.areas.lev_7_rm_1.help_btn_caption.ja = "量子論理XORゲートを作る"
+q_command.areas.lev_7_rm_1.help_btn_caption.ja = q_command.areas.lev_7_rm_1.help_btn_caption.en
 
 
 -------- Room 2 (Level VII)
@@ -272,66 +235,83 @@ q_command.areas.lev_7_rm_2.portal_pos = {x = 293, y = 1, z = -58}
 q_command.areas.lev_7_rm_2.chest_pos = {x = 284, y = 0, z = -60}
 q_command.areas.lev_7_rm_2.chest_inv = {
     inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
-                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
-                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
-                [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
-                [15] = "circuit_blocks:swap_tool",
-                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
-                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
-                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
-                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
-                [20] = "circuit_blocks:circuit_blocks_sdg_gate",
-                [21] = "circuit_blocks:circuit_blocks_tdg_gate",
-                [22] = "circuit_blocks:circuit_blocks_swap",
-                [23] = "circuit_blocks:rotate_tool",
-                [24] = "circuit_blocks:circuit_blocks_barrier",
-                [25] = "circuit_blocks:circuit_blocks_x_gate",
-                [26] = "circuit_blocks:circuit_blocks_y_gate",
-                [27] = "circuit_blocks:circuit_blocks_z_gate",
-                [28] = "circuit_blocks:circuit_blocks_s_gate",
-                [29] = "circuit_blocks:circuit_blocks_t_gate",
-                [30] = "circuit_blocks:circuit_blocks_h_gate",
-                [31] = "circuit_blocks:control_tool",
-                [32] = "circuit_blocks:circuit_blocks_measure_z"
+        main = {[1] = "",
+                [2] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_plus",
+                [3] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_plus",
+                [4] = "",
+                [5] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_plus",
+                [6] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_plus",
+                [7] = "",
+                [8] = "",
+
+                [9] = "",
+                [10] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_minus",
+                [11] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_minus",
+                [12] = "",
+                [13] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_minus",
+                [14] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_minus",
+                [15] = "",
+                [16] = "",
+
+                [17] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_plus",
+                [18] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_plus",
+                [19] = "",
+                [20] = "",
+                [21] = "",
+                [22] = "",
+                [23] = "circuit_blocks:circuit_blocks_pulse_cancellation_plus",
+                [24] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_plus",
+
+                [25] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_minus",
+                [26] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_minus",
+                [27] = "",
+                [28] = "",
+                [29] = "",
+                [30] = "",
+                [31] = "circuit_blocks:circuit_blocks_pulse_cancellation_minus",
+                [32] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_minus"
         }
     }
 }
-q_command.areas.lev_7_rm_2.solution_unitary =
-{{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+q_command.areas.lev_7_rm_2.solution_statevector =
+{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
 
 q_command.areas.lev_7_rm_2.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as shown on the wall."
+	"Qubits are multi-level systems in this challenge. By considering the effect from higher levels, some ",
+    "noisy terms are induced to your Hamiltonian. Now you need to create ZX(-pi/2) by eliminating ",
+    "those unwanted interactions. Typically two pulse echoed CR is used."
 }
+--[[
 q_command.areas.lev_7_rm_2.help_chat_msg.ja = {
 	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
 }
+--]]
 q_command.areas.lev_7_rm_2.help_chat_sent = false
 q_command.areas.lev_7_rm_2.help_success_msg = {
-	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
-	"circuits with increasingly complex quantum logic in no time!"
+	"Nice job.  TODO: Supply more instructional feedback"
 }
+--[[
 q_command.areas.lev_7_rm_2.help_success_msg.ja = {
 	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
 	"ジックを備えた回路をすぐに作成できるようになります。"
 }
+--]]
 q_command.areas.lev_7_rm_2.success_chat_sent = false
 
 q_command.areas.lev_7_rm_2.help_btn_text = {}
 q_command.areas.lev_7_rm_2.help_btn_text.en =
 [[
-Make a circuit like the last one, but negate the output as shown on the wall
+Qubits are multi-level systems in this challenge. By considering the effect
+from higher levels, some noisy terms are induced to your Hamiltonian. Now
+you need to create ZX(-pi/2) by eliminating those unwanted interactions.
+Typically two pulse echoed CR is used.
 ]]
 q_command.areas.lev_7_rm_2.help_btn_text.es = q_command.areas.lev_7_rm_2.help_btn_text.en
-q_command.areas.lev_7_rm_2.help_btn_text.ja =
-[[
-先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
-]]
+q_command.areas.lev_7_rm_2.help_btn_text.ja = q_command.areas.lev_7_rm_2.help_btn_text.en
 q_command.areas.lev_7_rm_2.help_btn_caption = {}
 q_command.areas.lev_7_rm_2.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
 q_command.areas.lev_7_rm_2.help_btn_caption.es = q_command.areas.lev_7_rm_2.help_btn_caption.en
-q_command.areas.lev_7_rm_2.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
+q_command.areas.lev_7_rm_2.help_btn_caption.ja = q_command.areas.lev_7_rm_2.help_btn_caption.en
 
 
 -------- Room 3 (Level VII)
@@ -349,66 +329,82 @@ q_command.areas.lev_7_rm_3.portal_pos = {x = 293, y = 1, z = -68}
 q_command.areas.lev_7_rm_3.chest_pos = {x = 290, y = 0, z = -72}
 q_command.areas.lev_7_rm_3.chest_inv = {
     inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
-                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
-                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
-                [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
-                [15] = "circuit_blocks:swap_tool",
-                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
-                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
-                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
-                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
-                [20] = "circuit_blocks:circuit_blocks_sdg_gate",
-                [21] = "circuit_blocks:circuit_blocks_tdg_gate",
-                [22] = "circuit_blocks:circuit_blocks_swap",
-                [23] = "circuit_blocks:rotate_tool",
-                [24] = "circuit_blocks:circuit_blocks_barrier",
-                [25] = "circuit_blocks:circuit_blocks_x_gate",
-                [26] = "circuit_blocks:circuit_blocks_y_gate",
-                [27] = "circuit_blocks:circuit_blocks_z_gate",
-                [28] = "circuit_blocks:circuit_blocks_s_gate",
-                [29] = "circuit_blocks:circuit_blocks_t_gate",
-                [30] = "circuit_blocks:circuit_blocks_h_gate",
-                [31] = "circuit_blocks:control_tool",
-                [32] = "circuit_blocks:circuit_blocks_measure_z"
+        main = {[1] = "",
+                [2] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_plus",
+                [3] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_plus",
+                [4] = "",
+                [5] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_plus",
+                [6] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_plus",
+                [7] = "",
+                [8] = "",
+
+                [9] = "",
+                [10] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_minus",
+                [11] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_minus",
+                [12] = "",
+                [13] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_minus",
+                [14] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_minus",
+                [15] = "",
+                [16] = "",
+
+                [17] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_plus",
+                [18] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_plus",
+                [19] = "",
+                [20] = "",
+                [21] = "",
+                [22] = "",
+                [23] = "circuit_blocks:circuit_blocks_pulse_cancellation_plus",
+                [24] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_plus",
+
+                [25] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_minus",
+                [26] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_minus",
+                [27] = "",
+                [28] = "",
+                [29] = "",
+                [30] = "",
+                [31] = "circuit_blocks:circuit_blocks_pulse_cancellation_minus",
+                [32] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_minus"
         }
     }
 }
-q_command.areas.lev_7_rm_3.solution_unitary =
-{{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+q_command.areas.lev_7_rm_3.solution_statevector =
+{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
 
 q_command.areas.lev_7_rm_3.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as shown on the wall."
+	"There is classical cross-talk in your system. This cross-talk induces another ",
+    "noisy term in your Hamiltonian. Now you need to create ZX(-pi/2) by using ",
+    "cancellation pulses."
 }
+--[[
 q_command.areas.lev_7_rm_3.help_chat_msg.ja = {
 	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
 }
+]]
 q_command.areas.lev_7_rm_3.help_chat_sent = false
 q_command.areas.lev_7_rm_3.help_success_msg = {
-	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
-	"circuits with increasingly complex quantum logic in no time!"
+	"Great job! TODO: Supply more instructional feedback"
 }
+--[[
 q_command.areas.lev_7_rm_3.help_success_msg.ja = {
 	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
 	"ジックを備えた回路をすぐに作成できるようになります。"
 }
+--]]
 q_command.areas.lev_7_rm_3.success_chat_sent = false
 
 q_command.areas.lev_7_rm_3.help_btn_text = {}
 q_command.areas.lev_7_rm_3.help_btn_text.en =
 [[
-Make a circuit like the last one, but negate the output as shown on the wall
+There is classical cross-talk in your system. This cross-talk induces another
+noisy term in your Hamiltonian. Now you need to create ZX(-pi/2) by using
+cancellation pulses.
 ]]
 q_command.areas.lev_7_rm_3.help_btn_text.es = q_command.areas.lev_7_rm_3.help_btn_text.en
-q_command.areas.lev_7_rm_3.help_btn_text.ja =
-[[
-先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
-]]
+q_command.areas.lev_7_rm_3.help_btn_text.ja = q_command.areas.lev_7_rm_3.help_btn_text.en
 q_command.areas.lev_7_rm_3.help_btn_caption = {}
 q_command.areas.lev_7_rm_3.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
 q_command.areas.lev_7_rm_3.help_btn_caption.es = q_command.areas.lev_7_rm_3.help_btn_caption.en
-q_command.areas.lev_7_rm_3.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
+q_command.areas.lev_7_rm_3.help_btn_caption.ja = q_command.areas.lev_7_rm_3.help_btn_caption.en
 
 
 -------- Room 4 (Level VII)
@@ -426,66 +422,78 @@ q_command.areas.lev_7_rm_4.portal_pos = {x = 303, y = 1, z = -68}
 q_command.areas.lev_7_rm_4.chest_pos = {x = 302, y = 0, z = -70}
 q_command.areas.lev_7_rm_4.chest_inv = {
     inventory = {
-        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
-                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
-                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
-                [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
-                [15] = "circuit_blocks:swap_tool",
-                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
-                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
-                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
-                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
-                [20] = "circuit_blocks:circuit_blocks_sdg_gate",
-                [21] = "circuit_blocks:circuit_blocks_tdg_gate",
-                [22] = "circuit_blocks:circuit_blocks_swap",
-                [23] = "circuit_blocks:rotate_tool",
-                [24] = "circuit_blocks:circuit_blocks_barrier",
-                [25] = "circuit_blocks:circuit_blocks_x_gate",
-                [26] = "circuit_blocks:circuit_blocks_y_gate",
-                [27] = "circuit_blocks:circuit_blocks_z_gate",
-                [28] = "circuit_blocks:circuit_blocks_s_gate",
-                [29] = "circuit_blocks:circuit_blocks_t_gate",
-                [30] = "circuit_blocks:circuit_blocks_h_gate",
-                [31] = "circuit_blocks:control_tool",
-                [32] = "circuit_blocks:circuit_blocks_measure_z"
+        main = {[1] = "",
+                [2] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_plus",
+                [3] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_plus",
+                [4] = "",
+                [5] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_plus",
+                [6] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_plus",
+                [7] = "",
+                [8] = "",
+
+                [9] = "",
+                [10] = "circuit_blocks:circuit_blocks_pulse_gaussian_x90_minus",
+                [11] = "circuit_blocks:circuit_blocks_pulse_gaussian_x180_minus",
+                [12] = "",
+                [13] = "circuit_blocks:circuit_blocks_pulse_gaussian_y90_minus",
+                [14] = "circuit_blocks:circuit_blocks_pulse_gaussian_y180_minus",
+                [15] = "",
+                [16] = "",
+
+                [17] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_plus",
+                [18] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_plus",
+                [19] = "",
+                [20] = "",
+                [21] = "",
+                [22] = "",
+                [23] = "circuit_blocks:circuit_blocks_pulse_cancellation_plus",
+                [24] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_plus",
+
+                [25] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx45_minus",
+                [26] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_zx90_minus",
+                [27] = "",
+                [28] = "",
+                [29] = "",
+                [30] = "",
+                [31] = "circuit_blocks:circuit_blocks_pulse_cancellation_minus",
+                [32] = "circuit_blocks:circuit_blocks_pulse_fractal_gaussian_cancellation_minus"
         }
     }
 }
-q_command.areas.lev_7_rm_4.solution_unitary =
-{{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+q_command.areas.lev_7_rm_4.solution_statevector =
+{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
 
 q_command.areas.lev_7_rm_4.help_chat_msg = {
-	"Make a circuit like the last one, but negate the output as shown on the wall."
+	"You need to create CNOT gate from ZX(-pi/2)."
 }
+--[[
 q_command.areas.lev_7_rm_4.help_chat_msg.ja = {
 	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
 }
+--]]
 q_command.areas.lev_7_rm_4.help_chat_sent = false
 q_command.areas.lev_7_rm_4.help_success_msg = {
-	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
-	"circuits with increasingly complex quantum logic in no time!"
+	"Excellent!  TODO: Supply more instructional feedback"
 }
+--[[
 q_command.areas.lev_7_rm_4.help_success_msg.ja = {
 	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
 	"ジックを備えた回路をすぐに作成できるようになります。"
 }
+--]]
 q_command.areas.lev_7_rm_4.success_chat_sent = false
 
 q_command.areas.lev_7_rm_4.help_btn_text = {}
 q_command.areas.lev_7_rm_4.help_btn_text.en =
 [[
-Make a circuit like the last one, but negate the output as shown on the wall
+You need to create CNOT gate from ZX(-pi/2).
 ]]
 q_command.areas.lev_7_rm_4.help_btn_text.es = q_command.areas.lev_7_rm_4.help_btn_text.en
-q_command.areas.lev_7_rm_4.help_btn_text.ja =
-[[
-先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
-]]
+q_command.areas.lev_7_rm_4.help_btn_text.ja = q_command.areas.lev_7_rm_4.help_btn_text.en
 q_command.areas.lev_7_rm_4.help_btn_caption = {}
 q_command.areas.lev_7_rm_4.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
 q_command.areas.lev_7_rm_4.help_btn_caption.es = q_command.areas.lev_7_rm_4.help_btn_caption.en
-q_command.areas.lev_7_rm_4.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
+q_command.areas.lev_7_rm_4.help_btn_caption.ja = q_command.areas.lev_7_rm_4.help_btn_caption.en
 
 
 -------- Room 5 (Level VII)
