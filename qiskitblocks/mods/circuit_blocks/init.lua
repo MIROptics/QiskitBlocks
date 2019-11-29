@@ -440,6 +440,13 @@ minetest.register_node("circuit_blocks:_pulse_u", {
 	paramtype2 = "facedir"
 })
 
+minetest.register_node("circuit_blocks:_pulse_u0", {
+    description = "Pulse u0 block",
+    tiles = {"circuit_blocks_pulse_u0.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir"
+})
+
 minetest.register_node("circuit_blocks:_pulse_d0", {
     description = "Pulse d0 block",
     tiles = {"circuit_blocks_pulse_d0.png"},
@@ -454,11 +461,22 @@ minetest.register_node("circuit_blocks:_pulse_d1", {
 	paramtype2 = "facedir"
 })
 
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_UP, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_DOWN, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_UP, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_DOWN, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP, false, false, 0, false)
-circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_X90_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_X90_MINUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_X180_MINUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_Y90_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_Y90_MINUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_Y180_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_GAUSSIAN_Y180_MINUS, false, false, 0, false)
+
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_MINUS, false, false, 0, false)
+
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_CANCELLATION_MINUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_PLUS, false, false, 0, false)
+circuit_blocks:register_circuit_block(CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_MINUS, false, false, 0, false)
 

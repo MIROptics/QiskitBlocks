@@ -983,20 +983,40 @@ function circuit_blocks:register_circuit_block(circuit_node_type,
         texture_name = "circuit_blocks_gate_" .. suffix
 
     -- Register pulse blocks
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN then
-        texture_name = "circuit_blocks_pulse_gaussian"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_UP then
-        texture_name = "circuit_blocks_pulse_fractal_gaussian_up"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_DOWN then
-        texture_name = "circuit_blocks_pulse_fractal_gaussian_down"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_UP then
-        texture_name = "circuit_blocks_pulse_cancellation_up"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_DOWN then
-        texture_name = "circuit_blocks_pulse_cancellation_down"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP then
-        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_up"
-    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN then
-        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_down"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_X90_PLUS then
+        texture_name = "circuit_blocks_pulse_gaussian_x90_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_X90_MINUS then
+        texture_name = "circuit_blocks_pulse_gaussian_x90_minus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS then
+        texture_name = "circuit_blocks_pulse_gaussian_x180_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_X180_MINUS then
+        texture_name = "circuit_blocks_pulse_gaussian_x180_minus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_Y90_PLUS then
+        texture_name = "circuit_blocks_pulse_gaussian_y90_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_Y90_MINUS then
+        texture_name = "circuit_blocks_pulse_gaussian_y90_minus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_Y180_PLUS then
+        texture_name = "circuit_blocks_pulse_gaussian_y180_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_GAUSSIAN_Y180_MINUS then
+        texture_name = "circuit_blocks_pulse_gaussian_y180_minus"
+
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_zx45_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_zx45_minus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_PLUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_zx90_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_MINUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_zx90_minus"
+
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_PLUS then
+        texture_name = "circuit_blocks_pulse_cancellation_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_CANCELLATION_MINUS then
+        texture_name = "circuit_blocks_pulse_cancellation_minus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_PLUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_plus"
+    elseif circuit_node_type == CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_CANCELLATION_MINUS then
+        texture_name = "circuit_blocks_pulse_fractal_gaussian_cancellation_minus"
     end
 
     -- TODO: Work out way to pass in a meaningful description

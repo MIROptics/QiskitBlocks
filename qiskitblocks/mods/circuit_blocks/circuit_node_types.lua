@@ -38,12 +38,26 @@ CircuitNodeTypes = {
     QUBIT_BASIS = 18, -- Block that represents |0> or |1>
     COLOR_QUBIT = 19, -- Block that depicts the state of a qubit with an HSV color
                      -- TODO: Reference a paper, Maddy Tod, etc.
-    PULSE_GAUSSIAN = 20, -- Block that depicts a gaussian pulse
-    PULSE_FRACTAL_GAUSSIAN_UP = 21, -- Block that depicts a fractal gaussian pulse up
-    PULSE_FRACTAL_GAUSSIAN_DOWN = 22, -- Block that depicts a fractal gaussian pulse down
-    PULSE_CANCELLATION_UP = 23, -- Block that depicts a cancellation pulse up
-    PULSE_CANCELLATION_DOWN = 24, -- Block that depicts a cancellation pulse down
-    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_UP = 25, -- Block that depicts a fractal gaussian cancellation pulse up
-    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_DOWN = 26 -- Block that depicts a fractal gaussian cancellation pulse down
+
+    -- Blocks that depicts pulses
+    PULSE_GAUSSIAN_X90_PLUS = 20,
+    PULSE_GAUSSIAN_X90_MINUS = 21,
+    PULSE_GAUSSIAN_X180_PLUS = 22,
+    PULSE_GAUSSIAN_X180_MINUS = 23,
+    PULSE_GAUSSIAN_Y90_PLUS = 24,
+    PULSE_GAUSSIAN_Y90_MINUS = 25,
+    PULSE_GAUSSIAN_Y180_PLUS = 26,
+    PULSE_GAUSSIAN_Y180_MINUS = 27,
+
+    PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS = 28,
+    PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS = 29,
+    PULSE_FRACTAL_GAUSSIAN_ZX90_PLUS = 30,
+    PULSE_FRACTAL_GAUSSIAN_ZX90_MINUS = 31,
+
+    PULSE_CANCELLATION_PLUS = 32,
+    PULSE_CANCELLATION_MINUS = 33,
+
+    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_PLUS = 34,
+    PULSE_FRACTAL_GAUSSIAN_CANCELLATION_MINUS = 35
 
 }
