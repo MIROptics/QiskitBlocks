@@ -19,6 +19,8 @@ Elements of the q_command table that supply information about areas in the game.
 The "Note to devs" comments in Room 1 apply to all escape rooms in all levels
 --]]
 
+dofile(minetest.get_modpath("circuit_blocks").."/circuit_node_types.lua");
+
 -- Escape room puzzles Level VII ------------------------------------------------
 -------- Room 1 (Level VII)
 -- Note to devs: Use lev_X_rm_Y pattern, where X is level number and Y is room number
@@ -131,8 +133,15 @@ q_command.areas.lev_7_rm_1.solution_unitary =
 -- This will cause the statevector to appear in the debug.txt log file every
 -- time the circuit is modified or measured. This vector can be quite large, so
 -- remove spaces, tabs, and newline characters before inserting here.
+--[[
 q_command.areas.lev_7_rm_1.solution_statevector =
 {{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
+--]]
+
+q_command.areas.lev_7_rm_1.solution_pulses =
+{{CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_MINUS}}
 
 -- Note to devs: The variable ending in help_chat_msg holds the English localized version
 -- of the message that Professor Q will chat to the player when entering an escape room
@@ -273,8 +282,23 @@ q_command.areas.lev_7_rm_2.chest_inv = {
         }
     }
 }
-q_command.areas.lev_7_rm_2.solution_statevector =
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
+q_command.areas.lev_7_rm_2.solution_pulses =
+{{CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS,            --d0
+  CircuitNodeTypes.EMPTY,                               --d1
+  CircuitNodeTypes.EMPTY},                              --u
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS},
+
+ {CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY},
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS}
+}
 
 q_command.areas.lev_7_rm_2.help_chat_msg = {
 	"Qubits are multi-level systems in this challenge. By considering the effect from higher levels, some ",
@@ -367,8 +391,23 @@ q_command.areas.lev_7_rm_3.chest_inv = {
         }
     }
 }
-q_command.areas.lev_7_rm_3.solution_statevector =
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
+q_command.areas.lev_7_rm_3.solution_pulses =
+{{CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS,            --d0
+  CircuitNodeTypes.EMPTY,                               --d1
+  CircuitNodeTypes.EMPTY},                              --u
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_CANCELLATION_PLUS,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS},
+
+ {CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY},
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_CANCELLATION_MINUS,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS}
+}
 
 q_command.areas.lev_7_rm_3.help_chat_msg = {
 	"There is classical cross-talk in your system. This cross-talk induces another ",
@@ -460,8 +499,23 @@ q_command.areas.lev_7_rm_4.chest_inv = {
         }
     }
 }
-q_command.areas.lev_7_rm_4.solution_statevector =
-{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}}
+q_command.areas.lev_7_rm_4.solution_pulses =
+{{CircuitNodeTypes.PULSE_GAUSSIAN_Y180_MINUS,           --d0
+  CircuitNodeTypes.PULSE_GAUSSIAN_X90_PLUS,             --d1
+  CircuitNodeTypes.EMPTY},                              --u
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_CANCELLATION_PLUS,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_PLUS},
+
+ {CircuitNodeTypes.PULSE_GAUSSIAN_X180_PLUS,
+  CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.EMPTY},
+
+ {CircuitNodeTypes.EMPTY,
+  CircuitNodeTypes.PULSE_CANCELLATION_MINUS,
+  CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX45_MINUS}
+}
 
 q_command.areas.lev_7_rm_4.help_chat_msg = {
 	"You need to create CNOT gate from ZX(-pi/2)."

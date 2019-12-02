@@ -987,6 +987,57 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks, to
 end
 
 
+function q_command:compute_circuit_pulses(circuit_block)
+    local num_wires = circuit_block.get_circuit_num_wires()
+    local num_columns = circuit_block.get_circuit_num_columns()
+    local circuit_dir_str = circuit_block.get_circuit_dir_str()
+    local circuit_pos_x = circuit_block.get_circuit_pos().x
+    local circuit_pos_y = circuit_block.get_circuit_pos().y
+    local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+    local circuit_pulses = {}
+
+    for column_num = 1, num_columns do
+        circuit_pulses[column_num] = {}
+        for wire_num = 1, num_wires do
+            circuit_pulses[column_num][wire_num] = CircuitNodeTypes.EMPTY
+
+            -- Assume dir_str is "+Z"
+            local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+
+            if circuit_dir_str == "+X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z - column_num + 1}
+            elseif circuit_dir_str == "-X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z + column_num - 1}
+            elseif circuit_dir_str == "-Z" then
+                circuit_node_pos = {x = circuit_pos_x - column_num + 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+            end
+
+
+            local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+            --local q_block = q_command:get_q_command_block(circuit_node_pos)
+
+            if circuit_node_block then
+                local node_type = circuit_node_block.get_node_type()
+                circuit_pulses[column_num][wire_num] = node_type
+            end
+        end
+    end
+
+    --minetest.debug("circuit_pulses:\n" .. dump(circuit_pulses))
+
+    return circuit_pulses
+end
+
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
         if fields.num_wires_str and fields.num_columns_str then
@@ -1091,6 +1142,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                             suffix_incorrect_solution,
                                             correct_solution_statevector,
                                             correct_solution_unitary,
+                                            correct_solution_pulses,
                                             block_represents_correct_solution,
                                             door_pos,
                                             chest_pos,
@@ -1617,7 +1669,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local sv_data = http_request_response.data
                             local statevector = q_command:parse_json_statevector(sv_data)
-                            minetest.debug("statevector:\n" .. dump(statevector))
+                            --minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- Only check for a correct player solution if correct_solution_statevector exists
                             if correct_solution_statevector then
@@ -2046,9 +2098,47 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
 
                         -- If there is a correct unitary solution, run the unitary_simulator
-                        -- TODO: Add code that creates and checks for a correct unitary
                         if correct_solution_unitary then
                             request_http_api.fetch(http_request_unitary, process_backend_unitary_result)
+
+                        elseif correct_solution_pulses then
+                            -- If there is a correct pulses solution, compare with actual
+                            local circuit_pulses = q_command:compute_circuit_pulses(circuit_block)
+
+                            -- minetest.debug("circuit_pulses:\n" .. dump(circuit_pulses))
+
+                            local is_correct_solution_pulses = true
+                            if circuit_pulses and correct_solution_pulses and
+                                    #circuit_pulses == #correct_solution_pulses then
+                                for pul_col_idx = 1, #circuit_pulses do
+                                    for pul_row_idx = 1, #circuit_pulses[pul_col_idx] do
+
+                                        --[[
+                                        minetest.debug("circuit_pulses[" ..
+                                                tostring(pul_col_idx) .. "][" ..
+                                                tostring(pul_row_idx) .. "]: " ..
+                                                tostring(circuit_pulses[pul_col_idx][pul_row_idx]))
+
+                                        minetest.debug("correct_solution_pulses[" ..
+                                                tostring(pul_col_idx) .. "][" ..
+                                                tostring(pul_row_idx) .. "]: " ..
+                                                tostring(correct_solution_pulses[pul_col_idx][pul_row_idx]))
+                                        --]]
+
+                                        if circuit_pulses[pul_col_idx][pul_row_idx] ~=
+                                                correct_solution_pulses[pul_col_idx][pul_row_idx] then
+                                            is_correct_solution_pulses = false
+                                            break
+                                        end
+                                    end
+                                end
+                            else
+                                is_correct_solution_pulses = false
+                            end
+                            minetest.debug("is_correct_solution_pulses: " .. tostring(is_correct_solution_pulses))
+                            react_solution_attempt(is_correct_solution_pulses)
+
+
                         end
                     end
                 end
@@ -2417,11 +2507,12 @@ for key, area in pairs(q_command.areas) do
         q_command:register_help_button(key,
                 area.help_btn_caption, area.help_btn_text)
     end
-    if area.solution_statevector or area.solution_unitary then
+    if area.solution_statevector or area.solution_unitary or area.solution_pulses then
         q_command:register_q_command_block( key .. "_success",
                 key,
                 area.solution_statevector,
                 area.solution_unitary,
+                area.solution_pulses,
                 true,
                 area.door_pos,
                 area.chest_pos,
@@ -2430,6 +2521,7 @@ for key, area in pairs(q_command.areas) do
                 key,
                 area.solution_statevector,
                 area.solution_unitary,
+                area.solution_pulses,
                 false,
                 area.door_pos,
                 area.chest_pos,
