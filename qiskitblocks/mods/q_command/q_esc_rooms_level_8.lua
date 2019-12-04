@@ -49,6 +49,15 @@ q_command.areas.lev_8_rm_1.q_block_pos = {x = 265, y = 0, z = -70}
 -- Note to devs: The door_pos x/y/z values should indicate where the exit door is.
 q_command.areas.lev_8_rm_1.door_pos = {x = 270, y = 0, z = -63}
 
+-- Note to devs: The portal_pos x/y/z values should indicate where the orange portal
+-- is, so that it may be used to teleport from the hub into the room, and entered by
+-- the player to teleport back to the hub. It is good practice to place it one block
+-- above floor level so that player doesn't accidentally get teleported when bumping
+-- into it. It is also good practice to place the portal to the West of the center_pos
+-- if possible, so that the portal is behind the player when teleporting into the room
+-- (players enter from the West into the blue portals in the portal room.)
+q_command.areas.lev_8_rm_1.portal_pos = {x = 303, y = 1, z = -58}
+
 -- Note to devs: The chest_pos x/y/z values should indicate where the chest is, so
 -- that it may be restocked when a puzzle is solved.
 q_command.areas.lev_8_rm_1.chest_pos = {x = 272, y = 0, z = -66}
@@ -244,7 +253,7 @@ q_command.areas.lev_8_rm_2.region = q_command.regions.esc_rooms_level_8
 table.insert(q_command.regions.esc_rooms_level_8, q_command.areas.lev_8_rm_2)
 q_command.areas.lev_8_rm_2.area_num = #q_command.regions.esc_rooms_level_8
 
-q_command.areas.lev_8_rm_2.center_pos = {x = 238, y = 0, z = 42}
+q_command.areas.lev_8_rm_2.center_pos = {x = 268, y = 0, z = -58}
 q_command.areas.lev_8_rm_2.radius = 5
 q_command.areas.lev_8_rm_2.q_block_pos = {x = 235, y = 0, z = 40}
 
