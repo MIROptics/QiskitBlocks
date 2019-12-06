@@ -18,6 +18,19 @@ limitations under the License.
 Elements of the q_command table that supply information about areas in the game
 --]]
 
+-- Starting room TARDIS
+q_command.areas.starting_room_tardis = {}
+q_command.areas.starting_room_tardis.region = q_command.regions.starting_room
+table.insert(q_command.regions.starting_room, q_command.areas.starting_room_tardis)
+q_command.areas.starting_room_tardis.area_num = #q_command.regions.starting_room
+q_command.areas.starting_room_tardis.center_pos = {x = 227, y = 9, z = 79}
+q_command.areas.starting_room_tardis.radius = 4
+q_command.areas.starting_room_tardis.portal_pos = {x = 227, y = 9, z = 81}
+q_command.areas.starting_room_tardis.help_chat_msg = {
+	"Walk into the TARDIS (blue box) for the portal room"
+}
+
+
 -- Starting room help buttons ------------------------------------------------
 q_command.areas.quantum_circuit_world = {}
 q_command.areas.quantum_circuit_world.help_btn_text = {}

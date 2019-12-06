@@ -74,13 +74,16 @@ ESC_ROOMS_LEVEL_14_REGION_ID = 14
 ESC_ROOMS_LEVEL_15_REGION_ID = 15
 ESC_ROOMS_LEVEL_16_REGION_ID = 16
 
-CIRCUIT_GARDEN_REGION_ID = 17
+STARTING_ROOM_REGION_ID = 17
+CIRCUIT_GARDEN_REGION_ID = 18
 
 NUM_AREAS_IN_EACH_ESC_ROOM = 16
+NUM_AREAS_IN_STARTING_ROOM = 1
 NUM_AREAS_IN_CIRCUIT_GARDEN = 0 --TODO: Plug in correct number
 
 HUB_PORTALS_RADIUS = 1
 RETURN_LOOK_RAD = 3 * (math.pi / 2)
+TARDIS_RETURN_LOOK_RAD = 0
 
 -- our API object
 q_command = {}
@@ -239,6 +242,16 @@ q_command.regions.esc_rooms_level_16.hub_portal = {}
 q_command.regions.esc_rooms_level_16.hub_portal.center_pos = {x = 224, y = 0, z = 128}
 q_command.regions.esc_rooms_level_16.hub_portal.return_pos = {x = 226, y = 0, z = 128}
 q_command.regions.esc_rooms_level_16.hub_portal.return_look_rad = RETURN_LOOK_RAD
+
+q_command.regions.starting_room = {}
+q_command.regions.starting_room.id = STARTING_ROOM_REGION_ID
+q_command.regions.starting_room.num_areas = NUM_AREAS_IN_STARTING_ROOM
+q_command.regions.starting_room.cur_area = 1  -- One-indexed
+q_command.regions.starting_room.hub_portal = {}
+q_command.regions.starting_room.hub_portal.center_pos = {x = 228, y = 0, z = 83}
+q_command.regions.starting_room.hub_portal.return_pos = {x = 228, y = 0, z = 85}
+q_command.regions.starting_room.hub_portal.return_look_rad = TARDIS_RETURN_LOOK_RAD
+
 
 --q_command.regions.circuit_garden = {}
 --q_command.regions.circuit_garden.id = CIRCUIT_GARDEN_REGION_ID
@@ -2594,7 +2607,7 @@ minetest.register_globalstep(function(dtime)
                         area.region.hub_portal.return_pos and
                         area.region.hub_portal.return_look_rad then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Teleporting back to the portal room")
+                    --minetest.chat_send_player(object:get_player_name(), "Teleporting back to the portal room")
                     object:set_pos(area.region.hub_portal.return_pos)
                     object:set_look_horizontal(area.region.hub_portal.return_look_rad)
                 end
@@ -2611,7 +2624,7 @@ minetest.register_globalstep(function(dtime)
                     HUB_PORTALS_RADIUS)) do
                 if object:is_player() then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
+                    --minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
                     if region[region.cur_area] and region[region.cur_area].center_pos then
                         --object:set_pos(region[region.cur_area].center_pos)
 
@@ -2701,6 +2714,30 @@ minetest.register_node("q_command:hamiltonian_operator_block", {
     tiles = {"q_command_hamiltonian_operator.png"},
     groups = {oddly_breakable_by_hand=2},
 	paramtype2 = "facedir",
+})
+
+minetest.register_node("q_command:q_command_tardis_top", {
+    description = "TARDIS top section",
+    tiles = {"q_command_tardis_overhead.png",
+             "q_command_tardis_underside.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
+minetest.register_node("q_command:q_command_tardis_bottom", {
+    description = "TARDIS bottom section",
+    tiles = {"q_command_tardis_overhead.png",
+             "q_command_tardis_underside.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
 })
 
 

@@ -49,6 +49,15 @@ q_command.areas.lev_15_rm_1.q_block_pos = {x = 146, y = 0, z = 65}
 -- Note to devs: The door_pos x/y/z values should indicate where the exit door is.
 q_command.areas.lev_15_rm_1.door_pos = {x = 143, y = 0, z = 60}
 
+-- Note to devs: The portal_pos x/y/z values should indicate where the orange portal
+-- is, so that it may be used to teleport from the hub into the room, and entered by
+-- the player to teleport back to the hub. It is good practice to place it one block
+-- above floor level so that player doesn't accidentally get teleported when bumping
+-- into it. It is also good practice to place the portal to the West of the center_pos
+-- if possible, so that the portal is behind the player when teleporting into the room
+-- (players enter from the West into the blue portals in the portal room.)
+q_command.areas.lev_15_rm_1.portal_pos = {x = 153, y = 1, z = 62}
+
 -- Note to devs: The chest_pos x/y/z values should indicate where the chest is, so
 -- that it may be restocked when a puzzle is solved.
 q_command.areas.lev_15_rm_1.chest_pos = {x = 146, y = 0, z = 58}
@@ -244,12 +253,13 @@ q_command.areas.lev_15_rm_2.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_2)
 q_command.areas.lev_15_rm_2.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_2.center_pos = {x = 238, y = 0, z = 42}
+q_command.areas.lev_15_rm_2.center_pos = {x = 138, y = 0, z = 62}
 q_command.areas.lev_15_rm_2.radius = 5
-q_command.areas.lev_15_rm_2.q_block_pos = {x = 235, y = 0, z = 40}
+q_command.areas.lev_15_rm_2.q_block_pos = {x = 140, y = 0, z = 59}
 
-q_command.areas.lev_15_rm_2.door_pos = {x = 243, y = 0, z = 44}
-q_command.areas.lev_15_rm_2.chest_pos = {x = 240, y = 0, z = 46}
+q_command.areas.lev_15_rm_2.door_pos = {x = 136, y = 0, z = 67}
+q_command.areas.lev_15_rm_2.portal_pos = {x = 143, y = 1, z = 62}
+q_command.areas.lev_15_rm_2.chest_pos = {x = 134, y = 0, z = 64}
 q_command.areas.lev_15_rm_2.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -320,12 +330,13 @@ q_command.areas.lev_15_rm_3.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_3)
 q_command.areas.lev_15_rm_3.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_3.center_pos = {x = 248, y = 0, z = 42}
+q_command.areas.lev_15_rm_3.center_pos = {x = 138, y = 0, z = 72}
 q_command.areas.lev_15_rm_3.radius = 5
-q_command.areas.lev_15_rm_3.q_block_pos = {x = 246, y = 0, z = 45}
+q_command.areas.lev_15_rm_3.q_block_pos = {x = 135, y = 0, z = 70}
 
-q_command.areas.lev_15_rm_3.door_pos = {x = 250, y = 0, z = 37}
-q_command.areas.lev_15_rm_3.chest_pos = {x = 252, y = 0, z = 40}
+q_command.areas.lev_15_rm_3.door_pos = {x = 143, y = 0, z = 74}
+q_command.areas.lev_15_rm_3.portal_pos = {x = 143, y = 1, z = 72}
+q_command.areas.lev_15_rm_3.chest_pos = {x = 140, y = 0, z = 76}
 q_command.areas.lev_15_rm_3.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -396,12 +407,13 @@ q_command.areas.lev_15_rm_4.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_4)
 q_command.areas.lev_15_rm_4.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_4.center_pos = {x = 248, y = 0, z = 32}
+q_command.areas.lev_15_rm_4.center_pos = {x = 148, y = 0, z = 72}
 q_command.areas.lev_15_rm_4.radius = 5
-q_command.areas.lev_15_rm_4.q_block_pos = {x = 245, y = 0, z = 30}
+q_command.areas.lev_15_rm_4.q_block_pos = {x = 150, y = 0, z = 69}
 
-q_command.areas.lev_15_rm_4.door_pos = {x = 246, y = 0, z = 27}
-q_command.areas.lev_15_rm_4.chest_pos = {x = 250, y = 0, z = 28}
+q_command.areas.lev_15_rm_4.door_pos = {x = 153, y = 0, z = 70}
+q_command.areas.lev_15_rm_4.portal_pos = {x = 153, y = 1, z = 72}
+q_command.areas.lev_15_rm_4.chest_pos = {x = 152, y = 0, z = 74}
 q_command.areas.lev_15_rm_4.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -472,12 +484,13 @@ q_command.areas.lev_15_rm_5.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_5)
 q_command.areas.lev_15_rm_5.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_5.center_pos = {x = 248, y = 0, z = 22}
+q_command.areas.lev_15_rm_5.center_pos = {x = 158, y = 0, z = 72}
 q_command.areas.lev_15_rm_5.radius = 5
-q_command.areas.lev_15_rm_5.q_block_pos = {x = 251, y = 0, z = 24}
+q_command.areas.lev_15_rm_5.q_block_pos = {x = 156, y = 0, z = 75}
 
-q_command.areas.lev_15_rm_5.door_pos = {x = 243, y = 0, z = 24}
-q_command.areas.lev_15_rm_5.chest_pos = {x = 244, y = 0, z = 20}
+q_command.areas.lev_15_rm_5.door_pos = {x = 156, y = 0, z = 67}
+q_command.areas.lev_15_rm_5.portal_pos = {x = 163, y = 1, z = 72}
+q_command.areas.lev_15_rm_5.chest_pos = {x = 160, y = 0, z = 68}
 q_command.areas.lev_15_rm_5.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -548,12 +561,13 @@ q_command.areas.lev_15_rm_6.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_6)
 q_command.areas.lev_15_rm_6.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_6.center_pos = {x = 238, y = 0, z = 22}
+q_command.areas.lev_15_rm_6.center_pos = {x = 158, y = 0, z = 62}
 q_command.areas.lev_15_rm_6.radius = 5
-q_command.areas.lev_15_rm_6.q_block_pos = {x = 240, y = 0, z = 19}
+q_command.areas.lev_15_rm_6.q_block_pos = {x = 160, y = 0, z = 59}
 
-q_command.areas.lev_15_rm_6.door_pos = {x = 236, y = 0, z = 17}
-q_command.areas.lev_15_rm_6.chest_pos = {x = 236, y = 0, z = 26}
+q_command.areas.lev_15_rm_6.door_pos = {x = 163, y = 0, z = 60}
+q_command.areas.lev_15_rm_6.portal_pos = {x = 163, y = 1, z = 62}
+q_command.areas.lev_15_rm_6.chest_pos = {x = 154, y = 0, z = 60}
 q_command.areas.lev_15_rm_6.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -624,12 +638,13 @@ q_command.areas.lev_15_rm_7.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_7)
 q_command.areas.lev_15_rm_7.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_7.center_pos = {x = 238, y = 0, z = 12}
+q_command.areas.lev_15_rm_7.center_pos = {x = 168, y = 0, z = 62}
 q_command.areas.lev_15_rm_7.radius = 5
-q_command.areas.lev_15_rm_7.q_block_pos = {x = 240, y = 0, z = 9}
+q_command.areas.lev_15_rm_7.q_block_pos = {x = 171, y = 0, z = 64}
 
-q_command.areas.lev_15_rm_7.door_pos = {x = 243, y = 0, z = 10}
-q_command.areas.lev_15_rm_7.chest_pos = {x = 234, y = 0, z = 14}
+q_command.areas.lev_15_rm_7.door_pos = {x = 170, y = 0, z = 67}
+q_command.areas.lev_15_rm_7.portal_pos = {x = 173, y = 1, z = 59}
+q_command.areas.lev_15_rm_7.chest_pos = {x = 166, y = 0, z = 58}
 q_command.areas.lev_15_rm_7.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -700,12 +715,13 @@ q_command.areas.lev_15_rm_8.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_8)
 q_command.areas.lev_15_rm_8.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_8.center_pos = {x = 248, y = 0, z = 12}
+q_command.areas.lev_15_rm_8.center_pos = {x = 168, y = 0, z = 72}
 q_command.areas.lev_15_rm_8.radius = 5
-q_command.areas.lev_15_rm_8.q_block_pos = {x = 246, y = 0, z = 15}
+q_command.areas.lev_15_rm_8.q_block_pos = {x = 165, y = 0, z = 70}
 
-q_command.areas.lev_15_rm_8.door_pos = {x = 253, y = 0, z = 14}
-q_command.areas.lev_15_rm_8.chest_pos = {x = 246, y = 0, z = 8}
+q_command.areas.lev_15_rm_8.door_pos = {x = 166, y = 0, z = 77}
+q_command.areas.lev_15_rm_8.portal_pos = {x = 173, y = 1, z = 72}
+q_command.areas.lev_15_rm_8.chest_pos = {x = 172, y = 0, z = 70}
 q_command.areas.lev_15_rm_8.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -776,12 +792,13 @@ q_command.areas.lev_15_rm_9.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_9)
 q_command.areas.lev_15_rm_9.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_9.center_pos = {x = 258, y = 0, z = 12}
+q_command.areas.lev_15_rm_9.center_pos = {x = 168, y = 0, z = 82}
 q_command.areas.lev_15_rm_9.radius = 5
-q_command.areas.lev_15_rm_9.q_block_pos = {x = 256, y = 0, z = 16}
+q_command.areas.lev_15_rm_9.q_block_pos = {x = 171, y = 0, z = 84}
 
-q_command.areas.lev_15_rm_9.door_pos = {x = 263, y = 0, z = 10}
-q_command.areas.lev_15_rm_9.chest_pos = {x = 254, y = 0, z = 10}
+q_command.areas.lev_15_rm_9.door_pos = {x = 170, y = 0, z = 87}
+q_command.areas.lev_15_rm_9.portal_pos = {x = 173, y = 1, z = 79}
+q_command.areas.lev_15_rm_9.chest_pos = {x = 170, y = 0, z = 78}
 q_command.areas.lev_15_rm_9.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -852,12 +869,13 @@ q_command.areas.lev_15_rm_10.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_10)
 q_command.areas.lev_15_rm_10.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_10.center_pos = {x = 268, y = 0, z = 12}
+q_command.areas.lev_15_rm_10.center_pos = {x = 168, y = 0, z = 92}
 q_command.areas.lev_15_rm_10.radius = 5
-q_command.areas.lev_15_rm_10.q_block_pos = {x = 271, y = 0, z = 14}
+q_command.areas.lev_15_rm_10.q_block_pos = {x = 166, y = 0, z = 95}
 
-q_command.areas.lev_15_rm_10.door_pos = {x = 266, y = 0, z = 17}
-q_command.areas.lev_15_rm_10.chest_pos = {x = 266, y = 0, z = 8}
+q_command.areas.lev_15_rm_10.door_pos = {x = 163, y = 0, z = 90}
+q_command.areas.lev_15_rm_10.portal_pos = {x = 173, y = 1, z = 92}
+q_command.areas.lev_15_rm_10.chest_pos = {x = 172, y = 0, z = 90}
 q_command.areas.lev_15_rm_10.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -928,12 +946,13 @@ q_command.areas.lev_15_rm_11.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_11)
 q_command.areas.lev_15_rm_11.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_11.center_pos = {x = 268, y = 0, z = 22}
+q_command.areas.lev_15_rm_11.center_pos = {x = 158, y = 0, z = 92}
 q_command.areas.lev_15_rm_11.radius = 5
-q_command.areas.lev_15_rm_11.q_block_pos = {x = 271, y = 0, z = 24}
+q_command.areas.lev_15_rm_11.q_block_pos = {x = 155, y = 0, z = 90}
 
-q_command.areas.lev_15_rm_11.door_pos = {x = 263, y = 0, z = 24}
-q_command.areas.lev_15_rm_11.chest_pos = {x = 264, y = 0, z = 20}
+q_command.areas.lev_15_rm_11.door_pos = {x = 156, y = 0, z = 87}
+q_command.areas.lev_15_rm_11.portal_pos = {x = 163, y = 1, z = 92}
+q_command.areas.lev_15_rm_11.chest_pos = {x = 160, y = 0, z = 88}
 q_command.areas.lev_15_rm_11.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -1004,12 +1023,13 @@ q_command.areas.lev_15_rm_12.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_12)
 q_command.areas.lev_15_rm_12.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_12.center_pos = {x = 258, y = 0, z = 22}
+q_command.areas.lev_15_rm_12.center_pos = {x = 158, y = 0, z = 82}
 q_command.areas.lev_15_rm_12.radius = 5
-q_command.areas.lev_15_rm_12.q_block_pos = {x = 260, y = 0, z = 19}
+q_command.areas.lev_15_rm_12.q_block_pos = {x = 161, y = 0, z = 84}
 
-q_command.areas.lev_15_rm_12.door_pos = {x = 260, y = 0, z = 27}
-q_command.areas.lev_15_rm_12.chest_pos = {x = 256, y = 0, z = 26}
+q_command.areas.lev_15_rm_12.door_pos = {x = 153, y = 0, z = 84}
+q_command.areas.lev_15_rm_12.portal_pos = {x = 163, y = 1, z = 85}
+q_command.areas.lev_15_rm_12.chest_pos = {x = 154, y = 0, z = 80}
 q_command.areas.lev_15_rm_12.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -1080,12 +1100,13 @@ q_command.areas.lev_15_rm_13.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_13)
 q_command.areas.lev_15_rm_13.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_13.center_pos = {x = 258, y = 0, z = 32}
+q_command.areas.lev_15_rm_13.center_pos = {x = 148, y = 0, z = 82}
 q_command.areas.lev_15_rm_13.radius = 5
-q_command.areas.lev_15_rm_13.q_block_pos = {x = 256, y = 0, z = 35}
+q_command.areas.lev_15_rm_13.q_block_pos = {x = 145, y = 0, z = 80}
 
-q_command.areas.lev_15_rm_13.door_pos = {x = 263, y = 0, z = 30}
-q_command.areas.lev_15_rm_13.chest_pos = {x = 254, y = 0, z = 34}
+q_command.areas.lev_15_rm_13.door_pos = {x = 150, y = 0, z = 87}
+q_command.areas.lev_15_rm_13.portal_pos = {x = 153, y = 1, z = 82}
+q_command.areas.lev_15_rm_13.chest_pos = {x = 146, y = 0, z = 78}
 q_command.areas.lev_15_rm_13.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -1156,12 +1177,13 @@ q_command.areas.lev_15_rm_14.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_14)
 q_command.areas.lev_15_rm_14.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_14.center_pos = {x = 268, y = 0, z = 32}
+q_command.areas.lev_15_rm_14.center_pos = {x = 148, y = 0, z = 92}
 q_command.areas.lev_15_rm_14.radius = 5
-q_command.areas.lev_15_rm_14.q_block_pos = {x = 236, y = 0, z = 35}
+q_command.areas.lev_15_rm_14.q_block_pos = {x = 151, y = 0, z = 94}
 
-q_command.areas.lev_15_rm_14.door_pos = {x = 270, y = 0, z = 37}
-q_command.areas.lev_15_rm_14.chest_pos = {x = 272, y = 0, z = 30}
+q_command.areas.lev_15_rm_14.door_pos = {x = 143, y = 0, z = 94}
+q_command.areas.lev_15_rm_14.portal_pos = {x = 153, y = 1, z = 89}
+q_command.areas.lev_15_rm_14.chest_pos = {x = 150, y = 0, z = 96}
 q_command.areas.lev_15_rm_14.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -1232,12 +1254,13 @@ q_command.areas.lev_15_rm_15.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_15)
 q_command.areas.lev_15_rm_15.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_15.center_pos = {x = 268, y = 0, z = 42}
+q_command.areas.lev_15_rm_15.center_pos = {x = 138, y = 0, z = 92}
 q_command.areas.lev_15_rm_15.radius = 5
-q_command.areas.lev_15_rm_15.q_block_pos = {x = 266, y = 0, z = 45}
+q_command.areas.lev_15_rm_15.q_block_pos = {x = 135, y = 0, z = 90}
 
-q_command.areas.lev_15_rm_15.door_pos = {x = 263, y = 0, z = 44}
-q_command.areas.lev_15_rm_15.chest_pos = {x = 272, y = 0, z = 40}
+q_command.areas.lev_15_rm_15.door_pos = {x = 136, y = 0, z = 87}
+q_command.areas.lev_15_rm_15.portal_pos = {x = 143, y = 1, z = 92}
+q_command.areas.lev_15_rm_15.chest_pos = {x = 140, y = 0, z = 96}
 q_command.areas.lev_15_rm_15.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
@@ -1308,12 +1331,13 @@ q_command.areas.lev_15_rm_16.region = q_command.regions.esc_rooms_level_15
 table.insert(q_command.regions.esc_rooms_level_15, q_command.areas.lev_15_rm_16)
 q_command.areas.lev_15_rm_16.area_num = #q_command.regions.esc_rooms_level_15
 
-q_command.areas.lev_15_rm_16.center_pos = {x = 258, y = 0, z = 42}
+q_command.areas.lev_15_rm_16.center_pos = {x = 138, y = 0, z = 82}
 q_command.areas.lev_15_rm_16.radius = 5
-q_command.areas.lev_15_rm_16.q_block_pos = {x = 255, y = 0, z = 40}
+q_command.areas.lev_15_rm_16.q_block_pos = {x = 141, y = 0, z = 84}
 
-q_command.areas.lev_15_rm_16.door_pos = {x = 256, y = 0, z = 47}
-q_command.areas.lev_15_rm_16.chest_pos = {x = 260, y = 0, z = 46}
+q_command.areas.lev_15_rm_16.door_pos = {x = 133, y = 0, z = 80}
+q_command.areas.lev_15_rm_16.portal_pos = {x = 143, y = 1, z = 85}
+q_command.areas.lev_15_rm_16.chest_pos = {x = 134, y = 0, z = 84}
 q_command.areas.lev_15_rm_16.chest_inv = {
     inventory = {
         main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
