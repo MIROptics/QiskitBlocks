@@ -67,7 +67,6 @@ q_command:register_wall_block("q_command_math_e_i_pi")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
-q_command:register_wall_block("q_command_math_e_i_7pi_4")
 
 q_command:register_wall_block("q_command_char_lower_a")
 q_command:register_wall_block("q_command_chars_paren_lower_a")
@@ -166,6 +165,8 @@ q_command:register_wall_block("q_command_portal_return_top_wall_tile")
 q_command:register_wall_block("q_command_portal_return_bottom_wall_tile")
 q_command:register_wall_block("q_command_read_first_wall_tile")
 q_command:register_wall_block("q_command_bloch_minus_state_wall_tile")
+
+q_command:register_wall_block("q_command_9_3_4_wall_tile")
 
 q_command:register_wall_block("q_command_silver_sandstone_wall_tile")
 
