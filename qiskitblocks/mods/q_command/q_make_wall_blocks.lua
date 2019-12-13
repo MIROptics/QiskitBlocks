@@ -67,7 +67,6 @@ q_command:register_wall_block("q_command_math_e_i_pi")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
-q_command:register_wall_block("q_command_math_e_i_7pi_4")
 
 q_command:register_wall_block("q_command_char_lower_a")
 q_command:register_wall_block("q_command_chars_paren_lower_a")
@@ -171,6 +170,60 @@ q_command:register_wall_block("q_command_silver_sandstone_wall_tile")
 
 q_command:register_wall_block("prof_q_top_low_res")
 q_command:register_wall_block("prof_q_bottom_low_res")
+
+
+
+--Added by team #49
+q_command:register_wall_block("q_command_human_ch_wall_tile")
+
+q_command:register_wall_block("q_command_letter_capital_C_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_D_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_G_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_H_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_J_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_M_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_Q_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_S_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_T_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_W_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_Y_wall_tile")
+
+q_command:register_wall_block("q_command_letter_g_wall_tile")
+q_command:register_wall_block("q_command_letter_h_wall_tile")
+q_command:register_wall_block("q_command_letter_i_wall_tile")
+q_command:register_wall_block("q_command_letter_j_wall_tile")
+q_command:register_wall_block("q_command_letter_k_wall_tile")
+q_command:register_wall_block("q_command_letter_l_wall_tile")
+q_command:register_wall_block("q_command_letter_m_wall_tile")
+q_command:register_wall_block("q_command_letter_n_wall_tile")
+q_command:register_wall_block("q_command_letter_o_wall_tile")
+q_command:register_wall_block("q_command_letter_p_wall_tile")
+q_command:register_wall_block("q_command_letter_q_wall_tile")
+q_command:register_wall_block("q_command_letter_r_wall_tile")
+q_command:register_wall_block("q_command_letter_s_wall_tile")
+q_command:register_wall_block("q_command_letter_t_wall_tile")
+q_command:register_wall_block("q_command_letter_u_wall_tile")
+q_command:register_wall_block("q_command_letter_v_wall_tile")
+q_command:register_wall_block("q_command_letter_w_wall_tile")
+q_command:register_wall_block("q_command_letter_x_wall_tile")
+q_command:register_wall_block("q_command_letter_y_wall_tile")
+q_command:register_wall_block("q_command_letter_z_wall_tile")
+q_command:register_wall_block("q_command_letter_capital_I_wall_tile")
+q_command:register_wall_block("q_command_letter_bra_state_0_wall_tile")
+q_command:register_wall_block("q_command_letter_number_2_wall_tile")
+q_command:register_wall_block("q_command_letter_number_wall_tile")
+q_command:register_wall_block("q_command_letter_4_wall_tile")
+q_command:register_wall_block("q_command_letter_9_wall_tile")
+
+
+q_command:register_wall_block("q_command_esc_room_1_7")
+q_command:register_wall_block("q_command_esc_room_2_7")
+q_command:register_wall_block("q_command_esc_room_3_7")
+q_command:register_wall_block("q_command_esc_room_4_7")
+q_command:register_wall_block("q_command_esc_room_5_7")
+q_command:register_wall_block("q_command_esc_room_6_7")
+q_command:register_wall_block("q_command_esc_room_7_7")
+
 
 local NUM_ESCAPE_ROOMS = 16
 for idx = 1, NUM_ESCAPE_ROOMS do
