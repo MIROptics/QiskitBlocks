@@ -25,33 +25,6 @@ Please choose one of the *Installing and running* options below and follow the i
 
 - Click the `Play Game` button, waiting a few seconds while the new world is generated and lighted.
 
-- Jump to the [Explore and learn](https://github.com/JavaFXpert/QiskitBlocks#explore-and-learn) section below.
-
-## Installing and running (clone this repo instead of using the Minetest Content Database)
-- Download and install [Minetest 5.0.1](https://www.minetest.net/). Note: This site has a preferred alternative to MacOS Homebrew installation: https://www.techspot.com/downloads/5585-minetest.html
-
-- Clone this QiskitBlocks project, and copy the `qiskitblocks_games` folder of this QiskitBlocks project into the `games` folder of your 
-  Minetest installation.
-
-- Add a `worlds` folder (if it doesn't already exist) to your Minetest installation at the same 
-  level as the `games` folder. 
-
-- Copy the `quantum_circuits_world` folder from from the `worlds` folder of this distribution into 
-  the `worlds` folder of your Minetest installation.
-
-- QiskitBlocks makes requests to a service named QiskitBlocksService which accesses Qiskit quantum simulators that power the QiskitBlocks quantum circuits. By default, QiskitBlocks uses a cloud-based QiskitBlocksService, so public internet access is required at runtime. Optionally, you can checkout and run the [QiskitBlocksService](https://github.com/JavaFXpert/QiskitBlocksService) locally. If you choose to do that, then uncomment (remove the leading `#` character) the following lines in `qiskitblocks_game/minetest.conf` :
-
-  ```
-  #qiskit_service_host = http://localhost:5000
-  ```
-
-  ```
-  #qiskit_service_timeout = 5 
-  ```
-
-- Open the Minetest application, select the round `QiskitBlocks` game from the lower left, and uncheck the `Creative Mode`, `Enable Damage`, and `Host Server` checkboxes. Then select the world `quantum_circuits_world [qiskitblocks]` from the menu, and click `Play Game`.
-![QiskitBlocks in Minetest menu](https://github.com/JavaFXpert/QiskitBlocks/raw/master/qiskitblocks_minetest_screen.png)
-
 ## Selecting a language
 Due to the great translation work of [Kifumi Numata](https://twitter.com/kifuminumata) , you may choose for QiskitBlocks messages to be displayed in Japanese (`ja`). To accomplish this, take the following steps: 
 
