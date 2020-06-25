@@ -6,6 +6,15 @@ local function begins(str, start)
 	return str:sub(1, #start) == start
 end
 
+local function file_exists(path)
+	local file = io.open(path, "r")
+	if file then
+		file:close()
+		return true
+	end
+	return false
+end
+
 -----------------------------------------------
 -- Add all nodes which begin with one of the --
 -- following names to the meta whitelist     --
