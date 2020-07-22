@@ -27,7 +27,7 @@ end
 LOG_DEBUG = false
 
 local qiskit_service_host = minetest.settings:get("qiskit_service_host") or
-        "https://qiskit-blocks-service.herokuapp.com"
+        "https://qiskit-blocks-service.anvil.app"
 
 local qiskit_service_timeout = tonumber(minetest.settings:get("qiskit_service_timeout")) or 10
 
@@ -74,13 +74,16 @@ ESC_ROOMS_LEVEL_14_REGION_ID = 14
 ESC_ROOMS_LEVEL_15_REGION_ID = 15
 ESC_ROOMS_LEVEL_16_REGION_ID = 16
 
-CIRCUIT_GARDEN_REGION_ID = 17
+STARTING_ROOM_REGION_ID = 17
+CIRCUIT_GARDEN_REGION_ID = 18
 
 NUM_AREAS_IN_EACH_ESC_ROOM = 16
+NUM_AREAS_IN_STARTING_ROOM = 1
 NUM_AREAS_IN_CIRCUIT_GARDEN = 0 --TODO: Plug in correct number
 
 HUB_PORTALS_RADIUS = 1
 RETURN_LOOK_RAD = 3 * (math.pi / 2)
+TARDIS_RETURN_LOOK_RAD = 0
 
 -- our API object
 q_command = {}
@@ -164,7 +167,7 @@ q_command.regions.esc_rooms_level_8.id = ESC_ROOMS_LEVEL_8_REGION_ID
 q_command.regions.esc_rooms_level_8.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_8.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_8.hub_portal = {}
-q_command.regions.esc_rooms_level_8.hub_portal.center_pos = {x = 223, y = 0, z = 112}
+q_command.regions.esc_rooms_level_8.hub_portal.center_pos = {x = 224, y = 0, z = 112}
 q_command.regions.esc_rooms_level_8.hub_portal.return_pos = {x = 226, y = 0, z = 112}
 q_command.regions.esc_rooms_level_8.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -173,7 +176,7 @@ q_command.regions.esc_rooms_level_9.id = ESC_ROOMS_LEVEL_9_REGION_ID
 q_command.regions.esc_rooms_level_9.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_9.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_9.hub_portal = {}
-q_command.regions.esc_rooms_level_9.hub_portal.center_pos = {x = 223, y = 0, z = 114}
+q_command.regions.esc_rooms_level_9.hub_portal.center_pos = {x = 224, y = 0, z = 114}
 q_command.regions.esc_rooms_level_9.hub_portal.return_pos = {x = 226, y = 0, z = 114}
 q_command.regions.esc_rooms_level_9.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -182,7 +185,7 @@ q_command.regions.esc_rooms_level_10.id = ESC_ROOMS_LEVEL_10_REGION_ID
 q_command.regions.esc_rooms_level_10.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_10.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_10.hub_portal = {}
-q_command.regions.esc_rooms_level_10.hub_portal.center_pos = {x = 223, y = 0, z = 116}
+q_command.regions.esc_rooms_level_10.hub_portal.center_pos = {x = 224, y = 0, z = 116}
 q_command.regions.esc_rooms_level_10.hub_portal.return_pos = {x = 226, y = 0, z = 116}
 q_command.regions.esc_rooms_level_10.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -191,7 +194,7 @@ q_command.regions.esc_rooms_level_11.id = ESC_ROOMS_LEVEL_11_REGION_ID
 q_command.regions.esc_rooms_level_11.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_11.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_11.hub_portal = {}
-q_command.regions.esc_rooms_level_11.hub_portal.center_pos = {x = 223, y = 0, z = 118}
+q_command.regions.esc_rooms_level_11.hub_portal.center_pos = {x = 224, y = 0, z = 118}
 q_command.regions.esc_rooms_level_11.hub_portal.return_pos = {x = 226, y = 0, z = 118}
 q_command.regions.esc_rooms_level_11.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -200,7 +203,7 @@ q_command.regions.esc_rooms_level_12.id = ESC_ROOMS_LEVEL_12_REGION_ID
 q_command.regions.esc_rooms_level_12.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_12.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_12.hub_portal = {}
-q_command.regions.esc_rooms_level_12.hub_portal.center_pos = {x = 223, y = 0, z = 120}
+q_command.regions.esc_rooms_level_12.hub_portal.center_pos = {x = 224, y = 0, z = 120}
 q_command.regions.esc_rooms_level_12.hub_portal.return_pos = {x = 226, y = 0, z = 120}
 q_command.regions.esc_rooms_level_12.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -209,7 +212,7 @@ q_command.regions.esc_rooms_level_13.id = ESC_ROOMS_LEVEL_13_REGION_ID
 q_command.regions.esc_rooms_level_13.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_13.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_13.hub_portal = {}
-q_command.regions.esc_rooms_level_13.hub_portal.center_pos = {x = 223, y = 0, z = 122}
+q_command.regions.esc_rooms_level_13.hub_portal.center_pos = {x = 224, y = 0, z = 122}
 q_command.regions.esc_rooms_level_13.hub_portal.return_pos = {x = 226, y = 0, z = 122}
 q_command.regions.esc_rooms_level_13.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -218,7 +221,7 @@ q_command.regions.esc_rooms_level_14.id = ESC_ROOMS_LEVEL_14_REGION_ID
 q_command.regions.esc_rooms_level_14.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_14.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_14.hub_portal = {}
-q_command.regions.esc_rooms_level_14.hub_portal.center_pos = {x = 223, y = 0, z = 124}
+q_command.regions.esc_rooms_level_14.hub_portal.center_pos = {x = 224, y = 0, z = 124}
 q_command.regions.esc_rooms_level_14.hub_portal.return_pos = {x = 226, y = 0, z = 124}
 q_command.regions.esc_rooms_level_14.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -227,7 +230,7 @@ q_command.regions.esc_rooms_level_15.id = ESC_ROOMS_LEVEL_15_REGION_ID
 q_command.regions.esc_rooms_level_15.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_15.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_15.hub_portal = {}
-q_command.regions.esc_rooms_level_15.hub_portal.center_pos = {x = 223, y = 0, z = 126}
+q_command.regions.esc_rooms_level_15.hub_portal.center_pos = {x = 224, y = 0, z = 126}
 q_command.regions.esc_rooms_level_15.hub_portal.return_pos = {x = 226, y = 0, z = 126}
 q_command.regions.esc_rooms_level_15.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -236,9 +239,19 @@ q_command.regions.esc_rooms_level_16.id = ESC_ROOMS_LEVEL_16_REGION_ID
 q_command.regions.esc_rooms_level_16.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_16.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_16.hub_portal = {}
-q_command.regions.esc_rooms_level_16.hub_portal.center_pos = {x = 223, y = 0, z = 128}
+q_command.regions.esc_rooms_level_16.hub_portal.center_pos = {x = 224, y = 0, z = 128}
 q_command.regions.esc_rooms_level_16.hub_portal.return_pos = {x = 226, y = 0, z = 128}
 q_command.regions.esc_rooms_level_16.hub_portal.return_look_rad = RETURN_LOOK_RAD
+
+q_command.regions.starting_room = {}
+q_command.regions.starting_room.id = STARTING_ROOM_REGION_ID
+q_command.regions.starting_room.num_areas = NUM_AREAS_IN_STARTING_ROOM
+q_command.regions.starting_room.cur_area = 1  -- One-indexed
+q_command.regions.starting_room.hub_portal = {}
+q_command.regions.starting_room.hub_portal.center_pos = {x = 228, y = 0, z = 83}
+q_command.regions.starting_room.hub_portal.return_pos = {x = 228, y = 0, z = 85}
+q_command.regions.starting_room.hub_portal.return_look_rad = TARDIS_RETURN_LOOK_RAD
+
 
 --q_command.regions.circuit_garden = {}
 --q_command.regions.circuit_garden.id = CIRCUIT_GARDEN_REGION_ID
@@ -254,15 +267,17 @@ dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_4.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_5.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_6.lua");
 dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_7.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_8.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_9.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_10.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_11.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_12.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_13.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_14.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_15.lua");
---dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_16.lua");
+
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_8.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_9.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_10.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_11.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_12.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_13.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_14.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_15.lua");
+dofile(minetest.get_modpath("q_command").."/q_esc_rooms_level_16.lua");
+
 dofile(minetest.get_modpath("q_command").."/q_circuit_garden_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_qasm_chasm_puzzles.lua");
 dofile(minetest.get_modpath("q_command").."/q_basic_algos_lodge.lua");
@@ -574,9 +589,8 @@ function q_command:get_locale_lang()
 	minetest.debug("minetest.setting_get('language'):" .. minetest.setting_get('language'))
 	if lang then
 		if lang ~= "ja" and
-            lang ~= "es" then
+				lang ~= "es" then
 			lang = "en"
-
 		end
 	else
 		lang = "en"
@@ -988,6 +1002,57 @@ function q_command:compute_circuit(circuit_block, include_measurement_blocks, to
 end
 
 
+function q_command:compute_circuit_pulses(circuit_block)
+    local num_wires = circuit_block.get_circuit_num_wires()
+    local num_columns = circuit_block.get_circuit_num_columns()
+    local circuit_dir_str = circuit_block.get_circuit_dir_str()
+    local circuit_pos_x = circuit_block.get_circuit_pos().x
+    local circuit_pos_y = circuit_block.get_circuit_pos().y
+    local circuit_pos_z = circuit_block.get_circuit_pos().z
+
+    local circuit_pulses = {}
+
+    for column_num = 1, num_columns do
+        circuit_pulses[column_num] = {}
+        for wire_num = 1, num_wires do
+            circuit_pulses[column_num][wire_num] = CircuitNodeTypes.EMPTY
+
+            -- Assume dir_str is "+Z"
+            local circuit_node_pos = {x = circuit_pos_x + column_num - 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+
+            if circuit_dir_str == "+X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z - column_num + 1}
+            elseif circuit_dir_str == "-X" then
+                circuit_node_pos = {x = circuit_pos_x,
+                                    y = circuit_pos_y + num_wires - wire_num,
+                                    z = circuit_pos_z + column_num - 1}
+            elseif circuit_dir_str == "-Z" then
+                circuit_node_pos = {x = circuit_pos_x - column_num + 1,
+                                      y = circuit_pos_y + num_wires - wire_num,
+                                      z = circuit_pos_z}
+            end
+
+
+            local circuit_node_block = circuit_blocks:get_circuit_block(circuit_node_pos)
+            --local q_block = q_command:get_q_command_block(circuit_node_pos)
+
+            if circuit_node_block then
+                local node_type = circuit_node_block.get_node_type()
+                circuit_pulses[column_num][wire_num] = node_type
+            end
+        end
+    end
+
+    --minetest.debug("circuit_pulses:\n" .. dump(circuit_pulses))
+
+    return circuit_pulses
+end
+
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
     if(formname == "create_circuit_grid") then
         if fields.num_wires_str and fields.num_columns_str then
@@ -1092,6 +1157,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
                                             suffix_incorrect_solution,
                                             correct_solution_statevector,
                                             correct_solution_unitary,
+                                            correct_solution_pulses,
                                             block_represents_correct_solution,
                                             door_pos,
                                             chest_pos,
@@ -1281,37 +1347,37 @@ function q_command:register_q_command_block(suffix_correct_solution,
                             3, false)
 
                     local http_request_statevector = {
-                        url = qiskit_service_host .. "/api/run/statevector?backend=statevector_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/statevector?backend=statevector_simulator&qasm=" ..
                                 url_code.urlencode(qasm_str),
                         timeout = qiskit_service_timeout
                     }
 
                     local http_request_unitary = {
-                        url = qiskit_service_host .. "/api/run/unitary?backend=unitary_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/unitary?backend=unitary_simulator&qasm=" ..
                                 url_code.urlencode(qasm_for_unitary_str),
                         timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm = {
-                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_measurement_str) .. "&num_shots=1",
                         timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_x = {
-                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_x_str) .. "&num_shots=1000",
                         timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_y = {
-                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_y_str) .. "&num_shots=1000",
                         timeout = qiskit_service_timeout
                     }
 
                     local http_request_qasm_tomo_z = {
-                        url = qiskit_service_host .. "/api/run/qasm?backend=qasm_simulator&qasm=" ..
+                        url = qiskit_service_host .. "/_/api/run/qasm?backend=qasm_simulator&qasm=" ..
                                 url_code.urlencode(qasm_with_tomo_z_str) .. "&num_shots=1000",
                         timeout = qiskit_service_timeout
                     }
@@ -1618,7 +1684,7 @@ function q_command:register_q_command_block(suffix_correct_solution,
 
                             local sv_data = http_request_response.data
                             local statevector = q_command:parse_json_statevector(sv_data)
-                            minetest.debug("statevector:\n" .. dump(statevector))
+                            --minetest.debug("statevector:\n" .. dump(statevector))
 
                             -- Only check for a correct player solution if correct_solution_statevector exists
                             if correct_solution_statevector then
@@ -2047,9 +2113,47 @@ function q_command:register_q_command_block(suffix_correct_solution,
                         request_http_api.fetch(http_request_statevector, process_backend_statevector_result)
 
                         -- If there is a correct unitary solution, run the unitary_simulator
-                        -- TODO: Add code that creates and checks for a correct unitary
                         if correct_solution_unitary then
                             request_http_api.fetch(http_request_unitary, process_backend_unitary_result)
+
+                        elseif correct_solution_pulses then
+                            -- If there is a correct pulses solution, compare with actual
+                            local circuit_pulses = q_command:compute_circuit_pulses(circuit_block)
+
+                            -- minetest.debug("circuit_pulses:\n" .. dump(circuit_pulses))
+
+                            local is_correct_solution_pulses = true
+                            if circuit_pulses and correct_solution_pulses and
+                                    #circuit_pulses == #correct_solution_pulses then
+                                for pul_col_idx = 1, #circuit_pulses do
+                                    for pul_row_idx = 1, #circuit_pulses[pul_col_idx] do
+
+                                        --[[
+                                        minetest.debug("circuit_pulses[" ..
+                                                tostring(pul_col_idx) .. "][" ..
+                                                tostring(pul_row_idx) .. "]: " ..
+                                                tostring(circuit_pulses[pul_col_idx][pul_row_idx]))
+
+                                        minetest.debug("correct_solution_pulses[" ..
+                                                tostring(pul_col_idx) .. "][" ..
+                                                tostring(pul_row_idx) .. "]: " ..
+                                                tostring(correct_solution_pulses[pul_col_idx][pul_row_idx]))
+                                        --]]
+
+                                        if circuit_pulses[pul_col_idx][pul_row_idx] ~=
+                                                correct_solution_pulses[pul_col_idx][pul_row_idx] then
+                                            is_correct_solution_pulses = false
+                                            break
+                                        end
+                                    end
+                                end
+                            else
+                                is_correct_solution_pulses = false
+                            end
+                            minetest.debug("is_correct_solution_pulses: " .. tostring(is_correct_solution_pulses))
+                            react_solution_attempt(is_correct_solution_pulses)
+
+
                         end
                     end
                 end
@@ -2418,11 +2522,12 @@ for key, area in pairs(q_command.areas) do
         q_command:register_help_button(key,
                 area.help_btn_caption, area.help_btn_text)
     end
-    if area.solution_statevector or area.solution_unitary then
+    if area.solution_statevector or area.solution_unitary or area.solution_pulses then
         q_command:register_q_command_block( key .. "_success",
                 key,
                 area.solution_statevector,
                 area.solution_unitary,
+                area.solution_pulses,
                 true,
                 area.door_pos,
                 area.chest_pos,
@@ -2431,6 +2536,7 @@ for key, area in pairs(q_command.areas) do
                 key,
                 area.solution_statevector,
                 area.solution_unitary,
+                area.solution_pulses,
                 false,
                 area.door_pos,
                 area.chest_pos,
@@ -2501,7 +2607,7 @@ minetest.register_globalstep(function(dtime)
                         area.region.hub_portal.return_pos and
                         area.region.hub_portal.return_look_rad then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Teleporting back to the portal room")
+                    --minetest.chat_send_player(object:get_player_name(), "Teleporting back to the portal room")
                     object:set_pos(area.region.hub_portal.return_pos)
                     object:set_look_horizontal(area.region.hub_portal.return_look_rad)
                 end
@@ -2518,7 +2624,7 @@ minetest.register_globalstep(function(dtime)
                     HUB_PORTALS_RADIUS)) do
                 if object:is_player() then
                     -- Teleport to area
-                    minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
+                    --minetest.chat_send_player(object:get_player_name(), "Teleporting from the portal room")
                     if region[region.cur_area] and region[region.cur_area].center_pos then
                         --object:set_pos(region[region.cur_area].center_pos)
 
@@ -2596,6 +2702,44 @@ minetest.register_node("q_command:block_no_function", {
     end
 })
 
+minetest.register_node("q_command:optimizer_nelder_mead_block", {
+    description = "Nelder-Mead optimizer block",
+    tiles = {"q_command_optimizer_nelder_mead.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir",
+})
+
+minetest.register_node("q_command:hamiltonian_operator_block", {
+    description = "Hamiltonian operator block",
+    tiles = {"q_command_hamiltonian_operator.png"},
+    groups = {oddly_breakable_by_hand=2},
+	paramtype2 = "facedir",
+})
+
+minetest.register_node("q_command:q_command_tardis_top", {
+    description = "TARDIS top section",
+    tiles = {"q_command_tardis_overhead.png",
+             "q_command_tardis_underside.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png",
+             "q_command_tardis_top.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
+minetest.register_node("q_command:q_command_tardis_bottom", {
+    description = "TARDIS bottom section",
+    tiles = {"q_command_tardis_overhead.png",
+             "q_command_tardis_underside.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png",
+             "q_command_tardis_bottom.png"},
+    groups = {oddly_breakable_by_hand=2},
+    paramtype2 = "facedir"
+})
+
 
 for num_qubits = 1, BASIS_STATE_BLOCK_MAX_QUBITS do
     for basis_state_num = 0, 2^num_qubits - 1 do
@@ -2666,5 +2810,4 @@ minetest.register_globalstep(function(dtime)
         end
     end
 end)
-
 
