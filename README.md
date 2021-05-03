@@ -15,6 +15,18 @@ Please choose one of the *Installing and running* options below and follow the i
 - When on the page shown here, type `QiskitBlocks`, click the `Search` button, and click the `Install` button beside the `QiskitBlocks` row. Click the `Back to Main Menu` button when installation has completed.
 ![Minetest Search QiskitBlocks](https://github.com/JavaFXpert/QiskitBlocks/raw/master/minetest_search_qiskitblocks.png)
 
+- For QiskitBlocks to work correctly, HTTP requests must be allowed for one of its core components. To do this, go to the `Settings` menu. Click on `All Settings`.
+![Minetest Settings Tab](https://user-images.githubusercontent.com/6960065/116815046-09853d80-ab5c-11eb-8748-9f40171ea35c.png)
+
+- First enter `HTTP mods` into the search bar and then click the `Search` button. Select the row containing `HTTP mods` and click on the `Edit` button.
+![Minetest All Settings](https://user-images.githubusercontent.com/6960065/116815053-130ea580-ab5c-11eb-9a60-d8f30e65e6f8.png)
+
+- Enter `q_command` and click the `Save` button.
+![Minetest HTTP Mods Setting Dialog](https://user-images.githubusercontent.com/6960065/116815070-215cc180-ab5c-11eb-97e5-67e61950f9c6.png)
+
+- Leave the `All Settings` menu by clicking on the `Back to Settings page` button.
+![Minetest All Settings Exit](https://user-images.githubusercontent.com/6960065/116815076-2588df00-ab5c-11eb-8077-ee9262aa5fd2.png)
+
 - Although Minetest typically uses your computer's default language, you must select a language in Minetest for QiskitBlocks messages to be displayed in your desired language. Currently, QiskitBlocks messages have been translated to Japanese, so please refer to the [Selecting a language](https://github.com/JavaFXpert/QiskitBlocks#selecting-a-language) section below for instructions.
 
 - Click the `Start Game` tab shown here, select the round `QiskitBlocks` game from the lower left, deselect the three checkboxes, and click the `New` button.
