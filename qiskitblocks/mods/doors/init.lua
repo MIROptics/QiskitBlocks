@@ -758,7 +758,7 @@ function doors.register_fencegate(name, def)
 	local fence_closed = table.copy(fence)
 	fence_closed.mesh = "doors_fencegate_closed.obj"
 	fence_closed.gate = name .. "_open"
-	fence_closed.sound = "doors_fencegate_open"
+	fence_closed.sound = {"doors_fencegate_open"}
 	fence_closed.collision_box = {
 		type = "fixed",
 		fixed = {-1/2, -1/2, -1/4, 1/2, 1/2, 1/4},
@@ -767,7 +767,7 @@ function doors.register_fencegate(name, def)
 	local fence_open = table.copy(fence)
 	fence_open.mesh = "doors_fencegate_open.obj"
 	fence_open.gate = name .. "_closed"
-	fence_open.sound = "doors_fencegate_close"
+	fence_open.sound = {"doors_fencegate_close"}
 	fence_open.groups.not_in_creative_inventory = 1
 	fence_open.collision_box = {
 		type = "fixed",
