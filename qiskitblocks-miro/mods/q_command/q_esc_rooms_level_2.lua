@@ -51,7 +51,7 @@ q_command.areas.xor_escape.solution_unitary =
 {{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}}}
 
 q_command.areas.xor_escape.help_chat_msg = {
-	"We meet again, esteemed colleague! You may recall that my name is Professor Q and",
+	"We meet again, esteemed colleague! You may recall that my name is Professor Aldo and",
 	"that I'm standing behind this glass because we're conducting quantum experiments.",
 	"I'm sure that you'll be fine though :-) For this experiment, make a circuit that",
 	"realizes a digital 'exclusive or' gate as shown on the wall. You may place |1>",
@@ -83,7 +83,7 @@ q_command.areas.xor_escape.help_btn_text = {}
 q_command.areas.xor_escape.help_btn_text.en =
 [[
 We meet again, esteemed colleague! You may recall that my name is
-Professor Q and that I'm standing behind this glass because we're
+Professor Aldo and that I'm standing behind this glass because we're
 conducting quantum experiments. I'm sure that you'll be fine though :-)
 For this experiment, make a circuit that realizes a digital
 'exclusive or' gate as shown on the wall. You may place |1> blocks on
@@ -91,7 +91,7 @@ wires to test input combinations without affecting the exit door.
 
 Notes: Most of the help that you'll need for these 'escape room' circuit
 puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
+by Professor Aldo. For all of these puzzles, get blocks from the chest and
 place them on the circuit. When you solve a puzzle, the Q block will
 turn gold, celebration music will play, and the door to the next room
 will open. Please solve the Level I escape rooms if you haven't already,

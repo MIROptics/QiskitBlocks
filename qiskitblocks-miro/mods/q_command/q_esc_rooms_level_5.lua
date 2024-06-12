@@ -122,7 +122,7 @@ q_command.areas.lev_5_rm_1.solution_statevector =
 {r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0},{r=0.354,i=0}}
 
 -- Note to devs: The variable ending in help_chat_msg holds the English localized version
--- of the message that Professor Q will chat to the player when entering an escape room
+-- of the message that Professor Aldo will chat to the player when entering an escape room
 -- for the first time since the application is invoked. Note that for help_chat_msg,
 -- ".en" is *not* added to the end of the variable name for the English language.
 q_command.areas.lev_5_rm_1.help_chat_msg = {
@@ -135,7 +135,7 @@ q_command.areas.lev_5_rm_1.help_chat_msg = {
 
 }
 -- Note to devs: The variable ending in help_chat_msg and a language code holds the
--- non-English localized version of the message that Professor Q will chat to the
+-- non-English localized version of the message that Professor Aldo will chat to the
 -- player when entering an escape room for the first time since the application is invoked.
 q_command.areas.lev_5_rm_1.help_chat_msg.ja = {
 	"また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ",
@@ -156,7 +156,7 @@ q_command.areas.lev_5_rm_1.help_chat_msg.zh_TW = {
 q_command.areas.lev_5_rm_1.help_chat_sent = false
 
 -- Note to devs: The variable ending in help_success_msg holds the English localized
--- version of the message that Professor Q will chat to the player when solving an
+-- version of the message that Professor Aldo will chat to the player when solving an
 -- escape room puzzle for the first time since the application is invoked. Note that
 -- for help_success_msg, ".en" is *not* added to the end of the variable name for the
 -- English language.
@@ -164,7 +164,7 @@ q_command.areas.lev_5_rm_1.help_success_msg = {
 	"Congratulations, you did a good job"
 }
 -- Note to devs: The variable ending in help_success_msg and a language code holds the
--- localized version of the message that Professor Q will chat to the player when
+-- localized version of the message that Professor Aldo will chat to the player when
 -- solving an escape room puzzle for the first time since the application is invoked.
 q_command.areas.lev_5_rm_1.help_success_msg.ja = {
 	"よくできました！ CNOTゲートはそれ自体が可逆であることがわかっているため、出力を入力 ",

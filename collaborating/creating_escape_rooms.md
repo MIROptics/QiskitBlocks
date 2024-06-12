@@ -26,7 +26,7 @@ There is also a directory named `textures` that contains the 16x16 pixel `PNG` i
 
 Some levels in the world contain placeholder escape rooms and circuits, and are ready for construction. To define and build a series of escape rooms on a given level, after given the go-ahead do the following:
 
-1. In Creative Mode, navigate to that level in the world and note that there are placeholder circuits, chests, exit doors, orange portals, signs and Professor Q chat text in all 16 of its rooms.
+1. In Creative Mode, navigate to that level in the world and note that there are placeholder circuits, chests, exit doors, orange portals, signs and Professor Aldo chat text in all 16 of its rooms.
 2. Open the Lua file corresponding to the Level. For example, the file for Level VII has the following name:
    `q_esc_rooms_level_7.lua`
 3. Follow the instructions in the "Note to devs:" comments in the code, modifying the escape rooms and code as required. For example, you'll do the following activities for each room:

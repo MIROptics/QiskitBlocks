@@ -57,7 +57,7 @@ q_command.areas.swap_escape.solution_unitary =
 {{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
 
 q_command.areas.swap_escape.help_chat_msg = {
-	"Hello again, esteemed colleague! I'm sure you remember that my name is Professor Q ",
+	"Hello again, esteemed colleague! I'm sure you remember that my name is Professor Aldo ",
 	"and that I'm standing behind this explosion-proof glass. For this experiment, make ",
 	"a circuit that swaps the qubit states of two wires as shown on the wall. You may ",
 	"place |1> blocks on wires to test input combinations without affecting the exit ",
@@ -74,14 +74,14 @@ q_command.areas.swap_escape.help_btn_text = {}
 q_command.areas.swap_escape.help_btn_text.en =
 [[
 Hello again, esteemed colleague! I'm sure you remember that my name is
-Professor Q. and that I'm standing behind this explosion-proof glass.
+Professor Aldo. and that I'm standing behind this explosion-proof glass.
 For this experiment, make a circuit that swaps the qubit states of two
 wires as shown on the wall. You may place |1> blocks on wires to test
 input combinations without affecting the exit door.
 
 Notes: Most of the help that you'll need for these 'escape room' circuit
 puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
+by Professor Aldo. For all of these puzzles, get blocks from the chest and
 place them on the circuit. When you solve a puzzle, the Q block will
 turn gold, celebration music will play, and the door to the next room
 will open. Please solve the Levels I and II escape rooms if you haven't

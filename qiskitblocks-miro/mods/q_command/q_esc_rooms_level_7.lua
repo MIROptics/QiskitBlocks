@@ -144,7 +144,7 @@ q_command.areas.lev_7_rm_1.solution_pulses =
   CircuitNodeTypes.PULSE_FRACTAL_GAUSSIAN_ZX90_MINUS}}
 
 -- Note to devs: The variable ending in help_chat_msg holds the English localized version
--- of the message that Professor Q will chat to the player when entering an escape room
+-- of the message that Professor Aldo will chat to the player when entering an escape room
 -- for the first time since the application is invoked. Note that for help_chat_msg,
 -- ".en" is *not* added to the end of the variable name for the English language.
 q_command.areas.lev_7_rm_1.help_chat_msg = {
@@ -155,7 +155,7 @@ q_command.areas.lev_7_rm_1.help_chat_msg = {
 	"system and no cross-talk. Now you need to create a unitary of ZX(-pi/2) as a foundation of a CNOT gate."
 }
 -- Note to devs: The variable ending in help_chat_msg and a language code holds the
--- non-English localized version of the message that Professor Q will chat to the
+-- non-English localized version of the message that Professor Aldo will chat to the
 -- player when entering an escape room for the first time since the application is invoked.
 --[[
 q_command.areas.lev_7_rm_1.help_chat_msg.ja = {
@@ -169,7 +169,7 @@ q_command.areas.lev_7_rm_1.help_chat_msg.ja = {
 q_command.areas.lev_7_rm_1.help_chat_sent = false
 
 -- Note to devs: The variable ending in help_success_msg holds the English localized
--- version of the message that Professor Q will chat to the player when solving an
+-- version of the message that Professor Aldo will chat to the player when solving an
 -- escape room puzzle for the first time since the application is invoked. Note that
 -- for help_success_msg, ".en" is *not* added to the end of the variable name for the
 -- English language.
@@ -177,7 +177,7 @@ q_command.areas.lev_7_rm_1.help_success_msg = {
 	"Well done! TODO: Supply more instructional feedback"
 }
 -- Note to devs: The variable ending in help_success_msg and a language code holds the
--- localized version of the message that Professor Q will chat to the player when
+-- localized version of the message that Professor Aldo will chat to the player when
 -- solving an escape room puzzle for the first time since the application is invoked.
 q_command.areas.lev_7_rm_1.help_success_msg.ja = {
 	"よくできました！ CNOTゲートはそれ自体が可逆であることがわかっているため、出力を入力 ",
@@ -204,7 +204,7 @@ q_command.areas.lev_7_rm_1.help_btn_text = {}
 q_command.areas.lev_7_rm_1.help_btn_text.en =
 [[
 We meet again, esteemed colleague! You may recall that my name is
-Professor Q and that I'm standing behind this glass because we're
+Professor Aldo and that I'm standing behind this glass because we're
 conducting quantum experiments. I'm sure that you'll be fine though :-)
 For this experiment, let's assume a system composed of two qubits q0 and
 q1 coupled by a bus resonator. Each qubit has a drive channel and pulse

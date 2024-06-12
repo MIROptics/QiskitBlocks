@@ -53,7 +53,7 @@ room, and come back anytime you have questions about what they do or how
 to use them.
 
 If want an escape room-like experience, check out the puzzle rooms at
-the bottom of the ladder located in this building. Professor Q will help
+the bottom of the ladder located in this building. Professor Aldo will help
 guide you through the circuit puzzles by sending chat message to the
 upper-left corner of your window.
 
@@ -93,7 +93,7 @@ cualquiera de ellos.
 
 Si quieres vivir una experiencia a lo escape room, prueba las
 habitaciones-puzzle que se encuentran al final de las escaleras que
-bajan, localizadas en este edificio. El Profesor Q te guiará a través de
+bajan, localizadas en este edificio. El Profesor Aldo te guiará a través de
 los puzzles de circuitos mediante mensajes de texto que aparecerán en la
 esquina superior izquierda.
 

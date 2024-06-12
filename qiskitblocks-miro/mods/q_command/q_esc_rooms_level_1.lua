@@ -49,13 +49,13 @@ q_command.areas.x_gate_escape.solution_statevector =
 {{r=0,i=0},{r=1,i=0}}
 
 q_command.areas.x_gate_escape.help_chat_msg = {
-	"Hello test subject #576, I mean esteemed colleague! My name is Professor Q and I'm",
+	"Hello test subject #576, I mean esteemed colleague! My name is Professor Aldo and I'm",
 	"standing behind this blast glass because we're going to try an experiment. Hopefully",
 	"it won't vaporize you or scramble your molecules :-) For this experiment, change the",
 	"quantum state of the circuit from |0> to the state shown on the wall."
 }
 q_command.areas.x_gate_escape.help_chat_msg.es = {
-	"Hola, sujeto #576, digo... ¡estimado colega! Mi nombre es Profesor Q y me encuentro aquí,",
+	"Hola, sujeto #576, digo... ¡estimado colega! Mi nombre es Profesor Aldo y me encuentro aquí,",
 	"detrás de esta mampara de cristal porque vamos a probar un experimento. Con suerte, ni te",
 	"vaporizará, ni esparcirá tus moléculas por ahí. Para este experimento, cambia el estado",
 	"cuántico del circuito de |0> al estado que se muestra en la pared."
@@ -93,7 +93,7 @@ q_command.areas.x_gate_escape.help_btn_text.en =
 [[
 TLDR: Most of the help that you'll need for these 'escape room' circuit
 puzzles will appear in the chat area (upper left corner of your window)
-by Professor Q. For all of these puzzles, get blocks from the chest and
+by Professor Aldo. For all of these puzzles, get blocks from the chest and
 place them on the circuit. The door to the next room will open when the
 liquid levels and arrows in the blue blocks correspond to the quantum
 state displayed on the wall behind the circuit in Dirac notation. The

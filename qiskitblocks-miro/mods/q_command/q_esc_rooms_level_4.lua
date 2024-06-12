@@ -121,17 +121,17 @@ q_command.areas.lev_4_rm_1.solution_statevector =
 --]]
 
 -- Note to devs: The variable ending in help_chat_msg holds the English localized version
--- of the message that Professor Q will chat to the player when entering an escape room
+-- of the message that Professor Aldo will chat to the player when entering an escape room
 -- for the first time since the application is invoked. Note that for help_chat_msg,
 -- ".en" is *not* added to the end of the variable name for the English language.
 q_command.areas.lev_4_rm_1.help_chat_msg = {
-"We meet again, esteemed colleague! You may recall that my name is Professor Q",
+"We meet again, esteemed colleague! You may recall that my name is Professor Aldo",
 "and that I'm standing behind this glass because we're conducting quantum experiments.",
 "I'm sure that you'll be fine though :-). For this experiment, let's make a 2 qubit QFT circuit",
 "To find out more about QFT,  right click on the question mark.",
 }
 -- Note to devs: The variable ending in help_chat_msg and a language code holds the
--- non-English localized version of the message that Professor Q will chat to the
+-- non-English localized version of the message that Professor Aldo will chat to the
 -- player when entering an escape room for the first time since the application is invoked.
 q_command.areas.lev_4_rm_1.help_chat_msg.ja = {
 	"また会いましたね、尊敬する同僚！私の名前はQ教授で、量子実験を行っているため、このガ",
@@ -143,7 +143,7 @@ q_command.areas.lev_4_rm_1.help_chat_msg.ja = {
 q_command.areas.lev_4_rm_1.help_chat_sent = false
 
 -- Note to devs: The variable ending in help_success_msg holds the English localized
--- version of the message that Professor Q will chat to the player when solving an
+-- version of the message that Professor Aldo will chat to the player when solving an
 -- escape room puzzle for the first time since the application is invoked. Note that
 -- for help_success_msg, ".en" is *not* added to the end of the variable name for the
 -- English language.
@@ -152,7 +152,7 @@ q_command.areas.lev_4_rm_1.help_success_msg = {
   "The door to next level is open."
 }
 -- Note to devs: The variable ending in help_success_msg and a language code holds the
--- localized version of the message that Professor Q will chat to the player when
+-- localized version of the message that Professor Aldo will chat to the player when
 -- solving an escape room puzzle for the first time since the application is invoked.
 q_command.areas.lev_4_rm_1.help_success_msg.ja = {
 	"よくできました！ CNOTゲートはそれ自体が可逆であることがわかっているため、出力を入力 ",
@@ -1445,7 +1445,7 @@ cualquiera de ellos.
 
 Si quieres vivir una experiencia a lo escape room, prueba las
 habitaciones-puzzle que se encuentran al final de las escaleras que
-bajan, localizadas en este edificio. El Profesor Q te guiará a través de
+bajan, localizadas en este edificio. El Profesor Aldo te guiará a través de
 los puzzles de circuitos mediante mensajes de texto que aparecerán en la
 esquina superior izquierda.
 
