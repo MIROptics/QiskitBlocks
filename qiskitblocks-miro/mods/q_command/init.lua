@@ -2544,6 +2544,12 @@ for key, area in pairs(q_command.areas) do
     end
 end
 
+-- Disable chats
+for key, area in pairs(q_command.areas) do
+    area.help_chat_sent = true
+    area.success_chat_sent = true
+end
+
 -- Periodically check all areas for player
 minetest.register_globalstep(function(dtime)
 
