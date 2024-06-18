@@ -2545,10 +2545,7 @@ for key, area in pairs(q_command.areas) do
 end
 
 -- Disable chats
-for key, area in pairs(q_command.areas) do
-    area.help_chat_sent = true
-    area.success_chat_sent = true
-end
+q_command.chat_enabled = false
 
 -- Periodically check all areas for player
 minetest.register_globalstep(function(dtime)
@@ -2561,14 +2558,16 @@ minetest.register_globalstep(function(dtime)
                     area.radius)) do
                 if object:is_player() then
                     if not area.help_chat_sent then
-                        minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
-                        if area.help_chat_msg[locale_lang] then
-                            for idx = 1, #area.help_chat_msg[locale_lang] do
-                                minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[locale_lang][idx])
-                            end
-                        elseif area.help_chat_msg then
-                            for idx = 1, #area.help_chat_msg do
-                                minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[idx])
+                        if q_command.chat_enabled then
+                            minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
+                            if area.help_chat_msg[locale_lang] then
+                                for idx = 1, #area.help_chat_msg[locale_lang] do
+                                    minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[locale_lang][idx])
+                                end
+                            elseif area.help_chat_msg then
+                                for idx = 1, #area.help_chat_msg do
+                                    minetest.chat_send_player(object:get_player_name(), area.help_chat_msg[idx])
+                                end
                             end
                         end
                         area.help_chat_sent = true
@@ -2585,6 +2584,7 @@ minetest.register_globalstep(function(dtime)
 
                     if area.q_block_pos and
                             q_command:get_q_command_block(area.q_block_pos).circuit_puzzle_solved() and
+                            q_command.chat_enabled and
                             not area.success_chat_sent then
                         minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
                         if area.help_success_msg[locale_lang] then
