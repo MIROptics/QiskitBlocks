@@ -557,81 +557,81 @@ q_command.areas.lev_4_rm_5.help_btn_caption.es = q_command.areas.lev_4_rm_5.help
 q_command.areas.lev_4_rm_5.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
 
 
--------- Room 6 (Level IV)
---q_command.areas.lev_4_rm_6 = {}
---q_command.areas.lev_4_rm_6.region = q_command.regions.esc_rooms_level_4
---table.insert(q_command.regions.esc_rooms_level_4, q_command.areas.lev_4_rm_6)
---q_command.areas.lev_4_rm_6.area_num = #q_command.regions.esc_rooms_level_4
---
---q_command.areas.lev_4_rm_6.center_pos = {x = 238, y = 0, z = 22}
---q_command.areas.lev_4_rm_6.radius = 5
---q_command.areas.lev_4_rm_6.q_block_pos = {x = 240, y = 0, z = 19}
+------ Room 6 (Level IV)
+q_command.areas.lev_4_rm_6 = {}
+q_command.areas.lev_4_rm_6.region = q_command.regions.esc_rooms_level_4
+table.insert(q_command.regions.esc_rooms_level_4, q_command.areas.lev_4_rm_6)
+q_command.areas.lev_4_rm_6.area_num = #q_command.regions.esc_rooms_level_4
 
---q_command.areas.lev_4_rm_6.door_pos = {x = 236, y = 0, z = 17}
---q_command.areas.lev_4_rm_6.portal_pos = {x = 243, y = 1, z = 22}
---q_command.areas.lev_4_rm_6.chest_pos = {x = 236, y = 0, z = 26}
---q_command.areas.lev_4_rm_6.chest_inv = {
---    inventory = {
---        main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
---                [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
---                [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
---                [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
---                [15] = "circuit_blocks:swap_tool",
---                [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
---                [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
---                [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
---                [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
---                [20] = "circuit_blocks:circuit_blocks_sdg_gate",
---                [21] = "circuit_blocks:circuit_blocks_tdg_gate",
---                [22] = "circuit_blocks:circuit_blocks_swap",
---                [23] = "circuit_blocks:rotate_tool",
---              [24] = "circuit_blocks:circuit_blocks_barrier",
---                [25] = "circuit_blocks:circuit_blocks_x_gate",
---                [26] = "circuit_blocks:circuit_blocks_y_gate",
---                [27] = "circuit_blocks:circuit_blocks_z_gate",
---                [28] = "circuit_blocks:circuit_blocks_s_gate",
---                [29] = "circuit_blocks:circuit_blocks_t_gate",
---                [30] = "circuit_blocks:circuit_blocks_h_gate",
---                [31] = "circuit_blocks:control_tool",
---                [32] = "circuit_blocks:circuit_blocks_measure_z"
---        }
---    }
---}
---q_command.areas.lev_4_rm_6.solution_unitary =
---{{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
---{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+q_command.areas.lev_4_rm_6.center_pos = {x = 238, y = 0, z = 22}
+q_command.areas.lev_4_rm_6.radius = 5
+q_command.areas.lev_4_rm_6.q_block_pos = {x = 240, y = 0, z = 19}
 
---q_command.areas.lev_4_rm_6.help_chat_msg = {
---	"Make a circuit like the last one, but negate the output as shown on the wall. (6)"
---}
---q_command.areas.lev_4_rm_6.help_chat_msg.ja = {
---	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
---}
---q_command.areas.lev_4_rm_6.help_chat_sent = false
---q_command.areas.lev_4_rm_6.help_success_msg = {
---	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
---	"circuits with increasingly complex quantum logic in no time!"
---}
---q_command.areas.lev_4_rm_6.help_success_msg.ja = {
---	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
---	"ジックを備えた回路をすぐに作成できるようになります。"
---}
---q_command.areas.lev_4_rm_6.success_chat_sent = false
---
---q_command.areas.lev_4_rm_6.help_btn_text = {}
---q_command.areas.lev_4_rm_6.help_btn_text.en =
---[[
---Make a circuit like the last one, but negate the output as shown on the wall
---]]
---q_command.areas.lev_4_rm_6.help_btn_text.es = q_command.areas.lev_4_rm_6.help_btn_text.en
---q_command.areas.lev_4_rm_6.help_btn_text.ja =
---[[
---先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
---]]
---q_command.areas.lev_4_rm_6.help_btn_caption = {}
---q_command.areas.lev_4_rm_6.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
---q_command.areas.lev_4_rm_6.help_btn_caption.es = q_command.areas.lev_4_rm_6.help_btn_caption.en
---q_command.areas.lev_4_rm_6.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
+q_command.areas.lev_4_rm_6.door_pos = {x = 236, y = 0, z = 17}
+q_command.areas.lev_4_rm_6.portal_pos = {x = 243, y = 1, z = 22}
+q_command.areas.lev_4_rm_6.chest_pos = {x = 236, y = 0, z = 26}
+q_command.areas.lev_4_rm_6.chest_inv = {
+   inventory = {
+       main = {[1] = "", [2] = "", [3] = "", [4] = "", [5] = "", [6] = "",
+               [7] = "circuit_blocks:circuit_blocks_gate_qubit_0",
+               [8] = "circuit_blocks:circuit_blocks_gate_qubit_1",
+               [9] = "", [10] = "", [11] = "", [12] = "", [13] = "", [14] = "",
+               [15] = "circuit_blocks:swap_tool",
+               [16] = "circuit_blocks:circuit_blocks_if_c0_eq0",
+               [17] = "circuit_blocks:circuit_blocks_rx_gate_0p16",
+               [18] = "circuit_blocks:circuit_blocks_ry_gate_0p16",
+               [19] = "circuit_blocks:circuit_blocks_rz_gate_0p16",
+               [20] = "circuit_blocks:circuit_blocks_sdg_gate",
+               [21] = "circuit_blocks:circuit_blocks_tdg_gate",
+               [22] = "circuit_blocks:circuit_blocks_swap",
+               [23] = "circuit_blocks:rotate_tool",
+             [24] = "circuit_blocks:circuit_blocks_barrier",
+               [25] = "circuit_blocks:circuit_blocks_x_gate",
+               [26] = "circuit_blocks:circuit_blocks_y_gate",
+               [27] = "circuit_blocks:circuit_blocks_z_gate",
+               [28] = "circuit_blocks:circuit_blocks_s_gate",
+               [29] = "circuit_blocks:circuit_blocks_t_gate",
+               [30] = "circuit_blocks:circuit_blocks_h_gate",
+               [31] = "circuit_blocks:control_tool",
+               [32] = "circuit_blocks:circuit_blocks_measure_z"
+       }
+   }
+}
+q_command.areas.lev_4_rm_6.solution_unitary =
+{{{r=0,i=0},{r=0,i=0},{r=1,i=0},{r=0,i=0}},{{r=0,i=0},{r=1,i=0},{r=0,i=0},{r=0,i=0}},
+{{r=1,i=0},{r=0,i=0},{r=0,i=0},{r=0,i=0}},{{r=0,i=0},{r=0,i=0},{r=0,i=0},{r=1,i=0}}}
+
+q_command.areas.lev_4_rm_6.help_chat_msg = {
+	"Make a circuit like the last one, but negate the output as shown on the wall. (6)"
+}
+q_command.areas.lev_4_rm_6.help_chat_msg.ja = {
+	"先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。"
+}
+q_command.areas.lev_4_rm_6.help_chat_sent = false
+q_command.areas.lev_4_rm_6.help_success_msg = {
+	"Nice job. I'll keep adding twists like that X gate so you'll be creating ",
+	"circuits with increasingly complex quantum logic in no time!"
+}
+q_command.areas.lev_4_rm_6.help_success_msg.ja = {
+	"良くやりました。Xゲートのような反転を追加し続けることで、ますます複雑化する量子ロ ",
+	"ジックを備えた回路をすぐに作成できるようになります。"
+}
+q_command.areas.lev_4_rm_6.success_chat_sent = false
+
+q_command.areas.lev_4_rm_6.help_btn_text = {}
+q_command.areas.lev_4_rm_6.help_btn_text.en =
+[[
+Make a circuit like the last one, but negate the output as shown on the wall
+]]
+q_command.areas.lev_4_rm_6.help_btn_text.es = q_command.areas.lev_4_rm_6.help_btn_text.en
+q_command.areas.lev_4_rm_6.help_btn_text.ja =
+[[
+先ほどと同じような回路を作成しますが、壁に示されているように出力を否定します。
+]]
+q_command.areas.lev_4_rm_6.help_btn_caption = {}
+q_command.areas.lev_4_rm_6.help_btn_caption.en = "Make a NOT XOR quantum logic gate"
+q_command.areas.lev_4_rm_6.help_btn_caption.es = q_command.areas.lev_4_rm_6.help_btn_caption.en
+q_command.areas.lev_4_rm_6.help_btn_caption.ja = "NOT XOR量子論理ゲートを作る"
 
 
 -------- Room 7 (Level IV)
