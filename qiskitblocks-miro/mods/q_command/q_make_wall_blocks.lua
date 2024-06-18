@@ -67,6 +67,7 @@ q_command:register_wall_block("q_command_math_e_i_pi")
 q_command:register_wall_block("q_command_math_e_i_pi_2")
 q_command:register_wall_block("q_command_math_e_i_pi_4")
 q_command:register_wall_block("q_command_math_e_i_3pi_2")
+q_command:register_wall_block("q_command_math_e_i_7pi_4")
 
 q_command:register_wall_block("q_command_char_lower_a")
 q_command:register_wall_block("q_command_chars_paren_lower_a")
