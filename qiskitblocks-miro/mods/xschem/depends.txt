@@ -1,4 +1,0 @@
-default
-q_command
-circuit_blocks
-mobs

@@ -1,0 +1,12 @@
+#Name				Time	Gain
+an-open-gate-long    4:37    0.50
+qiskit-suite   10:26    0.20
+superposition   2:47    0.15
+quangratulations-short			0:06	0.60
+quangratulations				0:50	0.30
+
+#an-open-gate    4:13    0.20
+
+
+
+
