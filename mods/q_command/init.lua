@@ -2548,7 +2548,10 @@ end
 q_command.chat_enabled = false
 
 -- Periodically check all areas for player
+q_command.player_last_area = {}
+
 minetest.register_globalstep(function(dtime)
+    local players_in_this_step = {}
 
 	for key, area in pairs(q_command.areas) do
         if area.center_pos and area.radius then
@@ -2557,6 +2560,29 @@ minetest.register_globalstep(function(dtime)
                     area.center_pos,
                     area.radius)) do
                 if object:is_player() then
+                    local player_name = object:get_player_name()
+                    players_in_this_step[player_name] = key
+
+                    -- Check if player just entered this area
+                    if q_command.player_last_area[player_name] ~= key then
+                        q_command:erase_player_inventory()
+
+                        -- Refill the chest
+                        if area.chest_pos and area.chest_inv and area.chest_inv.inventory and area.chest_inv.inventory.main then
+                            local meta = minetest.get_meta(area.chest_pos)
+                            local inv = meta:get_inventory()
+                            inv:set_list("main", area.chest_inv.inventory.main)
+                        end
+
+                        -- Make note of the current area within the region
+                        if area.region and area.region.id and area.region.cur_area and
+                                area.area_num then
+                            minetest.debug("Cur region ID: " .. area.region.id)
+                            area.region.cur_area = area.area_num
+                            minetest.debug("cur_area in region: " .. area.region.cur_area)
+                        end
+                    end
+
                     if not area.help_chat_sent then
                         if q_command.chat_enabled then
                             minetest.chat_send_player(object:get_player_name(), "----- Prof Q: -----")
@@ -2571,15 +2597,6 @@ minetest.register_globalstep(function(dtime)
                             end
                         end
                         area.help_chat_sent = true
-                        q_command:erase_player_inventory()
-
-                        -- Make note of the current area within the region
-                        if area.region and area.region.id and area.region.cur_area and
-                                area.area_num then
-                            minetest.debug("Cur region ID: " .. area.region.id)
-                            area.region.cur_area = area.area_num
-                            minetest.debug("cur_area in region: " .. area.region.cur_area)
-                        end
                     end
 
                     if area.q_block_pos and
@@ -2620,6 +2637,9 @@ minetest.register_globalstep(function(dtime)
             end
         end
 	end
+
+    -- Update last area for all players
+    q_command.player_last_area = players_in_this_step
 
     -- Check hub portals and teleport
 	for key, region in pairs(q_command.regions) do
