@@ -81,7 +81,7 @@ NUM_AREAS_IN_EACH_ESC_ROOM = 16
 NUM_AREAS_IN_STARTING_ROOM = 1
 NUM_AREAS_IN_CIRCUIT_GARDEN = 0 --TODO: Plug in correct number
 
-HUB_PORTALS_RADIUS = 1
+HUB_PORTALS_RADIUS = 0.8
 RETURN_LOOK_RAD = 3 * (math.pi / 2)
 TARDIS_RETURN_LOOK_RAD = 0
 
@@ -122,7 +122,7 @@ q_command.regions.esc_rooms_level_3.id = ESC_ROOMS_LEVEL_3_REGION_ID
 q_command.regions.esc_rooms_level_3.num_areas = NUM_AREAS_IN_EACH_ESC_ROOM
 q_command.regions.esc_rooms_level_3.cur_area = 1  -- One-indexed
 q_command.regions.esc_rooms_level_3.hub_portal = {}
-q_command.regions.esc_rooms_level_3.hub_portal.center_pos = {x = 224, y = 0, z = 102}
+q_command.regions.esc_rooms_level_3.hub_portal.center_pos = {x = 228, y = 0, z = 102}
 q_command.regions.esc_rooms_level_3.hub_portal.return_pos = {x = 226, y = 0, z = 102}
 q_command.regions.esc_rooms_level_3.hub_portal.return_look_rad = RETURN_LOOK_RAD
 
@@ -248,7 +248,7 @@ q_command.regions.starting_room.id = STARTING_ROOM_REGION_ID
 q_command.regions.starting_room.num_areas = NUM_AREAS_IN_STARTING_ROOM
 q_command.regions.starting_room.cur_area = 1  -- One-indexed
 q_command.regions.starting_room.hub_portal = {}
-q_command.regions.starting_room.hub_portal.center_pos = {x = 228, y = 0, z = 83}
+q_command.regions.starting_room.hub_portal.center_pos = {x = 228, y = 0, z = 87}
 q_command.regions.starting_room.hub_portal.return_pos = {x = 228, y = 0, z = 85}
 q_command.regions.starting_room.hub_portal.return_look_rad = TARDIS_RETURN_LOOK_RAD
 
